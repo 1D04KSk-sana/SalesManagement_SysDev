@@ -34,6 +34,27 @@ namespace SalesManagement_SysDev
             this.Close();
         }
 
+        private void btnDone_Click(object sender, EventArgs e)
+        {
+            //登録ラヂオボタンがチェックされているとき
+            if (rdbRegister.Checked)
+            {
+                ClientDataRegister();
+            }
+
+            //更新ラヂオボタンがチェックされているとき
+            if (rdbUpdate.Checked)
+            {
+                ClientDataUpdate();
+            }
+
+            //検索ラヂオボタンがチェックされているとき
+            if (rdbSearch.Checked)
+            {
+                ClientDataSelect();
+            }
+        }
+
         private void dgvRecordEditing_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //クリックされたDataGridViewがヘッダーのとき⇒何もしない
@@ -46,6 +67,39 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：ClientDataRegister()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：顧客情報登録の実行
+        ///////////////////////////////
+        private void ClientDataRegister()
+        {
+
+        }
+
+        ///////////////////////////////
+        //メソッド名：ClientDataUpdate()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：選択された行に対してのコントロールの変更
+        ///////////////////////////////
+        private void ClientDataUpdate()
+        {
+
+        }
+
+        ///////////////////////////////
+        //メソッド名：ClientDataSelect()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：選択された行に対してのコントロールの変更
+        ///////////////////////////////
+        private void ClientDataSelect()
+        {
+
+        }
+
+        ///////////////////////////////
         //メソッド名：SelectRowControl()
         //引　数   ：なし
         //戻り値   ：なし
@@ -53,6 +107,7 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SelectRowControl()
         {
+            //データグリッドビューに乗っている情報をGUIに反映
             txbClientID.Text = dgvClient[0, dgvClient.CurrentCellAddress.Y].Value.ToString();
             cmbSalesOfficeID.SelectedIndex = int.Parse(dgvClient[1, dgvClient.CurrentCellAddress.Y].Value.ToString()) - 1;
             txbClientName.Text = dgvClient[2, dgvClient.CurrentCellAddress.Y].Value.ToString();
@@ -61,7 +116,7 @@ namespace SalesManagement_SysDev
             txbClientPostal.Text = dgvClient[5, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientFax.Text = dgvClient[6, dgvClient.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = int.Parse(dgvClient[7, dgvClient.CurrentCellAddress.Y].Value.ToString());
-            //txbHidden.Text = dgvClient[8, dgvClient.CurrentCellAddress.Y].Value.ToString();
+            txbHidden.Text = dgvClient[8, dgvClient.CurrentCellAddress.Y]?.Value?.ToString();
         }
 
         ///////////////////////////////
@@ -72,10 +127,22 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SetFormDataGridView()
         {
-            //読み取り専用に指定
-            dgvClient.ReadOnly = true;
-            //行内をクリックすることで行を選択
+            //行単位で選択するようにする
             dgvClient.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //行と列の高さを変更できないように
+            dgvClient.AllowUserToResizeColumns = false;
+            dgvClient.AllowUserToResizeRows = false;
+            //セルの複数行選択をオフに
+            dgvClient.MultiSelect = false;
+            //セルの編集ができないように
+            dgvClient.ReadOnly = true;
+            //ユーザーが新しい行を追加できないようにする
+            dgvClient.AllowUserToAddRows = false;
+
+            //左端の項目列を削除
+            dgvClient.RowHeadersVisible = false;
+            //行の自動追加をオフ
+            dgvClient.AllowUserToAddRows = false;
 
             //ヘッダー位置の指定
             dgvClient.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -107,23 +174,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SetDataGridView()
         {
-            //行単位で選択するようにする
-            dgvClient.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            //行と列の高さを変更できないように
-            dgvClient.AllowUserToResizeColumns = false;
-            dgvClient.AllowUserToResizeRows = false;
-            //セルの複数行選択をオフに
-            dgvClient.MultiSelect = false;
-            //セルの編集ができないように
-            dgvClient.ReadOnly = true;
-            //ユーザーが新しい行を追加できないようにする
-            dgvClient.AllowUserToAddRows = false;
-
-            //左端の項目列を削除
-            dgvClient.RowHeadersVisible = false;
-            //行の自動追加をオフ
-            dgvClient.AllowUserToAddRows = false;
-
             dgvClient.DataSource = listClient.ToList();
 
             //各列幅の指定

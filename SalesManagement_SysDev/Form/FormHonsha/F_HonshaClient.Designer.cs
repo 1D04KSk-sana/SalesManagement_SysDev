@@ -30,7 +30,6 @@
         {
             this.btnReturn = new System.Windows.Forms.Button();
             this.pnlSelect = new System.Windows.Forms.Panel();
-            this.rdbHidden = new System.Windows.Forms.RadioButton();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.rdbUpdate = new System.Windows.Forms.RadioButton();
             this.rdbRegister = new System.Windows.Forms.RadioButton();
@@ -71,26 +70,13 @@
             // pnlSelect
             // 
             this.pnlSelect.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.pnlSelect.Controls.Add(this.rdbHidden);
             this.pnlSelect.Controls.Add(this.rdbSearch);
             this.pnlSelect.Controls.Add(this.rdbUpdate);
             this.pnlSelect.Controls.Add(this.rdbRegister);
             this.pnlSelect.Location = new System.Drawing.Point(158, 12);
             this.pnlSelect.Name = "pnlSelect";
-            this.pnlSelect.Size = new System.Drawing.Size(372, 37);
+            this.pnlSelect.Size = new System.Drawing.Size(268, 37);
             this.pnlSelect.TabIndex = 1;
-            // 
-            // rdbHidden
-            // 
-            this.rdbHidden.AutoSize = true;
-            this.rdbHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbHidden.Location = new System.Drawing.Point(266, 8);
-            this.rdbHidden.Name = "rdbHidden";
-            this.rdbHidden.Size = new System.Drawing.Size(83, 22);
-            this.rdbHidden.TabIndex = 3;
-            this.rdbHidden.TabStop = true;
-            this.rdbHidden.Text = "非表示";
-            this.rdbHidden.UseVisualStyleBackColor = true;
             // 
             // rdbSearch
             // 
@@ -299,6 +285,7 @@
             this.btnDone.TabIndex = 19;
             this.btnDone.Text = "実行";
             this.btnDone.UseVisualStyleBackColor = true;
+            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // cmbHidden
             // 
@@ -353,7 +340,6 @@
 
         private System.Windows.Forms.Button btnReturn;
         private System.Windows.Forms.Panel pnlSelect;
-        private System.Windows.Forms.RadioButton rdbHidden;
         private System.Windows.Forms.RadioButton rdbSearch;
         private System.Windows.Forms.RadioButton rdbUpdate;
         private System.Windows.Forms.RadioButton rdbRegister;
