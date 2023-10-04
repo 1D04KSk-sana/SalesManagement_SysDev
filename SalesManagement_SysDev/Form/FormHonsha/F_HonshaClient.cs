@@ -34,6 +34,36 @@ namespace SalesManagement_SysDev
             this.Close();
         }
 
+        private void dgvRecordEditing_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvClient.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            SelectRowControl();
+        }
+
+        ///////////////////////////////
+        //メソッド名：SelectRowControl()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：選択された行に対してのコントロールの変更
+        ///////////////////////////////
+        private void SelectRowControl()
+        {
+            txbClientID.Text = dgvClient[0, dgvClient.CurrentCellAddress.Y].Value.ToString();
+            cmbSalesOfficeID.SelectedIndex = int.Parse(dgvClient[1, dgvClient.CurrentCellAddress.Y].Value.ToString()) - 1;
+            txbClientName.Text = dgvClient[2, dgvClient.CurrentCellAddress.Y].Value.ToString();
+            txbClientAddress.Text = dgvClient[3, dgvClient.CurrentCellAddress.Y].Value.ToString();
+            txbCilentPhone.Text = dgvClient[4, dgvClient.CurrentCellAddress.Y].Value.ToString();
+            txbClientPostal.Text = dgvClient[5, dgvClient.CurrentCellAddress.Y].Value.ToString();
+            txbClientFax.Text = dgvClient[6, dgvClient.CurrentCellAddress.Y].Value.ToString();
+            cmbHidden.SelectedIndex = int.Parse(dgvClient[7, dgvClient.CurrentCellAddress.Y].Value.ToString());
+            //txbHidden.Text = dgvClient[8, dgvClient.CurrentCellAddress.Y].Value.ToString();
+        }
+
         ///////////////////////////////
         //メソッド名：SetFormDataGridView()
         //引　数   ：なし

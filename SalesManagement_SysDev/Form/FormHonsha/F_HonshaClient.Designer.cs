@@ -49,9 +49,10 @@
             this.lblClientFax = new System.Windows.Forms.Label();
             this.txbClientFax = new System.Windows.Forms.TextBox();
             this.lblClientHidden = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txbHidden = new System.Windows.Forms.TextBox();
             this.dgvClient = new System.Windows.Forms.DataGridView();
             this.btnDone = new System.Windows.Forms.Button();
+            this.cmbHidden = new System.Windows.Forms.ComboBox();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             this.SuspendLayout();
@@ -76,7 +77,7 @@
             this.pnlSelect.Controls.Add(this.rdbRegister);
             this.pnlSelect.Location = new System.Drawing.Point(158, 12);
             this.pnlSelect.Name = "pnlSelect";
-            this.pnlSelect.Size = new System.Drawing.Size(349, 37);
+            this.pnlSelect.Size = new System.Drawing.Size(372, 37);
             this.pnlSelect.TabIndex = 1;
             // 
             // rdbHidden
@@ -185,6 +186,12 @@
             // 
             this.cmbSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSalesOfficeID.FormattingEnabled = true;
+            this.cmbSalesOfficeID.Items.AddRange(new object[] {
+            "北大阪営業所",
+            "兵庫営業所",
+            "鹿営業所",
+            "京都営業所",
+            "和歌山営業所"});
             this.cmbSalesOfficeID.Location = new System.Drawing.Point(569, 76);
             this.cmbSalesOfficeID.Name = "cmbSalesOfficeID";
             this.cmbSalesOfficeID.Size = new System.Drawing.Size(156, 26);
@@ -258,19 +265,19 @@
             // 
             this.lblClientHidden.AutoSize = true;
             this.lblClientHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientHidden.Location = new System.Drawing.Point(13, 161);
+            this.lblClientHidden.Location = new System.Drawing.Point(229, 161);
             this.lblClientHidden.Name = "lblClientHidden";
             this.lblClientHidden.Size = new System.Drawing.Size(98, 18);
             this.lblClientHidden.TabIndex = 16;
             this.lblClientHidden.Text = "非表示理由";
             // 
-            // textBox1
+            // txbHidden
             // 
-            this.textBox1.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox1.Location = new System.Drawing.Point(117, 158);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(612, 25);
-            this.textBox1.TabIndex = 17;
+            this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbHidden.Location = new System.Drawing.Point(333, 158);
+            this.txbHidden.Name = "txbHidden";
+            this.txbHidden.Size = new System.Drawing.Size(681, 25);
+            this.txbHidden.TabIndex = 17;
             // 
             // dgvClient
             // 
@@ -281,6 +288,7 @@
             this.dgvClient.RowTemplate.Height = 24;
             this.dgvClient.Size = new System.Drawing.Size(1042, 286);
             this.dgvClient.TabIndex = 18;
+            this.dgvClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRecordEditing_CellClick);
             // 
             // btnDone
             // 
@@ -292,14 +300,27 @@
             this.btnDone.Text = "実行";
             this.btnDone.UseVisualStyleBackColor = true;
             // 
+            // cmbHidden
+            // 
+            this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbHidden.FormattingEnabled = true;
+            this.cmbHidden.Items.AddRange(new object[] {
+            "表示",
+            "非表示"});
+            this.cmbHidden.Location = new System.Drawing.Point(16, 157);
+            this.cmbHidden.Name = "cmbHidden";
+            this.cmbHidden.Size = new System.Drawing.Size(156, 26);
+            this.cmbHidden.TabIndex = 20;
+            // 
             // F_HonshaClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1066, 494);
+            this.Controls.Add(this.cmbHidden);
             this.Controls.Add(this.btnDone);
             this.Controls.Add(this.dgvClient);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txbHidden);
             this.Controls.Add(this.lblClientHidden);
             this.Controls.Add(this.txbClientFax);
             this.Controls.Add(this.lblClientFax);
@@ -351,8 +372,9 @@
         private System.Windows.Forms.Label lblClientFax;
         private System.Windows.Forms.TextBox txbClientFax;
         private System.Windows.Forms.Label lblClientHidden;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txbHidden;
         private System.Windows.Forms.DataGridView dgvClient;
         private System.Windows.Forms.Button btnDone;
+        private System.Windows.Forms.ComboBox cmbHidden;
     }
 }
