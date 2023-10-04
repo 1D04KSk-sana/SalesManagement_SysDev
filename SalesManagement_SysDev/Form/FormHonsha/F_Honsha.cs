@@ -16,5 +16,26 @@ namespace SalesManagement_SysDev
         {
             InitializeComponent();
         }
+
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnFormClient_Click(object sender, EventArgs e)
+        {
+            F_HonshaClient f_HonshaClient = new F_HonshaClient();
+
+            f_HonshaClient.Owner = this;
+            f_HonshaClient.FormClosed += ChildForm_FormClosed;
+            f_HonshaClient.Show();
+
+            this.Opacity = 0;
+        }
+
+        private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Opacity = 1;
+        }
     }
 }

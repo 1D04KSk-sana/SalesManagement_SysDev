@@ -65,6 +65,7 @@
             this.btnReturn.TabIndex = 0;
             this.btnReturn.Text = "戻る";
             this.btnReturn.UseVisualStyleBackColor = true;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
             // pnlSelect
             // 

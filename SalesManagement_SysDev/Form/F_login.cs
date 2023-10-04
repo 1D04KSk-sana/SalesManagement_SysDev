@@ -734,5 +734,21 @@ namespace SalesManagement_SysDev
 
             MessageBox.Show("サンプルデータ登録完了");
         }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            F_Honsha f_Honsha = new F_Honsha();
+
+            f_Honsha.Owner = this;
+            f_Honsha.FormClosed += ChildForm_FormClosed;
+            f_Honsha.Show();
+
+            this.Opacity = 0;
+        }
+
+        private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Opacity = 1;
+        }
     }
 }
