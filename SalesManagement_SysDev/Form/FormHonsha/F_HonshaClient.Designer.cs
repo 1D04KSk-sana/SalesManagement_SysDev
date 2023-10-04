@@ -30,10 +30,10 @@
         {
             this.btnReturn = new System.Windows.Forms.Button();
             this.pnlSelect = new System.Windows.Forms.Panel();
-            this.rdbRegister = new System.Windows.Forms.RadioButton();
-            this.rdbUpdate = new System.Windows.Forms.RadioButton();
-            this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.rdbHidden = new System.Windows.Forms.RadioButton();
+            this.rdbSearch = new System.Windows.Forms.RadioButton();
+            this.rdbUpdate = new System.Windows.Forms.RadioButton();
+            this.rdbRegister = new System.Windows.Forms.RadioButton();
             this.lblClientID = new System.Windows.Forms.Label();
             this.txbClientID = new System.Windows.Forms.TextBox();
             this.lblClientName = new System.Windows.Forms.Label();
@@ -50,10 +50,10 @@
             this.txbClientFax = new System.Windows.Forms.TextBox();
             this.lblClientHidden = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvClient = new System.Windows.Forms.DataGridView();
             this.btnDone = new System.Windows.Forms.Button();
             this.pnlSelect.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             this.SuspendLayout();
             // 
             // btnReturn
@@ -79,29 +79,17 @@
             this.pnlSelect.Size = new System.Drawing.Size(349, 37);
             this.pnlSelect.TabIndex = 1;
             // 
-            // rdbRegister
+            // rdbHidden
             // 
-            this.rdbRegister.AutoSize = true;
-            this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbRegister.Location = new System.Drawing.Point(15, 8);
-            this.rdbRegister.Name = "rdbRegister";
-            this.rdbRegister.Size = new System.Drawing.Size(65, 22);
-            this.rdbRegister.TabIndex = 0;
-            this.rdbRegister.TabStop = true;
-            this.rdbRegister.Text = "登録";
-            this.rdbRegister.UseVisualStyleBackColor = true;
-            // 
-            // rdbUpdate
-            // 
-            this.rdbUpdate.AutoSize = true;
-            this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbUpdate.Location = new System.Drawing.Point(97, 8);
-            this.rdbUpdate.Name = "rdbUpdate";
-            this.rdbUpdate.Size = new System.Drawing.Size(65, 22);
-            this.rdbUpdate.TabIndex = 1;
-            this.rdbUpdate.TabStop = true;
-            this.rdbUpdate.Text = "更新";
-            this.rdbUpdate.UseVisualStyleBackColor = true;
+            this.rdbHidden.AutoSize = true;
+            this.rdbHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbHidden.Location = new System.Drawing.Point(266, 8);
+            this.rdbHidden.Name = "rdbHidden";
+            this.rdbHidden.Size = new System.Drawing.Size(83, 22);
+            this.rdbHidden.TabIndex = 3;
+            this.rdbHidden.TabStop = true;
+            this.rdbHidden.Text = "非表示";
+            this.rdbHidden.UseVisualStyleBackColor = true;
             // 
             // rdbSearch
             // 
@@ -115,17 +103,29 @@
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
             // 
-            // rdbHidden
+            // rdbUpdate
             // 
-            this.rdbHidden.AutoSize = true;
-            this.rdbHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbHidden.Location = new System.Drawing.Point(266, 8);
-            this.rdbHidden.Name = "rdbHidden";
-            this.rdbHidden.Size = new System.Drawing.Size(83, 22);
-            this.rdbHidden.TabIndex = 3;
-            this.rdbHidden.TabStop = true;
-            this.rdbHidden.Text = "非表示";
-            this.rdbHidden.UseVisualStyleBackColor = true;
+            this.rdbUpdate.AutoSize = true;
+            this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbUpdate.Location = new System.Drawing.Point(97, 8);
+            this.rdbUpdate.Name = "rdbUpdate";
+            this.rdbUpdate.Size = new System.Drawing.Size(65, 22);
+            this.rdbUpdate.TabIndex = 1;
+            this.rdbUpdate.TabStop = true;
+            this.rdbUpdate.Text = "更新";
+            this.rdbUpdate.UseVisualStyleBackColor = true;
+            // 
+            // rdbRegister
+            // 
+            this.rdbRegister.AutoSize = true;
+            this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbRegister.Location = new System.Drawing.Point(15, 8);
+            this.rdbRegister.Name = "rdbRegister";
+            this.rdbRegister.Size = new System.Drawing.Size(65, 22);
+            this.rdbRegister.TabIndex = 0;
+            this.rdbRegister.TabStop = true;
+            this.rdbRegister.Text = "登録";
+            this.rdbRegister.UseVisualStyleBackColor = true;
             // 
             // lblClientID
             // 
@@ -272,15 +272,15 @@
             this.textBox1.Size = new System.Drawing.Size(612, 25);
             this.textBox1.TabIndex = 17;
             // 
-            // dataGridView1
+            // dgvClient
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 196);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1042, 286);
-            this.dataGridView1.TabIndex = 18;
+            this.dgvClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvClient.Location = new System.Drawing.Point(12, 196);
+            this.dgvClient.Name = "dgvClient";
+            this.dgvClient.RowHeadersWidth = 51;
+            this.dgvClient.RowTemplate.Height = 24;
+            this.dgvClient.Size = new System.Drawing.Size(1042, 286);
+            this.dgvClient.TabIndex = 18;
             // 
             // btnDone
             // 
@@ -298,7 +298,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1066, 494);
             this.Controls.Add(this.btnDone);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvClient);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.lblClientHidden);
             this.Controls.Add(this.txbClientFax);
@@ -319,9 +319,10 @@
             this.Controls.Add(this.btnReturn);
             this.Name = "F_HonshaClient";
             this.Text = "F_Client";
+            this.Load += new System.EventHandler(this.F_HonshaClient_Load);
             this.pnlSelect.ResumeLayout(false);
             this.pnlSelect.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -351,7 +352,7 @@
         private System.Windows.Forms.TextBox txbClientFax;
         private System.Windows.Forms.Label lblClientHidden;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvClient;
         private System.Windows.Forms.Button btnDone;
     }
 }
