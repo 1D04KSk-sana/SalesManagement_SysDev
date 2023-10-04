@@ -729,7 +729,6 @@ namespace SalesManagement_SysDev
                 context.SaveChanges();
             }
 
-
             context.Dispose();
 
             MessageBox.Show("サンプルデータ登録完了");
