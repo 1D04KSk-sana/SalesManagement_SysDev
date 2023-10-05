@@ -32,7 +32,24 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         public bool UpdateClientData(M_Client updClient)
         {
-            return true;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var division = context.M_Client.Single(x => x.M_SalesOffice == updClient.DivisionCD);
+                division.DivisionName = updClient.DivisionName;
+                division.DeleteFlg = updClient.DeleteFlg;
+                division.Comments = updClient.Comments;
+
+                context.SaveChanges();
+                context.Dispose();
+
+                return true;
+        }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
 
         ///////////////////////////////
