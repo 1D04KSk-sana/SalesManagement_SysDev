@@ -7,6 +7,7 @@ using System.Windows.Forms;
 
 namespace SalesManagement_SysDev
 {
+    
     internal class ClientDataAccess
     {
         ///////////////////////////////
@@ -45,8 +46,24 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         public bool DeleteClientData(M_Client delClient)
         {
-            return true;
+            try
+            {
+
+                var context = new SalesManagement_DevContext();
+                var client = context.M_Clients.Single(x => x.ClID == delClient.ClID);
+                context.M_Clients.Remove(client);
+                context.SaveChanges();
+                context.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
+
 
         ///////////////////////////////
         //メソッド名：GetClientData()
