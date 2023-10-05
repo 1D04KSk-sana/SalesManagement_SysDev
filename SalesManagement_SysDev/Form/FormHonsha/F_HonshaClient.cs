@@ -75,6 +75,47 @@ namespace SalesManagement_SysDev
         private void ClientDataRegister()
         {
 
+            // 8.1.1.2 部署情報作成
+            var regDivision = GenerateDataAtRegistration();
+
+            // 8.1.1.3 部署情報登録
+            RegistrationDivision(regDivision);  //ここまだ。コピペ後どう修正したらいいか分からない
+        }
+
+        ///////////////////////////////
+        //　8.1.1.3 部署情報登録
+        //メソッド名：RegistrationDivision()
+        //引　数   ：部署情報
+        //戻り値   ：なし
+        //機　能   ：部署データの登録
+
+        ///////////////////////////////
+        private void RegistrationDivision(M_Client regDivision)
+        {
+
+        }
+
+        ///////////////////////////////
+        //　8.1.1.2 部署情報作成
+        //メソッド名：GenerateDataAtRegistration()
+        //引　数   ：なし
+        //戻り値   ：部署登録情報
+        //機　能   ：登録データのセット
+        ///////////////////////////////
+        private M_Client GenerateDataAtRegistration()
+        {
+            return new M_Client
+            {
+                ClID = int.Parse(txbClientID.Text.Trim()),
+                SoID = cmbSalesOfficeID.SelectedIndex,
+                ClName = txbClientName.Text.Trim(),
+                ClAddress = txbClientAddress.Text.Trim(),
+                ClPhone = txbCilentPhone.Text.Trim(),
+                ClPostal = txbClientPostal.Text.Trim(),
+                ClFAX = txbClientFax.Text.Trim(),
+                ClFlag = cmbHidden.SelectedIndex,
+                ClHidden = txbHidden.Text.Trim(),
+            };
         }
 
         ///////////////////////////////
