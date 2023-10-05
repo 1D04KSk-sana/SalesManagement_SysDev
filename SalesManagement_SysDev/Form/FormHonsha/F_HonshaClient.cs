@@ -114,7 +114,7 @@ namespace SalesManagement_SysDev
             txbClientAddress.Text = dgvClient[3, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbCilentPhone.Text = dgvClient[4, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientPostal.Text = dgvClient[5, dgvClient.CurrentCellAddress.Y].Value.ToString();
-            txbClientFax.Text = dgvClient[6, dgvClient.CurrentCellAddress.Y].Value.ToString();
+            txbClientFAX.Text = dgvClient[6, dgvClient.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = int.Parse(dgvClient[7, dgvClient.CurrentCellAddress.Y].Value.ToString());
             txbHidden.Text = dgvClient[8, dgvClient.CurrentCellAddress.Y]?.Value?.ToString();
         }
@@ -188,6 +188,25 @@ namespace SalesManagement_SysDev
             dgvClient.Columns[8].Width = 100;
 
             dgvClient.Refresh();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txbClientID.Text = string.Empty;
+            txbClientName.Text = string.Empty;
+            txbCilentPhone.Text = string.Empty;
+            txbClientPostal.Text = string.Empty;
+            txbClientAddress.Text = string.Empty;
+            txbClientAddress.Text = string.Empty;
+            txbHidden.Text = string.Empty;
+            cmbSalesOfficeID.SelectedIndex = 0;
+            cmbHidden.SelectedIndex = 0;
+            txbClientFAX.Text = string.Empty;
+        }
+
+        private void lblClientID_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

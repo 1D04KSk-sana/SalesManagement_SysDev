@@ -46,12 +46,13 @@
             this.lblClientAddress = new System.Windows.Forms.Label();
             this.txbClientAddress = new System.Windows.Forms.TextBox();
             this.lblClientFax = new System.Windows.Forms.Label();
-            this.txbClientFax = new System.Windows.Forms.TextBox();
+            this.txbClientFAX = new System.Windows.Forms.TextBox();
             this.lblClientHidden = new System.Windows.Forms.Label();
             this.txbHidden = new System.Windows.Forms.TextBox();
             this.dgvClient = new System.Windows.Forms.DataGridView();
             this.btnDone = new System.Windows.Forms.Button();
             this.cmbHidden = new System.Windows.Forms.ComboBox();
+            this.btnClear = new System.Windows.Forms.Button();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             this.SuspendLayout();
@@ -84,7 +85,7 @@
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbSearch.Location = new System.Drawing.Point(185, 8);
             this.rdbSearch.Name = "rdbSearch";
-            this.rdbSearch.Size = new System.Drawing.Size(65, 22);
+            this.rdbSearch.Size = new System.Drawing.Size(68, 23);
             this.rdbSearch.TabIndex = 2;
             this.rdbSearch.TabStop = true;
             this.rdbSearch.Text = "検索";
@@ -96,7 +97,7 @@
             this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbUpdate.Location = new System.Drawing.Point(97, 8);
             this.rdbUpdate.Name = "rdbUpdate";
-            this.rdbUpdate.Size = new System.Drawing.Size(65, 22);
+            this.rdbUpdate.Size = new System.Drawing.Size(68, 23);
             this.rdbUpdate.TabIndex = 1;
             this.rdbUpdate.TabStop = true;
             this.rdbUpdate.Text = "更新";
@@ -108,7 +109,7 @@
             this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbRegister.Location = new System.Drawing.Point(15, 8);
             this.rdbRegister.Name = "rdbRegister";
-            this.rdbRegister.Size = new System.Drawing.Size(65, 22);
+            this.rdbRegister.Size = new System.Drawing.Size(68, 23);
             this.rdbRegister.TabIndex = 0;
             this.rdbRegister.TabStop = true;
             this.rdbRegister.Text = "登録";
@@ -120,9 +121,10 @@
             this.lblClientID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblClientID.Location = new System.Drawing.Point(13, 79);
             this.lblClientID.Name = "lblClientID";
-            this.lblClientID.Size = new System.Drawing.Size(60, 18);
+            this.lblClientID.Size = new System.Drawing.Size(64, 19);
             this.lblClientID.TabIndex = 2;
             this.lblClientID.Text = "顧客ID";
+            this.lblClientID.Click += new System.EventHandler(this.lblClientID_Click);
             // 
             // txbClientID
             // 
@@ -138,7 +140,7 @@
             this.lblClientName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblClientName.Location = new System.Drawing.Point(229, 79);
             this.lblClientName.Name = "lblClientName";
-            this.lblClientName.Size = new System.Drawing.Size(62, 18);
+            this.lblClientName.Size = new System.Drawing.Size(66, 19);
             this.lblClientName.TabIndex = 4;
             this.lblClientName.Text = "顧客名";
             // 
@@ -156,7 +158,7 @@
             this.lblSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblSalesOfficeID.Location = new System.Drawing.Point(485, 79);
             this.lblSalesOfficeID.Name = "lblSalesOfficeID";
-            this.lblSalesOfficeID.Size = new System.Drawing.Size(78, 18);
+            this.lblSalesOfficeID.Size = new System.Drawing.Size(83, 19);
             this.lblSalesOfficeID.TabIndex = 6;
             this.lblSalesOfficeID.Text = "営業所ID";
             // 
@@ -189,7 +191,7 @@
             this.lblCilentPhone.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblCilentPhone.Location = new System.Drawing.Point(781, 79);
             this.lblCilentPhone.Name = "lblCilentPhone";
-            this.lblCilentPhone.Size = new System.Drawing.Size(80, 18);
+            this.lblCilentPhone.Size = new System.Drawing.Size(85, 19);
             this.lblCilentPhone.TabIndex = 9;
             this.lblCilentPhone.Text = "電話番号";
             // 
@@ -199,7 +201,7 @@
             this.lblClientPostal.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblClientPostal.Location = new System.Drawing.Point(13, 121);
             this.lblClientPostal.Name = "lblClientPostal";
-            this.lblClientPostal.Size = new System.Drawing.Size(80, 18);
+            this.lblClientPostal.Size = new System.Drawing.Size(85, 19);
             this.lblClientPostal.TabIndex = 10;
             this.lblClientPostal.Text = "郵便番号";
             // 
@@ -217,7 +219,7 @@
             this.lblClientAddress.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblClientAddress.Location = new System.Drawing.Point(229, 121);
             this.lblClientAddress.Name = "lblClientAddress";
-            this.lblClientAddress.Size = new System.Drawing.Size(44, 18);
+            this.lblClientAddress.Size = new System.Drawing.Size(47, 19);
             this.lblClientAddress.TabIndex = 12;
             this.lblClientAddress.Text = "住所";
             // 
@@ -235,17 +237,17 @@
             this.lblClientFax.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblClientFax.Location = new System.Drawing.Point(781, 121);
             this.lblClientFax.Name = "lblClientFax";
-            this.lblClientFax.Size = new System.Drawing.Size(40, 18);
+            this.lblClientFax.Size = new System.Drawing.Size(42, 19);
             this.lblClientFax.TabIndex = 14;
             this.lblClientFax.Text = "FAX";
             // 
-            // txbClientFax
+            // txbClientFAX
             // 
-            this.txbClientFax.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientFax.Location = new System.Drawing.Point(867, 118);
-            this.txbClientFax.Name = "txbClientFax";
-            this.txbClientFax.Size = new System.Drawing.Size(147, 25);
-            this.txbClientFax.TabIndex = 15;
+            this.txbClientFAX.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbClientFAX.Location = new System.Drawing.Point(867, 118);
+            this.txbClientFAX.Name = "txbClientFAX";
+            this.txbClientFAX.Size = new System.Drawing.Size(147, 25);
+            this.txbClientFAX.TabIndex = 15;
             // 
             // lblClientHidden
             // 
@@ -253,7 +255,7 @@
             this.lblClientHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblClientHidden.Location = new System.Drawing.Point(229, 161);
             this.lblClientHidden.Name = "lblClientHidden";
-            this.lblClientHidden.Size = new System.Drawing.Size(98, 18);
+            this.lblClientHidden.Size = new System.Drawing.Size(104, 19);
             this.lblClientHidden.TabIndex = 16;
             this.lblClientHidden.Text = "非表示理由";
             // 
@@ -299,17 +301,28 @@
             this.cmbHidden.Size = new System.Drawing.Size(156, 26);
             this.cmbHidden.TabIndex = 20;
             // 
+            // btnClear
+            // 
+            this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnClear.Location = new System.Drawing.Point(841, 11);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(94, 38);
+            this.btnClear.TabIndex = 21;
+            this.btnClear.Text = "クリア";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // F_HonshaClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1066, 494);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.cmbHidden);
-            this.Controls.Add(this.btnDone);
             this.Controls.Add(this.dgvClient);
             this.Controls.Add(this.txbHidden);
             this.Controls.Add(this.lblClientHidden);
-            this.Controls.Add(this.txbClientFax);
+            this.Controls.Add(this.txbClientFAX);
             this.Controls.Add(this.lblClientFax);
             this.Controls.Add(this.txbClientAddress);
             this.Controls.Add(this.lblClientAddress);
@@ -325,6 +338,7 @@
             this.Controls.Add(this.lblClientID);
             this.Controls.Add(this.pnlSelect);
             this.Controls.Add(this.btnReturn);
+            this.Controls.Add(this.btnDone);
             this.Name = "F_HonshaClient";
             this.Text = "F_Client";
             this.Load += new System.EventHandler(this.F_HonshaClient_Load);
@@ -356,11 +370,12 @@
         private System.Windows.Forms.Label lblClientAddress;
         private System.Windows.Forms.TextBox txbClientAddress;
         private System.Windows.Forms.Label lblClientFax;
-        private System.Windows.Forms.TextBox txbClientFax;
+        private System.Windows.Forms.TextBox txbClientFAX;
         private System.Windows.Forms.Label lblClientHidden;
         private System.Windows.Forms.TextBox txbHidden;
         private System.Windows.Forms.DataGridView dgvClient;
         private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.ComboBox cmbHidden;
+        private System.Windows.Forms.Button btnClear;
     }
 }
