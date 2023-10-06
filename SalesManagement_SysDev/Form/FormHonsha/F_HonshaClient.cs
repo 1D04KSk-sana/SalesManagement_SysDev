@@ -76,10 +76,10 @@ namespace SalesManagement_SysDev
         {
 
             // 部署情報作成
-            var regDivision = GenerateDataAtRegistration();
+            var regClient = GenerateDataAtRegistration();
 
             // 部署情報登録
-            RegistrationDivision(regDivision);
+            RegistrationClient(regClient);
         }
 
         ///////////////////////////////
@@ -88,10 +88,10 @@ namespace SalesManagement_SysDev
         //戻り値   ：なし
         //機　能   ：部署データの登録
         ///////////////////////////////
-        private void RegistrationDivision(M_Client regDivision)
+        private void RegistrationClient(M_Client regClient)
         {
             // 部署情報の登録
-            bool flg = clientDataAccess.AddClientData(regDivision);
+            bool flg = clientDataAccess.AddClientData(regClient);
 
             //登録成功・失敗メッセージ
             if (flg == true)
