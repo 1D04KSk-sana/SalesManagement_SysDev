@@ -38,7 +38,7 @@
             this.lblClientName = new System.Windows.Forms.Label();
             this.txbClientName = new System.Windows.Forms.TextBox();
             this.lblSalesOfficeID = new System.Windows.Forms.Label();
-            this.txbCilentPhone = new System.Windows.Forms.TextBox();
+            this.txbClientPhone = new System.Windows.Forms.TextBox();
             this.cmbSalesOfficeID = new System.Windows.Forms.ComboBox();
             this.lblCilentPhone = new System.Windows.Forms.Label();
             this.lblClientPostal = new System.Windows.Forms.Label();
@@ -124,7 +124,6 @@
             this.lblClientID.Size = new System.Drawing.Size(64, 19);
             this.lblClientID.TabIndex = 2;
             this.lblClientID.Text = "顧客ID";
-            this.lblClientID.Click += new System.EventHandler(this.lblClientID_Click);
             // 
             // txbClientID
             // 
@@ -162,13 +161,13 @@
             this.lblSalesOfficeID.TabIndex = 6;
             this.lblSalesOfficeID.Text = "営業所ID";
             // 
-            // txbCilentPhone
+            // txbClientPhone
             // 
-            this.txbCilentPhone.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbCilentPhone.Location = new System.Drawing.Point(867, 76);
-            this.txbCilentPhone.Name = "txbCilentPhone";
-            this.txbCilentPhone.Size = new System.Drawing.Size(147, 25);
-            this.txbCilentPhone.TabIndex = 7;
+            this.txbClientPhone.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbClientPhone.Location = new System.Drawing.Point(867, 76);
+            this.txbClientPhone.Name = "txbClientPhone";
+            this.txbClientPhone.Size = new System.Drawing.Size(147, 25);
+            this.txbClientPhone.TabIndex = 7;
             // 
             // cmbSalesOfficeID
             // 
@@ -330,7 +329,7 @@
             this.Controls.Add(this.lblClientPostal);
             this.Controls.Add(this.lblCilentPhone);
             this.Controls.Add(this.cmbSalesOfficeID);
-            this.Controls.Add(this.txbCilentPhone);
+            this.Controls.Add(this.txbClientPhone);
             this.Controls.Add(this.lblSalesOfficeID);
             this.Controls.Add(this.txbClientName);
             this.Controls.Add(this.lblClientName);
@@ -362,7 +361,7 @@
         private System.Windows.Forms.Label lblClientName;
         private System.Windows.Forms.TextBox txbClientName;
         private System.Windows.Forms.Label lblSalesOfficeID;
-        private System.Windows.Forms.TextBox txbCilentPhone;
+        private System.Windows.Forms.TextBox txbClientPhone;
         private System.Windows.Forms.ComboBox cmbSalesOfficeID;
         private System.Windows.Forms.Label lblCilentPhone;
         private System.Windows.Forms.Label lblClientPostal;
