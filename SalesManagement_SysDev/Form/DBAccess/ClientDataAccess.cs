@@ -29,7 +29,7 @@ namespace SalesManagement_SysDev
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return true;
+                return false;
             }
             
         }

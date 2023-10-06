@@ -75,28 +75,43 @@ namespace SalesManagement_SysDev
         private void ClientDataRegister()
         {
 
-            // 8.1.1.2 部署情報作成
+            // 部署情報作成
             var regDivision = GenerateDataAtRegistration();
 
-            // 8.1.1.3 部署情報登録
-            RegistrationDivision(regDivision);  //ここまだ。コピペ後どう修正したらいいか分からない
+            // 部署情報登録
+            RegistrationDivision(regDivision);
         }
 
         ///////////////////////////////
-        //　8.1.1.3 部署情報登録
         //メソッド名：RegistrationDivision()
         //引　数   ：部署情報
         //戻り値   ：なし
         //機　能   ：部署データの登録
-
         ///////////////////////////////
         private void RegistrationDivision(M_Client regDivision)
         {
+            // 部署情報の登録
+            bool flg = clientDataAccess.AddClientData(regDivision);
+
+            //登録成功・失敗メッセージ
+            if (flg == true)
+            {
+                MessageBox.Show("データを登録しました。");
+            }
+            else
+            {
+                MessageBox.Show("データの登録に失敗しました。");
+            }
+
+            // 入力エリアのクリア
+            ClearInput();
+
+            // データグリッドビューの表示
+            GetDataGridView();
 
         }
 
         ///////////////////////////////
-        //　8.1.1.2 部署情報作成
         //メソッド名：GenerateDataAtRegistration()
         //引　数   ：なし
         //戻り値   ：部署登録情報
@@ -229,6 +244,25 @@ namespace SalesManagement_SysDev
             dgvClient.Columns[8].Width = 100;
 
             dgvClient.Refresh();
+        }
+
+        ///////////////////////////////
+        //メソッド名：ClearInput()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：入力エリアをクリア
+        ///////////////////////////////
+        private void ClearInput()
+        {
+            txbClientID.Text = "";
+            txbClientName.Text = "";
+            txbCilentPhone.Text = "";
+            txbClientPostal.Text = "";
+            txbClientAddress.Text = "";
+            txbClientFax.Text = "";
+            txbHidden.Text = "";
+            cmbSalesOfficeID.SelectedIndex = 0;
+            cmbHidden.SelectedIndex = 0;
         }
     }
 }
