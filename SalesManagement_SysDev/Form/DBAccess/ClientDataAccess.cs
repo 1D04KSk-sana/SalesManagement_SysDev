@@ -35,10 +35,17 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                var division = context.M_Client.Single(x => x.M_SalesOffice == updClient.DivisionCD);
-                division.DivisionName = updClient.DivisionName;
-                division.DeleteFlg = updClient.DeleteFlg;
-                division.Comments = updClient.Comments;
+                var division = context.M_Clients.Single(x => x.ClID == updClient.ClID);
+                division.ClName = updClient.ClName;
+                division.ClFlag = updClient.ClFlag;
+                division.ClHidden = updClient.ClHidden;
+                division.ClFAX = updClient.ClFAX;
+                division.ClPhone = updClient.ClPhone;
+                division.ClAddress = updClient.ClAddress;
+                division.SoID = updClient.SoID;
+                division.ClPostal = updClient.ClPostal;
+                division.ClID = updClient.ClID;
+
 
                 context.SaveChanges();
                 context.Dispose();
