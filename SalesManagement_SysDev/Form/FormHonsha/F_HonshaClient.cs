@@ -34,6 +34,11 @@ namespace SalesManagement_SysDev
             this.Close();
         }
 
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearImput();
+        }
+
         private void btnDone_Click(object sender, EventArgs e)
         {
             //登録ラヂオボタンがチェックされているとき
@@ -104,7 +109,7 @@ namespace SalesManagement_SysDev
             }
 
             // 入力エリアのクリア
-            ClearInput();
+            ClearImput();
 
             // データグリッドビューの表示
             GetDataGridView();
@@ -125,13 +130,215 @@ namespace SalesManagement_SysDev
                 SoID = cmbSalesOfficeID.SelectedIndex,
                 ClName = txbClientName.Text.Trim(),
                 ClAddress = txbClientAddress.Text.Trim(),
-                ClPhone = txbCilentPhone.Text.Trim(),
+                ClPhone = txbClientPhone.Text.Trim(),
                 ClPostal = txbClientPostal.Text.Trim(),
-                ClFAX = txbClientFax.Text.Trim(),
+                ClFAX = txbClientFAX.Text.Trim(),
                 ClFlag = cmbHidden.SelectedIndex,
                 ClHidden = txbHidden.Text.Trim(),
             };
         }
+
+        ///////////////////////////////
+        //　8.1.1.1 妥当な部署データ取得
+        //メソッド名：GetValidDataAtRegistration()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：入力データの形式チェック
+        //          ：エラーがない場合True
+        //          ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtRegistration()
+        {
+
+            // 顧客IDの適否
+            if (!String.IsNullOrEmpty(txbClientID.Text.Trim()))
+            {
+                // 顧客IDの半角英数字チェック
+                if (dataInputCheck.CheckHalfAlphabetNumeric(txbClientID.Text.Trim()))
+                {
+                    MessageBox.Show("顧客IDは全て半角英数字入力です");
+                    txbClientID.Focus();
+                    return false;
+                }
+                // 顧客IDの文字数チェック
+                if (txbClientID.TextLength != 5)
+                {
+                    MessageBox.Show("顧客IDは5文字です");
+                    txbClientID.Focus();
+                    return false;
+                }
+                //// 顧客IDの重複チェック
+                //if (divisionDataAccess.CheckDivisionCDExistence(textBoxDivisionCD.Text.Trim()))
+                //{
+                //    //MessageBox.Show("入力された顧客IDは既に存在します");
+                //    messageDsp.DspMsg("M1003");
+                //    txbClientID.Focus();
+                //    return false;
+                //}
+            }
+            else
+            {
+                MessageBox.Show("顧客IDが入力されていません");
+                txbClientID.Focus();
+                return false;
+            }
+
+            // 顧客名の適否
+            if (!String.IsNullOrEmpty(txbClientName.Text.Trim()))
+            {
+                // 顧客名の文字数チェック
+                if (txbClientName.TextLength >= 50)
+                {
+                    MessageBox.Show("顧客名は50文字です");
+                    txbClientName.Focus();
+                    return false;
+                }
+                //// 顧客名の重複チェック
+                //if (divisionDataAccess.CheckDivisionCDExistence(textBoxDivisionCD.Text.Trim()))
+                //{
+                //    //MessageBox.Show("入力された顧客名は既に存在します");
+                //    messageDsp.DspMsg("M1003");
+                //    txbClientName.Focus();
+                //    return false;
+                //}
+            }
+            else
+            {
+                MessageBox.Show("顧客名が入力されていません");
+                txbClientName.Focus();
+                return false;
+            }
+
+            // 電話番号の適否
+            if (!String.IsNullOrEmpty(txbClientPhone.Text.Trim()))
+            {
+                // 電話番号の文字数チェック
+                if (txbClientPhone.TextLength >= 13)
+                {
+                    MessageBox.Show("電話番号は13文字以内です");
+                    txbClientPhone.Focus();
+                    return false;
+                }
+                //// 電話番号の重複チェック
+                //if (divisionDataAccess.CheckDivisionCDExistence(textBoxDivisionCD.Text.Trim()))
+                //{
+                //    //MessageBox.Show("入力された電話番号は既に存在します");
+                //    messageDsp.DspMsg("M1003");
+                //    txbClientPhone.Focus();
+                //    return false;
+                //}
+            }
+            else
+            {
+                MessageBox.Show("電話番号が入力されていません");
+                txbClientName.Focus();
+                return false;
+            }
+
+
+            // 郵便番号の適否
+            if (!String.IsNullOrEmpty(txbClientPostal.Text.Trim()))
+            {
+                // 郵便番号の文字数チェック
+                if (txbClientPostal.TextLength >= 7)
+                {
+                    MessageBox.Show("郵便番号は7文字以内です");
+                    txbClientPostal.Focus();
+                    return false;
+                }
+                //// 郵便番号の重複チェック
+                //if (divisionDataAccess.CheckDivisionCDExistence(textBoxDivisionCD.Text.Trim()))
+                //{
+                //    //MessageBox.Show("入力された郵便番号は既に存在します");
+                //    messageDsp.DspMsg("M1003");
+                //    txbClientPostal.Focus();
+                //    return false;
+                //}
+            }
+            else
+            {
+                MessageBox.Show("郵便番号が入力されていません");
+                txbClientPostal.Focus();
+                return false;
+            }
+
+            // 住所の適否
+            if (!String.IsNullOrEmpty(txbClientAddress.Text.Trim()))
+            {
+                // 住所の文字数チェック
+                if (txbClientAddress.TextLength >= 50)
+                {
+                    MessageBox.Show("住所は50文字以内です");
+                    txbClientAddress.Focus();
+                    return false;
+                }
+                //// 住所の重複チェック
+                //if (divisionDataAccess.CheckDivisionCDExistence(textBoxDivisionCD.Text.Trim()))
+                //{
+                //    //MessageBox.Show("入力された住所は既に存在します");
+                //    messageDsp.DspMsg("M1003");
+                //    txbClientAddress.Focus();
+                //    return false;
+                //}
+            }
+            else
+            {
+                MessageBox.Show("住所が入力されていません");
+                txbClientAddress.Focus();
+                return false;
+            }
+
+            // FAXの適否
+            if (!String.IsNullOrEmpty(txbClientFAX.Text.Trim()))
+            {
+                // FAXの文字数チェック
+                if (txbClientFAX.TextLength >= 13)
+                {
+                    MessageBox.Show("FAXは13文字以内です");
+                    txbClientFAX.Focus();
+                    return false;
+                }
+                //// FAXの重複チェック
+                //if (divisionDataAccess.CheckDivisionCDExistence(textBoxDivisionCD.Text.Trim()))
+                //{
+                //    //MessageBox.Show("入力されたFAXは既に存在します");
+                //    messageDsp.DspMsg("M1003");
+                //    txbClientFAX.Focus();
+                //    return false;
+                //}
+            }
+            else
+            {
+                MessageBox.Show("FAXが入力されていません");
+                txbClientFAX.Focus();
+                return false;
+            }
+
+            // 非表示理由の適否
+            if (!String.IsNullOrEmpty(txbHidden.Text.Trim()))
+            {
+  
+                
+                //// 非表示理由の重複チェック
+                //if (divisionDataAccess.CheckDivisionCDExistence(textBoxDivisionCD.Text.Trim()))
+                //{
+                //    //MessageBox.Show("入力された非表示理由は既に存在します");
+                //    messageDsp.DspMsg("M1003");
+                //    txbHidden.Focus();
+                //    return false;
+                //}
+            }
+            else
+            {
+                MessageBox.Show("非表示理由が入力されていません");
+                txbHidden.Focus();
+                return false;
+            }
+
+
+            return true;
+        }
+
 
         ///////////////////////////////
         //メソッド名：ClientDataUpdate()
@@ -163,11 +370,11 @@ namespace SalesManagement_SysDev
                 ClID = int.Parse(txbClientID.Text.Trim()),
                 ClName = txbClientName.Text.Trim(),
                 ClHidden = txbHidden.Text.Trim(),
-                ClPhone = txbCilentPhone.Text.Trim(),
+                ClPhone = txbClientPhone.Text.Trim(),
                 SoID = cmbSalesOfficeID.SelectedIndex,
                 ClPostal = txbClientPostal.Text.Trim(),
                 ClAddress = txbClientAddress.Text.Trim(),
-                ClFAX = txbClientFax.Text.Trim(),
+                ClFAX = txbClientFAX.Text.Trim(),
                 ClFlag = cmbHidden.SelectedIndex,
             };
         }
@@ -233,9 +440,9 @@ namespace SalesManagement_SysDev
             cmbSalesOfficeID.SelectedIndex = int.Parse(dgvClient[1, dgvClient.CurrentCellAddress.Y].Value.ToString()) - 1;
             txbClientName.Text = dgvClient[2, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientAddress.Text = dgvClient[3, dgvClient.CurrentCellAddress.Y].Value.ToString();
-            txbCilentPhone.Text = dgvClient[4, dgvClient.CurrentCellAddress.Y].Value.ToString();
+            txbClientPhone.Text = dgvClient[4, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientPostal.Text = dgvClient[5, dgvClient.CurrentCellAddress.Y].Value.ToString();
-            txbClientFax.Text = dgvClient[6, dgvClient.CurrentCellAddress.Y].Value.ToString();
+            txbClientFAX.Text = dgvClient[6, dgvClient.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = int.Parse(dgvClient[7, dgvClient.CurrentCellAddress.Y].Value.ToString());
             txbHidden.Text = dgvClient[8, dgvClient.CurrentCellAddress.Y]?.Value?.ToString();
         }
@@ -312,22 +519,23 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：ClearInput()
+        //メソッド名：ClearImput()
         //引　数   ：なし
         //戻り値   ：なし
-        //機　能   ：入力エリアをクリア
+        //機　能   ：テキストボックスやコンボボックスの中身のクリア
         ///////////////////////////////
-        private void ClearInput()
+        private void ClearImput()
         {
-            txbClientID.Text = "";
-            txbClientName.Text = "";
-            txbCilentPhone.Text = "";
-            txbClientPostal.Text = "";
-            txbClientAddress.Text = "";
-            txbClientFax.Text = "";
-            txbHidden.Text = "";
-            cmbSalesOfficeID.SelectedIndex = 0;
-            cmbHidden.SelectedIndex = 0;
+            txbClientID.Text = string.Empty;
+            txbClientName.Text = string.Empty;
+            txbClientPhone.Text = string.Empty;
+            txbClientPostal.Text = string.Empty;
+            txbClientAddress.Text = string.Empty;
+            txbClientAddress.Text = string.Empty;
+            txbHidden.Text = string.Empty;
+            cmbSalesOfficeID.SelectedIndex = -1;
+            cmbHidden.SelectedIndex = -1;
+            txbClientFAX.Text = string.Empty;
         }
     }
 }
