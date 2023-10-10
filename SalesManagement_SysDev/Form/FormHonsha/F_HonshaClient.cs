@@ -77,6 +77,62 @@ namespace SalesManagement_SysDev
         private void ClientDataRegister()
         {
 
+            // 部署情報作成
+            var regClient = GenerateDataAtRegistration();
+
+            // 部署情報登録
+            RegistrationClient(regClient);
+        }
+
+        ///////////////////////////////
+        //メソッド名：RegistrationDivision()
+        //引　数   ：部署情報
+        //戻り値   ：なし
+        //機　能   ：部署データの登録
+        ///////////////////////////////
+        private void RegistrationClient(M_Client regClient)
+        {
+            // 部署情報の登録
+            bool flg = clientDataAccess.AddClientData(regClient);
+
+            //登録成功・失敗メッセージ
+            if (flg == true)
+            {
+                MessageBox.Show("データを登録しました。");
+            }
+            else
+            {
+                MessageBox.Show("データの登録に失敗しました。");
+            }
+
+            // 入力エリアのクリア
+            ClearInput();
+
+            // データグリッドビューの表示
+            GetDataGridView();
+
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtRegistration()
+        //引　数   ：なし
+        //戻り値   ：部署登録情報
+        //機　能   ：登録データのセット
+        ///////////////////////////////
+        private M_Client GenerateDataAtRegistration()
+        {
+            return new M_Client
+            {
+                ClID = int.Parse(txbClientID.Text.Trim()),
+                SoID = cmbSalesOfficeID.SelectedIndex,
+                ClName = txbClientName.Text.Trim(),
+                ClAddress = txbClientAddress.Text.Trim(),
+                ClPhone = txbCilentPhone.Text.Trim(),
+                ClPostal = txbClientPostal.Text.Trim(),
+                ClFAX = txbClientFax.Text.Trim(),
+                ClFlag = cmbHidden.SelectedIndex,
+                ClHidden = txbHidden.Text.Trim(),
+            };
         }
 
         ///////////////////////////////
@@ -87,6 +143,71 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void ClientDataUpdate()
         {
+
+            // 8.1.2.2 部署情報作成
+            var updDivision = GenerateDataAtUpdate();
+
+            // 8.1.2.3 部署情報更新
+            UpdateDivision(updDivision);
+        }
+
+        ///////////////////////////////
+        //　8.1.2.2 部署情報作成
+        //メソッド名：GenerateDataAtUpdate()
+        //引　数   ：なし
+        //戻り値   ：部署更新情報
+        //機　能   ：更新データのセット
+        ///////////////////////////////
+        private M_Client GenerateDataAtUpdate()
+        {
+            return new M_Client
+            {
+                ClID = int.Parse(txbClientID.Text.Trim()),
+                ClName = txbClientName.Text.Trim(),
+                ClHidden = txbHidden.Text.Trim(),
+                ClPhone = txbCilentPhone.Text.Trim(),
+                SoID = cmbSalesOfficeID.SelectedIndex,
+                ClPostal = txbClientPostal.Text.Trim(),
+                ClAddress = txbClientAddress.Text.Trim(),
+                ClFAX = txbClientFax.Text.Trim(),
+                ClFlag = cmbHidden.SelectedIndex,
+            };
+        }
+
+        ///////////////////////////////
+        //　8.1.2.3 部署情報更新
+        //メソッド名：UpdateDivision()
+        //引　数   ：部署情報
+        //戻り値   ：なし
+        //機　能   ：部署情報の更新
+        ///////////////////////////////
+        private void UpdateDivision(M_Client updDivision)
+        {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？","確認"
+                ,MessageBoxButtons.OKCancel,MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+                return;
+
+            // 部署情報の更新
+            bool flg = clientDataAccess.UpdateClientData(updDivision);
+            if (flg == true)
+                //MessageBox.Show("データを更新しました。");
+                MessageBox.Show("更新しました。", "確認"
+                 , MessageBoxButtons.OK, MessageBoxIcon.Information);
+            else
+                //MessageBox.Show("データの更新に失敗しました。");
+                MessageBox.Show("更新に失敗しました。", "エラー"
+                 , MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+           
+
+            
+
+            // データグリッドビューの表示
+            GetDataGridView();
+
 
         }
 
@@ -241,9 +362,23 @@ namespace SalesManagement_SysDev
             dgvClient.Refresh();
         }
 
-        private void rdbSearch_CheckedChanged(object sender, EventArgs e)
+        ///////////////////////////////
+        //メソッド名：ClearInput()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：入力エリアをクリア
+        ///////////////////////////////
+        private void ClearInput()
         {
-
+            txbClientID.Text = "";
+            txbClientName.Text = "";
+            txbCilentPhone.Text = "";
+            txbClientPostal.Text = "";
+            txbClientAddress.Text = "";
+            txbClientFax.Text = "";
+            txbHidden.Text = "";
+            cmbSalesOfficeID.SelectedIndex = 0;
+            cmbHidden.SelectedIndex = 0;
         }
     }
 }
