@@ -98,6 +98,17 @@ namespace SalesManagement_SysDev
         public List<M_Client> GetClientData(M_Client selectClient)
         {
             List<M_Client> listClient = new List<M_Client>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listClient = context.M_Clients.Where(x => x.ClID == selectClient.ClID).ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
 
             return listClient;
         }
