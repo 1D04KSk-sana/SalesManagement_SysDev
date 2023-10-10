@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,6 +13,7 @@ namespace SalesManagement_SysDev
 {
     public partial class F_HonshaClient : Form
     {
+
         //データベース顧客テーブルアクセス用クラスのインスタンス化
         ClientDataAccess clientDataAccess = new ClientDataAccess();
         //入力形式チェック用クラスのインスタンス化
@@ -217,8 +219,57 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void ClientDataSelect()
         {
+            // 8.1.4.2 部署情報抽出
+            GenerateDataAtSelect();
+
+            // 8.1.4.3 部署抽出結果表示
+            SetSelectData();
 
         }
+        ///////////////////////////////
+        //　8.1.4.2 部署情報抽出
+        //メソッド名：GenerateDataAtSelect()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：部署情報の取得
+        ///////////////////////////////
+        private void GenerateDataAtSelect()
+        {
+            // 検索条件のセット
+            M_Client selectCondition = new M_Client()
+            {
+                ClID =int.Parse(txbClientID.Text.Trim()),
+                ClName = txbClientName.Text.Trim()
+               // SoID= int.Parse(cmbSalesOfficeID.Text.Trim()),
+               // ClPhone= txbCilentPhone.Text.Trim(),
+               // ClPostal= txbClientPostal.Text.Trim(),
+               // ClAddress= txbClientAddress.Text.Trim(),
+               // ClFAX=txbClientFax.Text.Trim(),
+               // ClHidden=txbHidden.Text.Trim()
+            };
+            // 部署データの抽出
+            listClient = clientDataAccess.GetClientData(selectCondition);
+
+        }
+        ///////////////////////////////
+        //　8.1.4.3 部署部署抽出結果表示
+        //メソッド名：SetSelectData()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：部署情報の表示
+        ///////////////////////////////
+        private void SetSelectData()
+        {
+            dgvClient.DataSource = listClient;
+            dgvClient.Refresh();
+
+        }
+
+        private void dataGridViewDsp_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
 
         ///////////////////////////////
         //メソッド名：SelectRowControl()
