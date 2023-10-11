@@ -167,9 +167,10 @@
             // txbClientPhone
             // 
             this.txbClientPhone.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientPhone.Location = new System.Drawing.Point(867, 76);
+            this.txbClientPhone.Location = new System.Drawing.Point(881, 76);
+            this.txbClientPhone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txbClientPhone.Name = "txbClientPhone";
-            this.txbClientPhone.Size = new System.Drawing.Size(147, 25);
+            this.txbClientPhone.Size = new System.Drawing.Size(118, 25);
             this.txbClientPhone.TabIndex = 7;
             // 
             // cmbSalesOfficeID
@@ -247,9 +248,10 @@
             // txbClientFAX
             // 
             this.txbClientFAX.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientFAX.Location = new System.Drawing.Point(867, 118);
+            this.txbClientFAX.Location = new System.Drawing.Point(881, 118);
+            this.txbClientFAX.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txbClientFAX.Name = "txbClientFAX";
-            this.txbClientFAX.Size = new System.Drawing.Size(147, 25);
+            this.txbClientFAX.Size = new System.Drawing.Size(118, 25);
             this.txbClientFAX.TabIndex = 15;
             // 
             // lblClientHidden
@@ -308,9 +310,10 @@
             // btnClear
             // 
             this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClear.Location = new System.Drawing.Point(841, 11);
+            this.btnClear.Location = new System.Drawing.Point(858, 12);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(94, 38);
+            this.btnClear.Size = new System.Drawing.Size(84, 38);
             this.btnClear.TabIndex = 21;
             this.btnClear.Text = "クリア";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -320,7 +323,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1066, 494);
+            this.ClientSize = new System.Drawing.Size(1070, 496);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.cmbHidden);
             this.Controls.Add(this.dgvClient);
