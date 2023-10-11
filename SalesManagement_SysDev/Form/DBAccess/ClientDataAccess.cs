@@ -10,6 +10,31 @@ namespace SalesManagement_SysDev
     internal class ClientDataAccess
     {
         ///////////////////////////////
+        //メソッド名：CheckClientIDExistence()
+        //引　数   ：顧客コード
+        //戻り値   ：True or False
+        //機　能   ：一致する顧客IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckClientIDExistence(int clientID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                //部署CDで一致するデータが存在するか
+                flg = context.M_Clients.Any(x => x.ClID == clientID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
         //メソッド名：AddClientData()
         //引　数：regClient = 顧客データ
         //戻り値：True or False
@@ -48,6 +73,7 @@ namespace SalesManagement_SysDev
             {
                 var context = new SalesManagement_DevContext();
                 var Client = context.M_Clients.Single(x => x.ClID == updClient.ClID);
+
                 Client.ClName = updClient.ClName;
                 Client.ClFlag = updClient.ClFlag;
                 Client.ClHidden = updClient.ClHidden;
@@ -56,8 +82,6 @@ namespace SalesManagement_SysDev
                 Client.ClAddress = updClient.ClAddress;
                 Client.SoID = updClient.SoID;
                 Client.ClPostal = updClient.ClPostal;
-                Client.ClID = updClient.ClID;
-
 
                 context.SaveChanges();
                 context.Dispose();
