@@ -31,9 +31,26 @@ namespace SalesManagement_SysDev
             SetFormDataGridView();
         }
 
+        private void rdoSElect_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbRegister.Checked || rdbSearch.Checked)
+            {
+                txbClientID.Enabled = true;
+            }
+            if (rdbUpdate.Checked)
+            {
+                txbClientID.Enabled = false;
+            }
+        }
+
         private void btnReturn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearImput();
         }
 
         private void btnDone_Click(object sender, EventArgs e)
@@ -76,6 +93,11 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void ClientDataRegister()
         {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtRegistration())
+            {
+                return;
+            }
 
             // 部署情報作成
             var regClient = GenerateDataAtRegistration();
@@ -98,15 +120,15 @@ namespace SalesManagement_SysDev
             //登録成功・失敗メッセージ
             if (flg == true)
             {
-                MessageBox.Show("データを登録しました。");
+                MessageBox.Show("データを登録しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                MessageBox.Show("データの登録に失敗しました。");
+                MessageBox.Show("データの登録に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             // 入力エリアのクリア
-            ClearInput();
+            ClearImput();
 
             // データグリッドビューの表示
             GetDataGridView();
@@ -127,22 +149,180 @@ namespace SalesManagement_SysDev
                 SoID = cmbSalesOfficeID.SelectedIndex,
                 ClName = txbClientName.Text.Trim(),
                 ClAddress = txbClientAddress.Text.Trim(),
-                ClPhone = txbCilentPhone.Text.Trim(),
+                ClPhone = txbClientPhone.Text.Trim(),
                 ClPostal = txbClientPostal.Text.Trim(),
-                ClFAX = txbClientFax.Text.Trim(),
+                ClFAX = txbClientFAX.Text.Trim(),
                 ClFlag = cmbHidden.SelectedIndex,
                 ClHidden = txbHidden.Text.Trim(),
             };
         }
 
         ///////////////////////////////
+        //メソッド名：GetValidDataAtRegistration()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：登録入力データの形式チェック
+        //          ：エラーがない場合True
+        //          ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtRegistration()
+        {
+
+            // 顧客IDの適否
+            if (!String.IsNullOrEmpty(txbClientID.Text.Trim()))
+            {
+                // 顧客IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbClientID.Text.Trim()))
+                {
+                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+                //顧客IDの重複チェック
+                if (clientDataAccess.CheckClientIDExistence(int.Parse(txbClientID.Text.Trim())))
+                {
+                    MessageBox.Show("顧客IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("顧客IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbClientID.Focus();
+                return false;
+            }
+
+            // 顧客名の適否
+            if (!String.IsNullOrEmpty(txbClientName.Text.Trim()))
+            {
+                // 顧客名の文字数チェック
+                if (txbClientName.TextLength >= 50)
+                {
+                    MessageBox.Show("顧客名は50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientName.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("顧客名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbClientName.Focus();
+                return false;
+            }
+
+            //営業所選択の適否
+            if (cmbSalesOfficeID.SelectedIndex == -1)
+            {
+                MessageBox.Show("営業所が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbSalesOfficeID.Focus();
+                return false;
+            }
+
+            // 電話番号の適否
+            if (!String.IsNullOrEmpty(txbClientPhone.Text.Trim()))
+            {
+                // 電話番号の文字数チェック
+                if (txbClientPhone.TextLength > 13)
+                {
+                    MessageBox.Show("電話番号は13文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientPhone.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("電話番号が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbClientName.Focus();
+                return false;
+            }
+
+
+            // 郵便番号の適否
+            if (!String.IsNullOrEmpty(txbClientPostal.Text.Trim()))
+            {
+                // 郵便番号の数字チェック
+                if (!dataInputCheck.CheckNumeric(txbClientPostal.Text.Trim()))
+                {
+                    MessageBox.Show("郵便番号は全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientPostal.Focus();
+                    return false;
+                }
+                // 郵便番号の文字数チェック
+                if (txbClientPostal.TextLength > 7)
+                {
+                    MessageBox.Show("郵便番号は7文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientPostal.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("郵便番号が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbClientPostal.Focus();
+                return false;
+            }
+
+            // 住所の適否
+            if (!String.IsNullOrEmpty(txbClientAddress.Text.Trim()))
+            {
+                // 住所の文字数チェック
+                if (txbClientAddress.TextLength > 50)
+                {
+                    MessageBox.Show("住所は50文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientAddress.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("住所が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbClientAddress.Focus();
+                return false;
+            }
+
+            // FAXの適否
+            if (!String.IsNullOrEmpty(txbClientFAX.Text.Trim()))
+            {
+                // FAXの文字数チェック
+                if (txbClientFAX.TextLength > 13)
+                {
+                    MessageBox.Show("FAXは13文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientFAX.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("FAXが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbClientFAX.Focus();
+                return false;
+            }
+
+            //表示非表示選択の適否
+            if (cmbHidden.SelectedIndex == -1)
+            {
+                MessageBox.Show("表示家選択が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbHidden.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        ///////////////////////////////
         //メソッド名：ClientDataUpdate()
         //引　数   ：なし
         //戻り値   ：なし
-        //機　能   ：選択された行に対してのコントロールの変更
+        //機　能   ：顧客情報更新の実行
         ///////////////////////////////
         private void ClientDataUpdate()
         {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtUpdate())
+            {
+                return;
+            }
 
             // 8.1.2.2 部署情報作成
             var updDivision = GenerateDataAtUpdate();
@@ -152,10 +332,9 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //　8.1.2.2 部署情報作成
         //メソッド名：GenerateDataAtUpdate()
         //引　数   ：なし
-        //戻り値   ：部署更新情報
+        //戻り値   ：顧客更新情報
         //機　能   ：更新データのセット
         ///////////////////////////////
         private M_Client GenerateDataAtUpdate()
@@ -165,11 +344,11 @@ namespace SalesManagement_SysDev
                 ClID = int.Parse(txbClientID.Text.Trim()),
                 ClName = txbClientName.Text.Trim(),
                 ClHidden = txbHidden.Text.Trim(),
-                ClPhone = txbCilentPhone.Text.Trim(),
+                ClPhone = txbClientPhone.Text.Trim(),
                 SoID = cmbSalesOfficeID.SelectedIndex,
                 ClPostal = txbClientPostal.Text.Trim(),
                 ClAddress = txbClientAddress.Text.Trim(),
-                ClFAX = txbClientFax.Text.Trim(),
+                ClFAX = txbClientFAX.Text.Trim(),
                 ClFlag = cmbHidden.SelectedIndex,
             };
         }
@@ -184,50 +363,199 @@ namespace SalesManagement_SysDev
         private void UpdateDivision(M_Client updDivision)
         {
             // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？","確認"
-                ,MessageBoxButtons.OKCancel,MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
             if (result == DialogResult.Cancel)
+            {
                 return;
+            }
 
             // 部署情報の更新
             bool flg = clientDataAccess.UpdateClientData(updDivision);
             if (flg == true)
-                //MessageBox.Show("データを更新しました。");
-                MessageBox.Show("更新しました。", "確認"
-                 , MessageBoxButtons.OK, MessageBoxIcon.Information);
+            {
+                MessageBox.Show("更新しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             else
-                //MessageBox.Show("データの更新に失敗しました。");
-                MessageBox.Show("更新に失敗しました。", "エラー"
-                 , MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {
+                MessageBox.Show("更新に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-           
-
-            
+            //テキストボックス等のクリア
+            ClearImput();
 
             // データグリッドビューの表示
             GetDataGridView();
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtUpdate()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：更新入力データの形式チェック
+        //         ：エラーがない場合True
+        //         ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtUpdate()
+        {
+
+            // 顧客IDの適否
+            if (!String.IsNullOrEmpty(txbClientID.Text.Trim()))
+            {
+                // 顧客IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbClientID.Text.Trim()))
+                {
+                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("顧客IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbClientID.Focus();
+                return false;
+            }
+
+            // 顧客名の適否
+            if (!String.IsNullOrEmpty(txbClientName.Text.Trim()))
+            {
+                // 顧客名の文字数チェック
+                if (txbClientName.TextLength >= 50)
+                {
+                    MessageBox.Show("顧客名は50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientName.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("顧客名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbClientName.Focus();
+                return false;
+            }
+
+            //営業所選択の適否
+            if (cmbSalesOfficeID.SelectedIndex == -1)
+            {
+                MessageBox.Show("営業所が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbSalesOfficeID.Focus();
+                return false;
+            }
+
+            // 電話番号の適否
+            if (!String.IsNullOrEmpty(txbClientPhone.Text.Trim()))
+            {
+                // 電話番号の文字数チェック
+                if (txbClientPhone.TextLength > 13)
+                {
+                    MessageBox.Show("電話番号は13文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientPhone.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("電話番号が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbClientName.Focus();
+                return false;
+            }
 
 
+            // 郵便番号の適否
+            if (!String.IsNullOrEmpty(txbClientPostal.Text.Trim()))
+            {
+                // 郵便番号の数字チェック
+                if (!dataInputCheck.CheckNumeric(txbClientPostal.Text.Trim()))
+                {
+                    MessageBox.Show("郵便番号は全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientPostal.Focus();
+                    return false;
+                }
+                // 郵便番号の文字数チェック
+                if (txbClientPostal.TextLength > 7)
+                {
+                    MessageBox.Show("郵便番号は7文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientPostal.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("郵便番号が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbClientPostal.Focus();
+                return false;
+            }
+
+            // 住所の適否
+            if (!String.IsNullOrEmpty(txbClientAddress.Text.Trim()))
+            {
+                // 住所の文字数チェック
+                if (txbClientAddress.TextLength > 50)
+                {
+                    MessageBox.Show("住所は50文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientAddress.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("住所が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbClientAddress.Focus();
+                return false;
+            }
+
+            // FAXの適否
+            if (!String.IsNullOrEmpty(txbClientFAX.Text.Trim()))
+            {
+                // FAXの文字数チェック
+                if (txbClientFAX.TextLength > 13)
+                {
+                    MessageBox.Show("FAXは13文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientFAX.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("FAXが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbClientFAX.Focus();
+                return false;
+            }
+
+            //表示非表示選択の適否
+            if (cmbHidden.SelectedIndex == -1)
+            {
+                MessageBox.Show("表示選択が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbHidden.Focus();
+                return false;
+            }
+
+            return true;
         }
 
         ///////////////////////////////
         //メソッド名：ClientDataSelect()
         //引　数   ：なし
         //戻り値   ：なし
-        //機　能   ：選択された行に対してのコントロールの変更
+        //機　能   ：顧客情報検索の実行
         ///////////////////////////////
         private void ClientDataSelect()
         {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtSearch())
+            {
+                return;
+            }
+
             // 8.1.4.2 部署情報抽出
             GenerateDataAtSelect();
 
             // 8.1.4.3 部署抽出結果表示
             SetSelectData();
-
         }
+
         ///////////////////////////////
-        //　8.1.4.2 部署情報抽出
         //メソッド名：GenerateDataAtSelect()
         //引　数   ：なし
         //戻り値   ：なし
@@ -249,10 +577,9 @@ namespace SalesManagement_SysDev
             };
             // 部署データの抽出
             listClient = clientDataAccess.GetClientData(selectCondition);
-
         }
+
         ///////////////////////////////
-        //　8.1.4.3 部署部署抽出結果表示
         //メソッド名：SetSelectData()
         //引　数   ：なし
         //戻り値   ：なし
@@ -262,14 +589,46 @@ namespace SalesManagement_SysDev
         {
             dgvClient.DataSource = listClient;
             dgvClient.Refresh();
-
         }
 
-        private void dataGridViewDsp_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtSearch()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：検索入力データの形式チェック
+        //         ：エラーがない場合True
+        //         ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtSearch()
         {
 
-        }
+            // 顧客IDの適否
+            if (!String.IsNullOrEmpty(txbClientID.Text.Trim()))
+            {
+                // 顧客IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbClientID.Text.Trim()))
+                {
+                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+                //顧客IDの重複チェック
+                if (!clientDataAccess.CheckClientIDExistence(int.Parse(txbClientID.Text.Trim())))
+                {
+                    MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("顧客IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbClientID.Focus();
+                return false;
+            }
 
+            return true;
+        }
 
         ///////////////////////////////
         //メソッド名：SelectRowControl()
@@ -284,9 +643,9 @@ namespace SalesManagement_SysDev
             cmbSalesOfficeID.SelectedIndex = int.Parse(dgvClient[1, dgvClient.CurrentCellAddress.Y].Value.ToString()) - 1;
             txbClientName.Text = dgvClient[2, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientAddress.Text = dgvClient[3, dgvClient.CurrentCellAddress.Y].Value.ToString();
-            txbCilentPhone.Text = dgvClient[4, dgvClient.CurrentCellAddress.Y].Value.ToString();
+            txbClientPhone.Text = dgvClient[4, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientPostal.Text = dgvClient[5, dgvClient.CurrentCellAddress.Y].Value.ToString();
-            txbClientFax.Text = dgvClient[6, dgvClient.CurrentCellAddress.Y].Value.ToString();
+            txbClientFAX.Text = dgvClient[6, dgvClient.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = int.Parse(dgvClient[7, dgvClient.CurrentCellAddress.Y].Value.ToString());
             txbHidden.Text = dgvClient[8, dgvClient.CurrentCellAddress.Y]?.Value?.ToString();
         }
@@ -363,22 +722,29 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：ClearInput()
+        //メソッド名：ClearImput()
         //引　数   ：なし
         //戻り値   ：なし
-        //機　能   ：入力エリアをクリア
+        //機　能   ：テキストボックスやコンボボックスの中身のクリア
         ///////////////////////////////
-        private void ClearInput()
+        private void ClearImput()
         {
-            txbClientID.Text = "";
-            txbClientName.Text = "";
-            txbCilentPhone.Text = "";
-            txbClientPostal.Text = "";
-            txbClientAddress.Text = "";
-            txbClientFax.Text = "";
-            txbHidden.Text = "";
-            cmbSalesOfficeID.SelectedIndex = 0;
-            cmbHidden.SelectedIndex = 0;
+            txbClientID.Enabled = true;
+
+            rdbRegister.Checked = false;
+            rdbUpdate.Checked = false;
+            rdbSearch.Checked = false;
+
+            txbClientID.Text = string.Empty;
+            txbClientName.Text = string.Empty;
+            txbClientPhone.Text = string.Empty;
+            txbClientPostal.Text = string.Empty;
+            txbClientAddress.Text = string.Empty;
+            txbClientAddress.Text = string.Empty;
+            txbHidden.Text = string.Empty;
+            cmbSalesOfficeID.SelectedIndex = -1;
+            cmbHidden.SelectedIndex = -1;
+            txbClientFAX.Text = string.Empty;
         }
     }
 }

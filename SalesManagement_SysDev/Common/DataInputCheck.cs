@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Text.RegularExpressions;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SalesManagement_SysDev
 {
@@ -18,7 +21,16 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         public bool CheckFullWidth(string imputText)
         {
-            return true;
+            bool flg;
+
+            int textLength = imputText.Replace("\r\n", string.Empty).Length;
+            int textByte = Encoding.GetEncoding("Shift_JIS").GetByteCount(imputText.Replace("\r\n", string.Empty));
+            if (textByte != textLength * 2)
+                flg = false;
+            else
+                flg = true;
+
+            return flg;
         }
 
         ///////////////////////////////
@@ -31,7 +43,15 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         public bool CheckHalfAlphabetNumeric(string imputText)
         {
-            return true;
+            bool flg;
+
+            Regex regex = new Regex("^[a-zA-Z0-9]+$");
+            if (!regex.IsMatch(imputText))
+                flg = false;
+            else
+                flg = true;
+
+            return flg;
         }
 
         ///////////////////////////////
@@ -44,7 +64,15 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         public bool CheckHalfWidthKatakana(string imputText)
         {
-            return true;
+            bool flg;
+
+            Regex regex = new Regex(@"[\uFF66-\uFF9D]");
+            if (!regex.IsMatch(imputText))
+                flg = false;
+            else
+                flg = true;
+
+            return flg;
         }
 
         ///////////////////////////////
@@ -57,7 +85,15 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         public bool CheckNumeric(string imputText)
         {
-            return true;
+            bool flg;
+
+            Regex regex = new Regex("^[0-9]+$");
+            if (!regex.IsMatch(imputText))
+                flg = false;
+            else
+                flg = true;
+
+            return flg;
         }
 
         ///////////////////////////////
@@ -70,7 +106,15 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         public bool CheckMailAddress(string imputText)
         {
-            return true;
+            bool flg = false;
+
+            Regex regex = new Regex(@"^\b[\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,4}\b$");
+            if (!regex.IsMatch(imputText))
+                flg = false;
+            else
+                flg = true;
+
+            return flg;
         }
 
         ///////////////////////////////
@@ -83,7 +127,14 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         public bool CheckHalfChar(string imputText)
         {
-            return true;
+            bool flg = false;
+
+            Regex regex = new Regex("^[ -~]+$");
+            if (!regex.IsMatch(imputText))
+                flg = false;
+            else
+                flg = true;
+            return flg;
         }
     }
 }
