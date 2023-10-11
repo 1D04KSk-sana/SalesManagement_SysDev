@@ -542,15 +542,20 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void ClientDataSelect()
         {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtSearch())
+            {
+                return;
+            }
+
             // 8.1.4.2 部署情報抽出
             GenerateDataAtSelect();
 
             // 8.1.4.3 部署抽出結果表示
             SetSelectData();
-
         }
+
         ///////////////////////////////
-        //　8.1.4.2 部署情報抽出
         //メソッド名：GenerateDataAtSelect()
         //引　数   ：なし
         //戻り値   ：なし
@@ -572,10 +577,9 @@ namespace SalesManagement_SysDev
             };
             // 部署データの抽出
             listClient = clientDataAccess.GetClientData(selectCondition);
-
         }
+
         ///////////////////////////////
-        //　8.1.4.3 部署部署抽出結果表示
         //メソッド名：SetSelectData()
         //引　数   ：なし
         //戻り値   ：なし
@@ -585,14 +589,46 @@ namespace SalesManagement_SysDev
         {
             dgvClient.DataSource = listClient;
             dgvClient.Refresh();
-
         }
 
-        private void dataGridViewDsp_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtSearch()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：検索入力データの形式チェック
+        //         ：エラーがない場合True
+        //         ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtSearch()
         {
 
-        }
+            // 顧客IDの適否
+            if (!String.IsNullOrEmpty(txbClientID.Text.Trim()))
+            {
+                // 顧客IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbClientID.Text.Trim()))
+                {
+                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+                //顧客IDの重複チェック
+                if (!clientDataAccess.CheckClientIDExistence(int.Parse(txbClientID.Text.Trim())))
+                {
+                    MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("顧客IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbClientID.Focus();
+                return false;
+            }
 
+            return true;
+        }
 
         ///////////////////////////////
         //メソッド名：SelectRowControl()
