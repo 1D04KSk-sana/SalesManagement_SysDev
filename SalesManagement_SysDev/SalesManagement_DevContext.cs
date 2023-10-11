@@ -13,32 +13,77 @@ namespace SalesManagement_SysDev
 {
     class SalesManagement_DevContext : DbContext
     {
+        //顧客
         public DbSet<M_Client> M_Clients { get; set; }
+        
+        //社員
         public DbSet<M_Employee> M_Employees { get; set; }
+        
+        //大分類
         public DbSet<M_MajorClassification> M_MajorCassifications { get; set; }
+        
+        //メーカー
         public DbSet<M_Maker> M_Makers { get; set; }
+        
+        //役職
         public DbSet<M_Position> M_Positions { get; set; }
+        
+        //商品
         public DbSet<M_Product> M_Products { get; set; }
+        
+        //営業所
         public DbSet<M_SalesOffice> M_SalesOffices { get; set; }
+        
+        //小分類
         public DbSet<M_SmallClassification> M_SmallClassifications { get; set; }
+        
+        //入荷
         public DbSet<T_Arrival> T_Arrivals { get; set; }
+        //入荷詳細
         public DbSet<T_ArrivalDetail> T_ArrivalDetails { get; set; }
+        
+        //注文
         public DbSet<T_Chumon> T_Chumons { get; set; }
+        //注文詳細
         public DbSet<T_ChumonDetail> T_ChumonDetails { get; set; }
+        
+        //発注
         public DbSet<T_Hattyu> T_Hattyus { get; set; }
+        //発注詳細
         public DbSet<T_HattyuDetail> T_HattyuDetails { get; set; }
+
+        //ログイン履歴（今回は使用しない）
         public DbSet<T_LoginHistory> T_LoginHistorys { get; set; }
+
+        //操作履歴（今回は使用しない）
         public DbSet<T_OperationHistory> T_OperationHistorys { get; set; }
+
+        //受注
         public DbSet<T_Order> T_Orders { get; set; }
+        //受注詳細
         public DbSet<T_OrderDetail> T_OrderDetails { get; set; }
+
+        //売上
         public DbSet<T_Sale> T_Sale { get; set; }
+        //売上詳細
         public DbSet<T_SaleDetail> T_SaleDetails { get; set; }
+        
+        //出荷
         public DbSet<T_Shipment> T_Shipments { get; set; }
+        //出荷詳細
         public DbSet<T_ShipmentDetail> T_ShipmentDetails { get; set; }
+
+        //在庫
         public DbSet<T_Stock> T_Stocks { get; set; }
+
+        //出庫
         public DbSet<T_Syukko> T_Syukkos { get; set; }
+        //出庫詳細
         public DbSet<T_SyukkoDetail> T_SyukkoDetails { get; set; }
+
+        //入庫
         public DbSet<T_Warehousing> T_Warehousings { get; set; }
+        //入庫詳細
         public DbSet<T_WarehousingDetail> T_WarehousingDetails { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

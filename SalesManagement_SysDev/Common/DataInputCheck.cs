@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace SalesManagement_SysDev
 {
@@ -84,7 +85,15 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         public bool CheckNumeric(string imputText)
         {
-            return true;
+            bool flg;
+
+            Regex regex = new Regex("^[0-9]+$");
+            if (!regex.IsMatch(imputText))
+                flg = false;
+            else
+                flg = true;
+
+            return flg;
         }
 
         ///////////////////////////////
