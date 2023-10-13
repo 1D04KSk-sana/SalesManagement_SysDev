@@ -657,6 +657,8 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SetFormDataGridView()
         {
+            //列を自由に設定できるように
+            dgvClient.AutoGenerateColumns = false;
             //行単位で選択するようにする
             dgvClient.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             //行と列の高さを変更できないように
@@ -704,18 +706,20 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SetDataGridView()
         {
-            dgvClient.DataSource = listClient.ToList();
+            dgvClient.Columns.Add("ClID", "顧客ID");
+            dgvClient.Columns.Add("SoID", "営業所ID");
+            dgvClient.Columns.Add("ClName", "顧客名");
+            dgvClient.Columns.Add("ClAddress", "住所");
+            dgvClient.Columns.Add("ClPhone", "電話番号");
+            dgvClient.Columns.Add("ClPostal", "郵便番号");
+            dgvClient.Columns.Add("ClFAX", "FAX");
+            dgvClient.Columns.Add("ClFlag", "顧客管理フラグ");
+            dgvClient.Columns.Add("ClHidden", "非表示理由");
 
-            //各列幅の指定
-            dgvClient.Columns[0].Width = 40;
-            dgvClient.Columns[1].Width = 70;
-            dgvClient.Columns[2].Width = 70;
-            dgvClient.Columns[3].Width = 60;
-            dgvClient.Columns[4].Width = 60;
-            dgvClient.Columns[5].Width = 70;
-            dgvClient.Columns[6].Width = 60;
-            dgvClient.Columns[7].Width = 60;
-            dgvClient.Columns[8].Width = 100;
+            foreach (var item in listClient)
+            {
+                dgvClient.Rows.Add(item.ClID, item.SoID, item.ClName, item.ClAddress, item.ClPhone, item.ClPostal, item.ClFAX, item.ClFlag, item.ClHidden);
+            }
 
             dgvClient.Refresh();
         }
