@@ -15,11 +15,15 @@ namespace SalesManagement_SysDev
     {
         //データベース顧客テーブルアクセス用クラスのインスタンス化
         ClientDataAccess clientDataAccess = new ClientDataAccess();
+        //データベース営業所テーブルアクセス用クラスのインスタンス化
+        SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
         //入力形式チェック用クラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
         //データグリッドビュー用の顧客データ
         private static List<M_Client> listClient = new List<M_Client>();
-        
+        //コンボボックス用の営業所データリスト
+        private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
+
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
         { 
@@ -44,6 +48,18 @@ namespace SalesManagement_SysDev
 
         private void F_HonshaClient_Load(object sender, EventArgs e)
         {
+            //営業所のデータを取得
+            listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
+            //取得したデータをコンボボックスに挿入
+            cmbSalesOfficeID.DataSource = listSalesOffice;
+            //表示する名前をSoNameに指定
+            cmbSalesOfficeID.DisplayMember = "SoName";
+            //項目の順番をSoIDに指定
+            cmbSalesOfficeID.ValueMember = "SoID";
+
+            //cmbSalesOfficeIDを未選択に
+            cmbSalesOfficeID.SelectedIndex = -1;
+
             SetFormDataGridView();
         }
 
@@ -656,13 +672,13 @@ namespace SalesManagement_SysDev
         {
             //データグリッドビューに乗っている情報をGUIに反映
             txbClientID.Text = dgvClient[0, dgvClient.CurrentCellAddress.Y].Value.ToString();
-            cmbSalesOfficeID.SelectedIndex = int.Parse(dgvClient[1, dgvClient.CurrentCellAddress.Y].Value.ToString()) - 1;
+            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvClient[1, dgvClient.CurrentCellAddress.Y].Value.ToString()).Key;
             txbClientName.Text = dgvClient[2, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientAddress.Text = dgvClient[3, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientPhone.Text = dgvClient[4, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientPostal.Text = dgvClient[5, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientFAX.Text = dgvClient[6, dgvClient.CurrentCellAddress.Y].Value.ToString();
-            cmbHidden.SelectedIndex = int.Parse(dgvClient[7, dgvClient.CurrentCellAddress.Y].Value.ToString());
+            cmbHidden.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvClient[7, dgvClient.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvClient[8, dgvClient.CurrentCellAddress.Y]?.Value?.ToString();
         }
 

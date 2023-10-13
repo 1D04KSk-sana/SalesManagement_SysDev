@@ -181,12 +181,6 @@
             this.cmbSalesOfficeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSalesOfficeID.FormattingEnabled = true;
-            this.cmbSalesOfficeID.Items.AddRange(new object[] {
-            "北大阪営業所",
-            "兵庫営業所",
-            "鹿営業所",
-            "京都営業所",
-            "和歌山営業所"});
             this.cmbSalesOfficeID.Location = new System.Drawing.Point(674, 179);
             this.cmbSalesOfficeID.Name = "cmbSalesOfficeID";
             this.cmbSalesOfficeID.Size = new System.Drawing.Size(200, 26);
@@ -339,7 +333,7 @@
             this.lblClient.ForeColor = System.Drawing.Color.White;
             this.lblClient.Location = new System.Drawing.Point(470, 21);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(289, 44);
+            this.lblClient.Size = new System.Drawing.Size(283, 43);
             this.lblClient.TabIndex = 23;
             this.lblClient.Text = "顧客登録画面";
             // 
