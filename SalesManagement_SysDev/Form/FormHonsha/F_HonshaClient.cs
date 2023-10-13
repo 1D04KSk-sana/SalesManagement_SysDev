@@ -711,6 +711,22 @@ namespace SalesManagement_SysDev
 
             //ヘッダー位置の指定
             dgvClient.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            
+            dgvClient.Columns.Add("ClID", "顧客ID");
+            dgvClient.Columns.Add("SoID", "営業所ID");
+            dgvClient.Columns.Add("ClName", "顧客名");
+            dgvClient.Columns.Add("ClAddress", "住所");
+            dgvClient.Columns.Add("ClPhone", "電話番号");
+            dgvClient.Columns.Add("ClPostal", "郵便番号");
+            dgvClient.Columns.Add("ClFAX", "FAX");
+            dgvClient.Columns.Add("ClFlag", "顧客管理フラグ");
+            dgvClient.Columns.Add("ClHidden", "非表示理由");
+
+            //並び替えができないようにする
+            foreach (DataGridViewColumn dataColumn in dgvClient.Columns)
+            {
+                dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
 
             //データグリッドビューのデータ取得
             GetDataGridView();
@@ -739,21 +755,16 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SetDataGridView()
         {
-            dgvClient.Columns.Add("ClID", "顧客ID");
-            dgvClient.Columns.Add("SoID", "営業所ID");
-            dgvClient.Columns.Add("ClName", "顧客名");
-            dgvClient.Columns.Add("ClAddress", "住所");
-            dgvClient.Columns.Add("ClPhone", "電話番号");
-            dgvClient.Columns.Add("ClPostal", "郵便番号");
-            dgvClient.Columns.Add("ClFAX", "FAX");
-            dgvClient.Columns.Add("ClFlag", "顧客管理フラグ");
-            dgvClient.Columns.Add("ClHidden", "非表示理由");
-
+            //中身を消去
+            dgvClient.Rows.Clear();
+            
+            //listClientを1行ずつdgvClientに挿入
             foreach (var item in listClient)
             {
                 dgvClient.Rows.Add(item.ClID, dictionarySalesOffice[item.SoID], item.ClName, item.ClAddress, item.ClPhone, item.ClPostal, item.ClFAX, dictionaryHidden[item.ClFlag], item.ClHidden);
             }
 
+            //dgvClientをリフレッシュ
             dgvClient.Refresh();
         }
 
