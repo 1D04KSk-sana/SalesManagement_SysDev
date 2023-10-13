@@ -746,5 +746,25 @@ namespace SalesManagement_SysDev
             cmbHidden.SelectedIndex = -1;
             txbClientFAX.Text = string.Empty;
         }
+
+        private void txbClientName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbSalesOfficeID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblSalesOfficeID_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txbClientAddress_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

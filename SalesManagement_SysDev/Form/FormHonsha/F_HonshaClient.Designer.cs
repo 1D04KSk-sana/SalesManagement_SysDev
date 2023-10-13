@@ -59,7 +59,7 @@
             // 
             // btnReturn
             // 
-            this.btnReturn.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnReturn.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnReturn.Location = new System.Drawing.Point(12, 12);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(94, 38);
@@ -70,22 +70,22 @@
             // 
             // pnlSelect
             // 
-            this.pnlSelect.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.pnlSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.pnlSelect.Controls.Add(this.rdbSearch);
             this.pnlSelect.Controls.Add(this.rdbUpdate);
             this.pnlSelect.Controls.Add(this.rdbRegister);
-            this.pnlSelect.Location = new System.Drawing.Point(158, 12);
+            this.pnlSelect.Location = new System.Drawing.Point(151, 12);
             this.pnlSelect.Name = "pnlSelect";
-            this.pnlSelect.Size = new System.Drawing.Size(268, 37);
+            this.pnlSelect.Size = new System.Drawing.Size(278, 47);
             this.pnlSelect.TabIndex = 1;
             // 
             // rdbSearch
             // 
             this.rdbSearch.AutoSize = true;
-            this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbSearch.Location = new System.Drawing.Point(185, 8);
             this.rdbSearch.Name = "rdbSearch";
-            this.rdbSearch.Size = new System.Drawing.Size(65, 22);
+            this.rdbSearch.Size = new System.Drawing.Size(77, 27);
             this.rdbSearch.TabIndex = 2;
             this.rdbSearch.TabStop = true;
             this.rdbSearch.Text = "検索";
@@ -95,10 +95,10 @@
             // rdbUpdate
             // 
             this.rdbUpdate.AutoSize = true;
-            this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbUpdate.Location = new System.Drawing.Point(97, 8);
             this.rdbUpdate.Name = "rdbUpdate";
-            this.rdbUpdate.Size = new System.Drawing.Size(65, 22);
+            this.rdbUpdate.Size = new System.Drawing.Size(77, 27);
             this.rdbUpdate.TabIndex = 1;
             this.rdbUpdate.TabStop = true;
             this.rdbUpdate.Text = "更新";
@@ -108,10 +108,10 @@
             // rdbRegister
             // 
             this.rdbRegister.AutoSize = true;
-            this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbRegister.Location = new System.Drawing.Point(15, 8);
             this.rdbRegister.Name = "rdbRegister";
-            this.rdbRegister.Size = new System.Drawing.Size(65, 22);
+            this.rdbRegister.Size = new System.Drawing.Size(77, 27);
             this.rdbRegister.TabIndex = 0;
             this.rdbRegister.TabStop = true;
             this.rdbRegister.Text = "登録";
@@ -122,7 +122,7 @@
             // 
             this.lblClientID.AutoSize = true;
             this.lblClientID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientID.Location = new System.Drawing.Point(13, 79);
+            this.lblClientID.Location = new System.Drawing.Point(13, 83);
             this.lblClientID.Name = "lblClientID";
             this.lblClientID.Size = new System.Drawing.Size(60, 18);
             this.lblClientID.TabIndex = 2;
@@ -131,16 +131,16 @@
             // txbClientID
             // 
             this.txbClientID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientID.Location = new System.Drawing.Point(79, 76);
+            this.txbClientID.Location = new System.Drawing.Point(98, 80);
             this.txbClientID.Name = "txbClientID";
-            this.txbClientID.Size = new System.Drawing.Size(100, 25);
+            this.txbClientID.Size = new System.Drawing.Size(150, 25);
             this.txbClientID.TabIndex = 3;
             // 
             // lblClientName
             // 
             this.lblClientName.AutoSize = true;
             this.lblClientName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientName.Location = new System.Drawing.Point(229, 79);
+            this.lblClientName.Location = new System.Drawing.Point(273, 83);
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(62, 18);
             this.lblClientName.TabIndex = 4;
@@ -149,28 +149,30 @@
             // txbClientName
             // 
             this.txbClientName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientName.Location = new System.Drawing.Point(297, 76);
+            this.txbClientName.Location = new System.Drawing.Point(343, 80);
             this.txbClientName.Name = "txbClientName";
-            this.txbClientName.Size = new System.Drawing.Size(147, 25);
+            this.txbClientName.Size = new System.Drawing.Size(200, 25);
             this.txbClientName.TabIndex = 5;
+            this.txbClientName.TextChanged += new System.EventHandler(this.txbClientName_TextChanged);
             // 
             // lblSalesOfficeID
             // 
             this.lblSalesOfficeID.AutoSize = true;
             this.lblSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblSalesOfficeID.Location = new System.Drawing.Point(485, 79);
+            this.lblSalesOfficeID.Location = new System.Drawing.Point(579, 82);
             this.lblSalesOfficeID.Name = "lblSalesOfficeID";
             this.lblSalesOfficeID.Size = new System.Drawing.Size(78, 18);
             this.lblSalesOfficeID.TabIndex = 6;
             this.lblSalesOfficeID.Text = "営業所ID";
+            this.lblSalesOfficeID.Click += new System.EventHandler(this.lblSalesOfficeID_Click);
             // 
             // txbClientPhone
             // 
             this.txbClientPhone.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientPhone.Location = new System.Drawing.Point(881, 76);
-            this.txbClientPhone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txbClientPhone.Location = new System.Drawing.Point(1016, 82);
+            this.txbClientPhone.Margin = new System.Windows.Forms.Padding(2);
             this.txbClientPhone.Name = "txbClientPhone";
-            this.txbClientPhone.Size = new System.Drawing.Size(118, 25);
+            this.txbClientPhone.Size = new System.Drawing.Size(200, 25);
             this.txbClientPhone.TabIndex = 7;
             // 
             // cmbSalesOfficeID
@@ -184,16 +186,17 @@
             "鹿営業所",
             "京都営業所",
             "和歌山営業所"});
-            this.cmbSalesOfficeID.Location = new System.Drawing.Point(569, 76);
+            this.cmbSalesOfficeID.Location = new System.Drawing.Point(674, 79);
             this.cmbSalesOfficeID.Name = "cmbSalesOfficeID";
-            this.cmbSalesOfficeID.Size = new System.Drawing.Size(156, 26);
+            this.cmbSalesOfficeID.Size = new System.Drawing.Size(200, 26);
             this.cmbSalesOfficeID.TabIndex = 8;
+            this.cmbSalesOfficeID.SelectedIndexChanged += new System.EventHandler(this.cmbSalesOfficeID_SelectedIndexChanged);
             // 
             // lblCilentPhone
             // 
             this.lblCilentPhone.AutoSize = true;
             this.lblCilentPhone.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblCilentPhone.Location = new System.Drawing.Point(781, 79);
+            this.lblCilentPhone.Location = new System.Drawing.Point(914, 83);
             this.lblCilentPhone.Name = "lblCilentPhone";
             this.lblCilentPhone.Size = new System.Drawing.Size(80, 18);
             this.lblCilentPhone.TabIndex = 9;
@@ -203,7 +206,7 @@
             // 
             this.lblClientPostal.AutoSize = true;
             this.lblClientPostal.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientPostal.Location = new System.Drawing.Point(13, 121);
+            this.lblClientPostal.Location = new System.Drawing.Point(13, 157);
             this.lblClientPostal.Name = "lblClientPostal";
             this.lblClientPostal.Size = new System.Drawing.Size(80, 18);
             this.lblClientPostal.TabIndex = 10;
@@ -212,16 +215,16 @@
             // txbClientPostal
             // 
             this.txbClientPostal.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientPostal.Location = new System.Drawing.Point(99, 118);
+            this.txbClientPostal.Location = new System.Drawing.Point(98, 150);
             this.txbClientPostal.Name = "txbClientPostal";
-            this.txbClientPostal.Size = new System.Drawing.Size(100, 25);
+            this.txbClientPostal.Size = new System.Drawing.Size(150, 25);
             this.txbClientPostal.TabIndex = 11;
             // 
             // lblClientAddress
             // 
             this.lblClientAddress.AutoSize = true;
             this.lblClientAddress.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientAddress.Location = new System.Drawing.Point(229, 121);
+            this.lblClientAddress.Location = new System.Drawing.Point(273, 153);
             this.lblClientAddress.Name = "lblClientAddress";
             this.lblClientAddress.Size = new System.Drawing.Size(44, 18);
             this.lblClientAddress.TabIndex = 12;
@@ -230,16 +233,17 @@
             // txbClientAddress
             // 
             this.txbClientAddress.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientAddress.Location = new System.Drawing.Point(297, 118);
+            this.txbClientAddress.Location = new System.Drawing.Point(343, 150);
             this.txbClientAddress.Name = "txbClientAddress";
-            this.txbClientAddress.Size = new System.Drawing.Size(428, 25);
+            this.txbClientAddress.Size = new System.Drawing.Size(531, 25);
             this.txbClientAddress.TabIndex = 13;
+            this.txbClientAddress.TextChanged += new System.EventHandler(this.txbClientAddress_TextChanged);
             // 
             // lblClientFax
             // 
             this.lblClientFax.AutoSize = true;
             this.lblClientFax.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientFax.Location = new System.Drawing.Point(781, 121);
+            this.lblClientFax.Location = new System.Drawing.Point(919, 149);
             this.lblClientFax.Name = "lblClientFax";
             this.lblClientFax.Size = new System.Drawing.Size(40, 18);
             this.lblClientFax.TabIndex = 14;
@@ -248,17 +252,17 @@
             // txbClientFAX
             // 
             this.txbClientFAX.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientFAX.Location = new System.Drawing.Point(881, 118);
-            this.txbClientFAX.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txbClientFAX.Location = new System.Drawing.Point(1016, 146);
+            this.txbClientFAX.Margin = new System.Windows.Forms.Padding(2);
             this.txbClientFAX.Name = "txbClientFAX";
-            this.txbClientFAX.Size = new System.Drawing.Size(118, 25);
+            this.txbClientFAX.Size = new System.Drawing.Size(200, 25);
             this.txbClientFAX.TabIndex = 15;
             // 
             // lblClientHidden
             // 
             this.lblClientHidden.AutoSize = true;
             this.lblClientHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientHidden.Location = new System.Drawing.Point(229, 161);
+            this.lblClientHidden.Location = new System.Drawing.Point(280, 228);
             this.lblClientHidden.Name = "lblClientHidden";
             this.lblClientHidden.Size = new System.Drawing.Size(98, 18);
             this.lblClientHidden.TabIndex = 16;
@@ -267,26 +271,26 @@
             // txbHidden
             // 
             this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbHidden.Location = new System.Drawing.Point(333, 158);
+            this.txbHidden.Location = new System.Drawing.Point(386, 221);
             this.txbHidden.Name = "txbHidden";
-            this.txbHidden.Size = new System.Drawing.Size(681, 25);
+            this.txbHidden.Size = new System.Drawing.Size(830, 25);
             this.txbHidden.TabIndex = 17;
             // 
             // dgvClient
             // 
             this.dgvClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClient.Location = new System.Drawing.Point(12, 196);
+            this.dgvClient.Location = new System.Drawing.Point(16, 291);
             this.dgvClient.Name = "dgvClient";
             this.dgvClient.RowHeadersWidth = 51;
             this.dgvClient.RowTemplate.Height = 24;
-            this.dgvClient.Size = new System.Drawing.Size(1042, 286);
+            this.dgvClient.Size = new System.Drawing.Size(1200, 350);
             this.dgvClient.TabIndex = 18;
             this.dgvClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRecordEditing_CellClick);
             // 
             // btnDone
             // 
-            this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnDone.Location = new System.Drawing.Point(960, 12);
+            this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnDone.Location = new System.Drawing.Point(1122, 12);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(94, 38);
             this.btnDone.TabIndex = 19;
@@ -302,16 +306,16 @@
             this.cmbHidden.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbHidden.Location = new System.Drawing.Point(16, 157);
+            this.cmbHidden.Location = new System.Drawing.Point(92, 220);
             this.cmbHidden.Name = "cmbHidden";
             this.cmbHidden.Size = new System.Drawing.Size(156, 26);
             this.cmbHidden.TabIndex = 20;
             // 
             // btnClear
             // 
-            this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClear.Location = new System.Drawing.Point(858, 12);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnClear.Location = new System.Drawing.Point(1020, 12);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(84, 38);
             this.btnClear.TabIndex = 21;
@@ -323,7 +327,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1070, 496);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.ClientSize = new System.Drawing.Size(1232, 653);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.cmbHidden);
             this.Controls.Add(this.dgvClient);
