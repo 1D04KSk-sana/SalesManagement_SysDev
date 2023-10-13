@@ -57,8 +57,7 @@ namespace SalesManagement_SysDev
             //項目の順番をSoIDに指定
             cmbSalesOfficeID.ValueMember = "SoID";
 
-            //cmbSalesOfficeIDを未選択に
-            cmbSalesOfficeID.SelectedIndex = -1;
+            ClearImput();
 
             SetFormDataGridView();
         }
@@ -160,12 +159,11 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("データの登録に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            // 入力エリアのクリア
-            ClearImput();
-
             // データグリッドビューの表示
             GetDataGridView();
 
+            // 入力エリアのクリア
+            ClearImput();
         }
 
         ///////////////////////////////
@@ -584,7 +582,7 @@ namespace SalesManagement_SysDev
             GenerateDataAtSelect();
 
             // 顧客抽出結果表示
-            SetSelectData();
+            SetDataGridView();
         }
 
         ///////////////////////////////
