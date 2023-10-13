@@ -19,13 +19,15 @@ namespace SalesManagement_SysDev
         DataInputCheck dataInputCheck = new DataInputCheck();
         //データグリッドビュー用の顧客データ
         private static List<M_Client> listClient = new List<M_Client>();
-
+        
+        //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
         { 
             { 0, "表示" },
             { 1, "非表示" },
         };
 
+        //DataGridView用に使用す営業所のDictionary
         private Dictionary<int, string> dictionarySalesOffice = new Dictionary<int, string>
         {
             { 0, "北大阪営業所" },
