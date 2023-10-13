@@ -57,7 +57,8 @@ namespace SalesManagement_SysDev
             //項目の順番をSoIDに指定
             cmbSalesOfficeID.ValueMember = "SoID";
 
-            ClearImput();
+            //cmbSalesOfficeIDを未選択に
+            cmbSalesOfficeID.SelectedIndex = -1;
 
             SetFormDataGridView();
         }
@@ -159,11 +160,12 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("データの登録に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            // 入力エリアのクリア
+            ClearImput();
+
             // データグリッドビューの表示
             GetDataGridView();
 
-            // 入力エリアのクリア
-            ClearImput();
         }
 
         ///////////////////////////////
@@ -610,18 +612,6 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：SetSelectData()
-        //引　数   ：なし
-        //戻り値   ：なし
-        //機　能   ：顧客情報の表示
-        ///////////////////////////////
-        private void SetSelectData()
-        {
-            dgvClient.DataSource = listClient;
-            dgvClient.Refresh();
-        }
-
-        ///////////////////////////////
         //メソッド名：GetValidDataAtSearch()
         //引　数   ：なし
         //戻り値   ：true or false
@@ -775,10 +765,6 @@ namespace SalesManagement_SysDev
         private void ClearImput()
         {
             txbClientID.Enabled = true;
-
-            rdbRegister.Checked = false;
-            rdbUpdate.Checked = false;
-            rdbSearch.Checked = false;
 
             txbClientID.Text = string.Empty;
             txbClientName.Text = string.Empty;
