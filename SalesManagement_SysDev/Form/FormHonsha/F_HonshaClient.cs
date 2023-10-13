@@ -20,6 +20,21 @@ namespace SalesManagement_SysDev
         //データグリッドビュー用の顧客データ
         private static List<M_Client> listClient = new List<M_Client>();
 
+        private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
+        { 
+            { 0, "表示" },
+            { 1, "非表示" },
+        };
+
+        private Dictionary<int, string> dictionarySalesOffice = new Dictionary<int, string>
+        {
+            { 0, "北大阪営業所" },
+            { 1, "兵庫営業所" },
+            { 2, "鹿営業所"},
+            { 3, "京都営業所"},
+            { 4, "和歌山営業所"}
+        };
+
         public F_HonshaClient()
         {
             InitializeComponent();
@@ -718,7 +733,7 @@ namespace SalesManagement_SysDev
 
             foreach (var item in listClient)
             {
-                dgvClient.Rows.Add(item.ClID, item.SoID, item.ClName, item.ClAddress, item.ClPhone, item.ClPostal, item.ClFAX, item.ClFlag, item.ClHidden);
+                dgvClient.Rows.Add(item.ClID, dictionarySalesOffice[item.SoID], item.ClName, item.ClAddress, item.ClPhone, item.ClPostal, item.ClFAX, dictionaryHidden[item.ClFlag], item.ClHidden);
             }
 
             dgvClient.Refresh();
