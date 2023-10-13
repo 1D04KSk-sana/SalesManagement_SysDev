@@ -13,7 +13,6 @@ namespace SalesManagement_SysDev
 {
     public partial class F_HonshaClient : Form
     {
-
         //データベース顧客テーブルアクセス用クラスのインスタンス化
         ClientDataAccess clientDataAccess = new ClientDataAccess();
         //入力形式チェック用クラスのインスタンス化
@@ -82,6 +81,7 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            //選択された行に対してのコントロールの変更
             SelectRowControl();
         }
 
@@ -99,22 +99,22 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 部署情報作成
+            // 顧客情報作成
             var regClient = GenerateDataAtRegistration();
 
-            // 部署情報登録
+            // 顧客情報登録
             RegistrationClient(regClient);
         }
 
         ///////////////////////////////
         //メソッド名：RegistrationDivision()
-        //引　数   ：部署情報
+        //引　数   ：顧客情報
         //戻り値   ：なし
-        //機　能   ：部署データの登録
+        //機　能   ：顧客データの登録
         ///////////////////////////////
         private void RegistrationClient(M_Client regClient)
         {
-            // 部署情報の登録
+            // 顧客情報の登録
             bool flg = clientDataAccess.AddClientData(regClient);
 
             //登録成功・失敗メッセージ
@@ -138,7 +138,7 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         //メソッド名：GenerateDataAtRegistration()
         //引　数   ：なし
-        //戻り値   ：部署登録情報
+        //戻り値   ：顧客登録情報
         //機　能   ：登録データのセット
         ///////////////////////////////
         private M_Client GenerateDataAtRegistration()
@@ -324,11 +324,11 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 8.1.2.2 部署情報作成
-            var updDivision = GenerateDataAtUpdate();
+            // 顧客情報作成
+            var updClient = GenerateDataAtUpdate();
 
-            // 8.1.2.3 部署情報更新
-            UpdateDivision(updDivision);
+            // 顧客情報更新
+            UpdateClient(updClient);
         }
 
         ///////////////////////////////
@@ -354,13 +354,12 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //　8.1.2.3 部署情報更新
-        //メソッド名：UpdateDivision()
-        //引　数   ：部署情報
+        //メソッド名：UpdateClient()
+        //引　数   ：顧客情報
         //戻り値   ：なし
-        //機　能   ：部署情報の更新
+        //機　能   ：顧客情報の更新
         ///////////////////////////////
-        private void UpdateDivision(M_Client updDivision)
+        private void UpdateClient(M_Client updClient)
         {
             // 更新確認メッセージ
             DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
@@ -370,8 +369,8 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 部署情報の更新
-            bool flg = clientDataAccess.UpdateClientData(updDivision);
+            // 顧客情報の更新
+            bool flg = clientDataAccess.UpdateClientData(updClient);
             if (flg == true)
             {
                 MessageBox.Show("更新しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -548,10 +547,10 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 8.1.4.2 部署情報抽出
+            // 顧客情報抽出
             GenerateDataAtSelect();
 
-            // 8.1.4.3 部署抽出結果表示
+            // 顧客抽出結果表示
             SetSelectData();
         }
 
@@ -559,7 +558,7 @@ namespace SalesManagement_SysDev
         //メソッド名：GenerateDataAtSelect()
         //引　数   ：なし
         //戻り値   ：なし
-        //機　能   ：部署情報の取得
+        //機　能   ：顧客情報の取得
         ///////////////////////////////
         private void GenerateDataAtSelect()
         {
@@ -575,7 +574,7 @@ namespace SalesManagement_SysDev
                // ClFAX=txbClientFax.Text.Trim(),
                // ClHidden=txbHidden.Text.Trim()
             };
-            // 部署データの抽出
+            // 顧客データの抽出
             listClient = clientDataAccess.GetClientData(selectCondition);
         }
 
@@ -583,7 +582,7 @@ namespace SalesManagement_SysDev
         //メソッド名：SetSelectData()
         //引　数   ：なし
         //戻り値   ：なし
-        //機　能   ：部署情報の表示
+        //機　能   ：顧客情報の表示
         ///////////////////////////////
         private void SetSelectData()
         {
@@ -745,26 +744,6 @@ namespace SalesManagement_SysDev
             cmbSalesOfficeID.SelectedIndex = -1;
             cmbHidden.SelectedIndex = -1;
             txbClientFAX.Text = string.Empty;
-        }
-
-        private void txbClientName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmbSalesOfficeID_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblSalesOfficeID_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txbClientAddress_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
