@@ -34,11 +34,11 @@ namespace SalesManagement_SysDev
         //DataGridView用に使用す営業所のDictionary
         private Dictionary<int, string> dictionarySalesOffice = new Dictionary<int, string>
         {
-            { 0, "北大阪営業所" },
-            { 1, "兵庫営業所" },
-            { 2, "鹿営業所"},
-            { 3, "京都営業所"},
-            { 4, "和歌山営業所"}
+            { 1, "北大阪営業所" },
+            { 2, "兵庫営業所" },
+            { 3, "鹿営業所"},
+            { 4, "京都営業所"},
+            { 5, "和歌山営業所"}
         };
 
         public F_HonshaClient()
@@ -378,7 +378,7 @@ namespace SalesManagement_SysDev
                 ClName = txbClientName.Text.Trim(),
                 ClHidden = txbHidden.Text.Trim(),
                 ClPhone = txbClientPhone.Text.Trim(),
-                SoID = cmbSalesOfficeID.SelectedIndex,
+                SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 ClPostal = txbClientPostal.Text.Trim(),
                 ClAddress = txbClientAddress.Text.Trim(),
                 ClFAX = txbClientFAX.Text.Trim(),
@@ -660,7 +660,7 @@ namespace SalesManagement_SysDev
         {
             //データグリッドビューに乗っている情報をGUIに反映
             txbClientID.Text = dgvClient[0, dgvClient.CurrentCellAddress.Y].Value.ToString();
-            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvClient[1, dgvClient.CurrentCellAddress.Y].Value.ToString()).Key;
+            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvClient[1, dgvClient.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbClientName.Text = dgvClient[2, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientAddress.Text = dgvClient[3, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientPhone.Text = dgvClient[4, dgvClient.CurrentCellAddress.Y].Value.ToString();

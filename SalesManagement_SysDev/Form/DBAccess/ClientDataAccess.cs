@@ -57,7 +57,7 @@ namespace SalesManagement_SysDev
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            
+
         }
 
         ///////////////////////////////
@@ -88,7 +88,7 @@ namespace SalesManagement_SysDev
                 context.Dispose();
 
                 return true;
-        }
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
