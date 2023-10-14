@@ -32,7 +32,7 @@ namespace SalesManagement_SysDev
         };
 
         //DataGridView用に使用す営業所のDictionary
-        private Dictionary<int, string> dictionarySalesOffice = new Dictionary<int, string>
+        private Dictionary<int?, string> dictionarySalesOffice = new Dictionary<int?, string>
         {
             { 1, "北大阪営業所" },
             { 2, "兵庫営業所" },
@@ -575,10 +575,10 @@ namespace SalesManagement_SysDev
         private void ClientDataSelect()
         {
             //テキストボックス等の入力チェック
-            if (!GetValidDataAtSearch())
-            {
-                return;
-            }
+            //if (!GetValidDataAtSearch())
+            //{
+            //    return;
+            //}
 
             // 顧客情報抽出
             GenerateDataAtSelect();
@@ -595,17 +595,25 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void GenerateDataAtSelect()
         {
+            string strClientID = txbClientID.Text.Trim();
+            int intClientID = 0;
+
+            if (!String.IsNullOrEmpty(strClientID))
+            {
+                intClientID = int.Parse(strClientID);
+            }
+
             // 検索条件のセット
             M_Client selectCondition = new M_Client()
             {
-                ClID =int.Parse(txbClientID.Text.Trim()),
-                ClName = txbClientName.Text.Trim()
-               // SoID= int.Parse(cmbSalesOfficeID.Text.Trim()),
-               // ClPhone= txbCilentPhone.Text.Trim(),
-               // ClPostal= txbClientPostal.Text.Trim(),
-               // ClAddress= txbClientAddress.Text.Trim(),
-               // ClFAX=txbClientFax.Text.Trim(),
-               // ClHidden=txbHidden.Text.Trim()
+                ClID =intClientID,
+                //ClName = txbClientName.Text.Trim()
+                SoID= cmbSalesOfficeID.SelectedIndex + 1,
+                ClPhone = txbClientPhone.Text.Trim(),
+                //ClPostal= txbClientPostal.Text.Trim(),
+                //ClAddress= txbClientAddress.Text.Trim(),
+                //ClFAX=txbClientFax.Text.Trim(),
+                //ClHidden=txbHidden.Text.Trim()
             };
             // 顧客データの抽出
             listClient = clientDataAccess.GetClientData(selectCondition);
@@ -660,13 +668,13 @@ namespace SalesManagement_SysDev
         {
             //データグリッドビューに乗っている情報をGUIに反映
             txbClientID.Text = dgvClient[0, dgvClient.CurrentCellAddress.Y].Value.ToString();
-            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvClient[1, dgvClient.CurrentCellAddress.Y].Value.ToString()).Key - 1;
+            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvClient[1, dgvClient.CurrentCellAddress.Y].Value.ToString()).Key.Value - 1;
             txbClientName.Text = dgvClient[2, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientAddress.Text = dgvClient[3, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientPhone.Text = dgvClient[4, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientPostal.Text = dgvClient[5, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientFAX.Text = dgvClient[6, dgvClient.CurrentCellAddress.Y].Value.ToString();
-            cmbHidden.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvClient[7, dgvClient.CurrentCellAddress.Y].Value.ToString()).Key;
+            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvClient[7, dgvClient.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvClient[8, dgvClient.CurrentCellAddress.Y]?.Value?.ToString();
         }
 

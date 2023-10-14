@@ -161,7 +161,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listClient = context.M_Clients.Where(x => x.ClID == selectClient.ClID).ToList();
+                listClient = context.M_Clients.Where(x => x.ClID == selectClient.ClID || x.SoID == selectClient.SoID || x.ClPhone == selectClient.ClPhone).ToList();
                 context.Dispose();
             }
             catch (Exception ex)
