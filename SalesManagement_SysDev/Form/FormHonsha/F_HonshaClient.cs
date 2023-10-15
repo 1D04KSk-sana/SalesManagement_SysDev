@@ -67,14 +67,16 @@ namespace SalesManagement_SysDev
 
         private void rdoSElect_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdbRegister.Checked || rdbSearch.Checked)
-            {
-                txbClientID.Enabled = true;
-            }
-            if (rdbUpdate.Checked)
-            {
-                txbClientID.Enabled = false;
-            }
+            //if (rdbRegister.Checked)
+            //{
+            //    var context = new SalesManagement_DevContext();
+
+            //    txbClientID.Text = (context.M_Clients.Count() + 1).ToString();
+            //}
+            //else
+            //{
+            //    txbClientID.Text = string.Empty;
+            //}
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
@@ -128,23 +130,15 @@ namespace SalesManagement_SysDev
         private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
         {
             f_SearchDialog.Close();
-            
-            // 顧客情報抽出
-            GenerateDataAtSelect(true);
 
-            // 顧客抽出結果表示
-            SetDataGridView();
+            ClientSearchButtonClick(true);
         }
 
         private void SearchDialog_btnOrSearchClick(object sender, EventArgs e)
         {
             f_SearchDialog.Close();
 
-            // 顧客情報抽出
-            GenerateDataAtSelect(false);
-
-            // 顧客抽出結果表示
-            SetDataGridView();
+            ClientSearchButtonClick(false);
         }
 
         ///////////////////////////////
@@ -604,10 +598,10 @@ namespace SalesManagement_SysDev
         private void ClientDataSelect()
         {
             //テキストボックス等の入力チェック
-            //if (!GetValidDataAtSearch())
-            //{
-            //    return;
-            //}
+            if (!GetValidDataAtSearch())
+            {
+                return;
+            }
 
             //検索ダイアログのフォームを作成
             f_SearchDialog = new F_SearchDialog();
@@ -669,6 +663,25 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：ClientSearchButtonClick()
+        //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：顧客情報検索の実行
+        ///////////////////////////////
+        private void ClientSearchButtonClick(bool searchFlg)
+        {
+            // 顧客情報抽出
+            GenerateDataAtSelect(searchFlg);
+
+            int intSearchCount = listClient.Count;
+
+            // 顧客抽出結果表示
+            SetDataGridView();
+
+            MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        ///////////////////////////////
         //メソッド名：GetValidDataAtSearch()
         //引　数   ：なし
         //戻り値   ：true or false
@@ -696,12 +709,6 @@ namespace SalesManagement_SysDev
                     txbClientID.Focus();
                     return false;
                 }
-            }
-            else
-            {
-                MessageBox.Show("顧客IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbClientID.Focus();
-                return false;
             }
 
             return true;
@@ -821,8 +828,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void ClearImput()
         {
-            txbClientID.Enabled = true;
-
             txbClientID.Text = string.Empty;
             txbClientName.Text = string.Empty;
             txbClientPhone.Text = string.Empty;
