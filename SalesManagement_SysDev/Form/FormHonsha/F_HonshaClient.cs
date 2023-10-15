@@ -23,6 +23,8 @@ namespace SalesManagement_SysDev
         private static List<M_Client> listClient = new List<M_Client>();
         //コンボボックス用の営業所データリスト
         private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
+        //フォームを呼び出しする際のインスタンス化
+        private F_SearchDialog f_SearchDialog = new F_SearchDialog();
 
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
@@ -116,6 +118,33 @@ namespace SalesManagement_SysDev
 
             //選択された行に対してのコントロールの変更
             SelectRowControl();
+        }
+
+        private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Opacity = 1;
+        }
+
+        private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+            
+            // 顧客情報抽出
+            GenerateDataAtSelect(true);
+
+            // 顧客抽出結果表示
+            SetDataGridView();
+        }
+
+        private void SearchDialog_btnOrSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            // 顧客情報抽出
+            GenerateDataAtSelect(false);
+
+            // 顧客抽出結果表示
+            SetDataGridView();
         }
 
         ///////////////////////////////
@@ -580,20 +609,31 @@ namespace SalesManagement_SysDev
             //    return;
             //}
 
-            // 顧客情報抽出
-            GenerateDataAtSelect();
+            //検索ダイアログのフォームを作成
+            f_SearchDialog = new F_SearchDialog();
+            //検索ダイアログのフォームのオーナー設定
+            f_SearchDialog.Owner = this;
 
-            // 顧客抽出結果表示
-            SetDataGridView();
+            //検索ダイアログのフォームのボタンクリックイベントにハンドラを追加
+            f_SearchDialog.btnAndSearchClick += SearchDialog_btnAndSearchClick;
+            f_SearchDialog.btnOrSearchClick += SearchDialog_btnOrSearchClick;
+
+            //検索ダイアログのフォームが閉じたときのイベントを設定
+            f_SearchDialog.FormClosed += ChildForm_FormClosed;
+            //検索ダイアログのフォームの表示
+            f_SearchDialog.Show();
+
+            //顧客登録フォームの透明化
+            this.Opacity = 0;
         }
 
         ///////////////////////////////
         //メソッド名：GenerateDataAtSelect()
-        //引　数   ：なし
+        //引　数   ：searchFlg = And検索かOr検索か判別するためのBool値
         //戻り値   ：なし
         //機　能   ：顧客情報の取得
         ///////////////////////////////
-        private void GenerateDataAtSelect()
+        private void GenerateDataAtSelect(bool searchFlg)
         {
             string strClientID = txbClientID.Text.Trim();
             int intClientID = 0;
@@ -615,8 +655,17 @@ namespace SalesManagement_SysDev
                 //ClFAX=txbClientFax.Text.Trim(),
                 //ClHidden=txbHidden.Text.Trim()
             };
-            // 顧客データの抽出
-            listClient = clientDataAccess.GetClientData(selectCondition);
+
+            if (searchFlg)
+            {
+                // 顧客データのAnd抽出
+                listClient = clientDataAccess.GetAndClientData(selectCondition);
+            }
+            else
+            {
+                // 顧客データのOr抽出
+                listClient = clientDataAccess.GetOrClientData(selectCondition);
+            }
         }
 
         ///////////////////////////////

@@ -150,18 +150,36 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：GetClientData()　オーバーロード
+        //メソッド名：GetAndClientData()
         //引　数：検索条件
-        //戻り値：条件一致顧客データ
-        //機　能：条件一致顧客データの取得
+        //戻り値：条件完全一致顧客データ
+        //機　能：条件完全一致顧客データの取得
         ///////////////////////////////
-        public List<M_Client> GetClientData(M_Client selectClient)
+        public List<M_Client> GetAndClientData(M_Client selectClient)
         {
             List<M_Client> listClient = new List<M_Client>();
             try
             {
                 var context = new SalesManagement_DevContext();
-                listClient = context.M_Clients.Where(x => x.ClID == selectClient.ClID || x.SoID == selectClient.SoID || x.ClPhone == selectClient.ClPhone).ToList();
+                //listClient = context.M_Clients.Where(x => x.ClID == selectClient.ClID || x.SoID == selectClient.SoID || x.ClPhone == selectClient.ClPhone).ToList();
+                var query = context.M_Clients.AsQueryable();
+
+                if (selectClient.ClID != null && selectClient.ClID != 0)
+                {
+                    query = query.Where(x => x.ClID == selectClient.ClID);
+                }
+
+                if (selectClient.SoID != null && selectClient.SoID != 0)
+                {
+                    query = query.Where(x => x.SoID == selectClient.SoID);
+                }
+
+                if (selectClient.ClPhone != null && selectClient.ClPhone != "")
+                {
+                    query = query.Where(x => x.ClPhone == selectClient.ClPhone);
+                }
+
+                listClient = query.ToList();
                 context.Dispose();
             }
             catch (Exception ex)
@@ -169,6 +187,29 @@ namespace SalesManagement_SysDev
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            return listClient;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetOrClientData()
+        //引　数：検索条件
+        //戻り値：条件一部一致顧客データ
+        //機　能：条件一部一致顧客データの取得
+        ///////////////////////////////
+        public List<M_Client> GetOrClientData(M_Client selectClient)
+        {
+            List<M_Client> listClient = new List<M_Client>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listClient = context.M_Clients.Where(x => x.ClID == selectClient.ClID || x.SoID == selectClient.SoID || x.ClPhone == selectClient.ClPhone).ToList();
+             
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             return listClient;
         }
