@@ -21,6 +21,8 @@ namespace SalesManagement_SysDev
         DataInputCheck dataInputCheck = new DataInputCheck();
         //データグリッドビュー用の顧客データ
         private static List<M_Client> listClient = new List<M_Client>();
+        //データグリッドビュー用の全顧客データ
+        private static List<M_Client> listAllClient = new List<M_Client>();
         //コンボボックス用の営業所データリスト
         private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
         //フォームを呼び出しする際のインスタンス化
@@ -50,6 +52,8 @@ namespace SalesManagement_SysDev
 
         private void F_HonshaClient_Load(object sender, EventArgs e)
         {
+            SetFormDataGridView();
+
             //営業所のデータを取得
             listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
             //取得したデータをコンボボックスに挿入
@@ -62,7 +66,8 @@ namespace SalesManagement_SysDev
             //cmbSalesOfficeIDを未選択に
             cmbSalesOfficeID.SelectedIndex = -1;
 
-            SetFormDataGridView();
+            //cmbViewを表示に
+            cmbView.SelectedIndex = 0;
         }
 
         private void rdoSElect_CheckedChanged(object sender, EventArgs e)
@@ -122,6 +127,12 @@ namespace SalesManagement_SysDev
             SelectRowControl();
         }
 
+        private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //データグリッドビューのデータ取得
+            GetDataGridView();
+        }
+
         private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Opacity = 1;
@@ -176,7 +187,7 @@ namespace SalesManagement_SysDev
             //登録成功・失敗メッセージ
             if (flg == true)
             {
-                MessageBox.Show("データを登録しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("データを登録しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
@@ -676,7 +687,7 @@ namespace SalesManagement_SysDev
             int intSearchCount = listClient.Count;
 
             // 顧客抽出結果表示
-            SetDataGridView();
+            SetDataGridView(listClient);
 
             MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -691,6 +702,13 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtSearch()
         {
+            //検索条件の存在確認
+            if (String.IsNullOrEmpty(txbClientID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbClientPhone.Text.Trim()))
+            {
+                MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbClientID.Focus();
+                return false;
+            }
 
             // 顧客IDの適否
             if (!String.IsNullOrEmpty(txbClientID.Text.Trim()))
@@ -779,9 +797,6 @@ namespace SalesManagement_SysDev
             {
                 dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-
-            //データグリッドビューのデータ取得
-            GetDataGridView();
         }
 
         ///////////////////////////////
@@ -792,11 +807,36 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void GetDataGridView()
         {
-            // 部署データの取得
-            listClient = clientDataAccess.GetClientData();
+            //顧客のデータを全取得
+            listAllClient = clientDataAccess.GetClientData();
+
+            //表示用の顧客リスト作成
+            List<M_Client> listViewClient = new List<M_Client>();
+
+            //検索ラヂオボタンがチェックされているとき
+            if (rdbSearch.Checked)
+            {
+                //表示用の
+                listViewClient = listClient;
+            }
+            else
+            {
+                listViewClient = listAllClient;
+            }
+
+            if (cmbView.SelectedIndex == 0)
+            {
+                // 管理Flgが表示の部署データの取得
+                listViewClient = clientDataAccess.GetClientDspData(listViewClient);
+            }
+            else
+            {
+                // 管理Flgが非表示の部署データの取得
+                listViewClient = clientDataAccess.GetClientNotDspData(listViewClient);
+            }
 
             // DataGridViewに表示するデータを指定
-            SetDataGridView();
+            SetDataGridView(listViewClient);
         }
 
         ///////////////////////////////
@@ -805,13 +845,13 @@ namespace SalesManagement_SysDev
         //戻り値   ：なし
         //機　能   ：データグリッドビューへの表示
         ///////////////////////////////
-        private void SetDataGridView()
+        private void SetDataGridView(List<M_Client> viewClient)
         {
             //中身を消去
             dgvClient.Rows.Clear();
             
             //listClientを1行ずつdgvClientに挿入
-            foreach (var item in listClient)
+            foreach (var item in viewClient)
             {
                 dgvClient.Rows.Add(item.ClID, dictionarySalesOffice[item.SoID], item.ClName, item.ClAddress, item.ClPhone, item.ClPostal, item.ClFAX, dictionaryHidden[item.ClFlag], item.ClHidden);
             }

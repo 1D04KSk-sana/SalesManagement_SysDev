@@ -55,6 +55,7 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.pnlHonsha = new System.Windows.Forms.Panel();
             this.lblClient = new System.Windows.Forms.Label();
+            this.cmbView = new System.Windows.Forms.ComboBox();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             this.pnlHonsha.SuspendLayout();
@@ -337,12 +338,27 @@
             this.lblClient.TabIndex = 23;
             this.lblClient.Text = "顧客登録画面";
             // 
+            // cmbView
+            // 
+            this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbView.FormattingEnabled = true;
+            this.cmbView.Items.AddRange(new object[] {
+            "表示",
+            "非表示"});
+            this.cmbView.Location = new System.Drawing.Point(759, 123);
+            this.cmbView.Name = "cmbView";
+            this.cmbView.Size = new System.Drawing.Size(200, 31);
+            this.cmbView.TabIndex = 23;
+            this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
+            // 
             // F_HonshaClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1232, 753);
+            this.Controls.Add(this.cmbView);
             this.Controls.Add(this.pnlHonsha);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.cmbHidden);
@@ -407,5 +423,6 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Panel pnlHonsha;
         private System.Windows.Forms.Label lblClient;
+        private System.Windows.Forms.ComboBox cmbView;
     }
 }

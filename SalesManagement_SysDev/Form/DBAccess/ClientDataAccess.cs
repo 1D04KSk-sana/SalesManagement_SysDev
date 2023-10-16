@@ -104,26 +104,24 @@ namespace SalesManagement_SysDev
         //      ：削除成功の場合True
         //      ：削除失敗の場合False
         ///////////////////////////////
-        public bool DeleteClientData(M_Client delClient)
-        {
-            try
-            {
+        //public bool DeleteClientData(M_Client delClient)
+        //{
+        //    try
+        //    {
+        //        var context = new SalesManagement_DevContext();
+        //        var client = context.M_Clients.Single(x => x.ClID == delClient.ClID);
+        //        context.M_Clients.Remove(client);
+        //        context.SaveChanges();
+        //        context.Dispose();
 
-                var context = new SalesManagement_DevContext();
-                var client = context.M_Clients.Single(x => x.ClID == delClient.ClID);
-                context.M_Clients.Remove(client);
-                context.SaveChanges();
-                context.Dispose();
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-        }
-
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        return false;
+        //    }
+        //}
 
         ///////////////////////////////
         //メソッド名：GetClientData()
@@ -150,6 +148,50 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：GetClientDspData()
+        //引　数：なし
+        //戻り値：管理Flgが表示の顧客データ
+        //機　能：管理Flgが表示の顧客データの全取得
+        ///////////////////////////////
+        public List<M_Client> GetClientDspData(List<M_Client> dspClient)
+        {
+            List<M_Client> listClient = new List<M_Client>();
+
+            try
+            {
+                listClient = dspClient.Where(x => x.ClFlag == 0).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listClient;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetClientNotDspData()
+        //引　数：なし
+        //戻り値：管理Flgが非表示の顧客データ
+        //機　能：管理Flgが非表示の顧客データの全取得
+        ///////////////////////////////
+        public List<M_Client> GetClientNotDspData(List<M_Client> dspClient)
+        {
+            List<M_Client> listClient = new List<M_Client>();
+
+            try
+            {
+                listClient = dspClient.Where(x => x.ClFlag == 1).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listClient;
+        }
+
+        ///////////////////////////////
         //メソッド名：GetAndClientData()
         //引　数：検索条件
         //戻り値：条件完全一致顧客データ
@@ -161,7 +203,6 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                //listClient = context.M_Clients.Where(x => x.ClID == selectClient.ClID || x.SoID == selectClient.SoID || x.ClPhone == selectClient.ClPhone).ToList();
                 var query = context.M_Clients.AsQueryable();
 
                 if (selectClient.ClID != null && selectClient.ClID != 0)
