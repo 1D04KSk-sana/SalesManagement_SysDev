@@ -37,7 +37,7 @@
             // btn_CleateDabase
             // 
             this.btn_CleateDabase.Location = new System.Drawing.Point(881, 399);
-            this.btn_CleateDabase.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_CleateDabase.Margin = new System.Windows.Forms.Padding(4);
             this.btn_CleateDabase.Name = "btn_CleateDabase";
             this.btn_CleateDabase.Size = new System.Drawing.Size(141, 61);
             this.btn_CleateDabase.TabIndex = 0;
@@ -58,7 +58,7 @@
             // btn_InsertSampleData
             // 
             this.btn_InsertSampleData.Location = new System.Drawing.Point(881, 486);
-            this.btn_InsertSampleData.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_InsertSampleData.Margin = new System.Windows.Forms.Padding(4);
             this.btn_InsertSampleData.Name = "btn_InsertSampleData";
             this.btn_InsertSampleData.Size = new System.Drawing.Size(141, 61);
             this.btn_InsertSampleData.TabIndex = 0;
@@ -81,12 +81,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 562);
+            this.ClientSize = new System.Drawing.Size(1067, 563);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.Lbl_tag);
             this.Controls.Add(this.btn_InsertSampleData);
             this.Controls.Add(this.btn_CleateDabase);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "F_Login";
             this.Text = "販売管理システムログイン画面";
             this.ResumeLayout(false);

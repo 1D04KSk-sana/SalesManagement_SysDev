@@ -13,13 +13,37 @@ namespace SalesManagement_SysDev
 {
     public partial class F_HonshaClient : Form
     {
-
         //データベース顧客テーブルアクセス用クラスのインスタンス化
         ClientDataAccess clientDataAccess = new ClientDataAccess();
+        //データベース営業所テーブルアクセス用クラスのインスタンス化
+        SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
         //入力形式チェック用クラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
         //データグリッドビュー用の顧客データ
         private static List<M_Client> listClient = new List<M_Client>();
+        //データグリッドビュー用の全顧客データ
+        private static List<M_Client> listAllClient = new List<M_Client>();
+        //コンボボックス用の営業所データリスト
+        private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
+        //フォームを呼び出しする際のインスタンス化
+        private F_SearchDialog f_SearchDialog = new F_SearchDialog();
+
+        //DataGridView用に使用する表示形式のDictionary
+        private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
+        { 
+            { 0, "表示" },
+            { 1, "非表示" },
+        };
+
+        //DataGridView用に使用す営業所のDictionary
+        private Dictionary<int?, string> dictionarySalesOffice = new Dictionary<int?, string>
+        {
+            { 1, "北大阪営業所" },
+            { 2, "兵庫営業所" },
+            { 3, "鹿営業所"},
+            { 4, "京都営業所"},
+            { 5, "和歌山営業所"}
+        };
 
         public F_HonshaClient()
         {
@@ -29,18 +53,35 @@ namespace SalesManagement_SysDev
         private void F_HonshaClient_Load(object sender, EventArgs e)
         {
             SetFormDataGridView();
+
+            //営業所のデータを取得
+            listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
+            //取得したデータをコンボボックスに挿入
+            cmbSalesOfficeID.DataSource = listSalesOffice;
+            //表示する名前をSoNameに指定
+            cmbSalesOfficeID.DisplayMember = "SoName";
+            //項目の順番をSoIDに指定
+            cmbSalesOfficeID.ValueMember = "SoID";
+
+            //cmbSalesOfficeIDを未選択に
+            cmbSalesOfficeID.SelectedIndex = -1;
+
+            //cmbViewを表示に
+            cmbView.SelectedIndex = 0;
         }
 
         private void rdoSElect_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdbRegister.Checked || rdbSearch.Checked)
-            {
-                txbClientID.Enabled = true;
-            }
-            if (rdbUpdate.Checked)
-            {
-                txbClientID.Enabled = false;
-            }
+            //if (rdbRegister.Checked)
+            //{
+            //    var context = new SalesManagement_DevContext();
+
+            //    txbClientID.Text = (context.M_Clients.Count() + 1).ToString();
+            //}
+            //else
+            //{
+            //    txbClientID.Text = string.Empty;
+            //}
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
@@ -82,7 +123,33 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            //選択された行に対してのコントロールの変更
             SelectRowControl();
+        }
+
+        private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //データグリッドビューのデータ取得
+            GetDataGridView();
+        }
+
+        private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Opacity = 1;
+        }
+
+        private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            ClientSearchButtonClick(true);
+        }
+
+        private void SearchDialog_btnOrSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            ClientSearchButtonClick(false);
         }
 
         ///////////////////////////////
@@ -99,28 +166,28 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 部署情報作成
+            // 顧客情報作成
             var regClient = GenerateDataAtRegistration();
 
-            // 部署情報登録
+            // 顧客情報登録
             RegistrationClient(regClient);
         }
 
         ///////////////////////////////
         //メソッド名：RegistrationDivision()
-        //引　数   ：部署情報
+        //引　数   ：顧客情報
         //戻り値   ：なし
-        //機　能   ：部署データの登録
+        //機　能   ：顧客データの登録
         ///////////////////////////////
         private void RegistrationClient(M_Client regClient)
         {
-            // 部署情報の登録
+            // 顧客情報の登録
             bool flg = clientDataAccess.AddClientData(regClient);
 
             //登録成功・失敗メッセージ
             if (flg == true)
             {
-                MessageBox.Show("データを登録しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("データを登録しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
@@ -138,7 +205,7 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         //メソッド名：GenerateDataAtRegistration()
         //引　数   ：なし
-        //戻り値   ：部署登録情報
+        //戻り値   ：顧客登録情報
         //機　能   ：登録データのセット
         ///////////////////////////////
         private M_Client GenerateDataAtRegistration()
@@ -146,7 +213,7 @@ namespace SalesManagement_SysDev
             return new M_Client
             {
                 ClID = int.Parse(txbClientID.Text.Trim()),
-                SoID = cmbSalesOfficeID.SelectedIndex,
+                SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 ClName = txbClientName.Text.Trim(),
                 ClAddress = txbClientAddress.Text.Trim(),
                 ClPhone = txbClientPhone.Text.Trim(),
@@ -324,11 +391,11 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 8.1.2.2 部署情報作成
-            var updDivision = GenerateDataAtUpdate();
+            // 顧客情報作成
+            var updClient = GenerateDataAtUpdate();
 
-            // 8.1.2.3 部署情報更新
-            UpdateDivision(updDivision);
+            // 顧客情報更新
+            UpdateClient(updClient);
         }
 
         ///////////////////////////////
@@ -345,7 +412,7 @@ namespace SalesManagement_SysDev
                 ClName = txbClientName.Text.Trim(),
                 ClHidden = txbHidden.Text.Trim(),
                 ClPhone = txbClientPhone.Text.Trim(),
-                SoID = cmbSalesOfficeID.SelectedIndex,
+                SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 ClPostal = txbClientPostal.Text.Trim(),
                 ClAddress = txbClientAddress.Text.Trim(),
                 ClFAX = txbClientFAX.Text.Trim(),
@@ -354,13 +421,12 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //　8.1.2.3 部署情報更新
-        //メソッド名：UpdateDivision()
-        //引　数   ：部署情報
+        //メソッド名：UpdateClient()
+        //引　数   ：顧客情報
         //戻り値   ：なし
-        //機　能   ：部署情報の更新
+        //機　能   ：顧客情報の更新
         ///////////////////////////////
-        private void UpdateDivision(M_Client updDivision)
+        private void UpdateClient(M_Client updClient)
         {
             // 更新確認メッセージ
             DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
@@ -370,8 +436,8 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 部署情報の更新
-            bool flg = clientDataAccess.UpdateClientData(updDivision);
+            // 顧客情報の更新
+            bool flg = clientDataAccess.UpdateClientData(updClient);
             if (flg == true)
             {
                 MessageBox.Show("更新しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -548,47 +614,82 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 8.1.4.2 部署情報抽出
-            GenerateDataAtSelect();
+            //検索ダイアログのフォームを作成
+            f_SearchDialog = new F_SearchDialog();
+            //検索ダイアログのフォームのオーナー設定
+            f_SearchDialog.Owner = this;
 
-            // 8.1.4.3 部署抽出結果表示
-            SetSelectData();
+            //検索ダイアログのフォームのボタンクリックイベントにハンドラを追加
+            f_SearchDialog.btnAndSearchClick += SearchDialog_btnAndSearchClick;
+            f_SearchDialog.btnOrSearchClick += SearchDialog_btnOrSearchClick;
+
+            //検索ダイアログのフォームが閉じたときのイベントを設定
+            f_SearchDialog.FormClosed += ChildForm_FormClosed;
+            //検索ダイアログのフォームの表示
+            f_SearchDialog.Show();
+
+            //顧客登録フォームの透明化
+            this.Opacity = 0;
         }
 
         ///////////////////////////////
         //メソッド名：GenerateDataAtSelect()
-        //引　数   ：なし
+        //引　数   ：searchFlg = And検索かOr検索か判別するためのBool値
         //戻り値   ：なし
-        //機　能   ：部署情報の取得
+        //機　能   ：顧客情報の取得
         ///////////////////////////////
-        private void GenerateDataAtSelect()
+        private void GenerateDataAtSelect(bool searchFlg)
         {
+            string strClientID = txbClientID.Text.Trim();
+            int intClientID = 0;
+
+            if (!String.IsNullOrEmpty(strClientID))
+            {
+                intClientID = int.Parse(strClientID);
+            }
+
             // 検索条件のセット
             M_Client selectCondition = new M_Client()
             {
-                ClID =int.Parse(txbClientID.Text.Trim()),
-                ClName = txbClientName.Text.Trim()
-               // SoID= int.Parse(cmbSalesOfficeID.Text.Trim()),
-               // ClPhone= txbCilentPhone.Text.Trim(),
-               // ClPostal= txbClientPostal.Text.Trim(),
-               // ClAddress= txbClientAddress.Text.Trim(),
-               // ClFAX=txbClientFax.Text.Trim(),
-               // ClHidden=txbHidden.Text.Trim()
+                ClID =intClientID,
+                //ClName = txbClientName.Text.Trim()
+                SoID= cmbSalesOfficeID.SelectedIndex + 1,
+                ClPhone = txbClientPhone.Text.Trim(),
+                //ClPostal= txbClientPostal.Text.Trim(),
+                //ClAddress= txbClientAddress.Text.Trim(),
+                //ClFAX=txbClientFax.Text.Trim(),
+                //ClHidden=txbHidden.Text.Trim()
             };
-            // 部署データの抽出
-            listClient = clientDataAccess.GetClientData(selectCondition);
+
+            if (searchFlg)
+            {
+                // 顧客データのAnd抽出
+                listClient = clientDataAccess.GetAndClientData(selectCondition);
+            }
+            else
+            {
+                // 顧客データのOr抽出
+                listClient = clientDataAccess.GetOrClientData(selectCondition);
+            }
         }
 
         ///////////////////////////////
-        //メソッド名：SetSelectData()
-        //引　数   ：なし
+        //メソッド名：ClientSearchButtonClick()
+        //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
         //戻り値   ：なし
-        //機　能   ：部署情報の表示
+        //機　能   ：顧客情報検索の実行
         ///////////////////////////////
-        private void SetSelectData()
+        private void ClientSearchButtonClick(bool searchFlg)
         {
-            dgvClient.DataSource = listClient;
-            dgvClient.Refresh();
+            // 顧客情報抽出
+            GenerateDataAtSelect(searchFlg);
+
+            int intSearchCount = listClient.Count;
+
+            // 顧客抽出結果表示
+            SetDataGridView(listClient);
+
+            MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         ///////////////////////////////
@@ -601,6 +702,13 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtSearch()
         {
+            //検索条件の存在確認
+            if (String.IsNullOrEmpty(txbClientID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbClientPhone.Text.Trim()))
+            {
+                MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbClientID.Focus();
+                return false;
+            }
 
             // 顧客IDの適否
             if (!String.IsNullOrEmpty(txbClientID.Text.Trim()))
@@ -620,12 +728,6 @@ namespace SalesManagement_SysDev
                     return false;
                 }
             }
-            else
-            {
-                MessageBox.Show("顧客IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbClientID.Focus();
-                return false;
-            }
 
             return true;
         }
@@ -640,13 +742,13 @@ namespace SalesManagement_SysDev
         {
             //データグリッドビューに乗っている情報をGUIに反映
             txbClientID.Text = dgvClient[0, dgvClient.CurrentCellAddress.Y].Value.ToString();
-            cmbSalesOfficeID.SelectedIndex = int.Parse(dgvClient[1, dgvClient.CurrentCellAddress.Y].Value.ToString()) - 1;
+            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvClient[1, dgvClient.CurrentCellAddress.Y].Value.ToString()).Key.Value - 1;
             txbClientName.Text = dgvClient[2, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientAddress.Text = dgvClient[3, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientPhone.Text = dgvClient[4, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientPostal.Text = dgvClient[5, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientFAX.Text = dgvClient[6, dgvClient.CurrentCellAddress.Y].Value.ToString();
-            cmbHidden.SelectedIndex = int.Parse(dgvClient[7, dgvClient.CurrentCellAddress.Y].Value.ToString());
+            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvClient[7, dgvClient.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvClient[8, dgvClient.CurrentCellAddress.Y]?.Value?.ToString();
         }
 
@@ -658,6 +760,8 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SetFormDataGridView()
         {
+            //列を自由に設定できるように
+            dgvClient.AutoGenerateColumns = false;
             //行単位で選択するようにする
             dgvClient.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             //行と列の高さを変更できないように
@@ -677,9 +781,22 @@ namespace SalesManagement_SysDev
 
             //ヘッダー位置の指定
             dgvClient.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            
+            dgvClient.Columns.Add("ClID", "顧客ID");
+            dgvClient.Columns.Add("SoID", "営業所ID");
+            dgvClient.Columns.Add("ClName", "顧客名");
+            dgvClient.Columns.Add("ClAddress", "住所");
+            dgvClient.Columns.Add("ClPhone", "電話番号");
+            dgvClient.Columns.Add("ClPostal", "郵便番号");
+            dgvClient.Columns.Add("ClFAX", "FAX");
+            dgvClient.Columns.Add("ClFlag", "顧客管理フラグ");
+            dgvClient.Columns.Add("ClHidden", "非表示理由");
 
-            //データグリッドビューのデータ取得
-            GetDataGridView();
+            //並び替えができないようにする
+            foreach (DataGridViewColumn dataColumn in dgvClient.Columns)
+            {
+                dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
 
         ///////////////////////////////
@@ -690,11 +807,36 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void GetDataGridView()
         {
-            // 部署データの取得
-            listClient = clientDataAccess.GetClientData();
+            //顧客のデータを全取得
+            listAllClient = clientDataAccess.GetClientData();
+
+            //表示用の顧客リスト作成
+            List<M_Client> listViewClient = new List<M_Client>();
+
+            //検索ラヂオボタンがチェックされているとき
+            if (rdbSearch.Checked)
+            {
+                //表示用の
+                listViewClient = listClient;
+            }
+            else
+            {
+                listViewClient = listAllClient;
+            }
+
+            if (cmbView.SelectedIndex == 0)
+            {
+                // 管理Flgが表示の部署データの取得
+                listViewClient = clientDataAccess.GetClientDspData(listViewClient);
+            }
+            else
+            {
+                // 管理Flgが非表示の部署データの取得
+                listViewClient = clientDataAccess.GetClientNotDspData(listViewClient);
+            }
 
             // DataGridViewに表示するデータを指定
-            SetDataGridView();
+            SetDataGridView(listViewClient);
         }
 
         ///////////////////////////////
@@ -703,21 +845,18 @@ namespace SalesManagement_SysDev
         //戻り値   ：なし
         //機　能   ：データグリッドビューへの表示
         ///////////////////////////////
-        private void SetDataGridView()
+        private void SetDataGridView(List<M_Client> viewClient)
         {
-            dgvClient.DataSource = listClient.ToList();
+            //中身を消去
+            dgvClient.Rows.Clear();
+            
+            //listClientを1行ずつdgvClientに挿入
+            foreach (var item in viewClient)
+            {
+                dgvClient.Rows.Add(item.ClID, dictionarySalesOffice[item.SoID], item.ClName, item.ClAddress, item.ClPhone, item.ClPostal, item.ClFAX, dictionaryHidden[item.ClFlag], item.ClHidden);
+            }
 
-            //各列幅の指定
-            dgvClient.Columns[0].Width = 40;
-            dgvClient.Columns[1].Width = 70;
-            dgvClient.Columns[2].Width = 70;
-            dgvClient.Columns[3].Width = 60;
-            dgvClient.Columns[4].Width = 60;
-            dgvClient.Columns[5].Width = 70;
-            dgvClient.Columns[6].Width = 60;
-            dgvClient.Columns[7].Width = 60;
-            dgvClient.Columns[8].Width = 100;
-
+            //dgvClientをリフレッシュ
             dgvClient.Refresh();
         }
 
@@ -729,12 +868,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void ClearImput()
         {
-            txbClientID.Enabled = true;
-
-            rdbRegister.Checked = false;
-            rdbUpdate.Checked = false;
-            rdbSearch.Checked = false;
-
             txbClientID.Text = string.Empty;
             txbClientName.Text = string.Empty;
             txbClientPhone.Text = string.Empty;
