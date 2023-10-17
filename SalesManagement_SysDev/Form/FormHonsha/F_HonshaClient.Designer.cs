@@ -300,9 +300,9 @@
             this.cmbHidden.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbHidden.Location = new System.Drawing.Point(92, 320);
+            this.cmbHidden.Location = new System.Drawing.Point(98, 321);
             this.cmbHidden.Name = "cmbHidden";
-            this.cmbHidden.Size = new System.Drawing.Size(156, 26);
+            this.cmbHidden.Size = new System.Drawing.Size(150, 26);
             this.cmbHidden.TabIndex = 20;
             // 
             // btnClear
