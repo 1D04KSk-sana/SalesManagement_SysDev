@@ -464,7 +464,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(1232, 800);
+            this.ClientSize = new System.Drawing.Size(1230, 800);
             this.ControlBox = false;
             this.Controls.Add(this.lblNumPage);
             this.Controls.Add(this.txbNumPage);
@@ -500,7 +500,6 @@
             this.Controls.Add(this.btnDone);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "F_HonshaClient";
-            this.Text = "F_Client";
             this.Load += new System.EventHandler(this.F_HonshaClient_Load);
             this.pnlSelect.ResumeLayout(false);
             this.pnlSelect.PerformLayout();
