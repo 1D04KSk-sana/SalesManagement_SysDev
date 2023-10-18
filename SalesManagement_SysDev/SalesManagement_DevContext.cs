@@ -67,7 +67,7 @@ namespace SalesManagement_SysDev
         public DbSet<T_OrderDetail> T_OrderDetails { get; set; }
 
         //売上
-        public DbSet<T_Sale> T_Sale { get; set; }
+        public DbSet<T_Sale> T_Sales { get; set; }
         //売上詳細
         public DbSet<T_SaleDetail> T_SaleDetails { get; set; }
         

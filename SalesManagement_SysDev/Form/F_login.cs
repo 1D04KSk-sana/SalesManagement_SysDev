@@ -19,6 +19,10 @@ namespace SalesManagement_SysDev
         //入力チェッククラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
 
+        //他フォームでも使用できるようにinternal
+        //社員ID
+        internal static int intEmployeeID = 116;
+
         public F_Login()
         {
             InitializeComponent();

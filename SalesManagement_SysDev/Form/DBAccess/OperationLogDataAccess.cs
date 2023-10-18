@@ -32,5 +32,21 @@ namespace SalesManagement_SysDev
                 return false;
             }
         }
+
+        ///////////////////////////////
+        //メソッド名：OperationLogNum()
+        //引　数：なし
+        //戻り値：操作ログ件数
+        //機　能：操作ログデータの件数
+        ///////////////////////////////
+        public int OperationLogNum()
+        {
+            var context = new SalesManagement_DevContext();
+
+            //登録されている操作ログの件数取得
+            int logCount = context.T_OperationLogs.Count();
+
+            return logCount;
+        }
     }
 }

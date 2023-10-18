@@ -40,7 +40,7 @@ namespace SalesManagement_SysDev
         [Required]
         public string ClFAX { get; set; }       //FAX		
         public int ClFlag { get; set; }         //顧客管理フラグ	
-        public string ClHidden { get; set; }	//非表示理由		
+        public string ClHidden { get; set; }	//非表示理由
 
         public virtual M_SalesOffice M_SalesOffice { get; set; }
         public virtual ICollection<T_Arrival> T_Arrival { get; set; }

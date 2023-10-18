@@ -17,6 +17,8 @@ namespace SalesManagement_SysDev
         ClientDataAccess clientDataAccess = new ClientDataAccess();
         //データベース営業所テーブルアクセス用クラスのインスタンス化
         SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
+        //データベース操作ログテーブルアクセス用クラスのインスタンス化
+        OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
         //入力形式チェック用クラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
         //データグリッドビュー用の顧客データ
@@ -200,6 +202,28 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：GenerateLogAtRegistration()
+        //引　数   ：操作名
+        //戻り値   ：操作ログ登録情報
+        //機　能   ：操作ログ情報登録データのセット
+        ///////////////////////////////
+        private T_OperationLog GenerateLogAtRegistration(string OperationDone)
+        {
+            //登録・更新使用としている顧客データの取得
+            var logOperatin = GenerateDataAtRegistration();
+
+            return new T_OperationLog
+            {
+                OpHistoryID = operationLogAccess.OperationLogNum() + 1,
+                EmID = F_Login.intEmployeeID,
+                FormName = "顧客管理画面",
+                OpDone = OperationDone,
+                OpDBID = logOperatin.ClID.Value,
+                OpSetTime = DateTime.Now,
+            };
+        }
+
+        ///////////////////////////////
         //メソッド名：ClientDataRegister()
         //引　数   ：なし
         //戻り値   ：なし
@@ -213,6 +237,15 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbRegister.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
             // 顧客情報作成
             var regClient = GenerateDataAtRegistration();
 
@@ -221,7 +254,7 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：RegistrationDivision()
+        //メソッド名：RegistrationClient()
         //引　数   ：顧客情報
         //戻り値   ：なし
         //機　能   ：顧客データの登録
@@ -478,6 +511,15 @@ namespace SalesManagement_SysDev
             DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
             if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
             {
                 return;
             }
