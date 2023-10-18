@@ -58,6 +58,9 @@ namespace SalesManagement_SysDev
         //操作履歴（今回は使用しない）
         public DbSet<T_OperationHistory> T_OperationHistorys { get; set; }
 
+        //操作ログ（オリジナル）
+        public DbSet<T_OperationLog> T_OperationLogs { get; set; }
+
         //受注
         public DbSet<T_Order> T_Orders { get; set; }
         //受注詳細

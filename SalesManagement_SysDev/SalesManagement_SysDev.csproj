@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form\DBAccess\EmployeeDataAccess.cs" />
     <Compile Include="Form\DBAccess\ClientDataAccess.cs" />
     <Compile Include="Common\DataInputCheck.cs" />
     <Compile Include="Entity\M_MajorClassification.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Entity\T_WarehousingDetail.cs" />
     <Compile Include="SalesManagement_DevContext.cs" />
     <Compile Include="Form\DBAccess\SalesOfficeDataAccess.cs" />
+    <Compile Include="Entity\T_OperationLog.cs" />
     <EmbeddedResource Include="Form\F_login.resx">
       <DependentUpon>F_login.cs</DependentUpon>
     </EmbeddedResource>

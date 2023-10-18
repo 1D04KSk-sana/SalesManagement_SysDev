@@ -281,7 +281,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-
             // 顧客IDの適否
             if (!String.IsNullOrEmpty(txbClientID.Text.Trim()))
             {
