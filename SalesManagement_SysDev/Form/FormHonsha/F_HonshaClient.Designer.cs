@@ -63,7 +63,7 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnPageMin = new System.Windows.Forms.Button();
-            this.txtNumPage = new System.Windows.Forms.TextBox();
+            this.txbNumPage = new System.Windows.Forms.TextBox();
             this.lblNumPage = new System.Windows.Forms.Label();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
@@ -390,6 +390,7 @@
             this.btnPageSize.TabIndex = 26;
             this.btnPageSize.Text = "行数変更";
             this.btnPageSize.UseVisualStyleBackColor = true;
+            this.btnPageSize.Click += new System.EventHandler(this.btnPageSize_Click);
             // 
             // btnPageMax
             // 
@@ -435,14 +436,14 @@
             this.btnPageMin.Text = "|◀";
             this.btnPageMin.UseVisualStyleBackColor = true;
             // 
-            // txtNumPage
+            // txbNumPage
             // 
-            this.txtNumPage.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txtNumPage.Location = new System.Drawing.Point(899, 764);
-            this.txtNumPage.Margin = new System.Windows.Forms.Padding(2);
-            this.txtNumPage.Name = "txtNumPage";
-            this.txtNumPage.Size = new System.Drawing.Size(60, 25);
-            this.txtNumPage.TabIndex = 31;
+            this.txbNumPage.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbNumPage.Location = new System.Drawing.Point(899, 764);
+            this.txbNumPage.Margin = new System.Windows.Forms.Padding(2);
+            this.txbNumPage.Name = "txbNumPage";
+            this.txbNumPage.Size = new System.Drawing.Size(60, 25);
+            this.txbNumPage.TabIndex = 31;
             // 
             // lblNumPage
             // 
@@ -462,7 +463,7 @@
             this.ClientSize = new System.Drawing.Size(1232, 800);
             this.ControlBox = false;
             this.Controls.Add(this.lblNumPage);
-            this.Controls.Add(this.txtNumPage);
+            this.Controls.Add(this.txbNumPage);
             this.Controls.Add(this.btnPageMin);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnNext);
@@ -544,7 +545,7 @@
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnPageMin;
-        private System.Windows.Forms.TextBox txtNumPage;
+        private System.Windows.Forms.TextBox txbNumPage;
         private System.Windows.Forms.Label lblNumPage;
     }
 }

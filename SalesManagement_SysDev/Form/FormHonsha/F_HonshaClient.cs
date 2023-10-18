@@ -52,6 +52,9 @@ namespace SalesManagement_SysDev
 
         private void F_HonshaClient_Load(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+            txbPageSize.Text = "5";
+
             SetFormDataGridView();
 
             //営業所のデータを取得
@@ -92,6 +95,10 @@ namespace SalesManagement_SysDev
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
+
+            rdbRegister.Checked = true;
+
+            GetDataGridView();
         }
 
         private void btnDone_Click(object sender, EventArgs e)
@@ -113,6 +120,11 @@ namespace SalesManagement_SysDev
             {
                 ClientDataSelect();
             }
+        }
+
+        private void btnPageSize_Click(object sender, EventArgs e)
+        {
+            GetDataGridView();
         }
 
         private void dgvRecordEditing_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -852,8 +864,16 @@ namespace SalesManagement_SysDev
             //中身を消去
             dgvClient.Rows.Clear();
             
-            //listClientを1行ずつdgvClientに挿入
-            foreach (var item in viewClient)
+            //ページ行数を取得
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
+            //ページ数を取得
+            int pageNum = int.Parse(txbNumPage.Text.Trim()) - 1;
+
+            //データからページに必要な部分だけを取り出す
+            var depData = viewClient.Skip(pageSize * pageNum).Take(pageSize).ToList();
+
+            //1行ずつdgvClientに挿入
+            foreach (var item in depData)
             {
                 dgvClient.Rows.Add(item.ClID, dictionarySalesOffice[item.SoID], item.ClName, item.ClAddress, item.ClPhone, item.ClPostal, item.ClFAX, dictionaryHidden[item.ClFlag], item.ClHidden);
             }
