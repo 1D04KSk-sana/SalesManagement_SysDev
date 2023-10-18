@@ -687,7 +687,7 @@ namespace SalesManagement_SysDev
             int intSearchCount = listClient.Count;
 
             // 顧客抽出結果表示
-            SetDataGridView(listClient);
+            GetDataGridView();
 
             MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -816,14 +816,16 @@ namespace SalesManagement_SysDev
             //検索ラヂオボタンがチェックされているとき
             if (rdbSearch.Checked)
             {
-                //表示用の
+                //表示している（検索結果）のデータをとってくる
                 listViewClient = listClient;
             }
             else
             {
+                //全データをとってくる
                 listViewClient = listAllClient;
             }
 
+            //一覧表示cmbViewが表示を選択されているとき
             if (cmbView.SelectedIndex == 0)
             {
                 // 管理Flgが表示の部署データの取得
