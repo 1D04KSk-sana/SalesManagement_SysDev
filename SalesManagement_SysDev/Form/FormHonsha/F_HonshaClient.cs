@@ -53,7 +53,7 @@ namespace SalesManagement_SysDev
         private void F_HonshaClient_Load(object sender, EventArgs e)
         {
             txbNumPage.Text = "1";
-            txbPageSize.Text = "5";
+            txbPageSize.Text = "3";
 
             SetFormDataGridView();
 
@@ -124,6 +124,41 @@ namespace SalesManagement_SysDev
 
         private void btnPageSize_Click(object sender, EventArgs e)
         {
+            GetDataGridView();
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) + 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) - 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnPageMin_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+
+            GetDataGridView();
+        }
+
+        private void btnPageMax_Click(object sender, EventArgs e)
+        {
+            List<M_Client> viewClient = SetListClient();
+
+            //ページ行数を取得
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
+            //最終ページ数を取得（テキストボックスに代入する数字なので-1はしない）
+            int lastPage = (int)Math.Ceiling(viewClient.Count / (double)pageSize);
+
+            txbNumPage.Text = lastPage.ToString();
+
             GetDataGridView();
         }
 
@@ -819,6 +854,21 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void GetDataGridView()
         {
+            //表示用の顧客リスト作成
+            List<M_Client> listViewClient = SetListClient();
+
+            // DataGridViewに表示するデータを指定
+            SetDataGridView(listViewClient);
+        }
+
+        ///////////////////////////////
+        //メソッド名：SetListClient()
+        //引　数   ：なし
+        //戻り値   ：表示用顧客データ
+        //機　能   ：表示用顧客データの準備
+        ///////////////////////////////
+        private List<M_Client> SetListClient()
+        {
             //顧客のデータを全取得
             listAllClient = clientDataAccess.GetClientData();
 
@@ -849,8 +899,7 @@ namespace SalesManagement_SysDev
                 listViewClient = clientDataAccess.GetClientNotDspData(listViewClient);
             }
 
-            // DataGridViewに表示するデータを指定
-            SetDataGridView(listViewClient);
+            return listViewClient;
         }
 
         ///////////////////////////////
@@ -868,6 +917,8 @@ namespace SalesManagement_SysDev
             int pageSize = int.Parse(txbPageSize.Text.Trim());
             //ページ数を取得
             int pageNum = int.Parse(txbNumPage.Text.Trim()) - 1;
+            //最終ページ数を取得
+            int lastPage = (int)Math.Ceiling(viewClient.Count / (double)pageSize) - 1;
 
             //データからページに必要な部分だけを取り出す
             var depData = viewClient.Skip(pageSize * pageNum).Take(pageSize).ToList();
@@ -880,6 +931,28 @@ namespace SalesManagement_SysDev
 
             //dgvClientをリフレッシュ
             dgvClient.Refresh();
+
+            if (lastPage == pageNum)
+            {
+                btnPageMax.Visible = false;
+                btnNext.Visible = false;
+                btnPageMin.Visible = true;
+                btnBack.Visible = true;
+            }
+            else if (pageNum == 0)
+            {
+                btnPageMax.Visible = true;
+                btnNext.Visible = true;
+                btnPageMin.Visible = false;
+                btnBack.Visible = false;
+            }
+            else
+            {
+                btnPageMax.Visible = true;
+                btnNext.Visible = true;
+                btnPageMin.Visible = true;
+                btnBack.Visible = true;
+            }
         }
 
         ///////////////////////////////

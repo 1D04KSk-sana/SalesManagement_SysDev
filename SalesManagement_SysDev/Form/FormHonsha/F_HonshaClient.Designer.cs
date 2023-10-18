@@ -402,6 +402,7 @@
             this.btnPageMax.TabIndex = 27;
             this.btnPageMax.Text = "▶|";
             this.btnPageMax.UseVisualStyleBackColor = true;
+            this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
             // btnNext
             // 
@@ -413,6 +414,7 @@
             this.btnNext.TabIndex = 28;
             this.btnNext.Text = "▶";
             this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnBack
             // 
@@ -424,6 +426,7 @@
             this.btnBack.TabIndex = 29;
             this.btnBack.Text = "◀";
             this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnPageMin
             // 
@@ -435,6 +438,7 @@
             this.btnPageMin.TabIndex = 30;
             this.btnPageMin.Text = "|◀";
             this.btnPageMin.UseVisualStyleBackColor = true;
+            this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
             // 
             // txbNumPage
             // 
