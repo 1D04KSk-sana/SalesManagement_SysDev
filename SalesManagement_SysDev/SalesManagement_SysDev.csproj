@@ -92,6 +92,7 @@
     <Compile Include="Form\F_SearchDialog.Designer.cs">
       <DependentUpon>F_SearchDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\DBAccess\OperationLogDataAccess.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entity\T_Arrival.cs" />
