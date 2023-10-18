@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form\DBAccess\ChumonDataAccess.cs" />
     <Compile Include="Form\DBAccess\EmployeeDataAccess.cs" />
     <Compile Include="Form\DBAccess\ClientDataAccess.cs" />
     <Compile Include="Common\DataInputCheck.cs" />
@@ -135,6 +136,10 @@
     <Compile Include="Form\FormEigyo\F_Eigyo.Designer.cs">
       <DependentUpon>F_Eigyo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\DBAccess\ProdactDataAccess.cs" />
+    <Compile Include="Form\DBAccess\PositionDataAccess.cs" />
+    <Compile Include="Form\DBAccess\MakerDataAccess.cs" />
+    <Compile Include="Form\DBAccess\MajorDataAccess.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entity\T_Arrival.cs" />
@@ -156,9 +161,12 @@
     <Compile Include="Entity\T_SyukkoDetail.cs" />
     <Compile Include="Entity\T_Warehousing.cs" />
     <Compile Include="Entity\T_WarehousingDetail.cs" />
+    <Compile Include="Form\DBAccess\SaleDataAccess.cs" />
     <Compile Include="SalesManagement_DevContext.cs" />
     <Compile Include="Form\DBAccess\SalesOfficeDataAccess.cs" />
     <Compile Include="Entity\T_OperationLog.cs" />
+    <Compile Include="Form\DBAccess\SmallDataAccess.cs" />
+    <Compile Include="Form\DBAccess\StockDataAccess.cs" />
     <EmbeddedResource Include="Form\F_login.resx">
       <DependentUpon>F_login.cs</DependentUpon>
     </EmbeddedResource>
