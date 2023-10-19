@@ -87,6 +87,7 @@
             this.btnFormEmployee.TabStop = false;
             this.btnFormEmployee.Text = "社員管理画面";
             this.btnFormEmployee.UseVisualStyleBackColor = true;
+            this.btnFormEmployee.Click += new System.EventHandler(this.btnFormEmployee_Click);
             // 
             // btnFormSale
             // 
@@ -98,6 +99,7 @@
             this.btnFormSale.TabStop = false;
             this.btnFormSale.Text = "売上管理画面";
             this.btnFormSale.UseVisualStyleBackColor = true;
+            this.btnFormSale.Click += new System.EventHandler(this.btnFormSale_Click);
             // 
             // btnFormProdact
             // 
@@ -109,6 +111,7 @@
             this.btnFormProdact.TabStop = false;
             this.btnFormProdact.Text = "商品管理画面";
             this.btnFormProdact.UseVisualStyleBackColor = true;
+            this.btnFormProdact.Click += new System.EventHandler(this.btnFormProdact_Click);
             // 
             // btnFormSinghUp
             // 
@@ -120,6 +123,7 @@
             this.btnFormSinghUp.TabStop = false;
             this.btnFormSinghUp.Text = "新規登録";
             this.btnFormSinghUp.UseVisualStyleBackColor = true;
+            this.btnFormSinghUp.Click += new System.EventHandler(this.btnFormSinghUp_Click);
             // 
             // btnFormOperationLog
             // 
@@ -131,6 +135,7 @@
             this.btnFormOperationLog.TabStop = false;
             this.btnFormOperationLog.Text = "ログ管理画面";
             this.btnFormOperationLog.UseVisualStyleBackColor = true;
+            this.btnFormOperationLog.Click += new System.EventHandler(this.btnFormOperationLog_Click);
             // 
             // panel1
             // 
