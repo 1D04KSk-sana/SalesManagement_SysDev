@@ -17,6 +17,8 @@ namespace SalesManagement_SysDev
         ClientDataAccess clientDataAccess = new ClientDataAccess();
         //データベース営業所テーブルアクセス用クラスのインスタンス化
         SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
+        //データベース操作ログテーブルアクセス用クラスのインスタンス化
+        OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
         //入力形式チェック用クラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
         //データグリッドビュー用の顧客データ
@@ -52,6 +54,9 @@ namespace SalesManagement_SysDev
 
         private void F_HonshaClient_Load(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+            txbPageSize.Text = "3";
+
             SetFormDataGridView();
 
             //営業所のデータを取得
@@ -92,6 +97,10 @@ namespace SalesManagement_SysDev
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
+
+            rdbRegister.Checked = true;
+
+            GetDataGridView();
         }
 
         private void btnDone_Click(object sender, EventArgs e)
@@ -113,6 +122,46 @@ namespace SalesManagement_SysDev
             {
                 ClientDataSelect();
             }
+        }
+
+        private void btnPageSize_Click(object sender, EventArgs e)
+        {
+            GetDataGridView();
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) + 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) - 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnPageMin_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+
+            GetDataGridView();
+        }
+
+        private void btnPageMax_Click(object sender, EventArgs e)
+        {
+            List<M_Client> viewClient = SetListClient();
+
+            //ページ行数を取得
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
+            //最終ページ数を取得（テキストボックスに代入する数字なので-1はしない）
+            int lastPage = (int)Math.Ceiling(viewClient.Count / (double)pageSize);
+
+            txbNumPage.Text = lastPage.ToString();
+
+            GetDataGridView();
         }
 
         private void dgvRecordEditing_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -153,6 +202,28 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：GenerateLogAtRegistration()
+        //引　数   ：操作名
+        //戻り値   ：操作ログ登録情報
+        //機　能   ：操作ログ情報登録データのセット
+        ///////////////////////////////
+        private T_OperationLog GenerateLogAtRegistration(string OperationDone)
+        {
+            //登録・更新使用としている顧客データの取得
+            var logOperatin = GenerateDataAtRegistration();
+
+            return new T_OperationLog
+            {
+                OpHistoryID = operationLogAccess.OperationLogNum() + 1,
+                EmID = F_Login.intEmployeeID,
+                FormName = "顧客管理画面",
+                OpDone = OperationDone,
+                OpDBID = logOperatin.ClID.Value,
+                OpSetTime = DateTime.Now,
+            };
+        }
+
+        ///////////////////////////////
         //メソッド名：ClientDataRegister()
         //引　数   ：なし
         //戻り値   ：なし
@@ -166,6 +237,15 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbRegister.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
             // 顧客情報作成
             var regClient = GenerateDataAtRegistration();
 
@@ -174,7 +254,7 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：RegistrationDivision()
+        //メソッド名：RegistrationClient()
         //引　数   ：顧客情報
         //戻り値   ：なし
         //機　能   ：顧客データの登録
@@ -234,7 +314,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-
             // 顧客IDの適否
             if (!String.IsNullOrEmpty(txbClientID.Text.Trim()))
             {
@@ -432,6 +511,15 @@ namespace SalesManagement_SysDev
             DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
             if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
             {
                 return;
             }
@@ -687,7 +775,7 @@ namespace SalesManagement_SysDev
             int intSearchCount = listClient.Count;
 
             // 顧客抽出結果表示
-            SetDataGridView(listClient);
+            GetDataGridView();
 
             MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -807,6 +895,21 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void GetDataGridView()
         {
+            //表示用の顧客リスト作成
+            List<M_Client> listViewClient = SetListClient();
+
+            // DataGridViewに表示するデータを指定
+            SetDataGridView(listViewClient);
+        }
+
+        ///////////////////////////////
+        //メソッド名：SetListClient()
+        //引　数   ：なし
+        //戻り値   ：表示用顧客データ
+        //機　能   ：表示用顧客データの準備
+        ///////////////////////////////
+        private List<M_Client> SetListClient()
+        {
             //顧客のデータを全取得
             listAllClient = clientDataAccess.GetClientData();
 
@@ -816,14 +919,16 @@ namespace SalesManagement_SysDev
             //検索ラヂオボタンがチェックされているとき
             if (rdbSearch.Checked)
             {
-                //表示用の
+                //表示している（検索結果）のデータをとってくる
                 listViewClient = listClient;
             }
             else
             {
+                //全データをとってくる
                 listViewClient = listAllClient;
             }
 
+            //一覧表示cmbViewが表示を選択されているとき
             if (cmbView.SelectedIndex == 0)
             {
                 // 管理Flgが表示の部署データの取得
@@ -835,8 +940,7 @@ namespace SalesManagement_SysDev
                 listViewClient = clientDataAccess.GetClientNotDspData(listViewClient);
             }
 
-            // DataGridViewに表示するデータを指定
-            SetDataGridView(listViewClient);
+            return listViewClient;
         }
 
         ///////////////////////////////
@@ -850,14 +954,46 @@ namespace SalesManagement_SysDev
             //中身を消去
             dgvClient.Rows.Clear();
             
-            //listClientを1行ずつdgvClientに挿入
-            foreach (var item in viewClient)
+            //ページ行数を取得
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
+            //ページ数を取得
+            int pageNum = int.Parse(txbNumPage.Text.Trim()) - 1;
+            //最終ページ数を取得
+            int lastPage = (int)Math.Ceiling(viewClient.Count / (double)pageSize) - 1;
+
+            //データからページに必要な部分だけを取り出す
+            var depData = viewClient.Skip(pageSize * pageNum).Take(pageSize).ToList();
+
+            //1行ずつdgvClientに挿入
+            foreach (var item in depData)
             {
                 dgvClient.Rows.Add(item.ClID, dictionarySalesOffice[item.SoID], item.ClName, item.ClAddress, item.ClPhone, item.ClPostal, item.ClFAX, dictionaryHidden[item.ClFlag], item.ClHidden);
             }
 
             //dgvClientをリフレッシュ
             dgvClient.Refresh();
+
+            if (lastPage == pageNum)
+            {
+                btnPageMax.Visible = false;
+                btnNext.Visible = false;
+                btnPageMin.Visible = true;
+                btnBack.Visible = true;
+            }
+            else if (pageNum == 0)
+            {
+                btnPageMax.Visible = true;
+                btnNext.Visible = true;
+                btnPageMin.Visible = false;
+                btnBack.Visible = false;
+            }
+            else
+            {
+                btnPageMax.Visible = true;
+                btnNext.Visible = true;
+                btnPageMin.Visible = true;
+                btnBack.Visible = true;
+            }
         }
 
         ///////////////////////////////

@@ -16,6 +16,13 @@ namespace SalesManagement_SysDev
 {
     public partial class F_Login : Form
     {
+        //入力チェッククラスのインスタンス化
+        DataInputCheck dataInputCheck = new DataInputCheck();
+
+        //他フォームでも使用できるようにinternal
+        //社員ID
+        internal static int intEmployeeID = 116;
+
         public F_Login()
         {
             InitializeComponent();
@@ -736,6 +743,12 @@ namespace SalesManagement_SysDev
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            //ログイン入力データの形式チェック
+            //if (!GetValidDataAtLogin())
+            //{
+            //    return;
+            //}
+
             F_Honsha f_Honsha = new F_Honsha();
 
             f_Honsha.Owner = this;
@@ -748,6 +761,55 @@ namespace SalesManagement_SysDev
         private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Opacity = 1;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtLogin()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：ログイン入力データの形式チェック
+        //          ：エラーがない場合True
+        //          ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtLogin()
+        {
+            //社員IDの適否
+            if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
+            {
+                //社員IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbEmployeeID.Text.Trim()))
+                {
+                    MessageBox.Show("社員IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("社員IDを入力してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbEmployeeID.Focus();
+                return false;
+            }
+
+            //パスワードの適否
+            if (!String.IsNullOrEmpty(txbSinghUpPass.Text.Trim()))
+            {
+                //パスワードの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbSinghUpPass.Text.Trim()))
+                {
+                    MessageBox.Show("パスワードは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSinghUpPass.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("パスワードを入力してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbSinghUpPass.Focus();
+                return false;
+            }
+
+            return true;
         }
     }
 }
