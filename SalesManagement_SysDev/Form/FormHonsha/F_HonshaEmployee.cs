@@ -16,5 +16,20 @@ namespace SalesManagement_SysDev
         {
             InitializeComponent();
         }
+
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblClient_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void F_HonshaEmployee_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
