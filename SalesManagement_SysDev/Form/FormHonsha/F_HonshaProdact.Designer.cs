@@ -74,8 +74,8 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPageMax = new System.Windows.Forms.Button();
             this.pnlProdact = new System.Windows.Forms.Panel();
-            this.lblProdact = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
+            this.lblProdact = new System.Windows.Forms.Label();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.pnlProdact.SuspendLayout();
@@ -143,7 +143,6 @@
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(77, 27);
             this.rdbSearch.TabIndex = 2;
-            this.rdbSearch.TabStop = true;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
             // 
@@ -155,7 +154,6 @@
             this.rdbUpdate.Name = "rdbUpdate";
             this.rdbUpdate.Size = new System.Drawing.Size(77, 27);
             this.rdbUpdate.TabIndex = 1;
-            this.rdbUpdate.TabStop = true;
             this.rdbUpdate.Text = "更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
             // 
@@ -167,7 +165,6 @@
             this.rdbRegister.Name = "rdbRegister";
             this.rdbRegister.Size = new System.Drawing.Size(77, 27);
             this.rdbRegister.TabIndex = 0;
-            this.rdbRegister.TabStop = true;
             this.rdbRegister.Text = "登録";
             this.rdbRegister.UseVisualStyleBackColor = true;
             // 
@@ -528,16 +525,6 @@
             this.pnlProdact.Size = new System.Drawing.Size(1206, 90);
             this.pnlProdact.TabIndex = 42;
             // 
-            // lblProdact
-            // 
-            this.lblProdact.AutoSize = true;
-            this.lblProdact.Font = new System.Drawing.Font("MS UI Gothic", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProdact.Location = new System.Drawing.Point(448, 27);
-            this.lblProdact.Name = "lblProdact";
-            this.lblProdact.Size = new System.Drawing.Size(289, 44);
-            this.lblProdact.TabIndex = 1;
-            this.lblProdact.Text = "商品管理画面";
-            // 
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.White;
@@ -548,6 +535,16 @@
             this.btnClose.TabIndex = 2;
             this.btnClose.Text = "閉じる";
             this.btnClose.UseVisualStyleBackColor = false;
+            // 
+            // lblProdact
+            // 
+            this.lblProdact.AutoSize = true;
+            this.lblProdact.Font = new System.Drawing.Font("MS UI Gothic", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblProdact.Location = new System.Drawing.Point(448, 27);
+            this.lblProdact.Name = "lblProdact";
+            this.lblProdact.Size = new System.Drawing.Size(283, 43);
+            this.lblProdact.TabIndex = 1;
+            this.lblProdact.Text = "商品管理画面";
             // 
             // F_HonshaProdact
             // 
