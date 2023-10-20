@@ -16,5 +16,20 @@ namespace SalesManagement_SysDev
         {
             InitializeComponent();
         }
+
+        private void btnDone_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void F_HonshaProdact_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
