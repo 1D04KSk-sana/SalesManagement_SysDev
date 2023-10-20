@@ -55,14 +55,14 @@
             this.txbProdactPrice = new System.Windows.Forms.TextBox();
             this.lblProdactPrice = new System.Windows.Forms.Label();
             this.lblMakerName = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.txbProdactSafetyStock = new System.Windows.Forms.TextBox();
+            this.lblProdactSafetyStock = new System.Windows.Forms.Label();
+            this.txbProdactReleaseDate = new System.Windows.Forms.TextBox();
+            this.lblProdactReleaseDate = new System.Windows.Forms.Label();
             this.cmbHidden = new System.Windows.Forms.ComboBox();
             this.lblProdactHidden = new System.Windows.Forms.Label();
             this.tbxProdactHidden = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvProdact = new System.Windows.Forms.DataGridView();
             this.lblPageSize = new System.Windows.Forms.Label();
             this.txbMakerName = new System.Windows.Forms.TextBox();
             this.txbPageSize = new System.Windows.Forms.TextBox();
@@ -77,7 +77,7 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.lblProdact = new System.Windows.Forms.Label();
             this.pnlSelect.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProdact)).BeginInit();
             this.pnlProdact.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,6 +91,7 @@
             this.btnReturn.TabIndex = 0;
             this.btnReturn.Text = "戻る";
             this.btnReturn.UseVisualStyleBackColor = false;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
             // btnClear
             // 
@@ -102,6 +103,7 @@
             this.btnClear.TabIndex = 1;
             this.btnClear.Text = "クリア";
             this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnDone
             // 
@@ -114,7 +116,6 @@
             this.btnDone.TabIndex = 2;
             this.btnDone.Text = "実行";
             this.btnDone.UseVisualStyleBackColor = false;
-            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // cmbView
             // 
@@ -340,41 +341,41 @@
             this.lblMakerName.TabIndex = 21;
             this.lblMakerName.Text = "メーカー名";
             // 
-            // textBox1
+            // txbProdactSafetyStock
             // 
-            this.textBox1.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox1.Location = new System.Drawing.Point(991, 255);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(200, 25);
-            this.textBox1.TabIndex = 28;
+            this.txbProdactSafetyStock.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbProdactSafetyStock.Location = new System.Drawing.Point(991, 255);
+            this.txbProdactSafetyStock.Name = "txbProdactSafetyStock";
+            this.txbProdactSafetyStock.Size = new System.Drawing.Size(200, 25);
+            this.txbProdactSafetyStock.TabIndex = 28;
             // 
-            // label1
+            // lblProdactSafetyStock
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(889, 258);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 18);
-            this.label1.TabIndex = 27;
-            this.label1.Text = "安全在庫数";
+            this.lblProdactSafetyStock.AutoSize = true;
+            this.lblProdactSafetyStock.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblProdactSafetyStock.Location = new System.Drawing.Point(889, 258);
+            this.lblProdactSafetyStock.Name = "lblProdactSafetyStock";
+            this.lblProdactSafetyStock.Size = new System.Drawing.Size(98, 18);
+            this.lblProdactSafetyStock.TabIndex = 27;
+            this.lblProdactSafetyStock.Text = "安全在庫数";
             // 
-            // textBox2
+            // txbProdactReleaseDate
             // 
-            this.textBox2.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox2.Location = new System.Drawing.Point(677, 256);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(204, 25);
-            this.textBox2.TabIndex = 26;
+            this.txbProdactReleaseDate.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbProdactReleaseDate.Location = new System.Drawing.Point(677, 256);
+            this.txbProdactReleaseDate.Name = "txbProdactReleaseDate";
+            this.txbProdactReleaseDate.Size = new System.Drawing.Size(204, 25);
+            this.txbProdactReleaseDate.TabIndex = 26;
             // 
-            // label2
+            // lblProdactReleaseDate
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(605, 258);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 18);
-            this.label2.TabIndex = 25;
-            this.label2.Text = "発売日";
+            this.lblProdactReleaseDate.AutoSize = true;
+            this.lblProdactReleaseDate.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblProdactReleaseDate.Location = new System.Drawing.Point(605, 258);
+            this.lblProdactReleaseDate.Name = "lblProdactReleaseDate";
+            this.lblProdactReleaseDate.Size = new System.Drawing.Size(62, 18);
+            this.lblProdactReleaseDate.TabIndex = 25;
+            this.lblProdactReleaseDate.Text = "発売日";
             // 
             // cmbHidden
             // 
@@ -403,17 +404,16 @@
             this.tbxProdactHidden.Size = new System.Drawing.Size(812, 25);
             this.tbxProdactHidden.TabIndex = 31;
             // 
-            // dataGridView1
+            // dgvProdact
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(9, 360);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1191, 336);
-            this.dataGridView1.TabIndex = 32;
-            this.dataGridView1.TabStop = false;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dgvProdact.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProdact.Location = new System.Drawing.Point(9, 360);
+            this.dgvProdact.Name = "dgvProdact";
+            this.dgvProdact.RowHeadersWidth = 51;
+            this.dgvProdact.RowTemplate.Height = 24;
+            this.dgvProdact.Size = new System.Drawing.Size(1191, 336);
+            this.dgvProdact.TabIndex = 32;
+            this.dgvProdact.TabStop = false;
             // 
             // lblPageSize
             // 
@@ -564,14 +564,14 @@
             this.Controls.Add(this.btnPagesize);
             this.Controls.Add(this.txbPageSize);
             this.Controls.Add(this.lblPageSize);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvProdact);
             this.Controls.Add(this.tbxProdactHidden);
             this.Controls.Add(this.lblProdactHidden);
             this.Controls.Add(this.cmbHidden);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txbProdactSafetyStock);
+            this.Controls.Add(this.lblProdactSafetyStock);
+            this.Controls.Add(this.txbProdactReleaseDate);
+            this.Controls.Add(this.lblProdactReleaseDate);
             this.Controls.Add(this.txbProdactPrice);
             this.Controls.Add(this.lblProdactPrice);
             this.Controls.Add(this.txbMakerName);
@@ -599,10 +599,9 @@
             this.MaximizeBox = false;
             this.Name = "F_HonshaProdact";
             this.Text = "F_HonshaProdact";
-            this.Load += new System.EventHandler(this.F_HonshaProdact_Load);
             this.pnlSelect.ResumeLayout(false);
             this.pnlSelect.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProdact)).EndInit();
             this.pnlProdact.ResumeLayout(false);
             this.pnlProdact.PerformLayout();
             this.ResumeLayout(false);
@@ -639,14 +638,14 @@
         private System.Windows.Forms.TextBox txbProdactPrice;
         private System.Windows.Forms.Label lblProdactPrice;
         private System.Windows.Forms.Label lblMakerName;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txbProdactSafetyStock;
+        private System.Windows.Forms.Label lblProdactSafetyStock;
+        private System.Windows.Forms.TextBox txbProdactReleaseDate;
+        private System.Windows.Forms.Label lblProdactReleaseDate;
         private System.Windows.Forms.ComboBox cmbHidden;
         private System.Windows.Forms.Label lblProdactHidden;
         private System.Windows.Forms.TextBox tbxProdactHidden;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvProdact;
         private System.Windows.Forms.Label lblPageSize;
         private System.Windows.Forms.TextBox txbMakerName;
         private System.Windows.Forms.TextBox txbPageSize;
