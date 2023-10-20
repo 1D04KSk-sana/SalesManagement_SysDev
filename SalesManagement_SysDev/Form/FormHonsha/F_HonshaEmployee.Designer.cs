@@ -35,15 +35,14 @@
             this.cmbView = new System.Windows.Forms.ComboBox();
             this.pnlSelect = new System.Windows.Forms.Panel();
             this.rdbUpdate = new System.Windows.Forms.RadioButton();
-            this.rdbRegister = new System.Windows.Forms.RadioButton();
+            this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.cmbHidden = new System.Windows.Forms.ComboBox();
             this.txbHidden = new System.Windows.Forms.TextBox();
             this.lblClientHidden = new System.Windows.Forms.Label();
-            this.txbPositionName = new System.Windows.Forms.TextBox();
             this.PositionName = new System.Windows.Forms.Label();
             this.lblCilentPhone = new System.Windows.Forms.Label();
             this.cmbSalesOfficeID = new System.Windows.Forms.ComboBox();
-            this.txbClientPhone = new System.Windows.Forms.TextBox();
+            this.txbEmployeePhone = new System.Windows.Forms.TextBox();
             this.lblSalesOfficeID = new System.Windows.Forms.Label();
             this.txbEmployeeName = new System.Windows.Forms.TextBox();
             this.lblEmployeeName = new System.Windows.Forms.Label();
@@ -53,8 +52,8 @@
             this.lblEmployeeHireDate = new System.Windows.Forms.Label();
             this.dgvClient = new System.Windows.Forms.DataGridView();
             this.pnlHonsha = new System.Windows.Forms.Panel();
-            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.lblHonsha = new System.Windows.Forms.Label();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.lblNumPage = new System.Windows.Forms.Label();
             this.txbNumPage = new System.Windows.Forms.TextBox();
             this.btnPageMin = new System.Windows.Forms.Button();
@@ -64,6 +63,7 @@
             this.btnPageSize = new System.Windows.Forms.Button();
             this.lblPageSize = new System.Windows.Forms.Label();
             this.txbPageSize = new System.Windows.Forms.TextBox();
+            this.cmbPositionName = new System.Windows.Forms.ComboBox();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             this.pnlHonsha.SuspendLayout();
@@ -80,6 +80,7 @@
             this.btnReturn.TabIndex = 24;
             this.btnReturn.Text = "戻る";
             this.btnReturn.UseVisualStyleBackColor = false;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click_1);
             // 
             // btnClose
             // 
@@ -104,6 +105,7 @@
             this.btnClear.TabIndex = 26;
             this.btnClear.Text = "クリア";
             this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnDone
             // 
@@ -116,6 +118,7 @@
             this.btnDone.TabIndex = 27;
             this.btnDone.Text = "実行";
             this.btnDone.UseVisualStyleBackColor = false;
+            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // cmbView
             // 
@@ -135,7 +138,7 @@
             // 
             this.pnlSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.pnlSelect.Controls.Add(this.rdbUpdate);
-            this.pnlSelect.Controls.Add(this.rdbRegister);
+            this.pnlSelect.Controls.Add(this.rdbSearch);
             this.pnlSelect.Location = new System.Drawing.Point(11, 82);
             this.pnlSelect.Margin = new System.Windows.Forms.Padding(2);
             this.pnlSelect.Name = "pnlSelect";
@@ -155,18 +158,18 @@
             this.rdbUpdate.Text = "更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
             // 
-            // rdbRegister
+            // rdbSearch
             // 
-            this.rdbRegister.AutoSize = true;
-            this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbRegister.Location = new System.Drawing.Point(11, 6);
-            this.rdbRegister.Margin = new System.Windows.Forms.Padding(2);
-            this.rdbRegister.Name = "rdbRegister";
-            this.rdbRegister.Size = new System.Drawing.Size(65, 23);
-            this.rdbRegister.TabIndex = 0;
-            this.rdbRegister.TabStop = true;
-            this.rdbRegister.Text = "登録";
-            this.rdbRegister.UseVisualStyleBackColor = true;
+            this.rdbSearch.AutoSize = true;
+            this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbSearch.Location = new System.Drawing.Point(11, 6);
+            this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
+            this.rdbSearch.Name = "rdbSearch";
+            this.rdbSearch.Size = new System.Drawing.Size(65, 23);
+            this.rdbSearch.TabIndex = 0;
+            this.rdbSearch.TabStop = true;
+            this.rdbSearch.Text = "検索";
+            this.rdbSearch.UseVisualStyleBackColor = true;
             // 
             // cmbHidden
             // 
@@ -202,15 +205,6 @@
             this.lblClientHidden.TabIndex = 44;
             this.lblClientHidden.Text = "非表示理由";
             // 
-            // txbPositionName
-            // 
-            this.txbPositionName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbPositionName.Location = new System.Drawing.Point(95, 173);
-            this.txbPositionName.Margin = new System.Windows.Forms.Padding(2);
-            this.txbPositionName.Name = "txbPositionName";
-            this.txbPositionName.Size = new System.Drawing.Size(114, 22);
-            this.txbPositionName.TabIndex = 39;
-            // 
             // PositionName
             // 
             this.PositionName.AutoSize = true;
@@ -244,14 +238,14 @@
             this.cmbSalesOfficeID.Size = new System.Drawing.Size(151, 22);
             this.cmbSalesOfficeID.TabIndex = 36;
             // 
-            // txbClientPhone
+            // txbEmployeePhone
             // 
-            this.txbClientPhone.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientPhone.Location = new System.Drawing.Point(387, 167);
-            this.txbClientPhone.Margin = new System.Windows.Forms.Padding(2);
-            this.txbClientPhone.Name = "txbClientPhone";
-            this.txbClientPhone.Size = new System.Drawing.Size(114, 22);
-            this.txbClientPhone.TabIndex = 35;
+            this.txbEmployeePhone.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbEmployeePhone.Location = new System.Drawing.Point(387, 167);
+            this.txbEmployeePhone.Margin = new System.Windows.Forms.Padding(2);
+            this.txbEmployeePhone.Name = "txbEmployeePhone";
+            this.txbEmployeePhone.Size = new System.Drawing.Size(114, 22);
+            this.txbEmployeePhone.TabIndex = 35;
             // 
             // lblSalesOfficeID
             // 
@@ -388,6 +382,7 @@
             this.btnPageMin.TabIndex = 67;
             this.btnPageMin.Text = "|◀";
             this.btnPageMin.UseVisualStyleBackColor = true;
+            this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
             // 
             // btnBack
             // 
@@ -399,6 +394,7 @@
             this.btnBack.TabIndex = 66;
             this.btnBack.Text = "◀";
             this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnNext
             // 
@@ -410,6 +406,7 @@
             this.btnNext.TabIndex = 65;
             this.btnNext.Text = "▶";
             this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPageMax
             // 
@@ -421,6 +418,7 @@
             this.btnPageMax.TabIndex = 64;
             this.btnPageMax.Text = "▶|";
             this.btnPageMax.UseVisualStyleBackColor = true;
+            this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
             // btnPageSize
             // 
@@ -453,6 +451,17 @@
             this.txbPageSize.Size = new System.Drawing.Size(46, 22);
             this.txbPageSize.TabIndex = 61;
             // 
+            // cmbPositionName
+            // 
+            this.cmbPositionName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPositionName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbPositionName.FormattingEnabled = true;
+            this.cmbPositionName.Location = new System.Drawing.Point(95, 173);
+            this.cmbPositionName.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbPositionName.Name = "cmbPositionName";
+            this.cmbPositionName.Size = new System.Drawing.Size(151, 22);
+            this.cmbPositionName.TabIndex = 70;
+            // 
             // F_HonshaEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -460,6 +469,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(913, 601);
             this.ControlBox = false;
+            this.Controls.Add(this.cmbPositionName);
             this.Controls.Add(this.lblNumPage);
             this.Controls.Add(this.txbNumPage);
             this.Controls.Add(this.btnPageMin);
@@ -476,11 +486,10 @@
             this.Controls.Add(this.cmbHidden);
             this.Controls.Add(this.txbHidden);
             this.Controls.Add(this.lblClientHidden);
-            this.Controls.Add(this.txbPositionName);
             this.Controls.Add(this.PositionName);
             this.Controls.Add(this.lblCilentPhone);
             this.Controls.Add(this.cmbSalesOfficeID);
-            this.Controls.Add(this.txbClientPhone);
+            this.Controls.Add(this.txbEmployeePhone);
             this.Controls.Add(this.lblSalesOfficeID);
             this.Controls.Add(this.txbEmployeeName);
             this.Controls.Add(this.lblEmployeeName);
@@ -514,15 +523,14 @@
         private System.Windows.Forms.ComboBox cmbView;
         private System.Windows.Forms.Panel pnlSelect;
         private System.Windows.Forms.RadioButton rdbUpdate;
-        private System.Windows.Forms.RadioButton rdbRegister;
+        private System.Windows.Forms.RadioButton rdbSearch;
         private System.Windows.Forms.ComboBox cmbHidden;
         private System.Windows.Forms.TextBox txbHidden;
         private System.Windows.Forms.Label lblClientHidden;
-        private System.Windows.Forms.TextBox txbPositionName;
         private System.Windows.Forms.Label PositionName;
         private System.Windows.Forms.Label lblCilentPhone;
         private System.Windows.Forms.ComboBox cmbSalesOfficeID;
-        private System.Windows.Forms.TextBox txbClientPhone;
+        private System.Windows.Forms.TextBox txbEmployeePhone;
         private System.Windows.Forms.Label lblSalesOfficeID;
         private System.Windows.Forms.TextBox txbEmployeeName;
         private System.Windows.Forms.Label lblEmployeeName;
@@ -543,5 +551,6 @@
         private System.Windows.Forms.Button btnPageSize;
         private System.Windows.Forms.Label lblPageSize;
         private System.Windows.Forms.TextBox txbPageSize;
+        private System.Windows.Forms.ComboBox cmbPositionName;
     }
 }

@@ -12,9 +12,64 @@ namespace SalesManagement_SysDev
 {
     public partial class F_HonshaEmployee : Form
     {
+        //データベース顧客テーブルアクセス用クラスのインスタンス化
+        ClientDataAccess clientDataAccess = new ClientDataAccess();
+        //データベース営業所テーブルアクセス用クラスのインスタンス化
+        SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
+        //データベース操作ログテーブルアクセス用クラスのインスタンス化
+        OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
+        //入力形式チェック用クラスのインスタンス化
+        DataInputCheck dataInputCheck = new DataInputCheck();
+        //データグリッドビュー用の顧客データ
+        private static List<M_Client> listClient = new List<M_Client>();
+        //データグリッドビュー用の全顧客データ
+        private static List<M_Client> listAllClient = new List<M_Client>();
+        //コンボボックス用の営業所データリスト
+        private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
+        //フォームを呼び出しする際のインスタンス化
+        private F_SearchDialog f_SearchDialog = new F_SearchDialog();
+
+        //DataGridView用に使用する表示形式のDictionary
+        private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
+        {
+            { 0, "表示" },
+            { 1, "非表示" },
+        };
+
+        //DataGridView用に使用す営業所のDictionary
+        private Dictionary<int?, string> dictionarySalesOffice = new Dictionary<int?, string>
+        {
+            { 1, "北大阪営業所" },
+            { 2, "兵庫営業所" },
+            { 3, "鹿営業所"},
+            { 4, "京都営業所"},
+            { 5, "和歌山営業所"}
+        };
         public F_HonshaEmployee()
         {
             InitializeComponent();
+        }
+        private void F_HonshaClient_Load(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+            txbPageSize.Text = "3";
+
+            SetFormDataGridView();
+
+            //営業所のデータを取得
+            listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
+            //取得したデータをコンボボックスに挿入
+            cmbSalesOfficeID.DataSource = listSalesOffice;
+            //表示する名前をSoNameに指定
+            cmbSalesOfficeID.DisplayMember = "SoName";
+            //項目の順番をSoIDに指定
+            cmbSalesOfficeID.ValueMember = "SoID";
+
+            //cmbSalesOfficeIDを未選択に
+            cmbSalesOfficeID.SelectedIndex = -1;
+
+            //cmbViewを表示に
+            cmbView.SelectedIndex = 0;
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
@@ -30,6 +85,332 @@ namespace SalesManagement_SysDev
         private void F_HonshaEmployee_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnReturn_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDone_Click(object sender, EventArgs e)
+        {
+            //更新ラヂオボタンがチェックされているとき
+            if (rdbUpdate.Checked)
+            {
+                EmployeeDataUpdate();
+            }
+
+            //検索ラヂオボタンがチェックされているとき
+            if (rdbSearch.Checked)
+            {
+               // EmployeeDataSelect();
+            }
+        }
+
+        private void btnPageMin_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+
+            GetDataGridView();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) - 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) + 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnPageMax_Click(object sender, EventArgs e)
+        {
+            //List<M_Client> viewClient = SetListClient();
+
+            ////ページ行数を取得
+            //int pageSize = int.Parse(txbPageSize.Text.Trim());
+            ////最終ページ数を取得（テキストボックスに代入する数字なので-1はしない）
+            //int lastPage = (int)Math.Ceiling(viewClient.Count / (double)pageSize);
+
+            //txbNumPage.Text = lastPage.ToString();
+
+            //GetDataGridView();
+        }
+        ///////////////////////////////
+        //メソッド名：GetDataGridView()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：データグリッドビューに表示するデータの全取得
+        ///////////////////////////////
+        private void GetDataGridView()
+        {
+            //表示用の顧客リスト作成
+           // List<M_Client> listViewClient = //おそらくないだけSetListClient();
+
+            // DataGridViewに表示するデータを指定
+           //ないだけ SetDataGridView(listViewClient);
+        }
+        ///////////////////////////////
+        //メソッド名：UpdateClient()
+        //引　数   ：顧客情報
+        //戻り値   ：なし
+        //機　能   ：顧客情報の更新
+        ///////////////////////////////
+        private void UpdateEmployee(M_Employee updClient)
+        {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
+            // 顧客情報の更新
+           // bool flg = clientDataAccess.UpdateClientData(updClient);
+            //if (flg == true)
+            //{
+            //    MessageBox.Show("更新しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
+            //else
+            //{
+            //    MessageBox.Show("更新に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+
+            //テキストボックス等のクリア
+            //ないだけClearImput();
+
+            // データグリッドビューの表示
+            GetDataGridView();
+        }
+        ///////////////////////////////
+        //メソッド名：EmployeeDataUpdate()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：顧客情報更新の実行
+        ///////////////////////////////
+        private void EmployeeDataUpdate()
+        {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtUpdate())
+            {
+                return;
+            }
+
+            // 社員情報作成
+            var updEmployee = GenerateDataAtUpdate();
+
+            // 社員情報更新
+            UpdateEmployee(updEmployee);
+        }
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtUpdate()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：更新入力データの形式チェック
+        //         ：エラーがない場合True
+        //         ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtUpdate()
+        {
+
+            // 社員IDの適否
+            if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
+            {
+                // 社員IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbEmployeeID.Text.Trim()))
+                {
+                    MessageBox.Show("社員IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("社員IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbEmployeeID.Focus();
+                return false;
+            }
+
+            // 社員名の適否
+            if (!String.IsNullOrEmpty(txbEmployeeName.Text.Trim()))
+            {
+                // 社員名の文字数チェック
+                if (txbEmployeeName.TextLength >= 50)
+                {
+                    MessageBox.Show("社員名は50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeName.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("社員名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbEmployeeName.Focus();
+                return false;
+            }
+
+            //営業所選択の適否
+            if (cmbSalesOfficeID.SelectedIndex == -1)
+            {
+                MessageBox.Show("営業所が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbSalesOfficeID.Focus();
+                return false;
+            }
+
+            // 電話番号の適否
+            if (!String.IsNullOrEmpty(txbEmployeePhone.Text.Trim()))
+            {
+                // 電話番号の文字数チェック
+                if (txbEmployeePhone.TextLength > 13)
+                {
+                    MessageBox.Show("電話番号は13文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeePhone.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("電話番号が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbEmployeeName.Focus();
+                return false;
+            }
+
+
+
+
+
+
+            //表示非表示選択の適否
+            if (cmbHidden.SelectedIndex == -1)
+            {
+                MessageBox.Show("表示選択が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbHidden.Focus();
+                return false;
+            }
+
+            return true;
+        }
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtUpdate()
+        //引　数   ：なし
+        //戻り値   ：社員更新情報
+        //機　能   ：更新データのセット
+        ///////////////////////////////
+        private M_Employee GenerateDataAtUpdate()
+        {
+            return new M_Employee
+            {
+                EmID = int.Parse(txbEmployeeID.Text.Trim()),
+                EmName = txbEmployeeName.Text.Trim(),
+                EmHidden = txbHidden.Text.Trim(),
+                EmPhone = txbEmployeePhone.Text.Trim(),
+                SoID = cmbSalesOfficeID.SelectedIndex + 1,
+                PoID = cmbPositionName.SelectedIndex+ 1,
+               
+            };
+        }
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtRegistration()
+        //引　数   ：なし
+        //戻り値   ：顧客登録情報
+        //機　能   ：登録データのセット
+        ///////////////////////////////
+        private M_Employee GenerateDataAtRegistration()
+        {
+            return new M_Employee
+            {
+                EmID = int.Parse(txbEmployeeID.Text.Trim()),
+                SoID = cmbSalesOfficeID.SelectedIndex + 1,
+                EmName = txbEmployeeName.Text.Trim(),
+                EmPhone = txbEmployeePhone.Text.Trim(),
+                EmFlag = cmbHidden.SelectedIndex,
+                EmHidden = txbHidden.Text.Trim(),
+            };
+        }
+        ///////////////////////////////
+        //メソッド名：GenerateLogAtRegistration()
+        //引　数   ：操作名
+        //戻り値   ：操作ログ登録情報
+        //機　能   ：操作ログ情報登録データのセット
+        ///////////////////////////////
+        private T_OperationLog GenerateLogAtRegistration(string OperationDone)
+        {
+            //登録・更新使用としている顧客データの取得
+            var logOperatin = GenerateDataAtRegistration();
+
+            return new T_OperationLog
+            {
+                OpHistoryID = operationLogAccess.OperationLogNum() + 1,
+                EmID = F_Login.intEmployeeID,
+                FormName = "社員管理画面",
+                OpDone = OperationDone,
+                OpDBID = logOperatin.ClID.Value,
+                OpSetTime = DateTime.Now,
+            };
+        }
+        ///////////////////////////////
+        //メソッド名：SetFormDataGridView()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：データグリッドビューの初期設定
+        ///////////////////////////////
+        private void SetFormDataGridView()
+        {
+            //列を自由に設定できるように
+            dgvClient.AutoGenerateColumns = false;
+            //行単位で選択するようにする
+            dgvClient.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //行と列の高さを変更できないように
+            dgvClient.AllowUserToResizeColumns = false;
+            dgvClient.AllowUserToResizeRows = false;
+            //セルの複数行選択をオフに
+            dgvClient.MultiSelect = false;
+            //セルの編集ができないように
+            dgvClient.ReadOnly = true;
+            //ユーザーが新しい行を追加できないようにする
+            dgvClient.AllowUserToAddRows = false;
+
+            //左端の項目列を削除
+            dgvClient.RowHeadersVisible = false;
+            //行の自動追加をオフ
+            dgvClient.AllowUserToAddRows = false;
+
+            //ヘッダー位置の指定
+            dgvClient.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dgvClient.Columns.Add("EmID", "社員ID");
+            dgvClient.Columns.Add("SoID", "営業所ID");
+            dgvClient.Columns.Add("EmName", "社員名");
+            dgvClient.Columns.Add("EmPhone", "電話番号");
+            dgvClient.Columns.Add("EmFlag", "顧客管理フラグ");
+            dgvClient.Columns.Add("EmHidden", "非表示理由");
+            dgvClient.Columns.Add("PoID", "役職ID");
+
+            //並び替えができないようにする
+            foreach (DataGridViewColumn dataColumn in dgvClient.Columns)
+            {
+                dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
     }
 }
