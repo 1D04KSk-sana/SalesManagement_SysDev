@@ -77,6 +77,13 @@ namespace SalesManagement_SysDev
 
         }
 
+        private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            EmployeeSearchButtonClick(true);
+        }
+
         private void lblClient_Click(object sender, EventArgs e)
         {
 
@@ -108,7 +115,7 @@ namespace SalesManagement_SysDev
             //検索ラヂオボタンがチェックされているとき
             if (rdbSearch.Checked)
             {
-               // EmployeeDataSelect();
+                EmployeeDataSelect();
             }
         }
 
@@ -439,6 +446,48 @@ namespace SalesManagement_SysDev
                
             };
         }
+
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtSelect()
+        //引　数   ：searchFlg = And検索かOr検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：社員情報の取得
+        ///////////////////////////////
+        private void GenerateDataAtSelect(bool searchFlg)
+        {
+            string strEmployeeID = txbEmployeeID.Text.Trim();
+            int intEmployeeID = 0;
+
+            if (!String.IsNullOrEmpty(strEmployeeID))
+            {
+                intEmployeeID = int.Parse(strEmployeeID);
+            }
+
+            // 検索条件のセット
+            M_Employee selectCondition = new M_Employee()
+            {
+                EmID = intEmployeeID,
+               EmName = txbEmployeeName.Text.Trim(),
+                SoID = cmbSalesOfficeID.SelectedIndex + 1,
+                EmPhone = txbEmployeePhone.Text.Trim(),
+                //ClPostal= txbClientPostal.Text.Trim(),
+                //ClAddress= txbClientAddress.Text.Trim(),
+                //ClFAX=txbClientFax.Text.Trim(),
+                EmHidden=txbHidden.Text.Trim()
+            };
+
+            if (searchFlg)
+            {
+                // 社員データのAnd抽出
+                listEmployee = EmployeeDataAccess.GetAndEmployeeData(selectCondition);
+            }
+            else
+            {
+                // 社員データのOr抽出
+                listEmployee = EmployeeDataAccess.GetOrEmployeeData(selectCondition);
+            }
+        }
+
         ///////////////////////////////
         //メソッド名：GenerateDataAtRegistration()
         //引　数   ：なし
@@ -456,6 +505,78 @@ namespace SalesManagement_SysDev
                 EmFlag = cmbHidden.SelectedIndex,
                 EmHidden = txbHidden.Text.Trim(),
             };
+        }
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtSearch()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：検索入力データの形式チェック
+        //         ：エラーがない場合True
+        //         ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtSearch()
+        {
+            //検索条件の存在確認
+            if (String.IsNullOrEmpty(txbEmployeeID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbEmployeePhone.Text.Trim()))
+            {
+                MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbEmployeeID.Focus();
+                return false;
+            }
+
+            // 社員IDの適否
+            if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
+            {
+                // 社員IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbEmployeeID.Text.Trim()))
+                {
+                    MessageBox.Show("社員IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+                //社員IDの重複チェック
+                if (!EmployeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    MessageBox.Show("社員IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+
+        ///////////////////////////////
+        //メソッド名：EmployeeDataSelect()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：社員情報検索の実行
+        ///////////////////////////////
+        private void EmployeeDataSelect()
+        {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtSearch())
+            {
+                return;
+            }
+
+            //検索ダイアログのフォームを作成
+            f_SearchDialog = new F_SearchDialog();
+            //検索ダイアログのフォームのオーナー設定
+            f_SearchDialog.Owner = this;
+
+            //検索ダイアログのフォームのボタンクリックイベントにハンドラを追加
+            f_SearchDialog.btnAndSearchClick += SearchDialog_btnAndSearchClick;
+            f_SearchDialog.btnOrSearchClick += SearchDialog_btnOrSearchClick;
+
+            //検索ダイアログのフォームが閉じたときのイベントを設定
+            f_SearchDialog.FormClosed += ChildForm_FormClosed;
+            //検索ダイアログのフォームの表示
+            f_SearchDialog.Show();
+
+            //顧客登録フォームの透明化
+            this.Opacity = 0;
         }
         ///////////////////////////////
         //メソッド名：GenerateLogAtRegistration()
@@ -478,6 +599,26 @@ namespace SalesManagement_SysDev
                 OpSetTime = DateTime.Now,
             };
         }
+
+        ///////////////////////////////
+        //メソッド名：EmployeeSearchButtonClick()
+        //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：社員情報検索の実行
+        ///////////////////////////////
+        private void EmployeeSearchButtonClick(bool searchFlg)
+        {
+            // 社員情報抽出
+            GenerateDataAtSelect(searchFlg);
+
+            int intSearchCount = listEmployee.Count;
+
+            // 社員抽出結果表示
+            GetDataGridView();
+
+            MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         ///////////////////////////////
         //メソッド名：SetFormDataGridView()
         //引　数   ：なし

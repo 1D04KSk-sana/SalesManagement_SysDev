@@ -132,6 +132,47 @@ namespace SalesManagement_SysDev
                 return false;
             }
         }
+
+        ///////////////////////////////
+        //メソッド名：GetAndEmployeeData()
+        //引　数：検索条件
+        //戻り値：条件完全一致社員データ
+        //機　能：条件完全一致社員データの取得
+        ///////////////////////////////
+        public List<M_Client> GetAndClientData(M_Client selectClient)
+        {
+            List<M_Client> listClient = new List<M_Client>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var query = context.M_Clients.AsQueryable();
+
+                if (selectClient.ClID != null && selectClient.ClID != 0)
+                {
+                    query = query.Where(x => x.ClID == selectClient.ClID);
+                }
+
+                if (selectClient.SoID != null && selectClient.SoID != 0)
+                {
+                    query = query.Where(x => x.SoID == selectClient.SoID);
+                }
+
+                if (selectClient.ClPhone != null && selectClient.ClPhone != "")
+                {
+                    query = query.Where(x => x.ClPhone == selectClient.ClPhone);
+                }
+
+                listClient = query.ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listClient;
+        }
+
         ///////////////////////////////
         //メソッド名：CheckSinghUpPassExistence()
         //引　数   ：パスワード
