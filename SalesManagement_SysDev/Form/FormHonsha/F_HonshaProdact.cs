@@ -119,10 +119,10 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private M_Client GenerateDataAtRegistration()
         {
-            return new M_Client
+            return new M_Product
             {
-                ClID = int.Parse(txbClientID.Text.Trim()),
-                SoID = cmbSalesOfficeID.SelectedIndex + 1,
+                PrID = int.Parse(txbProdactID.Text.Trim()),
+                MaID = txbClientName.SelectedIndex + 1,
                 ClName = txbClientName.Text.Trim(),
                 ClAddress = txbClientAddress.Text.Trim(),
                 ClPhone = txbClientPhone.Text.Trim(),
