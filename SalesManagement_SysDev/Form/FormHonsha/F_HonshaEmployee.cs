@@ -13,7 +13,7 @@ namespace SalesManagement_SysDev
     public partial class F_HonshaEmployee : Form
     {
         //データベース顧客テーブルアクセス用クラスのインスタンス化
-        ClientDataAccess clientDataAccess = new ClientDataAccess();
+        EmployeeDataAccess EmployeeDataAccess = new EmployeeDataAccess();
         //データベース営業所テーブルアクセス用クラスのインスタンス化
         SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
@@ -21,9 +21,9 @@ namespace SalesManagement_SysDev
         //入力形式チェック用クラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
         //データグリッドビュー用の顧客データ
-        private static List<M_Client> listClient = new List<M_Client>();
+        private static List<M_Employee> listEmployee = new List<M_Employee>();
         //データグリッドビュー用の全顧客データ
-        private static List<M_Client> listAllClient = new List<M_Client>();
+        private static List<M_Employee> listAllEmployee = new List<M_Employee>();
         //コンボボックス用の営業所データリスト
         private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
         //フォームを呼び出しする際のインスタンス化
@@ -135,16 +135,16 @@ namespace SalesManagement_SysDev
 
         private void btnPageMax_Click(object sender, EventArgs e)
         {
-            //List<M_Client> viewClient = SetListClient();
+            List<M_Employee> viewEmployee = SetListEmployee();
 
             ////ページ行数を取得
-            //int pageSize = int.Parse(txbPageSize.Text.Trim());
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
             ////最終ページ数を取得（テキストボックスに代入する数字なので-1はしない）
-            //int lastPage = (int)Math.Ceiling(viewClient.Count / (double)pageSize);
+            int lastPage = (int)Math.Ceiling(viewEmployee.Count / (double)pageSize);
 
-            //txbNumPage.Text = lastPage.ToString();
+            txbNumPage.Text = lastPage.ToString();
 
-            //GetDataGridView();
+            GetDataGridView();
         }
         ///////////////////////////////
         //メソッド名：GetDataGridView()
@@ -154,19 +154,19 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void GetDataGridView()
         {
-            //表示用の顧客リスト作成
-           // List<M_Client> listViewClient = //おそらくないだけSetListClient();
+            //表示用の社員リスト作成
+            List<M_Employee> listViewEmployee = SetListEmployee();
 
             // DataGridViewに表示するデータを指定
-           //ないだけ SetDataGridView(listViewClient);
+           SetDataGridView(listViewEmployee);
         }
         ///////////////////////////////
-        //メソッド名：UpdateClient()
-        //引　数   ：顧客情報
+        //メソッド名：UpdateEmployee()
+        //引　数   ：社員情報
         //戻り値   ：なし
-        //機　能   ：顧客情報の更新
+        //機　能   ：社員情報の更新
         ///////////////////////////////
-        private void UpdateEmployee(M_Employee updClient)
+        private void UpdateEmployee(M_Employee updEmployee)
         {
             // 更新確認メッセージ
             DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
@@ -185,23 +185,76 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 顧客情報の更新
-           // bool flg = clientDataAccess.UpdateClientData(updClient);
-            //if (flg == true)
-            //{
-            //    MessageBox.Show("更新しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
-            //else
-            //{
-            //    MessageBox.Show("更新に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+            // 社員情報の更新
+            bool flg = EmployeeDataAccess.UpdateEmployeeData(updEmployee);
+            if (flg == true)
+            {
+                MessageBox.Show("更新しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("更新に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             //テキストボックス等のクリア
-            //ないだけClearImput();
+            ClearImput();
 
             // データグリッドビューの表示
             GetDataGridView();
         }
+        ///////////////////////////////
+        //メソッド名：SetDataGridView()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：データグリッドビューへの表示
+        ///////////////////////////////
+        private void SetDataGridView(List<M_Employee> viewEmployee)
+        {
+            //中身を消去
+            dgvClient.Rows.Clear();
+
+            //ページ行数を取得
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
+            //ページ数を取得
+            int pageNum = int.Parse(txbNumPage.Text.Trim()) - 1;
+            //最終ページ数を取得
+            int lastPage = (int)Math.Ceiling(viewEmployee.Count / (double)pageSize) - 1;
+
+            //データからページに必要な部分だけを取り出す
+            var depData = viewEmployee.Skip(pageSize * pageNum).Take(pageSize).ToList();
+
+            //1行ずつdgvClientに挿入
+            foreach (var item in depData)
+            {
+                dgvClient.Rows.Add(item.EmID, dictionarySalesOffice[item.SoID], item.EmName, item.EmPhone,  dictionaryHidden[item.EmFlag], item.EmHidden);
+            }
+
+            //dgvClientをリフレッシュ
+            dgvClient.Refresh();
+
+            if (lastPage == pageNum)
+            {
+                btnPageMax.Visible = false;
+                btnNext.Visible = false;
+                btnPageMin.Visible = true;
+                btnBack.Visible = true;
+            }
+            else if (pageNum == 0)
+            {
+                btnPageMax.Visible = true;
+                btnNext.Visible = true;
+                btnPageMin.Visible = false;
+                btnBack.Visible = false;
+            }
+            else
+            {
+                btnPageMax.Visible = true;
+                btnNext.Visible = true;
+                btnPageMin.Visible = true;
+                btnBack.Visible = true;
+            }
+        }
+       
         ///////////////////////////////
         //メソッド名：EmployeeDataUpdate()
         //引　数   ：なし
@@ -221,6 +274,21 @@ namespace SalesManagement_SysDev
 
             // 社員情報更新
             UpdateEmployee(updEmployee);
+        }
+        ///////////////////////////////
+        //メソッド名：ClearImput()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：テキストボックスやコンボボックスの中身のクリア
+        ///////////////////////////////
+        private void ClearImput()
+        {
+            txbEmployeeID.Text = string.Empty;
+            txbEmployeeName.Text = string.Empty;
+            txbEmployeePhone.Text = string.Empty;
+            txbHidden.Text = string.Empty;
+            cmbSalesOfficeID.SelectedIndex = -1;
+            cmbHidden.SelectedIndex = -1;
         }
         ///////////////////////////////
         //メソッド名：GetValidDataAtUpdate()
@@ -311,6 +379,48 @@ namespace SalesManagement_SysDev
             return true;
         }
         ///////////////////////////////
+        //メソッド名：SetListEmployee()
+        //引　数   ：なし
+        //戻り値   ：表示用顧客データ
+        //機　能   ：表示用顧客データの準備
+        ///////////////////////////////
+        private List<M_Employee> SetListEmployee()
+        {
+            //社員のデータを全取得
+            listAllEmployee = EmployeeDataAccess.GetEmployeeData();
+
+            //表示用の社員リスト作成
+            List<M_Employee> listViewEmployee = new List<M_Employee>();
+
+            //検索ラヂオボタンがチェックされているとき
+            if (rdbSearch.Checked)
+            {
+                //表示している（検索結果）のデータをとってくる
+                listViewEmployee = listEmployee;
+            }
+            else
+            {
+                //全データをとってくる
+                listViewEmployee = listAllEmployee;
+            }
+
+            //一覧表示cmbViewが表示を選択されているとき
+            if (cmbView.SelectedIndex == 0)
+            {
+                // 管理Flgが表示の部署データの取得
+                listViewEmployee = EmployeeDataAccess.GetEmployeeDspData(listViewEmployee);
+            }
+            else
+            {
+                // 管理Flgが非表示の部署データの取得
+                listViewEmployee = EmployeeDataAccess.GetEmployeeNotDspData(listViewEmployee);
+            }
+
+            return listViewEmployee;
+        }
+ 
+
+        ///////////////////////////////
         //メソッド名：GenerateDataAtUpdate()
         //引　数   ：なし
         //戻り値   ：社員更新情報
@@ -364,7 +474,7 @@ namespace SalesManagement_SysDev
                 EmID = F_Login.intEmployeeID,
                 FormName = "社員管理画面",
                 OpDone = OperationDone,
-                OpDBID = logOperatin.ClID.Value,
+                OpDBID = logOperatin.EmID,
                 OpSetTime = DateTime.Now,
             };
         }
