@@ -167,6 +167,9 @@
     <Compile Include="Entity\T_OperationLog.cs" />
     <Compile Include="Form\DBAccess\SmallDataAccess.cs" />
     <Compile Include="Form\DBAccess\StockDataAccess.cs" />
+    <EmbeddedResource Include="Form\FormHonsha\F_HonshaSale.resx">
+      <DependentUpon>F_HonshaSale.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\F_login.resx">
       <DependentUpon>F_login.cs</DependentUpon>
     </EmbeddedResource>
