@@ -10,10 +10,35 @@ namespace SalesManagement_SysDev
     internal class ProdactDataAccess
     {
         ///////////////////////////////
+        //メソッド名：CheckProdactIDExistence()
+        //引　数   ：顧客コード
+        //戻り値   ：True or False
+        //機　能   ：一致する顧客IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckProdactIDExistence(int prodactID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                //部署CDで一致するデータが存在するか
+                flg = context.M_Products.Any(x => x.PrID == prodactID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
         //メソッド名：GetClientData()
         //引　数：なし
-        //戻り値：顧客データ
-        //機　能：顧客データの全取得
+        //戻り値：商品データ
+        //機　能：商品データの全取得
         ///////////////////////////////
         public List<M_Product> GetProdactDspData()
         {
@@ -58,8 +83,8 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         //メソッド名：GetProdactDspData()
         //引　数：なし
-        //戻り値：管理Flgが表示の顧客データ
-        //機　能：管理Flgが表示の顧客データの全取得
+        //戻り値：管理Flgが表示の商品データ
+        //機　能：管理Flgが表示の商品データの全取得
         ///////////////////////////////
         public List<M_Product> GetProdactDspData(List<M_Product> dspProdact)
         {
