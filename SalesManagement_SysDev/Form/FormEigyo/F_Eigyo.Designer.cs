@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.btnLogOut = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnclose = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -45,17 +45,20 @@
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(110, 50);
             this.btnLogOut.TabIndex = 0;
+            this.btnLogOut.TabStop = false;
             this.btnLogOut.Text = "ログアウト";
             this.btnLogOut.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnclose
             // 
-            this.button2.Location = new System.Drawing.Point(958, 38);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnclose.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnclose.Location = new System.Drawing.Point(921, 20);
+            this.btnclose.Name = "btnclose";
+            this.btnclose.Size = new System.Drawing.Size(110, 50);
+            this.btnclose.TabIndex = 1;
+            this.btnclose.TabStop = false;
+            this.btnclose.Text = "閉じる";
+            this.btnclose.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
@@ -97,7 +100,7 @@
             // 
             this.pnlEigyo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(181)))), ((int)(((byte)(128)))));
             this.pnlEigyo.Controls.Add(this.btnLogOut);
-            this.pnlEigyo.Controls.Add(this.button2);
+            this.pnlEigyo.Controls.Add(this.btnclose);
             this.pnlEigyo.Location = new System.Drawing.Point(0, 0);
             this.pnlEigyo.Name = "pnlEigyo";
             this.pnlEigyo.Size = new System.Drawing.Size(1085, 90);
@@ -125,7 +128,7 @@
         #endregion
 
         private System.Windows.Forms.Button btnLogOut;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnclose;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
