@@ -14,16 +14,25 @@ namespace SalesManagement_SysDev
     {
         //入力形式チェック用クラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
-        //データベース顧客テーブルアクセス用クラスのインスタンス化
-        ClientDataAccess clientDataAccess = new ClientDataAccess();
+        //データベース売上テーブルアクセス用クラスのインスタンス化
+        SaleDataAccess saleDataAccess = new SaleDataAccess();
         //データグリッドビュー用の売上データ
-        private static List<T_Sale> listClient = new List<T_Sale>();
+        private static List<T_Sale> listSale = new List<T_Sale>();
         //データグリッドビュー用の全売上データ
-        private static List<T_Sale> listAllClient = new List<T_Sale>();
+        private static List<T_Sale> listAllSale = new List<T_Sale>();
         //コンボボックス用の営業所データリスト
         private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
         //フォームを呼び出しする際のインスタンス化
         private F_SearchDialog f_SearchDialog = new F_SearchDialog();
+        //DataGridView用に使用する表示形式のDictionary
+        private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
+        {
+            { 0, "表示" },
+            { 1, "非表示" },
+        };
+
+
+
 
 
 
@@ -40,6 +49,81 @@ namespace SalesManagement_SysDev
             { 4, "京都営業所"},
             { 5, "和歌山営業所"}
         };
+
+        private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            SaleSearchButtonClick(true);
+        }
+        private void SearchDialog_btnOrSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            SaleSearchButtonClick(false);
+        }
+        ///////////////////////////////
+        //メソッド名：SaleSearchButtonClick()
+        //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：顧客情報検索の実行
+        ///////////////////////////////
+        private void SaleSearchButtonClick(bool searchFlg)
+        {
+            // 顧客情報抽出
+            GenerateDataAtSelect(searchFlg);
+
+            int intSearchCount = listSale.Count;
+
+            // 顧客抽出結果表示
+            GetDataGridView();
+
+            MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtSelect()
+        //引　数   ：searchFlg = And検索かOr検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：売上情報の取得
+        ///////////////////////////////
+        private void GenerateDataAtSelect(bool searchFlg)
+        {
+            string strSaleID = txbSaleID.Text.Trim();
+            int intSaleID = 0;
+
+            if (!String.IsNullOrEmpty(strSaleID))
+            {
+                intSaleID = int.Parse(strSaleID);
+            }
+
+            // 検索条件のセット
+            T_Sale selectCondition = new T_Sale()
+            {
+                SaID = intSaleID,
+                //ClName = txbClientName.Text.Trim()
+                SoID = cmbSalesOfficeID.SelectedIndex + 1,
+                ChID = int.Parse(txbClientPostal.Text.Trim()),
+                //ClPostal= txbClientPostal.Text.Trim(),
+                //ClAddress= txbClientAddress.Text.Trim(),
+                //ClFAX=txbClientFax.Text.Trim(),
+                //ClHidden=txbHidden.Text.Trim()
+            };
+
+            if (searchFlg)
+            {
+                // 顧客データのAnd抽出
+                listSale = saleDataAccess.GetAndSaleData(selectCondition);
+            }
+            else
+            {
+                // 顧客データのOr抽出
+                listSale = saleDataAccess.GetOrSaleData(selectCondition);
+            }
+        }
+        private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Opacity = 1;
+        }
 
 
         private void F_HonshaSale_Load(object sender, EventArgs e)
@@ -132,7 +216,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbSaleID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbClientPhone.Text.Trim()))
+            if (String.IsNullOrEmpty(txbSaleID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbClientPostal.Text.Trim()))
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbSaleID.Focus();
@@ -150,7 +234,7 @@ namespace SalesManagement_SysDev
                     return false;
                 }
                 //顧客IDの重複チェック
-                if (!clientDataAccess.CheckClientIDExistence(int.Parse(txbSaleID.Text.Trim())))
+                if (!saleDataAccess.CheckSaleIDExistence(int.Parse(txbSaleID.Text.Trim())))
                 {
                     MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSaleID.Focus();
@@ -166,8 +250,6 @@ namespace SalesManagement_SysDev
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
-
-            rdbRegister.Checked = true;
 
             GetDataGridView();
 
@@ -250,7 +332,7 @@ namespace SalesManagement_SysDev
         //戻り値   ：なし
         //機　能   ：データグリッドビューへの表示
         ///////////////////////////////
-        private void SetDataGridView(List<M_Client> viewClient)
+        private void SetDataGridView(List<T_Sale> viewSale)
         {
             //中身を消去
             dgvSale.Rows.Clear();
@@ -260,15 +342,15 @@ namespace SalesManagement_SysDev
             //ページ数を取得
             int pageNum = int.Parse(txbNumPage.Text.Trim()) - 1;
             //最終ページ数を取得
-            int lastPage = (int)Math.Ceiling(viewClient.Count / (double)pageSize) - 1;
+            int lastPage = (int)Math.Ceiling(viewSale.Count / (double)pageSize) - 1;
 
             //データからページに必要な部分だけを取り出す
-            var depData = viewClient.Skip(pageSize * pageNum).Take(pageSize).ToList();
+            var depData = viewSale.Skip(pageSize * pageNum).Take(pageSize).ToList();
 
             //1行ずつdgvClientに挿入
             foreach (var item in depData)
             {
-                dgvSale.Rows.Add(item.ClID, dictionarySalesOffice[item.SoID], item.ClName, item.ClAddress, item.ClPhone, item.ClPostal, item.ClFAX, dictionaryHidden[item.ClFlag], item.ClHidden);
+                dgvSale.Rows.Add(item.ClID, dictionarySalesOffice[item.SaID], item.ClID, item.SoID, item.EmID, item.ChID, item.SaDate, dictionaryHidden[item.SaFlag], item.SaHidden);
             }
 
             //dgvClientをリフレッシュ
