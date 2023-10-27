@@ -184,9 +184,61 @@ namespace SalesManagement_SysDev
 
         private void btnDone_Click(object sender, EventArgs e)
         {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtRegistration())
+            {
+                return;
+            }
 
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbRegister.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
         }
 
+        ///////////////////////////////
+        //メソッド名：GenerateLogAtRegistration()
+        //引　数   ：操作名
+        //戻り値   ：操作ログ登録情報
+        //機　能   ：操作ログ情報登録データのセット
+        ///////////////////////////////
+        private T_OperationLog GenerateLogAtRegistration(string OperationDone)
+        {
+            //登録・更新使用としている顧客データの取得
+            var logOperatin = GenerateDataAtRegistration();
+
+            return new T_OperationLog
+            {
+                OpHistoryID = operationLogAccess.OperationLogNum() + 1,
+                EmID = F_Login.intEmployeeID,
+                FormName = "顧客管理画面",
+                OpDone = OperationDone,
+                OpDBID = logOperatin.ClID.Value,
+                OpSetTime = DateTime.Now,
+            };
+        }
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtRegistration()
+        //引　数   ：なし
+        //戻り値   ：顧客登録情報
+        //機　能   ：登録データのセット
+        ///////////////////////////////
+        private M_Employee GenerateDataAtRegistration()
+        {
+            return new M_Employee
+            {
+                EmID = int.Parse(txbEmployeeName.Text.Trim()),
+                SoID = cmbSalesOfficeID.SelectedIndex + 1,
+                EmPassword = txbSinghUpPass.Text.Trim(),
+                EmHiredate = dtpHireDate.Value,
+                EmPhone = txbSinghUpPhone.Text.Trim(),
+                PoID = cmbPositionID.SelectedIndex +1
+            };
+        }
         private void lblClient_Click(object sender, EventArgs e)
         {
 

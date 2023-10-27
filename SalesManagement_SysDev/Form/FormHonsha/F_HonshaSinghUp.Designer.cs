@@ -44,7 +44,7 @@
             this.lblClientID = new System.Windows.Forms.Label();
             this.btnDone = new System.Windows.Forms.Button();
             this.cmbPositionID = new System.Windows.Forms.ComboBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtpHireDate = new System.Windows.Forms.DateTimePicker();
             this.pnlHonsha.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -129,9 +129,9 @@
             this.lblClientAddress.Location = new System.Drawing.Point(208, 417);
             this.lblClientAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblClientAddress.Name = "lblClientAddress";
-            this.lblClientAddress.Size = new System.Drawing.Size(87, 20);
+            this.lblClientAddress.Size = new System.Drawing.Size(86, 20);
             this.lblClientAddress.TabIndex = 44;
-            this.lblClientAddress.Text = "パスポート";
+            this.lblClientAddress.Text = "パスワード";
             this.lblClientAddress.Click += new System.EventHandler(this.lblClientAddress_Click);
             // 
             // txbSinghUpPass
@@ -234,21 +234,21 @@
             this.cmbPositionID.Size = new System.Drawing.Size(218, 31);
             this.cmbPositionID.TabIndex = 55;
             // 
-            // dateTimePicker1
+            // dtpHireDate
             // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(895, 409);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(4);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(218, 30);
-            this.dateTimePicker1.TabIndex = 56;
+            this.dtpHireDate.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.dtpHireDate.Location = new System.Drawing.Point(895, 409);
+            this.dtpHireDate.Margin = new System.Windows.Forms.Padding(4);
+            this.dtpHireDate.Name = "dtpHireDate";
+            this.dtpHireDate.Size = new System.Drawing.Size(218, 30);
+            this.dtpHireDate.TabIndex = 56;
             // 
             // F_HonshaSinghUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1323, 937);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dtpHireDate);
             this.Controls.Add(this.cmbPositionID);
             this.Controls.Add(this.pnlHonsha);
             this.Controls.Add(this.btnClear);
@@ -293,6 +293,6 @@
         private System.Windows.Forms.Label lblClientID;
         private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.ComboBox cmbPositionID;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpHireDate;
     }
 }
