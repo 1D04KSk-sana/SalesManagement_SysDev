@@ -47,6 +47,7 @@ namespace SalesManagement_SysDev
             { 5, "和歌山営業所"}
         };
 
+ 
         public F_HonshaClient()
         {
             InitializeComponent();
@@ -1014,6 +1015,11 @@ namespace SalesManagement_SysDev
             cmbSalesOfficeID.SelectedIndex = -1;
             cmbHidden.SelectedIndex = -1;
             txbClientFAX.Text = string.Empty;
+        }
+
+        private void cmbSalesOfficeID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

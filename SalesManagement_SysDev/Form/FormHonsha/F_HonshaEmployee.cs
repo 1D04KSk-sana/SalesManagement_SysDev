@@ -12,20 +12,25 @@ namespace SalesManagement_SysDev
 {
     public partial class F_HonshaEmployee : Form
     {
-        //データベース顧客テーブルアクセス用クラスのインスタンス化
+        //データベース社員テーブルアクセス用クラスのインスタンス化
         EmployeeDataAccess EmployeeDataAccess = new EmployeeDataAccess();
         //データベース営業所テーブルアクセス用クラスのインスタンス化
         SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
+        //データベース役所テーブルアクセス用クラスのインスタンス化
+        PositionDataAccess PositionDataAccess = new PositionDataAccess();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
         //入力形式チェック用クラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
-        //データグリッドビュー用の顧客データ
+        //データグリッドビュー用の社員データ
         private static List<M_Employee> listEmployee = new List<M_Employee>();
-        //データグリッドビュー用の全顧客データ
+        //データグリッドビュー用の全社員データ
         private static List<M_Employee> listAllEmployee = new List<M_Employee>();
         //コンボボックス用の営業所データリスト
         private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
+        //コンボボックス用の役員データリスト
+        private static List<M_Position> listPosition = new List<M_Position>();
+
         //フォームを呼び出しする際のインスタンス化
         private F_SearchDialog f_SearchDialog = new F_SearchDialog();
 
@@ -45,11 +50,28 @@ namespace SalesManagement_SysDev
             { 4, "京都営業所"},
             { 5, "和歌山営業所"}
         };
+
+        //DataGridView用に使用す役職のDictionary
+        private Dictionary<int?, string> dictionaryPositionName = new Dictionary<int?, string>
+        {
+            { 1, "社長" },
+            { 2, "専務" },
+            { 3, "常務"},
+            { 4, "取締役"},
+            { 5, "部長"},
+            { 6, "次長"},
+            { 7, "課長"},
+            { 8, "係長"},
+            { 9, "主任"},
+            { 10, "社員"},
+            { 11,"パート"},
+        };
+
         public F_HonshaEmployee()
         {
             InitializeComponent();
         }
-        private void F_HonshaClient_Load(object sender, EventArgs e)
+        private void F_HonshaEmployee_Load(object sender, EventArgs e)
         {
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
@@ -68,6 +90,17 @@ namespace SalesManagement_SysDev
             //cmbSalesOfficeIDを未選択に
             cmbSalesOfficeID.SelectedIndex = -1;
 
+            //役職のデータを取得
+            listPosition = PositionDataAccess.GetPositionDspData();
+            //取得したデータをコンボボックスに挿入
+            cmbPositionName.DataSource = listPosition;
+            //表示する名前をPoNameに指定
+            cmbPositionName.DisplayMember = "PoName";
+            //項目の順番をPoIDに指定
+            cmbPositionName.ValueMember = "PoID";
+            //cmbPositionIDを未選択に
+            cmbPositionName.SelectedIndex = -1;
+
             //cmbViewを表示に
             cmbView.SelectedIndex = 0;
         }
@@ -77,6 +110,12 @@ namespace SalesManagement_SysDev
 
         }
 
+        private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Opacity = 1;
+        }
+
+
         private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
         {
             f_SearchDialog.Close();
@@ -84,12 +123,19 @@ namespace SalesManagement_SysDev
             EmployeeSearchButtonClick(true);
         }
 
+        private void SearchDialog_btnOrSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            EmployeeSearchButtonClick(false);
+        }
+
         private void lblClient_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void F_HonshaEmployee_Load(object sender, EventArgs e)
+        private void F_HonshaEmploye_Load(object sender, EventArgs e)
         {
 
         }
@@ -101,7 +147,11 @@ namespace SalesManagement_SysDev
 
         private void btnClear_Click(object sender, EventArgs e)
         {
+            ClearImput();
 
+            
+
+            GetDataGridView();
         }
 
         private void btnDone_Click(object sender, EventArgs e)
@@ -167,6 +217,48 @@ namespace SalesManagement_SysDev
             // DataGridViewに表示するデータを指定
            SetDataGridView(listViewEmployee);
         }
+
+        ///////////////////////////////
+        //メソッド名：SetListEmployee()
+        //引　数   ：なし
+        //戻り値   ：表示用社員データ
+        //機　能   ：表示用社員データの準備
+        ///////////////////////////////
+        private List<M_Employee> SetListEmployee()
+        {
+            //社員のデータを全取得
+            listAllEmployee = EmployeeDataAccess.GetEmployeeData();
+
+            //表示用の社員リスト作成
+            List<M_Employee> listViewEmployee = new List<M_Employee>();
+
+            //検索ラヂオボタンがチェックされているとき
+            if (rdbSearch.Checked)
+            {
+                //表示している（検索結果）のデータをとってくる
+                listViewEmployee = listEmployee;
+            }
+            else
+            {
+                //全データをとってくる
+                listViewEmployee = listAllEmployee;
+            }
+
+            //一覧表示cmbViewが表示を選択されているとき
+            if (cmbView.SelectedIndex == 0)
+            {
+                // 管理Flgが表示の部署データの取得
+                listViewEmployee = EmployeeDataAccess.GetEmployeeDspData(listViewEmployee);
+            }
+            else
+            {
+                // 管理Flgが非表示の部署データの取得
+                listViewEmployee = EmployeeDataAccess.GetEmployeeNotDspData(listViewEmployee);
+            }
+
+            return listViewEmployee;
+        }
+
         ///////////////////////////////
         //メソッド名：UpdateEmployee()
         //引　数   ：社員情報
@@ -218,7 +310,7 @@ namespace SalesManagement_SysDev
         private void SetDataGridView(List<M_Employee> viewEmployee)
         {
             //中身を消去
-            dgvClient.Rows.Clear();
+            dgvEmployee.Rows.Clear();
 
             //ページ行数を取得
             int pageSize = int.Parse(txbPageSize.Text.Trim());
@@ -230,14 +322,14 @@ namespace SalesManagement_SysDev
             //データからページに必要な部分だけを取り出す
             var depData = viewEmployee.Skip(pageSize * pageNum).Take(pageSize).ToList();
 
-            //1行ずつdgvClientに挿入
+            //1行ずつdgvEmployeeに挿入
             foreach (var item in depData)
             {
-                dgvClient.Rows.Add(item.EmID, dictionarySalesOffice[item.SoID], item.EmName, item.EmPhone,  dictionaryHidden[item.EmFlag], item.EmHidden);
+                dgvEmployee.Rows.Add(item.EmID, dictionarySalesOffice[item.SoID], item.EmName, item.EmPhone,  dictionaryHidden[item.EmFlag], dictionaryPositionName[item.PoID], item.EmHidden);
             }
 
             //dgvClientをリフレッシュ
-            dgvClient.Refresh();
+            dgvEmployee.Refresh();
 
             if (lastPage == pageNum)
             {
@@ -295,7 +387,9 @@ namespace SalesManagement_SysDev
             txbEmployeePhone.Text = string.Empty;
             txbHidden.Text = string.Empty;
             cmbSalesOfficeID.SelectedIndex = -1;
+            cmbPositionName.SelectedIndex = -1;
             cmbHidden.SelectedIndex = -1;
+            
         }
         ///////////////////////////////
         //メソッド名：GetValidDataAtUpdate()
@@ -352,6 +446,14 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
+            //役職選択の適否
+            if (cmbPositionName.SelectedIndex == -1)
+            {
+                MessageBox.Show("役職名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbPositionName.Focus();
+                return false;
+            }
+
             // 電話番号の適否
             if (!String.IsNullOrEmpty(txbEmployeePhone.Text.Trim()))
             {
@@ -385,47 +487,7 @@ namespace SalesManagement_SysDev
 
             return true;
         }
-        ///////////////////////////////
-        //メソッド名：SetListEmployee()
-        //引　数   ：なし
-        //戻り値   ：表示用顧客データ
-        //機　能   ：表示用顧客データの準備
-        ///////////////////////////////
-        private List<M_Employee> SetListEmployee()
-        {
-            //社員のデータを全取得
-            listAllEmployee = EmployeeDataAccess.GetEmployeeData();
-
-            //表示用の社員リスト作成
-            List<M_Employee> listViewEmployee = new List<M_Employee>();
-
-            //検索ラヂオボタンがチェックされているとき
-            if (rdbSearch.Checked)
-            {
-                //表示している（検索結果）のデータをとってくる
-                listViewEmployee = listEmployee;
-            }
-            else
-            {
-                //全データをとってくる
-                listViewEmployee = listAllEmployee;
-            }
-
-            //一覧表示cmbViewが表示を選択されているとき
-            if (cmbView.SelectedIndex == 0)
-            {
-                // 管理Flgが表示の部署データの取得
-                listViewEmployee = EmployeeDataAccess.GetEmployeeDspData(listViewEmployee);
-            }
-            else
-            {
-                // 管理Flgが非表示の部署データの取得
-                listViewEmployee = EmployeeDataAccess.GetEmployeeNotDspData(listViewEmployee);
-            }
-
-            return listViewEmployee;
-        }
- 
+       
 
         ///////////////////////////////
         //メソッド名：GenerateDataAtUpdate()
@@ -443,7 +505,7 @@ namespace SalesManagement_SysDev
                 EmPhone = txbEmployeePhone.Text.Trim(),
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 PoID = cmbPositionName.SelectedIndex+ 1,
-               
+               EmFlag = cmbHidden.SelectedIndex ,
             };
         }
 
@@ -546,6 +608,25 @@ namespace SalesManagement_SysDev
             return true;
         }
 
+        ///////////////////////////////
+        //メソッド名：SelectRowControl()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：選択された行に対してのコントロールの変更
+        ///////////////////////////////
+        private void SelectRowControl()
+        {
+            //データグリッドビューに乗っている情報をGUIに反映
+            txbEmployeeID.Text = dgvEmployee[0, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
+            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvEmployee[1, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key.Value - 1;
+            cmbPositionName.SelectedIndex = dictionaryPositionName.FirstOrDefault(x => x.Value == dgvEmployee[5, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key.Value - 1;
+            txbEmployeeName.Text = dgvEmployee[2, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
+            txbEmployeePhone.Text = dgvEmployee[3, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
+          //  txbCEmployeePostal.Text = dgvEmployee[5, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
+          //  txbEmployeeFAX.Text = dgvEmployee[6, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
+            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvEmployee[4, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key;
+            //txbHidden.Text = dgvEmployee[8, dgvEmployee.CurrentCellAddress.Y]?.Value?.ToString();
+        }
 
         ///////////////////////////////
         //メソッド名：EmployeeDataSelect()
@@ -628,40 +709,63 @@ namespace SalesManagement_SysDev
         private void SetFormDataGridView()
         {
             //列を自由に設定できるように
-            dgvClient.AutoGenerateColumns = false;
+            dgvEmployee.AutoGenerateColumns = false;
             //行単位で選択するようにする
-            dgvClient.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvEmployee.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             //行と列の高さを変更できないように
-            dgvClient.AllowUserToResizeColumns = false;
-            dgvClient.AllowUserToResizeRows = false;
+            dgvEmployee.AllowUserToResizeColumns = false;
+            dgvEmployee.AllowUserToResizeRows = false;
             //セルの複数行選択をオフに
-            dgvClient.MultiSelect = false;
+            dgvEmployee.MultiSelect = false;
             //セルの編集ができないように
-            dgvClient.ReadOnly = true;
+            dgvEmployee.ReadOnly = true;
             //ユーザーが新しい行を追加できないようにする
-            dgvClient.AllowUserToAddRows = false;
+            dgvEmployee.AllowUserToAddRows = false;
 
             //左端の項目列を削除
-            dgvClient.RowHeadersVisible = false;
+            dgvEmployee.RowHeadersVisible = false;
             //行の自動追加をオフ
-            dgvClient.AllowUserToAddRows = false;
+            dgvEmployee.AllowUserToAddRows = false;
 
             //ヘッダー位置の指定
-            dgvClient.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvEmployee.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            dgvClient.Columns.Add("EmID", "社員ID");
-            dgvClient.Columns.Add("SoID", "営業所ID");
-            dgvClient.Columns.Add("EmName", "社員名");
-            dgvClient.Columns.Add("EmPhone", "電話番号");
-            dgvClient.Columns.Add("EmFlag", "顧客管理フラグ");
-            dgvClient.Columns.Add("EmHidden", "非表示理由");
-            dgvClient.Columns.Add("PoID", "役職ID");
-
+            dgvEmployee.Columns.Add("EmID", "社員ID");
+            dgvEmployee.Columns.Add("SoID", "営業所ID");
+            dgvEmployee.Columns.Add("EmName", "社員名");
+            dgvEmployee.Columns.Add("EmPhone", "電話番号");
+            dgvEmployee.Columns.Add("EmFlag", "顧客管理フラグ");
+            dgvEmployee.Columns.Add("PoID", "役職ID");
+            dgvEmployee.Columns.Add("EmHidden", "非表示理由");
+  
             //並び替えができないようにする
-            foreach (DataGridViewColumn dataColumn in dgvClient.Columns)
+            foreach (DataGridViewColumn dataColumn in dgvEmployee.Columns)
             {
                 dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+        }
+
+        private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //データグリッドビューのデータ取得
+            GetDataGridView();
+        }
+
+        private void dgvEmployee_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvEmployee.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            //選択された行に対してのコントロールの変更
+            SelectRowControl();
+        }
+
+        private void btnPageSize_Click(object sender, EventArgs e)
+        {
+            GetDataGridView();
         }
     }
 }

@@ -114,10 +114,11 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var Employee = context.M_Employees.Single(x => x.EmID == updEmployee.EmID);
 
+                Employee.EmID = updEmployee.EmID;
                 Employee.EmName = updEmployee.EmName;
-                Employee.EmName = updEmployee.EmName;
-                Employee.EmName = updEmployee.EmName;
-                Employee.EmName = updEmployee.EmName;
+                Employee.PoID = updEmployee.PoID;
+                Employee.EmPhone = updEmployee.EmPhone;
+                Employee.EmFlag = updEmployee.EmFlag;
                 Employee.SoID = updEmployee.SoID;
 
 
@@ -172,7 +173,69 @@ namespace SalesManagement_SysDev
 
             return listClient;
         }
+        ///////////////////////////////
+        //メソッド名：GetAndEmployeeData()
+        //引　数：検索条件
+        //戻り値：条件完全一致社員データ
+        //機　能：条件完全一致社員データの取得
+        ///////////////////////////////
+        public List<M_Employee> GetAndEmployeeData(M_Employee selectEmployee)
+        {
+            List<M_Employee> listEmployee = new List<M_Employee>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var query = context.M_Employees.AsQueryable();
 
+                if (selectEmployee.EmID != null && selectEmployee.EmID != 0)
+                {
+                    query = query.Where(x => x.EmID == selectEmployee.EmID);
+                }
+
+                if (selectEmployee.SoID != null && selectEmployee.SoID != 0)
+                {
+                    query = query.Where(x => x.SoID == selectEmployee.SoID);
+                }
+
+                if (selectEmployee.EmPhone != null && selectEmployee.EmPhone != "")
+                {
+                    query = query.Where(x => x.EmPhone == selectEmployee.EmPhone);
+                }
+
+                listEmployee = query.ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listEmployee;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetOrEmployeeData()
+        //引　数：検索条件
+        //戻り値：条件一部一致社員データ
+        //機　能：条件一部一致社員データの取得
+        ///////////////////////////////
+        public List<M_Employee> GetOrEmployeeData(M_Employee selectEmployee)
+        {
+            List<M_Employee> listEmployee = new List<M_Employee>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listEmployee = context.M_Employees.Where(x => x.EmID == selectEmployee.EmID || x.SoID == selectEmployee.SoID || x.EmPhone == selectEmployee.EmPhone).ToList();
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listEmployee;
+        }
         ///////////////////////////////
         //メソッド名：CheckSinghUpPassExistence()
         //引　数   ：パスワード

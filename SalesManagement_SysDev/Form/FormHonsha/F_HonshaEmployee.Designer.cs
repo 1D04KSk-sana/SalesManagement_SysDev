@@ -50,7 +50,7 @@
             this.lblEmployeeID = new System.Windows.Forms.Label();
             this.dtpEmployeeHireDate = new System.Windows.Forms.DateTimePicker();
             this.lblEmployeeHireDate = new System.Windows.Forms.Label();
-            this.dgvClient = new System.Windows.Forms.DataGridView();
+            this.dgvEmployee = new System.Windows.Forms.DataGridView();
             this.pnlHonsha = new System.Windows.Forms.Panel();
             this.lblHonsha = new System.Windows.Forms.Label();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
@@ -65,7 +65,7 @@
             this.txbPageSize = new System.Windows.Forms.TextBox();
             this.cmbPositionName = new System.Windows.Forms.ComboBox();
             this.pnlSelect.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEmployee)).BeginInit();
             this.pnlHonsha.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -133,6 +133,7 @@
             this.cmbView.Name = "cmbView";
             this.cmbView.Size = new System.Drawing.Size(151, 26);
             this.cmbView.TabIndex = 28;
+            this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
             // 
             // pnlSelect
             // 
@@ -148,8 +149,9 @@
             // rdbUpdate
             // 
             this.rdbUpdate.AutoSize = true;
+            this.rdbUpdate.Checked = true;
             this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbUpdate.Location = new System.Drawing.Point(77, 6);
+            this.rdbUpdate.Location = new System.Drawing.Point(11, 6);
             this.rdbUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.rdbUpdate.Name = "rdbUpdate";
             this.rdbUpdate.Size = new System.Drawing.Size(65, 23);
@@ -162,12 +164,11 @@
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(11, 6);
+            this.rdbSearch.Location = new System.Drawing.Point(77, 6);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(65, 23);
             this.rdbSearch.TabIndex = 0;
-            this.rdbSearch.TabStop = true;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
             // 
@@ -317,17 +318,18 @@
             this.lblEmployeeHireDate.TabIndex = 48;
             this.lblEmployeeHireDate.Text = "入社年月日";
             // 
-            // dgvClient
+            // dgvEmployee
             // 
-            this.dgvClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClient.Location = new System.Drawing.Point(4, 260);
-            this.dgvClient.Margin = new System.Windows.Forms.Padding(2);
-            this.dgvClient.Name = "dgvClient";
-            this.dgvClient.RowHeadersWidth = 51;
-            this.dgvClient.RowTemplate.Height = 24;
-            this.dgvClient.Size = new System.Drawing.Size(900, 294);
-            this.dgvClient.TabIndex = 50;
-            this.dgvClient.TabStop = false;
+            this.dgvEmployee.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEmployee.Location = new System.Drawing.Point(4, 260);
+            this.dgvEmployee.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvEmployee.Name = "dgvEmployee";
+            this.dgvEmployee.RowHeadersWidth = 51;
+            this.dgvEmployee.RowTemplate.Height = 24;
+            this.dgvEmployee.Size = new System.Drawing.Size(900, 294);
+            this.dgvEmployee.TabIndex = 50;
+            this.dgvEmployee.TabStop = false;
+            this.dgvEmployee.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmployee_CellClick);
             // 
             // pnlHonsha
             // 
@@ -430,6 +432,7 @@
             this.btnPageSize.TabIndex = 63;
             this.btnPageSize.Text = "行数変更";
             this.btnPageSize.UseVisualStyleBackColor = true;
+            this.btnPageSize.Click += new System.EventHandler(this.btnPageSize_Click);
             // 
             // lblPageSize
             // 
@@ -480,7 +483,7 @@
             this.Controls.Add(this.lblPageSize);
             this.Controls.Add(this.txbPageSize);
             this.Controls.Add(this.pnlHonsha);
-            this.Controls.Add(this.dgvClient);
+            this.Controls.Add(this.dgvEmployee);
             this.Controls.Add(this.lblEmployeeHireDate);
             this.Controls.Add(this.dtpEmployeeHireDate);
             this.Controls.Add(this.cmbHidden);
@@ -507,7 +510,7 @@
             this.Load += new System.EventHandler(this.F_HonshaEmployee_Load);
             this.pnlSelect.ResumeLayout(false);
             this.pnlSelect.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEmployee)).EndInit();
             this.pnlHonsha.ResumeLayout(false);
             this.pnlHonsha.PerformLayout();
             this.ResumeLayout(false);
@@ -538,7 +541,7 @@
         private System.Windows.Forms.Label lblEmployeeID;
         private System.Windows.Forms.DateTimePicker dtpEmployeeHireDate;
         private System.Windows.Forms.Label lblEmployeeHireDate;
-        private System.Windows.Forms.DataGridView dgvClient;
+        private System.Windows.Forms.DataGridView dgvEmployee;
         private System.Windows.Forms.Panel pnlHonsha;
         private System.Windows.Forms.HelpProvider helpProvider1;
         private System.Windows.Forms.Label lblHonsha;
