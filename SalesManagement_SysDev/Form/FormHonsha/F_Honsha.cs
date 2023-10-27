@@ -37,5 +37,60 @@ namespace SalesManagement_SysDev
         {
             this.Opacity = 1;
         }
+
+        private void btnFormSale_Click(object sender, EventArgs e)
+        {
+            F_HonshaSale f_HonshaSale = new F_HonshaSale();
+
+            f_HonshaSale.Owner = this;
+            f_HonshaSale.FormClosed += ChildForm_FormClosed;
+            f_HonshaSale.Show();
+
+            this.Opacity = 0;
+        }
+
+        private void btnFormEmployee_Click(object sender, EventArgs e)
+        {
+            F_HonshaEmployee F_HonshaEmployee = new F_HonshaEmployee();
+
+            F_HonshaEmployee.Owner = this;
+            F_HonshaEmployee.FormClosed += ChildForm_FormClosed;
+            F_HonshaEmployee.Show();
+
+            this.Opacity = 0;
+        }
+
+        private void btnFormProdact_Click(object sender, EventArgs e)
+        {
+            F_HonshaProdact F_HonshaProdact = new F_HonshaProdact();
+
+            F_HonshaProdact.Owner = this;
+            F_HonshaProdact.FormClosed += ChildForm_FormClosed;
+            F_HonshaProdact.Show();
+
+            this.Opacity = 0;
+        }
+
+        private void btnFormSinghUp_Click(object sender, EventArgs e)
+        {
+            F_HonshaSinghUp F_HonshaSinghUp = new F_HonshaSinghUp();
+
+            F_HonshaSinghUp.Owner = this;
+            F_HonshaSinghUp.FormClosed += ChildForm_FormClosed;
+            F_HonshaSinghUp.Show();
+
+            this.Opacity = 0;
+        }
+
+        private void btnFormOperationLog_Click(object sender, EventArgs e)
+        {
+            F_HonshaOperationLog F_HonshaOperationLog = new F_HonshaOperationLog();
+
+            F_HonshaOperationLog.Owner = this;
+            F_HonshaOperationLog.FormClosed += ChildForm_FormClosed;
+            F_HonshaOperationLog.Show();
+
+            this.Opacity = 0;
+        }
     }
 }

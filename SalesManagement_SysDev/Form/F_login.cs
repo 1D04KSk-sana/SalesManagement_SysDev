@@ -6,11 +6,13 @@ using System.Data.Entity.Core.Common.CommandTrees;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Data.Entity.Infrastructure.Design.Executor;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace SalesManagement_SysDev
 {
@@ -74,6 +76,9 @@ namespace SalesManagement_SysDev
             List<M_MajorClassification> mc = new List<M_MajorClassification>();
             List<M_SmallClassification> sc = new List<M_SmallClassification>();
             List<M_Product> pr = new List<M_Product>();
+            List<T_Sale> sa = new List<T_Sale>();
+            List<T_SaleDetail> sadt = new List<T_SaleDetail>();
+
 
             {
                 ma.Add(new M_Maker()
@@ -735,6 +740,50 @@ namespace SalesManagement_SysDev
                 context.T_SyukkoDetails.AddRange(syd);
                 context.SaveChanges();
             }
+            {
+                sa.Add(new T_Sale()
+                {
+
+                    M_Employee = em[116],
+                    M_Client = cl[0],
+                    M_SalesOffice = so[0],
+                    SaDate = new DateTime(2023 / 10 / 27),
+                    SaFlag = 0,
+                    ChID = 1,
+
+                });
+                sa.Add(new T_Sale()
+                {
+                    M_Employee = em[310],
+                    M_Client = cl[1],
+                    M_SalesOffice = so[1],
+                    SaDate = new DateTime(2023 / 9 / 27),
+                    SaFlag = 0,
+                    ChID = 2,
+                });
+                context.T_Sales.AddRange(sa);
+                context.SaveChanges();
+            }
+            {
+                sadt.Add(new T_SaleDetail()
+                {
+                    M_Product = pr[0],
+                    T_Sale = sa[0],
+                    SaQuantity = 1,
+                    SaTotalPrice = 100000,
+                });
+                sadt.Add(new T_SaleDetail()
+                {
+                    M_Product= pr[1],
+                    T_Sale = sa[1],
+                    SaQuantity = 1,
+                    SaTotalPrice = 98000,
+                });
+                context.T_SaleDetails.AddRange(sadt);
+                context.SaveChanges();
+
+
+            }
 
             context.Dispose();
 
@@ -810,6 +859,11 @@ namespace SalesManagement_SysDev
             }
 
             return true;
+        }
+
+        private void F_Login_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

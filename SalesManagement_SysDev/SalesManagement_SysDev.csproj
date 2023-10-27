@@ -57,6 +57,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form\DBAccess\ArrivalDetailDataAccess.cs" />
+    <Compile Include="Form\DBAccess\ArrivalDataAccess.cs" />
     <Compile Include="Form\DBAccess\ChumonDataAccess.cs" />
     <Compile Include="Form\DBAccess\EmployeeDataAccess.cs" />
     <Compile Include="Form\DBAccess\ClientDataAccess.cs" />
@@ -140,6 +142,32 @@
     <Compile Include="Form\DBAccess\PositionDataAccess.cs" />
     <Compile Include="Form\DBAccess\MakerDataAccess.cs" />
     <Compile Include="Form\DBAccess\MajorDataAccess.cs" />
+    <Compile Include="Form\FormEigyo\F_EigyoStockView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\FormEigyo\F_EigyoStockView.Designer.cs">
+      <DependentUpon>F_EigyoStockView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\FormEigyo\F_EigyoOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\FormEigyo\F_EigyoOrder.Designer.cs">
+      <DependentUpon>F_EigyoOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\DBAccess\OrderDataAccess.cs" />
+    <Compile Include="Form\DBAccess\OrderDetailDataAccess.cs" />
+    <Compile Include="Form\FormEigyo\F_EigyoShipment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\FormEigyo\F_EigyoShipment.Designer.cs">
+      <DependentUpon>F_EigyoShipment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\FormEigyo\F_EigyoArrival.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\FormEigyo\F_EigyoArrival.Designer.cs">
+      <DependentUpon>F_EigyoArrival.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entity\T_Arrival.cs" />
@@ -170,6 +198,8 @@
     <EmbeddedResource Include="Form\FormHonsha\F_HonshaSale.resx">
       <DependentUpon>F_HonshaSale.cs</DependentUpon>
     </EmbeddedResource>
+    <Compile Include="Form\DBAccess\ShipmentDataAccess.cs" />
+    <Compile Include="Form\DBAccess\ShipmentDetailDataAccess.cs" />
     <EmbeddedResource Include="Form\F_login.resx">
       <DependentUpon>F_login.cs</DependentUpon>
     </EmbeddedResource>

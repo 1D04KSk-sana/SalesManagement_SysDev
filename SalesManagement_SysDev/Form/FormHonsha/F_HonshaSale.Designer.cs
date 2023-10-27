@@ -83,7 +83,7 @@
             // 
             this.btnPageSize.Font = new System.Drawing.Font("MS UI Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnPageSize.Location = new System.Drawing.Point(267, 912);
-            this.btnPageSize.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnPageSize.Margin = new System.Windows.Forms.Padding(2);
             this.btnPageSize.Name = "btnPageSize";
             this.btnPageSize.Size = new System.Drawing.Size(150, 42);
             this.btnPageSize.TabIndex = 64;
@@ -104,7 +104,7 @@
             // 
             this.txbPageSize.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbPageSize.Location = new System.Drawing.Point(160, 921);
-            this.txbPageSize.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txbPageSize.Margin = new System.Windows.Forms.Padding(2);
             this.txbPageSize.Name = "txbPageSize";
             this.txbPageSize.Size = new System.Drawing.Size(74, 29);
             this.txbPageSize.TabIndex = 62;
@@ -151,7 +151,7 @@
             // 
             this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnClear.Location = new System.Drawing.Point(1222, 138);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(138, 60);
             this.btnClear.TabIndex = 59;
@@ -181,7 +181,7 @@
             this.dgvSale.Name = "dgvSale";
             this.dgvSale.RowHeadersWidth = 51;
             this.dgvSale.RowTemplate.Height = 24;
-            this.dgvSale.Size = new System.Drawing.Size(810, 442);
+            this.dgvSale.Size = new System.Drawing.Size(930, 442);
             this.dgvSale.TabIndex = 56;
             // 
             // txbHidden
@@ -274,7 +274,7 @@
             // 
             this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbEmployeeName.Location = new System.Drawing.Point(207, 318);
-            this.txbEmployeeName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txbEmployeeName.Margin = new System.Windows.Forms.Padding(2);
             this.txbEmployeeName.Name = "txbEmployeeName";
             this.txbEmployeeName.Size = new System.Drawing.Size(249, 29);
             this.txbEmployeeName.TabIndex = 45;
@@ -361,12 +361,12 @@
             // dgvSaleDetail
             // 
             this.dgvSaleDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSaleDetail.Location = new System.Drawing.Point(857, 464);
+            this.dgvSaleDetail.Location = new System.Drawing.Point(968, 465);
             this.dgvSaleDetail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dgvSaleDetail.Name = "dgvSaleDetail";
             this.dgvSaleDetail.RowHeadersWidth = 51;
             this.dgvSaleDetail.RowTemplate.Height = 24;
-            this.dgvSaleDetail.Size = new System.Drawing.Size(660, 442);
+            this.dgvSaleDetail.Size = new System.Drawing.Size(550, 442);
             this.dgvSaleDetail.TabIndex = 72;
             // 
             // lblNumPage

@@ -12,6 +12,8 @@ namespace SalesManagement_SysDev
 {
     public partial class F_HonshaSale : Form
     {
+        //データベース営業所テーブルアクセス用クラスのインスタンス化
+        SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
         //入力形式チェック用クラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
         //データベース売上テーブルアクセス用クラスのインスタンス化
@@ -30,10 +32,6 @@ namespace SalesManagement_SysDev
             { 0, "表示" },
             { 1, "非表示" },
         };
-
-
-
-
 
 
         public F_HonshaSale()
@@ -128,38 +126,83 @@ namespace SalesManagement_SysDev
 
         private void F_HonshaSale_Load(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+            txbPageSize.Text = "3";
+
+            SetFormDataGridView();
+
+            //営業所のデータを取得
+            listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
+            //取得したデータをコンボボックスに挿入
+            cmbSalesOfficeID.DataSource = listSalesOffice;
+            //表示する名前をSoNameに指定
+            cmbSalesOfficeID.DisplayMember = "SoName";
+            //項目の順番をSoIDに指定
+            cmbSalesOfficeID.ValueMember = "SoID";
+
+            //cmbSalesOfficeIDを未選択に
+            cmbSalesOfficeID.SelectedIndex = -1;
+
+            //cmbViewを表示に
+            cmbView.SelectedIndex = 0;
 
         }
-
-        private void rdbSearch_CheckedChanged(object sender, EventArgs e)
+        ///////////////////////////////
+        //メソッド名：SetFormDataGridView()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：データグリッドビューの初期設定
+        ///////////////////////////////
+        private void SetFormDataGridView()
         {
+            //列を自由に設定できるように
+            dgvSale.AutoGenerateColumns = false;
+            //行単位で選択するようにする
+            dgvSale.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //行と列の高さを変更できないように
+            dgvSale.AllowUserToResizeColumns = false;
+            dgvSale.AllowUserToResizeRows = false;
+            //セルの複数行選択をオフに
+            dgvSale.MultiSelect = false;
+            //セルの編集ができないように
+            dgvSale.ReadOnly = true;
+            //ユーザーが新しい行を追加できないようにする
+            dgvSale.AllowUserToAddRows = false;
 
+            //左端の項目列を削除
+            dgvSale.RowHeadersVisible = false;
+            //行の自動追加をオフ
+            dgvSale.AllowUserToAddRows = false;
+
+            //ヘッダー位置の指定
+            dgvSale.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dgvSale.Columns.Add("SaID", "売上ID");
+            dgvSale.Columns.Add("ClID", "顧客名");
+            dgvSale.Columns.Add("SoID", "営業所名");
+            dgvSale.Columns.Add("EmID", "受注社員名");
+            dgvSale.Columns.Add("ChID", "受注ID");
+            dgvSale.Columns.Add("SaDate", "売上日時");
+            dgvSale.Columns.Add("SaFlag", "管理フラグ");
+            dgvSale.Columns.Add("SaHidden", "非表示理由");
+
+            dgvSale.Columns["SaID"].Width = 50;
+            dgvSale.Columns["ClID"].Width = 65;
+            dgvSale.Columns["SoID"].Width = 65;
+            dgvSale.Columns["EmID"].Width = 80;
+            dgvSale.Columns["ChID"].Width = 50;
+            dgvSale.Columns["SaDate"].Width = 80;
+            dgvSale.Columns["SaFlag"].Width = 65;
+
+
+            //並び替えができないようにする
+            foreach (DataGridViewColumn dataColumn in dgvSale.Columns)
+            {
+                dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
 
-        private void dtpSaleDate_ValueChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        private void lblSaleDate_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblEmployeeName_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txbEmployeeName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txbClientPostal_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
@@ -350,7 +393,7 @@ namespace SalesManagement_SysDev
             //1行ずつdgvClientに挿入
             foreach (var item in depData)
             {
-                dgvSale.Rows.Add(item.ClID, dictionarySalesOffice[item.SaID], item.ClID, item.SoID, item.EmID, item.ChID, item.SaDate, dictionaryHidden[item.SaFlag], item.SaHidden);
+                dgvSale.Rows.Add(dictionarySalesOffice[item.SaID], item.ClID, item.SoID, item.EmID, item.ChID, item.SaDate, dictionaryHidden[item.SaFlag], item.SaHidden);
             }
 
             //dgvClientをリフレッシュ
@@ -385,7 +428,40 @@ namespace SalesManagement_SysDev
 
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //データグリッドビューのデータ取得
+            GetDataGridView();
 
         }
+
+        private void rdbSearch_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpSaleDate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblSaleDate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblEmployeeName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txbEmployeeName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txbClientPostal_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
