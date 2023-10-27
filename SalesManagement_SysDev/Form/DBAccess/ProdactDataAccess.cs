@@ -101,5 +101,29 @@ namespace SalesManagement_SysDev
 
             return listProdact;
         }
+
+        ///////////////////////////////
+        //メソッド名：AddProdactData()
+        //引　数：regClient = 顧客データ
+        //戻り値：True or False
+        //機　能：顧客データの登録
+        //      ：登録成功の場合True
+        //      ：登録失敗の場合False
+        ///////////////////////////////
+        public bool AddProdactData(M_Product regProdact)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                context.M_Products.Add(regProdact);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+        }
     }
 }

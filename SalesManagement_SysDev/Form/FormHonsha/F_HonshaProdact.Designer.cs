@@ -42,10 +42,6 @@
             this.lblProdactName = new System.Windows.Forms.Label();
             this.txbMajorID = new System.Windows.Forms.TextBox();
             this.lblMajorID = new System.Windows.Forms.Label();
-            this.txbMajorName = new System.Windows.Forms.TextBox();
-            this.lblMajorName = new System.Windows.Forms.Label();
-            this.txbSmallName = new System.Windows.Forms.TextBox();
-            this.lblSmallName = new System.Windows.Forms.Label();
             this.txbSmallID = new System.Windows.Forms.TextBox();
             this.lblSmallID = new System.Windows.Forms.Label();
             this.txbProdactColor = new System.Windows.Forms.TextBox();
@@ -76,6 +72,8 @@
             this.pnlProdact = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblProdact = new System.Windows.Forms.Label();
+            this.txbProdactJanCode = new System.Windows.Forms.TextBox();
+            this.lblProdactJanCode = new System.Windows.Forms.Label();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdact)).BeginInit();
             this.pnlProdact.SuspendLayout();
@@ -122,10 +120,14 @@
             // 
             this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbView.FormattingEnabled = true;
+            this.cmbView.Items.AddRange(new object[] {
+            "表示",
+            "非表示"});
             this.cmbView.Location = new System.Drawing.Point(681, 105);
             this.cmbView.Name = "cmbView";
             this.cmbView.Size = new System.Drawing.Size(200, 31);
             this.cmbView.TabIndex = 3;
+            this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
             // 
             // pnlSelect
             // 
@@ -224,46 +226,10 @@
             this.lblMajorID.TabIndex = 9;
             this.lblMajorID.Text = "大分類ID";
             // 
-            // txbMajorName
-            // 
-            this.txbMajorName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbMajorName.Location = new System.Drawing.Point(991, 158);
-            this.txbMajorName.Name = "txbMajorName";
-            this.txbMajorName.Size = new System.Drawing.Size(200, 25);
-            this.txbMajorName.TabIndex = 12;
-            // 
-            // lblMajorName
-            // 
-            this.lblMajorName.AutoSize = true;
-            this.lblMajorName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblMajorName.Location = new System.Drawing.Point(907, 161);
-            this.lblMajorName.Name = "lblMajorName";
-            this.lblMajorName.Size = new System.Drawing.Size(80, 18);
-            this.lblMajorName.TabIndex = 11;
-            this.lblMajorName.Text = "大分類名";
-            // 
-            // txbSmallName
-            // 
-            this.txbSmallName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbSmallName.Location = new System.Drawing.Point(991, 206);
-            this.txbSmallName.Name = "txbSmallName";
-            this.txbSmallName.Size = new System.Drawing.Size(200, 25);
-            this.txbSmallName.TabIndex = 20;
-            // 
-            // lblSmallName
-            // 
-            this.lblSmallName.AutoSize = true;
-            this.lblSmallName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblSmallName.Location = new System.Drawing.Point(907, 209);
-            this.lblSmallName.Name = "lblSmallName";
-            this.lblSmallName.Size = new System.Drawing.Size(80, 18);
-            this.lblSmallName.TabIndex = 19;
-            this.lblSmallName.Text = "小分類名";
-            // 
             // txbSmallID
             // 
             this.txbSmallID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbSmallID.Location = new System.Drawing.Point(681, 206);
+            this.txbSmallID.Location = new System.Drawing.Point(974, 159);
             this.txbSmallID.Name = "txbSmallID";
             this.txbSmallID.Size = new System.Drawing.Size(200, 25);
             this.txbSmallID.TabIndex = 18;
@@ -272,7 +238,7 @@
             // 
             this.lblSmallID.AutoSize = true;
             this.lblSmallID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblSmallID.Location = new System.Drawing.Point(597, 209);
+            this.lblSmallID.Location = new System.Drawing.Point(887, 162);
             this.lblSmallID.Name = "lblSmallID";
             this.lblSmallID.Size = new System.Drawing.Size(78, 18);
             this.lblSmallID.TabIndex = 17;
@@ -345,7 +311,7 @@
             // txbProdactSafetyStock
             // 
             this.txbProdactSafetyStock.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProdactSafetyStock.Location = new System.Drawing.Point(991, 255);
+            this.txbProdactSafetyStock.Location = new System.Drawing.Point(681, 254);
             this.txbProdactSafetyStock.Name = "txbProdactSafetyStock";
             this.txbProdactSafetyStock.Size = new System.Drawing.Size(200, 25);
             this.txbProdactSafetyStock.TabIndex = 28;
@@ -354,7 +320,7 @@
             // 
             this.lblProdactSafetyStock.AutoSize = true;
             this.lblProdactSafetyStock.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProdactSafetyStock.Location = new System.Drawing.Point(889, 258);
+            this.lblProdactSafetyStock.Location = new System.Drawing.Point(579, 257);
             this.lblProdactSafetyStock.Name = "lblProdactSafetyStock";
             this.lblProdactSafetyStock.Size = new System.Drawing.Size(98, 18);
             this.lblProdactSafetyStock.TabIndex = 27;
@@ -363,16 +329,16 @@
             // txbProdactReleaseDate
             // 
             this.txbProdactReleaseDate.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProdactReleaseDate.Location = new System.Drawing.Point(677, 256);
+            this.txbProdactReleaseDate.Location = new System.Drawing.Point(681, 209);
             this.txbProdactReleaseDate.Name = "txbProdactReleaseDate";
-            this.txbProdactReleaseDate.Size = new System.Drawing.Size(204, 25);
+            this.txbProdactReleaseDate.Size = new System.Drawing.Size(200, 25);
             this.txbProdactReleaseDate.TabIndex = 26;
             // 
             // lblProdactReleaseDate
             // 
             this.lblProdactReleaseDate.AutoSize = true;
             this.lblProdactReleaseDate.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProdactReleaseDate.Location = new System.Drawing.Point(605, 258);
+            this.lblProdactReleaseDate.Location = new System.Drawing.Point(613, 212);
             this.lblProdactReleaseDate.Name = "lblProdactReleaseDate";
             this.lblProdactReleaseDate.Size = new System.Drawing.Size(62, 18);
             this.lblProdactReleaseDate.TabIndex = 25;
@@ -382,6 +348,9 @@
             // 
             this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbHidden.FormattingEnabled = true;
+            this.cmbHidden.Items.AddRange(new object[] {
+            "表示",
+            "非表示"});
             this.cmbHidden.Location = new System.Drawing.Point(96, 319);
             this.cmbHidden.Name = "cmbHidden";
             this.cmbHidden.Size = new System.Drawing.Size(150, 26);
@@ -415,6 +384,7 @@
             this.dgvProdact.Size = new System.Drawing.Size(1191, 336);
             this.dgvProdact.TabIndex = 32;
             this.dgvProdact.TabStop = false;
+            this.dgvProdact.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProdact_CellClick);
             // 
             // lblPageSize
             // 
@@ -452,6 +422,7 @@
             this.btnPagesize.TabIndex = 35;
             this.btnPagesize.Text = "行数変更";
             this.btnPagesize.UseVisualStyleBackColor = false;
+            this.btnPagesize.Click += new System.EventHandler(this.btnPagesize_Click);
             // 
             // lblNumPage
             // 
@@ -481,6 +452,7 @@
             this.btnPageMin.TabIndex = 38;
             this.btnPageMin.Text = "|◀";
             this.btnPageMin.UseVisualStyleBackColor = false;
+            this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
             // 
             // btnBack
             // 
@@ -492,6 +464,7 @@
             this.btnBack.TabIndex = 39;
             this.btnBack.Text = "◀";
             this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnNext
             // 
@@ -503,6 +476,7 @@
             this.btnNext.TabIndex = 40;
             this.btnNext.Text = "▶";
             this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPageMax
             // 
@@ -514,6 +488,7 @@
             this.btnPageMax.TabIndex = 41;
             this.btnPageMax.Text = "▶|";
             this.btnPageMax.UseVisualStyleBackColor = false;
+            this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
             // pnlProdact
             // 
@@ -547,6 +522,24 @@
             this.lblProdact.TabIndex = 1;
             this.lblProdact.Text = "商品管理画面";
             // 
+            // txbProdactJanCode
+            // 
+            this.txbProdactJanCode.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbProdactJanCode.Location = new System.Drawing.Point(974, 202);
+            this.txbProdactJanCode.Name = "txbProdactJanCode";
+            this.txbProdactJanCode.Size = new System.Drawing.Size(200, 25);
+            this.txbProdactJanCode.TabIndex = 43;
+            // 
+            // lblProdactJanCode
+            // 
+            this.lblProdactJanCode.AutoSize = true;
+            this.lblProdactJanCode.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblProdactJanCode.Location = new System.Drawing.Point(887, 210);
+            this.lblProdactJanCode.Name = "lblProdactJanCode";
+            this.lblProdactJanCode.Size = new System.Drawing.Size(81, 18);
+            this.lblProdactJanCode.TabIndex = 44;
+            this.lblProdactJanCode.Text = "JANコード";
+            // 
             // F_HonshaProdact
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -554,6 +547,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(1212, 753);
             this.ControlBox = false;
+            this.Controls.Add(this.lblProdactJanCode);
+            this.Controls.Add(this.txbProdactJanCode);
             this.Controls.Add(this.cmbView);
             this.Controls.Add(this.pnlProdact);
             this.Controls.Add(this.btnPageMax);
@@ -577,16 +572,12 @@
             this.Controls.Add(this.lblProdactPrice);
             this.Controls.Add(this.txbMakerName);
             this.Controls.Add(this.lblMakerName);
-            this.Controls.Add(this.txbSmallName);
-            this.Controls.Add(this.lblSmallName);
             this.Controls.Add(this.txbSmallID);
             this.Controls.Add(this.lblSmallID);
             this.Controls.Add(this.txbProdactColor);
             this.Controls.Add(this.lblProdactColor);
             this.Controls.Add(this.txbModelNumber);
             this.Controls.Add(this.lblModelNumber);
-            this.Controls.Add(this.txbMajorName);
-            this.Controls.Add(this.lblMajorName);
             this.Controls.Add(this.txbMajorID);
             this.Controls.Add(this.lblMajorID);
             this.Controls.Add(this.txbProdactName);
@@ -600,6 +591,7 @@
             this.MaximizeBox = false;
             this.Name = "F_HonshaProdact";
             this.Text = "F_HonshaProdact";
+            this.Load += new System.EventHandler(this.F_HonshaProdact_Load);
             this.pnlSelect.ResumeLayout(false);
             this.pnlSelect.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdact)).EndInit();
@@ -626,10 +618,6 @@
         private System.Windows.Forms.Label lblProdactName;
         private System.Windows.Forms.TextBox txbMajorID;
         private System.Windows.Forms.Label lblMajorID;
-        private System.Windows.Forms.TextBox txbMajorName;
-        private System.Windows.Forms.Label lblMajorName;
-        private System.Windows.Forms.TextBox txbSmallName;
-        private System.Windows.Forms.Label lblSmallName;
         private System.Windows.Forms.TextBox txbSmallID;
         private System.Windows.Forms.Label lblSmallID;
         private System.Windows.Forms.TextBox txbProdactColor;
@@ -660,5 +648,7 @@
         private System.Windows.Forms.Panel pnlProdact;
         private System.Windows.Forms.Label lblProdact;
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.TextBox txbProdactJanCode;
+        private System.Windows.Forms.Label lblProdactJanCode;
     }
 }

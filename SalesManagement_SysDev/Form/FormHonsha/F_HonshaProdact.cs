@@ -17,10 +17,15 @@ namespace SalesManagement_SysDev
         ProdactDataAccess ProdactDataAccess = new ProdactDataAccess();
         //データグリッドビュー用の全商品データ
         private static List<M_Product> listAllProdact = new List<M_Product>();
+        //データベース操作ログテーブルアクセス用クラスのインスタンス化
+        OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
         //データグリッドビュー用の商品データ
         private static List<M_Product> listProdact = new List<M_Product>();
         //入力形式チェック用クラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
+        //コンボボックス用の営業所データリスト
+        private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
+
 
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
@@ -29,7 +34,18 @@ namespace SalesManagement_SysDev
             { 1, "非表示" },
         };
 
+        private void F_HonshaProdact_Load(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+            txbPageSize.Text = "3";
 
+            SetFormDataGridView();
+
+
+
+            //cmbViewを表示に
+            cmbView.SelectedIndex = 0;
+        }
 
         public F_HonshaProdact()
         {
@@ -63,7 +79,7 @@ namespace SalesManagement_SysDev
         //メソッド名：ClientDataRegister()
         //引　数   ：なし
         //戻り値   ：なし
-        //機　能   ：顧客情報登録の実行
+        //機　能   ：商品情報登録の実行
         ///////////////////////////////
         private void ProdactDataRegister()
         {
@@ -82,11 +98,40 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 顧客情報作成
-            var regClient = GenerateDataAtRegistration();
+            // 商品情報作成
+            var regProdact = GenerateDataAtRegistration();
 
-            // 顧客情報登録
-            RegistrationClient(regClient);
+            // 商品情報登録
+            RegistrationProdact(regProdact);
+        }
+
+        ///////////////////////////////
+        //メソッド名：RegistrationClient()
+        //引　数   ：顧客情報
+        //戻り値   ：なし
+        //機　能   ：顧客データの登録
+        ///////////////////////////////
+        private void RegistrationProdact(M_Product regProdact)
+        {
+            // 顧客情報の登録
+            bool flg = ProdactDataAccess.AddProdactData(regProdact);
+
+            //登録成功・失敗メッセージ
+            if (flg == true)
+            {
+                MessageBox.Show("データを登録しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("データの登録に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            // 入力エリアのクリア
+            ClearImput();
+
+            // データグリッドビューの表示
+            GetDataGridView();
+
         }
 
         ///////////////////////////////
@@ -97,16 +142,16 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private T_OperationLog GenerateLogAtRegistration(string OperationDone)
         {
-            //登録・更新使用としている顧客データの取得
+            //登録・更新使用としている商品データの取得
             var logOperatin = GenerateDataAtRegistration();
 
             return new T_OperationLog
             {
                 OpHistoryID = operationLogAccess.OperationLogNum() + 1,
                 EmID = F_Login.intEmployeeID,
-                FormName = "顧客管理画面",
+                FormName = "商品管理画面",
                 OpDone = OperationDone,
-                OpDBID = logOperatin.ClID.Value,
+                OpDBID = logOperatin.PrID,
                 OpSetTime = DateTime.Now,
             };
         }
@@ -117,19 +162,22 @@ namespace SalesManagement_SysDev
         //戻り値   ：顧客登録情報
         //機　能   ：登録データのセット
         ///////////////////////////////
-        private M_Client GenerateDataAtRegistration()
+        private M_Product GenerateDataAtRegistration()
         {
             return new M_Product
             {
                 PrID = int.Parse(txbProdactID.Text.Trim()),
-                MaID = txbClientName.SelectedIndex + 1,
-                ClName = txbClientName.Text.Trim(),
-                ClAddress = txbClientAddress.Text.Trim(),
-                ClPhone = txbClientPhone.Text.Trim(),
-                ClPostal = txbClientPostal.Text.Trim(),
-                ClFAX = txbClientFAX.Text.Trim(),
-                ClFlag = cmbHidden.SelectedIndex,
-                ClHidden = txbHidden.Text.Trim(),
+                MaID = int.Parse(txbMakerName.Text.Trim()),
+                PrName = txbProdactName.Text.Trim(),
+                Price = int.Parse(txbSmallID.Text.Trim()),
+                PrJCode = txbProdactJanCode.Text.Trim(),
+                PrSafetyStock = int.Parse(txbProdactSafetyStock.Text.Trim()),
+                ScID = int.Parse(txbSmallID.Text.Trim()),
+                PrModelNumber = txbModelNumber.Text.Trim(),
+                PrColor = txbProdactColor.Text.Trim(),
+                PrFlag = cmbHidden.SelectedIndex,
+                PrHidden = tbxProdactHidden.Text.Trim(),
+                PrReleaseDate = DateTime.Now,
             };
         }
 
@@ -168,6 +216,24 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
+            // メーカー名の適否
+            if (!String.IsNullOrEmpty(txbMakerName.Text.Trim()))
+            {
+                // メーカー名の文字数チェック
+                if (txbMakerName.TextLength >= 50)
+                {
+                    MessageBox.Show("メーカー名は50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMakerName.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("メーカー名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbMakerName.Focus();
+                return false;
+            }
+
             // 商品名の適否
             if (!String.IsNullOrEmpty(txbProdactName.Text.Trim()))
             {
@@ -186,40 +252,75 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            // 大分類IDの適否
-            if (!String.IsNullOrEmpty(txbMajorID.Text.Trim()))
+            // 価格の適否
+            if (!String.IsNullOrEmpty(txbProdactPrice.Text.Trim()))
             {
-                // 大分類IDの文字数チェック
-                //if (txbMajorID.TextLength > 13)
-                //{
-                //    MessageBox.Show("大分類IDは13文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    txbMajorID.Focus();
-                //    return false;
-                //}
-            }
-            else
-            {
-                MessageBox.Show("大分類IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbProdactName.Focus();
-                return false;
-            }
-
-
-            // 大分類名の適否
-            if (!String.IsNullOrEmpty(txbMajorName.Text.Trim()))
-            {
-                // 大分類名の文字数チェック
-                if (txbMajorName.TextLength >= 50)
+                // 価格の文字数チェック
+                if (txbProdactPrice.TextLength >= 50)
                 {
-                    MessageBox.Show("大分類名は50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactName.Focus();
+                    MessageBox.Show("価格は50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactPrice.Focus();
                     return false;
                 }
             }
             else
             {
-                MessageBox.Show("大分類名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbProdactName.Focus();
+                MessageBox.Show("価格が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbProdactPrice.Focus();
+                return false;
+            }
+
+            // JANコードの適否
+            if (!String.IsNullOrEmpty(txbProdactJanCode.Text.Trim()))
+            {
+                // JANコードの文字数チェック
+                if (txbProdactJanCode.TextLength >= 50)
+                {
+                    MessageBox.Show("JANコードは50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactJanCode.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("JANコードが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbProdactJanCode.Focus();
+                return false;
+            }
+
+            // 安全在庫数の適否
+            if (!String.IsNullOrEmpty(txbProdactSafetyStock.Text.Trim()))
+            {
+                // 安全在庫数の文字数チェック
+                if (txbProdactSafetyStock.TextLength >= 50)
+                {
+                    MessageBox.Show("安全在庫数は50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactSafetyStock.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("安全在庫数が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbProdactSafetyStock.Focus();
+                return false;
+            }
+
+            // 小分類IDの適否
+            if (!String.IsNullOrEmpty(txbSmallID.Text.Trim()))
+            {
+                //小分類IDの文字数チェック
+                if (txbSmallID.TextLength > 13)
+                {
+                    MessageBox.Show("小分類IDは13文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSmallID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("小分類IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbSmallID.Focus();
                 return false;
             }
 
@@ -259,79 +360,6 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            // 小分類IDの適否
-            if (!String.IsNullOrEmpty(txbSmallID.Text.Trim()))
-            {
-                // 小分類IDの文字数チェック
-                //if (txbSmallID.TextLength > 13)
-                //{
-                //    MessageBox.Show("大分類IDは13文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    txbSmallID.Focus();
-                //    return false;
-                //}
-            }
-            else
-            {
-                MessageBox.Show("小分類IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbSmallID.Focus();
-                return false;
-            }
-
-
-            // 大分類名の適否
-            if (!String.IsNullOrEmpty(txbSmallName.Text.Trim()))
-            {
-                // 大分類名の文字数チェック
-                if (txbSmallName.TextLength >= 50)
-                {
-                    MessageBox.Show("小分類名は50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSmallName.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("小分類名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbMakerName.Focus();
-                return false;
-            }
-
-            // メーカー名の適否
-            if (!String.IsNullOrEmpty(txbMakerName.Text.Trim()))
-            {
-                // メーカー名の文字数チェック
-                if (txbMakerName.TextLength >= 50)
-                {
-                    MessageBox.Show("メーカー名は50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMakerName.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("メーカー名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbMakerName.Focus();
-                return false;
-            }
-
-            // 価格の適否
-            if (!String.IsNullOrEmpty(txbProdactPrice.Text.Trim()))
-            {
-                // 価格の文字数チェック
-                if (txbProdactPrice.TextLength >= 50)
-                {
-                    MessageBox.Show("価格は50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactPrice.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("価格が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbProdactPrice.Focus();
-                return false;
-            }
-
             // 発売日の適否
             if (!String.IsNullOrEmpty(txbProdactReleaseDate.Text.Trim()))
             {
@@ -350,24 +378,6 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            // 安全在庫数の適否
-            if (!String.IsNullOrEmpty(txbProdactSafetyStock.Text.Trim()))
-            {
-                // 安全在庫数の文字数チェック
-                if (txbProdactSafetyStock.TextLength >= 50)
-                {
-                    MessageBox.Show("安全在庫数は50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactSafetyStock.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("安全在庫数が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbProdactSafetyStock.Focus();
-                return false;
-            }
-
             //表示非表示選択の適否
             if (cmbHidden.SelectedIndex == -1)
             {
@@ -375,6 +385,25 @@ namespace SalesManagement_SysDev
                 cmbHidden.Focus();
                 return false;
             }
+
+            //// 大分類IDの適否
+            //if (!String.IsNullOrEmpty(txbMajorID.Text.Trim()))
+            //{
+            //    // 大分類IDの文字数チェック
+            //    //if (txbMajorID.TextLength > 13)
+            //    //{
+            //    //    MessageBox.Show("大分類IDは13文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    //    txbMajorID.Focus();
+            //    //    return false;
+            //    //}
+            //}
+            //else
+            //{
+            //    MessageBox.Show("大分類IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    txbProdactName.Focus();
+            //    return false;
+            //}
+
 
             return true;
         }
@@ -459,9 +488,10 @@ namespace SalesManagement_SysDev
             //1行ずつdgvClientに挿入
             foreach (var item in depData)
             {
-                dgvProdact.Rows.Add(item.PrID,item.MaID,item.PrName, dictionaryHidden[item.PrFlag], 
-                    item.PrHidden, item.Price, item.PrJCode, item.PrSafetyStock, item.ScID, item.PrModelNumber, 
-                    item.PrColor, item.PrReleaseDate, item.PrHidden);
+                dgvProdact.Rows.Add(item.PrID,item.MaID,item.PrName, 
+                     item.Price,item.PrJCode, item.PrSafetyStock, item.ScID,
+                     item.PrModelNumber, item.PrColor, dictionaryHidden[item.PrFlag],
+                     item.PrReleaseDate, item.PrHidden);
             }
 
             //dgvClientをリフレッシュ
@@ -491,6 +521,56 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：SetFormDataGridView()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：データグリッドビューの初期設定
+        ///////////////////////////////
+        private void SetFormDataGridView()
+        {
+            //列を自由に設定できるように
+            dgvProdact.AutoGenerateColumns = false;
+            //行単位で選択するようにする
+            dgvProdact.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //行と列の高さを変更できないように
+            dgvProdact.AllowUserToResizeColumns = false;
+            dgvProdact.AllowUserToResizeRows = false;
+            //セルの複数行選択をオフに
+            dgvProdact.MultiSelect = false;
+            //セルの編集ができないように
+            dgvProdact.ReadOnly = true;
+            //ユーザーが新しい行を追加できないようにする
+            dgvProdact.AllowUserToAddRows = false;
+
+            //左端の項目列を削除
+            dgvProdact.RowHeadersVisible = false;
+            //行の自動追加をオフ
+            dgvProdact.AllowUserToAddRows = false;
+
+            //ヘッダー位置の指定
+            dgvProdact.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dgvProdact.Columns.Add("PrID", "商品ID");
+            dgvProdact.Columns.Add("MaID", "メーカID");
+            dgvProdact.Columns.Add("PrName", "商品名");
+            dgvProdact.Columns.Add("Price", "価格");
+            dgvProdact.Columns.Add("PrJCode", "JANコード");
+            dgvProdact.Columns.Add("PrSafetyStock", "安全在庫数");
+            dgvProdact.Columns.Add("ScID", "小分類ID");
+            dgvProdact.Columns.Add("PrModelNumber", "型番");
+            dgvProdact.Columns.Add("PrColor", "色");
+            dgvProdact.Columns.Add("PrFlag", "商品管理フラグ");
+            dgvProdact.Columns.Add("PrReleaseDate", "発売日");
+            dgvProdact.Columns.Add("PrHidden", "非表示理由");
+
+            //並び替えができないようにする
+            foreach (DataGridViewColumn dataColumn in dgvProdact.Columns)
+            {
+                dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+        }
+
+        ///////////////////////////////
         //メソッド名：ClearImput()
         //引　数   ：なし
         //戻り値   ：なし
@@ -501,11 +581,11 @@ namespace SalesManagement_SysDev
             txbProdactID.Text = string.Empty;
             txbProdactName.Text = string.Empty;
             txbMajorID.Text = string.Empty;
-            txbMajorName.Text = string.Empty;
+            //txbMajorName.Text = string.Empty;
             txbModelNumber.Text = string.Empty;
             txbProdactColor.Text = string.Empty;
             txbSmallID.Text = string.Empty;
-            txbSmallName.Text = string.Empty;
+            //txbSmallName.Text = string.Empty;
             txbMakerName.Text = string.Empty;
             txbProdactPrice.Text = string.Empty;
             txbProdactReleaseDate.Text = string.Empty;
@@ -514,6 +594,89 @@ namespace SalesManagement_SysDev
             cmbHidden.SelectedIndex = -1;
         }
 
+        private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //データグリッドビューのデータ取得
+            GetDataGridView();
+        }
 
+        private void dgvProdact_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvProdact.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            //選択された行に対してのコントロールの変更
+            SelectRowControl();
+        }
+
+        ///////////////////////////////
+        //メソッド名：SelectRowControl()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：選択された行に対してのコントロールの変更
+        ///////////////////////////////
+        private void SelectRowControl()
+        {
+            
+
+            //データグリッドビューに乗っている情報をGUIに反映
+            txbProdactID.Text = dgvProdact[0, dgvProdact.CurrentCellAddress.Y].Value.ToString();
+            //cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvProdact[1, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key.Value - 1;
+            txbProdactName.Text = dgvProdact[2, dgvProdact.CurrentCellAddress.Y].Value.ToString();
+            //txbMajorID.Text = dgvProdact[2, dgvProdact.CurrentCellAddress.Y].Value.ToString();
+            txbSmallID.Text = dgvProdact[6, dgvProdact.CurrentCellAddress.Y].Value.ToString();
+            txbModelNumber.Text = dgvProdact[7, dgvProdact.CurrentCellAddress.Y].Value.ToString();
+            txbProdactColor.Text = dgvProdact[8, dgvProdact.CurrentCellAddress.Y].Value.ToString();
+            txbProdactReleaseDate.Text = dgvProdact[9, dgvProdact.CurrentCellAddress.Y].Value.ToString();
+            txbProdactJanCode.Text = dgvProdact[10, dgvProdact.CurrentCellAddress.Y]?.Value?.ToString();
+            txbMakerName.Text = dgvProdact[1, dgvProdact.CurrentCellAddress.Y]?.Value?.ToString();
+            txbProdactPrice.Text = dgvProdact[3, dgvProdact.CurrentCellAddress.Y].Value.ToString();
+            txbProdactSafetyStock.Text = dgvProdact[5, dgvProdact.CurrentCellAddress.Y].Value.ToString();
+            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvProdact[10, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key;
+            tbxProdactHidden.Text = dgvProdact[11, dgvProdact.CurrentCellAddress.Y]?.Value?.ToString();
+        }
+
+        private void btnPagesize_Click(object sender, EventArgs e)
+        {
+            GetDataGridView();
+        }
+
+        private void btnPageMin_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+
+            GetDataGridView();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) - 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) + 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnPageMax_Click(object sender, EventArgs e)
+        {
+            List<M_Product> viewClient = SetListClient();
+
+            //ページ行数を取得
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
+            //最終ページ数を取得（テキストボックスに代入する数字なので-1はしない）
+            int lastPage = (int)Math.Ceiling(viewClient.Count / (double)pageSize);
+
+            txbNumPage.Text = lastPage.ToString();
+
+            GetDataGridView();
+        }
     }
 }
