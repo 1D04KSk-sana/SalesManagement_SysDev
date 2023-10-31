@@ -40,9 +40,7 @@
             this.txbProdactID = new System.Windows.Forms.TextBox();
             this.txbProdactName = new System.Windows.Forms.TextBox();
             this.lblProdactName = new System.Windows.Forms.Label();
-            this.txbMajorID = new System.Windows.Forms.TextBox();
             this.lblMajorID = new System.Windows.Forms.Label();
-            this.txbSmallID = new System.Windows.Forms.TextBox();
             this.lblSmallID = new System.Windows.Forms.Label();
             this.txbProdactColor = new System.Windows.Forms.TextBox();
             this.lblProdactColor = new System.Windows.Forms.Label();
@@ -60,7 +58,6 @@
             this.tbxProdactHidden = new System.Windows.Forms.TextBox();
             this.dgvProdact = new System.Windows.Forms.DataGridView();
             this.lblPageSize = new System.Windows.Forms.Label();
-            this.txbMakerName = new System.Windows.Forms.TextBox();
             this.txbPageSize = new System.Windows.Forms.TextBox();
             this.btnPagesize = new System.Windows.Forms.Button();
             this.lblNumPage = new System.Windows.Forms.Label();
@@ -74,6 +71,9 @@
             this.lblProdact = new System.Windows.Forms.Label();
             this.txbProdactJanCode = new System.Windows.Forms.TextBox();
             this.lblProdactJanCode = new System.Windows.Forms.Label();
+            this.cmbMakerName = new System.Windows.Forms.ComboBox();
+            this.cmbMajorID = new System.Windows.Forms.ComboBox();
+            this.cmbSmallID = new System.Windows.Forms.ComboBox();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdact)).BeginInit();
             this.pnlProdact.SuspendLayout();
@@ -208,14 +208,6 @@
             this.lblProdactName.TabIndex = 7;
             this.lblProdactName.Text = "商品名";
             // 
-            // txbMajorID
-            // 
-            this.txbMajorID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbMajorID.Location = new System.Drawing.Point(681, 158);
-            this.txbMajorID.Name = "txbMajorID";
-            this.txbMajorID.Size = new System.Drawing.Size(200, 25);
-            this.txbMajorID.TabIndex = 10;
-            // 
             // lblMajorID
             // 
             this.lblMajorID.AutoSize = true;
@@ -225,14 +217,6 @@
             this.lblMajorID.Size = new System.Drawing.Size(78, 18);
             this.lblMajorID.TabIndex = 9;
             this.lblMajorID.Text = "大分類ID";
-            // 
-            // txbSmallID
-            // 
-            this.txbSmallID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbSmallID.Location = new System.Drawing.Point(974, 159);
-            this.txbSmallID.Name = "txbSmallID";
-            this.txbSmallID.Size = new System.Drawing.Size(200, 25);
-            this.txbSmallID.TabIndex = 18;
             // 
             // lblSmallID
             // 
@@ -346,6 +330,7 @@
             // 
             // cmbHidden
             // 
+            this.cmbHidden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbHidden.FormattingEnabled = true;
             this.cmbHidden.Items.AddRange(new object[] {
@@ -395,14 +380,6 @@
             this.lblPageSize.Size = new System.Drawing.Size(98, 18);
             this.lblPageSize.TabIndex = 33;
             this.lblPageSize.Text = "1ページ行数";
-            // 
-            // txbMakerName
-            // 
-            this.txbMakerName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbMakerName.Location = new System.Drawing.Point(96, 255);
-            this.txbMakerName.Name = "txbMakerName";
-            this.txbMakerName.Size = new System.Drawing.Size(200, 25);
-            this.txbMakerName.TabIndex = 22;
             // 
             // txbPageSize
             // 
@@ -540,6 +517,57 @@
             this.lblProdactJanCode.TabIndex = 44;
             this.lblProdactJanCode.Text = "JANコード";
             // 
+            // cmbMakerName
+            // 
+            this.cmbMakerName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMakerName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbMakerName.FormattingEnabled = true;
+            this.cmbMakerName.Items.AddRange(new object[] {
+            "Aメーカ",
+            "Bメーカ",
+            "Cメーカ",
+            "Dメーカ"});
+            this.cmbMakerName.Location = new System.Drawing.Point(97, 253);
+            this.cmbMakerName.Name = "cmbMakerName";
+            this.cmbMakerName.Size = new System.Drawing.Size(150, 26);
+            this.cmbMakerName.TabIndex = 45;
+            // 
+            // cmbMajorID
+            // 
+            this.cmbMajorID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMajorID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbMajorID.FormattingEnabled = true;
+            this.cmbMajorID.Items.AddRange(new object[] {
+            "テレビ・レコーダー",
+            "エアコン・冷蔵庫・洗濯機",
+            "オーディオ・イヤホン・ヘッドホン",
+            "携帯電話・スマートフォン"});
+            this.cmbMajorID.Location = new System.Drawing.Point(681, 158);
+            this.cmbMajorID.Name = "cmbMajorID";
+            this.cmbMajorID.Size = new System.Drawing.Size(150, 26);
+            this.cmbMajorID.TabIndex = 46;
+            // 
+            // cmbSmallID
+            // 
+            this.cmbSmallID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSmallID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbSmallID.FormattingEnabled = true;
+            this.cmbSmallID.Items.AddRange(new object[] {
+            "テレビ",
+            "レコーダー",
+            "エアコン",
+            "冷蔵庫",
+            "洗濯機",
+            "オーディオ",
+            "イヤホン",
+            "ヘッドホン",
+            "携帯電話",
+            "スマートフォン"});
+            this.cmbSmallID.Location = new System.Drawing.Point(974, 154);
+            this.cmbSmallID.Name = "cmbSmallID";
+            this.cmbSmallID.Size = new System.Drawing.Size(150, 26);
+            this.cmbSmallID.TabIndex = 47;
+            // 
             // F_HonshaProdact
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -547,6 +575,9 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(1212, 753);
             this.ControlBox = false;
+            this.Controls.Add(this.cmbSmallID);
+            this.Controls.Add(this.cmbMajorID);
+            this.Controls.Add(this.cmbMakerName);
             this.Controls.Add(this.lblProdactJanCode);
             this.Controls.Add(this.txbProdactJanCode);
             this.Controls.Add(this.cmbView);
@@ -570,15 +601,12 @@
             this.Controls.Add(this.lblProdactReleaseDate);
             this.Controls.Add(this.txbProdactPrice);
             this.Controls.Add(this.lblProdactPrice);
-            this.Controls.Add(this.txbMakerName);
             this.Controls.Add(this.lblMakerName);
-            this.Controls.Add(this.txbSmallID);
             this.Controls.Add(this.lblSmallID);
             this.Controls.Add(this.txbProdactColor);
             this.Controls.Add(this.lblProdactColor);
             this.Controls.Add(this.txbModelNumber);
             this.Controls.Add(this.lblModelNumber);
-            this.Controls.Add(this.txbMajorID);
             this.Controls.Add(this.lblMajorID);
             this.Controls.Add(this.txbProdactName);
             this.Controls.Add(this.lblProdactName);
@@ -616,9 +644,7 @@
         private System.Windows.Forms.TextBox txbProdactID;
         private System.Windows.Forms.TextBox txbProdactName;
         private System.Windows.Forms.Label lblProdactName;
-        private System.Windows.Forms.TextBox txbMajorID;
         private System.Windows.Forms.Label lblMajorID;
-        private System.Windows.Forms.TextBox txbSmallID;
         private System.Windows.Forms.Label lblSmallID;
         private System.Windows.Forms.TextBox txbProdactColor;
         private System.Windows.Forms.Label lblProdactColor;
@@ -636,7 +662,6 @@
         private System.Windows.Forms.TextBox tbxProdactHidden;
         private System.Windows.Forms.DataGridView dgvProdact;
         private System.Windows.Forms.Label lblPageSize;
-        private System.Windows.Forms.TextBox txbMakerName;
         private System.Windows.Forms.TextBox txbPageSize;
         private System.Windows.Forms.Button btnPagesize;
         private System.Windows.Forms.Label lblNumPage;
@@ -650,5 +675,8 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.TextBox txbProdactJanCode;
         private System.Windows.Forms.Label lblProdactJanCode;
+        private System.Windows.Forms.ComboBox cmbMakerName;
+        private System.Windows.Forms.ComboBox cmbMajorID;
+        private System.Windows.Forms.ComboBox cmbSmallID;
     }
 }

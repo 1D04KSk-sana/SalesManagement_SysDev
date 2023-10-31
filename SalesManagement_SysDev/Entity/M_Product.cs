@@ -33,7 +33,8 @@ namespace SalesManagement_SysDev
         [MaxLength(13)]
         public string PrJCode { get; set; }         //JANコード		
         public int PrSafetyStock { get; set; }      //安全在庫数		
-        public int ScID { get; set; }               //小分類ID	                                                
+        public int ScID { get; set; }               //小分類ID
+        public int McID { get; set; }               //大分類ID	                                                
         [MaxLength(20)]
         [Required]
         public string PrModelNumber { get; set; }   //型番
@@ -49,6 +50,7 @@ namespace SalesManagement_SysDev
 
         public virtual M_Maker M_Maker { get; set; }
         public virtual M_SmallClassification M_SmallClassification { get; set; }
+        public virtual M_MajorClassification M_MajorClassification { get; set; }
         public virtual ICollection<T_ArrivalDetail> T_ArrivalDetail { get; set; }
         public virtual ICollection<T_ChumonDetail> T_ChumonDetail { get; set; }
         public virtual ICollection<T_HattyuDetail> T_HattyuDetail { get; set; }

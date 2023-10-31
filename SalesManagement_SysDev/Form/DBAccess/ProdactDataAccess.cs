@@ -125,5 +125,45 @@ namespace SalesManagement_SysDev
                 return false;
             }
         }
+
+        ///////////////////////////////
+        //メソッド名：UpdateClientData()
+        //引　数：updClient = 商品データ
+        //戻り値：True or False
+        //機　能：商品データの更新
+        //      ：更新成功の場合True
+        //      ：更新失敗の場合False
+        ///////////////////////////////
+        public bool UpdateProdactData(M_Product updProdact)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Prodact = context.M_Products.Single(x => x.PrID == updProdact.PrID);
+
+                Prodact.PrID = updProdact.PrID;
+                Prodact.MaID = updProdact.MaID;
+                Prodact.PrName = updProdact.PrName;
+                Prodact.Price = updProdact.Price;
+                Prodact.PrJCode = updProdact.PrJCode;
+                Prodact.PrSafetyStock = updProdact.PrSafetyStock;
+                Prodact.ScID = updProdact.ScID;
+                Prodact.PrModelNumber = updProdact.PrModelNumber;
+                Prodact.PrColor = updProdact.PrColor;
+                Prodact.PrReleaseDate = updProdact.PrReleaseDate;
+                Prodact.PrFlag = updProdact.PrFlag;
+                Prodact.PrHidden = updProdact.PrHidden;
+
+                context.SaveChanges();
+                context.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
     }
 }
