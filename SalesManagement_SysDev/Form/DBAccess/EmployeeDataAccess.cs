@@ -120,6 +120,7 @@ namespace SalesManagement_SysDev
                 Employee.EmPhone = updEmployee.EmPhone;
                 Employee.EmFlag = updEmployee.EmFlag;
                 Employee.SoID = updEmployee.SoID;
+                Employee.EmHidden = updEmployee.EmHidden;
 
 
                 context.SaveChanges();

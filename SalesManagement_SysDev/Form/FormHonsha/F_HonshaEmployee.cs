@@ -52,19 +52,11 @@ namespace SalesManagement_SysDev
         };
 
         //DataGridView用に使用す役職のDictionary
-        private Dictionary<int?, string> dictionaryPositionName = new Dictionary<int?, string>
+        private Dictionary<int?, string> dictionaryPositionname = new Dictionary<int?, string>
         {
-            { 1, "社長" },
-            { 2, "専務" },
-            { 3, "常務"},
-            { 4, "取締役"},
-            { 5, "部長"},
-            { 6, "次長"},
-            { 7, "課長"},
-            { 8, "係長"},
-            { 9, "主任"},
-            { 10, "社員"},
-            { 11,"パート"},
+            { 1, "管理者" },
+            { 2, "営業" },
+            { 3, "物流"},
         };
 
         public F_HonshaEmployee()
@@ -149,7 +141,7 @@ namespace SalesManagement_SysDev
         {
             ClearImput();
 
-            
+            rdbUpdate.Checked = true;
 
             GetDataGridView();
         }
@@ -325,7 +317,7 @@ namespace SalesManagement_SysDev
             //1行ずつdgvEmployeeに挿入
             foreach (var item in depData)
             {
-                dgvEmployee.Rows.Add(item.EmID, dictionarySalesOffice[item.SoID], item.EmName, item.EmPhone,  dictionaryHidden[item.EmFlag], dictionaryPositionName[item.PoID], item.EmHidden);
+                dgvEmployee.Rows.Add(item.EmID, dictionarySalesOffice[item.SoID], item.EmName, item.EmPhone,  dictionaryHidden[item.EmFlag], dictionaryPositionname[item.PoID], item.EmHidden);
             }
 
             //dgvClientをリフレッシュ
@@ -613,19 +605,19 @@ namespace SalesManagement_SysDev
         //引　数   ：なし
         //戻り値   ：なし
         //機　能   ：選択された行に対してのコントロールの変更
-        ///////////////////////////////
+        //////////////////////////////
         private void SelectRowControl()
         {
             //データグリッドビューに乗っている情報をGUIに反映
             txbEmployeeID.Text = dgvEmployee[0, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
             cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvEmployee[1, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key.Value - 1;
-            cmbPositionName.SelectedIndex = dictionaryPositionName.FirstOrDefault(x => x.Value == dgvEmployee[5, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key.Value - 1;
+            cmbPositionName.SelectedIndex = dictionaryPositionname.FirstOrDefault(x => x.Value == dgvEmployee[5, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key.Value - 1;
             txbEmployeeName.Text = dgvEmployee[2, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
             txbEmployeePhone.Text = dgvEmployee[3, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
           //  txbCEmployeePostal.Text = dgvEmployee[5, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
           //  txbEmployeeFAX.Text = dgvEmployee[6, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvEmployee[4, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key;
-            //txbHidden.Text = dgvEmployee[8, dgvEmployee.CurrentCellAddress.Y]?.Value?.ToString();
+            txbHidden.Text = dgvEmployee[6, dgvEmployee.CurrentCellAddress.Y]?.Value?.ToString();
         }
 
         ///////////////////////////////

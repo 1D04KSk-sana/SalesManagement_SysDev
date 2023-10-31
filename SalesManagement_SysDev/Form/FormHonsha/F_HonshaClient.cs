@@ -1016,7 +1016,7 @@ namespace SalesManagement_SysDev
             cmbHidden.SelectedIndex = -1;
             txbClientFAX.Text = string.Empty;
         }
-
+        
         private void cmbSalesOfficeID_SelectedIndexChanged(object sender, EventArgs e)
         {
 

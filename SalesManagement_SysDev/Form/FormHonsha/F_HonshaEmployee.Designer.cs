@@ -38,7 +38,7 @@
             this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.cmbHidden = new System.Windows.Forms.ComboBox();
             this.txbHidden = new System.Windows.Forms.TextBox();
-            this.lblClientHidden = new System.Windows.Forms.Label();
+            this.lblEmployeeHidden = new System.Windows.Forms.Label();
             this.PositionName = new System.Windows.Forms.Label();
             this.lblCilentPhone = new System.Windows.Forms.Label();
             this.cmbSalesOfficeID = new System.Windows.Forms.ComboBox();
@@ -195,16 +195,16 @@
             this.txbHidden.Size = new System.Drawing.Size(624, 22);
             this.txbHidden.TabIndex = 45;
             // 
-            // lblClientHidden
+            // lblEmployeeHidden
             // 
-            this.lblClientHidden.AutoSize = true;
-            this.lblClientHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientHidden.Location = new System.Drawing.Point(146, 211);
-            this.lblClientHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblClientHidden.Name = "lblClientHidden";
-            this.lblClientHidden.Size = new System.Drawing.Size(82, 15);
-            this.lblClientHidden.TabIndex = 44;
-            this.lblClientHidden.Text = "非表示理由";
+            this.lblEmployeeHidden.AutoSize = true;
+            this.lblEmployeeHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblEmployeeHidden.Location = new System.Drawing.Point(146, 211);
+            this.lblEmployeeHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblEmployeeHidden.Name = "lblEmployeeHidden";
+            this.lblEmployeeHidden.Size = new System.Drawing.Size(82, 15);
+            this.lblEmployeeHidden.TabIndex = 44;
+            this.lblEmployeeHidden.Text = "非表示理由";
             // 
             // PositionName
             // 
@@ -488,7 +488,7 @@
             this.Controls.Add(this.dtpEmployeeHireDate);
             this.Controls.Add(this.cmbHidden);
             this.Controls.Add(this.txbHidden);
-            this.Controls.Add(this.lblClientHidden);
+            this.Controls.Add(this.lblEmployeeHidden);
             this.Controls.Add(this.PositionName);
             this.Controls.Add(this.lblCilentPhone);
             this.Controls.Add(this.cmbSalesOfficeID);
@@ -529,7 +529,7 @@
         private System.Windows.Forms.RadioButton rdbSearch;
         private System.Windows.Forms.ComboBox cmbHidden;
         private System.Windows.Forms.TextBox txbHidden;
-        private System.Windows.Forms.Label lblClientHidden;
+        private System.Windows.Forms.Label lblEmployeeHidden;
         private System.Windows.Forms.Label PositionName;
         private System.Windows.Forms.Label lblCilentPhone;
         private System.Windows.Forms.ComboBox cmbSalesOfficeID;
