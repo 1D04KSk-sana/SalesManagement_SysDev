@@ -299,23 +299,6 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            // 発売日の適否
-            if (!String.IsNullOrEmpty(txbProdactReleaseDate.Text.Trim()))
-            {
-                // 発売日の文字数チェック
-                if (txbProdactReleaseDate.TextLength >= 50)
-                {
-                    MessageBox.Show("発売日は50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactReleaseDate.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("発売日が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbProdactReleaseDate.Focus();
-                return false;
-            }
 
             //表示非表示選択の適否
             if (cmbHidden.SelectedIndex == -1)
@@ -666,24 +649,6 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            // 発売日の適否
-            if (!String.IsNullOrEmpty(txbProdactReleaseDate.Text.Trim()))
-            {
-                // 発売日の文字数チェック
-                if (txbProdactReleaseDate.TextLength >= 50)
-                {
-                    MessageBox.Show("発売日は50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactReleaseDate.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("発売日が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbProdactReleaseDate.Focus();
-                return false;
-            }
-
             //表示非表示選択の適否
             if (cmbHidden.SelectedIndex == -1)
             {
@@ -884,7 +849,7 @@ namespace SalesManagement_SysDev
             //txbSmallName.Text = string.Empty;
             cmbMakerName.SelectedIndex = -1;
             txbProdactPrice.Text = string.Empty;
-            txbProdactReleaseDate.Text = string.Empty;
+            dtpProdactReleaseDate.Value = DateTime.Now;
             txbProdactSafetyStock.Text = string.Empty;
             cmbView.SelectedIndex = -1;
             cmbHidden.SelectedIndex = -1;
@@ -929,8 +894,8 @@ namespace SalesManagement_SysDev
             cmbSmallID.SelectedIndex = dictionarySmallID.FirstOrDefault(x => x.Value == dgvProdact[7, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key -1;
             txbModelNumber.Text = dgvProdact[8, dgvProdact.CurrentCellAddress.Y].Value.ToString();
             txbProdactColor.Text = dgvProdact[9, dgvProdact.CurrentCellAddress.Y].Value.ToString();
-            txbProdactReleaseDate.Text = dgvProdact[10, dgvProdact.CurrentCellAddress.Y].Value.ToString();
-            txbProdactJanCode.Text = dgvProdact[11, dgvProdact.CurrentCellAddress.Y]?.Value?.ToString();
+            dtpProdactReleaseDate.Text = dgvProdact[11, dgvProdact.CurrentCellAddress.Y].Value.ToString();
+            txbProdactJanCode.Text = dgvProdact[4, dgvProdact.CurrentCellAddress.Y]?.Value?.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvProdact[10, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key;
             tbxProdactHidden.Text = dgvProdact[12, dgvProdact.CurrentCellAddress.Y]?.Value?.ToString();
         }

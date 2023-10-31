@@ -51,7 +51,6 @@
             this.lblMakerName = new System.Windows.Forms.Label();
             this.txbProdactSafetyStock = new System.Windows.Forms.TextBox();
             this.lblProdactSafetyStock = new System.Windows.Forms.Label();
-            this.txbProdactReleaseDate = new System.Windows.Forms.TextBox();
             this.lblProdactReleaseDate = new System.Windows.Forms.Label();
             this.cmbHidden = new System.Windows.Forms.ComboBox();
             this.lblProdactHidden = new System.Windows.Forms.Label();
@@ -74,6 +73,7 @@
             this.cmbMakerName = new System.Windows.Forms.ComboBox();
             this.cmbMajorID = new System.Windows.Forms.ComboBox();
             this.cmbSmallID = new System.Windows.Forms.ComboBox();
+            this.dtpProdactReleaseDate = new System.Windows.Forms.DateTimePicker();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdact)).BeginInit();
             this.pnlProdact.SuspendLayout();
@@ -309,14 +309,6 @@
             this.lblProdactSafetyStock.Size = new System.Drawing.Size(98, 18);
             this.lblProdactSafetyStock.TabIndex = 27;
             this.lblProdactSafetyStock.Text = "安全在庫数";
-            // 
-            // txbProdactReleaseDate
-            // 
-            this.txbProdactReleaseDate.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProdactReleaseDate.Location = new System.Drawing.Point(681, 209);
-            this.txbProdactReleaseDate.Name = "txbProdactReleaseDate";
-            this.txbProdactReleaseDate.Size = new System.Drawing.Size(200, 25);
-            this.txbProdactReleaseDate.TabIndex = 26;
             // 
             // lblProdactReleaseDate
             // 
@@ -568,6 +560,14 @@
             this.cmbSmallID.Size = new System.Drawing.Size(150, 26);
             this.cmbSmallID.TabIndex = 47;
             // 
+            // dtpProdactReleaseDate
+            // 
+            this.dtpProdactReleaseDate.CalendarFont = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.dtpProdactReleaseDate.Location = new System.Drawing.Point(681, 212);
+            this.dtpProdactReleaseDate.Name = "dtpProdactReleaseDate";
+            this.dtpProdactReleaseDate.Size = new System.Drawing.Size(147, 22);
+            this.dtpProdactReleaseDate.TabIndex = 48;
+            // 
             // F_HonshaProdact
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -575,6 +575,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(1212, 753);
             this.ControlBox = false;
+            this.Controls.Add(this.dtpProdactReleaseDate);
             this.Controls.Add(this.cmbSmallID);
             this.Controls.Add(this.cmbMajorID);
             this.Controls.Add(this.cmbMakerName);
@@ -597,7 +598,6 @@
             this.Controls.Add(this.cmbHidden);
             this.Controls.Add(this.txbProdactSafetyStock);
             this.Controls.Add(this.lblProdactSafetyStock);
-            this.Controls.Add(this.txbProdactReleaseDate);
             this.Controls.Add(this.lblProdactReleaseDate);
             this.Controls.Add(this.txbProdactPrice);
             this.Controls.Add(this.lblProdactPrice);
@@ -655,7 +655,6 @@
         private System.Windows.Forms.Label lblMakerName;
         private System.Windows.Forms.TextBox txbProdactSafetyStock;
         private System.Windows.Forms.Label lblProdactSafetyStock;
-        private System.Windows.Forms.TextBox txbProdactReleaseDate;
         private System.Windows.Forms.Label lblProdactReleaseDate;
         private System.Windows.Forms.ComboBox cmbHidden;
         private System.Windows.Forms.Label lblProdactHidden;
@@ -678,5 +677,6 @@
         private System.Windows.Forms.ComboBox cmbMakerName;
         private System.Windows.Forms.ComboBox cmbMajorID;
         private System.Windows.Forms.ComboBox cmbSmallID;
+        private System.Windows.Forms.DateTimePicker dtpProdactReleaseDate;
     }
 }
