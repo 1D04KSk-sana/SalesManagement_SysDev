@@ -337,7 +337,14 @@ namespace SalesManagement_SysDev
             //dgvClientをリフレッシュ
             dgvEmployee.Refresh();
 
-            if (pageNum == 0)
+            if (pageNum == 0 && lastPage == pageNum)
+            {
+                btnPageMax.Visible = false;
+                btnNext.Visible = false;
+                btnPageMin.Visible = false;
+                btnBack.Visible = false;
+            }
+            else if (pageNum == 0)
             {
                 btnPageMax.Visible = true;
                 btnNext.Visible = true;
