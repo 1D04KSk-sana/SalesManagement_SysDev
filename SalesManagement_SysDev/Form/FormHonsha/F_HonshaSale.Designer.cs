@@ -183,6 +183,8 @@
             this.dgvSale.RowTemplate.Height = 24;
             this.dgvSale.Size = new System.Drawing.Size(930, 442);
             this.dgvSale.TabIndex = 56;
+            this.dgvSale.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSale_CellClick);
+            this.dgvSale.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSale_CellContentClick);
             // 
             // txbHidden
             // 
@@ -305,9 +307,9 @@
             this.lblClientName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblClientName.Location = new System.Drawing.Point(537, 236);
             this.lblClientName.Name = "lblClientName";
-            this.lblClientName.Size = new System.Drawing.Size(76, 22);
+            this.lblClientName.Size = new System.Drawing.Size(73, 22);
             this.lblClientName.TabIndex = 42;
-            this.lblClientName.Text = "顧客名";
+            this.lblClientName.Text = "顧客ID";
             // 
             // txbSaleID
             // 

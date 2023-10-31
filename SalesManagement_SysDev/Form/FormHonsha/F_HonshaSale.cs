@@ -93,6 +93,14 @@ namespace SalesManagement_SysDev
             {
                 intSaleID = int.Parse(strSaleID);
             }
+            string strtxbClientPostal = txbClientPostal.Text.Trim();
+            int inttxbClientPostal = 0;
+
+            if (!String.IsNullOrEmpty(strtxbClientPostal))
+            {
+                inttxbClientPostal = int.Parse(strtxbClientPostal);
+            }
+
 
             // 検索条件のセット
             T_Sale selectCondition = new T_Sale()
@@ -100,7 +108,8 @@ namespace SalesManagement_SysDev
                 SaID = intSaleID,
                 //ClName = txbClientName.Text.Trim()
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
-                ChID = int.Parse(txbClientPostal.Text.Trim()),
+                ChID = inttxbClientPostal,
+
                 //ClPostal= txbClientPostal.Text.Trim(),
                 //ClAddress= txbClientAddress.Text.Trim(),
                 //ClFAX=txbClientFax.Text.Trim(),
@@ -180,7 +189,7 @@ namespace SalesManagement_SysDev
             dgvSale.Columns.Add("SaID", "売上ID");
             dgvSale.Columns.Add("ClID", "顧客名");
             dgvSale.Columns.Add("SoID", "営業所名");
-            dgvSale.Columns.Add("EmID", "受注社員名");
+            dgvSale.Columns.Add("EmID", "受注社員ID");
             dgvSale.Columns.Add("ChID", "受注ID");
             dgvSale.Columns.Add("SaDate", "売上日時");
             dgvSale.Columns.Add("SaFlag", "管理フラグ");
@@ -393,7 +402,7 @@ namespace SalesManagement_SysDev
             //1行ずつdgvClientに挿入
             foreach (var item in depData)
             {
-                dgvSale.Rows.Add(dictionarySalesOffice[item.SaID], item.ClID, item.SoID, item.EmID, item.ChID, item.SaDate, dictionaryHidden[item.SaFlag], item.SaHidden);
+                dgvSale.Rows.Add(item.SaID, item.ClID, dictionarySalesOffice[item.SoID], item.EmID, item.ChID, item.SaDate, dictionaryHidden[item.SaFlag], item.SaHidden);
             }
 
             //dgvClientをリフレッシュ
@@ -420,6 +429,25 @@ namespace SalesManagement_SysDev
                 btnPageMin.Visible = true;
                 btnBack.Visible = true;
             }
+        }
+
+        ///////////////////////////////
+        //メソッド名：SelectRowControl()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：選択された行に対してのコントロールの変更
+        ///////////////////////////////
+        private void SelectRowControl()
+        {
+            //データグリッドビューに乗っている情報をGUIに反映
+            txbSaleID.Text = dgvSale[0, dgvSale.CurrentCellAddress.Y].Value.ToString();
+            txbClientName.Text = dgvSale[1, dgvSale.CurrentCellAddress.Y].Value.ToString();
+            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvSale[2, dgvSale.CurrentCellAddress.Y].Value.ToString()).Key.Value - 1;
+            txbEmployeeName.Text = dgvSale [3, dgvSale.CurrentCellAddress.Y].Value.ToString();
+            txbClientPostal.Text = dgvSale[4, dgvSale.CurrentCellAddress.Y].Value.ToString();
+            dtpSaleDate.Text = dgvSale[5, dgvSale.CurrentCellAddress.Y].Value.ToString();
+            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSale[6, dgvSale.CurrentCellAddress.Y].Value.ToString()).Key;
+            txbHidden.Text = dgvSale[7, dgvSale.CurrentCellAddress.Y]?.Value?.ToString();
         }
 
 
@@ -463,5 +491,22 @@ namespace SalesManagement_SysDev
 
         }
 
+        private void dgvSale_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvSale_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvSale.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            //選択された行に対してのコントロールの変更
+            SelectRowControl();
+
+        }
     }
 }

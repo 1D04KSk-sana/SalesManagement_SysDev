@@ -77,7 +77,7 @@ namespace SalesManagement_SysDev
             List<M_SmallClassification> sc = new List<M_SmallClassification>();
             List<M_Product> pr = new List<M_Product>();
             List<T_Sale> sa = new List<T_Sale>();
-            List<T_SaleDetail> sadt = new List<T_SaleDetail>();
+            List<T_SaleDetail> sad = new List<T_SaleDetail>();
 
 
             {
@@ -743,43 +743,26 @@ namespace SalesManagement_SysDev
             {
                 sa.Add(new T_Sale()
                 {
-
                     M_Employee = em[116],
-                    M_Client = cl[0],
-                    M_SalesOffice = so[0],
-                    SaDate = new DateTime(2023 / 10 / 27),
-                    SaFlag = 0,
-                    ChID = 1,
-
-                });
-                sa.Add(new T_Sale()
-                {
-                    M_Employee = em[310],
                     M_Client = cl[1],
-                    M_SalesOffice = so[1],
-                    SaDate = new DateTime(2023 / 9 / 27),
+                    T_Chumon = ch[0],
+                    M_SalesOffice = so[0],
+                    SaDate = new DateTime(2023 , 10 , 27),
                     SaFlag = 0,
-                    ChID = 2,
                 });
+
                 context.T_Sales.AddRange(sa);
                 context.SaveChanges();
             }
             {
-                sadt.Add(new T_SaleDetail()
+                sad.Add(new T_SaleDetail()
                 {
                     M_Product = pr[0],
                     T_Sale = sa[0],
                     SaQuantity = 1,
                     SaTotalPrice = 100000,
                 });
-                sadt.Add(new T_SaleDetail()
-                {
-                    M_Product= pr[1],
-                    T_Sale = sa[1],
-                    SaQuantity = 1,
-                    SaTotalPrice = 98000,
-                });
-                context.T_SaleDetails.AddRange(sadt);
+                context.T_SaleDetails.AddRange(sad);
                 context.SaveChanges();
 
 
