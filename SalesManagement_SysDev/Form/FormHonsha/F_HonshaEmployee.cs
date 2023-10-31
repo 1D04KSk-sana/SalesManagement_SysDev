@@ -599,7 +599,7 @@ namespace SalesManagement_SysDev
 
             return true;
         }
-
+        
         ///////////////////////////////
         //メソッド名：SelectRowControl()
         //引　数   ：なし
@@ -729,7 +729,15 @@ namespace SalesManagement_SysDev
             dgvEmployee.Columns.Add("EmFlag", "顧客管理フラグ");
             dgvEmployee.Columns.Add("PoID", "役職ID");
             dgvEmployee.Columns.Add("EmHidden", "非表示理由");
-  
+
+            dgvEmployee.Columns["EmID"].Width = 50;
+            dgvEmployee.Columns["SoID"].Width = 100;
+            dgvEmployee.Columns["EmName"].Width = 100;
+            dgvEmployee.Columns["EmPhone"].Width = 100;
+            dgvEmployee.Columns["EmFlag"].Width = 100;
+            dgvEmployee.Columns["PoID"].Width = 100;
+            dgvEmployee.Columns["EmHidden"].Width = 350;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvEmployee.Columns)
             {

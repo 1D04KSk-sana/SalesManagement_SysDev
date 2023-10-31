@@ -122,7 +122,7 @@
             // 
             // cmbView
             // 
-            this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbView.BackColor = System.Drawing.Color.White;
             this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbView.FormattingEnabled = true;
             this.cmbView.Items.AddRange(new object[] {
@@ -174,7 +174,6 @@
             // 
             // cmbHidden
             // 
-            this.cmbHidden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbHidden.FormattingEnabled = true;
             this.cmbHidden.Items.AddRange(new object[] {
@@ -230,7 +229,7 @@
             // 
             // cmbSalesOfficeID
             // 
-            this.cmbSalesOfficeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSalesOfficeID.BackColor = System.Drawing.Color.White;
             this.cmbSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSalesOfficeID.FormattingEnabled = true;
             this.cmbSalesOfficeID.Location = new System.Drawing.Point(662, 126);
@@ -376,6 +375,7 @@
             // 
             // btnPageMin
             // 
+            this.btnPageMin.BackColor = System.Drawing.Color.White;
             this.btnPageMin.Font = new System.Drawing.Font("MS UI Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnPageMin.Location = new System.Drawing.Point(753, 559);
             this.btnPageMin.Margin = new System.Windows.Forms.Padding(2);
@@ -383,11 +383,12 @@
             this.btnPageMin.Size = new System.Drawing.Size(32, 29);
             this.btnPageMin.TabIndex = 67;
             this.btnPageMin.Text = "|◀";
-            this.btnPageMin.UseVisualStyleBackColor = true;
+            this.btnPageMin.UseVisualStyleBackColor = false;
             this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
             // 
             // btnBack
             // 
+            this.btnBack.BackColor = System.Drawing.Color.White;
             this.btnBack.Font = new System.Drawing.Font("MS UI Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnBack.Location = new System.Drawing.Point(788, 559);
             this.btnBack.Margin = new System.Windows.Forms.Padding(2);
@@ -395,11 +396,12 @@
             this.btnBack.Size = new System.Drawing.Size(32, 29);
             this.btnBack.TabIndex = 66;
             this.btnBack.Text = "◀";
-            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnNext
             // 
+            this.btnNext.BackColor = System.Drawing.Color.White;
             this.btnNext.Font = new System.Drawing.Font("MS UI Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnNext.Location = new System.Drawing.Point(822, 559);
             this.btnNext.Margin = new System.Windows.Forms.Padding(2);
@@ -407,11 +409,12 @@
             this.btnNext.Size = new System.Drawing.Size(32, 29);
             this.btnNext.TabIndex = 65;
             this.btnNext.Text = "▶";
-            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.UseVisualStyleBackColor = false;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPageMax
             // 
+            this.btnPageMax.BackColor = System.Drawing.Color.White;
             this.btnPageMax.Font = new System.Drawing.Font("MS UI Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnPageMax.Location = new System.Drawing.Point(856, 559);
             this.btnPageMax.Margin = new System.Windows.Forms.Padding(2);
@@ -419,11 +422,12 @@
             this.btnPageMax.Size = new System.Drawing.Size(32, 29);
             this.btnPageMax.TabIndex = 64;
             this.btnPageMax.Text = "▶|";
-            this.btnPageMax.UseVisualStyleBackColor = true;
+            this.btnPageMax.UseVisualStyleBackColor = false;
             this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
             // btnPageSize
             // 
+            this.btnPageSize.BackColor = System.Drawing.Color.White;
             this.btnPageSize.Font = new System.Drawing.Font("MS UI Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnPageSize.Location = new System.Drawing.Point(149, 558);
             this.btnPageSize.Margin = new System.Windows.Forms.Padding(2);
@@ -431,7 +435,7 @@
             this.btnPageSize.Size = new System.Drawing.Size(90, 28);
             this.btnPageSize.TabIndex = 63;
             this.btnPageSize.Text = "行数変更";
-            this.btnPageSize.UseVisualStyleBackColor = true;
+            this.btnPageSize.UseVisualStyleBackColor = false;
             this.btnPageSize.Click += new System.EventHandler(this.btnPageSize_Click);
             // 
             // lblPageSize
@@ -456,7 +460,7 @@
             // 
             // cmbPositionName
             // 
-            this.cmbPositionName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPositionName.BackColor = System.Drawing.Color.White;
             this.cmbPositionName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbPositionName.FormattingEnabled = true;
             this.cmbPositionName.Location = new System.Drawing.Point(95, 173);
