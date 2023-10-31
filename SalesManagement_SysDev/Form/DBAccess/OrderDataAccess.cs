@@ -3,10 +3,127 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SalesManagement_SysDev
 {
     internal class OrderDataAccess
     {
+        ///////////////////////////////
+        //メソッド名：CheckOrderIDExistence()
+        //引　数   ：受注コード
+        //戻り値   ：True or False
+        //機　能   ：一致する受注IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckOrderIDExistence(int orderID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                //顧客IDで一致するデータが存在するか
+                flg = context.T_Orders.Any(x => x.OrID == orderID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetOrderData()
+        //引　数：なし
+        //戻り値：受注データ
+        //機　能：受注データの全取得
+        ///////////////////////////////
+        public List<T_Order> GetOrderData()
+        {
+            List<T_Order> listOrder = new List<T_Order>();
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listOrder = context.T_Orders.ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listOrder;
+        }
+
+        ///////////////////////////////
+        //メソッド名：AddOrderData()
+        //引　数：regOrder = 受注データ
+        //戻り値：True or False
+        //機　能：受注データの登録
+        //      ：登録成功の場合True
+        //      ：登録失敗の場合False
+        ///////////////////////////////
+        public bool AddClientData(T_Order regOrder)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                context.T_Orders.Add(regOrder);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetOrderDspData()
+        //引　数：なし
+        //戻り値：管理Flgが表示の受注データ
+        //機　能：管理Flgが表示の受注データの全取得
+        ///////////////////////////////
+        public List<T_Order> GetOrderDspData(List<T_Order> dspOrder)
+        {
+            List<T_Order> listOrder = new List<T_Order>();
+
+            try
+            {
+                listOrder = dspOrder.Where(x => x.OrFlag == 0).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listOrder;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetOrderNotDspData()
+        //引　数：なし
+        //戻り値：管理Flgが非表示の受注データ
+        //機　能：管理Flgが非表示の受注データの全取得
+        ///////////////////////////////
+        public List<T_Order> GetOrderNotDspData(List<T_Order> dspOrder)
+        {
+            List<T_Order> listOrder = new List<T_Order>();
+
+            try
+            {
+                listOrder = dspOrder.Where(x => x.OrFlag == 1).ToList();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listOrder;
+        }
     }
 }

@@ -81,5 +81,32 @@ namespace SalesManagement_SysDev
             }
             return flg;
         }
+
+        ///////////////////////////////
+        //メソッド名：GetEmployeeID()
+        //引　数   ：社員名
+        //戻り値   ：社員ID
+        //機　能   ：一致する社員名を取り出して、IDを取得
+        ///////////////////////////////
+        public int GetEmployeeID(string employeeName)
+        {
+            int employeeID = 0;
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Employee = context.M_Employees.Single(x => x.EmName == employeeName);
+
+                employeeID = Employee.EmID;
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return employeeID;
+        }
     }
 }

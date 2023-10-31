@@ -201,6 +201,7 @@
             this.cmbView.Size = new System.Drawing.Size(200, 26);
             this.cmbView.TabIndex = 54;
             this.cmbView.TabStop = false;
+            this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
             // 
             // btnClear
             // 
@@ -213,6 +214,7 @@
             this.btnClear.TabStop = false;
             this.btnClear.Text = "クリア";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // cmbHidden
             // 
@@ -223,7 +225,7 @@
             this.cmbHidden.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbHidden.Location = new System.Drawing.Point(127, 327);
+            this.cmbHidden.Location = new System.Drawing.Point(138, 327);
             this.cmbHidden.Name = "cmbHidden";
             this.cmbHidden.Size = new System.Drawing.Size(200, 22);
             this.cmbHidden.TabIndex = 52;
@@ -242,9 +244,9 @@
             // txbHidden
             // 
             this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbHidden.Location = new System.Drawing.Point(127, 372);
+            this.txbHidden.Location = new System.Drawing.Point(138, 372);
             this.txbHidden.Name = "txbHidden";
-            this.txbHidden.Size = new System.Drawing.Size(656, 22);
+            this.txbHidden.Size = new System.Drawing.Size(645, 22);
             this.txbHidden.TabIndex = 49;
             // 
             // lblClientHidden
@@ -290,7 +292,7 @@
             // 
             this.lblSalesOfficeID.AutoSize = true;
             this.lblSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblSalesOfficeID.Location = new System.Drawing.Point(429, 193);
+            this.lblSalesOfficeID.Location = new System.Drawing.Point(443, 193);
             this.lblSalesOfficeID.Name = "lblSalesOfficeID";
             this.lblSalesOfficeID.Size = new System.Drawing.Size(67, 15);
             this.lblSalesOfficeID.TabIndex = 38;
@@ -299,7 +301,7 @@
             // txbClientName
             // 
             this.txbClientName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientName.Location = new System.Drawing.Point(127, 234);
+            this.txbClientName.Location = new System.Drawing.Point(138, 234);
             this.txbClientName.Name = "txbClientName";
             this.txbClientName.Size = new System.Drawing.Size(200, 22);
             this.txbClientName.TabIndex = 37;
@@ -317,7 +319,7 @@
             // txbOrderID
             // 
             this.txbOrderID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbOrderID.Location = new System.Drawing.Point(127, 190);
+            this.txbOrderID.Location = new System.Drawing.Point(138, 190);
             this.txbOrderID.Name = "txbOrderID";
             this.txbOrderID.Size = new System.Drawing.Size(200, 22);
             this.txbOrderID.TabIndex = 35;
@@ -341,14 +343,14 @@
             this.pnlSelect.Controls.Add(this.rdbRegister);
             this.pnlSelect.Location = new System.Drawing.Point(14, 118);
             this.pnlSelect.Name = "pnlSelect";
-            this.pnlSelect.Size = new System.Drawing.Size(370, 37);
+            this.pnlSelect.Size = new System.Drawing.Size(408, 37);
             this.pnlSelect.TabIndex = 33;
             // 
             // rdbSearch
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(299, 8);
+            this.rdbSearch.Location = new System.Drawing.Point(312, 8);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(65, 23);
             this.rdbSearch.TabIndex = 2;
@@ -359,7 +361,7 @@
             // 
             this.rdbUpdate.AutoSize = true;
             this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbUpdate.Location = new System.Drawing.Point(213, 8);
+            this.rdbUpdate.Location = new System.Drawing.Point(228, 8);
             this.rdbUpdate.Name = "rdbUpdate";
             this.rdbUpdate.Size = new System.Drawing.Size(65, 23);
             this.rdbUpdate.TabIndex = 1;
@@ -387,6 +389,7 @@
             this.btnDone.TabStop = false;
             this.btnDone.Text = "実行";
             this.btnDone.UseVisualStyleBackColor = true;
+            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // pnlHonsha
             // 
@@ -419,6 +422,7 @@
             this.btnReturn.TabStop = false;
             this.btnReturn.Text = "戻る";
             this.btnReturn.UseVisualStyleBackColor = true;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
             // dgvOrderDetail
             // 
@@ -443,7 +447,7 @@
             // 
             this.lblOrderManager.AutoSize = true;
             this.lblOrderManager.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblOrderManager.Location = new System.Drawing.Point(429, 237);
+            this.lblOrderManager.Location = new System.Drawing.Point(443, 237);
             this.lblOrderManager.Name = "lblOrderManager";
             this.lblOrderManager.Size = new System.Drawing.Size(97, 15);
             this.lblOrderManager.TabIndex = 66;
@@ -452,7 +456,7 @@
             // txbEmployeeName
             // 
             this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbEmployeeName.Location = new System.Drawing.Point(127, 279);
+            this.txbEmployeeName.Location = new System.Drawing.Point(138, 279);
             this.txbEmployeeName.Name = "txbEmployeeName";
             this.txbEmployeeName.Size = new System.Drawing.Size(200, 22);
             this.txbEmployeeName.TabIndex = 69;
@@ -471,11 +475,11 @@
             // 
             this.lblOrderDate.AutoSize = true;
             this.lblOrderDate.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblOrderDate.Location = new System.Drawing.Point(429, 286);
+            this.lblOrderDate.Location = new System.Drawing.Point(443, 282);
             this.lblOrderDate.Name = "lblOrderDate";
-            this.lblOrderDate.Size = new System.Drawing.Size(112, 15);
+            this.lblOrderDate.Size = new System.Drawing.Size(82, 15);
             this.lblOrderDate.TabIndex = 70;
-            this.lblOrderDate.Text = "発注確定年月日";
+            this.lblOrderDate.Text = "受注年月日";
             // 
             // dtpOrderDate
             // 
@@ -512,7 +516,7 @@
             // 
             this.lblConfirm.AutoSize = true;
             this.lblConfirm.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblConfirm.Location = new System.Drawing.Point(429, 330);
+            this.lblConfirm.Location = new System.Drawing.Point(443, 330);
             this.lblConfirm.Name = "lblConfirm";
             this.lblConfirm.Size = new System.Drawing.Size(90, 15);
             this.lblConfirm.TabIndex = 74;
@@ -581,7 +585,7 @@
             // 
             this.rdbDetailRegister.AutoSize = true;
             this.rdbDetailRegister.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbDetailRegister.Location = new System.Drawing.Point(93, 8);
+            this.rdbDetailRegister.Location = new System.Drawing.Point(104, 8);
             this.rdbDetailRegister.Name = "rdbDetailRegister";
             this.rdbDetailRegister.Size = new System.Drawing.Size(103, 23);
             this.rdbDetailRegister.TabIndex = 3;

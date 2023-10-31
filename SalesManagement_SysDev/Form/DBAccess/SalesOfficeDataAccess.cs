@@ -18,16 +18,16 @@ namespace SalesManagement_SysDev
         public List<M_SalesOffice> GetSalesOfficeDspData()
         {
             List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
-            //try
-            //{
+            try
+            {
                 var context = new SalesManagement_DevContext();
                 listSalesOffice = context.M_SalesOffices.Where(x => x.SoFlag == 0).ToList();
                 context.Dispose();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             return listSalesOffice;
         }
