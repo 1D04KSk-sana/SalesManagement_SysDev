@@ -35,6 +35,29 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：AddEmployeeData()
+        //引　数：regEmployee = 顧客データ
+        //戻り値：True or False
+        //機　能：顧客データの登録
+        //      ：登録成功の場合True
+        //      ：登録失敗の場合False
+        ///////////////////////////////
+        public bool AddEmployeeData(M_Employee regEmployee)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                context.M_Employees.Add(regEmployee);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+        }
+        ///////////////////////////////
         //メソッド名：CheckSinghUpPassExistence()
         //引　数   ：パスワード
         //戻り値   ：True or False
