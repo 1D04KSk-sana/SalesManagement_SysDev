@@ -16,6 +16,10 @@ namespace SalesManagement_SysDev
         DataInputCheck dataInputCheck = new DataInputCheck();
         //データベース営業所テーブルアクセス用クラスのインスタンス化
         SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
+        //データベース社員テーブルアクセス用クラスのインスタンス化
+        EmployeeDataAccess EmployeeDataAccess = new EmployeeDataAccess();
+        //データベース営業所テーブルアクセス用クラスのインスタンス化
+        OperationLogDataAccess operationLogDataAccess = new OperationLogDataAccess();
         //コンボボックス用の営業所データリスト
         private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
         //データベース役職名テーブルアクセス用クラスのインスタンス化
@@ -84,7 +88,7 @@ namespace SalesManagement_SysDev
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-
+            ClearImput();
         }
 
         private void cmbHidden_SelectedIndexChanged(object sender, EventArgs e)
@@ -191,13 +195,58 @@ namespace SalesManagement_SysDev
             }
 
             //操作ログデータ取得
-            var regOperationLog = GenerateLogAtRegistration(rdbRegister.Text);
+            var regOperationLog = GenerateLogAtRegistration("登録");
 
             //操作ログデータの登録（成功 = true,失敗 = false）
-            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            if (!operationLogDataAccess.AddOperationLogData(regOperationLog))
             {
                 return;
             }
+            // 顧客情報作成
+            var regEmployee = GenerateDataAtRegistration();
+
+            // 顧客情報登録
+            RegistrationEmployee(regEmployee);
+        }
+        ///////////////////////////////
+        //メソッド名：RegEmployee()
+        //引　数   ：顧客情報
+        //戻り値   ：なし
+        //機　能   ：顧客データの登録
+        ///////////////////////////////
+        private void RegistrationEmployee(M_Employee regEmployee)
+        {
+            // 顧客情報の登録
+            bool flg = EmployeeDataAccess.AddEmployeeData(regEmployee);
+
+            //登録成功・失敗メッセージ
+            if (flg == true)
+            {
+                MessageBox.Show("データを登録しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("データの登録に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            // 入力エリアのクリア
+            ClearImput();
+
+        }
+        ///////////////////////////////
+        //メソッド名：ClearImput()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：テキストボックスやコンボボックスの中身のクリア
+        ///////////////////////////////
+        private void ClearImput()
+        {
+            txbEmployeeName.Text = string.Empty;
+            txbSinghUpPass.Text = string.Empty;
+            txbSinghUpPhone.Text = string.Empty;
+            dtpHireDate.Value = DateTime.Now;
+            cmbSalesOfficeID.SelectedIndex = -1;
+            cmbPositionID.SelectedIndex = -1;
         }
 
         ///////////////////////////////
@@ -213,11 +262,11 @@ namespace SalesManagement_SysDev
 
             return new T_OperationLog
             {
-                OpHistoryID = operationLogAccess.OperationLogNum() + 1,
+                OpHistoryID = operationLogDataAccess.OperationLogNum() + 1,
                 EmID = F_Login.intEmployeeID,
                 FormName = "顧客管理画面",
                 OpDone = OperationDone,
-                OpDBID = logOperatin.ClID.Value,
+                OpDBID = logOperatin.EmID,
                 OpSetTime = DateTime.Now,
             };
         }
@@ -282,9 +331,9 @@ namespace SalesManagement_SysDev
             if (!String.IsNullOrEmpty(txbEmployeeName.Text.Trim()))
             {
                 // 社員名の文字数チェック
-                if (txbEmployeeName.TextLength >= 50)
+                if (txbEmployeeName.TextLength > 50)
                 {
-                    MessageBox.Show("社員名は50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("社員名は50文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbEmployeeName.Focus();
                     return false;
                 }
@@ -329,12 +378,12 @@ namespace SalesManagement_SysDev
                 // パスワードの数字チェック
                 if (!dataInputCheck.CheckHalfAlphabetNumeric(txbSinghUpPass.Text.Trim()))
                 {
-                    MessageBox.Show("パスワードは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("パスワードは全て半角英数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSinghUpPass.Focus();
                     return false;
                 }
                 // パスワードの文字数チェック
-                if (txbSinghUpPass.TextLength > 7)
+                if (txbSinghUpPass.TextLength > 10)
                 {
                     MessageBox.Show("パスワードは10文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSinghUpPass.Focus();
