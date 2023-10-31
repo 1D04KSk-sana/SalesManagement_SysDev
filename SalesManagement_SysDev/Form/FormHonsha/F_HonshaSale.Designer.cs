@@ -184,7 +184,6 @@
             this.dgvSale.Size = new System.Drawing.Size(930, 442);
             this.dgvSale.TabIndex = 56;
             this.dgvSale.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSale_CellClick);
-            this.dgvSale.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSale_CellContentClick);
             // 
             // txbHidden
             // 
@@ -217,7 +216,6 @@
             this.rdbSearch.TabStop = true;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
-            this.rdbSearch.CheckedChanged += new System.EventHandler(this.rdbSearch_CheckedChanged);
             // 
             // lblSaleDate
             // 
@@ -228,7 +226,6 @@
             this.lblSaleDate.Size = new System.Drawing.Size(98, 22);
             this.lblSaleDate.TabIndex = 50;
             this.lblSaleDate.Text = "売上日時";
-            this.lblSaleDate.Click += new System.EventHandler(this.lblSaleDate_Click);
             // 
             // txbClientPostal
             // 
@@ -238,7 +235,6 @@
             this.txbClientPostal.Name = "txbClientPostal";
             this.txbClientPostal.Size = new System.Drawing.Size(186, 29);
             this.txbClientPostal.TabIndex = 49;
-            this.txbClientPostal.TextChanged += new System.EventHandler(this.txbClientPostal_TextChanged);
             // 
             // lblChumonID
             // 
@@ -259,7 +255,6 @@
             this.lblEmployeeName.Size = new System.Drawing.Size(120, 22);
             this.lblEmployeeName.TabIndex = 47;
             this.lblEmployeeName.Text = "受注社員名";
-            this.lblEmployeeName.Click += new System.EventHandler(this.lblEmployeeName_Click);
             // 
             // cmbSalesOfficeID
             // 
@@ -280,7 +275,6 @@
             this.txbEmployeeName.Name = "txbEmployeeName";
             this.txbEmployeeName.Size = new System.Drawing.Size(249, 29);
             this.txbEmployeeName.TabIndex = 45;
-            this.txbEmployeeName.TextChanged += new System.EventHandler(this.txbEmployeeName_TextChanged);
             // 
             // lblSalesOfficeID
             // 
@@ -358,7 +352,6 @@
             this.dtpSaleDate.Name = "dtpSaleDate";
             this.dtpSaleDate.Size = new System.Drawing.Size(201, 25);
             this.dtpSaleDate.TabIndex = 71;
-            this.dtpSaleDate.ValueChanged += new System.EventHandler(this.dtpSaleDate_ValueChanged);
             // 
             // dgvSaleDetail
             // 

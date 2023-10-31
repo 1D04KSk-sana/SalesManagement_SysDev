@@ -28,6 +28,7 @@ namespace SalesManagement_SysDev
         private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
         //フォームを呼び出しする際のインスタンス化
         private F_SearchDialog f_SearchDialog = new F_SearchDialog();
+
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
         {
@@ -35,11 +36,11 @@ namespace SalesManagement_SysDev
             { 1, "非表示" },
         };
 
-
         public F_HonshaSale()
         {
             InitializeComponent();
         }
+
         //DataGridView用に使用す営業所のDictionary
         private Dictionary<int?, string> dictionarySalesOffice = new Dictionary<int?, string>
         {
@@ -56,12 +57,14 @@ namespace SalesManagement_SysDev
 
             SaleSearchButtonClick(true);
         }
+
         private void SearchDialog_btnOrSearchClick(object sender, EventArgs e)
         {
             f_SearchDialog.Close();
 
             SaleSearchButtonClick(false);
         }
+
         ///////////////////////////////
         //メソッド名：SaleSearchButtonClick()
         //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
@@ -80,6 +83,7 @@ namespace SalesManagement_SysDev
 
             MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
         ///////////////////////////////
         //メソッド名：GenerateDataAtSelect()
         //引　数   ：searchFlg = And検索かOr検索か判別するためのBool値
@@ -102,7 +106,6 @@ namespace SalesManagement_SysDev
             {
                 inttxbClientPostal = int.Parse(strtxbClientPostal);
             }
-
 
             // 検索条件のセット
             T_Sale selectCondition = new T_Sale()
@@ -129,11 +132,11 @@ namespace SalesManagement_SysDev
                 listSale = saleDataAccess.GetOrSaleData(selectCondition);
             }
         }
+
         private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Opacity = 1;
         }
-
 
         private void F_HonshaSale_Load(object sender, EventArgs e)
         {
@@ -156,8 +159,8 @@ namespace SalesManagement_SysDev
 
             //cmbViewを表示に
             cmbView.SelectedIndex = 0;
-
         }
+
         ///////////////////////////////
         //メソッド名：SetFormDataGridView()
         //引　数   ：なし
@@ -245,17 +248,13 @@ namespace SalesManagement_SysDev
             dgvSaleDetail.Columns["PrID"].Width = 60;
             dgvSaleDetail.Columns["SaQuantity"].Width = 57;
             dgvSaleDetail.Columns["SaTotalPrice"].Width = 80;
-
-
+                        
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvSaleDetail.Columns)
             {
                 dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-
         }
-
-
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
@@ -270,6 +269,7 @@ namespace SalesManagement_SysDev
                 ClientDataSelect();
             }
         }
+
         ///////////////////////////////
         //メソッド名：ClientDataSelect()
         //引　数   ：なし
@@ -301,6 +301,7 @@ namespace SalesManagement_SysDev
             //顧客登録フォームの透明化
             this.Opacity = 0;
         }
+
         ///////////////////////////////
         //メソッド名：GetValidDataAtSearch()
         //引　数   ：なし
@@ -341,15 +342,13 @@ namespace SalesManagement_SysDev
             return true;
         }
 
-
-
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
 
-            GetDataGridView();
-
+            GetDataGridView();            
         }
+
         ///////////////////////////////
         //メソッド名：ClearImput()
         //引　数   ：なし
@@ -368,6 +367,7 @@ namespace SalesManagement_SysDev
             cmbSalesOfficeID.SelectedIndex = -1;
             cmbHidden.SelectedIndex = -1;
         }
+
         ///////////////////////////////
         //メソッド名：GetDataGridView()
         //引　数   ：なし
@@ -383,8 +383,8 @@ namespace SalesManagement_SysDev
 
             // DataGridViewに表示するデータを指定
             SetDataGridView(listViewSale,listSaleDetail);
-
         }
+
         ///////////////////////////////
         //メソッド名：SetListSale()
         //引　数   ：なし
@@ -439,9 +439,6 @@ namespace SalesManagement_SysDev
             //中身を消去
             dgvSaleDetail.Rows.Clear();
 
-
-
-
             //ページ行数を取得
             int pageSize = int.Parse(txbPageSize.Text.Trim());
             //ページ数を取得
@@ -470,12 +467,12 @@ namespace SalesManagement_SysDev
             //dgvClientをリフレッシュ
             dgvSaleDetail.Refresh();
 
-            if (lastPage == pageNum)
+            if (pageNum == 0 && lastPage == pageNum)
             {
                 btnPageMax.Visible = false;
                 btnNext.Visible = false;
-                btnPageMin.Visible = true;
-                btnBack.Visible = true;
+                btnPageMin.Visible = false;
+                btnBack.Visible = false;
             }
             else if (pageNum == 0)
             {
@@ -483,6 +480,13 @@ namespace SalesManagement_SysDev
                 btnNext.Visible = true;
                 btnPageMin.Visible = false;
                 btnBack.Visible = false;
+            }
+            else if (lastPage == pageNum)
+            {
+                btnPageMax.Visible = false;
+                btnNext.Visible = false;
+                btnPageMin.Visible = true;
+                btnBack.Visible = true;
             }
             else
             {
@@ -512,50 +516,10 @@ namespace SalesManagement_SysDev
             txbHidden.Text = dgvSale[7, dgvSale.CurrentCellAddress.Y]?.Value?.ToString();
         }
 
-
-
-
-
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {
             //データグリッドビューのデータ取得
             GetDataGridView();
-
-        }
-
-        private void rdbSearch_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dtpSaleDate_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblSaleDate_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblEmployeeName_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txbEmployeeName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txbClientPostal_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvSale_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void dgvSale_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -568,7 +532,6 @@ namespace SalesManagement_SysDev
 
             //選択された行に対してのコントロールの変更
             SelectRowControl();
-
         }
     }
 }
