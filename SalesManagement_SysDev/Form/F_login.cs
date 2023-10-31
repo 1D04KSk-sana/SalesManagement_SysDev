@@ -755,6 +755,14 @@ namespace SalesManagement_SysDev
             f_Honsha.FormClosed += ChildForm_FormClosed;
             f_Honsha.Show();
 
+            //F_Eigyo f_Eigyo = new F_Eigyo();
+
+            //f_Eigyo.Owner = this;
+            //f_Eigyo.FormClosed += ChildForm_FormClosed;
+            //f_Eigyo.Show();
+
+
+
             this.Opacity = 0;
         }
 
