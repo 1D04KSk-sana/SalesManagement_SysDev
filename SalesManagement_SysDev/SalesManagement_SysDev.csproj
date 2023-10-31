@@ -197,6 +197,9 @@
     <Compile Include="Form\DBAccess\StockDataAccess.cs" />
     <Compile Include="Form\DBAccess\ShipmentDataAccess.cs" />
     <Compile Include="Form\DBAccess\ShipmentDetailDataAccess.cs" />
+    <EmbeddedResource Include="Form\FormEigyo\F_Eigyo.resx">
+      <DependentUpon>F_Eigyo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\F_login.resx">
       <DependentUpon>F_login.cs</DependentUpon>
     </EmbeddedResource>
