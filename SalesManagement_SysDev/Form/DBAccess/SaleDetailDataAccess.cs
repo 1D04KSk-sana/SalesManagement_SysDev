@@ -32,6 +32,5 @@ namespace SalesManagement_SysDev
 
             return listSaleDetail;
         }
-
     }
 }

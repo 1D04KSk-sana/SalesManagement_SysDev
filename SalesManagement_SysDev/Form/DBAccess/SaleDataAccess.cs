@@ -33,6 +33,7 @@ namespace SalesManagement_SysDev
             }
             return flg;
         }
+
         ///////////////////////////////
         //メソッド名：GetSaleData()
         //引　数：なし
@@ -56,6 +57,7 @@ namespace SalesManagement_SysDev
 
             return listSale;
         }
+
         ///////////////////////////////
         //メソッド名：GetSaleDspData()
         //引　数：なし
@@ -77,6 +79,7 @@ namespace SalesManagement_SysDev
 
             return listSale;
         }
+
         ///////////////////////////////
         //メソッド名：GetSaleNotDspData()
         //引　数：なし
@@ -98,7 +101,6 @@ namespace SalesManagement_SysDev
 
             return listSale;
         }
-
 
         ///////////////////////////////
         //メソッド名：GetAndSaleData()
@@ -139,6 +141,7 @@ namespace SalesManagement_SysDev
 
             return listSale;
         }
+
         ///////////////////////////////
         //メソッド名：GetOrSaleData()
         //引　数：検索条件
@@ -162,7 +165,5 @@ namespace SalesManagement_SysDev
 
             return listSale;
         }
-
-
     }
 }
