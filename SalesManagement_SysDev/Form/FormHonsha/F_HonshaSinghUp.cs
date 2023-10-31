@@ -26,164 +26,10 @@ namespace SalesManagement_SysDev
        PositionDataAccess PositionDataAccess = new PositionDataAccess();
         //コンボボックス用の役職名データリスト
         private static List<M_Position> listPosition = new List<M_Position>();
+
         public F_HonshaSinghUp()
         {
             InitializeComponent();
-        }
-
-        private void pnlHonsha_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void txbNumPage_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnPageMin_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnNext_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnPageMax_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnPageSize_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblPageSize_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txbPageSize_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblNumPage_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnClear_Click(object sender, EventArgs e)
-        {
-            ClearImput();
-        }
-
-        private void cmbHidden_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvClient_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void txbHidden_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblClientHidden_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txbClientFAX_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblClientFax_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txbClientAddress_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblClientAddress_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txbClientPostal_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblClientPostal_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblCilentPhone_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmbSalesOfficeID_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txbClientPhone_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblSalesOfficeID_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txbClientName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblClientName_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txbClientID_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblClientID_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void pnlSelect_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void btnDone_Click(object sender, EventArgs e)
@@ -208,13 +54,19 @@ namespace SalesManagement_SysDev
             // 顧客情報登録
             RegistrationEmployee(regEmployee);
         }
-        ///////////////////////////////
-        //メソッド名：RegEmployee()
-        //引　数   ：顧客情報
-        //戻り値   ：なし
-        //機　能   ：顧客データの登録
-        ///////////////////////////////
-        private void RegistrationEmployee(M_Employee regEmployee)
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearImput();
+        }
+
+            ///////////////////////////////
+            //メソッド名：RegEmployee()
+            //引　数   ：顧客情報
+            //戻り値   ：なし
+            //機　能   ：顧客データの登録
+            ///////////////////////////////
+            private void RegistrationEmployee(M_Employee regEmployee)
         {
             // 顧客情報の登録
             bool flg = EmployeeDataAccess.AddEmployeeData(regEmployee);
@@ -247,6 +99,7 @@ namespace SalesManagement_SysDev
             dtpHireDate.Value = DateTime.Now;
             cmbSalesOfficeID.SelectedIndex = -1;
             cmbPositionID.SelectedIndex = -1;
+            txbEmployeeID.Text = string.Empty;
         }
 
         ///////////////////////////////
@@ -264,10 +117,10 @@ namespace SalesManagement_SysDev
             {
                 OpHistoryID = operationLogDataAccess.OperationLogNum() + 1,
                 EmID = F_Login.intEmployeeID,
-                FormName = "顧客管理画面",
+                FormName = "社員新規登録画面",
                 OpDone = OperationDone,
                 OpDBID = logOperatin.EmID,
-                OpSetTime = DateTime.Now,
+                OpSetTime = DateTime.Now
             };
         }
         ///////////////////////////////
@@ -280,18 +133,16 @@ namespace SalesManagement_SysDev
         {
             return new M_Employee
             {
-                EmID = int.Parse(txbEmployeeName.Text.Trim()),
+                EmID = int.Parse(txbEmployeeID.Text.Trim()),
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 EmPassword = txbSinghUpPass.Text.Trim(),
                 EmHiredate = dtpHireDate.Value,
                 EmPhone = txbSinghUpPhone.Text.Trim(),
-                PoID = cmbPositionID.SelectedIndex +1
+                PoID = cmbPositionID.SelectedIndex +1,
+                EmName = txbEmployeeName.Text.Trim(),
             };
         }
-        private void lblClient_Click(object sender, EventArgs e)
-        {
-
-        }
+        
         ///////////////////////////////
         //メソッド名：GetValidDataAtRegistration()
         //引　数   ：なし
@@ -302,30 +153,30 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-            //// 顧客IDの適否
-            //if (!String.IsNullOrEmpty(txbEmployeeName.Text.Trim()))
-            //{
-            //    // 顧客IDの数字チェック
-            //    if (!dataInputCheck.CheckNumeric(txbClientID.Text.Trim()))
-            //    {
-            //        MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        txbClientID.Focus();
-            //        return false;
-            //    }
-            //    //顧客IDの重複チェック
-            //    if (clientDataAccess.CheckClientIDExistence(int.Parse(txbClientID.Text.Trim())))
-            //    {
-            //        MessageBox.Show("顧客IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        txbClientID.Focus();
-            //        return false;
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("顧客IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    txbClientID.Focus();
-            //    return false;
-            //}
+            // 顧客IDの適否
+            if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
+            {
+                // 顧客IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbEmployeeID.Text.Trim()))
+                {
+                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+                //顧客IDの重複チェック
+                if (EmployeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    MessageBox.Show("顧客IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("顧客IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbEmployeeID.Focus();
+                return false;
+            }
 
             // 社員名の適否
             if (!String.IsNullOrEmpty(txbEmployeeName.Text.Trim()))
@@ -400,7 +251,7 @@ namespace SalesManagement_SysDev
             // 営業所名の適否
             if (cmbSalesOfficeID.SelectedIndex == -1)
             {
-                MessageBox.Show("営業名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("営業所名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbPositionID.Focus();
                 return false;
             }
@@ -433,5 +284,6 @@ namespace SalesManagement_SysDev
             //cmbPositionIDを未選択に
             cmbPositionID.SelectedIndex = -1;
         }
+
     }
 }
