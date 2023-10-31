@@ -974,19 +974,19 @@ namespace SalesManagement_SysDev
             //dgvClientをリフレッシュ
             dgvClient.Refresh();
 
-            if (lastPage == pageNum)
-            {
-                btnPageMax.Visible = false;
-                btnNext.Visible = false;
-                btnPageMin.Visible = true;
-                btnBack.Visible = true;
-            }
-            else if (pageNum == 0)
+            if (pageNum == 0)
             {
                 btnPageMax.Visible = true;
                 btnNext.Visible = true;
                 btnPageMin.Visible = false;
                 btnBack.Visible = false;
+            }
+            else if (lastPage == pageNum)
+            {
+                btnPageMax.Visible = false;
+                btnNext.Visible = false;
+                btnPageMin.Visible = true;
+                btnBack.Visible = true;
             }
             else
             {

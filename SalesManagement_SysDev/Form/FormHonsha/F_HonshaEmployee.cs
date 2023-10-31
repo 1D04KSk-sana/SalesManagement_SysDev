@@ -63,6 +63,7 @@ namespace SalesManagement_SysDev
         {
             InitializeComponent();
         }
+
         private void F_HonshaEmployee_Load(object sender, EventArgs e)
         {
             txbNumPage.Text = "1";
@@ -99,14 +100,13 @@ namespace SalesManagement_SysDev
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Opacity = 1;
         }
-
 
         private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
         {
@@ -120,16 +120,6 @@ namespace SalesManagement_SysDev
             f_SearchDialog.Close();
 
             EmployeeSearchButtonClick(false);
-        }
-
-        private void lblClient_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void F_HonshaEmploye_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void btnReturn_Click_1(object sender, EventArgs e)
@@ -195,6 +185,30 @@ namespace SalesManagement_SysDev
 
             GetDataGridView();
         }
+
+        private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //データグリッドビューのデータ取得
+            GetDataGridView();
+        }
+
+        private void dgvEmployee_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvEmployee.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            //選択された行に対してのコントロールの変更
+            SelectRowControl();
+        }
+
+        private void btnPageSize_Click(object sender, EventArgs e)
+        {
+            GetDataGridView();
+        }
+
         ///////////////////////////////
         //メソッド名：GetDataGridView()
         //引　数   ：なし
@@ -323,19 +337,19 @@ namespace SalesManagement_SysDev
             //dgvClientをリフレッシュ
             dgvEmployee.Refresh();
 
-            if (lastPage == pageNum)
-            {
-                btnPageMax.Visible = false;
-                btnNext.Visible = false;
-                btnPageMin.Visible = true;
-                btnBack.Visible = true;
-            }
-            else if (pageNum == 0)
+            if (pageNum == 0)
             {
                 btnPageMax.Visible = true;
                 btnNext.Visible = true;
                 btnPageMin.Visible = false;
                 btnBack.Visible = false;
+            }
+            else if (lastPage == pageNum)
+            {
+                btnPageMax.Visible = false;
+                btnNext.Visible = false;
+                btnPageMin.Visible = true;
+                btnBack.Visible = true;
             }
             else
             {
@@ -464,11 +478,6 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-
-
-
-
-
             //表示非表示選択の適否
             if (cmbHidden.SelectedIndex == -1)
             {
@@ -560,6 +569,7 @@ namespace SalesManagement_SysDev
                 EmHidden = txbHidden.Text.Trim(),
             };
         }
+
         ///////////////////////////////
         //メソッド名：GetValidDataAtSearch()
         //引　数   ：なし
@@ -651,6 +661,7 @@ namespace SalesManagement_SysDev
             //顧客登録フォームの透明化
             this.Opacity = 0;
         }
+
         ///////////////////////////////
         //メソッド名：GenerateLogAtRegistration()
         //引　数   ：操作名
@@ -743,29 +754,6 @@ namespace SalesManagement_SysDev
             {
                 dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-        }
-
-        private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //データグリッドビューのデータ取得
-            GetDataGridView();
-        }
-
-        private void dgvEmployee_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
-            if (dgvEmployee.SelectedCells.Count == 0)
-            {
-                return;
-            }
-
-            //選択された行に対してのコントロールの変更
-            SelectRowControl();
-        }
-
-        private void btnPageSize_Click(object sender, EventArgs e)
-        {
-            GetDataGridView();
         }
     }
 }
