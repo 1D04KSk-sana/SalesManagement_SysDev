@@ -18,6 +18,8 @@ namespace SalesManagement_SysDev
         DataInputCheck dataInputCheck = new DataInputCheck();
         //データベース売上テーブルアクセス用クラスのインスタンス化
         SaleDataAccess saleDataAccess = new SaleDataAccess();
+        //データベース売上詳細テーブルアクセス用クラスのインスタンス化
+        SaleDetailDataAccess saleDetailDataAccess = new SaleDetailDataAccess();
         //データグリッドビュー用の売上データ
         private static List<T_Sale> listSale = new List<T_Sale>();
         //データグリッドビュー用の全売上データ
@@ -209,6 +211,48 @@ namespace SalesManagement_SysDev
             {
                 dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+
+            //列を自由に設定できるように
+            dgvSaleDetail.AutoGenerateColumns = false;
+            //行単位で選択するようにする
+            dgvSaleDetail.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //行と列の高さを変更できないように
+            dgvSaleDetail.AllowUserToResizeColumns = false;
+            dgvSaleDetail.AllowUserToResizeRows = false;
+            //セルの複数行選択をオフに
+            dgvSaleDetail.MultiSelect = false;
+            //セルの編集ができないように
+            dgvSaleDetail.ReadOnly = true;
+            //ユーザーが新しい行を追加できないようにする
+            dgvSaleDetail.AllowUserToAddRows = false;
+
+            //左端の項目列を削除
+            dgvSaleDetail.RowHeadersVisible = false;
+            //行の自動追加をオフ
+            dgvSaleDetail.AllowUserToAddRows = false;
+
+            //ヘッダー位置の指定
+            dgvSaleDetail.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dgvSaleDetail.Columns.Add("SaDetailID", "売上明細ID");
+            dgvSaleDetail.Columns.Add("SaID", "売上ID");
+            dgvSaleDetail.Columns.Add("PrID", "商品ID");
+            dgvSaleDetail.Columns.Add("SaQuantity", "個数");
+            dgvSaleDetail.Columns.Add("SaTotalPrice", "合計金額");
+
+            dgvSaleDetail.Columns["SaDetailID"].Width = 70;
+            dgvSaleDetail.Columns["SaID"].Width = 60;
+            dgvSaleDetail.Columns["PrID"].Width = 60;
+            dgvSaleDetail.Columns["SaQuantity"].Width = 57;
+            dgvSaleDetail.Columns["SaTotalPrice"].Width = 80;
+
+
+            //並び替えができないようにする
+            foreach (DataGridViewColumn dataColumn in dgvSaleDetail.Columns)
+            {
+                dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
         }
 
 
@@ -335,8 +379,11 @@ namespace SalesManagement_SysDev
             //表示用の売上リスト作成
             List<T_Sale> listViewSale = SetListSale();
 
+            List<T_SaleDetail> listSaleDetail = saleDetailDataAccess.GetSaleDetailData();
+
             // DataGridViewに表示するデータを指定
-            SetDataGridView(listViewSale);
+            SetDataGridView(listViewSale,listSaleDetail);
+
         }
         ///////////////////////////////
         //メソッド名：SetListSale()
@@ -367,27 +414,33 @@ namespace SalesManagement_SysDev
             //一覧表示cmbViewが表示を選択されているとき
             if (cmbView.SelectedIndex == 0)
             {
-                // 管理Flgが表示の部署データの取得
+                // 管理Flgが表示の売上データの取得
                 listViewSale = saleDataAccess.GetSaleDspData(listViewSale);
             }
             else
             {
-                // 管理Flgが非表示の部署データの取得
+                // 管理Flgが非表示の売上データの取得
                 listViewSale = saleDataAccess.GetSaleNotDspData(listViewSale);
             }
 
             return listViewSale;
         }
+
         ///////////////////////////////
         //メソッド名：SetDataGridView()
         //引　数   ：なし
         //戻り値   ：なし
         //機　能   ：データグリッドビューへの表示
         ///////////////////////////////
-        private void SetDataGridView(List<T_Sale> viewSale)
+        private void SetDataGridView(List<T_Sale> viewSale,List<T_SaleDetail> viewSaleDetail)
         {
             //中身を消去
             dgvSale.Rows.Clear();
+            //中身を消去
+            dgvSaleDetail.Rows.Clear();
+
+
+
 
             //ページ行数を取得
             int pageSize = int.Parse(txbPageSize.Text.Trim());
@@ -407,6 +460,15 @@ namespace SalesManagement_SysDev
 
             //dgvClientをリフレッシュ
             dgvSale.Refresh();
+
+            //1行ずつdgvClientに挿入
+            foreach (var item in viewSaleDetail)
+            {
+                dgvSaleDetail.Rows.Add(item.SaDetailID, item.SaID,item.PrID, item.SaQuantity, item.SaTotalPrice);
+            }
+
+            //dgvClientをリフレッシュ
+            dgvSaleDetail.Refresh();
 
             if (lastPage == pageNum)
             {
