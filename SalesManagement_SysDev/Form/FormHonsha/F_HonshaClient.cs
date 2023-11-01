@@ -209,16 +209,13 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private T_OperationLog GenerateLogAtRegistration(string OperationDone)
         {
-            //登録・更新使用としている顧客データの取得
-            int logOperatin = int.Parse(txbClientID.Text.Trim());
-
             return new T_OperationLog
             {
                 OpHistoryID = operationLogAccess.OperationLogNum() + 1,
                 EmID = F_Login.intEmployeeID,
                 FormName = "顧客管理画面",
                 OpDone = OperationDone,
-                OpDBID = logOperatin,
+                OpDBID = int.Parse(txbClientID.Text.Trim()),
                 OpSetTime = DateTime.Now,
             };
         }
