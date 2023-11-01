@@ -75,6 +75,10 @@
             this.txbOrderQuantity = new System.Windows.Forms.TextBox();
             this.lblProductName = new System.Windows.Forms.Label();
             this.txbProductName = new System.Windows.Forms.TextBox();
+            this.txbClientID = new System.Windows.Forms.TextBox();
+            this.lblEmployeeID = new System.Windows.Forms.Label();
+            this.txbEmployeeID = new System.Windows.Forms.TextBox();
+            this.lblClientID = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).BeginInit();
             this.pnlSelect.SuspendLayout();
             this.pnlHonsha.SuspendLayout();
@@ -230,7 +234,7 @@
             this.cmbHidden.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbHidden.Location = new System.Drawing.Point(139, 328);
+            this.cmbHidden.Location = new System.Drawing.Point(139, 373);
             this.cmbHidden.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbHidden.Name = "cmbHidden";
             this.cmbHidden.Size = new System.Drawing.Size(200, 22);
@@ -252,17 +256,17 @@
             // txbHidden
             // 
             this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbHidden.Location = new System.Drawing.Point(139, 372);
+            this.txbHidden.Location = new System.Drawing.Point(583, 373);
             this.txbHidden.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txbHidden.Name = "txbHidden";
-            this.txbHidden.Size = new System.Drawing.Size(645, 22);
+            this.txbHidden.Size = new System.Drawing.Size(630, 22);
             this.txbHidden.TabIndex = 49;
             // 
             // lblClientHidden
             // 
             this.lblClientHidden.AutoSize = true;
             this.lblClientHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientHidden.Location = new System.Drawing.Point(13, 375);
+            this.lblClientHidden.Location = new System.Drawing.Point(471, 377);
             this.lblClientHidden.Name = "lblClientHidden";
             this.lblClientHidden.Size = new System.Drawing.Size(82, 15);
             this.lblClientHidden.TabIndex = 48;
@@ -302,7 +306,7 @@
             // 
             this.lblSalesOfficeID.AutoSize = true;
             this.lblSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblSalesOfficeID.Location = new System.Drawing.Point(443, 192);
+            this.lblSalesOfficeID.Location = new System.Drawing.Point(472, 193);
             this.lblSalesOfficeID.Name = "lblSalesOfficeID";
             this.lblSalesOfficeID.Size = new System.Drawing.Size(67, 15);
             this.lblSalesOfficeID.TabIndex = 38;
@@ -311,9 +315,10 @@
             // txbClientName
             // 
             this.txbClientName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientName.Location = new System.Drawing.Point(139, 234);
+            this.txbClientName.Location = new System.Drawing.Point(583, 282);
             this.txbClientName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txbClientName.Name = "txbClientName";
+            this.txbClientName.ReadOnly = true;
             this.txbClientName.Size = new System.Drawing.Size(200, 22);
             this.txbClientName.TabIndex = 37;
             // 
@@ -321,7 +326,7 @@
             // 
             this.lblClientName.AutoSize = true;
             this.lblClientName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientName.Location = new System.Drawing.Point(13, 238);
+            this.lblClientName.Location = new System.Drawing.Point(472, 287);
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(52, 15);
             this.lblClientName.TabIndex = 36;
@@ -486,7 +491,7 @@
             // txbOrderManager
             // 
             this.txbOrderManager.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbOrderManager.Location = new System.Drawing.Point(583, 234);
+            this.txbOrderManager.Location = new System.Drawing.Point(139, 327);
             this.txbOrderManager.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txbOrderManager.Name = "txbOrderManager";
             this.txbOrderManager.Size = new System.Drawing.Size(200, 22);
@@ -496,7 +501,7 @@
             // 
             this.lblOrderManager.AutoSize = true;
             this.lblOrderManager.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblOrderManager.Location = new System.Drawing.Point(443, 238);
+            this.lblOrderManager.Location = new System.Drawing.Point(10, 330);
             this.lblOrderManager.Name = "lblOrderManager";
             this.lblOrderManager.Size = new System.Drawing.Size(97, 15);
             this.lblOrderManager.TabIndex = 66;
@@ -505,9 +510,10 @@
             // txbEmployeeName
             // 
             this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbEmployeeName.Location = new System.Drawing.Point(139, 279);
+            this.txbEmployeeName.Location = new System.Drawing.Point(583, 235);
             this.txbEmployeeName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txbEmployeeName.Name = "txbEmployeeName";
+            this.txbEmployeeName.ReadOnly = true;
             this.txbEmployeeName.Size = new System.Drawing.Size(200, 22);
             this.txbEmployeeName.TabIndex = 69;
             // 
@@ -515,7 +521,7 @@
             // 
             this.lblEmployeeName.AutoSize = true;
             this.lblEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblEmployeeName.Location = new System.Drawing.Point(13, 282);
+            this.lblEmployeeName.Location = new System.Drawing.Point(472, 239);
             this.lblEmployeeName.Name = "lblEmployeeName";
             this.lblEmployeeName.Size = new System.Drawing.Size(52, 15);
             this.lblEmployeeName.TabIndex = 68;
@@ -525,7 +531,7 @@
             // 
             this.lblOrderDate.AutoSize = true;
             this.lblOrderDate.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblOrderDate.Location = new System.Drawing.Point(443, 282);
+            this.lblOrderDate.Location = new System.Drawing.Point(472, 331);
             this.lblOrderDate.Name = "lblOrderDate";
             this.lblOrderDate.Size = new System.Drawing.Size(82, 15);
             this.lblOrderDate.TabIndex = 70;
@@ -533,7 +539,7 @@
             // 
             // dtpOrderDate
             // 
-            this.dtpOrderDate.Location = new System.Drawing.Point(583, 279);
+            this.dtpOrderDate.Location = new System.Drawing.Point(583, 324);
             this.dtpOrderDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtpOrderDate.Name = "dtpOrderDate";
             this.dtpOrderDate.Size = new System.Drawing.Size(200, 22);
@@ -543,7 +549,7 @@
             // 
             this.lblHidden.AutoSize = true;
             this.lblHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblHidden.Location = new System.Drawing.Point(13, 330);
+            this.lblHidden.Location = new System.Drawing.Point(13, 375);
             this.lblHidden.Name = "lblHidden";
             this.lblHidden.Size = new System.Drawing.Size(90, 15);
             this.lblHidden.TabIndex = 73;
@@ -569,13 +575,13 @@
             this.txbProductID.Size = new System.Drawing.Size(200, 22);
             this.txbProductID.TabIndex = 75;
             this.txbProductID.TextChanged += new System.EventHandler(this.txbProductID_TextChanged);
-            this.txbProductID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbProductID_KeyPress);
+            this.txbProductID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblOrderQuantity
             // 
             this.lblOrderQuantity.AutoSize = true;
             this.lblOrderQuantity.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblOrderQuantity.Location = new System.Drawing.Point(901, 330);
+            this.lblOrderQuantity.Location = new System.Drawing.Point(900, 330);
             this.lblOrderQuantity.Name = "lblOrderQuantity";
             this.lblOrderQuantity.Size = new System.Drawing.Size(52, 15);
             this.lblOrderQuantity.TabIndex = 78;
@@ -584,7 +590,7 @@
             // txbOrderQuantity
             // 
             this.txbOrderQuantity.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbOrderQuantity.Location = new System.Drawing.Point(1013, 328);
+            this.txbOrderQuantity.Location = new System.Drawing.Point(1013, 327);
             this.txbOrderQuantity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txbOrderQuantity.Name = "txbOrderQuantity";
             this.txbOrderQuantity.Size = new System.Drawing.Size(200, 22);
@@ -611,12 +617,58 @@
             this.txbProductName.Size = new System.Drawing.Size(200, 22);
             this.txbProductName.TabIndex = 80;
             // 
+            // txbClientID
+            // 
+            this.txbClientID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbClientID.Location = new System.Drawing.Point(139, 280);
+            this.txbClientID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txbClientID.Name = "txbClientID";
+            this.txbClientID.Size = new System.Drawing.Size(200, 22);
+            this.txbClientID.TabIndex = 84;
+            this.txbClientID.TextChanged += new System.EventHandler(this.txbClientID_TextChanged);
+            this.txbClientID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
+            // 
+            // lblEmployeeID
+            // 
+            this.lblEmployeeID.AutoSize = true;
+            this.lblEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblEmployeeID.Location = new System.Drawing.Point(13, 237);
+            this.lblEmployeeID.Name = "lblEmployeeID";
+            this.lblEmployeeID.Size = new System.Drawing.Size(51, 15);
+            this.lblEmployeeID.TabIndex = 83;
+            this.lblEmployeeID.Text = "社員ID";
+            // 
+            // txbEmployeeID
+            // 
+            this.txbEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbEmployeeID.Location = new System.Drawing.Point(139, 235);
+            this.txbEmployeeID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txbEmployeeID.Name = "txbEmployeeID";
+            this.txbEmployeeID.Size = new System.Drawing.Size(200, 22);
+            this.txbEmployeeID.TabIndex = 82;
+            this.txbEmployeeID.TextChanged += new System.EventHandler(this.txbEmployeeID_TextChanged);
+            this.txbEmployeeID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
+            // 
+            // lblClientID
+            // 
+            this.lblClientID.AutoSize = true;
+            this.lblClientID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblClientID.Location = new System.Drawing.Point(13, 282);
+            this.lblClientID.Name = "lblClientID";
+            this.lblClientID.Size = new System.Drawing.Size(51, 15);
+            this.lblClientID.TabIndex = 81;
+            this.lblClientID.Text = "顧客ID";
+            // 
             // F_EigyoOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(219)))), ((int)(((byte)(193)))));
             this.ClientSize = new System.Drawing.Size(1229, 800);
+            this.Controls.Add(this.txbClientID);
+            this.Controls.Add(this.lblEmployeeID);
+            this.Controls.Add(this.txbEmployeeID);
+            this.Controls.Add(this.lblClientID);
             this.Controls.Add(this.txbProductName);
             this.Controls.Add(this.lblProductName);
             this.Controls.Add(this.lblOrderQuantity);
@@ -722,5 +774,9 @@
         private System.Windows.Forms.TextBox txbProductName;
         private System.Windows.Forms.RadioButton rdbDetailRegister;
         private System.Windows.Forms.RadioButton rdbConfirm;
+        private System.Windows.Forms.TextBox txbClientID;
+        private System.Windows.Forms.Label lblEmployeeID;
+        private System.Windows.Forms.TextBox txbEmployeeID;
+        private System.Windows.Forms.Label lblClientID;
     }
 }

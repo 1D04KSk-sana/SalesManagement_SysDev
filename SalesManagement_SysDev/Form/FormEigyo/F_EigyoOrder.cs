@@ -211,7 +211,7 @@ namespace SalesManagement_SysDev
             }
         }
 
-        private void txbProductID_KeyPress(object sender, KeyPressEventArgs e)
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
         {
             //0～9と、バックスペース以外の時は、イベントをキャンセルする
             if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
@@ -222,7 +222,13 @@ namespace SalesManagement_SysDev
 
         private void txbProductID_TextChanged(object sender, EventArgs e)
         {
-            int intProdactID = int.Parse(txbProductID.Text.Trim());
+            string stringProdactID = txbProductID.Text.Trim();
+            int intProdactID = 0;
+
+            if (!String.IsNullOrEmpty(stringProdactID))
+            {
+                intProdactID = int.Parse(stringProdactID);
+            }
 
             if (!prodactDataAccess.CheckProdactIDExistence(intProdactID))
             {
@@ -233,6 +239,48 @@ namespace SalesManagement_SysDev
             var Prodact = listProdact.Single(x => x.PrID == intProdactID);
 
             txbProductName.Text = Prodact.PrName;
+        }
+
+        private void txbEmployeeID_TextChanged(object sender, EventArgs e)
+        {
+            string stringEmployeeID = txbEmployeeID.Text.Trim();
+            int intEmployeeID = 0;
+
+            if (!String.IsNullOrEmpty(stringEmployeeID))
+            {
+                intEmployeeID = int.Parse(stringEmployeeID);
+            }
+
+            if (!employeeDataAccess.CheckEmployeeIDExistence(intEmployeeID))
+            {
+                txbEmployeeName.Text = "社員IDが存在しません";
+                return;
+            }
+
+            var Employee = listEmployee.Single(x => x.EmID == intEmployeeID);
+
+            txbEmployeeName.Text = Employee.EmName;
+        }
+
+        private void txbClientID_TextChanged(object sender, EventArgs e)
+        {
+            string stringClientID = txbClientID.Text.Trim();
+            int intClientID = 0;
+
+            if (!String.IsNullOrEmpty(stringClientID))
+            {
+                intClientID = int.Parse(stringClientID);
+            }
+
+            if (!clientDataAccess.CheckClientIDExistence(intClientID))
+            {
+                txbClientName.Text = "社員IDが存在しません";
+                return;
+            }
+
+            var Client = listClient.Single(x => x.ClID == intClientID);
+
+            txbClientName.Text = Client.ClName;
         }
 
         ///////////////////////////////
