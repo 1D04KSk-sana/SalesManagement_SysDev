@@ -152,6 +152,30 @@ namespace SalesManagement_SysDev
         //戻り値：管理Flgが表示の顧客データ
         //機　能：管理Flgが表示の顧客データの全取得
         ///////////////////////////////
+        public List<M_Client> GetClientDspData()
+        {
+            List<M_Client> listClient = new List<M_Client>();
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listClient = context.M_Clients.Where(x => x.ClFlag == 0).ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listClient;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetClientDspData()　　※オーバーロード
+        //引　数：なし
+        //戻り値：管理Flgが表示の顧客データ
+        //機　能：管理Flgが表示の顧客データの全取得
+        ///////////////////////////////
         public List<M_Client> GetClientDspData(List<M_Client> dspClient)
         {
             List<M_Client> listClient = new List<M_Client>();

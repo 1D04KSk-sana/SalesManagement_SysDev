@@ -52,6 +52,7 @@
             this.txbOrderID = new System.Windows.Forms.TextBox();
             this.lblOrderID = new System.Windows.Forms.Label();
             this.pnlSelect = new System.Windows.Forms.Panel();
+            this.rdbDetailRegister = new System.Windows.Forms.RadioButton();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.rdbUpdate = new System.Windows.Forms.RadioButton();
             this.rdbRegister = new System.Windows.Forms.RadioButton();
@@ -75,7 +76,6 @@
             this.txbOrderQuantity = new System.Windows.Forms.TextBox();
             this.lblProductName = new System.Windows.Forms.Label();
             this.txbProductName = new System.Windows.Forms.TextBox();
-            this.rdbDetailRegister = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).BeginInit();
             this.pnlSelect.SuspendLayout();
             this.pnlHonsha.SuspendLayout();
@@ -114,6 +114,7 @@
             this.btnPageMin.TabStop = false;
             this.btnPageMin.Text = "|◀";
             this.btnPageMin.UseVisualStyleBackColor = false;
+            this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
             // 
             // btnBack
             // 
@@ -127,6 +128,7 @@
             this.btnBack.TabStop = false;
             this.btnBack.Text = "◀";
             this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnNext
             // 
@@ -140,6 +142,7 @@
             this.btnNext.TabStop = false;
             this.btnNext.Text = "▶";
             this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPageMax
             // 
@@ -153,6 +156,7 @@
             this.btnPageMax.TabStop = false;
             this.btnPageMax.Text = "▶|";
             this.btnPageMax.UseVisualStyleBackColor = false;
+            this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
             // btnPageSize
             // 
@@ -166,6 +170,7 @@
             this.btnPageSize.TabStop = false;
             this.btnPageSize.Text = "行数変更";
             this.btnPageSize.UseVisualStyleBackColor = false;
+            this.btnPageSize.Click += new System.EventHandler(this.btnPageSize_Click);
             // 
             // lblPageSize
             // 
@@ -240,6 +245,7 @@
             this.dgvOrder.Size = new System.Drawing.Size(735, 345);
             this.dgvOrder.TabIndex = 50;
             this.dgvOrder.TabStop = false;
+            this.dgvOrder.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrder_CellClick);
             // 
             // txbHidden
             // 
@@ -345,6 +351,17 @@
             this.pnlSelect.Name = "pnlSelect";
             this.pnlSelect.Size = new System.Drawing.Size(408, 37);
             this.pnlSelect.TabIndex = 33;
+            // 
+            // rdbDetailRegister
+            // 
+            this.rdbDetailRegister.AutoSize = true;
+            this.rdbDetailRegister.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbDetailRegister.Location = new System.Drawing.Point(104, 8);
+            this.rdbDetailRegister.Name = "rdbDetailRegister";
+            this.rdbDetailRegister.Size = new System.Drawing.Size(103, 23);
+            this.rdbDetailRegister.TabIndex = 3;
+            this.rdbDetailRegister.Text = "詳細登録";
+            this.rdbDetailRegister.UseVisualStyleBackColor = true;
             // 
             // rdbSearch
             // 
@@ -580,17 +597,6 @@
             this.txbProductName.ReadOnly = true;
             this.txbProductName.Size = new System.Drawing.Size(200, 22);
             this.txbProductName.TabIndex = 80;
-            // 
-            // rdbDetailRegister
-            // 
-            this.rdbDetailRegister.AutoSize = true;
-            this.rdbDetailRegister.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbDetailRegister.Location = new System.Drawing.Point(104, 8);
-            this.rdbDetailRegister.Name = "rdbDetailRegister";
-            this.rdbDetailRegister.Size = new System.Drawing.Size(103, 23);
-            this.rdbDetailRegister.TabIndex = 3;
-            this.rdbDetailRegister.Text = "詳細登録";
-            this.rdbDetailRegister.UseVisualStyleBackColor = true;
             // 
             // F_EigyoOrder
             // 

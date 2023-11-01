@@ -28,10 +28,21 @@ namespace SalesManagement_SysDev
         DataInputCheck dataInputCheck = new DataInputCheck();
         //コンボボックス用の営業所データリスト
         private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
+        //コンボボックス用の顧客データリスト
+        private static List<M_Client> listClient = new List<M_Client>();
+        //コンボボックス用の社員データリスト
+        private static List<M_Employee> listEmployee = new List<M_Employee>();
         //データグリッドビュー用の顧客データ
         private static List<T_Order> listOrder = new List<T_Order>();
         //データグリッドビュー用の全顧客データ
         private static List<T_Order> listAllOrder = new List<T_Order>();
+
+        //DataGridView用に使用する営業所のDictionary
+        private Dictionary<int, string> dictionarySalesOffice = new Dictionary<int, string>{};
+        //DataGridView用に使用する顧客のDictionary
+        private Dictionary<int, string> dictionaryClient = new Dictionary<int, string> { };
+        //DataGridView用に使用する社員のDictionary
+        private Dictionary<int, string> dictionaryEmployee = new Dictionary<int, string> { };
 
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
@@ -50,6 +61,58 @@ namespace SalesManagement_SysDev
         public F_EigyoOrder()
         {
             InitializeComponent();
+        }
+
+        private void btnPageSize_Click(object sender, EventArgs e)
+        {
+            GetDataGridView();
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) + 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) - 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnPageMin_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+
+            GetDataGridView();
+        }
+
+        private void btnPageMax_Click(object sender, EventArgs e)
+        {
+            List<T_Order> viewOrder = SetListOrder();
+
+            //ページ行数を取得
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
+            //最終ページ数を取得（テキストボックスに代入する数字なので-1はしない）
+            int lastPage = (int)Math.Ceiling(viewOrder.Count / (double)pageSize);
+
+            txbNumPage.Text = lastPage.ToString();
+
+            GetDataGridView();
+        }
+
+        private void dgvOrder_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvOrder.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            //選択された行に対してのコントロールの変更
+            SelectRowControl();
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
@@ -73,10 +136,8 @@ namespace SalesManagement_SysDev
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 
-            SetFormDataGridView();
+            DictionarySet();
 
-            //営業所のデータを取得
-            listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
             //取得したデータをコンボボックスに挿入
             cmbSalesOfficeID.DataSource = listSalesOffice;
             //表示する名前をSoNameに指定
@@ -86,6 +147,7 @@ namespace SalesManagement_SysDev
 
             //cmbSalesOfficeIDを未選択に
             cmbSalesOfficeID.SelectedIndex = -1;
+            SetFormDataGridView();
 
             //cmbViewを表示に
             cmbView.SelectedIndex = 0;
@@ -96,6 +158,37 @@ namespace SalesManagement_SysDev
             if (rdbRegister.Checked)
             {
                 OrderDataRegister();
+            }
+        }
+
+        ///////////////////////////////
+        //メソッド名：DictionarySet()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：Dictionaryのセット
+        ///////////////////////////////
+        private void DictionarySet()
+        {
+            //営業所のデータを取得
+            listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
+
+            foreach (var item in listSalesOffice)
+            {
+                dictionarySalesOffice.Add(item.SoID, item.SoName);
+            }
+
+            listClient = clientDataAccess.GetClientDspData();
+
+            foreach (var item in listClient)
+            {
+                dictionaryClient.Add(item.ClID.Value, item.ClName);
+            }
+
+            listEmployee = employeeDataAccess.GetEmployeeDspData();
+
+            foreach (var item in listEmployee)
+            {
+                dictionaryEmployee.Add(item.EmID, item.EmName);
             }
         }
 
@@ -486,7 +579,7 @@ namespace SalesManagement_SysDev
             //1行ずつdgvClientに挿入
             foreach (var item in depData)
             {
-                dgvOrder.Rows.Add(item.OrID, item.SoID, item.ClID, item.ClCharge, item.EmID, item.OrDate, dictionaryHidden[item.OrFlag], dictionaryConfirm[item.OrStateFlag], item.OrHidden);
+                dgvOrder.Rows.Add(item.OrID, dictionarySalesOffice[item.SoID], dictionaryClient[item.ClID], item.ClCharge, dictionaryEmployee[item.EmID], item.OrDate, dictionaryHidden[item.OrFlag], dictionaryConfirm[item.OrStateFlag], item.OrHidden);
             }
 
             //dgvClientをリフレッシュ
@@ -535,6 +628,26 @@ namespace SalesManagement_SysDev
             txbProductID.Text = string.Empty;
             txbProductName.Text = string.Empty;
             txbOrderQuantity.Text = string.Empty;
+        }
+
+        ///////////////////////////////
+        //メソッド名：SelectRowControl()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：選択された行に対してのコントロールの変更
+        ///////////////////////////////
+        private void SelectRowControl()
+        {
+            //データグリッドビューに乗っている情報をGUIに反映
+            txbOrderID.Text = dgvOrder[0, dgvOrder.CurrentCellAddress.Y].Value.ToString();
+            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvOrder[1, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key - 1;
+            txbClientName.Text = dgvOrder[2, dgvOrder.CurrentCellAddress.Y].Value.ToString();
+            txbOrderManager.Text = dgvOrder[3, dgvOrder.CurrentCellAddress.Y].Value.ToString();
+            txbEmployeeName.Text = dgvOrder[4, dgvOrder.CurrentCellAddress.Y].Value.ToString();
+            dtpOrderDate.Text = dgvOrder[5, dgvOrder.CurrentCellAddress.Y].Value.ToString();
+            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvOrder[6, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key;
+            cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvOrder[7, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key;
+            txbHidden.Text = dgvOrder[8, dgvOrder.CurrentCellAddress.Y]?.Value?.ToString();
         }
     }
 }
