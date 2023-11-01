@@ -222,6 +222,7 @@ namespace SalesManagement_SysDev
 
         private void txbProductID_TextChanged(object sender, EventArgs e)
         {
+            //nullの確認
             string stringProdactID = txbProductID.Text.Trim();
             int intProdactID = 0;
 
@@ -230,12 +231,14 @@ namespace SalesManagement_SysDev
                 intProdactID = int.Parse(stringProdactID);
             }
 
+            //存在確認
             if (!prodactDataAccess.CheckProdactIDExistence(intProdactID))
             {
                 txbProductName.Text = "商品IDが存在しません";
                 return;
             }
 
+            //IDから名前を取り出す
             var Prodact = listProdact.Single(x => x.PrID == intProdactID);
 
             txbProductName.Text = Prodact.PrName;
@@ -243,6 +246,7 @@ namespace SalesManagement_SysDev
 
         private void txbEmployeeID_TextChanged(object sender, EventArgs e)
         {
+            //nullの確認
             string stringEmployeeID = txbEmployeeID.Text.Trim();
             int intEmployeeID = 0;
 
@@ -251,12 +255,14 @@ namespace SalesManagement_SysDev
                 intEmployeeID = int.Parse(stringEmployeeID);
             }
 
+            //存在確認
             if (!employeeDataAccess.CheckEmployeeIDExistence(intEmployeeID))
             {
                 txbEmployeeName.Text = "社員IDが存在しません";
                 return;
             }
 
+            //IDから名前を取り出す
             var Employee = listEmployee.Single(x => x.EmID == intEmployeeID);
 
             txbEmployeeName.Text = Employee.EmName;
@@ -264,6 +270,7 @@ namespace SalesManagement_SysDev
 
         private void txbClientID_TextChanged(object sender, EventArgs e)
         {
+            //nullの確認
             string stringClientID = txbClientID.Text.Trim();
             int intClientID = 0;
 
@@ -272,12 +279,14 @@ namespace SalesManagement_SysDev
                 intClientID = int.Parse(stringClientID);
             }
 
+            //存在確認
             if (!clientDataAccess.CheckClientIDExistence(intClientID))
             {
                 txbClientName.Text = "社員IDが存在しません";
                 return;
             }
 
+            //IDから名前を取り出す
             var Client = listClient.Single(x => x.ClID == intClientID);
 
             txbClientName.Text = Client.ClName;
