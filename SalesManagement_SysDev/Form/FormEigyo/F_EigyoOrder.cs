@@ -334,14 +334,6 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            //確定選択の適否
-            if (cmbConfirm.SelectedIndex == -1)
-            {
-                MessageBox.Show("未確定/確定が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                cmbConfirm.Focus();
-                return false;
-            }
-
             return true;
         }
 
@@ -361,7 +353,7 @@ namespace SalesManagement_SysDev
                 ClID = clientDataAccess.GetClientID(txbClientName.Text.Trim()),
                 ClCharge = txbOrderManager.Text.Trim(),
                 OrDate = dtpOrderDate.Value,
-                OrStateFlag = cmbConfirm.SelectedIndex,
+                OrStateFlag = 0,
                 OrFlag = cmbHidden.SelectedIndex,
                 OrHidden = txbHidden.Text.Trim(),
             };
@@ -451,14 +443,6 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            //確定選択の適否
-            if (cmbConfirm.SelectedIndex == -1)
-            {
-                MessageBox.Show("未確定/確定が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                cmbConfirm.Focus();
-                return false;
-            }
-
             return true;
         }
 
@@ -473,7 +457,6 @@ namespace SalesManagement_SysDev
             return new T_Order
             {
                 OrID = int.Parse(txbOrderID.Text.Trim()),
-                OrStateFlag = cmbConfirm.SelectedIndex,
                 OrFlag = cmbHidden.SelectedIndex,
                 OrHidden = txbHidden.Text.Trim(),
             };
@@ -748,7 +731,6 @@ namespace SalesManagement_SysDev
             txbEmployeeName.Text = string.Empty;
             dtpOrderDate.Value = DateTime.Now;
             cmbHidden.SelectedIndex = -1;
-            cmbConfirm.SelectedIndex = -1;
             txbOrderDetailID.Text = string.Empty;
             txbProductID.Text = string.Empty;
             txbProductName.Text = string.Empty;
@@ -771,7 +753,6 @@ namespace SalesManagement_SysDev
             txbEmployeeName.Text = dgvOrder[4, dgvOrder.CurrentCellAddress.Y].Value.ToString();
             dtpOrderDate.Text = dgvOrder[5, dgvOrder.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvOrder[6, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key;
-            cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvOrder[7, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvOrder[8, dgvOrder.CurrentCellAddress.Y]?.Value?.ToString();
         }
     }
