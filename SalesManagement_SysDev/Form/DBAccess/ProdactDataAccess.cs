@@ -10,6 +10,31 @@ namespace SalesManagement_SysDev
     internal class ProdactDataAccess
     {
         ///////////////////////////////
+        //メソッド名：CheckProdactIDExistence()
+        //引　数   ：商品コード
+        //戻り値   ：True or False
+        //機　能   ：一致する商品IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckProdactIDExistence(int ProdactID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                //商品IDで一致するデータが存在するか
+                flg = context.M_Products.Any(x => x.PrID == ProdactID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
         //メソッド名：GetProdactDspData()
         //引　数：なし
         //戻り値：管理Flgが表示の商品データ

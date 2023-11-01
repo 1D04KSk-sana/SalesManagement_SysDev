@@ -52,6 +52,7 @@
             this.txbOrderID = new System.Windows.Forms.TextBox();
             this.lblOrderID = new System.Windows.Forms.Label();
             this.pnlSelect = new System.Windows.Forms.Panel();
+            this.rdbConfirm = new System.Windows.Forms.RadioButton();
             this.rdbDetailRegister = new System.Windows.Forms.RadioButton();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.rdbUpdate = new System.Windows.Forms.RadioButton();
@@ -74,7 +75,6 @@
             this.txbOrderQuantity = new System.Windows.Forms.TextBox();
             this.lblProductName = new System.Windows.Forms.Label();
             this.txbProductName = new System.Windows.Forms.TextBox();
-            this.rdbConfirm = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).BeginInit();
             this.pnlSelect.SuspendLayout();
             this.pnlHonsha.SuspendLayout();
@@ -360,6 +360,18 @@
             this.pnlSelect.Size = new System.Drawing.Size(556, 38);
             this.pnlSelect.TabIndex = 33;
             // 
+            // rdbConfirm
+            // 
+            this.rdbConfirm.AutoSize = true;
+            this.rdbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbConfirm.Location = new System.Drawing.Point(340, 8);
+            this.rdbConfirm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rdbConfirm.Name = "rdbConfirm";
+            this.rdbConfirm.Size = new System.Drawing.Size(65, 23);
+            this.rdbConfirm.TabIndex = 4;
+            this.rdbConfirm.Text = "確定";
+            this.rdbConfirm.UseVisualStyleBackColor = true;
+            // 
             // rdbDetailRegister
             // 
             this.rdbDetailRegister.AutoSize = true;
@@ -552,9 +564,12 @@
             this.txbProductID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbProductID.Location = new System.Drawing.Point(1013, 234);
             this.txbProductID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txbProductID.MaxLength = 4;
             this.txbProductID.Name = "txbProductID";
             this.txbProductID.Size = new System.Drawing.Size(200, 22);
             this.txbProductID.TabIndex = 75;
+            this.txbProductID.TextChanged += new System.EventHandler(this.txbProductID_TextChanged);
+            this.txbProductID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbProductID_KeyPress);
             // 
             // lblOrderQuantity
             // 
@@ -595,18 +610,6 @@
             this.txbProductName.ReadOnly = true;
             this.txbProductName.Size = new System.Drawing.Size(200, 22);
             this.txbProductName.TabIndex = 80;
-            // 
-            // rdbConfirm
-            // 
-            this.rdbConfirm.AutoSize = true;
-            this.rdbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbConfirm.Location = new System.Drawing.Point(340, 8);
-            this.rdbConfirm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.rdbConfirm.Name = "rdbConfirm";
-            this.rdbConfirm.Size = new System.Drawing.Size(65, 23);
-            this.rdbConfirm.TabIndex = 4;
-            this.rdbConfirm.Text = "確定";
-            this.rdbConfirm.UseVisualStyleBackColor = true;
             // 
             // F_EigyoOrder
             // 

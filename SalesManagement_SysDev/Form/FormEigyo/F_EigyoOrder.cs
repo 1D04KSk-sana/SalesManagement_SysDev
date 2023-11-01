@@ -124,8 +124,6 @@ namespace SalesManagement_SysDev
             //選択された行に対してのコントロールの変更
             SelectRowControl();
 
-            DictionaryDetailSet();
-
             dgvOrderDetail.Rows.Clear();
 
             listOrderDetail = orderDetailDataAccess.GetOrderDetailIDData(int.Parse(dgvOrder[0, dgvOrder.CurrentCellAddress.Y].Value.ToString()));
@@ -213,6 +211,30 @@ namespace SalesManagement_SysDev
             }
         }
 
+        private void txbProductID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txbProductID_TextChanged(object sender, EventArgs e)
+        {
+            int intProdactID = int.Parse(txbProductID.Text.Trim());
+
+            if (!prodactDataAccess.CheckProdactIDExistence(intProdactID))
+            {
+                txbProductName.Text = "商品IDが存在しません";
+                return;
+            }
+
+            var Prodact = listProdact.Single(x => x.PrID == intProdactID);
+
+            txbProductName.Text = Prodact.PrName;
+        }
+
         ///////////////////////////////
         //メソッド名：DictionarySet()
         //引　数   ：なし
@@ -248,16 +270,7 @@ namespace SalesManagement_SysDev
             {
                 dictionaryEmployee.Add(item.EmID, item.EmName);
             }
-        }
 
-        ///////////////////////////////
-        //メソッド名：DictionaryDetailSet()
-        //引　数   ：なし
-        //戻り値   ：なし
-        //機　能   ：Dictionaryのセット
-        ///////////////////////////////
-        private void DictionaryDetailSet()
-        {
             //商品のデータを取得
             listProdact = prodactDataAccess.GetProdactDspData();
 
@@ -352,6 +365,13 @@ namespace SalesManagement_SysDev
                     txbClientName.Focus();
                     return false;
                 }
+                //// 顧客名の存在チェック
+                //if ((int.Parse(txbOrderID.Text.Trim())))
+                //{
+                //    MessageBox.Show("顧客名が存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //    txbOrderID.Focus();
+                //    return false;
+                //}
             }
             else
             {
