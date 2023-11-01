@@ -403,28 +403,21 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            // 顧客名の適否
-            if (!String.IsNullOrEmpty(txbClientName.Text.Trim()))
+            // 顧客IDの適否
+            if (!String.IsNullOrEmpty(txbClientID.Text.Trim()))
             {
-                // 顧客名の文字数チェック
-                if (txbClientName.TextLength >= 50)
+                // 顧客IDの存在チェック
+                if (!clientDataAccess.CheckClientIDExistence(int.Parse(txbClientID.Text.Trim())))
                 {
-                    MessageBox.Show("顧客名は50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbClientName.Focus();
+                    MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
                     return false;
                 }
-                //// 顧客名の存在チェック
-                //if ((int.Parse(txbOrderID.Text.Trim())))
-                //{
-                //    MessageBox.Show("顧客名が存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    txbOrderID.Focus();
-                //    return false;
-                //}
             }
             else
             {
-                MessageBox.Show("顧客名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbClientName.Focus();
+                MessageBox.Show("顧客IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbClientID.Focus();
                 return false;
             }
 
@@ -446,21 +439,28 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            // 社員名の適否
-            if (!String.IsNullOrEmpty(txbEmployeeName.Text.Trim()))
+            // 社員IDの適否
+            if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
             {
-                // 社員名の文字数チェック
-                if (txbEmployeeName.TextLength >= 50)
+                //社員IDの存在チェック
+                if (!employeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
                 {
-                    MessageBox.Show("社員名は50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbEmployeeName.Focus();
+                    MessageBox.Show("社員IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+                //社員IDが現在ログインしているIDと等しいかチェック
+                if (F_Login.intEmployeeID == int.Parse(txbEmployeeID.Text.Trim()))
+                {
+                    MessageBox.Show("自身の社員IDを入力してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
                     return false;
                 }
             }
             else
             {
-                MessageBox.Show("社員名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbEmployeeName.Focus();
+                MessageBox.Show("社員IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbEmployeeID.Focus();
                 return false;
             }
 
@@ -693,7 +693,7 @@ namespace SalesManagement_SysDev
         private T_OperationLog GenerateLogAtRegistration(string OperationDone)
         {
             //登録・更新使用としている顧客データの取得
-            var logOperatin = GenerateDataAtRegistration();
+            int logOperatin = int.Parse(txbOrderID.Text.Trim());
 
             return new T_OperationLog
             {
@@ -701,7 +701,7 @@ namespace SalesManagement_SysDev
                 EmID = F_Login.intEmployeeID,
                 FormName = "受注管理画面",
                 OpDone = OperationDone,
-                OpDBID = logOperatin.OrID,
+                OpDBID = logOperatin,
                 OpSetTime = DateTime.Now,
             };
         }
@@ -913,8 +913,10 @@ namespace SalesManagement_SysDev
         {
             txbOrderID.Text = string.Empty;
             cmbSalesOfficeID.SelectedIndex = -1;
+            txbClientID.Text = string.Empty;
             txbClientName.Text = string.Empty;
             txbOrderManager.Text = string.Empty;
+            txbEmployeeID.Text = string.Empty;
             txbEmployeeName.Text = string.Empty;
             dtpOrderDate.Value = DateTime.Now;
             cmbHidden.SelectedIndex = -1;
@@ -951,9 +953,9 @@ namespace SalesManagement_SysDev
             //データグリッドビューに乗っている情報をGUIに反映
             txbOrderID.Text = dgvOrder[0, dgvOrder.CurrentCellAddress.Y].Value.ToString();
             cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvOrder[1, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key - 1;
-            txbClientName.Text = dgvOrder[2, dgvOrder.CurrentCellAddress.Y].Value.ToString();
+            txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvOrder[2, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbOrderManager.Text = dgvOrder[3, dgvOrder.CurrentCellAddress.Y].Value.ToString();
-            txbEmployeeName.Text = dgvOrder[4, dgvOrder.CurrentCellAddress.Y].Value.ToString();
+            txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvOrder[4, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             dtpOrderDate.Text = dgvOrder[5, dgvOrder.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvOrder[6, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvOrder[8, dgvOrder.CurrentCellAddress.Y]?.Value?.ToString();

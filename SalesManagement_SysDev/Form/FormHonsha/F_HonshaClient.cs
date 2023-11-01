@@ -210,7 +210,7 @@ namespace SalesManagement_SysDev
         private T_OperationLog GenerateLogAtRegistration(string OperationDone)
         {
             //登録・更新使用としている顧客データの取得
-            var logOperatin = GenerateDataAtRegistration();
+            int logOperatin = int.Parse(txbClientID.Text.Trim());
 
             return new T_OperationLog
             {
@@ -218,7 +218,7 @@ namespace SalesManagement_SysDev
                 EmID = F_Login.intEmployeeID,
                 FormName = "顧客管理画面",
                 OpDone = OperationDone,
-                OpDBID = logOperatin.ClID.Value,
+                OpDBID = logOperatin,
                 OpSetTime = DateTime.Now,
             };
         }
