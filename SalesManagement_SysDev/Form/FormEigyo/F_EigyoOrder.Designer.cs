@@ -349,7 +349,7 @@
             this.pnlSelect.Controls.Add(this.rdbRegister);
             this.pnlSelect.Location = new System.Drawing.Point(14, 118);
             this.pnlSelect.Name = "pnlSelect";
-            this.pnlSelect.Size = new System.Drawing.Size(408, 37);
+            this.pnlSelect.Size = new System.Drawing.Size(478, 37);
             this.pnlSelect.TabIndex = 33;
             // 
             // rdbDetailRegister
@@ -367,7 +367,7 @@
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(312, 8);
+            this.rdbSearch.Location = new System.Drawing.Point(343, 8);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(65, 23);
             this.rdbSearch.TabIndex = 2;
@@ -378,7 +378,7 @@
             // 
             this.rdbUpdate.AutoSize = true;
             this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbUpdate.Location = new System.Drawing.Point(228, 8);
+            this.rdbUpdate.Location = new System.Drawing.Point(259, 8);
             this.rdbUpdate.Name = "rdbUpdate";
             this.rdbUpdate.Size = new System.Drawing.Size(65, 23);
             this.rdbUpdate.TabIndex = 1;

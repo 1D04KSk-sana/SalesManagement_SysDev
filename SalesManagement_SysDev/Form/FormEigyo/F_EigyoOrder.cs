@@ -155,9 +155,16 @@ namespace SalesManagement_SysDev
 
         private void btnDone_Click(object sender, EventArgs e)
         {
+            //登録ラヂオボタンがチェックされているとき
             if (rdbRegister.Checked)
             {
                 OrderDataRegister();
+            }
+
+            //更新ラヂオボタンがチェックされているとき
+            if (rdbUpdate.Checked)
+            {
+                OrderDataUpdate();
             }
         }
 
@@ -200,14 +207,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void OrderDataRegister()
         {
-            // 登録確認メッセージ
-            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
             //入力情報適否
             if (!GetValidDataAtRegistration())
             {
@@ -215,7 +214,7 @@ namespace SalesManagement_SysDev
             }
 
             //操作ログデータ取得
-            var regOperationLog = GenerateOrderLogAtRegistration(rdbRegister.Text);
+            var regOperationLog = GenerateLogAtRegistration(rdbRegister.Text);
             
             //操作ログデータの登録（成功 = true,失敗 = false）
             if (!operationLogAccess.AddOperationLogData(regOperationLog))
@@ -376,6 +375,14 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void RegistrationOrder(T_Order regOrder)
         {
+            // 登録確認メッセージ
+            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
             // 顧客情報の登録
             bool flg = orderDataAccess.AddClientData(regOrder);
 
@@ -397,12 +404,123 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：GenerateOrderLogAtRegistration()
+        //メソッド名：OrderDataUpdate()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：受注情報更新の実行
+        ///////////////////////////////
+        private void OrderDataUpdate()
+        {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtUpdate())
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
+            // 顧客情報作成
+            var updOrder = GenerateDataAtUpdate();
+
+            // 顧客情報更新
+            UpdateOrder(updOrder);
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtUpdate()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：更新入力データの形式チェック
+        //          ：エラーがない場合True
+        //          ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtUpdate()
+        {
+            //表示選択の適否
+            if (cmbHidden.SelectedIndex == -1)
+            {
+                MessageBox.Show("表示/非表示が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbHidden.Focus();
+                return false;
+            }
+
+            //確定選択の適否
+            if (cmbConfirm.SelectedIndex == -1)
+            {
+                MessageBox.Show("未確定/確定が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbConfirm.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtUpdate()
+        //引　数   ：なし
+        //戻り値   ：顧客更新情報
+        //機　能   ：更新データのセット
+        ///////////////////////////////
+        private T_Order GenerateDataAtUpdate()
+        {
+            return new T_Order
+            {
+                OrID = int.Parse(txbOrderID.Text.Trim()),
+                OrStateFlag = cmbConfirm.SelectedIndex,
+                OrFlag = cmbHidden.SelectedIndex,
+                OrHidden = txbHidden.Text.Trim(),
+            };
+        }
+
+        ///////////////////////////////
+        //メソッド名：UpdateOrder()
+        //引　数   ：受注情報
+        //戻り値   ：なし
+        //機　能   ：受注情報の更新
+        ///////////////////////////////
+        private void UpdateOrder(T_Order updOrder)
+        {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            // 顧客情報の更新
+            bool flg = orderDataAccess.UpdateOrderData(updOrder);
+
+            if (flg == true)
+            {
+                MessageBox.Show("更新しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("更新に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //テキストボックス等のクリア
+            ClearImput();
+
+            // データグリッドビューの表示
+            GetDataGridView();
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateLogAtRegistration()
         //引　数   ：操作名
         //戻り値   ：操作ログ登録情報
         //機　能   ：操作ログ情報登録データのセット
         ///////////////////////////////
-        private T_OperationLog GenerateOrderLogAtRegistration(string OperationDone)
+        private T_OperationLog GenerateLogAtRegistration(string OperationDone)
         {
             //登録・更新使用としている顧客データの取得
             var logOperatin = GenerateDataAtRegistration();
@@ -585,12 +703,12 @@ namespace SalesManagement_SysDev
             //dgvClientをリフレッシュ
             dgvOrder.Refresh();
 
-            if (lastPage == pageNum)
+            if (lastPage == -1 || (lastPage == pageNum && pageNum == 0))
             {
                 btnPageMax.Visible = false;
                 btnNext.Visible = false;
-                btnPageMin.Visible = true;
-                btnBack.Visible = true;
+                btnPageMin.Visible = false;
+                btnBack.Visible = false;
             }
             else if (pageNum == 0)
             {
@@ -598,6 +716,13 @@ namespace SalesManagement_SysDev
                 btnNext.Visible = true;
                 btnPageMin.Visible = false;
                 btnBack.Visible = false;
+            }
+            else if (lastPage == pageNum)
+            {
+                btnPageMax.Visible = false;
+                btnNext.Visible = false;
+                btnPageMin.Visible = true;
+                btnBack.Visible = true;
             }
             else
             {

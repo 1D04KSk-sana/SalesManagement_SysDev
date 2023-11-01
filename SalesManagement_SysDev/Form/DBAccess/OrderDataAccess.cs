@@ -83,6 +83,37 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：UpdateOrderData()
+        //引　数：updOrder = 受注データ
+        //戻り値：True or False
+        //機　能：受注データの更新
+        //      ：更新成功の場合True
+        //      ：更新失敗の場合False
+        ///////////////////////////////
+        public bool UpdateOrderData(T_Order updOrder)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Order = context.T_Orders.Single(x => x.OrID == updOrder.OrID);
+
+                Order.OrFlag = updOrder.OrFlag;
+                Order.OrStateFlag = updOrder.OrStateFlag;
+                Order.OrHidden = updOrder.OrHidden;
+
+                context.SaveChanges();
+                context.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        ///////////////////////////////
         //メソッド名：GetOrderDspData()
         //引　数：なし
         //戻り値：管理Flgが表示の受注データ
