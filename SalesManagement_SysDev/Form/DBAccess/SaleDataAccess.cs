@@ -165,5 +165,34 @@ namespace SalesManagement_SysDev
 
             return listSale;
         }
+        ///////////////////////////////
+        //メソッド名：UpdateSaleData()
+        //引　数：updSale = 売上データ
+        //戻り値：True or False
+        //機　能：売上データの更新
+        //      ：更新成功の場合True
+        //      ：更新失敗の場合False
+        ///////////////////////////////
+        public bool UpdateSaleData(T_Sale updSale)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Sale = context.T_Sales.Single(x => x.SaID == updSale.SaID);
+
+                Sale.SaFlag=updSale.SaFlag;
+                context.SaveChanges();
+                context.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
     }
+
 }

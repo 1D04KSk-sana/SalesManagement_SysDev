@@ -18,8 +18,12 @@ namespace SalesManagement_SysDev
         DataInputCheck dataInputCheck = new DataInputCheck();
         //データベース売上テーブルアクセス用クラスのインスタンス化
         SaleDataAccess saleDataAccess = new SaleDataAccess();
+        //データベース操作ログテーブルアクセス用クラスのインスタンス化
+        OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
         //データベース売上詳細テーブルアクセス用クラスのインスタンス化
         SaleDetailDataAccess saleDetailDataAccess = new SaleDetailDataAccess();
+        //データベース顧客テーブルアクセス用クラスのインスタンス化
+        ClientDataAccess clientDataAccess = new ClientDataAccess();
         //データグリッドビュー用の売上データ
         private static List<T_Sale> listSale = new List<T_Sale>();
         //データグリッドビュー用の全売上データ
@@ -28,6 +32,19 @@ namespace SalesManagement_SysDev
         private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
         //フォームを呼び出しする際のインスタンス化
         private F_SearchDialog f_SearchDialog = new F_SearchDialog();
+        //データグリッドビュー用の顧客データ
+        private static List<T_SaleDetail> listSaleDetail = new List<T_SaleDetail>();
+        //コンボボックス用の顧客データリスト
+        private static List<M_Client> listClient = new List<M_Client>();
+        //DataGridView用に使用する顧客のDictionary
+        private Dictionary<int, string> dictionaryClient;
+        //DataGridView用に使用す営業所のDictionary
+        private Dictionary<int?, string> dictionarySalesOffice;
+
+
+
+
+
 
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
@@ -35,21 +52,17 @@ namespace SalesManagement_SysDev
             { 0, "表示" },
             { 1, "非表示" },
         };
+        //DataGridView用に使用する確定形式のDictionary
+        private Dictionary<int, string> dictionaryConfirm = new Dictionary<int, string>
+        {
+            { 0, "未確定" },
+            { 1, "確定" },
+        };
 
         public F_HonshaSale()
         {
             InitializeComponent();
         }
-
-        //DataGridView用に使用す営業所のDictionary
-        private Dictionary<int?, string> dictionarySalesOffice = new Dictionary<int?, string>
-        {
-            { 1, "北大阪営業所" },
-            { 2, "兵庫営業所" },
-            { 3, "鹿営業所"},
-            { 4, "京都営業所"},
-            { 5, "和歌山営業所"}
-        };
 
         private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
         {
@@ -64,6 +77,54 @@ namespace SalesManagement_SysDev
 
             SaleSearchButtonClick(false);
         }
+        ///////////////////////////////
+        //メソッド名：DictionarySet()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：Dictionaryのセット
+        ///////////////////////////////
+        private void DictionarySet()
+        {
+            //営業所のデータを取得
+            listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
+
+            dictionarySalesOffice = new Dictionary<int?, string> { };
+
+            foreach (var item in listSalesOffice)
+            {
+                dictionarySalesOffice.Add(item.SoID, item.SoName);
+            }
+
+            listClient = clientDataAccess.GetClientDspData();
+
+            dictionaryClient = new Dictionary<int, string> { };
+
+            foreach (var item in listClient)
+            {
+                dictionaryClient.Add(item.ClID.Value, item.ClName);
+            }
+
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateLogAtRegistration()
+        //引　数   ：操作名
+        //戻り値   ：操作ログ登録情報
+        //機　能   ：操作ログ情報登録データのセット
+        ///////////////////////////////
+        private T_OperationLog GenerateLogAtRegistration(string OperationDone)
+        {
+            return new T_OperationLog
+            {
+                OpHistoryID = operationLogAccess.OperationLogNum() + 1,
+                EmID = F_Login.intEmployeeID,
+                FormName = "売上管理画面",
+                OpDone = OperationDone,
+                OpDBID = int.Parse(txbSaleID.Text.Trim()),
+                OpSetTime = DateTime.Now,
+            };
+        }
+
 
         ///////////////////////////////
         //メソッド名：SaleSearchButtonClick()
@@ -111,24 +172,18 @@ namespace SalesManagement_SysDev
             T_Sale selectCondition = new T_Sale()
             {
                 SaID = intSaleID,
-                //ClName = txbClientName.Text.Trim()
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 ChID = inttxbClientPostal,
-
-                //ClPostal= txbClientPostal.Text.Trim(),
-                //ClAddress= txbClientAddress.Text.Trim(),
-                //ClFAX=txbClientFax.Text.Trim(),
-                //ClHidden=txbHidden.Text.Trim()
             };
 
             if (searchFlg)
             {
-                // 顧客データのAnd抽出
+                // 売上データのAnd抽出
                 listSale = saleDataAccess.GetAndSaleData(selectCondition);
             }
             else
             {
-                // 顧客データのOr抽出
+                // 売上データのOr抽出
                 listSale = saleDataAccess.GetOrSaleData(selectCondition);
             }
         }
@@ -142,7 +197,7 @@ namespace SalesManagement_SysDev
         {
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
-
+            DictionarySet();
             SetFormDataGridView();
 
             //営業所のデータを取得
@@ -268,6 +323,12 @@ namespace SalesManagement_SysDev
             {
                 ClientDataSelect();
             }
+            //非表示更新ラヂオボタンがチェックされているとき
+            if (rdbHiddenUpdate.Checked)
+            {
+                SaleDataHiddenUpdate();
+            }
+
         }
 
         ///////////////////////////////
@@ -320,17 +381,17 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            // 顧客IDの適否
+            // 売上IDの適否
             if (!String.IsNullOrEmpty(txbSaleID.Text.Trim()))
             {
-                // 顧客IDの数字チェック
+                // 売上IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbSaleID.Text.Trim()))
                 {
                     MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSaleID.Focus();
                     return false;
                 }
-                //顧客IDの重複チェック
+                //売上IDの重複チェック
                 if (!saleDataAccess.CheckSaleIDExistence(int.Parse(txbSaleID.Text.Trim())))
                 {
                     MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -360,13 +421,11 @@ namespace SalesManagement_SysDev
             txbSaleID.Text = string.Empty;
             txbClientName.Text = string.Empty;
             txbClientPostal.Text = string.Empty;
-            txbEmployeeName.Text = string.Empty;
             txbClientPostal.Text = string.Empty;
-            txbHidden.Text = string.Empty;
             dtpSaleDate.Value= DateTime.Now;
             cmbSalesOfficeID.SelectedIndex = -1;
-            cmbHidden.SelectedIndex = -1;
         }
+
 
         ///////////////////////////////
         //メソッド名：GetDataGridView()
@@ -509,11 +568,8 @@ namespace SalesManagement_SysDev
             txbSaleID.Text = dgvSale[0, dgvSale.CurrentCellAddress.Y].Value.ToString();
             txbClientName.Text = dgvSale[1, dgvSale.CurrentCellAddress.Y].Value.ToString();
             cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvSale[2, dgvSale.CurrentCellAddress.Y].Value.ToString()).Key.Value - 1;
-            txbEmployeeName.Text = dgvSale [3, dgvSale.CurrentCellAddress.Y].Value.ToString();
             txbClientPostal.Text = dgvSale[4, dgvSale.CurrentCellAddress.Y].Value.ToString();
             dtpSaleDate.Text = dgvSale[5, dgvSale.CurrentCellAddress.Y].Value.ToString();
-            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSale[6, dgvSale.CurrentCellAddress.Y].Value.ToString()).Key;
-            txbHidden.Text = dgvSale[7, dgvSale.CurrentCellAddress.Y]?.Value?.ToString();
         }
 
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
@@ -532,6 +588,178 @@ namespace SalesManagement_SysDev
 
             //選択された行に対してのコントロールの変更
             SelectRowControl();
+
+            dgvSaleDetail.Rows.Clear();
+
+            listSaleDetail = saleDetailDataAccess.GetSaleDetailIDData(int.Parse(dgvSale[0, dgvSale.CurrentCellAddress.Y].Value.ToString()));
+
+            //1行ずつdgvSaleに挿入
+            foreach (var item in listSaleDetail)
+            {
+                dgvSaleDetail.Rows.Add(item.SaDetailID, item.SaID, item.PrID, item.SaQuantity, item.SaTotalPrice);
+            }
+
+            //dgvClientをリフレッシュ
+            dgvSaleDetail.Refresh();
+
+        }
+        ///////////////////////////////
+        //メソッド名：SaleDataHiddenUpdate()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：売上情報表示更新の実行
+        ///////////////////////////////
+        private void SaleDataHiddenUpdate()
+        {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtUpdate())
+            {
+                return;
+            }
+
+            // 売上情報作成
+            var updSale = GenerateDataAtUpdate();
+
+            // 売上情報更新
+            UpdateSale(updSale);
+        }
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtUpdate()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：更新入力データの形式チェック
+        //         ：エラーがない場合True
+        //         ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtUpdate()
+        {
+            // 売上IDの適否
+            if (!String.IsNullOrEmpty(txbSaleID.Text.Trim()))
+            {
+                // 売上IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbSaleID.Text.Trim()))
+                {
+                    MessageBox.Show("売上IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSaleID.Focus();
+                    return false;
+                }
+                //売上IDの存在チェック
+                if (!saleDataAccess.CheckSaleIDExistence(int.Parse(txbSaleID.Text.Trim())))
+                {
+                    MessageBox.Show("売上IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSaleID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("売上IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbSaleID.Focus();
+                return false;
+            }
+            //表示非表示選択の適否
+            if (cmbHidden.SelectedIndex == -1)
+            {
+                MessageBox.Show("表示選択が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbHidden.Focus();
+                return false;
+            }
+
+
+            return true;
+        }
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtUpdate()
+        //引　数   ：なし
+        //戻り値   ：顧客更新情報
+        //機　能   ：更新データのセット
+        ///////////////////////////////
+        private T_Sale GenerateDataAtUpdate()
+        {
+            return new T_Sale
+            {
+                SaID = int.Parse(txbSaleID.Text.Trim()),
+                SaFlag= cmbHidden.SelectedIndex,
+            };
+        }
+        ///////////////////////////////
+        //メソッド名：UpdateSale()
+        //引　数   ：売上情報
+        //戻り値   ：なし
+        //機　能   ：売上情報の更新
+        ///////////////////////////////
+        private void UpdateSale(T_Sale updSale)
+        {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbHiddenUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
+            // 顧客情報の更新
+            bool flg = saleDataAccess.UpdateSaleData(updSale);
+            if (flg == true)
+            {
+                MessageBox.Show("更新しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("更新に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //テキストボックス等のクリア
+            ClearImput();
+
+            // データグリッドビューの表示
+            GetDataGridView();
+        }
+
+
+
+        private void cmbSalesOfficeID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtpSaleDate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txbClientPostal_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txbClientName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txbSaleID_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txbEmployeeName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvSale_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
