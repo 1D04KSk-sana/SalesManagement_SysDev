@@ -35,6 +35,30 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：GetEmployeeDspData()
+        //引　数：なし
+        //戻り値：管理Flgが表示の社員データ
+        //機　能：管理Flgが表示の社員データの全取得
+        ///////////////////////////////
+        public List<M_Employee> GetEmployeeDspData()
+        {
+            List<M_Employee> listEmployee = new List<M_Employee>();
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listEmployee = context.M_Employees.Where(x => x.EmFlag == 0).ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listEmployee;
+        }
+
+        ///////////////////////////////
         //メソッド名：AddEmployeeData()
         //引　数：regEmployee = 顧客データ
         //戻り値：True or False
@@ -80,6 +104,33 @@ namespace SalesManagement_SysDev
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return flg;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetEmployeeID()
+        //引　数   ：社員名
+        //戻り値   ：社員ID
+        //機　能   ：一致する社員名を取り出して、IDを取得
+        ///////////////////////////////
+        public int GetEmployeeID(string employeeName)
+        {
+            int employeeID = 0;
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Employee = context.M_Employees.Single(x => x.EmName == employeeName);
+
+                employeeID = Employee.EmID;
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return employeeID;
         }
     }
 }
