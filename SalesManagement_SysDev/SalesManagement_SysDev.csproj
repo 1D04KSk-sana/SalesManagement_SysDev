@@ -200,6 +200,9 @@
     <EmbeddedResource Include="Form\FormEigyo\F_EigyoOrder.resx">
       <DependentUpon>F_EigyoOrder.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormHonsha\F_HonshaOperationLog.resx">
+      <DependentUpon>F_HonshaOperationLog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\FormHonsha\F_HonshaSinghUp.resx">
       <DependentUpon>F_HonshaSinghUp.cs</DependentUpon>
     </EmbeddedResource>
