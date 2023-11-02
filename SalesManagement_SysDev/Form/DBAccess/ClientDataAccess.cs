@@ -24,7 +24,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                //部署CDで一致するデータが存在するか
+                //顧客IDで一致するデータが存在するか
                 flg = context.M_Clients.Any(x => x.ClID == clientID);
                 context.Dispose();
             }
@@ -152,6 +152,30 @@ namespace SalesManagement_SysDev
         //戻り値：管理Flgが表示の顧客データ
         //機　能：管理Flgが表示の顧客データの全取得
         ///////////////////////////////
+        public List<M_Client> GetClientDspData()
+        {
+            List<M_Client> listClient = new List<M_Client>();
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listClient = context.M_Clients.Where(x => x.ClFlag == 0).ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listClient;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetClientDspData()　　※オーバーロード
+        //引　数：なし
+        //戻り値：管理Flgが表示の顧客データ
+        //機　能：管理Flgが表示の顧客データの全取得
+        ///////////////////////////////
         public List<M_Client> GetClientDspData(List<M_Client> dspClient)
         {
             List<M_Client> listClient = new List<M_Client>();
@@ -252,6 +276,33 @@ namespace SalesManagement_SysDev
             }
 
             return listClient;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetClientID()
+        //引　数   ：顧客名
+        //戻り値   ：顧客ID
+        //機　能   ：一致する顧客名を取り出して、IDを取得
+        ///////////////////////////////
+        public int GetClientID(string clientName)
+        {
+            int clientID = 0;
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Client = context.M_Clients.Single(x => x.ClName == clientName);
+
+                clientID = Client.ClID.Value;
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return clientID;
         }
     }
 }

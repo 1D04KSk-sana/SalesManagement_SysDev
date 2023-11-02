@@ -201,6 +201,9 @@
     </EmbeddedResource>
     <Compile Include="Form\DBAccess\ShipmentDataAccess.cs" />
     <Compile Include="Form\DBAccess\ShipmentDetailDataAccess.cs" />
+    <EmbeddedResource Include="Form\FormEigyo\F_EigyoOrder.resx">
+      <DependentUpon>F_EigyoOrder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\FormHonsha\F_HonshaSinghUp.resx">
       <DependentUpon>F_HonshaSinghUp.cs</DependentUpon>
     </EmbeddedResource>
