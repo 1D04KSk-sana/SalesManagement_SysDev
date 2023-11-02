@@ -33,7 +33,7 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnDone = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.cmbView = new System.Windows.Forms.ComboBox();
             this.txbEmployeeID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -110,27 +110,31 @@
             this.btnDone.Text = "実行";
             this.btnDone.UseVisualStyleBackColor = false;
             // 
-            // radioButton1
+            // rdbSearch
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.radioButton1.Location = new System.Drawing.Point(96, 122);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(93, 32);
-            this.radioButton1.TabIndex = 6;
-            this.radioButton1.Text = "検索";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rdbSearch.AutoSize = true;
+            this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbSearch.Location = new System.Drawing.Point(96, 122);
+            this.rdbSearch.Name = "rdbSearch";
+            this.rdbSearch.Size = new System.Drawing.Size(93, 32);
+            this.rdbSearch.TabIndex = 6;
+            this.rdbSearch.Text = "検索";
+            this.rdbSearch.UseVisualStyleBackColor = true;
             // 
             // cmbView
             // 
             this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbView.FormattingEnabled = true;
+            this.cmbView.Items.AddRange(new object[] {
+            "表示",
+            "非表示"});
             this.cmbView.Location = new System.Drawing.Point(676, 122);
             this.cmbView.Name = "cmbView";
             this.cmbView.Size = new System.Drawing.Size(200, 36);
             this.cmbView.TabIndex = 7;
             this.cmbView.TabStop = false;
+            this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
             // 
             // txbEmployeeID
             // 
@@ -317,7 +321,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txbEmployeeID);
             this.Controls.Add(this.cmbView);
-            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.rdbSearch);
             this.Controls.Add(this.btnDone);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.pnlHonsha);
@@ -325,6 +329,7 @@
             this.MaximizeBox = false;
             this.Name = "F_HonshaOperationLog";
             this.Text = "ログ管理画面";
+            this.Load += new System.EventHandler(this.F_HonshaOperationLog_Load);
             this.pnlHonsha.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOperatinLog)).EndInit();
             this.ResumeLayout(false);
@@ -339,7 +344,7 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnDone;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton rdbSearch;
         private System.Windows.Forms.ComboBox cmbView;
         private System.Windows.Forms.TextBox txbEmployeeID;
         private System.Windows.Forms.Label label1;
