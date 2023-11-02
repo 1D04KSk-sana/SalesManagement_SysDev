@@ -749,17 +749,17 @@ namespace SalesManagement_SysDev
             //    return;
             //}
 
-            //F_Honsha f_Honsha = new F_Honsha();
+            F_Honsha f_Honsha = new F_Honsha();
 
-            //f_Honsha.Owner = this;
-            //f_Honsha.FormClosed += ChildForm_FormClosed;
-            //f_Honsha.Show();
+            f_Honsha.Owner = this;
+            f_Honsha.FormClosed += ChildForm_FormClosed;
+            f_Honsha.Show();
 
-            F_Eigyo f_Eigyo = new F_Eigyo();
+            //F_Eigyo f_Eigyo = new F_Eigyo();
 
-            f_Eigyo.Owner = this;
-            f_Eigyo.FormClosed += ChildForm_FormClosed;
-            f_Eigyo.Show();
+            //f_Eigyo.Owner = this;
+            //f_Eigyo.FormClosed += ChildForm_FormClosed;
+            //f_Eigyo.Show();
 
 
 
