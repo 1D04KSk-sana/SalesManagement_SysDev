@@ -29,7 +29,7 @@ namespace SalesManagement_SysDev
         [MaxLength(50)]
         [Required]
         public string PrName { get; set; }          //商品名		
-        public decimal Price { get; set; }          //価格	
+        public int Price { get; set; }          //価格	
         [MaxLength(13)]
         public string PrJCode { get; set; }         //JANコード		
         public int PrSafetyStock { get; set; }      //安全在庫数		

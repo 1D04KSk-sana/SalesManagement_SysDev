@@ -11,9 +11,9 @@ namespace SalesManagement_SysDev
     {
         ///////////////////////////////
         //メソッド名：CheckProdactIDExistence()
-        //引　数   ：顧客コード
+        //引　数   ：商品コード
         //戻り値   ：True or False
-        //機　能   ：一致する顧客IDの有無を確認
+        //機　能   ：一致する商品IDの有無を確認
         //          ：一致データありの場合True
         //          ：一致データなしの場合False
         ///////////////////////////////
@@ -23,7 +23,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                //部署CDで一致するデータが存在するか
+                //商品CDで一致するデータが存在するか
                 flg = context.M_Products.Any(x => x.PrID == prodactID);
                 context.Dispose();
             }
@@ -81,6 +81,70 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：GetAndProdactData()
+        //引　数：検索条件
+        //戻り値：条件完全一致商品データ
+        //機　能：条件完全一致商品データの取得
+        ///////////////////////////////
+        public List<M_Product> GetAndProdactData(M_Product selectProdact)
+        {
+            List<M_Product> listProdact = new List<M_Product>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var query = context.M_Products.AsQueryable();
+
+                if (selectProdact.PrID != null && selectProdact.PrID != 0)
+                {
+                    query = query.Where(x => x.PrID == selectProdact.PrID);
+                }
+
+                if (selectProdact.McID != null && selectProdact.McID != 0)
+                {
+                    query = query.Where(x => x.McID == selectProdact.McID);
+                }
+
+                if (selectProdact.MaID != null && selectProdact.MaID != 0)
+                {
+                    query = query.Where(x => x.MaID == selectProdact.MaID);
+                }
+
+                listProdact = query.ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listProdact;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetOrProdactData()
+        //引　数：検索条件
+        //戻り値：条件一部一致商品データ
+        //機　能：条件一部一致商品データの取得
+        ///////////////////////////////
+        public List<M_Product> GetOrProdactData(M_Product selectProdact)
+        {
+            List<M_Product> listProdact = new List<M_Product>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listProdact = context.M_Products.Where(x => x.PrID == selectProdact.PrID || x.McID == selectProdact.McID || x.MaID == selectProdact.MaID).ToList();
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listProdact;
+        }
+
+        ///////////////////////////////
         //メソッド名：GetProdactDspData()
         //引　数：なし
         //戻り値：管理Flgが表示の商品データ
@@ -104,9 +168,9 @@ namespace SalesManagement_SysDev
 
         ///////////////////////////////
         //メソッド名：AddProdactData()
-        //引　数：regClient = 顧客データ
+        //引　数：regClient = 商品データ
         //戻り値：True or False
-        //機　能：顧客データの登録
+        //機　能：商品データの登録
         //      ：登録成功の場合True
         //      ：登録失敗の場合False
         ///////////////////////////////
