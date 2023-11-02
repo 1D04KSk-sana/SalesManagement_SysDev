@@ -331,7 +331,7 @@ namespace SalesManagement_SysDev
             //1行ずつdgvEmployeeに挿入
             foreach (var item in depData)
             {
-                dgvEmployee.Rows.Add(item.EmID, dictionarySalesOffice[item.SoID], item.EmName, item.EmPhone,  dictionaryHidden[item.EmFlag], dictionaryPositionname[item.PoID], item.EmHidden);
+                dgvEmployee.Rows.Add(item.EmID, dictionarySalesOffice[item.SoID], item.EmName, item.EmPhone,  dictionaryHidden[item.EmFlag], dictionaryPositionname[item.PoID], item.EmHiredate, item.EmHidden);
             }
 
             //dgvClientをリフレッシュ
@@ -402,7 +402,9 @@ namespace SalesManagement_SysDev
             cmbSalesOfficeID.SelectedIndex = -1;
             cmbPositionName.SelectedIndex = -1;
             cmbHidden.SelectedIndex = -1;
-            
+            dtpEmployeeHireDate.Text = string.Empty;
+
+
         }
         ///////////////////////////////
         //メソッド名：GetValidDataAtUpdate()
@@ -513,7 +515,8 @@ namespace SalesManagement_SysDev
                 EmPhone = txbEmployeePhone.Text.Trim(),
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 PoID = cmbPositionName.SelectedIndex+ 1,
-               EmFlag = cmbHidden.SelectedIndex ,
+                EmHiredate = dtpEmployeeHireDate.Value,
+                EmFlag = cmbHidden.SelectedIndex ,
             };
         }
 
@@ -540,10 +543,7 @@ namespace SalesManagement_SysDev
                EmName = txbEmployeeName.Text.Trim(),
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 EmPhone = txbEmployeePhone.Text.Trim(),
-                //ClPostal= txbClientPostal.Text.Trim(),
-                //ClAddress= txbClientAddress.Text.Trim(),
-                //ClFAX=txbClientFax.Text.Trim(),
-                EmHidden=txbHidden.Text.Trim()
+                PoID = cmbPositionName.SelectedIndex + 1,
             };
 
             if (searchFlg)
@@ -573,6 +573,7 @@ namespace SalesManagement_SysDev
                 EmName = txbEmployeeName.Text.Trim(),
                 EmPhone = txbEmployeePhone.Text.Trim(),
                 EmFlag = cmbHidden.SelectedIndex,
+                EmHiredate = dtpEmployeeHireDate.Value,
                 EmHidden = txbHidden.Text.Trim(),
             };
         }
@@ -588,7 +589,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbEmployeeID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbEmployeePhone.Text.Trim()))
+            if (String.IsNullOrEmpty(txbEmployeeID.Text.Trim()) && cmbPositionName.SelectedIndex == -1 && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbEmployeePhone.Text.Trim()))
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbEmployeeID.Focus();
@@ -631,10 +632,9 @@ namespace SalesManagement_SysDev
             cmbPositionName.SelectedIndex = dictionaryPositionname.FirstOrDefault(x => x.Value == dgvEmployee[5, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key.Value - 1;
             txbEmployeeName.Text = dgvEmployee[2, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
             txbEmployeePhone.Text = dgvEmployee[3, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
-          //  txbCEmployeePostal.Text = dgvEmployee[5, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
-          //  txbEmployeeFAX.Text = dgvEmployee[6, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvEmployee[4, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key;
-            txbHidden.Text = dgvEmployee[6, dgvEmployee.CurrentCellAddress.Y]?.Value?.ToString();
+            dtpEmployeeHireDate.Text = dgvEmployee[6, dgvEmployee.CurrentCellAddress.Y]?.Value?.ToString();
+            txbHidden.Text = dgvEmployee[7, dgvEmployee.CurrentCellAddress.Y]?.Value?.ToString();
         }
 
         ///////////////////////////////
@@ -678,7 +678,7 @@ namespace SalesManagement_SysDev
         private T_OperationLog GenerateLogAtRegistration(string OperationDone)
         {
             //登録・更新使用としている顧客データの取得
-            var logOperatin = GenerateDataAtRegistration();
+            //var logOperatin = GenerateDataAtRegistration();
 
             return new T_OperationLog
             {
@@ -686,7 +686,7 @@ namespace SalesManagement_SysDev
                 EmID = F_Login.intEmployeeID,
                 FormName = "社員管理画面",
                 OpDone = OperationDone,
-                OpDBID = logOperatin.EmID,
+                OpDBID = int.Parse(txbEmployeeID.Text.Trim()),
                 OpSetTime = DateTime.Now,
             };
         }
@@ -746,6 +746,7 @@ namespace SalesManagement_SysDev
             dgvEmployee.Columns.Add("EmPhone", "電話番号");
             dgvEmployee.Columns.Add("EmFlag", "顧客管理フラグ");
             dgvEmployee.Columns.Add("PoID", "役職ID");
+            dgvEmployee.Columns.Add("EmHiredate", "入社年月日");
             dgvEmployee.Columns.Add("EmHidden", "非表示理由");
 
             dgvEmployee.Columns["EmID"].Width = 50;
@@ -754,7 +755,8 @@ namespace SalesManagement_SysDev
             dgvEmployee.Columns["EmPhone"].Width = 100;
             dgvEmployee.Columns["EmFlag"].Width = 100;
             dgvEmployee.Columns["PoID"].Width = 100;
-            dgvEmployee.Columns["EmHidden"].Width = 350;
+            dgvEmployee.Columns["EmHiredate"].Width = 100;
+            dgvEmployee.Columns["EmHidden"].Width = 250;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvEmployee.Columns)

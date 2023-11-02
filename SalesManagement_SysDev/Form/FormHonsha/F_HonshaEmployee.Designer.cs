@@ -78,6 +78,7 @@
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(82, 40);
             this.btnReturn.TabIndex = 24;
+            this.btnReturn.TabStop = false;
             this.btnReturn.Text = "戻る";
             this.btnReturn.UseVisualStyleBackColor = false;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click_1);
@@ -91,6 +92,7 @@
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(82, 40);
             this.btnClose.TabIndex = 25;
+            this.btnClose.TabStop = false;
             this.btnClose.Text = "閉じる";
             this.btnClose.UseVisualStyleBackColor = false;
             // 
@@ -103,6 +105,7 @@
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(82, 40);
             this.btnClear.TabIndex = 26;
+            this.btnClear.TabStop = false;
             this.btnClear.Text = "クリア";
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -116,6 +119,7 @@
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(82, 40);
             this.btnDone.TabIndex = 27;
+            this.btnDone.TabStop = false;
             this.btnDone.Text = "実行";
             this.btnDone.UseVisualStyleBackColor = false;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
@@ -134,6 +138,7 @@
             this.cmbView.Name = "cmbView";
             this.cmbView.Size = new System.Drawing.Size(151, 26);
             this.cmbView.TabIndex = 28;
+            this.cmbView.TabStop = false;
             this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
             // 
             // pnlSelect
@@ -157,7 +162,6 @@
             this.rdbUpdate.Name = "rdbUpdate";
             this.rdbUpdate.Size = new System.Drawing.Size(65, 23);
             this.rdbUpdate.TabIndex = 1;
-            this.rdbUpdate.TabStop = true;
             this.rdbUpdate.Text = "更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
             // 
@@ -186,6 +190,7 @@
             this.cmbHidden.Name = "cmbHidden";
             this.cmbHidden.Size = new System.Drawing.Size(114, 22);
             this.cmbHidden.TabIndex = 46;
+            this.cmbHidden.TabStop = false;
             // 
             // txbHidden
             // 
@@ -240,6 +245,7 @@
             this.cmbSalesOfficeID.Name = "cmbSalesOfficeID";
             this.cmbSalesOfficeID.Size = new System.Drawing.Size(151, 22);
             this.cmbSalesOfficeID.TabIndex = 36;
+            this.cmbSalesOfficeID.TabStop = false;
             // 
             // txbEmployeePhone
             // 
@@ -308,6 +314,7 @@
             this.dtpEmployeeHireDate.Name = "dtpEmployeeHireDate";
             this.dtpEmployeeHireDate.Size = new System.Drawing.Size(150, 22);
             this.dtpEmployeeHireDate.TabIndex = 47;
+            this.dtpEmployeeHireDate.TabStop = false;
             // 
             // lblEmployeeHireDate
             // 
@@ -385,6 +392,7 @@
             this.btnPageMin.Name = "btnPageMin";
             this.btnPageMin.Size = new System.Drawing.Size(32, 29);
             this.btnPageMin.TabIndex = 67;
+            this.btnPageMin.TabStop = false;
             this.btnPageMin.Text = "|◀";
             this.btnPageMin.UseVisualStyleBackColor = false;
             this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
@@ -398,6 +406,7 @@
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(32, 29);
             this.btnBack.TabIndex = 66;
+            this.btnBack.TabStop = false;
             this.btnBack.Text = "◀";
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -411,6 +420,7 @@
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(32, 29);
             this.btnNext.TabIndex = 65;
+            this.btnNext.TabStop = false;
             this.btnNext.Text = "▶";
             this.btnNext.UseVisualStyleBackColor = false;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
@@ -424,6 +434,7 @@
             this.btnPageMax.Name = "btnPageMax";
             this.btnPageMax.Size = new System.Drawing.Size(32, 29);
             this.btnPageMax.TabIndex = 64;
+            this.btnPageMax.TabStop = false;
             this.btnPageMax.Text = "▶|";
             this.btnPageMax.UseVisualStyleBackColor = false;
             this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
@@ -437,6 +448,7 @@
             this.btnPageSize.Name = "btnPageSize";
             this.btnPageSize.Size = new System.Drawing.Size(90, 28);
             this.btnPageSize.TabIndex = 63;
+            this.btnPageSize.TabStop = false;
             this.btnPageSize.Text = "行数変更";
             this.btnPageSize.UseVisualStyleBackColor = false;
             this.btnPageSize.Click += new System.EventHandler(this.btnPageSize_Click);
@@ -472,6 +484,7 @@
             this.cmbPositionName.Name = "cmbPositionName";
             this.cmbPositionName.Size = new System.Drawing.Size(151, 22);
             this.cmbPositionName.TabIndex = 70;
+            this.cmbPositionName.TabStop = false;
             // 
             // F_HonshaEmployee
             // 

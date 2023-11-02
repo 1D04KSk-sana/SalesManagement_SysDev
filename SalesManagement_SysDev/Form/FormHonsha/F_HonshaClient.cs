@@ -294,6 +294,7 @@ namespace SalesManagement_SysDev
         //機　能   ：登録データのセット
         ///////////////////////////////
         private M_Client GenerateDataAtRegistration()
+
         {
             return new M_Client
             {
@@ -730,6 +731,7 @@ namespace SalesManagement_SysDev
             //顧客登録フォームの透明化
             this.Opacity = 0;
         }
+        
 
         ///////////////////////////////
         //メソッド名：GenerateDataAtSelect()

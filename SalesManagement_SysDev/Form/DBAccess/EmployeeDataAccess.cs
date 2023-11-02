@@ -166,6 +166,7 @@ namespace SalesManagement_SysDev
                 Employee.EmPhone = updEmployee.EmPhone;
                 Employee.EmFlag = updEmployee.EmFlag;
                 Employee.SoID = updEmployee.SoID;
+                Employee.EmHiredate = updEmployee.EmHiredate;
                 Employee.EmHidden = updEmployee.EmHidden;
 
 
@@ -247,10 +248,17 @@ namespace SalesManagement_SysDev
                 if (selectEmployee.EmPhone != null && selectEmployee.EmPhone != "")
                 {
                     query = query.Where(x => x.EmPhone == selectEmployee.EmPhone);
+
+                }
+
+                if (selectEmployee.PoID != null && selectEmployee.PoID != 0)
+                {
+                    query = query.Where(x => x.PoID == selectEmployee.PoID);
                 }
 
                 listEmployee = query.ToList();
                 context.Dispose();
+
             }
             catch (Exception ex)
             {
@@ -272,7 +280,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listEmployee = context.M_Employees.Where(x => x.EmID == selectEmployee.EmID || x.SoID == selectEmployee.SoID || x.EmPhone == selectEmployee.EmPhone).ToList();
+                listEmployee = context.M_Employees.Where(x => x.EmID == selectEmployee.EmID || x.SoID == selectEmployee.SoID || x.EmPhone == selectEmployee.EmPhone || x.PoID == selectEmployee.PoID).ToList();
 
                 context.Dispose();
             }
