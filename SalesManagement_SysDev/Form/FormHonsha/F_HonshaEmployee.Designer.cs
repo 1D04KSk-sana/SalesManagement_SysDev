@@ -64,6 +64,7 @@
             this.lblPageSize = new System.Windows.Forms.Label();
             this.txbPageSize = new System.Windows.Forms.TextBox();
             this.cmbPositionName = new System.Windows.Forms.ComboBox();
+            this.btnSinghUp = new System.Windows.Forms.Button();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployee)).BeginInit();
             this.pnlHonsha.SuspendLayout();
@@ -146,11 +147,12 @@
             this.pnlSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.pnlSelect.Controls.Add(this.rdbUpdate);
             this.pnlSelect.Controls.Add(this.rdbSearch);
-            this.pnlSelect.Location = new System.Drawing.Point(11, 82);
+            this.pnlSelect.Location = new System.Drawing.Point(120, 76);
             this.pnlSelect.Margin = new System.Windows.Forms.Padding(2);
             this.pnlSelect.Name = "pnlSelect";
-            this.pnlSelect.Size = new System.Drawing.Size(144, 38);
+            this.pnlSelect.Size = new System.Drawing.Size(145, 38);
             this.pnlSelect.TabIndex = 29;
+            this.pnlSelect.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlSelect_Paint);
             // 
             // rdbUpdate
             // 
@@ -162,6 +164,7 @@
             this.rdbUpdate.Name = "rdbUpdate";
             this.rdbUpdate.Size = new System.Drawing.Size(65, 23);
             this.rdbUpdate.TabIndex = 1;
+            this.rdbUpdate.TabStop = true;
             this.rdbUpdate.Text = "更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
             // 
@@ -486,6 +489,20 @@
             this.cmbPositionName.TabIndex = 70;
             this.cmbPositionName.TabStop = false;
             // 
+            // btnSinghUp
+            // 
+            this.btnSinghUp.BackColor = System.Drawing.Color.White;
+            this.btnSinghUp.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnSinghUp.Location = new System.Drawing.Point(9, 73);
+            this.btnSinghUp.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSinghUp.Name = "btnSinghUp";
+            this.btnSinghUp.Size = new System.Drawing.Size(97, 40);
+            this.btnSinghUp.TabIndex = 27;
+            this.btnSinghUp.TabStop = false;
+            this.btnSinghUp.Text = "新規登録";
+            this.btnSinghUp.UseVisualStyleBackColor = false;
+            this.btnSinghUp.Click += new System.EventHandler(this.btnSinghUp_Click);
+            // 
             // F_HonshaEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -493,6 +510,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(913, 601);
             this.ControlBox = false;
+            this.Controls.Add(this.btnSinghUp);
             this.Controls.Add(this.cmbPositionName);
             this.Controls.Add(this.lblNumPage);
             this.Controls.Add(this.txbNumPage);
@@ -576,5 +594,6 @@
         private System.Windows.Forms.Label lblPageSize;
         private System.Windows.Forms.TextBox txbPageSize;
         private System.Windows.Forms.ComboBox cmbPositionName;
+        private System.Windows.Forms.Button btnSinghUp;
     }
 }

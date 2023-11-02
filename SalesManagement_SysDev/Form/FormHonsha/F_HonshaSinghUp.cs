@@ -285,5 +285,9 @@ namespace SalesManagement_SysDev
             cmbPositionID.SelectedIndex = -1;
         }
 
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

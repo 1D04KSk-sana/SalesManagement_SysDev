@@ -34,6 +34,8 @@ namespace SalesManagement_SysDev
         //フォームを呼び出しする際のインスタンス化
         private F_SearchDialog f_SearchDialog = new F_SearchDialog();
 
+
+
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
         {
@@ -763,6 +765,22 @@ namespace SalesManagement_SysDev
             {
                 dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+        }
+
+        private void pnlSelect_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnSinghUp_Click(object sender, EventArgs e)
+        {
+            F_HonshaSinghUp F_HonshaSinghUp = new F_HonshaSinghUp();
+
+            F_HonshaSinghUp.Owner = this;
+            F_HonshaSinghUp.FormClosed += ChildForm_FormClosed;
+            F_HonshaSinghUp.Show();
+
+            this.Opacity = 0;
         }
     }
 }
