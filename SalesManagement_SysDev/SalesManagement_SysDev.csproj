@@ -206,6 +206,9 @@
     <EmbeddedResource Include="Form\FormEigyo\F_Eigyo.resx">
       <DependentUpon>F_Eigyo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormHonsha\F_HonshaProdact.resx">
+      <DependentUpon>F_HonshaProdact.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\F_login.resx">
       <DependentUpon>F_login.cs</DependentUpon>
     </EmbeddedResource>
