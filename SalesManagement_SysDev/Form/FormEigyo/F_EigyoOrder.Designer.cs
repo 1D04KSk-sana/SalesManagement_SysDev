@@ -52,10 +52,10 @@
             this.txbOrderID = new System.Windows.Forms.TextBox();
             this.lblOrderID = new System.Windows.Forms.Label();
             this.pnlSelect = new System.Windows.Forms.Panel();
+            this.rdbUpdate = new System.Windows.Forms.RadioButton();
             this.rdbConfirm = new System.Windows.Forms.RadioButton();
             this.rdbDetailRegister = new System.Windows.Forms.RadioButton();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
-            this.rdbUpdate = new System.Windows.Forms.RadioButton();
             this.rdbRegister = new System.Windows.Forms.RadioButton();
             this.btnDone = new System.Windows.Forms.Button();
             this.pnlHonsha = new System.Windows.Forms.Panel();
@@ -79,6 +79,9 @@
             this.lblEmployeeID = new System.Windows.Forms.Label();
             this.txbEmployeeID = new System.Windows.Forms.TextBox();
             this.lblClientID = new System.Windows.Forms.Label();
+            this.lblConfirm = new System.Windows.Forms.Label();
+            this.cmbConfirm = new System.Windows.Forms.ComboBox();
+            this.btnDetailClear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).BeginInit();
             this.pnlSelect.SuspendLayout();
             this.pnlHonsha.SuspendLayout();
@@ -204,7 +207,7 @@
             this.cmbView.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbView.Location = new System.Drawing.Point(757, 118);
+            this.cmbView.Location = new System.Drawing.Point(618, 118);
             this.cmbView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbView.Name = "cmbView";
             this.cmbView.Size = new System.Drawing.Size(200, 26);
@@ -215,7 +218,7 @@
             // btnClear
             // 
             this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClear.Location = new System.Drawing.Point(976, 108);
+            this.btnClear.Location = new System.Drawing.Point(844, 108);
             this.btnClear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(109, 50);
@@ -243,12 +246,12 @@
             // dgvOrder
             // 
             this.dgvOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvOrder.Location = new System.Drawing.Point(13, 410);
+            this.dgvOrder.Location = new System.Drawing.Point(13, 465);
             this.dgvOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvOrder.Name = "dgvOrder";
             this.dgvOrder.RowHeadersWidth = 51;
             this.dgvOrder.RowTemplate.Height = 24;
-            this.dgvOrder.Size = new System.Drawing.Size(735, 345);
+            this.dgvOrder.Size = new System.Drawing.Size(735, 290);
             this.dgvOrder.TabIndex = 50;
             this.dgvOrder.TabStop = false;
             this.dgvOrder.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrder_CellClick);
@@ -256,17 +259,17 @@
             // txbHidden
             // 
             this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbHidden.Location = new System.Drawing.Point(583, 373);
+            this.txbHidden.Location = new System.Drawing.Point(139, 416);
             this.txbHidden.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txbHidden.Name = "txbHidden";
-            this.txbHidden.Size = new System.Drawing.Size(630, 22);
+            this.txbHidden.Size = new System.Drawing.Size(644, 22);
             this.txbHidden.TabIndex = 49;
             // 
             // lblClientHidden
             // 
             this.lblClientHidden.AutoSize = true;
             this.lblClientHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientHidden.Location = new System.Drawing.Point(471, 377);
+            this.lblClientHidden.Location = new System.Drawing.Point(13, 419);
             this.lblClientHidden.Name = "lblClientHidden";
             this.lblClientHidden.Size = new System.Drawing.Size(82, 15);
             this.lblClientHidden.TabIndex = 48;
@@ -354,22 +357,34 @@
             // pnlSelect
             // 
             this.pnlSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(219)))), ((int)(((byte)(193)))));
+            this.pnlSelect.Controls.Add(this.rdbUpdate);
             this.pnlSelect.Controls.Add(this.rdbConfirm);
             this.pnlSelect.Controls.Add(this.rdbDetailRegister);
             this.pnlSelect.Controls.Add(this.rdbSearch);
-            this.pnlSelect.Controls.Add(this.rdbUpdate);
             this.pnlSelect.Controls.Add(this.rdbRegister);
             this.pnlSelect.Location = new System.Drawing.Point(13, 118);
             this.pnlSelect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlSelect.Name = "pnlSelect";
-            this.pnlSelect.Size = new System.Drawing.Size(556, 38);
+            this.pnlSelect.Size = new System.Drawing.Size(599, 38);
             this.pnlSelect.TabIndex = 33;
+            // 
+            // rdbUpdate
+            // 
+            this.rdbUpdate.AutoSize = true;
+            this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbUpdate.Location = new System.Drawing.Point(261, 8);
+            this.rdbUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.rdbUpdate.Name = "rdbUpdate";
+            this.rdbUpdate.Size = new System.Drawing.Size(122, 23);
+            this.rdbUpdate.TabIndex = 5;
+            this.rdbUpdate.Text = "非表示更新";
+            this.rdbUpdate.UseVisualStyleBackColor = true;
             // 
             // rdbConfirm
             // 
             this.rdbConfirm.AutoSize = true;
             this.rdbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbConfirm.Location = new System.Drawing.Point(340, 8);
+            this.rdbConfirm.Location = new System.Drawing.Point(429, 8);
             this.rdbConfirm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.rdbConfirm.Name = "rdbConfirm";
             this.rdbConfirm.Size = new System.Drawing.Size(65, 23);
@@ -393,25 +408,13 @@
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(433, 8);
+            this.rdbSearch.Location = new System.Drawing.Point(522, 8);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(65, 23);
             this.rdbSearch.TabIndex = 2;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
-            // 
-            // rdbUpdate
-            // 
-            this.rdbUpdate.AutoSize = true;
-            this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbUpdate.Location = new System.Drawing.Point(250, 8);
-            this.rdbUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.rdbUpdate.Name = "rdbUpdate";
-            this.rdbUpdate.Size = new System.Drawing.Size(65, 23);
-            this.rdbUpdate.TabIndex = 1;
-            this.rdbUpdate.Text = "更新";
-            this.rdbUpdate.UseVisualStyleBackColor = true;
             // 
             // rdbRegister
             // 
@@ -478,12 +481,12 @@
             // dgvOrderDetail
             // 
             this.dgvOrderDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvOrderDetail.Location = new System.Drawing.Point(757, 410);
+            this.dgvOrderDetail.Location = new System.Drawing.Point(757, 465);
             this.dgvOrderDetail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvOrderDetail.Name = "dgvOrderDetail";
             this.dgvOrderDetail.RowHeadersWidth = 51;
             this.dgvOrderDetail.RowTemplate.Height = 24;
-            this.dgvOrderDetail.Size = new System.Drawing.Size(461, 345);
+            this.dgvOrderDetail.Size = new System.Drawing.Size(461, 290);
             this.dgvOrderDetail.TabIndex = 65;
             this.dgvOrderDetail.TabStop = false;
             this.dgvOrderDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrderDetail_CellClick);
@@ -659,12 +662,53 @@
             this.lblClientID.TabIndex = 81;
             this.lblClientID.Text = "顧客ID";
             // 
+            // lblConfirm
+            // 
+            this.lblConfirm.AutoSize = true;
+            this.lblConfirm.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblConfirm.Location = new System.Drawing.Point(472, 376);
+            this.lblConfirm.Name = "lblConfirm";
+            this.lblConfirm.Size = new System.Drawing.Size(90, 15);
+            this.lblConfirm.TabIndex = 85;
+            this.lblConfirm.Text = "未確定/確定";
+            // 
+            // cmbConfirm
+            // 
+            this.cmbConfirm.BackColor = System.Drawing.Color.White;
+            this.cmbConfirm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbConfirm.FormattingEnabled = true;
+            this.cmbConfirm.Items.AddRange(new object[] {
+            "未確定",
+            "確定"});
+            this.cmbConfirm.Location = new System.Drawing.Point(583, 372);
+            this.cmbConfirm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbConfirm.Name = "cmbConfirm";
+            this.cmbConfirm.Size = new System.Drawing.Size(200, 22);
+            this.cmbConfirm.TabIndex = 86;
+            // 
+            // btnDetailClear
+            // 
+            this.btnDetailClear.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnDetailClear.Location = new System.Drawing.Point(974, 108);
+            this.btnDetailClear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDetailClear.Name = "btnDetailClear";
+            this.btnDetailClear.Size = new System.Drawing.Size(109, 50);
+            this.btnDetailClear.TabIndex = 87;
+            this.btnDetailClear.TabStop = false;
+            this.btnDetailClear.Text = "詳細クリア";
+            this.btnDetailClear.UseVisualStyleBackColor = true;
+            this.btnDetailClear.Click += new System.EventHandler(this.btnDetailClear_Click);
+            // 
             // F_EigyoOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(219)))), ((int)(((byte)(193)))));
             this.ClientSize = new System.Drawing.Size(1229, 800);
+            this.Controls.Add(this.btnDetailClear);
+            this.Controls.Add(this.cmbConfirm);
+            this.Controls.Add(this.lblConfirm);
             this.Controls.Add(this.txbClientID);
             this.Controls.Add(this.lblEmployeeID);
             this.Controls.Add(this.txbEmployeeID);
@@ -752,7 +796,6 @@
         private System.Windows.Forms.Label lblOrderID;
         private System.Windows.Forms.Panel pnlSelect;
         private System.Windows.Forms.RadioButton rdbSearch;
-        private System.Windows.Forms.RadioButton rdbUpdate;
         private System.Windows.Forms.RadioButton rdbRegister;
         private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.Panel pnlHonsha;
@@ -778,5 +821,9 @@
         private System.Windows.Forms.Label lblEmployeeID;
         private System.Windows.Forms.TextBox txbEmployeeID;
         private System.Windows.Forms.Label lblClientID;
+        private System.Windows.Forms.Label lblConfirm;
+        private System.Windows.Forms.ComboBox cmbConfirm;
+        private System.Windows.Forms.RadioButton rdbUpdate;
+        private System.Windows.Forms.Button btnDetailClear;
     }
 }
