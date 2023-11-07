@@ -168,6 +168,32 @@
     <Compile Include="Form\FormEigyo\F_EigyoArrival.Designer.cs">
       <DependentUpon>F_EigyoArrival.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\FormButuryu\F_ButuryuStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\FormButuryu\F_ButuryuStock.Designer.cs">
+      <DependentUpon>F_ButuryuStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\FormButuryu\F_ButuryuWarehousing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\FormButuryu\F_ButuryuWarehousing.Designer.cs">
+      <DependentUpon>F_ButuryuWarehousing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\FormButuryu\F_ButuryuHattyu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\FormButuryu\F_ButuryuHattyu.Designer.cs">
+      <DependentUpon>F_ButuryuHattyu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form\DBAccess\HattyuDataAccess.cs" />
+    <Compile Include="Form\DBAccess\HattyuDetailDataAccess.cs" />
+    <Compile Include="Form\FormButuryu\F_ButuryuSyukko.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\FormButuryu\F_ButuryuSyukko.Designer.cs">
+      <DependentUpon>F_ButuryuSyukko.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entity\T_Arrival.cs" />
@@ -197,6 +223,10 @@
     <Compile Include="Form\DBAccess\StockDataAccess.cs" />
     <Compile Include="Form\DBAccess\ShipmentDataAccess.cs" />
     <Compile Include="Form\DBAccess\ShipmentDetailDataAccess.cs" />
+    <Compile Include="Form\DBAccess\WarehousingDataAccess.cs" />
+    <Compile Include="Form\DBAccess\WarehousingDetailDataAccess.cs" />
+    <Compile Include="Form\DBAccess\SyukkoDataAccess.cs" />
+    <Compile Include="Form\DBAccess\SyukkoDetailDataAccess.cs" />
     <EmbeddedResource Include="Form\FormEigyo\F_EigyoOrder.resx">
       <DependentUpon>F_EigyoOrder.cs</DependentUpon>
     </EmbeddedResource>

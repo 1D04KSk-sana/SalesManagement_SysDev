@@ -32,5 +32,29 @@ namespace SalesManagement_SysDev
 
             return listOrderDetail;
         }
+
+        ///////////////////////////////
+        //メソッド名：AddOrderDetailData()
+        //引　数：regOrder = 受注詳細データ
+        //戻り値：True or False
+        //機　能：受注詳細データの登録
+        //      ：登録成功の場合True
+        //      ：登録失敗の場合False
+        ///////////////////////////////
+        public bool AddOrderDetailData(T_OrderDetail regOrder)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                context.T_OrderDetails.Add(regOrder);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+        }
     }
 }
