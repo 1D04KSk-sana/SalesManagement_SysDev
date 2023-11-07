@@ -17,14 +17,14 @@ namespace SalesManagement_SysDev
         //          ：一致データありの場合True
         //          ：一致データなしの場合False
         ///////////////////////////////
-        public bool CheckProdactIDExistence(int prodactID)
+        public bool CheckProdactIDExistence(int ProdactID)
         {
             bool flg = false;
             try
             {
                 var context = new SalesManagement_DevContext();
-                //商品CDで一致するデータが存在するか
-                flg = context.M_Products.Any(x => x.PrID == prodactID);
+                //商品IDで一致するデータが存在するか
+                flg = context.M_Products.Any(x => x.PrID == ProdactID);
                 context.Dispose();
             }
             catch (Exception ex)
@@ -35,10 +35,10 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：GetClientData()
+        //メソッド名：GetProdactDspData()
         //引　数：なし
-        //戻り値：商品データ
-        //機　能：商品データの全取得
+        //戻り値：管理Flgが表示の商品データ
+        //機　能：管理Flgが表示の商品データの全取得
         ///////////////////////////////
         public List<M_Product> GetProdactDspData()
         {
@@ -47,7 +47,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listProdact = context.M_Products.ToList();
+                listProdact = context.M_Products.Where(x => x.PrFlag == 0).ToList();
                 context.Dispose();
             }
             catch (Exception ex)
@@ -79,6 +79,31 @@ namespace SalesManagement_SysDev
 
             return listProdact;
         }
+
+        ///////////////////////////////
+        //メソッド名：GetProdactID()
+        //引　数   ：商品名
+        //戻り値   ：商品ID
+        //機　能   ：一致する商品名を取り出して、IDを取得
+        ///////////////////////////////
+        public int GetProdactID(string prodactName)
+        {
+            int prodactID = 0;
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Prodact = context.M_Products.Single(x => x.PrName == prodactName);
+
+                prodactID = Prodact.PrID;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+            return prodactID;
+    	}
 
         ///////////////////////////////
         //メソッド名：GetAndProdactData()

@@ -129,7 +129,7 @@
             "非表示"});
             this.cmbView.Location = new System.Drawing.Point(681, 105);
             this.cmbView.Name = "cmbView";
-            this.cmbView.Size = new System.Drawing.Size(200, 31);
+            this.cmbView.Size = new System.Drawing.Size(200, 26);
             this.cmbView.TabIndex = 3;
             this.cmbView.TabStop = false;
             this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
@@ -150,7 +150,7 @@
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbSearch.Location = new System.Drawing.Point(232, 12);
             this.rdbSearch.Name = "rdbSearch";
-            this.rdbSearch.Size = new System.Drawing.Size(77, 27);
+            this.rdbSearch.Size = new System.Drawing.Size(65, 23);
             this.rdbSearch.TabIndex = 2;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
@@ -161,7 +161,7 @@
             this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbUpdate.Location = new System.Drawing.Point(138, 12);
             this.rdbUpdate.Name = "rdbUpdate";
-            this.rdbUpdate.Size = new System.Drawing.Size(77, 27);
+            this.rdbUpdate.Size = new System.Drawing.Size(65, 23);
             this.rdbUpdate.TabIndex = 1;
             this.rdbUpdate.Text = "更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
@@ -173,7 +173,7 @@
             this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbRegister.Location = new System.Drawing.Point(41, 12);
             this.rdbRegister.Name = "rdbRegister";
-            this.rdbRegister.Size = new System.Drawing.Size(77, 27);
+            this.rdbRegister.Size = new System.Drawing.Size(65, 23);
             this.rdbRegister.TabIndex = 0;
             this.rdbRegister.TabStop = true;
             this.rdbRegister.Text = "登録";
@@ -185,7 +185,7 @@
             this.lblProdactID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblProdactID.Location = new System.Drawing.Point(26, 161);
             this.lblProdactID.Name = "lblProdactID";
-            this.lblProdactID.Size = new System.Drawing.Size(60, 18);
+            this.lblProdactID.Size = new System.Drawing.Size(51, 15);
             this.lblProdactID.TabIndex = 5;
             this.lblProdactID.Text = "商品ID";
             // 
@@ -194,7 +194,7 @@
             this.txbProdactID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbProdactID.Location = new System.Drawing.Point(96, 159);
             this.txbProdactID.Name = "txbProdactID";
-            this.txbProdactID.Size = new System.Drawing.Size(200, 25);
+            this.txbProdactID.Size = new System.Drawing.Size(200, 22);
             this.txbProdactID.TabIndex = 6;
             this.txbProdactID.TabStop = false;
             // 
@@ -203,7 +203,7 @@
             this.txbProdactName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbProdactName.Location = new System.Drawing.Point(379, 159);
             this.txbProdactName.Name = "txbProdactName";
-            this.txbProdactName.Size = new System.Drawing.Size(200, 25);
+            this.txbProdactName.Size = new System.Drawing.Size(200, 22);
             this.txbProdactName.TabIndex = 8;
             this.txbProdactName.TabStop = false;
             // 
@@ -213,7 +213,7 @@
             this.lblProdactName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblProdactName.Location = new System.Drawing.Point(313, 162);
             this.lblProdactName.Name = "lblProdactName";
-            this.lblProdactName.Size = new System.Drawing.Size(62, 18);
+            this.lblProdactName.Size = new System.Drawing.Size(52, 15);
             this.lblProdactName.TabIndex = 7;
             this.lblProdactName.Text = "商品名";
             // 
@@ -223,7 +223,7 @@
             this.lblMajorID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblMajorID.Location = new System.Drawing.Point(597, 161);
             this.lblMajorID.Name = "lblMajorID";
-            this.lblMajorID.Size = new System.Drawing.Size(78, 18);
+            this.lblMajorID.Size = new System.Drawing.Size(66, 15);
             this.lblMajorID.TabIndex = 9;
             this.lblMajorID.Text = "大分類ID";
             // 
@@ -233,7 +233,7 @@
             this.lblSmallID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblSmallID.Location = new System.Drawing.Point(887, 162);
             this.lblSmallID.Name = "lblSmallID";
-            this.lblSmallID.Size = new System.Drawing.Size(78, 18);
+            this.lblSmallID.Size = new System.Drawing.Size(66, 15);
             this.lblSmallID.TabIndex = 17;
             this.lblSmallID.Text = "小分類ID";
             // 
@@ -242,7 +242,7 @@
             this.txbProdactColor.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbProdactColor.Location = new System.Drawing.Point(379, 207);
             this.txbProdactColor.Name = "txbProdactColor";
-            this.txbProdactColor.Size = new System.Drawing.Size(200, 25);
+            this.txbProdactColor.Size = new System.Drawing.Size(200, 22);
             this.txbProdactColor.TabIndex = 16;
             this.txbProdactColor.TabStop = false;
             // 
@@ -252,7 +252,7 @@
             this.lblProdactColor.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblProdactColor.Location = new System.Drawing.Point(347, 210);
             this.lblProdactColor.Name = "lblProdactColor";
-            this.lblProdactColor.Size = new System.Drawing.Size(26, 18);
+            this.lblProdactColor.Size = new System.Drawing.Size(22, 15);
             this.lblProdactColor.TabIndex = 15;
             this.lblProdactColor.Text = "色";
             // 
@@ -261,7 +261,7 @@
             this.txbModelNumber.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbModelNumber.Location = new System.Drawing.Point(96, 207);
             this.txbModelNumber.Name = "txbModelNumber";
-            this.txbModelNumber.Size = new System.Drawing.Size(200, 25);
+            this.txbModelNumber.Size = new System.Drawing.Size(200, 22);
             this.txbModelNumber.TabIndex = 14;
             this.txbModelNumber.TabStop = false;
             // 
@@ -271,7 +271,7 @@
             this.lblModelNumber.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblModelNumber.Location = new System.Drawing.Point(42, 209);
             this.lblModelNumber.Name = "lblModelNumber";
-            this.lblModelNumber.Size = new System.Drawing.Size(44, 18);
+            this.lblModelNumber.Size = new System.Drawing.Size(37, 15);
             this.lblModelNumber.TabIndex = 13;
             this.lblModelNumber.Text = "型番";
             // 
@@ -280,7 +280,7 @@
             this.txbProdactPrice.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbProdactPrice.Location = new System.Drawing.Point(379, 255);
             this.txbProdactPrice.Name = "txbProdactPrice";
-            this.txbProdactPrice.Size = new System.Drawing.Size(200, 25);
+            this.txbProdactPrice.Size = new System.Drawing.Size(200, 22);
             this.txbProdactPrice.TabIndex = 24;
             this.txbProdactPrice.TabStop = false;
             // 
@@ -290,7 +290,7 @@
             this.lblProdactPrice.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblProdactPrice.Location = new System.Drawing.Point(329, 258);
             this.lblProdactPrice.Name = "lblProdactPrice";
-            this.lblProdactPrice.Size = new System.Drawing.Size(44, 18);
+            this.lblProdactPrice.Size = new System.Drawing.Size(37, 15);
             this.lblProdactPrice.TabIndex = 23;
             this.lblProdactPrice.Text = "価格";
             // 
@@ -300,7 +300,7 @@
             this.lblMakerName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblMakerName.Location = new System.Drawing.Point(12, 257);
             this.lblMakerName.Name = "lblMakerName";
-            this.lblMakerName.Size = new System.Drawing.Size(81, 18);
+            this.lblMakerName.Size = new System.Drawing.Size(67, 15);
             this.lblMakerName.TabIndex = 21;
             this.lblMakerName.Text = "メーカー名";
             // 
@@ -309,7 +309,7 @@
             this.txbProdactSafetyStock.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbProdactSafetyStock.Location = new System.Drawing.Point(681, 254);
             this.txbProdactSafetyStock.Name = "txbProdactSafetyStock";
-            this.txbProdactSafetyStock.Size = new System.Drawing.Size(200, 25);
+            this.txbProdactSafetyStock.Size = new System.Drawing.Size(200, 22);
             this.txbProdactSafetyStock.TabIndex = 28;
             this.txbProdactSafetyStock.TabStop = false;
             // 
@@ -319,7 +319,7 @@
             this.lblProdactSafetyStock.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblProdactSafetyStock.Location = new System.Drawing.Point(579, 257);
             this.lblProdactSafetyStock.Name = "lblProdactSafetyStock";
-            this.lblProdactSafetyStock.Size = new System.Drawing.Size(98, 18);
+            this.lblProdactSafetyStock.Size = new System.Drawing.Size(82, 15);
             this.lblProdactSafetyStock.TabIndex = 27;
             this.lblProdactSafetyStock.Text = "安全在庫数";
             // 
@@ -329,7 +329,7 @@
             this.lblProdactReleaseDate.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblProdactReleaseDate.Location = new System.Drawing.Point(613, 212);
             this.lblProdactReleaseDate.Name = "lblProdactReleaseDate";
-            this.lblProdactReleaseDate.Size = new System.Drawing.Size(62, 18);
+            this.lblProdactReleaseDate.Size = new System.Drawing.Size(52, 15);
             this.lblProdactReleaseDate.TabIndex = 25;
             this.lblProdactReleaseDate.Text = "発売日";
             // 
@@ -343,7 +343,7 @@
             "非表示"});
             this.cmbHidden.Location = new System.Drawing.Point(96, 319);
             this.cmbHidden.Name = "cmbHidden";
-            this.cmbHidden.Size = new System.Drawing.Size(150, 26);
+            this.cmbHidden.Size = new System.Drawing.Size(150, 22);
             this.cmbHidden.TabIndex = 29;
             this.cmbHidden.TabStop = false;
             // 
@@ -353,7 +353,7 @@
             this.lblProdactHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblProdactHidden.Location = new System.Drawing.Point(282, 319);
             this.lblProdactHidden.Name = "lblProdactHidden";
-            this.lblProdactHidden.Size = new System.Drawing.Size(98, 18);
+            this.lblProdactHidden.Size = new System.Drawing.Size(82, 15);
             this.lblProdactHidden.TabIndex = 30;
             this.lblProdactHidden.Text = "非表示理由";
             // 
@@ -362,7 +362,7 @@
             this.tbxProdactHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.tbxProdactHidden.Location = new System.Drawing.Point(379, 316);
             this.tbxProdactHidden.Name = "tbxProdactHidden";
-            this.tbxProdactHidden.Size = new System.Drawing.Size(812, 25);
+            this.tbxProdactHidden.Size = new System.Drawing.Size(812, 22);
             this.tbxProdactHidden.TabIndex = 31;
             this.tbxProdactHidden.TabStop = false;
             // 
@@ -384,7 +384,7 @@
             this.lblPageSize.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblPageSize.Location = new System.Drawing.Point(12, 718);
             this.lblPageSize.Name = "lblPageSize";
-            this.lblPageSize.Size = new System.Drawing.Size(98, 18);
+            this.lblPageSize.Size = new System.Drawing.Size(81, 15);
             this.lblPageSize.TabIndex = 33;
             this.lblPageSize.Text = "1ページ行数";
             // 
@@ -393,7 +393,7 @@
             this.txbPageSize.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbPageSize.Location = new System.Drawing.Point(116, 714);
             this.txbPageSize.Name = "txbPageSize";
-            this.txbPageSize.Size = new System.Drawing.Size(50, 25);
+            this.txbPageSize.Size = new System.Drawing.Size(50, 22);
             this.txbPageSize.TabIndex = 34;
             // 
             // btnPagesize
@@ -414,7 +414,7 @@
             this.lblNumPage.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblNumPage.Location = new System.Drawing.Point(955, 717);
             this.lblNumPage.Name = "lblNumPage";
-            this.lblNumPage.Size = new System.Drawing.Size(53, 18);
+            this.lblNumPage.Size = new System.Drawing.Size(43, 15);
             this.lblNumPage.TabIndex = 36;
             this.lblNumPage.Text = "ページ";
             // 
@@ -423,7 +423,7 @@
             this.txbNumPage.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbNumPage.Location = new System.Drawing.Point(911, 714);
             this.txbNumPage.Name = "txbNumPage";
-            this.txbNumPage.Size = new System.Drawing.Size(38, 25);
+            this.txbNumPage.Size = new System.Drawing.Size(38, 22);
             this.txbNumPage.TabIndex = 37;
             // 
             // btnPageMin
@@ -476,7 +476,7 @@
             // 
             // pnlProdact
             // 
-            this.pnlProdact.BackColor = System.Drawing.Color.Lime;
+            this.pnlProdact.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(255)))), ((int)(((byte)(112)))));
             this.pnlProdact.Controls.Add(this.btnClose);
             this.pnlProdact.Controls.Add(this.lblProdact);
             this.pnlProdact.Controls.Add(this.btnReturn);
@@ -503,7 +503,7 @@
             this.lblProdact.Font = new System.Drawing.Font("MS UI Gothic", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblProdact.Location = new System.Drawing.Point(448, 27);
             this.lblProdact.Name = "lblProdact";
-            this.lblProdact.Size = new System.Drawing.Size(283, 43);
+            this.lblProdact.Size = new System.Drawing.Size(231, 35);
             this.lblProdact.TabIndex = 1;
             this.lblProdact.Text = "商品管理画面";
             // 
@@ -512,7 +512,7 @@
             this.txbProdactJanCode.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbProdactJanCode.Location = new System.Drawing.Point(974, 202);
             this.txbProdactJanCode.Name = "txbProdactJanCode";
-            this.txbProdactJanCode.Size = new System.Drawing.Size(200, 25);
+            this.txbProdactJanCode.Size = new System.Drawing.Size(200, 22);
             this.txbProdactJanCode.TabIndex = 43;
             this.txbProdactJanCode.TabStop = false;
             // 
@@ -522,7 +522,7 @@
             this.lblProdactJanCode.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblProdactJanCode.Location = new System.Drawing.Point(887, 210);
             this.lblProdactJanCode.Name = "lblProdactJanCode";
-            this.lblProdactJanCode.Size = new System.Drawing.Size(81, 18);
+            this.lblProdactJanCode.Size = new System.Drawing.Size(67, 15);
             this.lblProdactJanCode.TabIndex = 44;
             this.lblProdactJanCode.Text = "JANコード";
             // 
@@ -533,7 +533,7 @@
             this.cmbMakerName.FormattingEnabled = true;
             this.cmbMakerName.Location = new System.Drawing.Point(97, 253);
             this.cmbMakerName.Name = "cmbMakerName";
-            this.cmbMakerName.Size = new System.Drawing.Size(150, 26);
+            this.cmbMakerName.Size = new System.Drawing.Size(150, 22);
             this.cmbMakerName.TabIndex = 45;
             this.cmbMakerName.TabStop = false;
             // 
@@ -549,7 +549,7 @@
             "携帯電話・スマートフォン"});
             this.cmbMajorID.Location = new System.Drawing.Point(681, 158);
             this.cmbMajorID.Name = "cmbMajorID";
-            this.cmbMajorID.Size = new System.Drawing.Size(150, 26);
+            this.cmbMajorID.Size = new System.Drawing.Size(150, 22);
             this.cmbMajorID.TabIndex = 46;
             this.cmbMajorID.TabStop = false;
             // 
@@ -560,7 +560,7 @@
             this.cmbSmallID.FormattingEnabled = true;
             this.cmbSmallID.Location = new System.Drawing.Point(974, 154);
             this.cmbSmallID.Name = "cmbSmallID";
-            this.cmbSmallID.Size = new System.Drawing.Size(150, 26);
+            this.cmbSmallID.Size = new System.Drawing.Size(150, 22);
             this.cmbSmallID.TabIndex = 47;
             this.cmbSmallID.TabStop = false;
             // 

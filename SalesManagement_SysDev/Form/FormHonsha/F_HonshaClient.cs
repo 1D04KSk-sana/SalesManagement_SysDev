@@ -209,16 +209,13 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private T_OperationLog GenerateLogAtRegistration(string OperationDone)
         {
-            //登録・更新使用としている顧客データの取得
-            var logOperatin = GenerateDataAtRegistration();
-
             return new T_OperationLog
             {
                 OpHistoryID = operationLogAccess.OperationLogNum() + 1,
                 EmID = F_Login.intEmployeeID,
                 FormName = "顧客管理画面",
                 OpDone = OperationDone,
-                OpDBID = logOperatin.ClID.Value,
+                OpDBID = int.Parse(txbClientID.Text.Trim()),
                 OpSetTime = DateTime.Now,
             };
         }
@@ -231,6 +228,14 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void ClientDataRegister()
         {
+            // 登録確認メッセージ
+            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
             //テキストボックス等の入力チェック
             if (!GetValidDataAtRegistration())
             {
@@ -279,7 +284,6 @@ namespace SalesManagement_SysDev
 
             // データグリッドビューの表示
             GetDataGridView();
-
         }
 
         ///////////////////////////////
@@ -552,7 +556,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtUpdate()
         {
-
             // 顧客IDの適否
             if (!String.IsNullOrEmpty(txbClientID.Text.Trim()))
             {
@@ -560,6 +563,13 @@ namespace SalesManagement_SysDev
                 if (!dataInputCheck.CheckNumeric(txbClientID.Text.Trim()))
                 {
                     MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+                //顧客IDの存在チェック
+                if (!clientDataAccess.CheckClientIDExistence(int.Parse(txbClientID.Text.Trim())))
+                {
+                    MessageBox.Show("顧客IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbClientID.Focus();
                     return false;
                 }

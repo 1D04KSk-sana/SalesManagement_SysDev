@@ -4,23 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 namespace SalesManagement_SysDev
 {
-     class PositionDataAccess
+    internal class OrderDetailDataAccess
     {
         ///////////////////////////////
-        //メソッド名：GetPositionDspData()
-        //引　数   ：なし
-        //戻り値   ：表示用役職データ
-        //機　能   ：表示用役職名データの取得
+        //メソッド名：GetOrderDetailData()
+        //引　数：なし
+        //戻り値：受注詳細データ
+        //機　能：受注詳細データの全取得
         ///////////////////////////////
-        public List<M_Position> GetPositionDspData()
+        public List<T_OrderDetail> GetOrderDetailIDData(int orderID)
         {
-            List<M_Position> listPosition= new List<M_Position>();
+            List<T_OrderDetail> listOrderDetail = new List<T_OrderDetail>();
+
             try
             {
                 var context = new SalesManagement_DevContext();
-                listPosition = context.M_Positions.Where(x => x.PoFlag == 0).ToList();
+                listOrderDetail = context.T_OrderDetails.Where(x => x.OrID == orderID).ToList();
                 context.Dispose();
             }
             catch (Exception ex)
@@ -28,7 +30,7 @@ namespace SalesManagement_SysDev
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            return listPosition;
+            return listOrderDetail;
         }
     }
 }
