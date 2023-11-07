@@ -167,6 +167,14 @@ namespace SalesManagement_SysDev
             {
                 inttxbClientPostal = int.Parse(strtxbClientPostal);
             }
+            string strtxbClientName = txbClientName.Text.Trim();
+            int inttxbClientName = 0;
+
+            if (!String.IsNullOrEmpty(strtxbClientName))
+            {
+                inttxbClientName = int.Parse(strtxbClientName);
+            }
+
 
             // 検索条件のセット
             T_Sale selectCondition = new T_Sale()
@@ -174,6 +182,8 @@ namespace SalesManagement_SysDev
                 SaID = intSaleID,
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 ChID = inttxbClientPostal,
+                ClID= inttxbClientName,
+                SaDate = dtpSaleDate.Value,
             };
 
             if (searchFlg)
@@ -197,6 +207,7 @@ namespace SalesManagement_SysDev
         {
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
+            //dtpSaleDate.Value=DateTime.Now;
             DictionarySet();
             SetFormDataGridView();
 
@@ -212,9 +223,9 @@ namespace SalesManagement_SysDev
             //cmbSalesOfficeIDを未選択に
             cmbSalesOfficeID.SelectedIndex = -1;
 
-            //cmbViewを表示に
-            cmbView.SelectedIndex = 0;
         }
+
+    
 
         ///////////////////////////////
         //メソッド名：SetFormDataGridView()
@@ -374,7 +385,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbSaleID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbClientPostal.Text.Trim()))
+            if (String.IsNullOrEmpty(txbSaleID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbClientPostal.Text.Trim()) && String.IsNullOrEmpty(txbClientName.Text.Trim()))
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbSaleID.Focus();
@@ -387,14 +398,14 @@ namespace SalesManagement_SysDev
                 // 売上IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbSaleID.Text.Trim()))
                 {
-                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("売上IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSaleID.Focus();
                     return false;
                 }
                 //売上IDの重複チェック
                 if (!saleDataAccess.CheckSaleIDExistence(int.Parse(txbSaleID.Text.Trim())))
                 {
-                    MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("売上IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSaleID.Focus();
                     return false;
                 }
@@ -517,14 +528,6 @@ namespace SalesManagement_SysDev
             //dgvClientをリフレッシュ
             dgvSale.Refresh();
 
-            //1行ずつdgvClientに挿入
-            foreach (var item in viewSaleDetail)
-            {
-                dgvSaleDetail.Rows.Add(item.SaDetailID, item.SaID,item.PrID, item.SaQuantity, item.SaTotalPrice);
-            }
-
-            //dgvClientをリフレッシュ
-            dgvSaleDetail.Refresh();
 
             if (pageNum == 0 && lastPage == pageNum)
             {
@@ -725,17 +728,66 @@ namespace SalesManagement_SysDev
             GetDataGridView();
         }
 
+        private void btnPageSize_Click(object sender, EventArgs e)
+        {
+            GetDataGridView();
+        }
 
+        private void btnPageMin_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
 
+            GetDataGridView();
+
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) - 1).ToString();
+
+            GetDataGridView();
+
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) + 1).ToString();
+
+            GetDataGridView();
+
+        }
+
+        private void btnPageMax_Click(object sender, EventArgs e)
+        {
+            List<T_Sale> viewSale = SetListSale();
+
+            //ページ行数を取得
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
+            //最終ページ数を取得（テキストボックスに代入する数字なので-1はしない）
+            int lastPage = (int)Math.Ceiling(viewSale.Count / (double)pageSize);
+
+            txbNumPage.Text = lastPage.ToString();
+
+            GetDataGridView();
+
+        }
+        private void dtpSaleDate_KeyDown(object sender, KeyEventArgs e)
+        {
+        }
+        private void dtpSaleDate_ValueChanged(object sender, EventArgs e)
+        {
+        }
+        private void setdtpSaleDate(DateTime? datetime)
+        {
+        }
+        private void dtpSaleDate_MouseDown(object sender, MouseEventArgs e)
+        {
+        }
         private void cmbSalesOfficeID_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void dtpSaleDate_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void txbClientPostal_TextChanged(object sender, EventArgs e)
         {
@@ -761,5 +813,7 @@ namespace SalesManagement_SysDev
         {
 
         }
+
+
     }
 }

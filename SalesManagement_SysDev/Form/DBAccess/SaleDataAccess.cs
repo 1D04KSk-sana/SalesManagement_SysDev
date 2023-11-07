@@ -130,6 +130,17 @@ namespace SalesManagement_SysDev
                 {
                     query = query.Where(x => x.ChID == selectSale.ChID);
                 }
+                if (selectSale.ClID != null && selectSale.ClID != 0)
+                {
+                    query = query.Where(x => x.ClID == selectSale.ClID);
+                }
+                if (selectSale.SaDate != null )
+                {
+                    query = query.Where(x => x.SaDate == selectSale.SaDate);
+                }
+
+
+
 
                 listSale = query.ToList();
                 context.Dispose();
@@ -154,7 +165,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listSale = context.T_Sales.Where(x => x.SaID == selectSale.SaID || x.SoID == selectSale.SoID || x.ChID == selectSale.ChID).ToList();
+                listSale = context.T_Sales.Where(x => x.SaID == selectSale.SaID || x.SoID == selectSale.SoID || x.ChID == selectSale.ChID || x.ClID == selectSale.ClID || x.SaDate == selectSale.SaDate).ToList();
 
                 context.Dispose();
             }

@@ -48,8 +48,8 @@
             this.txbSaleID = new System.Windows.Forms.TextBox();
             this.lblSaleID = new System.Windows.Forms.Label();
             this.pnlSelect = new System.Windows.Forms.Panel();
+            this.rdbHiddenUpdate = new System.Windows.Forms.RadioButton();
             this.btnDone = new System.Windows.Forms.Button();
-            this.dtpSaleDate = new System.Windows.Forms.DateTimePicker();
             this.dgvSaleDetail = new System.Windows.Forms.DataGridView();
             this.lblNumPage = new System.Windows.Forms.Label();
             this.txbNumPage = new System.Windows.Forms.TextBox();
@@ -57,8 +57,8 @@
             this.btnBack = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPageMax = new System.Windows.Forms.Button();
-            this.rdbHiddenUpdate = new System.Windows.Forms.RadioButton();
             this.cmbHidden = new System.Windows.Forms.ComboBox();
+            this.dtpSaleDate = new SalesManagement_SysDev.MonthPicker();
             this.pnlHonsha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSale)).BeginInit();
             this.pnlSelect.SuspendLayout();
@@ -72,7 +72,7 @@
             this.lblClient.ForeColor = System.Drawing.Color.White;
             this.lblClient.Location = new System.Drawing.Point(587, 27);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(340, 52);
+            this.lblClient.Size = new System.Drawing.Size(231, 35);
             this.lblClient.TabIndex = 23;
             this.lblClient.Text = "売上管理画面";
             // 
@@ -86,6 +86,7 @@
             this.btnPageSize.TabStop = false;
             this.btnPageSize.Text = "行数変更";
             this.btnPageSize.UseVisualStyleBackColor = true;
+            this.btnPageSize.Click += new System.EventHandler(this.btnPageSize_Click);
             // 
             // lblPageSize
             // 
@@ -93,7 +94,7 @@
             this.lblPageSize.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblPageSize.Location = new System.Drawing.Point(13, 924);
             this.lblPageSize.Name = "lblPageSize";
-            this.lblPageSize.Size = new System.Drawing.Size(119, 22);
+            this.lblPageSize.Size = new System.Drawing.Size(81, 15);
             this.lblPageSize.TabIndex = 63;
             this.lblPageSize.Text = "1ページ行数";
             // 
@@ -102,7 +103,7 @@
             this.txbPageSize.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbPageSize.Location = new System.Drawing.Point(160, 921);
             this.txbPageSize.Name = "txbPageSize";
-            this.txbPageSize.Size = new System.Drawing.Size(74, 29);
+            this.txbPageSize.Size = new System.Drawing.Size(74, 22);
             this.txbPageSize.TabIndex = 62;
             // 
             // cmbView
@@ -115,7 +116,7 @@
             "非表示"});
             this.cmbView.Location = new System.Drawing.Point(947, 153);
             this.cmbView.Name = "cmbView";
-            this.cmbView.Size = new System.Drawing.Size(249, 36);
+            this.cmbView.Size = new System.Drawing.Size(249, 26);
             this.cmbView.TabIndex = 61;
             this.cmbView.TabStop = false;
             this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
@@ -173,7 +174,7 @@
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbSearch.Location = new System.Drawing.Point(3, 9);
             this.rdbSearch.Name = "rdbSearch";
-            this.rdbSearch.Size = new System.Drawing.Size(93, 32);
+            this.rdbSearch.Size = new System.Drawing.Size(65, 23);
             this.rdbSearch.TabIndex = 2;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
@@ -184,16 +185,16 @@
             this.lblSaleDate.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblSaleDate.Location = new System.Drawing.Point(554, 319);
             this.lblSaleDate.Name = "lblSaleDate";
-            this.lblSaleDate.Size = new System.Drawing.Size(98, 22);
+            this.lblSaleDate.Size = new System.Drawing.Size(67, 15);
             this.lblSaleDate.TabIndex = 50;
             this.lblSaleDate.Text = "売上日時";
             // 
             // txbClientPostal
             // 
             this.txbClientPostal.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientPostal.Location = new System.Drawing.Point(214, 310);
+            this.txbClientPostal.Location = new System.Drawing.Point(205, 312);
             this.txbClientPostal.Name = "txbClientPostal";
-            this.txbClientPostal.Size = new System.Drawing.Size(187, 29);
+            this.txbClientPostal.Size = new System.Drawing.Size(187, 22);
             this.txbClientPostal.TabIndex = 49;
             this.txbClientPostal.TextChanged += new System.EventHandler(this.txbClientPostal_TextChanged);
             // 
@@ -203,7 +204,7 @@
             this.lblChumonID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblChumonID.Location = new System.Drawing.Point(110, 322);
             this.lblChumonID.Name = "lblChumonID";
-            this.lblChumonID.Size = new System.Drawing.Size(73, 22);
+            this.lblChumonID.Size = new System.Drawing.Size(51, 15);
             this.lblChumonID.TabIndex = 48;
             this.lblChumonID.Text = "注文ID";
             // 
@@ -214,7 +215,7 @@
             this.cmbSalesOfficeID.FormattingEnabled = true;
             this.cmbSalesOfficeID.Location = new System.Drawing.Point(1123, 225);
             this.cmbSalesOfficeID.Name = "cmbSalesOfficeID";
-            this.cmbSalesOfficeID.Size = new System.Drawing.Size(249, 30);
+            this.cmbSalesOfficeID.Size = new System.Drawing.Size(249, 22);
             this.cmbSalesOfficeID.TabIndex = 46;
             this.cmbSalesOfficeID.TabStop = false;
             this.cmbSalesOfficeID.SelectedIndexChanged += new System.EventHandler(this.cmbSalesOfficeID_SelectedIndexChanged);
@@ -225,7 +226,7 @@
             this.lblSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblSalesOfficeID.Location = new System.Drawing.Point(987, 228);
             this.lblSalesOfficeID.Name = "lblSalesOfficeID";
-            this.lblSalesOfficeID.Size = new System.Drawing.Size(98, 22);
+            this.lblSalesOfficeID.Size = new System.Drawing.Size(67, 15);
             this.lblSalesOfficeID.TabIndex = 44;
             this.lblSalesOfficeID.Text = "営業所名";
             // 
@@ -234,7 +235,7 @@
             this.txbClientName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbClientName.Location = new System.Drawing.Point(647, 228);
             this.txbClientName.Name = "txbClientName";
-            this.txbClientName.Size = new System.Drawing.Size(249, 29);
+            this.txbClientName.Size = new System.Drawing.Size(249, 22);
             this.txbClientName.TabIndex = 43;
             this.txbClientName.TextChanged += new System.EventHandler(this.txbClientName_TextChanged);
             // 
@@ -244,7 +245,7 @@
             this.lblClientName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblClientName.Location = new System.Drawing.Point(537, 237);
             this.lblClientName.Name = "lblClientName";
-            this.lblClientName.Size = new System.Drawing.Size(76, 22);
+            this.lblClientName.Size = new System.Drawing.Size(52, 15);
             this.lblClientName.TabIndex = 42;
             this.lblClientName.Text = "顧客名";
             // 
@@ -253,7 +254,7 @@
             this.txbSaleID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbSaleID.Location = new System.Drawing.Point(205, 231);
             this.txbSaleID.Name = "txbSaleID";
-            this.txbSaleID.Size = new System.Drawing.Size(187, 29);
+            this.txbSaleID.Size = new System.Drawing.Size(187, 22);
             this.txbSaleID.TabIndex = 41;
             this.txbSaleID.TextChanged += new System.EventHandler(this.txbSaleID_TextChanged);
             // 
@@ -263,7 +264,7 @@
             this.lblSaleID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblSaleID.Location = new System.Drawing.Point(113, 237);
             this.lblSaleID.Name = "lblSaleID";
-            this.lblSaleID.Size = new System.Drawing.Size(73, 22);
+            this.lblSaleID.Size = new System.Drawing.Size(51, 15);
             this.lblSaleID.TabIndex = 40;
             this.lblSaleID.Text = "売上ID";
             // 
@@ -277,6 +278,19 @@
             this.pnlSelect.Size = new System.Drawing.Size(288, 45);
             this.pnlSelect.TabIndex = 39;
             // 
+            // rdbHiddenUpdate
+            // 
+            this.rdbHiddenUpdate.AutoSize = true;
+            this.rdbHiddenUpdate.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbHiddenUpdate.Location = new System.Drawing.Point(100, 9);
+            this.rdbHiddenUpdate.Margin = new System.Windows.Forms.Padding(4);
+            this.rdbHiddenUpdate.Name = "rdbHiddenUpdate";
+            this.rdbHiddenUpdate.Size = new System.Drawing.Size(103, 23);
+            this.rdbHiddenUpdate.TabIndex = 79;
+            this.rdbHiddenUpdate.TabStop = true;
+            this.rdbHiddenUpdate.Text = "表示更新";
+            this.rdbHiddenUpdate.UseVisualStyleBackColor = true;
+            // 
             // btnDone
             // 
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
@@ -288,15 +302,6 @@
             this.btnDone.Text = "実行";
             this.btnDone.UseVisualStyleBackColor = true;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
-            // 
-            // dtpSaleDate
-            // 
-            this.dtpSaleDate.Location = new System.Drawing.Point(690, 319);
-            this.dtpSaleDate.Name = "dtpSaleDate";
-            this.dtpSaleDate.Size = new System.Drawing.Size(201, 25);
-            this.dtpSaleDate.TabIndex = 71;
-            this.dtpSaleDate.TabStop = false;
-            this.dtpSaleDate.ValueChanged += new System.EventHandler(this.dtpSaleDate_ValueChanged);
             // 
             // dgvSaleDetail
             // 
@@ -315,7 +320,7 @@
             this.lblNumPage.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblNumPage.Location = new System.Drawing.Point(618, 922);
             this.lblNumPage.Name = "lblNumPage";
-            this.lblNumPage.Size = new System.Drawing.Size(64, 22);
+            this.lblNumPage.Size = new System.Drawing.Size(43, 15);
             this.lblNumPage.TabIndex = 78;
             this.lblNumPage.Text = "ページ";
             // 
@@ -324,7 +329,7 @@
             this.txbNumPage.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbNumPage.Location = new System.Drawing.Point(537, 921);
             this.txbNumPage.Name = "txbNumPage";
-            this.txbNumPage.Size = new System.Drawing.Size(74, 29);
+            this.txbNumPage.Size = new System.Drawing.Size(74, 22);
             this.txbNumPage.TabIndex = 77;
             // 
             // btnPageMin
@@ -337,6 +342,7 @@
             this.btnPageMin.TabStop = false;
             this.btnPageMin.Text = "|◀";
             this.btnPageMin.UseVisualStyleBackColor = true;
+            this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
             // 
             // btnBack
             // 
@@ -348,6 +354,7 @@
             this.btnBack.TabStop = false;
             this.btnBack.Text = "◀";
             this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnNext
             // 
@@ -359,6 +366,7 @@
             this.btnNext.TabStop = false;
             this.btnNext.Text = "▶";
             this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPageMax
             // 
@@ -370,19 +378,7 @@
             this.btnPageMax.TabStop = false;
             this.btnPageMax.Text = "▶|";
             this.btnPageMax.UseVisualStyleBackColor = true;
-            // 
-            // rdbHiddenUpdate
-            // 
-            this.rdbHiddenUpdate.AutoSize = true;
-            this.rdbHiddenUpdate.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbHiddenUpdate.Location = new System.Drawing.Point(100, 9);
-            this.rdbHiddenUpdate.Margin = new System.Windows.Forms.Padding(4);
-            this.rdbHiddenUpdate.Name = "rdbHiddenUpdate";
-            this.rdbHiddenUpdate.Size = new System.Drawing.Size(149, 32);
-            this.rdbHiddenUpdate.TabIndex = 79;
-            this.rdbHiddenUpdate.TabStop = true;
-            this.rdbHiddenUpdate.Text = "表示更新";
-            this.rdbHiddenUpdate.UseVisualStyleBackColor = true;
+            this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
             // cmbHidden
             // 
@@ -392,19 +388,28 @@
             this.cmbHidden.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbHidden.Location = new System.Drawing.Point(1075, 322);
+            this.cmbHidden.Location = new System.Drawing.Point(1123, 320);
             this.cmbHidden.Margin = new System.Windows.Forms.Padding(4);
             this.cmbHidden.Name = "cmbHidden";
-            this.cmbHidden.Size = new System.Drawing.Size(186, 30);
+            this.cmbHidden.Size = new System.Drawing.Size(186, 22);
             this.cmbHidden.TabIndex = 80;
+            // 
+            // dtpSaleDate
+            // 
+            this.dtpSaleDate.CustomFormat = "MMMM yyyy";
+            this.dtpSaleDate.Location = new System.Drawing.Point(647, 317);
+            this.dtpSaleDate.Name = "dtpSaleDate";
+            this.dtpSaleDate.Size = new System.Drawing.Size(249, 25);
+            this.dtpSaleDate.TabIndex = 81;
             // 
             // F_HonshaSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(1537, 960);
+            this.ClientSize = new System.Drawing.Size(1538, 960);
             this.ControlBox = false;
+            this.Controls.Add(this.dtpSaleDate);
             this.Controls.Add(this.cmbHidden);
             this.Controls.Add(this.lblNumPage);
             this.Controls.Add(this.txbNumPage);
@@ -413,7 +418,6 @@
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnPageMax);
             this.Controls.Add(this.dgvSaleDetail);
-            this.Controls.Add(this.dtpSaleDate);
             this.Controls.Add(this.btnPageSize);
             this.Controls.Add(this.lblPageSize);
             this.Controls.Add(this.txbPageSize);
@@ -470,7 +474,6 @@
         private System.Windows.Forms.Label lblSaleID;
         private System.Windows.Forms.Panel pnlSelect;
         private System.Windows.Forms.Button btnDone;
-        private System.Windows.Forms.DateTimePicker dtpSaleDate;
         private System.Windows.Forms.DataGridView dgvSaleDetail;
         private System.Windows.Forms.Label lblNumPage;
         private System.Windows.Forms.TextBox txbNumPage;
@@ -480,5 +483,6 @@
         private System.Windows.Forms.Button btnPageMax;
         private System.Windows.Forms.RadioButton rdbHiddenUpdate;
         private System.Windows.Forms.ComboBox cmbHidden;
+        private MonthPicker dtpSaleDate;
     }
 }

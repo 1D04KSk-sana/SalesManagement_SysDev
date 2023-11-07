@@ -17,7 +17,7 @@ namespace SalesManagement_SysDev
 
         [Key]
         public int? SaID { get; set; }           //売上ID	
-        public int ClID { get; set; }           //顧客ID	
+        public int? ClID { get; set; }           //顧客ID	
         public int? SoID { get; set; }           //営業所ID	
         public int EmID { get; set; }           //社員ID	
         public int? ChID { get; set; }           //受注ID
