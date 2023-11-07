@@ -16,6 +16,10 @@ namespace SalesManagement_SysDev
         EmployeeDataAccess EmployeeDataAccess = new EmployeeDataAccess();
         //データベース営業所テーブルアクセス用クラスのインスタンス化
         SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
+        //データベース顧客テーブルアクセス用クラスのインスタンス化
+        ClientDataAccess clientDataAccess = new ClientDataAccess();
+        //データベース社員テーブルアクセス用クラスのインスタンス化
+        EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
         //データベース役所テーブルアクセス用クラスのインスタンス化
         PositionDataAccess PositionDataAccess = new PositionDataAccess();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
@@ -30,6 +34,27 @@ namespace SalesManagement_SysDev
         private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
         //コンボボックス用の役員データリスト
         private static List<M_Position> listPosition = new List<M_Position>();
+        //コンボボックス用の顧客データリスト
+        private static List<M_Client> listClient = new List<M_Client>();
+        //コンボボックス用の社員データリスト
+        private static List<M_Product> listProdact = new List<M_Product>();
+        //コンボボックス用の社員データリスト
+        private static List<M_Employee> listHiredate = new List<M_Employee>();
+        //データグリッドビュー用の顧客データ
+        private static List<T_Order> listOrder = new List<T_Order>();
+        //データグリッドビュー用の顧客データ
+        private static List<T_OrderDetail> listOrderDetail = new List<T_OrderDetail>();
+        //データグリッドビュー用の全顧客データ
+        private static List<T_Order> listAllOrder = new List<T_Order>();
+
+        //DataGridView用に使用する営業所のDictionary
+        private Dictionary<int, string> dictionarySalesOffice;
+        //DataGridView用に使用する顧客のDictionary
+        private Dictionary<int, string> dictionaryClient;
+        //DataGridView用に使用する社員のDictionary
+        private Dictionary<int, string> dictionaryEmployee;
+        //DataGridView用に使用する社員のDictionary
+        private Dictionary<int, string> dictionaryPositionname;
 
         //フォームを呼び出しする際のインスタンス化
         private F_SearchDialog f_SearchDialog = new F_SearchDialog();
@@ -43,23 +68,14 @@ namespace SalesManagement_SysDev
             { 1, "非表示" },
         };
 
-        //DataGridView用に使用す営業所のDictionary
-        private Dictionary<int?, string> dictionarySalesOffice = new Dictionary<int?, string>
+        //DataGridView用に使用する確定形式のDictionary
+        private Dictionary<int, string> dictionaryConfirm = new Dictionary<int, string>
         {
-            { 1, "北大阪営業所" },
-            { 2, "兵庫営業所" },
-            { 3, "鹿営業所"},
-            { 4, "京都営業所"},
-            { 5, "和歌山営業所"}
+            { 0, "未確定" },
+            { 1, "確定" },
         };
 
-        //DataGridView用に使用す役職のDictionary
-        private Dictionary<int?, string> dictionaryPositionname = new Dictionary<int?, string>
-        {
-            { 1, "管理者" },
-            { 2, "営業" },
-            { 3, "物流"},
-        };
+       
 
         public F_HonshaEmployee()
         {
@@ -72,6 +88,7 @@ namespace SalesManagement_SysDev
             txbPageSize.Text = "3";
 
             SetFormDataGridView();
+            DictionarySet();
 
             //営業所のデータを取得
             listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
@@ -224,6 +241,55 @@ namespace SalesManagement_SysDev
 
             // DataGridViewに表示するデータを指定
            SetDataGridView(listViewEmployee);
+        }
+
+        ///////////////////////////////
+        //メソッド名：DictionarySet()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：Dictionaryのセット
+        ///////////////////////////////
+        private void DictionarySet()
+        {
+            //営業所のデータを取得
+            listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
+
+            dictionarySalesOffice = new Dictionary<int, string> { };
+
+            foreach (var item in listSalesOffice)
+            {
+                dictionarySalesOffice.Add(item.SoID, item.SoName);
+            }
+
+            listClient = clientDataAccess.GetClientDspData();
+
+            dictionaryClient = new Dictionary<int, string> { };
+
+            foreach (var item in listClient)
+            {
+                dictionaryClient.Add(item.ClID.Value, item.ClName);
+            }
+
+            listEmployee = employeeDataAccess.GetEmployeeDspData();
+
+            dictionaryEmployee = new Dictionary<int, string> { };
+
+            foreach (var item in listEmployee)
+            {
+                dictionaryEmployee.Add(item.EmID, item.EmName);
+            }
+
+            //役職のデータを取得
+            listPosition = PositionDataAccess.GetPositionDspData();
+
+            dictionaryPositionname = new Dictionary<int, string> { };
+
+            foreach (var item in listPosition)
+            {
+                dictionaryPositionname.Add(item.PoID, item.PoName);
+            }
+
+            
         }
 
         ///////////////////////////////
@@ -591,7 +657,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbEmployeeID.Text.Trim()) && cmbPositionName.SelectedIndex == -1 && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbEmployeePhone.Text.Trim()))
+            if (String.IsNullOrEmpty(txbEmployeeID.Text.Trim()) && cmbPositionName.SelectedIndex == -1 && cmbSalesOfficeID.SelectedIndex == -1 &&  String.IsNullOrEmpty(txbEmployeePhone.Text.Trim()))
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbEmployeeID.Focus();
@@ -630,8 +696,8 @@ namespace SalesManagement_SysDev
         {
             //データグリッドビューに乗っている情報をGUIに反映
             txbEmployeeID.Text = dgvEmployee[0, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
-            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvEmployee[1, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key.Value - 1;
-            cmbPositionName.SelectedIndex = dictionaryPositionname.FirstOrDefault(x => x.Value == dgvEmployee[5, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key.Value - 1;
+            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvEmployee[1, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key - 1;
+            cmbPositionName.SelectedIndex = dictionaryPositionname.FirstOrDefault(x => x.Value == dgvEmployee[5, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbEmployeeName.Text = dgvEmployee[2, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
             txbEmployeePhone.Text = dgvEmployee[3, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvEmployee[4, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key;
