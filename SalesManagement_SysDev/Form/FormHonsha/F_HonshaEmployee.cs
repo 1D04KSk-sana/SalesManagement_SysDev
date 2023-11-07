@@ -612,6 +612,7 @@ namespace SalesManagement_SysDev
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 EmPhone = txbEmployeePhone.Text.Trim(),
                 PoID = cmbPositionName.SelectedIndex + 1,
+                EmHiredate= dtpEmployeeHireDate.Value,
             };
 
             if (searchFlg)
@@ -646,6 +647,8 @@ namespace SalesManagement_SysDev
             };
         }
 
+
+
         ///////////////////////////////
         //メソッド名：GetValidDataAtSearch()
         //引　数   ：なし
@@ -657,7 +660,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbEmployeeID.Text.Trim()) && cmbPositionName.SelectedIndex == -1 && cmbSalesOfficeID.SelectedIndex == -1 &&  String.IsNullOrEmpty(txbEmployeePhone.Text.Trim()))
+            if (String.IsNullOrEmpty(txbEmployeeID.Text.Trim()) && cmbPositionName.SelectedIndex == -1 && cmbSalesOfficeID.SelectedIndex == -1 &&  String.IsNullOrEmpty(txbEmployeePhone.Text.Trim())&&dtpEmployeeHireDate.Value==null)
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbEmployeeID.Focus();
@@ -701,7 +704,7 @@ namespace SalesManagement_SysDev
             txbEmployeeName.Text = dgvEmployee[2, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
             txbEmployeePhone.Text = dgvEmployee[3, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvEmployee[4, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key;
-            dtpEmployeeHireDate.Text = dgvEmployee[6, dgvEmployee.CurrentCellAddress.Y]?.Value?.ToString();
+            dtpEmployeeHireDate.Text = dgvEmployee[6, dgvEmployee.CurrentCellAddress.Y]?.Value.ToString();
             txbHidden.Text = dgvEmployee[7, dgvEmployee.CurrentCellAddress.Y]?.Value?.ToString();
         }
 
