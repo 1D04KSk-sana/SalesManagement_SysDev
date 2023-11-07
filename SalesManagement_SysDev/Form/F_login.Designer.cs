@@ -39,10 +39,10 @@
             // 
             // btn_CleateDabase
             // 
-            this.btn_CleateDabase.Location = new System.Drawing.Point(881, 399);
-            this.btn_CleateDabase.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_CleateDabase.Location = new System.Drawing.Point(1101, 479);
+            this.btn_CleateDabase.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.btn_CleateDabase.Name = "btn_CleateDabase";
-            this.btn_CleateDabase.Size = new System.Drawing.Size(141, 61);
+            this.btn_CleateDabase.Size = new System.Drawing.Size(176, 73);
             this.btn_CleateDabase.TabIndex = 0;
             this.btn_CleateDabase.Text = "データベース生成";
             this.btn_CleateDabase.UseVisualStyleBackColor = true;
@@ -50,10 +50,10 @@
             // 
             // btn_InsertSampleData
             // 
-            this.btn_InsertSampleData.Location = new System.Drawing.Point(881, 486);
-            this.btn_InsertSampleData.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_InsertSampleData.Location = new System.Drawing.Point(1101, 583);
+            this.btn_InsertSampleData.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.btn_InsertSampleData.Name = "btn_InsertSampleData";
-            this.btn_InsertSampleData.Size = new System.Drawing.Size(141, 61);
+            this.btn_InsertSampleData.Size = new System.Drawing.Size(176, 73);
             this.btn_InsertSampleData.TabIndex = 0;
             this.btn_InsertSampleData.Text = "サンプルデータ登録";
             this.btn_InsertSampleData.UseVisualStyleBackColor = true;
@@ -62,9 +62,10 @@
             // btnLogin
             // 
             this.btnLogin.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnLogin.Location = new System.Drawing.Point(361, 331);
+            this.btnLogin.Location = new System.Drawing.Point(451, 397);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(277, 80);
+            this.btnLogin.Size = new System.Drawing.Size(346, 96);
             this.btnLogin.TabIndex = 2;
             this.btnLogin.Text = "ログイン";
             this.btnLogin.UseVisualStyleBackColor = true;
@@ -73,26 +74,29 @@
             // txbEmployeeID
             // 
             this.txbEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbEmployeeID.Location = new System.Drawing.Point(466, 149);
+            this.txbEmployeeID.Location = new System.Drawing.Point(582, 179);
+            this.txbEmployeeID.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txbEmployeeID.Name = "txbEmployeeID";
-            this.txbEmployeeID.Size = new System.Drawing.Size(200, 25);
+            this.txbEmployeeID.Size = new System.Drawing.Size(249, 29);
             this.txbEmployeeID.TabIndex = 6;
             // 
             // txbSinghUpPass
             // 
             this.txbSinghUpPass.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbSinghUpPass.Location = new System.Drawing.Point(466, 230);
+            this.txbSinghUpPass.Location = new System.Drawing.Point(582, 276);
+            this.txbSinghUpPass.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txbSinghUpPass.Name = "txbSinghUpPass";
-            this.txbSinghUpPass.Size = new System.Drawing.Size(200, 25);
+            this.txbSinghUpPass.Size = new System.Drawing.Size(249, 29);
             this.txbSinghUpPass.TabIndex = 7;
             // 
             // lblEmployeeID
             // 
             this.lblEmployeeID.AutoSize = true;
             this.lblEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblEmployeeID.Location = new System.Drawing.Point(349, 152);
+            this.lblEmployeeID.Location = new System.Drawing.Point(436, 182);
+            this.lblEmployeeID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEmployeeID.Name = "lblEmployeeID";
-            this.lblEmployeeID.Size = new System.Drawing.Size(60, 18);
+            this.lblEmployeeID.Size = new System.Drawing.Size(73, 22);
             this.lblEmployeeID.TabIndex = 8;
             this.lblEmployeeID.Text = "社員ID";
             // 
@@ -100,17 +104,18 @@
             // 
             this.lblSinghUpPass.AutoSize = true;
             this.lblSinghUpPass.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblSinghUpPass.Location = new System.Drawing.Point(349, 233);
+            this.lblSinghUpPass.Location = new System.Drawing.Point(436, 280);
+            this.lblSinghUpPass.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSinghUpPass.Name = "lblSinghUpPass";
-            this.lblSinghUpPass.Size = new System.Drawing.Size(79, 18);
+            this.lblSinghUpPass.Size = new System.Drawing.Size(96, 22);
             this.lblSinghUpPass.TabIndex = 9;
             this.lblSinghUpPass.Text = "パスワード";
             // 
             // F_Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 563);
+            this.ClientSize = new System.Drawing.Size(1334, 676);
             this.Controls.Add(this.lblSinghUpPass);
             this.Controls.Add(this.lblEmployeeID);
             this.Controls.Add(this.txbSinghUpPass);
@@ -118,9 +123,10 @@
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.btn_InsertSampleData);
             this.Controls.Add(this.btn_CleateDabase);
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.Name = "F_Login";
             this.Text = "販売管理システムログイン画面";
+            this.Load += new System.EventHandler(this.F_Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

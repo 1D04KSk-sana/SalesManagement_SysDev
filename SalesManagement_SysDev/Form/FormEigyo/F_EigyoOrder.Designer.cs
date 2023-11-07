@@ -95,7 +95,7 @@
             this.lblNumPage.Location = new System.Drawing.Point(373, 616);
             this.lblNumPage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNumPage.Name = "lblNumPage";
-            this.lblNumPage.Size = new System.Drawing.Size(43, 15);
+            this.lblNumPage.Size = new System.Drawing.Size(64, 22);
             this.lblNumPage.TabIndex = 63;
             this.lblNumPage.Text = "ページ";
             // 
@@ -186,7 +186,7 @@
             this.lblPageSize.Location = new System.Drawing.Point(3, 616);
             this.lblPageSize.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPageSize.Name = "lblPageSize";
-            this.lblPageSize.Size = new System.Drawing.Size(81, 15);
+            this.lblPageSize.Size = new System.Drawing.Size(119, 22);
             this.lblPageSize.TabIndex = 56;
             this.lblPageSize.Text = "1ページ行数";
             // 
@@ -257,6 +257,7 @@
             this.dgvOrder.TabIndex = 50;
             this.dgvOrder.TabStop = false;
             this.dgvOrder.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrder_CellClick);
+            this.dgvOrder.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrder_CellContentClick);
             // 
             // txbHidden
             // 
@@ -274,7 +275,7 @@
             this.lblClientHidden.Location = new System.Drawing.Point(10, 335);
             this.lblClientHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClientHidden.Name = "lblClientHidden";
-            this.lblClientHidden.Size = new System.Drawing.Size(82, 15);
+            this.lblClientHidden.Size = new System.Drawing.Size(120, 22);
             this.lblClientHidden.TabIndex = 48;
             this.lblClientHidden.Text = "非表示理由";
             // 
@@ -285,7 +286,7 @@
             this.lblOrderDetailID.Location = new System.Drawing.Point(676, 154);
             this.lblOrderDetailID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOrderDetailID.Name = "lblOrderDetailID";
-            this.lblOrderDetailID.Size = new System.Drawing.Size(81, 15);
+            this.lblOrderDetailID.Size = new System.Drawing.Size(117, 22);
             this.lblOrderDetailID.TabIndex = 41;
             this.lblOrderDetailID.Text = "受注詳細ID";
             // 
@@ -316,7 +317,7 @@
             this.lblSalesOfficeID.Location = new System.Drawing.Point(329, 153);
             this.lblSalesOfficeID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSalesOfficeID.Name = "lblSalesOfficeID";
-            this.lblSalesOfficeID.Size = new System.Drawing.Size(67, 15);
+            this.lblSalesOfficeID.Size = new System.Drawing.Size(98, 22);
             this.lblSalesOfficeID.TabIndex = 38;
             this.lblSalesOfficeID.Text = "営業所名";
             // 
@@ -337,7 +338,7 @@
             this.lblClientName.Location = new System.Drawing.Point(329, 229);
             this.lblClientName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClientName.Name = "lblClientName";
-            this.lblClientName.Size = new System.Drawing.Size(52, 15);
+            this.lblClientName.Size = new System.Drawing.Size(76, 22);
             this.lblClientName.TabIndex = 36;
             this.lblClientName.Text = "顧客名";
             // 
@@ -357,7 +358,7 @@
             this.lblOrderID.Location = new System.Drawing.Point(10, 154);
             this.lblOrderID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOrderID.Name = "lblOrderID";
-            this.lblOrderID.Size = new System.Drawing.Size(51, 15);
+            this.lblOrderID.Size = new System.Drawing.Size(73, 22);
             this.lblOrderID.TabIndex = 34;
             this.lblOrderID.Text = "受注ID";
             // 
@@ -394,7 +395,7 @@
             this.rdbConfirm.Location = new System.Drawing.Point(322, 6);
             this.rdbConfirm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rdbConfirm.Name = "rdbConfirm";
-            this.rdbConfirm.Size = new System.Drawing.Size(65, 23);
+            this.rdbConfirm.Size = new System.Drawing.Size(93, 32);
             this.rdbConfirm.TabIndex = 4;
             this.rdbConfirm.Text = "確定";
             this.rdbConfirm.UseVisualStyleBackColor = true;
@@ -406,7 +407,7 @@
             this.rdbDetailRegister.Location = new System.Drawing.Point(78, 6);
             this.rdbDetailRegister.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rdbDetailRegister.Name = "rdbDetailRegister";
-            this.rdbDetailRegister.Size = new System.Drawing.Size(103, 23);
+            this.rdbDetailRegister.Size = new System.Drawing.Size(149, 32);
             this.rdbDetailRegister.TabIndex = 3;
             this.rdbDetailRegister.Text = "詳細登録";
             this.rdbDetailRegister.UseVisualStyleBackColor = true;
@@ -418,7 +419,7 @@
             this.rdbSearch.Location = new System.Drawing.Point(392, 6);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rdbSearch.Name = "rdbSearch";
-            this.rdbSearch.Size = new System.Drawing.Size(65, 23);
+            this.rdbSearch.Size = new System.Drawing.Size(93, 32);
             this.rdbSearch.TabIndex = 2;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
@@ -431,7 +432,7 @@
             this.rdbRegister.Location = new System.Drawing.Point(11, 6);
             this.rdbRegister.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rdbRegister.Name = "rdbRegister";
-            this.rdbRegister.Size = new System.Drawing.Size(65, 23);
+            this.rdbRegister.Size = new System.Drawing.Size(93, 32);
             this.rdbRegister.TabIndex = 0;
             this.rdbRegister.TabStop = true;
             this.rdbRegister.Text = "登録";
@@ -469,7 +470,7 @@
             this.lblOrder.Location = new System.Drawing.Point(352, 17);
             this.lblOrder.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOrder.Name = "lblOrder";
-            this.lblOrder.Size = new System.Drawing.Size(231, 35);
+            this.lblOrder.Size = new System.Drawing.Size(340, 52);
             this.lblOrder.TabIndex = 23;
             this.lblOrder.Text = "受注管理画面";
             // 
@@ -515,7 +516,7 @@
             this.lblOrderManager.Location = new System.Drawing.Point(8, 264);
             this.lblOrderManager.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOrderManager.Name = "lblOrderManager";
-            this.lblOrderManager.Size = new System.Drawing.Size(97, 15);
+            this.lblOrderManager.Size = new System.Drawing.Size(142, 22);
             this.lblOrderManager.TabIndex = 66;
             this.lblOrderManager.Text = "顧客担当者名";
             // 
@@ -536,7 +537,7 @@
             this.lblEmployeeName.Location = new System.Drawing.Point(329, 190);
             this.lblEmployeeName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEmployeeName.Name = "lblEmployeeName";
-            this.lblEmployeeName.Size = new System.Drawing.Size(52, 15);
+            this.lblEmployeeName.Size = new System.Drawing.Size(76, 22);
             this.lblEmployeeName.TabIndex = 68;
             this.lblEmployeeName.Text = "社員名";
             // 
@@ -547,7 +548,7 @@
             this.lblOrderDate.Location = new System.Drawing.Point(329, 264);
             this.lblOrderDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOrderDate.Name = "lblOrderDate";
-            this.lblOrderDate.Size = new System.Drawing.Size(82, 15);
+            this.lblOrderDate.Size = new System.Drawing.Size(120, 22);
             this.lblOrderDate.TabIndex = 70;
             this.lblOrderDate.Text = "受注年月日";
             // 
@@ -566,7 +567,7 @@
             this.lblHidden.Location = new System.Drawing.Point(10, 300);
             this.lblHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblHidden.Name = "lblHidden";
-            this.lblHidden.Size = new System.Drawing.Size(90, 15);
+            this.lblHidden.Size = new System.Drawing.Size(131, 22);
             this.lblHidden.TabIndex = 73;
             this.lblHidden.Text = "表示/非表示";
             // 
@@ -577,7 +578,7 @@
             this.lblProductID.Location = new System.Drawing.Point(676, 190);
             this.lblProductID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProductID.Name = "lblProductID";
-            this.lblProductID.Size = new System.Drawing.Size(51, 15);
+            this.lblProductID.Size = new System.Drawing.Size(73, 22);
             this.lblProductID.TabIndex = 76;
             this.lblProductID.Text = "商品ID";
             // 
@@ -600,7 +601,7 @@
             this.lblOrderQuantity.Location = new System.Drawing.Point(675, 264);
             this.lblOrderQuantity.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOrderQuantity.Name = "lblOrderQuantity";
-            this.lblOrderQuantity.Size = new System.Drawing.Size(52, 15);
+            this.lblOrderQuantity.Size = new System.Drawing.Size(76, 22);
             this.lblOrderQuantity.TabIndex = 78;
             this.lblOrderQuantity.Text = "発注量";
             // 
@@ -620,7 +621,7 @@
             this.lblProductName.Location = new System.Drawing.Point(676, 229);
             this.lblProductName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProductName.Name = "lblProductName";
-            this.lblProductName.Size = new System.Drawing.Size(52, 15);
+            this.lblProductName.Size = new System.Drawing.Size(76, 22);
             this.lblProductName.TabIndex = 79;
             this.lblProductName.Text = "商品名";
             // 
@@ -653,7 +654,7 @@
             this.lblEmployeeID.Location = new System.Drawing.Point(10, 190);
             this.lblEmployeeID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEmployeeID.Name = "lblEmployeeID";
-            this.lblEmployeeID.Size = new System.Drawing.Size(51, 15);
+            this.lblEmployeeID.Size = new System.Drawing.Size(73, 22);
             this.lblEmployeeID.TabIndex = 83;
             this.lblEmployeeID.Text = "社員ID";
             // 
@@ -675,7 +676,7 @@
             this.lblClientID.Location = new System.Drawing.Point(10, 226);
             this.lblClientID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClientID.Name = "lblClientID";
-            this.lblClientID.Size = new System.Drawing.Size(51, 15);
+            this.lblClientID.Size = new System.Drawing.Size(73, 22);
             this.lblClientID.TabIndex = 81;
             this.lblClientID.Text = "顧客ID";
             // 
