@@ -45,6 +45,19 @@ namespace SalesManagement_SysDev
         {
             this.Opacity = 1;
         }
+        private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            LogSearchButtonClick(true);
+        }
+
+        private void SearchDialog_btnOrSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            LogSearchButtonClick(false);
+        }
         ///////////////////////////////
         //メソッド名：SetFormDataGridView()
         //引　数   ：なし
@@ -240,26 +253,87 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            // 顧客IDの適否
-            if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
-            {
-                // 顧客IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbEmployeeID.Text.Trim()))
-                {
-                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbEmployeeID.Focus();
-                    return false;
-                }
-                //顧客IDの重複チェック
-                if (!LogDataAccess.CheckClientIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
-                {
-                    MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbEmployeeID.Focus();
-                    return false;
-                }
-            }
+            //// 顧客IDの適否
+            //if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
+            //{
+            //    // 顧客IDの数字チェック
+            //    if (!dataInputCheck.CheckNumeric(txbEmployeeID.Text.Trim()))
+            //    {
+            //        MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        txbEmployeeID.Focus();
+            //        return false;
+            //    }
+            //    //顧客IDの重複チェック
+            //    if (!LogDataAccess.CheckClientIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+            //    {
+            //        MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        txbEmployeeID.Focus();
+            //        return false;
+            //    }
+            //}
 
             return true;
+        }
+        ///////////////////////////////
+        //メソッド名：LogSearchButtonClick()
+        //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：操作ログ情報検索の実行
+        ///////////////////////////////
+        private void LogSearchButtonClick(bool searchFlg)
+        {
+            // 顧客情報抽出
+            GenerateDataAtSelect(searchFlg);
+
+            int intSearchCount = listLog.Count;
+
+            // 顧客抽出結果表示
+            GetDataGridView();
+
+            MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtSelect()
+        //引　数   ：searchFlg = And検索かOr検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：操作ログ情報の取得
+        ///////////////////////////////
+        private void GenerateDataAtSelect(bool searchFlg)
+        {
+            string strEmployeeID = txbEmployeeID.Text.Trim();
+            int intEmployeeID = 0;
+
+            if (!String.IsNullOrEmpty(strEmployeeID))
+            {
+                intEmployeeID = int.Parse(strEmployeeID);
+            }
+
+            // 検索条件のセット
+            T_OperationLog selectCondition = new T_OperationLog()
+            {
+                OpHistoryID = intEmployeeID,
+            };
+
+            if (searchFlg)
+            {
+                // 操作ログデータのAnd抽出
+                listLog = LogDataAccess.GetAndLogData(selectCondition);
+            }
+            else
+            {
+                // 操作ログデータのOr抽出
+                listLog = LogDataAccess.GetOrLogData(selectCondition);
+            }
+
+        }
+
+        private void btnDone_Click(object sender, EventArgs e)
+        {
+            //検索ラヂオボタンがチェックされているとき
+            if (rdbSearch.Checked)
+            {
+                ClientDataSelect();
+            }
         }
     }
 }

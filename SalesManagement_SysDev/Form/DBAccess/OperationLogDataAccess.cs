@@ -71,5 +71,58 @@ namespace SalesManagement_SysDev
 
             return listLog;
         }
+        ///////////////////////////////
+        //メソッド名：GetAndLogData()
+        //引　数：検索条件
+        //戻り値：条件完全一致操作ログデータ
+        //機　能：条件完全一致操作ログデータの取得
+        ///////////////////////////////
+        public List<T_OperationLog> GetAndLogData(T_OperationLog selectLog)
+        {
+            List<T_OperationLog> listLog = new List<T_OperationLog>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var query = context.T_OperationLogs.AsQueryable();
+
+                if (selectLog.OpHistoryID != null && selectLog.OpHistoryID != 0)
+                {
+                    query = query.Where(x => x.OpHistoryID == selectLog.OpHistoryID);
+                }
+
+                listLog = query.ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listLog;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetOrLogData()
+        //引　数：検索条件
+        //戻り値：条件一部一致操作ログデータ
+        //機　能：条件一部一致操作ログデータの取得
+        ///////////////////////////////
+        public List<T_OperationLog> GetOrLogData(T_OperationLog selectLog)
+        {
+            List<T_OperationLog> listLog = new List<T_OperationLog>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listLog = context.T_OperationLogs.Where(x => x.OpHistoryID == selectLog.OpHistoryID).ToList();
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listLog;
+        }
     }
 }
