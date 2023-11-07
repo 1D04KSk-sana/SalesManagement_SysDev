@@ -85,9 +85,9 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.T_OperationLogs.AsQueryable();
 
-                if (selectLog.OpHistoryID != null && selectLog.OpHistoryID != 0)
+                if (selectLog.EmID != null && selectLog.EmID != 0)
                 {
-                    query = query.Where(x => x.OpHistoryID == selectLog.OpHistoryID);
+                    query = query.Where(x => x.EmID == selectLog.EmID);
                 }
 
                 listLog = query.ToList();
@@ -113,7 +113,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listLog = context.T_OperationLogs.Where(x => x.OpHistoryID == selectLog.OpHistoryID).ToList();
+                listLog = context.T_OperationLogs.Where(x => x.EmID == selectLog.EmID).ToList();
 
                 context.Dispose();
             }

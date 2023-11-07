@@ -311,7 +311,7 @@ namespace SalesManagement_SysDev
             // 検索条件のセット
             T_OperationLog selectCondition = new T_OperationLog()
             {
-                OpHistoryID = intEmployeeID,
+                EmID = intEmployeeID,
             };
 
             if (searchFlg)
