@@ -453,7 +453,6 @@ namespace SalesManagement_SysDev
                 txbProdactName.Focus();
                 return false;
             }
-
             return true;
         }
 
@@ -580,7 +579,6 @@ namespace SalesManagement_SysDev
 
             // データグリッドビューの表示
             GetDataGridView();
-
         }
 
         ///////////////////////////////
