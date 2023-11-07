@@ -55,40 +55,6 @@ namespace SalesManagement_SysDev
             { 1, "非表示" },
         };
 
-        //DataGridView用に使用する表示形式のDictionary
-        //private Dictionary<int, string> dictionaryMajorID = new Dictionary<int, string>
-        //{
-        //    { 1, "テレビ・レコーダー" },
-        //    { 2, "エアコン・冷蔵庫・洗濯機" },
-        //    { 3, "オーディオ・イヤホン・ヘッドホン" },
-        //    { 4, "携帯電話・スマートフォン" },
-        //};
-
-        //DataGridView用に使用する表示形式のDictionary
-        //private Dictionary<int, string> dictionarySmallID = new Dictionary<int, string>
-        //{
-        //    { 1, "テレビ" },
-        //    { 2, "レコーダー" },
-        //    { 3, "エアコン" },
-        //    { 4, "冷蔵庫" },
-        //    { 5, "洗濯機" },
-        //    { 6, "オーディオ" },
-        //    { 7, "イヤホン" },
-        //    { 8, "ヘッドホン" },
-        //    { 9, "携帯電話"},
-        //    { 10, "スマートフォン" }
-            
-        //};
-
-        //DataGridView用に使用する表示形式のDictionary
-        //private Dictionary<int, string> dictionaryMakerName = new Dictionary<int, string>
-        //{
-        //    { 1, "Aメーカ" },
-        //    { 2, "Bメーカ" },
-        //    { 3, "Cメーカ" },
-        //    { 4, "Dメーカ" },
-        //};
-
         private void F_HonshaProdact_Load(object sender, EventArgs e)
         {
             txbNumPage.Text = "1";
@@ -414,24 +380,6 @@ namespace SalesManagement_SysDev
                 txbProdactPrice.Focus();
                 return false;
             }
-
-            // JANコードの適否
-            //if (!String.IsNullOrEmpty(txbProdactJanCode.Text.Trim()))
-            //{
-            //    // JANコードの文字数チェック
-            //    if (txbProdactJanCode.TextLength >= 50)
-            //    {
-            //        MessageBox.Show("JANコードは50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        txbProdactJanCode.Focus();
-            //        return false;
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("JANコードが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    txbProdactJanCode.Focus();
-            //    return false;
-            //}
 
             // 安全在庫数の適否
             if (!String.IsNullOrEmpty(txbProdactSafetyStock.Text.Trim()))
@@ -766,24 +714,6 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            // JANコードの適否
-            //if (!String.IsNullOrEmpty(txbProdactJanCode.Text.Trim()))
-            //{
-            //    // JANコードの文字数チェック
-            //    if (txbProdactJanCode.TextLength >= 50)
-            //    {
-            //        MessageBox.Show("JANコードは50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        txbProdactJanCode.Focus();
-            //        return false;
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("JANコードが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    txbProdactJanCode.Focus();
-            //    return false;
-            //}
-
             // 安全在庫数の適否
             if (!String.IsNullOrEmpty(txbProdactSafetyStock.Text.Trim()))
             {
@@ -1114,13 +1044,9 @@ namespace SalesManagement_SysDev
             M_Product selectCondition = new M_Product()
             {
                 PrID = intProdactID,
-                //ClName = txbClientName.Text.Trim()
                 McID = cmbMajorID.SelectedIndex + 1,
                 MaID = cmbMakerName.SelectedIndex + 1,
-                //ClPostal= txbClientPostal.Text.Trim(),
-                //ClAddress= txbClientAddress.Text.Trim(),
-                //ClFAX=txbClientFax.Text.Trim(),
-                //ClHidden=txbHidden.Text.Trim()
+                //テキストボックス = txbxxxxxx.Text.Trim()
             };
 
             if (searchFlg)
