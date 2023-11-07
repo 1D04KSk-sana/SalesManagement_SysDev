@@ -12,6 +12,10 @@ namespace SalesManagement_SysDev
 {
     public partial class F_EigyoStockView : Form
     {
+        //データベース在庫テーブルアクセス用クラスのインスタンス化
+        StockDataAccess clientDataAccess = new StockDataAccess();
+        //データグリッドビュー用の全顧客データ
+        private static List<T_Stock> listAllStock = new List<T_Stock>();
         public F_EigyoStockView()
         {
             InitializeComponent();
@@ -189,12 +193,12 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：SetListClient()
+        //メソッド名：SetListStock()
         //引　数   ：なし
         //戻り値   ：表示用顧客データ
         //機　能   ：表示用顧客データの準備
         ///////////////////////////////
-        private List<M_Client> SetListClient()
+        private List<T_Stock> SetListStock()
         {
             //顧客のデータを全取得
             listAllStock = stockDataAccess.GetClientData();
