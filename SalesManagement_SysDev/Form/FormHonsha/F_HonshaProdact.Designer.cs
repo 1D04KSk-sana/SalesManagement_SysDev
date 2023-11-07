@@ -87,6 +87,7 @@
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(110, 50);
             this.btnReturn.TabIndex = 0;
+            this.btnReturn.TabStop = false;
             this.btnReturn.Text = "戻る";
             this.btnReturn.UseVisualStyleBackColor = false;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
@@ -99,6 +100,7 @@
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(110, 50);
             this.btnClear.TabIndex = 1;
+            this.btnClear.TabStop = false;
             this.btnClear.Text = "クリア";
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -112,12 +114,14 @@
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(110, 50);
             this.btnDone.TabIndex = 2;
+            this.btnDone.TabStop = false;
             this.btnDone.Text = "実行";
             this.btnDone.UseVisualStyleBackColor = false;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // cmbView
             // 
+            this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbView.FormattingEnabled = true;
             this.cmbView.Items.AddRange(new object[] {
@@ -127,6 +131,7 @@
             this.cmbView.Name = "cmbView";
             this.cmbView.Size = new System.Drawing.Size(200, 31);
             this.cmbView.TabIndex = 3;
+            this.cmbView.TabStop = false;
             this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
             // 
             // pnlSelect
@@ -164,11 +169,13 @@
             // rdbRegister
             // 
             this.rdbRegister.AutoSize = true;
+            this.rdbRegister.Checked = true;
             this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbRegister.Location = new System.Drawing.Point(41, 12);
             this.rdbRegister.Name = "rdbRegister";
             this.rdbRegister.Size = new System.Drawing.Size(77, 27);
             this.rdbRegister.TabIndex = 0;
+            this.rdbRegister.TabStop = true;
             this.rdbRegister.Text = "登録";
             this.rdbRegister.UseVisualStyleBackColor = true;
             // 
@@ -189,6 +196,7 @@
             this.txbProdactID.Name = "txbProdactID";
             this.txbProdactID.Size = new System.Drawing.Size(200, 25);
             this.txbProdactID.TabIndex = 6;
+            this.txbProdactID.TabStop = false;
             // 
             // txbProdactName
             // 
@@ -197,6 +205,7 @@
             this.txbProdactName.Name = "txbProdactName";
             this.txbProdactName.Size = new System.Drawing.Size(200, 25);
             this.txbProdactName.TabIndex = 8;
+            this.txbProdactName.TabStop = false;
             // 
             // lblProdactName
             // 
@@ -235,6 +244,7 @@
             this.txbProdactColor.Name = "txbProdactColor";
             this.txbProdactColor.Size = new System.Drawing.Size(200, 25);
             this.txbProdactColor.TabIndex = 16;
+            this.txbProdactColor.TabStop = false;
             // 
             // lblProdactColor
             // 
@@ -253,6 +263,7 @@
             this.txbModelNumber.Name = "txbModelNumber";
             this.txbModelNumber.Size = new System.Drawing.Size(200, 25);
             this.txbModelNumber.TabIndex = 14;
+            this.txbModelNumber.TabStop = false;
             // 
             // lblModelNumber
             // 
@@ -271,6 +282,7 @@
             this.txbProdactPrice.Name = "txbProdactPrice";
             this.txbProdactPrice.Size = new System.Drawing.Size(200, 25);
             this.txbProdactPrice.TabIndex = 24;
+            this.txbProdactPrice.TabStop = false;
             // 
             // lblProdactPrice
             // 
@@ -299,6 +311,7 @@
             this.txbProdactSafetyStock.Name = "txbProdactSafetyStock";
             this.txbProdactSafetyStock.Size = new System.Drawing.Size(200, 25);
             this.txbProdactSafetyStock.TabIndex = 28;
+            this.txbProdactSafetyStock.TabStop = false;
             // 
             // lblProdactSafetyStock
             // 
@@ -332,6 +345,7 @@
             this.cmbHidden.Name = "cmbHidden";
             this.cmbHidden.Size = new System.Drawing.Size(150, 26);
             this.cmbHidden.TabIndex = 29;
+            this.cmbHidden.TabStop = false;
             // 
             // lblProdactHidden
             // 
@@ -350,6 +364,7 @@
             this.tbxProdactHidden.Name = "tbxProdactHidden";
             this.tbxProdactHidden.Size = new System.Drawing.Size(812, 25);
             this.tbxProdactHidden.TabIndex = 31;
+            this.tbxProdactHidden.TabStop = false;
             // 
             // dgvProdact
             // 
@@ -478,6 +493,7 @@
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(110, 50);
             this.btnClose.TabIndex = 2;
+            this.btnClose.TabStop = false;
             this.btnClose.Text = "閉じる";
             this.btnClose.UseVisualStyleBackColor = false;
             // 
@@ -498,6 +514,7 @@
             this.txbProdactJanCode.Name = "txbProdactJanCode";
             this.txbProdactJanCode.Size = new System.Drawing.Size(200, 25);
             this.txbProdactJanCode.TabIndex = 43;
+            this.txbProdactJanCode.TabStop = false;
             // 
             // lblProdactJanCode
             // 
@@ -514,15 +531,11 @@
             this.cmbMakerName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMakerName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbMakerName.FormattingEnabled = true;
-            this.cmbMakerName.Items.AddRange(new object[] {
-            "Aメーカ",
-            "Bメーカ",
-            "Cメーカ",
-            "Dメーカ"});
             this.cmbMakerName.Location = new System.Drawing.Point(97, 253);
             this.cmbMakerName.Name = "cmbMakerName";
             this.cmbMakerName.Size = new System.Drawing.Size(150, 26);
             this.cmbMakerName.TabIndex = 45;
+            this.cmbMakerName.TabStop = false;
             // 
             // cmbMajorID
             // 
@@ -538,27 +551,18 @@
             this.cmbMajorID.Name = "cmbMajorID";
             this.cmbMajorID.Size = new System.Drawing.Size(150, 26);
             this.cmbMajorID.TabIndex = 46;
+            this.cmbMajorID.TabStop = false;
             // 
             // cmbSmallID
             // 
             this.cmbSmallID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSmallID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSmallID.FormattingEnabled = true;
-            this.cmbSmallID.Items.AddRange(new object[] {
-            "テレビ",
-            "レコーダー",
-            "エアコン",
-            "冷蔵庫",
-            "洗濯機",
-            "オーディオ",
-            "イヤホン",
-            "ヘッドホン",
-            "携帯電話",
-            "スマートフォン"});
             this.cmbSmallID.Location = new System.Drawing.Point(974, 154);
             this.cmbSmallID.Name = "cmbSmallID";
             this.cmbSmallID.Size = new System.Drawing.Size(150, 26);
             this.cmbSmallID.TabIndex = 47;
+            this.cmbSmallID.TabStop = false;
             // 
             // dtpProdactReleaseDate
             // 

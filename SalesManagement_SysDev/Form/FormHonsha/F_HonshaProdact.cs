@@ -16,10 +16,18 @@ namespace SalesManagement_SysDev
     {
         //データベース商品テーブルアクセス用クラスのインスタンス化
         ProdactDataAccess ProdactDataAccess = new ProdactDataAccess();
-        //データベース商品テーブルアクセス用クラスのインスタンス化
+        //データベースメーカーテーブルアクセス用クラスのインスタンス化
         MakerDataAccess MakerDataAccess = new MakerDataAccess();
+        //データベース大分類テーブルアクセス用クラスのインスタンス化
+        MajorDataAccess MajorDataAccess = new MajorDataAccess();
+        //データベース小分類テーブルアクセス用クラスのインスタンス化
+        SmallDataAccess SmallDataAccess = new SmallDataAccess();
         //データグリッドビュー用の全商品データ
         private static List<M_Product> listAllProdact = new List<M_Product>();
+        //データグリッドビュー用の大分類データ
+        private static List<M_MajorClassification> listMajorID = new List<M_MajorClassification>();
+        //データグリッドビュー用の小分類データ
+        private static List<M_SmallClassification> listSmallID = new List<M_SmallClassification>();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
         //データグリッドビュー用の商品データ
@@ -82,6 +90,36 @@ namespace SalesManagement_SysDev
 
             //メーカ名のデータを取得
             listMaker = MakerDataAccess.GetMakerDspData();
+            //取得したデータをコンボボックスに挿入
+            cmbMakerName.DataSource = listMaker;
+            //表示する名前をMaNameに指定
+            cmbMakerName.DisplayMember = "MaName";
+            //項目の順番をMaIDに指定
+            cmbMakerName.ValueMember = "MaID";
+            //cmbMakerNameを未選択に
+            cmbMakerName.SelectedIndex = -1;
+
+            //大分類のデータを取得
+            listMajorID = MajorDataAccess.GetMajorClassificationDspData();
+            //取得したデータをコンボボックスに挿入
+            cmbMajorID.DataSource = listMajorID;
+            //表示する名前をMaNameに指定
+            cmbMajorID.DisplayMember = "McName";
+            //項目の順番をMaIDに指定
+            cmbMajorID.ValueMember = "McID";
+            //cmbMakerNameを未選択に
+            cmbMajorID.SelectedIndex = -1;
+
+            //小分類のデータを取得
+            listSmallID = SmallDataAccess.GetSmallClassificationDspData();
+            //取得したデータをコンボボックスに挿入
+            cmbSmallID.DataSource = listSmallID;
+            //表示する名前をScNameに指定
+            cmbSmallID.DisplayMember = "ScName";
+            //項目の順番をScIDに指定
+            cmbSmallID.ValueMember = "ScID";
+            //cmbMakerNameを未選択に
+            cmbSmallID.SelectedIndex = -1;
 
             //cmbViewを表示に
             cmbView.SelectedIndex = 0;
@@ -320,22 +358,22 @@ namespace SalesManagement_SysDev
             }
 
             // JANコードの適否
-            if (!String.IsNullOrEmpty(txbProdactJanCode.Text.Trim()))
-            {
-                // JANコードの文字数チェック
-                if (txbProdactJanCode.TextLength >= 50)
-                {
-                    MessageBox.Show("JANコードは50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactJanCode.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("JANコードが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbProdactJanCode.Focus();
-                return false;
-            }
+            //if (!String.IsNullOrEmpty(txbProdactJanCode.Text.Trim()))
+            //{
+            //    // JANコードの文字数チェック
+            //    if (txbProdactJanCode.TextLength >= 50)
+            //    {
+            //        MessageBox.Show("JANコードは50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        txbProdactJanCode.Focus();
+            //        return false;
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("JANコードが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    txbProdactJanCode.Focus();
+            //    return false;
+            //}
 
             // 安全在庫数の適否
             if (!String.IsNullOrEmpty(txbProdactSafetyStock.Text.Trim()))
@@ -442,7 +480,7 @@ namespace SalesManagement_SysDev
                 PrColor = txbProdactColor.Text.Trim(),
                 PrFlag = cmbHidden.SelectedIndex,
                 PrHidden = tbxProdactHidden.Text.Trim(),
-                PrReleaseDate = DateTime.Now,
+                PrReleaseDate = dtpProdactReleaseDate.Value,
             };
         }
 
@@ -673,22 +711,22 @@ namespace SalesManagement_SysDev
             }
 
             // JANコードの適否
-            if (!String.IsNullOrEmpty(txbProdactJanCode.Text.Trim()))
-            {
-                // JANコードの文字数チェック
-                if (txbProdactJanCode.TextLength >= 50)
-                {
-                    MessageBox.Show("JANコードは50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactJanCode.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("JANコードが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbProdactJanCode.Focus();
-                return false;
-            }
+            //if (!String.IsNullOrEmpty(txbProdactJanCode.Text.Trim()))
+            //{
+            //    // JANコードの文字数チェック
+            //    if (txbProdactJanCode.TextLength >= 50)
+            //    {
+            //        MessageBox.Show("JANコードは50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        txbProdactJanCode.Focus();
+            //        return false;
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("JANコードが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    txbProdactJanCode.Focus();
+            //    return false;
+            //}
 
             // 安全在庫数の適否
             if (!String.IsNullOrEmpty(txbProdactSafetyStock.Text.Trim()))
@@ -954,7 +992,6 @@ namespace SalesManagement_SysDev
             txbProdactPrice.Text = string.Empty;
             dtpProdactReleaseDate.Value = DateTime.Now;
             txbProdactSafetyStock.Text = string.Empty;
-            cmbView.SelectedIndex = -1;
             cmbHidden.SelectedIndex = -1;
         }
 
@@ -984,8 +1021,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SelectRowControl()
         {
-            
-
             //データグリッドビューに乗っている情報をGUIに反映
             txbProdactID.Text = dgvProdact[0, dgvProdact.CurrentCellAddress.Y].Value.ToString();
             //cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvProdact[1, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key.Value - 1;
