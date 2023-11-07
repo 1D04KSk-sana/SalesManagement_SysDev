@@ -49,6 +49,8 @@
             this.btnBack = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPageMax = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txbEmployeeName = new System.Windows.Forms.TextBox();
             this.pnlHonsha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOperatinLog)).BeginInit();
             this.SuspendLayout();
@@ -59,7 +61,7 @@
             this.pnlHonsha.Controls.Add(this.btnReturn);
             this.pnlHonsha.Controls.Add(this.btnClose);
             this.pnlHonsha.Location = new System.Drawing.Point(1, 1);
-            this.pnlHonsha.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlHonsha.Margin = new System.Windows.Forms.Padding(2);
             this.pnlHonsha.Name = "pnlHonsha";
             this.pnlHonsha.Size = new System.Drawing.Size(738, 60);
             this.pnlHonsha.TabIndex = 0;
@@ -68,7 +70,7 @@
             // 
             this.btnReturn.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnReturn.Location = new System.Drawing.Point(13, 15);
-            this.btnReturn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReturn.Margin = new System.Windows.Forms.Padding(2);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(66, 33);
             this.btnReturn.TabIndex = 1;
@@ -81,7 +83,7 @@
             // 
             this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnClose.Location = new System.Drawing.Point(657, 15);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(66, 33);
             this.btnClose.TabIndex = 2;
@@ -94,7 +96,7 @@
             this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(172)))), ((int)(((byte)(242)))));
             this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnClear.Location = new System.Drawing.Point(545, 75);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(66, 33);
             this.btnClear.TabIndex = 4;
@@ -108,7 +110,7 @@
             this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnDone.Location = new System.Drawing.Point(620, 75);
-            this.btnDone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDone.Margin = new System.Windows.Forms.Padding(2);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(66, 33);
             this.btnDone.TabIndex = 5;
@@ -122,7 +124,7 @@
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbSearch.Location = new System.Drawing.Point(58, 81);
-            this.rdbSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(65, 23);
             this.rdbSearch.TabIndex = 6;
@@ -133,10 +135,12 @@
             // 
             this.txbEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 11F);
             this.txbEmployeeID.Location = new System.Drawing.Point(117, 177);
-            this.txbEmployeeID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txbEmployeeID.Margin = new System.Windows.Forms.Padding(2);
             this.txbEmployeeID.Name = "txbEmployeeID";
             this.txbEmployeeID.Size = new System.Drawing.Size(122, 22);
             this.txbEmployeeID.TabIndex = 8;
+            this.txbEmployeeID.TextChanged += new System.EventHandler(this.txbEmployeeID_TextChanged);
+            this.txbEmployeeID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbEmployeeID_KeyPress);
             // 
             // label1
             // 
@@ -153,7 +157,7 @@
             // 
             this.dgvOperatinLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOperatinLog.Location = new System.Drawing.Point(7, 225);
-            this.dgvOperatinLog.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvOperatinLog.Margin = new System.Windows.Forms.Padding(2);
             this.dgvOperatinLog.Name = "dgvOperatinLog";
             this.dgvOperatinLog.RowHeadersWidth = 62;
             this.dgvOperatinLog.RowTemplate.Height = 27;
@@ -164,7 +168,7 @@
             // 
             this.dateTimePicker1.Font = new System.Drawing.Font("MS UI Gothic", 11F);
             this.dateTimePicker1.Location = new System.Drawing.Point(287, 177);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(122, 22);
             this.dateTimePicker1.TabIndex = 13;
@@ -174,7 +178,7 @@
             // 
             this.dateTimePicker2.Font = new System.Drawing.Font("MS UI Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.dateTimePicker2.Location = new System.Drawing.Point(430, 177);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(122, 22);
             this.dateTimePicker2.TabIndex = 14;
@@ -297,6 +301,29 @@
             this.btnPageMax.Text = "▶|";
             this.btnPageMax.UseVisualStyleBackColor = false;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("MS UI Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label3.Location = new System.Drawing.Point(70, 149);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 15);
+            this.label3.TabIndex = 70;
+            this.label3.Text = "社員名";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // txbEmployeeName
+            // 
+            this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 11F);
+            this.txbEmployeeName.Location = new System.Drawing.Point(117, 144);
+            this.txbEmployeeName.Margin = new System.Windows.Forms.Padding(2);
+            this.txbEmployeeName.Name = "txbEmployeeName";
+            this.txbEmployeeName.ReadOnly = true;
+            this.txbEmployeeName.Size = new System.Drawing.Size(122, 22);
+            this.txbEmployeeName.TabIndex = 69;
+            this.txbEmployeeName.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
             // F_HonshaOperationLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -304,6 +331,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(738, 513);
             this.ControlBox = false;
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txbEmployeeName);
             this.Controls.Add(this.btnPageMax);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnBack);
@@ -324,7 +353,7 @@
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.pnlHonsha);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "F_HonshaOperationLog";
             this.Text = "ログ管理画面";
@@ -359,5 +388,7 @@
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPageMax;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txbEmployeeName;
     }
 }

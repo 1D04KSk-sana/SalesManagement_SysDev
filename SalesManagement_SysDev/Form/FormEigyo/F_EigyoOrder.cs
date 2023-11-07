@@ -1304,5 +1304,10 @@ namespace SalesManagement_SysDev
         {
 
         }
+
+        private void txbProductName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
