@@ -223,6 +223,7 @@ namespace SalesManagement_SysDev
             //cmbSalesOfficeIDを未選択に
             cmbSalesOfficeID.SelectedIndex = -1;
 
+            cmbView.SelectedIndex = 0;
         }
 
     

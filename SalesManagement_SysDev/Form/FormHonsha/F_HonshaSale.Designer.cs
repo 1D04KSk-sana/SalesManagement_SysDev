@@ -275,7 +275,7 @@
             this.pnlSelect.Controls.Add(this.rdbSearch);
             this.pnlSelect.Location = new System.Drawing.Point(17, 129);
             this.pnlSelect.Name = "pnlSelect";
-            this.pnlSelect.Size = new System.Drawing.Size(288, 45);
+            this.pnlSelect.Size = new System.Drawing.Size(242, 45);
             this.pnlSelect.TabIndex = 39;
             // 
             // rdbHiddenUpdate

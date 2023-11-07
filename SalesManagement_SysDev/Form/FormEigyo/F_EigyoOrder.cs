@@ -26,6 +26,8 @@ namespace SalesManagement_SysDev
         ProdactDataAccess prodactDataAccess = new ProdactDataAccess();
         //データベース顧客テーブルアクセス用クラスのインスタンス化
         ClientDataAccess clientDataAccess = new ClientDataAccess();
+        //データベース注文テーブルアクセス用クラスのインスタンス化
+        ChumonDataAccess chumonDataAccess = new ChumonDataAccess();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
         //入力形式チェック用クラスのインスタンス化
@@ -124,18 +126,7 @@ namespace SalesManagement_SysDev
             //選択された行に対してのコントロールの変更
             SelectRowControl();
 
-            dgvOrderDetail.Rows.Clear();
-
-            listOrderDetail = orderDetailDataAccess.GetOrderDetailIDData(int.Parse(dgvOrder[0, dgvOrder.CurrentCellAddress.Y].Value.ToString()));
-
-            //1行ずつdgvClientに挿入
-            foreach (var item in listOrderDetail)
-            {
-                dgvOrderDetail.Rows.Add(item.OrID, item.OrDetailID, dictionaryProdact[item.PrID], item.OrQuantity, item.OrTotalPrice);
-            }
-
-            //dgvClientをリフレッシュ
-            dgvOrderDetail.Refresh();
+            SetDataDetailGridView(int.Parse(dgvOrder[0, dgvOrder.CurrentCellAddress.Y].Value.ToString()));
 
             ClearImputDetail();
         }
@@ -160,6 +151,11 @@ namespace SalesManagement_SysDev
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
+        }
+
+        private void btnDetailClear_Click(object sender, EventArgs e)
+        {
+            ClearImputDetail();
         }
 
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
@@ -198,6 +194,12 @@ namespace SalesManagement_SysDev
                 OrderDataRegister();
             }
 
+            //詳細登録ラヂオボタンがチェックされているとき
+            if (rdbDetailRegister.Checked)
+            {
+                OrderDetailDataRegister();
+            }
+
             //更新ラヂオボタンがチェックされているとき
             if (rdbUpdate.Checked)
             {
@@ -207,7 +209,7 @@ namespace SalesManagement_SysDev
             //確定ラヂオボタンがチェックされているとき
             if (rdbConfirm.Checked)
             {
-
+                OrderDataConfirm();
             }
         }
 
@@ -496,7 +498,7 @@ namespace SalesManagement_SysDev
             {
                 OrID = int.Parse(txbOrderID.Text.Trim()),
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
-                EmID = employeeDataAccess.GetEmployeeID(txbEmployeeName.Text.Trim()),
+                EmID = F_Login.intEmployeeID,
                 ClID = clientDataAccess.GetClientID(txbClientName.Text.Trim()),
                 ClCharge = txbOrderManager.Text.Trim(),
                 OrDate = dtpOrderDate.Value,
@@ -522,8 +524,8 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 顧客情報の登録
-            bool flg = orderDataAccess.AddClientData(regOrder);
+            // 受注情報の登録
+            bool flg = orderDataAccess.AddOrderData(regOrder);
 
             //登録成功・失敗メッセージ
             if (flg == true)
@@ -537,9 +539,160 @@ namespace SalesManagement_SysDev
 
             // 入力エリアのクリア
             ClearImput();
+            ClearImputDetail();
 
             // データグリッドビューの表示
             GetDataGridView();
+        }
+
+        ///////////////////////////////
+        //メソッド名：OrderDetailDataRegister()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：受注詳細情報登録の実行
+        ///////////////////////////////
+        private void OrderDetailDataRegister()
+        {
+            //入力情報適否
+            if (!GetValidDetailDataAtRegistration())
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbDetailRegister.Text);
+            
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
+            // 受注情報作成
+            var regOrder = GenerateDetailDataAtRegistration();
+
+            // 受注情報登録
+            RegistrationOrderDetail(regOrder);
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetValidDetailDataAtRegistration()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：登録入力データの形式チェック
+        //          ：エラーがない場合True
+        //          ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDetailDataAtRegistration()
+        {
+            //受注詳細IDの適否
+            if (!String.IsNullOrEmpty(txbOrderDetailID.Text.Trim()))
+            {
+                //受注詳細IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbOrderDetailID.Text.Trim()))
+                {
+                    MessageBox.Show("受注詳細IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbOrderDetailID.Focus();
+                    return false;
+                }
+                //受注詳細IDの存在チェック
+                if (orderDataAccess.CheckOrderIDExistence(int.Parse(txbOrderDetailID.Text.Trim())))
+                {
+                    MessageBox.Show("受注詳細IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbOrderDetailID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("受注詳細IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbOrderDetailID.Focus();
+                return false;
+            }
+
+            //受注IDの適否
+            if (!String.IsNullOrEmpty(txbOrderID.Text.Trim()))
+            {
+                //受注IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbOrderID.Text.Trim()))
+                {
+                    MessageBox.Show("受注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbOrderID.Focus();
+                    return false;
+                }
+                //受注IDの存在チェック
+                if (!orderDataAccess.CheckOrderIDExistence(int.Parse(txbOrderID.Text.Trim())))
+                {
+                    MessageBox.Show("受注IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbOrderID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("受注IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbOrderID.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateDetailDataAtRegistration()
+        //引　数   ：なし
+        //戻り値   ：受注詳細登録情報
+        //機　能   ：登録データのセット
+        ///////////////////////////////
+        private T_OrderDetail GenerateDetailDataAtRegistration()
+        {
+            M_Product Prodact = prodactDataAccess.GetIDProdactData(int.Parse(txbProductID.Text.Trim()));
+
+            return new T_OrderDetail
+            {
+                OrDetailID = int.Parse(txbOrderDetailID.Text.Trim()),
+                OrID = int.Parse(txbOrderID.Text.Trim()),
+                PrID = int.Parse(txbProductID.Text.Trim()),
+                OrQuantity = int.Parse(txbOrderQuantity.Text.Trim()),
+                OrTotalPrice = int.Parse(txbOrderQuantity.Text.Trim()) * Prodact.Price
+            };
+        }
+
+        ///////////////////////////////
+        //メソッド名：RegistrationOrderDetail()
+        //引　数   ：受注詳細情報
+        //戻り値   ：なし
+        //機　能   ：受注詳細データの登録
+        ///////////////////////////////
+        private void RegistrationOrderDetail(T_OrderDetail regOrder)
+        {
+            // 登録確認メッセージ
+            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            // 受注情報の登録
+            bool flg = orderDetailDataAccess.AddOrderDetailData(regOrder);
+
+            //登録成功・失敗メッセージ
+            if (flg == true)
+            {
+                MessageBox.Show("データを登録しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("データの登録に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            // データグリッドビューの表示
+            SetDataDetailGridView(int.Parse(txbOrderID.Text.Trim()));
+
+            // 入力エリアのクリア
+            ClearImput();
+            ClearImputDetail();
         }
 
         ///////////////////////////////
@@ -565,10 +718,10 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 顧客情報作成
+            // 受注情報作成
             var updOrder = GenerateDataAtUpdate();
 
-            // 顧客情報更新
+            // 受注情報更新
             UpdateOrder(updOrder);
         }
 
@@ -621,7 +774,7 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         //メソッド名：GenerateDataAtUpdate()
         //引　数   ：なし
-        //戻り値   ：顧客更新情報
+        //戻り値   ：受注更新情報
         //機　能   ：更新データのセット
         ///////////////////////////////
         private T_Order GenerateDataAtUpdate()
@@ -650,7 +803,7 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 顧客情報の更新
+            // 受注情報の更新
             bool flg = orderDataAccess.UpdateOrderData(updOrder);
 
             if (flg == true)
@@ -664,6 +817,7 @@ namespace SalesManagement_SysDev
 
             //テキストボックス等のクリア
             ClearImput();
+            ClearImputDetail();
 
             // データグリッドビューの表示
             GetDataGridView();
@@ -677,6 +831,12 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void OrderDataConfirm()
         {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtConfirm())
+            {
+                return;
+            }
+
             //操作ログデータ取得
             var regOperationLog = GenerateLogAtRegistration(rdbConfirm.Text);
 
@@ -686,11 +846,151 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 顧客情報作成
-            var updOrder = GenerateDataAtUpdate();
+            // 受注情報作成
+            var cmfOrder = GenerateDataAtConfirm();
 
-            // 顧客情報更新
-            UpdateOrder(updOrder);
+            // 受注情報更新
+            ConfirmOrder(cmfOrder);
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtConfirm()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：確定入力データの形式チェック
+        //          ：エラーがない場合True
+        //          ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtConfirm()
+        {
+            //受注IDの適否
+            if (!String.IsNullOrEmpty(txbOrderID.Text.Trim()))
+            {
+                // 受注IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbOrderID.Text.Trim()))
+                {
+                    MessageBox.Show("受注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbOrderID.Focus();
+                    return false;
+                }
+                //受注IDの存在チェック
+                if (!orderDataAccess.CheckOrderIDExistence(int.Parse(txbOrderID.Text.Trim())))
+                {
+                    MessageBox.Show("受注IDが存在していません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbOrderID.Focus();
+                    return false;
+                }
+
+                T_Order order = orderDataAccess.GetIDOrderData(int.Parse(txbOrderID.Text.Trim()));
+
+                //受注IDの確定チェック
+                if (order.OrStateFlag == 1) 
+                {
+                    MessageBox.Show("受注IDはすでに確定しています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbOrderID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("受注IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbOrderID.Focus();
+                return false;
+            }
+
+            //確定選択の適否
+            if (cmbConfirm.SelectedIndex == -1)
+            {
+                MessageBox.Show("未確定/確定が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbConfirm.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtConfirm()
+        //引　数   ：なし
+        //戻り値   ：受注確定情報
+        //機　能   ：確定データのセット
+        ///////////////////////////////
+        private T_Order GenerateDataAtConfirm()
+        {
+            return new T_Order
+            {
+                OrID = int.Parse(txbOrderID.Text.Trim()),
+                OrStateFlag = cmbConfirm.SelectedIndex,
+            };
+        }
+
+        ///////////////////////////////
+        //メソッド名：ConfirmOrder()
+        //引　数   ：受注情報
+        //戻り値   ：なし
+        //機　能   ：受注情報の確定
+        ///////////////////////////////
+        private void ConfirmOrder(T_Order cfmOrder)
+        {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("確定しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            // 受注情報の更新
+            bool flg = orderDataAccess.ConfirmOrderData(cfmOrder);
+
+            if (flg == true)
+            {
+                MessageBox.Show("確定しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("確定に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            T_Order Order = orderDataAccess.GetIDOrderData(int.Parse(txbOrderID.Text.Trim()));
+
+            T_Chumon Chumon = GenerateChumonAtRegistration(Order);
+
+            bool flgChumon = chumonDataAccess.AddChumonData(Chumon);
+
+            if (flg == true)
+            {
+                MessageBox.Show("注文管理にデータを送信ました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("注文管理へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //テキストボックス等のクリア
+            ClearImput();
+            ClearImputDetail();
+
+            // データグリッドビューの表示
+            GetDataGridView();
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateChumonAtRegistration()
+        //引　数   ：注文情報
+        //戻り値   ：注文登録情報
+        //機　能   ：注文登録データのセット
+        ///////////////////////////////
+        private T_Chumon GenerateChumonAtRegistration(T_Order Order)
+        {
+            return new T_Chumon
+            {
+                ChID = Order.OrID,
+                SoID = Order.SoID,
+                ClID = Order.ClID,
+                OrID = Order.OrID,
+                ChDate = DateTime.Now,
+            };
         }
 
         ///////////////////////////////
@@ -801,25 +1101,25 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void GetDataGridView()
         {
-            //表示用の顧客リスト作成
+            //表示用の受注リスト作成
             List<T_Order> listViewOrder = SetListOrder();
 
             // DataGridViewに表示するデータを指定
             SetDataGridView(listViewOrder);
         }
-
+        
         ///////////////////////////////
         //メソッド名：SetListOrder()
         //引　数   ：なし
-        //戻り値   ：表示用顧客データ
-        //機　能   ：表示用顧客データの準備
+        //戻り値   ：表示用受注データ
+        //機　能   ：表示用受注データの準備
         ///////////////////////////////
         private List<T_Order> SetListOrder()
         {
-            //顧客のデータを全取得
+            //受注のデータを全取得
             listAllOrder = orderDataAccess.GetOrderData();
 
-            //表示用の顧客リスト作成
+            //表示用の受注リスト作成
             List<T_Order> listViewOrder = new List<T_Order>();
 
             //検索ラヂオボタンがチェックされているとき
@@ -910,6 +1210,28 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：SetDataDetailGridView()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：詳細データグリッドビューへの表示
+        ///////////////////////////////
+        private void SetDataDetailGridView(int intOrderID)
+        {
+            dgvOrderDetail.Rows.Clear();
+
+            listOrderDetail = orderDetailDataAccess.GetOrderDetailIDData(intOrderID);
+
+            //1行ずつdgvClientに挿入
+            foreach (var item in listOrderDetail)
+            {
+                dgvOrderDetail.Rows.Add(item.OrID, item.OrDetailID, dictionaryProdact[item.PrID], item.OrQuantity, item.OrTotalPrice);
+            }
+
+            //dgvClientをリフレッシュ
+            dgvOrderDetail.Refresh();
+        }
+
+        ///////////////////////////////
         //メソッド名：ClearImput()
         //引　数   ：なし
         //戻り値   ：なし
@@ -926,10 +1248,7 @@ namespace SalesManagement_SysDev
             txbEmployeeName.Text = string.Empty;
             dtpOrderDate.Value = DateTime.Now;
             cmbHidden.SelectedIndex = -1;
-            txbOrderDetailID.Text = string.Empty;
-            txbProductID.Text = string.Empty;
-            txbProductName.Text = string.Empty;
-            txbOrderQuantity.Text = string.Empty;
+            cmbConfirm.SelectedIndex = -1;
             txbHidden.Text = string.Empty;
         }
 
@@ -945,7 +1264,6 @@ namespace SalesManagement_SysDev
             txbProductID.Text = string.Empty;
             txbProductName.Text = string.Empty;
             txbOrderQuantity.Text = string.Empty;
-            txbHidden.Text = string.Empty;
         }
 
         ///////////////////////////////
@@ -964,6 +1282,7 @@ namespace SalesManagement_SysDev
             txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvOrder[4, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             dtpOrderDate.Text = dgvOrder[5, dgvOrder.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvOrder[6, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key;
+            cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvOrder[7, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvOrder[8, dgvOrder.CurrentCellAddress.Y]?.Value?.ToString();
         }
 
