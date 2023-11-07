@@ -12,6 +12,10 @@ namespace SalesManagement_SysDev
 {
     public partial class F_HonshaOperationLog : Form
     {
+        //データベース操作ログテーブルアクセス用クラスのインスタンス化
+        OperationLogDataAccess LogDataAccess = new OperationLogDataAccess();
+        //データグリッドビュー用の全顧客データ
+        private static List<T_OperationLog> listAllLog = new List<T_OperationLog>();
         public F_HonshaOperationLog()
         {
             InitializeComponent();
@@ -142,15 +146,15 @@ namespace SalesManagement_SysDev
             SetDataGridView(listViewLog);
         }
         ///////////////////////////////
-        //メソッド名：SetListClient()
+        //メソッド名：SetListLog()
         //引　数   ：なし
-        //戻り値   ：表示用顧客データ
-        //機　能   ：表示用顧客データの準備
+        //戻り値   ：表示用操作ログデータ
+        //機　能   ：表示用操作ログデータの準備
         ///////////////////////////////
         private List<T_OperationLog> SetListLog()
         {
             //顧客のデータを全取得
-            listAllLog = LogDataAccess.GetClientData();
+            listAllLog = LogDataAccess.GetLogData();
 
             //表示用の顧客リスト作成
             List<T_OperationLog> listViewLog = new List<T_OperationLog>();
@@ -171,12 +175,12 @@ namespace SalesManagement_SysDev
             if (cmbView.SelectedIndex == 0)
             {
                 // 管理Flgが表示の部署データの取得
-                listViewLog = LogDataAccess.GetClientDspData(listViewLog);
+                listViewLog = LogDataAccess.GetLogDspData(listViewLog);
             }
             else
             {
                 // 管理Flgが非表示の部署データの取得
-                listViewLog = LogDataAccess.GetClientNotDspData(listViewLog);
+                listViewLog = LogDataAccess.GetLogNotDspData(listViewLog);
             }
 
             return listViewLog;
