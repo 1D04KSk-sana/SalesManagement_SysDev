@@ -39,6 +39,14 @@ namespace SalesManagement_SysDev
         //フォームを呼び出しする際のインスタンス化
         private F_SearchDialog f_SearchDialog = new F_SearchDialog();
 
+        //DataGridView用に使用する大分類名のDictionary
+        private Dictionary<int, string> dictionaryMajorID;
+        //DataGridView用に使用する小分類名のDictionary
+        private Dictionary<int, string> dictionarySmallID;
+        //DataGridView用に使用するメーカー名のDictionary
+        private Dictionary<int, string> dictionaryMakerName;
+        //DataGridView用に使用する商品のDictionary
+        private Dictionary<int, string> dictionaryProdact;
 
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
@@ -48,38 +56,38 @@ namespace SalesManagement_SysDev
         };
 
         //DataGridView用に使用する表示形式のDictionary
-        private Dictionary<int, string> dictionaryMajorID = new Dictionary<int, string>
-        {
-            { 1, "テレビ・レコーダー" },
-            { 2, "エアコン・冷蔵庫・洗濯機" },
-            { 3, "オーディオ・イヤホン・ヘッドホン" },
-            { 4, "携帯電話・スマートフォン" },
-        };
+        //private Dictionary<int, string> dictionaryMajorID = new Dictionary<int, string>
+        //{
+        //    { 1, "テレビ・レコーダー" },
+        //    { 2, "エアコン・冷蔵庫・洗濯機" },
+        //    { 3, "オーディオ・イヤホン・ヘッドホン" },
+        //    { 4, "携帯電話・スマートフォン" },
+        //};
 
         //DataGridView用に使用する表示形式のDictionary
-        private Dictionary<int, string> dictionarySmallID = new Dictionary<int, string>
-        {
-            { 1, "テレビ" },
-            { 2, "レコーダー" },
-            { 3, "エアコン" },
-            { 4, "冷蔵庫" },
-            { 5, "洗濯機" },
-            { 6, "オーディオ" },
-            { 7, "イヤホン" },
-            { 8, "ヘッドホン" },
-            { 9, "携帯電話"},
-            { 10, "スマートフォン" }
+        //private Dictionary<int, string> dictionarySmallID = new Dictionary<int, string>
+        //{
+        //    { 1, "テレビ" },
+        //    { 2, "レコーダー" },
+        //    { 3, "エアコン" },
+        //    { 4, "冷蔵庫" },
+        //    { 5, "洗濯機" },
+        //    { 6, "オーディオ" },
+        //    { 7, "イヤホン" },
+        //    { 8, "ヘッドホン" },
+        //    { 9, "携帯電話"},
+        //    { 10, "スマートフォン" }
             
-        };
+        //};
 
         //DataGridView用に使用する表示形式のDictionary
-        private Dictionary<int, string> dictionaryMakerName = new Dictionary<int, string>
-        {
-            { 1, "Aメーカ" },
-            { 2, "Bメーカ" },
-            { 3, "Cメーカ" },
-            { 4, "Dメーカ" },
-        };
+        //private Dictionary<int, string> dictionaryMakerName = new Dictionary<int, string>
+        //{
+        //    { 1, "Aメーカ" },
+        //    { 2, "Bメーカ" },
+        //    { 3, "Cメーカ" },
+        //    { 4, "Dメーカ" },
+        //};
 
         private void F_HonshaProdact_Load(object sender, EventArgs e)
         {
@@ -87,6 +95,7 @@ namespace SalesManagement_SysDev
             txbPageSize.Text = "3";
 
             SetFormDataGridView();
+            DictionarySet();
 
             //メーカ名のデータを取得
             listMaker = MakerDataAccess.GetMakerDspData();
@@ -215,6 +224,55 @@ namespace SalesManagement_SysDev
 
             //商品登録フォームの透明化
             this.Opacity = 0;
+        }
+
+        ///////////////////////////////
+        //メソッド名：DictionarySet()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：Dictionaryのセット
+        ///////////////////////////////
+        private void DictionarySet()
+        {
+            //大分類名のデータを取得
+            listMajorID = MajorDataAccess.GetMajorClassificationDspData();
+
+            dictionaryMajorID = new Dictionary<int, string> { };
+
+            foreach (var item in listMajorID)
+            {
+                dictionaryMajorID.Add(item.McID, item.McName);
+            }
+
+            //小分類名のデータを取得
+            listSmallID = SmallDataAccess.GetSmallClassificationDspData();
+
+            dictionarySmallID = new Dictionary<int, string> { };
+
+            foreach (var item in listSmallID)
+            {
+                dictionarySmallID.Add(item.ScID, item.ScName);
+            }
+
+            //メーカ名
+            listMaker = MakerDataAccess.GetMakerDspData();
+
+            dictionaryMakerName = new Dictionary<int, string> { };
+
+            foreach (var item in listMaker)
+            {
+                dictionaryMakerName.Add(item.MaID, item.MaName);
+            }
+
+            //商品のデータを取得
+            listProdact = ProdactDataAccess.GetProdactDspData();
+
+            dictionaryProdact = new Dictionary<int, string> { };
+
+            foreach (var item in listProdact)
+            {
+                dictionaryProdact.Add(item.PrID, item.PrName);
+            }
         }
 
         ///////////////////////////////
