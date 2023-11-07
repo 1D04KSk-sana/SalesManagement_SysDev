@@ -34,7 +34,6 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.btnDone = new System.Windows.Forms.Button();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
-            this.cmbView = new System.Windows.Forms.ComboBox();
             this.txbEmployeeID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvOperatinLog = new System.Windows.Forms.DataGridView();
@@ -74,6 +73,7 @@
             this.btnReturn.TabStop = false;
             this.btnReturn.Text = "戻る";
             this.btnReturn.UseVisualStyleBackColor = true;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
             // btnClose
             // 
@@ -97,6 +97,7 @@
             this.btnClear.TabStop = false;
             this.btnClear.Text = "クリア";
             this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnDone
             // 
@@ -116,32 +117,17 @@
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbSearch.Location = new System.Drawing.Point(96, 122);
             this.rdbSearch.Name = "rdbSearch";
-            this.rdbSearch.Size = new System.Drawing.Size(93, 32);
+            this.rdbSearch.Size = new System.Drawing.Size(65, 23);
             this.rdbSearch.TabIndex = 6;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
-            // 
-            // cmbView
-            // 
-            this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cmbView.FormattingEnabled = true;
-            this.cmbView.Items.AddRange(new object[] {
-            "表示",
-            "非表示"});
-            this.cmbView.Location = new System.Drawing.Point(676, 122);
-            this.cmbView.Name = "cmbView";
-            this.cmbView.Size = new System.Drawing.Size(200, 36);
-            this.cmbView.TabIndex = 7;
-            this.cmbView.TabStop = false;
-            this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
             // 
             // txbEmployeeID
             // 
             this.txbEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 11F);
             this.txbEmployeeID.Location = new System.Drawing.Point(195, 266);
             this.txbEmployeeID.Name = "txbEmployeeID";
-            this.txbEmployeeID.Size = new System.Drawing.Size(200, 29);
+            this.txbEmployeeID.Size = new System.Drawing.Size(200, 22);
             this.txbEmployeeID.TabIndex = 8;
             // 
             // label1
@@ -150,7 +136,7 @@
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.label1.Location = new System.Drawing.Point(116, 273);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 22);
+            this.label1.Size = new System.Drawing.Size(51, 15);
             this.label1.TabIndex = 11;
             this.label1.Text = "社員ID";
             // 
@@ -169,7 +155,7 @@
             this.dateTimePicker1.Font = new System.Drawing.Font("MS UI Gothic", 11F);
             this.dateTimePicker1.Location = new System.Drawing.Point(478, 266);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 29);
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
             this.dateTimePicker1.TabIndex = 13;
             this.dateTimePicker1.TabStop = false;
             // 
@@ -178,7 +164,7 @@
             this.dateTimePicker2.Font = new System.Drawing.Font("MS UI Gothic", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.dateTimePicker2.Location = new System.Drawing.Point(716, 266);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 29);
+            this.dateTimePicker2.Size = new System.Drawing.Size(200, 22);
             this.dateTimePicker2.TabIndex = 14;
             this.dateTimePicker2.TabStop = false;
             // 
@@ -198,7 +184,7 @@
             this.lblPageSize.Location = new System.Drawing.Point(13, 722);
             this.lblPageSize.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPageSize.Name = "lblPageSize";
-            this.lblPageSize.Size = new System.Drawing.Size(119, 22);
+            this.lblPageSize.Size = new System.Drawing.Size(81, 15);
             this.lblPageSize.TabIndex = 57;
             this.lblPageSize.Text = "1ページ行数";
             // 
@@ -208,7 +194,7 @@
             this.txbPageSize.Location = new System.Drawing.Point(140, 718);
             this.txbPageSize.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.txbPageSize.Name = "txbPageSize";
-            this.txbPageSize.Size = new System.Drawing.Size(74, 29);
+            this.txbPageSize.Size = new System.Drawing.Size(74, 22);
             this.txbPageSize.TabIndex = 58;
             this.txbPageSize.TabStop = false;
             // 
@@ -231,7 +217,7 @@
             this.txbNumPage.Location = new System.Drawing.Point(818, 719);
             this.txbNumPage.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.txbNumPage.Name = "txbNumPage";
-            this.txbNumPage.Size = new System.Drawing.Size(74, 29);
+            this.txbNumPage.Size = new System.Drawing.Size(74, 22);
             this.txbNumPage.TabIndex = 63;
             this.txbNumPage.TabStop = false;
             // 
@@ -242,7 +228,7 @@
             this.lblNumPage.Location = new System.Drawing.Point(900, 722);
             this.lblNumPage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNumPage.Name = "lblNumPage";
-            this.lblNumPage.Size = new System.Drawing.Size(64, 22);
+            this.lblNumPage.Size = new System.Drawing.Size(43, 15);
             this.lblNumPage.TabIndex = 64;
             this.lblNumPage.Text = "ページ";
             // 
@@ -320,7 +306,6 @@
             this.Controls.Add(this.dgvOperatinLog);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txbEmployeeID);
-            this.Controls.Add(this.cmbView);
             this.Controls.Add(this.rdbSearch);
             this.Controls.Add(this.btnDone);
             this.Controls.Add(this.btnClear);
@@ -345,7 +330,6 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.RadioButton rdbSearch;
-        private System.Windows.Forms.ComboBox cmbView;
         private System.Windows.Forms.TextBox txbEmployeeID;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvOperatinLog;

@@ -14,8 +14,12 @@ namespace SalesManagement_SysDev
     {
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess LogDataAccess = new OperationLogDataAccess();
-        //データグリッドビュー用の全顧客データ
+        //データグリッドビュー用の全操作ログデータ
         private static List<T_OperationLog> listAllLog = new List<T_OperationLog>();
+        //データグリッドビュー用の操作ログデータ
+        private static List<T_OperationLog> listLog = new List<T_OperationLog>();
+        //フォームを呼び出しする際のインスタンス化
+        private F_SearchDialog f_SearchDialog = new F_SearchDialog();
         public F_HonshaOperationLog()
         {
             InitializeComponent();
@@ -27,9 +31,19 @@ namespace SalesManagement_SysDev
             txbPageSize.Text = "3";
 
             SetFormDataGridView();
-
-            //cmbViewを表示に
-            cmbView.SelectedIndex = 0;
+            GetDataGridView();
+        }
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearImput();
+        }
+        private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Opacity = 1;
         }
         ///////////////////////////////
         //メソッド名：SetFormDataGridView()
@@ -73,11 +87,6 @@ namespace SalesManagement_SysDev
             {
                 dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-        }
-
-        private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
         ///////////////////////////////
         //メソッド名：SetDataGridView()
@@ -153,10 +162,10 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private List<T_OperationLog> SetListLog()
         {
-            //顧客のデータを全取得
+            //操作ログのデータを全取得
             listAllLog = LogDataAccess.GetLogData();
 
-            //表示用の顧客リスト作成
+            //表示用の操作ログ作成
             List<T_OperationLog> listViewLog = new List<T_OperationLog>();
 
             //検索ラヂオボタンがチェックされているとき
@@ -170,20 +179,87 @@ namespace SalesManagement_SysDev
                 //全データをとってくる
                 listViewLog = listAllLog;
             }
-
-            //一覧表示cmbViewが表示を選択されているとき
-            if (cmbView.SelectedIndex == 0)
-            {
-                // 管理Flgが表示の部署データの取得
-                listViewLog = LogDataAccess.GetLogDspData(listViewLog);
-            }
-            else
-            {
-                // 管理Flgが非表示の部署データの取得
-                listViewLog = LogDataAccess.GetLogNotDspData(listViewLog);
-            }
-
             return listViewLog;
+        }
+        ///////////////////////////////
+        //メソッド名：ClearImput()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：テキストボックスやコンボボックスの中身のクリア
+        ///////////////////////////////
+        private void ClearImput()
+        {
+            txbEmployeeID.Text = string.Empty;
+        }
+        ///////////////////////////////
+        //メソッド名：ClientDataSelect()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：顧客情報検索の実行
+        ///////////////////////////////
+        private void ClientDataSelect()
+        {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtSearch())
+            {
+                return;
+            }
+
+            //検索ダイアログのフォームを作成
+            f_SearchDialog = new F_SearchDialog();
+            //検索ダイアログのフォームのオーナー設定
+            f_SearchDialog.Owner = this;
+
+            //検索ダイアログのフォームのボタンクリックイベントにハンドラを追加
+            f_SearchDialog.btnAndSearchClick += SearchDialog_btnAndSearchClick;
+            f_SearchDialog.btnOrSearchClick += SearchDialog_btnOrSearchClick;
+
+            //検索ダイアログのフォームが閉じたときのイベントを設定
+            f_SearchDialog.FormClosed += ChildForm_FormClosed;
+            //検索ダイアログのフォームの表示
+            f_SearchDialog.Show();
+
+            //顧客登録フォームの透明化
+            this.Opacity = 0;
+        }
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtSearch()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：検索入力データの形式チェック
+        //         ：エラーがない場合True
+        //         ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtSearch()
+        {
+            //検索条件の存在確認
+            if (String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
+            {
+                MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbEmployeeID.Focus();
+                return false;
+            }
+
+            // 顧客IDの適否
+            if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
+            {
+                // 顧客IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbEmployeeID.Text.Trim()))
+                {
+                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+                //顧客IDの重複チェック
+                if (!LogDataAccess.CheckClientIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

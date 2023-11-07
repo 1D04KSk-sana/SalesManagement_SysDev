@@ -48,5 +48,28 @@ namespace SalesManagement_SysDev
 
             return logCount;
         }
+        ///////////////////////////////
+        //メソッド名：GetLogData()
+        //引　数：なし
+        //戻り値：操作ログデータ
+        //機　能：操作ログデータの全取得
+        ///////////////////////////////
+        public List<T_OperationLog> GetLogData()
+        {
+            List<T_OperationLog> listLog = new List<T_OperationLog>();
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listLog = context.T_OperationLogs.ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listLog;
+        }
     }
 }
