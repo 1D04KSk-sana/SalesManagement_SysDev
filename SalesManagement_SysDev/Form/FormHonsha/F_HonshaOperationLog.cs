@@ -66,28 +66,33 @@ namespace SalesManagement_SysDev
                 e.Handled = true;
             }
         }
+        private void txbPageSize_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
+        private void txbNumPage_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
+        private void btnDone_Click(object sender, EventArgs e)
+        {
+            //検索ラヂオボタンがチェックされているとき
+            if (rdbSearch.Checked)
+            {
+                ClientDataSelect();
+            }
+        }
         private void txbEmployeeID_TextChanged(object sender, EventArgs e)
         {
-            //nullの確認
-            string stringProdactID = txbProductID.Text.Trim();
-            int intProdactID = 0;
-
-            if (!String.IsNullOrEmpty(stringProdactID))
-            {
-                intProdactID = int.Parse(stringProdactID);
-            }
-
-            //存在確認
-            if (!prodactDataAccess.CheckProdactIDExistence(intProdactID))
-            {
-                txbProductName.Text = "商品IDが存在しません";
-                return;
-            }
-
-            //IDから名前を取り出す
-            var Prodact = listProdact.Single(x => x.PrID == intProdactID);
-
-            txbProductName.Text = Prodact.PrName;
+           
         }
         ///////////////////////////////
         //メソッド名：SetFormDataGridView()
@@ -355,30 +360,6 @@ namespace SalesManagement_SysDev
                 // 操作ログデータのOr抽出
                 listLog = LogDataAccess.GetOrLogData(selectCondition);
             }
-
-        }
-
-        private void btnDone_Click(object sender, EventArgs e)
-        {
-            //検索ラヂオボタンがチェックされているとき
-            if (rdbSearch.Checked)
-            {
-                ClientDataSelect();
-            }
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txbEmployeeID_TextChanged(object sender, EventArgs e)
-        {
 
         }
     }
