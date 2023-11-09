@@ -355,7 +355,6 @@
             this.cmbHidden.Name = "cmbHidden";
             this.cmbHidden.Size = new System.Drawing.Size(220, 38);
             this.cmbHidden.TabIndex = 29;
-            this.cmbHidden.TabStop = false;
             // 
             // lblProdactHidden
             // 
@@ -565,7 +564,6 @@
             this.cmbMakerName.Name = "cmbMakerName";
             this.cmbMakerName.Size = new System.Drawing.Size(220, 38);
             this.cmbMakerName.TabIndex = 45;
-            this.cmbMakerName.TabStop = false;
             // 
             // cmbMajorID
             // 
@@ -582,7 +580,6 @@
             this.cmbMajorID.Name = "cmbMajorID";
             this.cmbMajorID.Size = new System.Drawing.Size(220, 38);
             this.cmbMajorID.TabIndex = 46;
-            this.cmbMajorID.TabStop = false;
             // 
             // cmbSmallID
             // 
@@ -594,7 +591,6 @@
             this.cmbSmallID.Name = "cmbSmallID";
             this.cmbSmallID.Size = new System.Drawing.Size(220, 38);
             this.cmbSmallID.TabIndex = 47;
-            this.cmbSmallID.TabStop = false;
             // 
             // dtpProdactReleaseDate
             // 
