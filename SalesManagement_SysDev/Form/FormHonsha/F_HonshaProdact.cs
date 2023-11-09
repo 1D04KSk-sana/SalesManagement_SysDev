@@ -567,6 +567,14 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void RegistrationProdact(M_Product regProdact)
         {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
             // 商品情報の登録
             bool flg = ProdactDataAccess.AddProdactData(regProdact);
 
@@ -951,6 +959,20 @@ namespace SalesManagement_SysDev
             dgvProdact.Columns.Add("PrReleaseDate", "発売日");
             dgvProdact.Columns.Add("PrHidden", "非表示理由");
 
+            dgvProdact.Columns["PrID"].Width = 102;
+            dgvProdact.Columns["MaID"].Width = 100;
+            dgvProdact.Columns["PrName"].Width = 130;
+            dgvProdact.Columns["Price"].Width = 120;
+            dgvProdact.Columns["PrJCode"].Width = 100;
+            dgvProdact.Columns["PrSafetyStock"].Width = 70;
+            dgvProdact.Columns["McID"].Width = 150;
+            dgvProdact.Columns["ScID"].Width = 120;
+            dgvProdact.Columns["PrModelNumber"].Width = 60;
+            dgvProdact.Columns["PrColor"].Width = 60;
+            dgvProdact.Columns["PrFlag"].Width = 102;
+            dgvProdact.Columns["PrReleaseDate"].Width = 120;
+            dgvProdact.Columns["PrHidden"].Width = 258;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvProdact.Columns)
             {
@@ -1118,6 +1140,15 @@ namespace SalesManagement_SysDev
             txbNumPage.Text = lastPage.ToString();
 
             GetDataGridView();
+        }
+
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
         }
     }
 }

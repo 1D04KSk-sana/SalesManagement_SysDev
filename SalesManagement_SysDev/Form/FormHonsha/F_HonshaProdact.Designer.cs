@@ -74,6 +74,7 @@
             this.cmbMajorID = new System.Windows.Forms.ComboBox();
             this.cmbSmallID = new System.Windows.Forms.ComboBox();
             this.dtpProdactReleaseDate = new System.Windows.Forms.DateTimePicker();
+            this.lblprodactdspHidden = new System.Windows.Forms.Label();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdact)).BeginInit();
             this.pnlProdact.SuspendLayout();
@@ -82,10 +83,11 @@
             // btnReturn
             // 
             this.btnReturn.BackColor = System.Drawing.Color.White;
-            this.btnReturn.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnReturn.Location = new System.Drawing.Point(25, 21);
+            this.btnReturn.Font = new System.Drawing.Font("MS UI Gothic", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnReturn.Location = new System.Drawing.Point(22, 41);
+            this.btnReturn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnReturn.Name = "btnReturn";
-            this.btnReturn.Size = new System.Drawing.Size(110, 50);
+            this.btnReturn.Size = new System.Drawing.Size(120, 56);
             this.btnReturn.TabIndex = 0;
             this.btnReturn.TabStop = false;
             this.btnReturn.Text = "戻る";
@@ -95,10 +97,11 @@
             // btnClear
             // 
             this.btnClear.BackColor = System.Drawing.Color.White;
-            this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClear.Location = new System.Drawing.Point(926, 94);
+            this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnClear.Location = new System.Drawing.Point(1246, 170);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(110, 50);
+            this.btnClear.Size = new System.Drawing.Size(120, 56);
             this.btnClear.TabIndex = 1;
             this.btnClear.TabStop = false;
             this.btnClear.Text = "クリア";
@@ -109,10 +112,11 @@
             // 
             this.btnDone.BackColor = System.Drawing.Color.White;
             this.btnDone.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnDone.Location = new System.Drawing.Point(1050, 93);
+            this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnDone.Location = new System.Drawing.Point(1398, 170);
+            this.btnDone.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDone.Name = "btnDone";
-            this.btnDone.Size = new System.Drawing.Size(110, 50);
+            this.btnDone.Size = new System.Drawing.Size(120, 56);
             this.btnDone.TabIndex = 2;
             this.btnDone.TabStop = false;
             this.btnDone.Text = "実行";
@@ -122,14 +126,15 @@
             // cmbView
             // 
             this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbView.FormattingEnabled = true;
             this.cmbView.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbView.Location = new System.Drawing.Point(681, 105);
+            this.cmbView.Location = new System.Drawing.Point(922, 186);
+            this.cmbView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmbView.Name = "cmbView";
-            this.cmbView.Size = new System.Drawing.Size(200, 26);
+            this.cmbView.Size = new System.Drawing.Size(271, 32);
             this.cmbView.TabIndex = 3;
             this.cmbView.TabStop = false;
             this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
@@ -139,18 +144,20 @@
             this.pnlSelect.Controls.Add(this.rdbSearch);
             this.pnlSelect.Controls.Add(this.rdbUpdate);
             this.pnlSelect.Controls.Add(this.rdbRegister);
-            this.pnlSelect.Location = new System.Drawing.Point(26, 102);
+            this.pnlSelect.Location = new System.Drawing.Point(55, 170);
+            this.pnlSelect.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlSelect.Name = "pnlSelect";
-            this.pnlSelect.Size = new System.Drawing.Size(349, 51);
+            this.pnlSelect.Size = new System.Drawing.Size(352, 73);
             this.pnlSelect.TabIndex = 4;
             // 
             // rdbSearch
             // 
             this.rdbSearch.AutoSize = true;
-            this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(232, 12);
+            this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbSearch.Location = new System.Drawing.Point(231, 17);
+            this.rdbSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rdbSearch.Name = "rdbSearch";
-            this.rdbSearch.Size = new System.Drawing.Size(65, 23);
+            this.rdbSearch.Size = new System.Drawing.Size(103, 39);
             this.rdbSearch.TabIndex = 2;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
@@ -158,10 +165,11 @@
             // rdbUpdate
             // 
             this.rdbUpdate.AutoSize = true;
-            this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbUpdate.Location = new System.Drawing.Point(138, 12);
+            this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbUpdate.Location = new System.Drawing.Point(116, 17);
+            this.rdbUpdate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rdbUpdate.Name = "rdbUpdate";
-            this.rdbUpdate.Size = new System.Drawing.Size(65, 23);
+            this.rdbUpdate.Size = new System.Drawing.Size(103, 39);
             this.rdbUpdate.TabIndex = 1;
             this.rdbUpdate.Text = "更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
@@ -170,210 +178,230 @@
             // 
             this.rdbRegister.AutoSize = true;
             this.rdbRegister.Checked = true;
-            this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbRegister.Location = new System.Drawing.Point(41, 12);
+            this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbRegister.Location = new System.Drawing.Point(9, 17);
+            this.rdbRegister.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rdbRegister.Name = "rdbRegister";
-            this.rdbRegister.Size = new System.Drawing.Size(65, 23);
+            this.rdbRegister.Size = new System.Drawing.Size(103, 39);
             this.rdbRegister.TabIndex = 0;
-            this.rdbRegister.TabStop = true;
             this.rdbRegister.Text = "登録";
             this.rdbRegister.UseVisualStyleBackColor = true;
             // 
             // lblProdactID
             // 
             this.lblProdactID.AutoSize = true;
-            this.lblProdactID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProdactID.Location = new System.Drawing.Point(26, 161);
+            this.lblProdactID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblProdactID.Location = new System.Drawing.Point(51, 285);
+            this.lblProdactID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProdactID.Name = "lblProdactID";
-            this.lblProdactID.Size = new System.Drawing.Size(51, 15);
+            this.lblProdactID.Size = new System.Drawing.Size(80, 24);
             this.lblProdactID.TabIndex = 5;
             this.lblProdactID.Text = "商品ID";
             // 
             // txbProdactID
             // 
-            this.txbProdactID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProdactID.Location = new System.Drawing.Point(96, 159);
+            this.txbProdactID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbProdactID.Location = new System.Drawing.Point(146, 282);
+            this.txbProdactID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txbProdactID.Name = "txbProdactID";
-            this.txbProdactID.Size = new System.Drawing.Size(200, 22);
+            this.txbProdactID.Size = new System.Drawing.Size(166, 31);
             this.txbProdactID.TabIndex = 6;
             this.txbProdactID.TabStop = false;
             // 
             // txbProdactName
             // 
-            this.txbProdactName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProdactName.Location = new System.Drawing.Point(379, 159);
+            this.txbProdactName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbProdactName.Location = new System.Drawing.Point(553, 279);
+            this.txbProdactName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txbProdactName.Name = "txbProdactName";
-            this.txbProdactName.Size = new System.Drawing.Size(200, 22);
+            this.txbProdactName.Size = new System.Drawing.Size(166, 31);
             this.txbProdactName.TabIndex = 8;
             this.txbProdactName.TabStop = false;
             // 
             // lblProdactName
             // 
             this.lblProdactName.AutoSize = true;
-            this.lblProdactName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProdactName.Location = new System.Drawing.Point(313, 162);
+            this.lblProdactName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblProdactName.Location = new System.Drawing.Point(467, 282);
+            this.lblProdactName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProdactName.Name = "lblProdactName";
-            this.lblProdactName.Size = new System.Drawing.Size(52, 15);
+            this.lblProdactName.Size = new System.Drawing.Size(82, 24);
             this.lblProdactName.TabIndex = 7;
             this.lblProdactName.Text = "商品名";
             // 
             // lblMajorID
             // 
             this.lblMajorID.AutoSize = true;
-            this.lblMajorID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblMajorID.Location = new System.Drawing.Point(597, 161);
+            this.lblMajorID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblMajorID.Location = new System.Drawing.Point(812, 279);
+            this.lblMajorID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMajorID.Name = "lblMajorID";
-            this.lblMajorID.Size = new System.Drawing.Size(66, 15);
+            this.lblMajorID.Size = new System.Drawing.Size(104, 24);
             this.lblMajorID.TabIndex = 9;
             this.lblMajorID.Text = "大分類ID";
             // 
             // lblSmallID
             // 
             this.lblSmallID.AutoSize = true;
-            this.lblSmallID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblSmallID.Location = new System.Drawing.Point(887, 162);
+            this.lblSmallID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblSmallID.Location = new System.Drawing.Point(1223, 279);
+            this.lblSmallID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSmallID.Name = "lblSmallID";
-            this.lblSmallID.Size = new System.Drawing.Size(66, 15);
+            this.lblSmallID.Size = new System.Drawing.Size(104, 24);
             this.lblSmallID.TabIndex = 17;
             this.lblSmallID.Text = "小分類ID";
             // 
             // txbProdactColor
             // 
-            this.txbProdactColor.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProdactColor.Location = new System.Drawing.Point(379, 207);
+            this.txbProdactColor.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbProdactColor.Location = new System.Drawing.Point(553, 344);
+            this.txbProdactColor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txbProdactColor.Name = "txbProdactColor";
-            this.txbProdactColor.Size = new System.Drawing.Size(200, 22);
+            this.txbProdactColor.Size = new System.Drawing.Size(166, 31);
             this.txbProdactColor.TabIndex = 16;
             this.txbProdactColor.TabStop = false;
             // 
             // lblProdactColor
             // 
             this.lblProdactColor.AutoSize = true;
-            this.lblProdactColor.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProdactColor.Location = new System.Drawing.Point(347, 210);
+            this.lblProdactColor.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblProdactColor.Location = new System.Drawing.Point(515, 351);
+            this.lblProdactColor.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProdactColor.Name = "lblProdactColor";
-            this.lblProdactColor.Size = new System.Drawing.Size(22, 15);
+            this.lblProdactColor.Size = new System.Drawing.Size(34, 24);
             this.lblProdactColor.TabIndex = 15;
             this.lblProdactColor.Text = "色";
             // 
             // txbModelNumber
             // 
-            this.txbModelNumber.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbModelNumber.Location = new System.Drawing.Point(96, 207);
+            this.txbModelNumber.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbModelNumber.Location = new System.Drawing.Point(146, 347);
+            this.txbModelNumber.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txbModelNumber.Name = "txbModelNumber";
-            this.txbModelNumber.Size = new System.Drawing.Size(200, 22);
+            this.txbModelNumber.Size = new System.Drawing.Size(166, 31);
             this.txbModelNumber.TabIndex = 14;
             this.txbModelNumber.TabStop = false;
             // 
             // lblModelNumber
             // 
             this.lblModelNumber.AutoSize = true;
-            this.lblModelNumber.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblModelNumber.Location = new System.Drawing.Point(42, 209);
+            this.lblModelNumber.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblModelNumber.Location = new System.Drawing.Point(73, 350);
+            this.lblModelNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblModelNumber.Name = "lblModelNumber";
-            this.lblModelNumber.Size = new System.Drawing.Size(37, 15);
+            this.lblModelNumber.Size = new System.Drawing.Size(58, 24);
             this.lblModelNumber.TabIndex = 13;
             this.lblModelNumber.Text = "型番";
             // 
             // txbProdactPrice
             // 
-            this.txbProdactPrice.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProdactPrice.Location = new System.Drawing.Point(379, 255);
+            this.txbProdactPrice.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbProdactPrice.Location = new System.Drawing.Point(553, 406);
+            this.txbProdactPrice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txbProdactPrice.Name = "txbProdactPrice";
-            this.txbProdactPrice.Size = new System.Drawing.Size(200, 22);
+            this.txbProdactPrice.Size = new System.Drawing.Size(166, 31);
             this.txbProdactPrice.TabIndex = 24;
             this.txbProdactPrice.TabStop = false;
             // 
             // lblProdactPrice
             // 
             this.lblProdactPrice.AutoSize = true;
-            this.lblProdactPrice.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProdactPrice.Location = new System.Drawing.Point(329, 258);
+            this.lblProdactPrice.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblProdactPrice.Location = new System.Drawing.Point(491, 409);
+            this.lblProdactPrice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProdactPrice.Name = "lblProdactPrice";
-            this.lblProdactPrice.Size = new System.Drawing.Size(37, 15);
+            this.lblProdactPrice.Size = new System.Drawing.Size(58, 24);
             this.lblProdactPrice.TabIndex = 23;
             this.lblProdactPrice.Text = "価格";
             // 
             // lblMakerName
             // 
             this.lblMakerName.AutoSize = true;
-            this.lblMakerName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblMakerName.Location = new System.Drawing.Point(12, 257);
+            this.lblMakerName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblMakerName.Location = new System.Drawing.Point(28, 408);
+            this.lblMakerName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMakerName.Name = "lblMakerName";
-            this.lblMakerName.Size = new System.Drawing.Size(67, 15);
+            this.lblMakerName.Size = new System.Drawing.Size(108, 24);
             this.lblMakerName.TabIndex = 21;
             this.lblMakerName.Text = "メーカー名";
             // 
             // txbProdactSafetyStock
             // 
-            this.txbProdactSafetyStock.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProdactSafetyStock.Location = new System.Drawing.Point(681, 254);
+            this.txbProdactSafetyStock.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbProdactSafetyStock.Location = new System.Drawing.Point(553, 468);
+            this.txbProdactSafetyStock.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txbProdactSafetyStock.Name = "txbProdactSafetyStock";
-            this.txbProdactSafetyStock.Size = new System.Drawing.Size(200, 22);
+            this.txbProdactSafetyStock.Size = new System.Drawing.Size(166, 31);
             this.txbProdactSafetyStock.TabIndex = 28;
             this.txbProdactSafetyStock.TabStop = false;
             // 
             // lblProdactSafetyStock
             // 
             this.lblProdactSafetyStock.AutoSize = true;
-            this.lblProdactSafetyStock.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProdactSafetyStock.Location = new System.Drawing.Point(579, 257);
+            this.lblProdactSafetyStock.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblProdactSafetyStock.Location = new System.Drawing.Point(419, 471);
+            this.lblProdactSafetyStock.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProdactSafetyStock.Name = "lblProdactSafetyStock";
-            this.lblProdactSafetyStock.Size = new System.Drawing.Size(82, 15);
+            this.lblProdactSafetyStock.Size = new System.Drawing.Size(130, 24);
             this.lblProdactSafetyStock.TabIndex = 27;
             this.lblProdactSafetyStock.Text = "安全在庫数";
             // 
             // lblProdactReleaseDate
             // 
             this.lblProdactReleaseDate.AutoSize = true;
-            this.lblProdactReleaseDate.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProdactReleaseDate.Location = new System.Drawing.Point(613, 212);
+            this.lblProdactReleaseDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblProdactReleaseDate.Location = new System.Drawing.Point(54, 467);
+            this.lblProdactReleaseDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProdactReleaseDate.Name = "lblProdactReleaseDate";
-            this.lblProdactReleaseDate.Size = new System.Drawing.Size(52, 15);
+            this.lblProdactReleaseDate.Size = new System.Drawing.Size(82, 24);
             this.lblProdactReleaseDate.TabIndex = 25;
             this.lblProdactReleaseDate.Text = "発売日";
             // 
             // cmbHidden
             // 
             this.cmbHidden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbHidden.FormattingEnabled = true;
             this.cmbHidden.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbHidden.Location = new System.Drawing.Point(96, 319);
+            this.cmbHidden.Location = new System.Drawing.Point(940, 409);
+            this.cmbHidden.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmbHidden.Name = "cmbHidden";
-            this.cmbHidden.Size = new System.Drawing.Size(150, 22);
+            this.cmbHidden.Size = new System.Drawing.Size(166, 32);
             this.cmbHidden.TabIndex = 29;
             this.cmbHidden.TabStop = false;
             // 
             // lblProdactHidden
             // 
             this.lblProdactHidden.AutoSize = true;
-            this.lblProdactHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProdactHidden.Location = new System.Drawing.Point(282, 319);
+            this.lblProdactHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblProdactHidden.Location = new System.Drawing.Point(786, 467);
+            this.lblProdactHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProdactHidden.Name = "lblProdactHidden";
-            this.lblProdactHidden.Size = new System.Drawing.Size(82, 15);
+            this.lblProdactHidden.Size = new System.Drawing.Size(130, 24);
             this.lblProdactHidden.TabIndex = 30;
             this.lblProdactHidden.Text = "非表示理由";
             // 
             // tbxProdactHidden
             // 
-            this.tbxProdactHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbxProdactHidden.Location = new System.Drawing.Point(379, 316);
+            this.tbxProdactHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.tbxProdactHidden.Location = new System.Drawing.Point(940, 467);
+            this.tbxProdactHidden.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbxProdactHidden.Name = "tbxProdactHidden";
-            this.tbxProdactHidden.Size = new System.Drawing.Size(812, 22);
+            this.tbxProdactHidden.Size = new System.Drawing.Size(578, 31);
             this.tbxProdactHidden.TabIndex = 31;
             this.tbxProdactHidden.TabStop = false;
             // 
             // dgvProdact
             // 
             this.dgvProdact.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProdact.Location = new System.Drawing.Point(9, 360);
+            this.dgvProdact.Location = new System.Drawing.Point(23, 517);
+            this.dgvProdact.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvProdact.Name = "dgvProdact";
             this.dgvProdact.RowHeadersWidth = 51;
             this.dgvProdact.RowTemplate.Height = 24;
-            this.dgvProdact.Size = new System.Drawing.Size(1191, 336);
+            this.dgvProdact.Size = new System.Drawing.Size(1495, 289);
             this.dgvProdact.TabIndex = 32;
             this.dgvProdact.TabStop = false;
             this.dgvProdact.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProdact_CellClick);
@@ -381,29 +409,35 @@
             // lblPageSize
             // 
             this.lblPageSize.AutoSize = true;
-            this.lblPageSize.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblPageSize.Location = new System.Drawing.Point(12, 718);
+            this.lblPageSize.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblPageSize.Location = new System.Drawing.Point(16, 816);
+            this.lblPageSize.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPageSize.Name = "lblPageSize";
-            this.lblPageSize.Size = new System.Drawing.Size(81, 15);
+            this.lblPageSize.Size = new System.Drawing.Size(125, 22);
             this.lblPageSize.TabIndex = 33;
             this.lblPageSize.Text = "1ページ行数";
             // 
             // txbPageSize
             // 
-            this.txbPageSize.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbPageSize.Location = new System.Drawing.Point(116, 714);
+            this.txbPageSize.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbPageSize.Location = new System.Drawing.Point(143, 814);
+            this.txbPageSize.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txbPageSize.Name = "txbPageSize";
-            this.txbPageSize.Size = new System.Drawing.Size(50, 22);
+            this.txbPageSize.Size = new System.Drawing.Size(38, 29);
             this.txbPageSize.TabIndex = 34;
+            this.txbPageSize.TabStop = false;
+            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // btnPagesize
             // 
             this.btnPagesize.BackColor = System.Drawing.Color.White;
-            this.btnPagesize.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnPagesize.Location = new System.Drawing.Point(172, 709);
+            this.btnPagesize.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnPagesize.Location = new System.Drawing.Point(207, 810);
+            this.btnPagesize.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPagesize.Name = "btnPagesize";
-            this.btnPagesize.Size = new System.Drawing.Size(120, 35);
+            this.btnPagesize.Size = new System.Drawing.Size(137, 32);
             this.btnPagesize.TabIndex = 35;
+            this.btnPagesize.TabStop = false;
             this.btnPagesize.Text = "行数変更";
             this.btnPagesize.UseVisualStyleBackColor = false;
             this.btnPagesize.Click += new System.EventHandler(this.btnPagesize_Click);
@@ -412,7 +446,8 @@
             // 
             this.lblNumPage.AutoSize = true;
             this.lblNumPage.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblNumPage.Location = new System.Drawing.Point(955, 717);
+            this.lblNumPage.Location = new System.Drawing.Point(1224, 839);
+            this.lblNumPage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNumPage.Name = "lblNumPage";
             this.lblNumPage.Size = new System.Drawing.Size(43, 15);
             this.lblNumPage.TabIndex = 36;
@@ -420,20 +455,25 @@
             // 
             // txbNumPage
             // 
-            this.txbNumPage.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbNumPage.Location = new System.Drawing.Point(911, 714);
+            this.txbNumPage.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbNumPage.Location = new System.Drawing.Point(1179, 824);
+            this.txbNumPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txbNumPage.Name = "txbNumPage";
-            this.txbNumPage.Size = new System.Drawing.Size(38, 22);
+            this.txbNumPage.Size = new System.Drawing.Size(30, 29);
             this.txbNumPage.TabIndex = 37;
+            this.txbNumPage.TabStop = false;
+            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // btnPageMin
             // 
             this.btnPageMin.BackColor = System.Drawing.Color.White;
-            this.btnPageMin.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnPageMin.Location = new System.Drawing.Point(1014, 709);
+            this.btnPageMin.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnPageMin.Location = new System.Drawing.Point(1289, 822);
+            this.btnPageMin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPageMin.Name = "btnPageMin";
-            this.btnPageMin.Size = new System.Drawing.Size(42, 36);
+            this.btnPageMin.Size = new System.Drawing.Size(38, 32);
             this.btnPageMin.TabIndex = 38;
+            this.btnPageMin.TabStop = false;
             this.btnPageMin.Text = "|◀";
             this.btnPageMin.UseVisualStyleBackColor = false;
             this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
@@ -441,11 +481,13 @@
             // btnBack
             // 
             this.btnBack.BackColor = System.Drawing.Color.White;
-            this.btnBack.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnBack.Location = new System.Drawing.Point(1062, 709);
+            this.btnBack.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnBack.Location = new System.Drawing.Point(1353, 822);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(42, 36);
+            this.btnBack.Size = new System.Drawing.Size(38, 32);
             this.btnBack.TabIndex = 39;
+            this.btnBack.TabStop = false;
             this.btnBack.Text = "◀";
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
@@ -453,11 +495,13 @@
             // btnNext
             // 
             this.btnNext.BackColor = System.Drawing.Color.White;
-            this.btnNext.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnNext.Location = new System.Drawing.Point(1110, 708);
+            this.btnNext.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnNext.Location = new System.Drawing.Point(1415, 822);
+            this.btnNext.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(42, 36);
+            this.btnNext.Size = new System.Drawing.Size(38, 32);
             this.btnNext.TabIndex = 40;
+            this.btnNext.TabStop = false;
             this.btnNext.Text = "▶";
             this.btnNext.UseVisualStyleBackColor = false;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
@@ -465,11 +509,13 @@
             // btnPageMax
             // 
             this.btnPageMax.BackColor = System.Drawing.Color.White;
-            this.btnPageMax.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnPageMax.Location = new System.Drawing.Point(1158, 708);
+            this.btnPageMax.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnPageMax.Location = new System.Drawing.Point(1480, 822);
+            this.btnPageMax.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPageMax.Name = "btnPageMax";
-            this.btnPageMax.Size = new System.Drawing.Size(42, 36);
+            this.btnPageMax.Size = new System.Drawing.Size(38, 32);
             this.btnPageMax.TabIndex = 41;
+            this.btnPageMax.TabStop = false;
             this.btnPageMax.Text = "▶|";
             this.btnPageMax.UseVisualStyleBackColor = false;
             this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
@@ -481,17 +527,19 @@
             this.pnlProdact.Controls.Add(this.lblProdact);
             this.pnlProdact.Controls.Add(this.btnReturn);
             this.pnlProdact.Location = new System.Drawing.Point(1, 0);
+            this.pnlProdact.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlProdact.Name = "pnlProdact";
-            this.pnlProdact.Size = new System.Drawing.Size(1206, 90);
+            this.pnlProdact.Size = new System.Drawing.Size(1920, 150);
             this.pnlProdact.TabIndex = 42;
             // 
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.White;
-            this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClose.Location = new System.Drawing.Point(1049, 21);
+            this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnClose.Location = new System.Drawing.Point(1357, 48);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(110, 50);
+            this.btnClose.Size = new System.Drawing.Size(160, 70);
             this.btnClose.TabIndex = 2;
             this.btnClose.TabStop = false;
             this.btnClose.Text = "閉じる";
@@ -500,89 +548,112 @@
             // lblProdact
             // 
             this.lblProdact.AutoSize = true;
-            this.lblProdact.Font = new System.Drawing.Font("MS UI Gothic", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProdact.Location = new System.Drawing.Point(448, 27);
+            this.lblProdact.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblProdact.Location = new System.Drawing.Point(558, 41);
+            this.lblProdact.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProdact.Name = "lblProdact";
-            this.lblProdact.Size = new System.Drawing.Size(231, 35);
+            this.lblProdact.Size = new System.Drawing.Size(417, 64);
             this.lblProdact.TabIndex = 1;
             this.lblProdact.Text = "商品管理画面";
             // 
             // txbProdactJanCode
             // 
-            this.txbProdactJanCode.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProdactJanCode.Location = new System.Drawing.Point(974, 202);
+            this.txbProdactJanCode.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbProdactJanCode.Location = new System.Drawing.Point(940, 343);
+            this.txbProdactJanCode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txbProdactJanCode.Name = "txbProdactJanCode";
-            this.txbProdactJanCode.Size = new System.Drawing.Size(200, 22);
+            this.txbProdactJanCode.Size = new System.Drawing.Size(166, 31);
             this.txbProdactJanCode.TabIndex = 43;
             this.txbProdactJanCode.TabStop = false;
             // 
             // lblProdactJanCode
             // 
             this.lblProdactJanCode.AutoSize = true;
-            this.lblProdactJanCode.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProdactJanCode.Location = new System.Drawing.Point(887, 210);
+            this.lblProdactJanCode.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblProdactJanCode.Location = new System.Drawing.Point(812, 350);
+            this.lblProdactJanCode.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProdactJanCode.Name = "lblProdactJanCode";
-            this.lblProdactJanCode.Size = new System.Drawing.Size(67, 15);
+            this.lblProdactJanCode.Size = new System.Drawing.Size(107, 24);
             this.lblProdactJanCode.TabIndex = 44;
             this.lblProdactJanCode.Text = "JANコード";
             // 
             // cmbMakerName
             // 
             this.cmbMakerName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbMakerName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbMakerName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbMakerName.FormattingEnabled = true;
-            this.cmbMakerName.Location = new System.Drawing.Point(97, 253);
+            this.cmbMakerName.Location = new System.Drawing.Point(146, 405);
+            this.cmbMakerName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmbMakerName.Name = "cmbMakerName";
-            this.cmbMakerName.Size = new System.Drawing.Size(150, 22);
+            this.cmbMakerName.Size = new System.Drawing.Size(166, 32);
             this.cmbMakerName.TabIndex = 45;
             this.cmbMakerName.TabStop = false;
             // 
             // cmbMajorID
             // 
             this.cmbMajorID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbMajorID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbMajorID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbMajorID.FormattingEnabled = true;
             this.cmbMajorID.Items.AddRange(new object[] {
             "テレビ・レコーダー",
             "エアコン・冷蔵庫・洗濯機",
             "オーディオ・イヤホン・ヘッドホン",
             "携帯電話・スマートフォン"});
-            this.cmbMajorID.Location = new System.Drawing.Point(681, 158);
+            this.cmbMajorID.Location = new System.Drawing.Point(940, 276);
+            this.cmbMajorID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmbMajorID.Name = "cmbMajorID";
-            this.cmbMajorID.Size = new System.Drawing.Size(150, 22);
+            this.cmbMajorID.Size = new System.Drawing.Size(166, 32);
             this.cmbMajorID.TabIndex = 46;
             this.cmbMajorID.TabStop = false;
             // 
             // cmbSmallID
             // 
             this.cmbSmallID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSmallID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbSmallID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSmallID.FormattingEnabled = true;
-            this.cmbSmallID.Location = new System.Drawing.Point(974, 154);
+            this.cmbSmallID.Location = new System.Drawing.Point(1352, 277);
+            this.cmbSmallID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmbSmallID.Name = "cmbSmallID";
-            this.cmbSmallID.Size = new System.Drawing.Size(150, 22);
+            this.cmbSmallID.Size = new System.Drawing.Size(166, 32);
             this.cmbSmallID.TabIndex = 47;
             this.cmbSmallID.TabStop = false;
             // 
             // dtpProdactReleaseDate
             // 
             this.dtpProdactReleaseDate.CalendarFont = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.dtpProdactReleaseDate.Location = new System.Drawing.Point(681, 212);
+            this.dtpProdactReleaseDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.dtpProdactReleaseDate.Location = new System.Drawing.Point(146, 465);
+            this.dtpProdactReleaseDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dtpProdactReleaseDate.Name = "dtpProdactReleaseDate";
-            this.dtpProdactReleaseDate.Size = new System.Drawing.Size(147, 22);
+            this.dtpProdactReleaseDate.Size = new System.Drawing.Size(166, 31);
             this.dtpProdactReleaseDate.TabIndex = 48;
+            this.dtpProdactReleaseDate.TabStop = false;
+            // 
+            // lblprodactdspHidden
+            // 
+            this.lblprodactdspHidden.AutoSize = true;
+            this.lblprodactdspHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblprodactdspHidden.Location = new System.Drawing.Point(774, 413);
+            this.lblprodactdspHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblprodactdspHidden.Name = "lblprodactdspHidden";
+            this.lblprodactdspHidden.Size = new System.Drawing.Size(142, 24);
+            this.lblprodactdspHidden.TabIndex = 49;
+            this.lblprodactdspHidden.Text = "表示/非表示";
             // 
             // F_HonshaProdact
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
-            this.ClientSize = new System.Drawing.Size(1212, 753);
+            this.ClientSize = new System.Drawing.Size(1556, 884);
             this.ControlBox = false;
+            this.Controls.Add(this.lblprodactdspHidden);
             this.Controls.Add(this.dtpProdactReleaseDate);
             this.Controls.Add(this.cmbSmallID);
             this.Controls.Add(this.cmbMajorID);
+            this.Controls.Add(this.btnDone);
             this.Controls.Add(this.cmbMakerName);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.lblProdactJanCode);
             this.Controls.Add(this.txbProdactJanCode);
             this.Controls.Add(this.cmbView);
@@ -617,12 +688,12 @@
             this.Controls.Add(this.txbProdactID);
             this.Controls.Add(this.lblProdactID);
             this.Controls.Add(this.pnlSelect);
-            this.Controls.Add(this.btnDone);
-            this.Controls.Add(this.btnClear);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.Name = "F_HonshaProdact";
             this.Text = "F_HonshaProdact";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.F_HonshaProdact_Load);
             this.pnlSelect.ResumeLayout(false);
             this.pnlSelect.PerformLayout();
@@ -682,5 +753,6 @@
         private System.Windows.Forms.ComboBox cmbMajorID;
         private System.Windows.Forms.ComboBox cmbSmallID;
         private System.Windows.Forms.DateTimePicker dtpProdactReleaseDate;
+        private System.Windows.Forms.Label lblprodactdspHidden;
     }
 }
