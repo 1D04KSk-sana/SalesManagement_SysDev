@@ -430,8 +430,61 @@ namespace SalesManagement_SysDev
 
         private void rdbSearch_CheckedChanged(object sender, EventArgs e)
         {
+           
+        }
+
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnPageMax_Click(object sender, EventArgs e)
+        {
+            {
+                List<T_Stock> viewStock = SetListStock();
+
+                //ページ行数を取得
+                int pageSize = int.Parse(txbPageSize.Text.Trim());
+                //最終ページ数を取得（テキストボックスに代入する数字なので-1はしない）
+                int lastPage = (int)Math.Ceiling(viewStock.Count / (double)pageSize);
+
+                txbNumPage.Text = lastPage.ToString();
+
+                GetDataGridView();
+            }
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) + 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) - 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnPageMin_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+
+            GetDataGridView();
+        }
+
+        private void btnPageSize_Click(object sender, EventArgs e)
+        {
+            GetDataGridView();
+        }
+
+        private void txbPageSize_TextChanged(object sender, EventArgs e)
+        {
 
         }
+        private System.Windows.Forms.RadioButton rdbRegister;
     }
 
 }

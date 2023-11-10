@@ -77,16 +77,16 @@ namespace SalesManagement_SysDev
 
         private void rdoSElect_CheckedChanged(object sender, EventArgs e)
         {
-            //if (rdbRegister.Checked)
-            //{
-            //    var context = new SalesManagement_DevContext();
+            if (rdbRegister.Checked)
+            {
+                var context = new SalesManagement_DevContext();
 
-            //    txbClientID.Text = (context.M_Clients.Count() + 1).ToString();
-            //}
-            //else
-            //{
-            //    txbClientID.Text = string.Empty;
-            //}
+                txbClientID.Text = (context.M_Clients.Count() + 1).ToString();
+            }
+            else
+            {
+                txbClientID.Text = string.Empty;
+            }
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
@@ -1024,6 +1024,11 @@ namespace SalesManagement_SysDev
             cmbSalesOfficeID.SelectedIndex = -1;
             cmbHidden.SelectedIndex = -1;
             txbClientFAX.Text = string.Empty;
+        }
+
+        private void txbPageSize_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -98,7 +98,7 @@
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbSearch.Location = new System.Drawing.Point(185, 8);
             this.rdbSearch.Name = "rdbSearch";
-            this.rdbSearch.Size = new System.Drawing.Size(77, 27);
+            this.rdbSearch.Size = new System.Drawing.Size(79, 28);
             this.rdbSearch.TabIndex = 2;
             this.rdbSearch.TabStop = true;
             this.rdbSearch.Text = "検索";
@@ -111,7 +111,7 @@
             this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbUpdate.Location = new System.Drawing.Point(97, 8);
             this.rdbUpdate.Name = "rdbUpdate";
-            this.rdbUpdate.Size = new System.Drawing.Size(77, 27);
+            this.rdbUpdate.Size = new System.Drawing.Size(79, 28);
             this.rdbUpdate.TabIndex = 1;
             this.rdbUpdate.TabStop = true;
             this.rdbUpdate.Text = "更新";
@@ -124,7 +124,7 @@
             this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbRegister.Location = new System.Drawing.Point(15, 8);
             this.rdbRegister.Name = "rdbRegister";
-            this.rdbRegister.Size = new System.Drawing.Size(77, 27);
+            this.rdbRegister.Size = new System.Drawing.Size(79, 28);
             this.rdbRegister.TabIndex = 0;
             this.rdbRegister.TabStop = true;
             this.rdbRegister.Text = "登録";
@@ -137,7 +137,7 @@
             this.lblClientID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblClientID.Location = new System.Drawing.Point(13, 183);
             this.lblClientID.Name = "lblClientID";
-            this.lblClientID.Size = new System.Drawing.Size(60, 18);
+            this.lblClientID.Size = new System.Drawing.Size(64, 19);
             this.lblClientID.TabIndex = 2;
             this.lblClientID.Text = "顧客ID";
             // 
@@ -155,7 +155,7 @@
             this.lblClientName.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblClientName.Location = new System.Drawing.Point(273, 183);
             this.lblClientName.Name = "lblClientName";
-            this.lblClientName.Size = new System.Drawing.Size(62, 18);
+            this.lblClientName.Size = new System.Drawing.Size(66, 19);
             this.lblClientName.TabIndex = 4;
             this.lblClientName.Text = "顧客名";
             // 
@@ -173,7 +173,7 @@
             this.lblSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblSalesOfficeID.Location = new System.Drawing.Point(579, 182);
             this.lblSalesOfficeID.Name = "lblSalesOfficeID";
-            this.lblSalesOfficeID.Size = new System.Drawing.Size(78, 18);
+            this.lblSalesOfficeID.Size = new System.Drawing.Size(83, 19);
             this.lblSalesOfficeID.TabIndex = 6;
             this.lblSalesOfficeID.Text = "営業所ID";
             // 
@@ -202,7 +202,7 @@
             this.lblCilentPhone.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblCilentPhone.Location = new System.Drawing.Point(914, 183);
             this.lblCilentPhone.Name = "lblCilentPhone";
-            this.lblCilentPhone.Size = new System.Drawing.Size(80, 18);
+            this.lblCilentPhone.Size = new System.Drawing.Size(85, 19);
             this.lblCilentPhone.TabIndex = 9;
             this.lblCilentPhone.Text = "電話番号";
             // 
@@ -212,7 +212,7 @@
             this.lblClientPostal.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblClientPostal.Location = new System.Drawing.Point(13, 257);
             this.lblClientPostal.Name = "lblClientPostal";
-            this.lblClientPostal.Size = new System.Drawing.Size(80, 18);
+            this.lblClientPostal.Size = new System.Drawing.Size(85, 19);
             this.lblClientPostal.TabIndex = 10;
             this.lblClientPostal.Text = "郵便番号";
             // 
@@ -230,7 +230,7 @@
             this.lblClientAddress.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblClientAddress.Location = new System.Drawing.Point(273, 253);
             this.lblClientAddress.Name = "lblClientAddress";
-            this.lblClientAddress.Size = new System.Drawing.Size(44, 18);
+            this.lblClientAddress.Size = new System.Drawing.Size(47, 19);
             this.lblClientAddress.TabIndex = 12;
             this.lblClientAddress.Text = "住所";
             // 
@@ -248,7 +248,7 @@
             this.lblClientFax.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblClientFax.Location = new System.Drawing.Point(919, 249);
             this.lblClientFax.Name = "lblClientFax";
-            this.lblClientFax.Size = new System.Drawing.Size(40, 18);
+            this.lblClientFax.Size = new System.Drawing.Size(42, 19);
             this.lblClientFax.TabIndex = 14;
             this.lblClientFax.Text = "FAX";
             // 
@@ -267,7 +267,7 @@
             this.lblClientHidden.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblClientHidden.Location = new System.Drawing.Point(280, 328);
             this.lblClientHidden.Name = "lblClientHidden";
-            this.lblClientHidden.Size = new System.Drawing.Size(98, 18);
+            this.lblClientHidden.Size = new System.Drawing.Size(104, 19);
             this.lblClientHidden.TabIndex = 16;
             this.lblClientHidden.Text = "非表示理由";
             // 
@@ -369,6 +369,7 @@
             this.txbPageSize.Name = "txbPageSize";
             this.txbPageSize.Size = new System.Drawing.Size(60, 25);
             this.txbPageSize.TabIndex = 24;
+            this.txbPageSize.TextChanged += new System.EventHandler(this.txbPageSize_TextChanged);
             // 
             // lblPageSize
             // 
@@ -376,7 +377,7 @@
             this.lblPageSize.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblPageSize.Location = new System.Drawing.Point(10, 767);
             this.lblPageSize.Name = "lblPageSize";
-            this.lblPageSize.Size = new System.Drawing.Size(98, 18);
+            this.lblPageSize.Size = new System.Drawing.Size(105, 19);
             this.lblPageSize.TabIndex = 25;
             this.lblPageSize.Text = "1ページ行数";
             // 
@@ -455,7 +456,7 @@
             this.lblNumPage.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblNumPage.Location = new System.Drawing.Point(964, 767);
             this.lblNumPage.Name = "lblNumPage";
-            this.lblNumPage.Size = new System.Drawing.Size(53, 18);
+            this.lblNumPage.Size = new System.Drawing.Size(57, 19);
             this.lblNumPage.TabIndex = 32;
             this.lblNumPage.Text = "ページ";
             // 

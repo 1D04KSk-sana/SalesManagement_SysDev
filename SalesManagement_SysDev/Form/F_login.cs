@@ -763,7 +763,7 @@ namespace SalesManagement_SysDev
 
 
 
-            this.Opacity = 0;
+            ////this.Opacity = 0;
         }
 
         private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)

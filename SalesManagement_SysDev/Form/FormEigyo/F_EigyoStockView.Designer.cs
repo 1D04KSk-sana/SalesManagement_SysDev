@@ -119,6 +119,7 @@
             this.btnNext.TabStop = false;
             this.btnNext.Text = "▶";
             this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPageMax
             // 
@@ -132,6 +133,7 @@
             this.btnPageMax.TabStop = false;
             this.btnPageMax.Text = "▶|";
             this.btnPageMax.UseVisualStyleBackColor = false;
+            this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
             // btnBack
             // 
@@ -145,6 +147,7 @@
             this.btnBack.TabStop = false;
             this.btnBack.Text = "◀";
             this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnPageMin
             // 
@@ -158,6 +161,7 @@
             this.btnPageMin.TabStop = false;
             this.btnPageMin.Text = "|◀";
             this.btnPageMin.UseVisualStyleBackColor = false;
+            this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
             // 
             // txbNumPage
             // 
@@ -191,6 +195,7 @@
             this.btnPageSize.TabStop = false;
             this.btnPageSize.Text = "行数変更";
             this.btnPageSize.UseVisualStyleBackColor = false;
+            this.btnPageSize.Click += new System.EventHandler(this.btnPageSize_Click);
             // 
             // txbPageSize
             // 
@@ -201,6 +206,7 @@
             this.txbPageSize.Size = new System.Drawing.Size(60, 25);
             this.txbPageSize.TabIndex = 67;
             this.txbPageSize.TabStop = false;
+            this.txbPageSize.TextChanged += new System.EventHandler(this.txbPageSize_TextChanged);
             // 
             // lblPageSize
             // 
@@ -248,6 +254,7 @@
             this.btnReturn.TabStop = false;
             this.btnReturn.Text = "戻る";
             this.btnReturn.UseVisualStyleBackColor = true;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
             // rdbSearch
             // 
@@ -256,7 +263,7 @@
             this.rdbSearch.Location = new System.Drawing.Point(82, 199);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.rdbSearch.Name = "rdbSearch";
-            this.rdbSearch.Size = new System.Drawing.Size(129, 48);
+            this.rdbSearch.Size = new System.Drawing.Size(126, 47);
             this.rdbSearch.TabIndex = 70;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;

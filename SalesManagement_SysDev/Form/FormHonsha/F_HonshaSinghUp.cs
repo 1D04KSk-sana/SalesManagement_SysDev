@@ -199,7 +199,7 @@ namespace SalesManagement_SysDev
             //役職名の適否
             if (cmbPositionID.SelectedIndex == -1)
             {
-                MessageBox.Show("営業名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("役職名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbPositionID.Focus();
                 return false;
             }
