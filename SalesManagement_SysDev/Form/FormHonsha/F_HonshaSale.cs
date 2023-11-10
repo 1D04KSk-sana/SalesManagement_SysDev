@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SalesManagement_SysDev
 {
@@ -268,13 +270,14 @@ namespace SalesManagement_SysDev
             dgvSale.Columns.Add("SaFlag", "管理フラグ");
             dgvSale.Columns.Add("SaHidden", "非表示理由");
 
-            dgvSale.Columns["SaID"].Width = 50;
-            dgvSale.Columns["ClID"].Width = 65;
-            dgvSale.Columns["SoID"].Width = 65;
-            dgvSale.Columns["EmID"].Width = 80;
-            dgvSale.Columns["ChID"].Width = 50;
-            dgvSale.Columns["SaDate"].Width = 80;
-            dgvSale.Columns["SaFlag"].Width = 65;
+            dgvSale.Columns["SaID"].Width = 92;
+            dgvSale.Columns["ClID"].Width = 110;
+            dgvSale.Columns["SoID"].Width = 125;
+            dgvSale.Columns["EmID"].Width = 110;
+            dgvSale.Columns["ChID"].Width = 90;
+            dgvSale.Columns["SaDate"].Width = 140;
+            dgvSale.Columns["SaFlag"].Width = 100;
+            dgvSale.Columns["SaHidden"].Width = 420;
 
 
             //並び替えができないようにする
@@ -311,11 +314,11 @@ namespace SalesManagement_SysDev
             dgvSaleDetail.Columns.Add("SaQuantity", "個数");
             dgvSaleDetail.Columns.Add("SaTotalPrice", "合計金額");
 
-            dgvSaleDetail.Columns["SaDetailID"].Width = 70;
-            dgvSaleDetail.Columns["SaID"].Width = 60;
-            dgvSaleDetail.Columns["PrID"].Width = 60;
-            dgvSaleDetail.Columns["SaQuantity"].Width = 57;
-            dgvSaleDetail.Columns["SaTotalPrice"].Width = 80;
+            dgvSaleDetail.Columns["SaDetailID"].Width = 120;
+            dgvSaleDetail.Columns["SaID"].Width = 120;
+            dgvSaleDetail.Columns["PrID"].Width = 120;
+            dgvSaleDetail.Columns["SaQuantity"].Width = 120;
+            dgvSaleDetail.Columns["SaTotalPrice"].Width = 217;
                         
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvSaleDetail.Columns)
@@ -345,7 +348,7 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：ClientDataSelect()
+        //メソッド名：SaleDataSelect()
         //引　数   ：なし
         //戻り値   ：なし
         //機　能   売上情報検索の実行
@@ -525,7 +528,7 @@ namespace SalesManagement_SysDev
             //1行ずつdgvClientに挿入
             foreach (var item in depData)
             {
-                dgvSale.Rows.Add(item.SaID, item.ClID, dictionarySalesOffice[item.SoID], item.EmID, item.ChID, item.SaDate, dictionaryHidden[item.SaFlag], item.SaHidden);
+                dgvSale.Rows.Add(item.SaID, dictionaryClient[item.ClID.Value], dictionarySalesOffice[item.SoID], item.EmID, item.ChID, item.SaDate, dictionaryHidden[item.SaFlag], item.SaHidden);
             }
 
             //dgvClientをリフレッシュ
@@ -713,7 +716,7 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 顧客情報の更新
+            //  売上情報の更新
             bool flg = saleDataAccess.UpdateSaleData(updSale);
             if (flg == true)
             {
@@ -774,54 +777,27 @@ namespace SalesManagement_SysDev
             GetDataGridView();
 
         }
-        private void dtpSaleDate_KeyDown(object sender, KeyEventArgs e)
+
+        private void txbNumPage_KeyPress(object sender, KeyPressEventArgs e)
         {
-        }
-        private void dtpSaleDate_ValueChanged(object sender, EventArgs e)
-        {
-        }
-        private void setdtpSaleDate(DateTime? datetime)
-        {
-        }
-        private void dtpSaleDate_MouseDown(object sender, MouseEventArgs e)
-        {
-        }
-        private void cmbSalesOfficeID_SelectedIndexChanged(object sender, EventArgs e)
-        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
 
         }
 
-
-        private void txbClientPostal_TextChanged(object sender, EventArgs e)
+        private void txbPageSize_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
         }
 
-        private void txbClientName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txbSaleID_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txbEmployeeName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvSale_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void rdbHiddenUpdate_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void rdbSearch_CheckedChanged(object sender, EventArgs e)
+        private void txbNumPage_TextChanged(object sender, EventArgs e)
         {
         }
     }
