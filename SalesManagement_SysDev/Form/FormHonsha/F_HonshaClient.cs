@@ -75,19 +75,6 @@ namespace SalesManagement_SysDev
             cmbView.SelectedIndex = 0;
         }
 
-        private void rdoSElect_CheckedChanged(object sender, EventArgs e)
-        {
-            //if (rdbRegister.Checked)
-            //{
-            //    var context = new SalesManagement_DevContext();
-
-            //    txbClientID.Text = (context.M_Clients.Count() + 1).ToString();
-            //}
-            //else
-            //{
-            //    txbClientID.Text = string.Empty;
-            //}
-        }
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
@@ -1026,9 +1013,5 @@ namespace SalesManagement_SysDev
             txbClientFAX.Text = string.Empty;
         }
 
-        private void dgvClient_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 }

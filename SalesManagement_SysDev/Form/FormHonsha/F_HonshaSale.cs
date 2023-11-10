@@ -797,8 +797,9 @@ namespace SalesManagement_SysDev
             }
         }
 
-        private void txbNumPage_TextChanged(object sender, EventArgs e)
+        private void dgvSale_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
         }
     }
 }

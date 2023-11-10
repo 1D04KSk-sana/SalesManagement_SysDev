@@ -174,6 +174,7 @@
             this.dgvSale.TabIndex = 56;
             this.dgvSale.TabStop = false;
             this.dgvSale.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSale_CellClick);
+            this.dgvSale.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSale_CellContentClick);
             // 
             // lblSaleDate
             // 
@@ -316,7 +317,6 @@
             this.txbNumPage.Name = "txbNumPage";
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 77;
-            this.txbNumPage.TextChanged += new System.EventHandler(this.txbNumPage_TextChanged);
             this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbNumPage_KeyPress);
             // 
             // btnPageMin
@@ -334,6 +334,7 @@
             // 
             // btnBack
             // 
+            this.btnBack.BackColor = System.Drawing.Color.White;
             this.btnBack.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnBack.Location = new System.Drawing.Point(1029, 1026);
             this.btnBack.Margin = new System.Windows.Forms.Padding(2);
@@ -342,7 +343,7 @@
             this.btnBack.TabIndex = 75;
             this.btnBack.TabStop = false;
             this.btnBack.Text = "◀";
-            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnNext

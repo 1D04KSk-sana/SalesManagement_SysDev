@@ -106,7 +106,6 @@
             this.rdbSearch.TabStop = true;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
-            this.rdbSearch.CheckedChanged += new System.EventHandler(this.rdoSElect_CheckedChanged);
             // 
             // rdbUpdate
             // 
@@ -120,7 +119,6 @@
             this.rdbUpdate.TabStop = true;
             this.rdbUpdate.Text = "更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
-            this.rdbUpdate.CheckedChanged += new System.EventHandler(this.rdoSElect_CheckedChanged);
             // 
             // rdbRegister
             // 
