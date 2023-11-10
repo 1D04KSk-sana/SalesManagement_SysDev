@@ -92,7 +92,7 @@ namespace SalesManagement_SysDev
         }
         private void txbEmployeeID_TextChanged(object sender, EventArgs e)
         {
-           
+            
         }
         ///////////////////////////////
         //メソッド名：SetFormDataGridView()
@@ -131,6 +131,13 @@ namespace SalesManagement_SysDev
             dgvOperatinLog.Columns.Add("OpDBID", "操作ID");
             dgvOperatinLog.Columns.Add("OpSetTime", "操作日時");
 
+            dgvOperatinLog.Columns["OpHistoryID"].Width = 316;
+            dgvOperatinLog.Columns["EmID"].Width = 316;
+            dgvOperatinLog.Columns["FormName"].Width = 316;
+            dgvOperatinLog.Columns["OpDone"].Width = 316;
+            dgvOperatinLog.Columns["OpDBID"].Width = 316;
+            dgvOperatinLog.Columns["OpSetTime"].Width = 320;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvOperatinLog.Columns)
             {
@@ -164,15 +171,15 @@ namespace SalesManagement_SysDev
                 dgvOperatinLog.Rows.Add(item.OpHistoryID, item.EmID, item.FormName, item.OpDone, item.OpDBID, item.OpSetTime);
             }
 
-            //dgvClientをリフレッシュ
+            //dgvoperationLogをリフレッシュ
             dgvOperatinLog.Refresh();
 
-            if (lastPage == pageNum)
+            if (lastPage == -1 || (lastPage == pageNum && pageNum == 0))
             {
                 btnPageMax.Visible = false;
                 btnNext.Visible = false;
-                btnPageMin.Visible = true;
-                btnBack.Visible = true;
+                btnPageMin.Visible = false;
+                btnBack.Visible = false;
             }
             else if (pageNum == 0)
             {
@@ -180,6 +187,13 @@ namespace SalesManagement_SysDev
                 btnNext.Visible = true;
                 btnPageMin.Visible = false;
                 btnBack.Visible = false;
+            }
+            else if (lastPage == pageNum)
+            {
+                btnPageMax.Visible = false;
+                btnNext.Visible = false;
+                btnPageMin.Visible = true;
+                btnBack.Visible = true;
             }
             else
             {
@@ -361,6 +375,46 @@ namespace SalesManagement_SysDev
                 listLog = LogDataAccess.GetOrLogData(selectCondition);
             }
 
+        }
+
+        private void btnPageMin_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+
+            GetDataGridView();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) - 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) + 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnPageMax_Click(object sender, EventArgs e)
+        {
+            List<T_OperationLog> viewLog = SetListLog();
+
+            //ページ行数を取得
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
+            //最終ページ数を取得（テキストボックスに代入する数字なので-1はしない）
+            int lastPage = (int)Math.Ceiling(viewLog.Count / (double)pageSize);
+
+            txbNumPage.Text = lastPage.ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnPageSize_Click(object sender, EventArgs e)
+        {
+            GetDataGridView();
         }
     }
 }

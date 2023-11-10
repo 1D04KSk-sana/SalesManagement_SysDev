@@ -47,11 +47,11 @@
             this.txbNumPage = new System.Windows.Forms.TextBox();
             this.lblNumPage = new System.Windows.Forms.Label();
             this.btnPageMin = new System.Windows.Forms.Button();
-            this.btnBack = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPageMax = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txbEmployeeName = new System.Windows.Forms.TextBox();
+            this.btnBack = new System.Windows.Forms.Button();
             this.pnlHonsha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOperatinLog)).BeginInit();
             this.SuspendLayout();
@@ -245,6 +245,7 @@
             this.btnPageSize.TabStop = false;
             this.btnPageSize.Text = "行数変更";
             this.btnPageSize.UseVisualStyleBackColor = false;
+            this.btnPageSize.Click += new System.EventHandler(this.btnPageSize_Click);
             // 
             // txbNumPage
             // 
@@ -280,19 +281,7 @@
             this.btnPageMin.TabStop = false;
             this.btnPageMin.Text = "|◀";
             this.btnPageMin.UseVisualStyleBackColor = false;
-            // 
-            // btnBack
-            // 
-            this.btnBack.BackColor = System.Drawing.Color.White;
-            this.btnBack.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnBack.Location = new System.Drawing.Point(1749, 1035);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(50, 40);
-            this.btnBack.TabIndex = 66;
-            this.btnBack.TabStop = false;
-            this.btnBack.Text = "◀";
-            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
             // 
             // btnNext
             // 
@@ -306,6 +295,7 @@
             this.btnNext.TabStop = false;
             this.btnNext.Text = "▶";
             this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPageMax
             // 
@@ -319,6 +309,7 @@
             this.btnPageMax.TabStop = false;
             this.btnPageMax.Text = "▶|";
             this.btnPageMax.UseVisualStyleBackColor = false;
+            this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
             // label3
             // 
@@ -341,6 +332,20 @@
             this.txbEmployeeName.Size = new System.Drawing.Size(220, 31);
             this.txbEmployeeName.TabIndex = 69;
             // 
+            // btnBack
+            // 
+            this.btnBack.BackColor = System.Drawing.Color.White;
+            this.btnBack.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnBack.Location = new System.Drawing.Point(1751, 1035);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(2);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(50, 40);
+            this.btnBack.TabIndex = 71;
+            this.btnBack.TabStop = false;
+            this.btnBack.Text = "◀";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
             // F_HonshaOperationLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -348,6 +353,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txbEmployeeName);
             this.Controls.Add(this.rdbSearch);
@@ -355,7 +361,6 @@
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnDone);
             this.Controls.Add(this.btnNext);
-            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnPageMin);
             this.Controls.Add(this.lblNumPage);
             this.Controls.Add(this.txbNumPage);
@@ -404,11 +409,11 @@
         private System.Windows.Forms.TextBox txbNumPage;
         private System.Windows.Forms.Label lblNumPage;
         private System.Windows.Forms.Button btnPageMin;
-        private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPageMax;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txbEmployeeName;
         private System.Windows.Forms.Label lblOperationLog;
+        private System.Windows.Forms.Button btnBack;
     }
 }

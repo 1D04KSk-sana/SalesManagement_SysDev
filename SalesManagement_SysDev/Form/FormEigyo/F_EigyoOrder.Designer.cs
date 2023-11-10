@@ -257,7 +257,6 @@
             this.dgvOrder.TabIndex = 50;
             this.dgvOrder.TabStop = false;
             this.dgvOrder.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrder_CellClick);
-            this.dgvOrder.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrder_CellContentClick);
             // 
             // txbHidden
             // 
@@ -635,7 +634,6 @@
             this.txbProductName.ReadOnly = true;
             this.txbProductName.Size = new System.Drawing.Size(151, 22);
             this.txbProductName.TabIndex = 80;
-            this.txbProductName.TextChanged += new System.EventHandler(this.txbProductName_TextChanged);
             // 
             // txbClientID
             // 
