@@ -20,6 +20,14 @@ namespace SalesManagement_SysDev
         private static List<T_OperationLog> listLog = new List<T_OperationLog>();
         //フォームを呼び出しする際のインスタンス化
         private F_SearchDialog f_SearchDialog = new F_SearchDialog();
+        //DataGridView用に使用する社員のDictionary
+        private Dictionary<int, string> dictionaryEmployee;
+        //コンボボックス用の社員データリスト
+        private static List<M_Employee> listEmployee = new List<M_Employee>();
+        //データベース社員テーブルアクセス用クラスのインスタンス化
+        EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
+
+
         public F_HonshaOperationLog()
         {
             InitializeComponent();
@@ -90,10 +98,6 @@ namespace SalesManagement_SysDev
                 ClientDataSelect();
             }
         }
-        private void txbEmployeeID_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
         ///////////////////////////////
         //メソッド名：SetFormDataGridView()
         //引　数   ：なし
@@ -103,43 +107,43 @@ namespace SalesManagement_SysDev
         private void SetFormDataGridView()
         {
             //列を自由に設定できるように
-            dgvOperatinLog.AutoGenerateColumns = false;
+            dgvOperationLog.AutoGenerateColumns = false;
             //行単位で選択するようにする
-            dgvOperatinLog.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvOperationLog.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             //行と列の高さを変更できないように
-            dgvOperatinLog.AllowUserToResizeColumns = false;
-            dgvOperatinLog.AllowUserToResizeRows = false;
+            dgvOperationLog.AllowUserToResizeColumns = false;
+            dgvOperationLog.AllowUserToResizeRows = false;
             //セルの複数行選択をオフに
-            dgvOperatinLog.MultiSelect = false;
+            dgvOperationLog.MultiSelect = false;
             //セルの編集ができないように
-            dgvOperatinLog.ReadOnly = true;
+            dgvOperationLog.ReadOnly = true;
             //ユーザーが新しい行を追加できないようにする
-            dgvOperatinLog.AllowUserToAddRows = false;
+            dgvOperationLog.AllowUserToAddRows = false;
 
             //左端の項目列を削除
-            dgvOperatinLog.RowHeadersVisible = false;
+            dgvOperationLog.RowHeadersVisible = false;
             //行の自動追加をオフ
-            dgvOperatinLog.AllowUserToAddRows = false;
+            dgvOperationLog.AllowUserToAddRows = false;
 
             //ヘッダー位置の指定
-            dgvOperatinLog.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dgvOperationLog.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            dgvOperatinLog.Columns.Add("OpHistoryID", "ログイン操作ID");
-            dgvOperatinLog.Columns.Add("EmID", "社員ID");
-            dgvOperatinLog.Columns.Add("FormName", "フォーム名");
-            dgvOperatinLog.Columns.Add("OpDone", "操作内容");
-            dgvOperatinLog.Columns.Add("OpDBID", "操作ID");
-            dgvOperatinLog.Columns.Add("OpSetTime", "操作日時");
+            dgvOperationLog.Columns.Add("OpHistoryID", "ログイン操作ID");
+            dgvOperationLog.Columns.Add("EmID", "社員ID");
+            dgvOperationLog.Columns.Add("FormName", "フォーム名");
+            dgvOperationLog.Columns.Add("OpDone", "操作内容");
+            dgvOperationLog.Columns.Add("OpDBID", "操作ID");
+            dgvOperationLog.Columns.Add("OpSetTime", "操作日時");
 
-            dgvOperatinLog.Columns["OpHistoryID"].Width = 316;
-            dgvOperatinLog.Columns["EmID"].Width = 316;
-            dgvOperatinLog.Columns["FormName"].Width = 316;
-            dgvOperatinLog.Columns["OpDone"].Width = 316;
-            dgvOperatinLog.Columns["OpDBID"].Width = 316;
-            dgvOperatinLog.Columns["OpSetTime"].Width = 320;
+            dgvOperationLog.Columns["OpHistoryID"].Width = 316;
+            dgvOperationLog.Columns["EmID"].Width = 316;
+            dgvOperationLog.Columns["FormName"].Width = 316;
+            dgvOperationLog.Columns["OpDone"].Width = 316;
+            dgvOperationLog.Columns["OpDBID"].Width = 316;
+            dgvOperationLog.Columns["OpSetTime"].Width = 320;
 
             //並び替えができないようにする
-            foreach (DataGridViewColumn dataColumn in dgvOperatinLog.Columns)
+            foreach (DataGridViewColumn dataColumn in dgvOperationLog.Columns)
             {
                 dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
@@ -153,7 +157,7 @@ namespace SalesManagement_SysDev
         private void SetDataGridView(List<T_OperationLog> viewLog)
         {
             //中身を消去
-            dgvOperatinLog.Rows.Clear();
+            dgvOperationLog.Rows.Clear();
 
             //ページ行数を取得
             int pageSize = int.Parse(txbPageSize.Text.Trim());
@@ -168,11 +172,11 @@ namespace SalesManagement_SysDev
             //1行ずつdgvOperationLogに挿入
             foreach (var item in depData)
             {
-                dgvOperatinLog.Rows.Add(item.OpHistoryID, item.EmID, item.FormName, item.OpDone, item.OpDBID, item.OpSetTime);
+                dgvOperationLog.Rows.Add(item.OpHistoryID, item.EmID, item.FormName, item.OpDone, item.OpDBID, item.OpSetTime);
             }
 
             //dgvoperationLogをリフレッシュ
-            dgvOperatinLog.Refresh();
+            dgvOperationLog.Refresh();
 
             if (lastPage == -1 || (lastPage == pageNum && pageNum == 0))
             {
@@ -415,6 +419,49 @@ namespace SalesManagement_SysDev
         private void btnPageSize_Click(object sender, EventArgs e)
         {
             GetDataGridView();
+        }
+
+        private void dgvOperationLog_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvOperationLog.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            //選択された行に対してのコントロールの変更
+            SelectRowControl();
+        }
+        ///////////////////////////////
+        //メソッド名：SelectRowControl()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：選択された行に対してのコントロールの変更
+        ///////////////////////////////
+        private void SelectRowControl()
+        {
+            //データグリッドビューに乗っている情報をGUIに反映
+            //txbEmployeeID.Text = dgvOperationLog[0, dgvOperationLog.CurrentCellAddress.Y].Value.ToString();
+            txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvOperationLog[0, dgvOperationLog.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+        }
+        ///////////////////////////////
+        //メソッド名：DictionarySet()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：Dictionaryのセット
+        ///////////////////////////////
+        private void DictionarySet()
+        {
+
+            listEmployee = employeeDataAccess.GetEmployeeDspData();
+
+            dictionaryEmployee = new Dictionary<int, string> { };
+
+            foreach (var item in listEmployee)
+            {
+                dictionaryEmployee.Add(item.EmID, item.EmName);
+            }
+
         }
     }
 }

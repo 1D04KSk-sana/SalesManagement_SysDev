@@ -11,7 +11,7 @@ namespace SalesManagement_SysDev
     {
         [Key]
         public int OpHistoryID { get; set; }        //ログイン操作ID	
-        public int EmID { get; set; }               //社員ID
+        public int? EmID { get; set; }               //社員ID
 
         [Required]
         public string FormName { get; set; }        //フォーム名

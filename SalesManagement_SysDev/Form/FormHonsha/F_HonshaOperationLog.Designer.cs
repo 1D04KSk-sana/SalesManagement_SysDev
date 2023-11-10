@@ -37,7 +37,7 @@
             this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.txbEmployeeID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dgvOperatinLog = new System.Windows.Forms.DataGridView();
+            this.dgvOperationLog = new System.Windows.Forms.DataGridView();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
@@ -53,7 +53,7 @@
             this.txbEmployeeName = new System.Windows.Forms.TextBox();
             this.btnBack = new System.Windows.Forms.Button();
             this.pnlHonsha.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOperatinLog)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOperationLog)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHonsha
@@ -153,7 +153,6 @@
             this.txbEmployeeID.Name = "txbEmployeeID";
             this.txbEmployeeID.Size = new System.Drawing.Size(220, 31);
             this.txbEmployeeID.TabIndex = 8;
-            this.txbEmployeeID.TextChanged += new System.EventHandler(this.txbEmployeeID_TextChanged);
             this.txbEmployeeID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbEmployeeID_KeyPress);
             // 
             // label1
@@ -167,17 +166,18 @@
             this.label1.TabIndex = 11;
             this.label1.Text = "社員ID";
             // 
-            // dgvOperatinLog
+            // dgvOperationLog
             // 
-            this.dgvOperatinLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvOperatinLog.Location = new System.Drawing.Point(9, 435);
-            this.dgvOperatinLog.Margin = new System.Windows.Forms.Padding(2);
-            this.dgvOperatinLog.Name = "dgvOperatinLog";
-            this.dgvOperatinLog.RowHeadersWidth = 62;
-            this.dgvOperatinLog.RowTemplate.Height = 27;
-            this.dgvOperatinLog.Size = new System.Drawing.Size(1900, 480);
-            this.dgvOperatinLog.TabIndex = 12;
-            this.dgvOperatinLog.TabStop = false;
+            this.dgvOperationLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOperationLog.Location = new System.Drawing.Point(9, 435);
+            this.dgvOperationLog.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvOperationLog.Name = "dgvOperationLog";
+            this.dgvOperationLog.RowHeadersWidth = 62;
+            this.dgvOperationLog.RowTemplate.Height = 27;
+            this.dgvOperationLog.Size = new System.Drawing.Size(1900, 480);
+            this.dgvOperationLog.TabIndex = 12;
+            this.dgvOperationLog.TabStop = false;
+            this.dgvOperationLog.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOperationLog_CellClick);
             // 
             // dateTimePicker1
             // 
@@ -370,7 +370,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.dgvOperatinLog);
+            this.Controls.Add(this.dgvOperationLog);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txbEmployeeID);
             this.Controls.Add(this.pnlHonsha);
@@ -383,7 +383,7 @@
             this.Load += new System.EventHandler(this.F_HonshaOperationLog_Load);
             this.pnlHonsha.ResumeLayout(false);
             this.pnlHonsha.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOperatinLog)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOperationLog)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -399,7 +399,7 @@
         private System.Windows.Forms.RadioButton rdbSearch;
         private System.Windows.Forms.TextBox txbEmployeeID;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dgvOperatinLog;
+        private System.Windows.Forms.DataGridView dgvOperationLog;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Label label2;
