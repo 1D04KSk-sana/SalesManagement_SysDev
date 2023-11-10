@@ -820,14 +820,14 @@ namespace SalesManagement_SysDev
             dgvEmployee.Columns.Add("EmHiredate", "入社年月日");
             dgvEmployee.Columns.Add("EmHidden", "非表示理由");
 
-            dgvEmployee.Columns["EmID"].Width = 50;
-            dgvEmployee.Columns["SoID"].Width = 100;
-            dgvEmployee.Columns["EmName"].Width = 100;
-            dgvEmployee.Columns["EmPhone"].Width = 100;
-            dgvEmployee.Columns["EmFlag"].Width = 100;
-            dgvEmployee.Columns["PoID"].Width = 100;
-            dgvEmployee.Columns["EmHiredate"].Width = 100;
-            dgvEmployee.Columns["EmHidden"].Width = 250;
+            dgvEmployee.Columns["EmID"].Width = 150;
+            dgvEmployee.Columns["SoID"].Width = 200;
+            dgvEmployee.Columns["EmName"].Width = 250;
+            dgvEmployee.Columns["EmPhone"].Width = 200;
+            dgvEmployee.Columns["EmFlag"].Width = 200;
+            dgvEmployee.Columns["PoID"].Width = 200;
+            dgvEmployee.Columns["EmHiredate"].Width = 200;
+            dgvEmployee.Columns["EmHidden"].Width = 500;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvEmployee.Columns)
@@ -850,6 +850,15 @@ namespace SalesManagement_SysDev
             F_HonshaSinghUp.Show();
 
             this.Opacity = 0;
+        }
+
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
         }
     }
 }
