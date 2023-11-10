@@ -428,6 +428,10 @@ namespace SalesManagement_SysDev
             }
         }
 
+        private void rdbSearch_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
