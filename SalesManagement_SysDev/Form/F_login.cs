@@ -438,6 +438,7 @@ namespace SalesManagement_SysDev
                     Price = 100000,
                     PrSafetyStock = 100,
                     M_SmallClassification = sc[0],
+                    M_MajorClassification = mc[0],
                     PrModelNumber = "1",
                     PrColor = "黒",
                     PrReleaseDate = new DateTime(2019, 5, 1),
@@ -450,6 +451,7 @@ namespace SalesManagement_SysDev
                     Price = 98000,
                     PrSafetyStock = 100,
                     M_SmallClassification = sc[0],
+                    M_MajorClassification = mc[0],
                     PrModelNumber = "1",
                     PrColor = "黒",
                     PrReleaseDate = new DateTime(2019, 5, 10),
@@ -462,6 +464,7 @@ namespace SalesManagement_SysDev
                     Price = 5000,
                     PrSafetyStock = 50,
                     M_SmallClassification = sc[1],
+                    M_MajorClassification = mc[0],
                     PrModelNumber = "1",
                     PrColor = "黒",
                     PrReleaseDate = new DateTime(2019, 10, 1),
@@ -474,6 +477,7 @@ namespace SalesManagement_SysDev
                     Price = 160000,
                     PrSafetyStock = 50,
                     M_SmallClassification = sc[2],
+                    M_MajorClassification = mc[1],
                     PrModelNumber = "1",
                     PrColor = "白",
                     PrReleaseDate = new DateTime(2020, 10, 1),
@@ -486,6 +490,7 @@ namespace SalesManagement_SysDev
                     Price = 200000,
                     PrSafetyStock = 50,
                     M_SmallClassification = sc[3],
+                    M_MajorClassification = mc[1],
                     PrModelNumber = "1",
                     PrColor = "白",
                     PrReleaseDate = new DateTime(2020, 1, 1),
@@ -498,6 +503,7 @@ namespace SalesManagement_SysDev
                     Price = 150000,
                     PrSafetyStock = 50,
                     M_SmallClassification = sc[4],
+                    M_MajorClassification = mc[1],
                     PrModelNumber = "1",
                     PrColor = "白",
                     PrReleaseDate = new DateTime(2019, 3, 1),
@@ -510,6 +516,7 @@ namespace SalesManagement_SysDev
                     Price = 6000,
                     PrSafetyStock = 10,
                     M_SmallClassification = sc[5],
+                    M_MajorClassification = mc[2],
                     PrModelNumber = "1",
                     PrColor = "黒",
                     PrReleaseDate = new DateTime(2020, 8, 1),
@@ -522,6 +529,7 @@ namespace SalesManagement_SysDev
                     Price = 5000,
                     PrSafetyStock = 100,
                     M_SmallClassification = sc[6],
+                    M_MajorClassification = mc[2],
                     PrModelNumber = "1",
                     PrColor = "赤",
                     PrReleaseDate = new DateTime(2019, 5, 1),
@@ -534,6 +542,7 @@ namespace SalesManagement_SysDev
                     Price = 78800,
                     PrSafetyStock = 50,
                     M_SmallClassification = sc[8],
+                    M_MajorClassification = mc[3],
                     PrModelNumber = "1",
                     PrColor = "ゴールド",
                     PrReleaseDate = new DateTime(2017, 9, 22),
@@ -546,6 +555,7 @@ namespace SalesManagement_SysDev
                     Price = 30000,
                     PrSafetyStock = 50,
                     M_SmallClassification = sc[9],
+                    M_MajorClassification = mc[3],
                     PrModelNumber = "1",
                     PrColor = "シルバー",
                     PrReleaseDate = new DateTime(2019, 5, 1),
@@ -558,6 +568,7 @@ namespace SalesManagement_SysDev
                     Price = 40000,
                     PrSafetyStock = 50,
                     M_SmallClassification = sc[9],
+                    M_MajorClassification = mc[3],
                     PrModelNumber = "1",
                     PrColor = "黒",
                     PrReleaseDate = new DateTime(2020, 11, 1),
@@ -825,8 +836,6 @@ namespace SalesManagement_SysDev
             //f_Eigyo.Owner = this;
             //f_Eigyo.FormClosed += ChildForm_FormClosed;
             //f_Eigyo.Show();
-
-
 
             this.Opacity = 0;
         }

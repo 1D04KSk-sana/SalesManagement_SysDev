@@ -58,7 +58,7 @@
             this.lblClient.Location = new System.Drawing.Point(646, 28);
             this.lblClient.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(195, 43);
+            this.lblClient.Size = new System.Drawing.Size(159, 35);
             this.lblClient.TabIndex = 23;
             this.lblClient.Text = "新規登録";
             // 
@@ -83,6 +83,7 @@
             this.btnReturn.TabIndex = 0;
             this.btnReturn.Text = "戻る";
             this.btnReturn.UseVisualStyleBackColor = true;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
             // btnClear
             // 
@@ -106,7 +107,7 @@
             this.cmbSalesOfficeID.Location = new System.Drawing.Point(364, 508);
             this.cmbSalesOfficeID.Margin = new System.Windows.Forms.Padding(4);
             this.cmbSalesOfficeID.Name = "cmbSalesOfficeID";
-            this.cmbSalesOfficeID.Size = new System.Drawing.Size(218, 30);
+            this.cmbSalesOfficeID.Size = new System.Drawing.Size(218, 26);
             this.cmbSalesOfficeID.TabIndex = 52;
             // 
             // lblClientFax
@@ -116,7 +117,7 @@
             this.lblClientFax.Location = new System.Drawing.Point(207, 522);
             this.lblClientFax.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblClientFax.Name = "lblClientFax";
-            this.lblClientFax.Size = new System.Drawing.Size(89, 20);
+            this.lblClientFax.Size = new System.Drawing.Size(71, 16);
             this.lblClientFax.TabIndex = 46;
             this.lblClientFax.Text = "営業所名";
             // 
@@ -127,7 +128,7 @@
             this.lblClientAddress.Location = new System.Drawing.Point(210, 394);
             this.lblClientAddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblClientAddress.Name = "lblClientAddress";
-            this.lblClientAddress.Size = new System.Drawing.Size(86, 20);
+            this.lblClientAddress.Size = new System.Drawing.Size(69, 16);
             this.lblClientAddress.TabIndex = 44;
             this.lblClientAddress.Text = "パスワード";
             // 
@@ -137,7 +138,7 @@
             this.txbSinghUpPass.Location = new System.Drawing.Point(364, 386);
             this.txbSinghUpPass.Margin = new System.Windows.Forms.Padding(4);
             this.txbSinghUpPass.Name = "txbSinghUpPass";
-            this.txbSinghUpPass.Size = new System.Drawing.Size(218, 30);
+            this.txbSinghUpPass.Size = new System.Drawing.Size(218, 26);
             this.txbSinghUpPass.TabIndex = 43;
             // 
             // lblCilentPhone
@@ -147,7 +148,7 @@
             this.lblCilentPhone.Location = new System.Drawing.Point(744, 515);
             this.lblCilentPhone.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCilentPhone.Name = "lblCilentPhone";
-            this.lblCilentPhone.Size = new System.Drawing.Size(89, 20);
+            this.lblCilentPhone.Size = new System.Drawing.Size(71, 16);
             this.lblCilentPhone.TabIndex = 41;
             this.lblCilentPhone.Text = "電話番号";
             // 
@@ -156,7 +157,7 @@
             this.txbSinghUpPhone.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbSinghUpPhone.Location = new System.Drawing.Point(897, 507);
             this.txbSinghUpPhone.Name = "txbSinghUpPhone";
-            this.txbSinghUpPhone.Size = new System.Drawing.Size(218, 30);
+            this.txbSinghUpPhone.Size = new System.Drawing.Size(218, 26);
             this.txbSinghUpPhone.TabIndex = 39;
             // 
             // lblSalesOfficeID
@@ -166,7 +167,7 @@
             this.lblSalesOfficeID.Location = new System.Drawing.Point(764, 278);
             this.lblSalesOfficeID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSalesOfficeID.Name = "lblSalesOfficeID";
-            this.lblSalesOfficeID.Size = new System.Drawing.Size(69, 20);
+            this.lblSalesOfficeID.Size = new System.Drawing.Size(55, 16);
             this.lblSalesOfficeID.TabIndex = 38;
             this.lblSalesOfficeID.Text = "役職名";
             // 
@@ -177,7 +178,7 @@
             this.lblClientName.Location = new System.Drawing.Point(227, 274);
             this.lblClientName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblClientName.Name = "lblClientName";
-            this.lblClientName.Size = new System.Drawing.Size(69, 20);
+            this.lblClientName.Size = new System.Drawing.Size(55, 16);
             this.lblClientName.TabIndex = 36;
             this.lblClientName.Text = "社員名";
             // 
@@ -187,7 +188,7 @@
             this.txbEmployeeName.Location = new System.Drawing.Point(364, 268);
             this.txbEmployeeName.Margin = new System.Windows.Forms.Padding(4);
             this.txbEmployeeName.Name = "txbEmployeeName";
-            this.txbEmployeeName.Size = new System.Drawing.Size(218, 30);
+            this.txbEmployeeName.Size = new System.Drawing.Size(218, 26);
             this.txbEmployeeName.TabIndex = 35;
             // 
             // lblClientID
@@ -197,7 +198,7 @@
             this.lblClientID.Location = new System.Drawing.Point(724, 386);
             this.lblClientID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblClientID.Name = "lblClientID";
-            this.lblClientID.Size = new System.Drawing.Size(109, 20);
+            this.lblClientID.Size = new System.Drawing.Size(87, 16);
             this.lblClientID.TabIndex = 34;
             this.lblClientID.Text = "入社年月日";
             // 
@@ -221,7 +222,7 @@
             this.cmbPositionID.Location = new System.Drawing.Point(897, 268);
             this.cmbPositionID.Margin = new System.Windows.Forms.Padding(4);
             this.cmbPositionID.Name = "cmbPositionID";
-            this.cmbPositionID.Size = new System.Drawing.Size(218, 31);
+            this.cmbPositionID.Size = new System.Drawing.Size(218, 26);
             this.cmbPositionID.TabIndex = 55;
             // 
             // dtpHireDate
@@ -230,14 +231,14 @@
             this.dtpHireDate.Location = new System.Drawing.Point(897, 386);
             this.dtpHireDate.Margin = new System.Windows.Forms.Padding(4);
             this.dtpHireDate.Name = "dtpHireDate";
-            this.dtpHireDate.Size = new System.Drawing.Size(218, 30);
+            this.dtpHireDate.Size = new System.Drawing.Size(218, 26);
             this.dtpHireDate.TabIndex = 56;
             // 
             // txbEmployeeID
             // 
             this.txbEmployeeID.Location = new System.Drawing.Point(363, 167);
             this.txbEmployeeID.Name = "txbEmployeeID";
-            this.txbEmployeeID.Size = new System.Drawing.Size(218, 27);
+            this.txbEmployeeID.Size = new System.Drawing.Size(218, 23);
             this.txbEmployeeID.TabIndex = 58;
             // 
             // label1
@@ -247,13 +248,13 @@
             this.label1.Location = new System.Drawing.Point(229, 174);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 20);
+            this.label1.Size = new System.Drawing.Size(53, 16);
             this.label1.TabIndex = 59;
             this.label1.Text = "社員ID";
             // 
             // F_HonshaSinghUp
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(1329, 718);
