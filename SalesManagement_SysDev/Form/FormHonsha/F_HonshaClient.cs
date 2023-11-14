@@ -47,6 +47,7 @@ namespace SalesManagement_SysDev
             { 5, "和歌山営業所"}
         };
 
+ 
         public F_HonshaClient()
         {
             InitializeComponent();
@@ -293,6 +294,7 @@ namespace SalesManagement_SysDev
         //機　能   ：登録データのセット
         ///////////////////////////////
         private M_Client GenerateDataAtRegistration()
+
         {
             return new M_Client
             {
@@ -729,6 +731,7 @@ namespace SalesManagement_SysDev
             //顧客登録フォームの透明化
             this.Opacity = 0;
         }
+        
 
         ///////////////////////////////
         //メソッド名：GenerateDataAtSelect()
@@ -983,19 +986,19 @@ namespace SalesManagement_SysDev
             //dgvClientをリフレッシュ
             dgvClient.Refresh();
 
-            if (lastPage == pageNum)
-            {
-                btnPageMax.Visible = false;
-                btnNext.Visible = false;
-                btnPageMin.Visible = true;
-                btnBack.Visible = true;
-            }
-            else if (pageNum == 0)
+            if (pageNum == 0)
             {
                 btnPageMax.Visible = true;
                 btnNext.Visible = true;
                 btnPageMin.Visible = false;
                 btnBack.Visible = false;
+            }
+            else if (lastPage == pageNum)
+            {
+                btnPageMax.Visible = false;
+                btnNext.Visible = false;
+                btnPageMin.Visible = true;
+                btnBack.Visible = true;
             }
             else
             {
@@ -1024,11 +1027,6 @@ namespace SalesManagement_SysDev
             cmbSalesOfficeID.SelectedIndex = -1;
             cmbHidden.SelectedIndex = -1;
             txbClientFAX.Text = string.Empty;
-        }
-
-        private void dgvClient_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }
