@@ -38,8 +38,8 @@
             this.txbEmployeeID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvOperationLog = new System.Windows.Forms.DataGridView();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpEndoDate = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.lblPageSize = new System.Windows.Forms.Label();
             this.txbPageSize = new System.Windows.Forms.TextBox();
@@ -153,7 +153,8 @@
             this.txbEmployeeID.Name = "txbEmployeeID";
             this.txbEmployeeID.Size = new System.Drawing.Size(220, 31);
             this.txbEmployeeID.TabIndex = 8;
-            this.txbEmployeeID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbEmployeeID_KeyPress);
+            this.txbEmployeeID.TextChanged += new System.EventHandler(this.txbEmployeeID_TextChanged);
+            this.txbEmployeeID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // label1
             // 
@@ -169,36 +170,37 @@
             // dgvOperationLog
             // 
             this.dgvOperationLog.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOperationLog.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.dgvOperationLog.Location = new System.Drawing.Point(9, 435);
             this.dgvOperationLog.Margin = new System.Windows.Forms.Padding(2);
             this.dgvOperationLog.Name = "dgvOperationLog";
             this.dgvOperationLog.RowHeadersWidth = 62;
             this.dgvOperationLog.RowTemplate.Height = 27;
-            this.dgvOperationLog.Size = new System.Drawing.Size(1900, 480);
+            this.dgvOperationLog.Size = new System.Drawing.Size(1900, 588);
             this.dgvOperationLog.TabIndex = 12;
             this.dgvOperationLog.TabStop = false;
             this.dgvOperationLog.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOperationLog_CellClick);
             // 
-            // dateTimePicker1
+            // dtpStartDate
             // 
-            this.dateTimePicker1.CalendarFont = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.dateTimePicker1.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(1128, 313);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(220, 31);
-            this.dateTimePicker1.TabIndex = 13;
-            this.dateTimePicker1.TabStop = false;
+            this.dtpStartDate.CalendarFont = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.dtpStartDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.dtpStartDate.Location = new System.Drawing.Point(1128, 313);
+            this.dtpStartDate.Margin = new System.Windows.Forms.Padding(2);
+            this.dtpStartDate.Name = "dtpStartDate";
+            this.dtpStartDate.Size = new System.Drawing.Size(220, 31);
+            this.dtpStartDate.TabIndex = 13;
+            this.dtpStartDate.TabStop = false;
             // 
-            // dateTimePicker2
+            // dtpEndoDate
             // 
-            this.dateTimePicker2.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.dateTimePicker2.Location = new System.Drawing.Point(1391, 313);
-            this.dateTimePicker2.Margin = new System.Windows.Forms.Padding(2);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(220, 31);
-            this.dateTimePicker2.TabIndex = 14;
-            this.dateTimePicker2.TabStop = false;
+            this.dtpEndoDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.dtpEndoDate.Location = new System.Drawing.Point(1391, 313);
+            this.dtpEndoDate.Margin = new System.Windows.Forms.Padding(2);
+            this.dtpEndoDate.Name = "dtpEndoDate";
+            this.dtpEndoDate.Size = new System.Drawing.Size(220, 31);
+            this.dtpEndoDate.TabIndex = 14;
+            this.dtpEndoDate.TabStop = false;
             // 
             // label2
             // 
@@ -231,7 +233,7 @@
             this.txbPageSize.Size = new System.Drawing.Size(50, 28);
             this.txbPageSize.TabIndex = 58;
             this.txbPageSize.TabStop = false;
-            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbPageSize_KeyPress);
+            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // btnPageSize
             // 
@@ -256,7 +258,7 @@
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 63;
             this.txbNumPage.TabStop = false;
-            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbNumPage_KeyPress);
+            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblNumPage
             // 
@@ -368,8 +370,8 @@
             this.Controls.Add(this.txbPageSize);
             this.Controls.Add(this.lblPageSize);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dtpEndoDate);
+            this.Controls.Add(this.dtpStartDate);
             this.Controls.Add(this.dgvOperationLog);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txbEmployeeID);
@@ -400,8 +402,8 @@
         private System.Windows.Forms.TextBox txbEmployeeID;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvOperationLog;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dtpStartDate;
+        private System.Windows.Forms.DateTimePicker dtpEndoDate;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblPageSize;
         private System.Windows.Forms.TextBox txbPageSize;

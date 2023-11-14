@@ -38,6 +38,7 @@ namespace SalesManagement_SysDev
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 
+            DictionarySet();
             SetFormDataGridView();
             GetDataGridView();
         }
@@ -66,23 +67,7 @@ namespace SalesManagement_SysDev
 
             LogSearchButtonClick(false);
         }
-        private void txbEmployeeID_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //0～9と、バックスペース以外の時は、イベントをキャンセルする
-            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
-            {
-                e.Handled = true;
-            }
-        }
-        private void txbPageSize_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //0～9と、バックスペース以外の時は、イベントをキャンセルする
-            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
-            {
-                e.Handled = true;
-            }
-        }
-        private void txbNumPage_KeyPress(object sender, KeyPressEventArgs e)
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
         {
             //0～9と、バックスペース以外の時は、イベントをキャンセルする
             if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
@@ -442,7 +427,7 @@ namespace SalesManagement_SysDev
         {
             //データグリッドビューに乗っている情報をGUIに反映
             //txbEmployeeID.Text = dgvOperationLog[0, dgvOperationLog.CurrentCellAddress.Y].Value.ToString();
-            txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvOperationLog[0, dgvOperationLog.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            txbEmployeeID.Text = dgvOperationLog[1, dgvOperationLog.CurrentCellAddress.Y].Value.ToString();
         }
         ///////////////////////////////
         //メソッド名：DictionarySet()
@@ -461,7 +446,30 @@ namespace SalesManagement_SysDev
             {
                 dictionaryEmployee.Add(item.EmID, item.EmName);
             }
+        }
 
+        private void txbEmployeeID_TextChanged(object sender, EventArgs e)
+        {
+            //nullの確認
+            string stringEmployeeID = txbEmployeeID.Text.Trim();
+            int intEmployeeID = 0;
+
+            if (!String.IsNullOrEmpty(stringEmployeeID))
+            {
+                intEmployeeID = int.Parse(stringEmployeeID);
+            }
+
+            //存在確認
+            if (!employeeDataAccess.CheckEmployeeIDExistence(intEmployeeID))
+            {
+                txbEmployeeName.Text = "社員IDが存在しません";
+                return;
+            }
+
+            //IDから名前を取り出す
+            var Employee = listEmployee.Single(x => x.EmID == intEmployeeID);
+
+            txbEmployeeName.Text = Employee.EmName;
         }
     }
 }
