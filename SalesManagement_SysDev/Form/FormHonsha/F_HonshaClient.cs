@@ -817,14 +817,14 @@ namespace SalesManagement_SysDev
                 // 顧客IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbClientID.Text.Trim()))
                 {
-                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("商品IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbClientID.Focus();
                     return false;
                 }
                 //顧客IDの重複チェック
                 if (!clientDataAccess.CheckClientIDExistence(int.Parse(txbClientID.Text.Trim())))
                 {
-                    MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("商品IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbClientID.Focus();
                     return false;
                 }
