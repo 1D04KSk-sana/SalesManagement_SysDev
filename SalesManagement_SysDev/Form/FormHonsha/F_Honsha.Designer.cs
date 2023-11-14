@@ -46,7 +46,7 @@
             this.btnFormClient.Location = new System.Drawing.Point(277, 110);
             this.btnFormClient.Margin = new System.Windows.Forms.Padding(2);
             this.btnFormClient.Name = "btnFormClient";
-            this.btnFormClient.Size = new System.Drawing.Size(510, 70);
+            this.btnFormClient.Size = new System.Drawing.Size(680, 88);
             this.btnFormClient.TabIndex = 0;
             this.btnFormClient.TabStop = false;
             this.btnFormClient.Text = "顧客管理画面";
@@ -59,7 +59,7 @@
             this.btnLogOut.Location = new System.Drawing.Point(11, 22);
             this.btnLogOut.Margin = new System.Windows.Forms.Padding(2);
             this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(110, 50);
+            this.btnLogOut.Size = new System.Drawing.Size(147, 62);
             this.btnLogOut.TabIndex = 1;
             this.btnLogOut.TabStop = false;
             this.btnLogOut.Text = "ログアウト";
@@ -69,20 +69,23 @@
             // btnClose
             // 
             this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClose.Location = new System.Drawing.Point(947, 22);
+            this.btnClose.Location = new System.Drawing.Point(1263, 28);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(110, 50);
+            this.btnClose.Size = new System.Drawing.Size(147, 62);
             this.btnClose.TabIndex = 2;
             this.btnClose.TabStop = false;
             this.btnClose.Text = "閉じる";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnFormEmployee
             // 
             this.btnFormEmployee.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormEmployee.Location = new System.Drawing.Point(277, 261);
+            this.btnFormEmployee.Location = new System.Drawing.Point(369, 326);
+            this.btnFormEmployee.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnFormEmployee.Name = "btnFormEmployee";
-            this.btnFormEmployee.Size = new System.Drawing.Size(510, 70);
+            this.btnFormEmployee.Size = new System.Drawing.Size(680, 88);
             this.btnFormEmployee.TabIndex = 3;
             this.btnFormEmployee.TabStop = false;
             this.btnFormEmployee.Text = "社員管理画面";
@@ -92,9 +95,10 @@
             // btnFormSale
             // 
             this.btnFormSale.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormSale.Location = new System.Drawing.Point(277, 185);
+            this.btnFormSale.Location = new System.Drawing.Point(369, 231);
+            this.btnFormSale.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnFormSale.Name = "btnFormSale";
-            this.btnFormSale.Size = new System.Drawing.Size(510, 70);
+            this.btnFormSale.Size = new System.Drawing.Size(680, 88);
             this.btnFormSale.TabIndex = 4;
             this.btnFormSale.TabStop = false;
             this.btnFormSale.Text = "売上管理画面";
@@ -104,9 +108,10 @@
             // btnFormProdact
             // 
             this.btnFormProdact.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormProdact.Location = new System.Drawing.Point(277, 337);
+            this.btnFormProdact.Location = new System.Drawing.Point(369, 421);
+            this.btnFormProdact.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnFormProdact.Name = "btnFormProdact";
-            this.btnFormProdact.Size = new System.Drawing.Size(510, 70);
+            this.btnFormProdact.Size = new System.Drawing.Size(680, 88);
             this.btnFormProdact.TabIndex = 5;
             this.btnFormProdact.TabStop = false;
             this.btnFormProdact.Text = "商品管理画面";
@@ -116,9 +121,10 @@
             // btnFormSinghUp
             // 
             this.btnFormSinghUp.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormSinghUp.Location = new System.Drawing.Point(277, 413);
+            this.btnFormSinghUp.Location = new System.Drawing.Point(369, 516);
+            this.btnFormSinghUp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnFormSinghUp.Name = "btnFormSinghUp";
-            this.btnFormSinghUp.Size = new System.Drawing.Size(510, 70);
+            this.btnFormSinghUp.Size = new System.Drawing.Size(680, 88);
             this.btnFormSinghUp.TabIndex = 6;
             this.btnFormSinghUp.TabStop = false;
             this.btnFormSinghUp.Text = "新規登録";
@@ -128,9 +134,10 @@
             // btnFormOperationLog
             // 
             this.btnFormOperationLog.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormOperationLog.Location = new System.Drawing.Point(277, 489);
+            this.btnFormOperationLog.Location = new System.Drawing.Point(369, 611);
+            this.btnFormOperationLog.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnFormOperationLog.Name = "btnFormOperationLog";
-            this.btnFormOperationLog.Size = new System.Drawing.Size(510, 70);
+            this.btnFormOperationLog.Size = new System.Drawing.Size(680, 88);
             this.btnFormOperationLog.TabIndex = 7;
             this.btnFormOperationLog.TabStop = false;
             this.btnFormOperationLog.Text = "ログ管理画面";
@@ -143,16 +150,17 @@
             this.panel1.Controls.Add(this.btnLogOut);
             this.panel1.Controls.Add(this.btnClose);
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1085, 90);
+            this.panel1.Size = new System.Drawing.Size(1447, 112);
             this.panel1.TabIndex = 8;
             // 
             // F_Honsha
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
-            this.ClientSize = new System.Drawing.Size(1069, 571);
+            this.ClientSize = new System.Drawing.Size(1425, 714);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnFormOperationLog);
             this.Controls.Add(this.btnFormSinghUp);
