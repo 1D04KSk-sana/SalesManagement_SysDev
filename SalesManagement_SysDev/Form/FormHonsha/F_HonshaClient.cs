@@ -147,9 +147,23 @@ namespace SalesManagement_SysDev
             //最終ページ数を取得（テキストボックスに代入する数字なので-1はしない）
             int lastPage = (int)Math.Ceiling(viewClient.Count / (double)pageSize);
 
+            if (lastPage == 0)
+            {
+                lastPage++;
+            }
+
             txbNumPage.Text = lastPage.ToString();
 
             GetDataGridView();
+        }
+
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
         }
 
         private void dgvRecordEditing_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -973,7 +987,14 @@ namespace SalesManagement_SysDev
             //dgvClientをリフレッシュ
             dgvClient.Refresh();
 
-            if (pageNum == 0)
+            if (lastPage == -1 || (lastPage == pageNum && pageNum == 0))
+            {
+                btnPageMax.Visible = false;
+                btnNext.Visible = false;
+                btnPageMin.Visible = false;
+                btnBack.Visible = false;
+            }
+            else if (pageNum == 0)
             {
                 btnPageMax.Visible = true;
                 btnNext.Visible = true;

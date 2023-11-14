@@ -46,6 +46,8 @@ namespace SalesManagement_SysDev
         private static List<T_OrderDetail> listOrderDetail = new List<T_OrderDetail>();
         //データグリッドビュー用の全顧客データ
         private static List<T_Order> listAllOrder = new List<T_Order>();
+        //フォームを呼び出しする際のインスタンス化
+        private F_SearchDialog f_SearchDialog = new F_SearchDialog();
 
         //DataGridView用に使用する営業所のDictionary
         private Dictionary<int, string> dictionarySalesOffice;
@@ -148,9 +150,18 @@ namespace SalesManagement_SysDev
             this.Close();
         }
 
+        private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Opacity = 1;
+        }
+
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
+
+            rdbRegister.Checked = true;
+
+            GetDataGridView();
         }
 
         private void btnDetailClear_Click(object sender, EventArgs e)
@@ -210,6 +221,12 @@ namespace SalesManagement_SysDev
             if (rdbConfirm.Checked)
             {
                 OrderDataConfirm();
+            }
+
+            //検索ラヂオボタンがチェックされているとき
+            if (rdbSearch.Checked)
+            {
+                OrderDataSelect();
             }
         }
 
@@ -292,6 +309,20 @@ namespace SalesManagement_SysDev
             var Client = listClient.Single(x => x.ClID == intClientID);
 
             txbClientName.Text = Client.ClName;
+        }
+
+        private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            OrderSearchButtonClick(true);
+        }
+
+        private void SearchDialog_btnOrSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            OrderSearchButtonClick(false);
         }
 
         ///////////////////////////////
@@ -973,6 +1004,188 @@ namespace SalesManagement_SysDev
 
             // データグリッドビューの表示
             GetDataGridView();
+        }
+
+        ///////////////////////////////
+        //メソッド名：OrderDataSelect()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：受注情報検索の実行
+        ///////////////////////////////
+        private void OrderDataSelect()
+        {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtSearch())
+            {
+                return;
+            }
+
+            //検索ダイアログのフォームを作成
+            f_SearchDialog = new F_SearchDialog();
+            //検索ダイアログのフォームのオーナー設定
+            f_SearchDialog.Owner = this;
+
+            //検索ダイアログのフォームのボタンクリックイベントにハンドラを追加
+            f_SearchDialog.btnAndSearchClick += SearchDialog_btnAndSearchClick;
+            f_SearchDialog.btnOrSearchClick += SearchDialog_btnOrSearchClick;
+
+            //検索ダイアログのフォームが閉じたときのイベントを設定
+            f_SearchDialog.FormClosed += ChildForm_FormClosed;
+            //検索ダイアログのフォームの表示
+            f_SearchDialog.Show();
+
+            //顧客登録フォームの透明化
+            this.Opacity = 0;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtSearch()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：検索入力データの形式チェック
+        //         ：エラーがない場合True
+        //         ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtSearch()
+        {
+            //検索条件の存在確認
+            if (String.IsNullOrEmpty(txbOrderID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbEmployeeID.Text.Trim()) && String.IsNullOrEmpty(txbClientID.Text.Trim()))
+            {
+                MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbOrderID.Focus();
+                return false;
+            }
+
+            //受注IDの適否
+            if (!String.IsNullOrEmpty(txbOrderID.Text.Trim()))
+            {
+                //受注IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbOrderID.Text.Trim()))
+                {
+                    MessageBox.Show("受注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbOrderID.Focus();
+                    return false;
+                }
+                //受注IDの重複チェック
+                if (!orderDataAccess.CheckOrderIDExistence(int.Parse(txbOrderID.Text.Trim())))
+                {
+                    MessageBox.Show("受注IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbOrderID.Focus();
+                    return false;
+                }
+            }
+
+            //社員IDの適否
+            if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
+            {
+                //社員IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbEmployeeID.Text.Trim()))
+                {
+                    MessageBox.Show("社員IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+                //社員IDの重複チェック
+                if (!employeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    MessageBox.Show("社員IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+            }
+
+            // 顧客IDの適否
+            if (!String.IsNullOrEmpty(txbClientID.Text.Trim()))
+            {
+                // 顧客IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbClientID.Text.Trim()))
+                {
+                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+                //顧客IDの重複チェック
+                if (!clientDataAccess.CheckClientIDExistence(int.Parse(txbClientID.Text.Trim())))
+                {
+                    MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        ///////////////////////////////
+        //メソッド名：OrderSearchButtonClick()
+        //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：受注情報検索の実行
+        ///////////////////////////////
+        private void OrderSearchButtonClick(bool searchFlg)
+        {
+            // 顧客情報抽出
+            GenerateDataAtSelect(searchFlg);
+
+            int intSearchCount = listOrder.Count;
+
+            // 顧客抽出結果表示
+            GetDataGridView();
+
+            MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtSelect()
+        //引　数   ：searchFlg = And検索かOr検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：受注情報の取得
+        ///////////////////////////////
+        private void GenerateDataAtSelect(bool searchFlg)
+        {
+            string strOrderID = txbOrderID.Text.Trim();
+            int intOrderID = 0;
+
+            if (!String.IsNullOrEmpty(strOrderID))
+            {
+                intOrderID = int.Parse(strOrderID);
+            }
+
+            string strEmployeeID = txbEmployeeID.Text.Trim();
+            int intEmployeeID = 0;
+
+            if (!String.IsNullOrEmpty(strEmployeeID))
+            {
+                intEmployeeID = int.Parse(strEmployeeID);
+            }
+
+            string strClientID = txbClientID.Text.Trim();
+            int intClientID = 0;
+
+            if (!String.IsNullOrEmpty(strClientID))
+            {
+                intClientID = int.Parse(strClientID);
+            }
+
+            // 検索条件のセット
+            T_Order selectCondition = new T_Order()
+            {
+                OrID = intOrderID,
+                SoID = cmbSalesOfficeID.SelectedIndex + 1,
+                EmID = intEmployeeID,
+                ClID = intClientID,
+            };
+
+            if (searchFlg)
+            {
+                // 顧客データのAnd抽出
+                listOrder = orderDataAccess.GetAndOrderData(selectCondition);
+            }
+            else
+            {
+                // 顧客データのOr抽出
+                listOrder = orderDataAccess.GetOrOrderData(selectCondition);
+            }
         }
 
         ///////////////////////////////

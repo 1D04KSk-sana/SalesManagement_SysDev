@@ -837,8 +837,6 @@ namespace SalesManagement_SysDev
             //f_Eigyo.FormClosed += ChildForm_FormClosed;
             //f_Eigyo.Show();
 
-
-
             this.Opacity = 0;
         }
 
