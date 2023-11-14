@@ -16,7 +16,7 @@ namespace SalesManagement_SysDev
         public int SaID { get; set; }               //売上ID
         public int PrID { get; set; }               //商品ID
         public int SaQuantity { get; set; }         //個数
-        public decimal SaTotalPrice { get; set; }   //合計金額
+        public int SaTotalPrice { get; set; }   //合計金額
 
         public virtual M_Product M_Product { get; set; }
         public virtual T_Sale T_Sale { get; set; }

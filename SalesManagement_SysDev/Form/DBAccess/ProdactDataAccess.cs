@@ -84,5 +84,30 @@ namespace SalesManagement_SysDev
 
             return prodactID;
         }
+
+        ///////////////////////////////
+        //メソッド名：GetIDProdactData()
+        //引　数：商品ID
+        //戻り値：商品IDの一致する受注データ
+        //機　能：商品IDの一致する受注データの取得
+        ///////////////////////////////
+        public M_Product GetIDProdactData(int ProdactID)
+        {
+            M_Product Prodact = new M_Product { };
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                Prodact = context.M_Products.Single(x => x.PrID == ProdactID);
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Prodact;
+        }
     }
 }

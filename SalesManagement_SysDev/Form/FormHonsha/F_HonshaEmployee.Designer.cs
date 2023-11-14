@@ -145,13 +145,13 @@
             // pnlSelect
             // 
             this.pnlSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.pnlSelect.Controls.Add(this.rdbUpdate);
             this.pnlSelect.Controls.Add(this.rdbSearch);
+            this.pnlSelect.Controls.Add(this.rdbUpdate);
             this.pnlSelect.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.pnlSelect.Location = new System.Drawing.Point(49, 240);
+            this.pnlSelect.Location = new System.Drawing.Point(213, 155);
             this.pnlSelect.Margin = new System.Windows.Forms.Padding(2);
             this.pnlSelect.Name = "pnlSelect";
-            this.pnlSelect.Size = new System.Drawing.Size(145, 38);
+            this.pnlSelect.Size = new System.Drawing.Size(215, 69);
             this.pnlSelect.TabIndex = 29;
             this.pnlSelect.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlSelect_Paint);
             // 
@@ -159,11 +159,11 @@
             // 
             this.rdbUpdate.AutoSize = true;
             this.rdbUpdate.Checked = true;
-            this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbUpdate.Location = new System.Drawing.Point(11, 6);
+            this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbUpdate.Location = new System.Drawing.Point(2, 14);
             this.rdbUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.rdbUpdate.Name = "rdbUpdate";
-            this.rdbUpdate.Size = new System.Drawing.Size(65, 23);
+            this.rdbUpdate.Size = new System.Drawing.Size(109, 41);
             this.rdbUpdate.TabIndex = 1;
             this.rdbUpdate.TabStop = true;
             this.rdbUpdate.Text = "更新";
@@ -172,11 +172,11 @@
             // rdbSearch
             // 
             this.rdbSearch.AutoSize = true;
-            this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(77, 6);
+            this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbSearch.Location = new System.Drawing.Point(100, 14);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
             this.rdbSearch.Name = "rdbSearch";
-            this.rdbSearch.Size = new System.Drawing.Size(65, 23);
+            this.rdbSearch.Size = new System.Drawing.Size(109, 41);
             this.rdbSearch.TabIndex = 0;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
@@ -343,6 +343,8 @@
             this.dgvEmployee.TabIndex = 50;
             this.dgvEmployee.TabStop = false;
             this.dgvEmployee.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmployee_CellClick);
+            this.dgvEmployee.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+
             // 
             // pnlHonsha
             // 
