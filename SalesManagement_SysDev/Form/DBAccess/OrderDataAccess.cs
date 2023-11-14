@@ -66,7 +66,7 @@ namespace SalesManagement_SysDev
         //      ：登録成功の場合True
         //      ：登録失敗の場合False
         ///////////////////////////////
-        public bool AddClientData(T_Order regOrder)
+        public bool AddOrderData(T_Order regOrder)
         {
             try
             {
@@ -98,7 +98,6 @@ namespace SalesManagement_SysDev
                 var Order = context.T_Orders.Single(x => x.OrID == updOrder.OrID);
 
                 Order.OrFlag = updOrder.OrFlag;
-                Order.OrStateFlag = updOrder.OrStateFlag;
                 Order.OrHidden = updOrder.OrHidden;
 
                 context.SaveChanges();
@@ -111,6 +110,60 @@ namespace SalesManagement_SysDev
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+        }
+
+        ///////////////////////////////
+        //メソッド名：ConfirmOrderData()
+        //引　数：cfmOrder = 受注データ
+        //戻り値：True or False
+        //機　能：受注データの確定
+        //      ：確定成功の場合True
+        //      ：確定失敗の場合False
+        ///////////////////////////////
+        public bool ConfirmOrderData(T_Order cfmOrder)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Order = context.T_Orders.Single(x => x.OrID == cfmOrder.OrID);
+
+                Order.OrStateFlag = cfmOrder.OrStateFlag;
+
+                context.SaveChanges();
+                context.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetIDOrderData()
+        //引　数：受注ID
+        //戻り値：受注IDの一致する受注データ
+        //機　能：受注IDの一致する受注データの取得
+        ///////////////////////////////
+        public T_Order GetIDOrderData(int OrderID)
+        {
+            T_Order Order = new T_Order{ };
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                Order = context.T_Orders.Single(x => x.OrID == OrderID);
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Order;
         }
 
         ///////////////////////////////
