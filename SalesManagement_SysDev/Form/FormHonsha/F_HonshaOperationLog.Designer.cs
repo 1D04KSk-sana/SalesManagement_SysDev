@@ -333,6 +333,7 @@
             this.txbEmployeeName.ReadOnly = true;
             this.txbEmployeeName.Size = new System.Drawing.Size(220, 31);
             this.txbEmployeeName.TabIndex = 69;
+            this.txbEmployeeName.TextChanged += new System.EventHandler(this.txbEmployeeName_TextChanged);
             // 
             // btnBack
             // 
