@@ -56,7 +56,7 @@
             this.btnPageMin = new System.Windows.Forms.Button();
             this.lblNumPage = new System.Windows.Forms.Label();
             this.txbNumPage = new System.Windows.Forms.TextBox();
-            this.cmbview = new System.Windows.Forms.ComboBox();
+            this.cmbView = new System.Windows.Forms.ComboBox();
             this.pnlButuryu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).BeginInit();
             this.SuspendLayout();
@@ -108,6 +108,7 @@
             this.btnReturn.TabStop = false;
             this.btnReturn.Text = "戻る";
             this.btnReturn.UseVisualStyleBackColor = true;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
             // btnClear
             // 
@@ -121,12 +122,13 @@
             this.btnClear.TabStop = false;
             this.btnClear.Text = "クリア";
             this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnDone
             // 
             this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnDone.Location = new System.Drawing.Point(922, 518);
+            this.btnDone.Location = new System.Drawing.Point(1436, 199);
             this.btnDone.Margin = new System.Windows.Forms.Padding(2);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(160, 70);
@@ -134,6 +136,7 @@
             this.btnDone.TabStop = false;
             this.btnDone.Text = "実行";
             this.btnDone.UseVisualStyleBackColor = false;
+            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // rdbSearch
             // 
@@ -385,15 +388,15 @@
             this.txbNumPage.TabIndex = 91;
             this.txbNumPage.TabStop = false;
             // 
-            // cmbview
+            // cmbView
             // 
-            this.cmbview.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbview.Font = new System.Drawing.Font("MS UI Gothic", 26F);
-            this.cmbview.FormattingEnabled = true;
-            this.cmbview.Location = new System.Drawing.Point(1256, 590);
-            this.cmbview.Name = "cmbview";
-            this.cmbview.Size = new System.Drawing.Size(360, 43);
-            this.cmbview.TabIndex = 97;
+            this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 26F);
+            this.cmbView.FormattingEnabled = true;
+            this.cmbView.Location = new System.Drawing.Point(1256, 590);
+            this.cmbView.Name = "cmbView";
+            this.cmbView.Size = new System.Drawing.Size(360, 43);
+            this.cmbView.TabIndex = 97;
             // 
             // F_ButuryuStock
             // 
@@ -402,7 +405,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
-            this.Controls.Add(this.cmbview);
+            this.Controls.Add(this.cmbView);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnPageMax);
             this.Controls.Add(this.btnNext);
@@ -433,6 +436,7 @@
             this.Name = "F_ButuryuStock";
             this.Text = "在庫管理";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.F_ButuryuStock_Load);
             this.pnlButuryu.ResumeLayout(false);
             this.pnlButuryu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).EndInit();
@@ -471,6 +475,6 @@
         private System.Windows.Forms.Button btnPageMin;
         private System.Windows.Forms.Label lblNumPage;
         private System.Windows.Forms.TextBox txbNumPage;
-        private System.Windows.Forms.ComboBox cmbview;
+        private System.Windows.Forms.ComboBox cmbView;
     }
 }
