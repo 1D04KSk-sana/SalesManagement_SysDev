@@ -193,7 +193,6 @@
             this.txbClientPhone.Name = "txbClientPhone";
             this.txbClientPhone.Size = new System.Drawing.Size(220, 31);
             this.txbClientPhone.TabIndex = 7;
-            this.txbClientPhone.TextChanged += new System.EventHandler(this.txbClientPhone_TextChanged);
             // 
             // cmbSalesOfficeID
             // 
@@ -236,7 +235,6 @@
             this.txbClientPostal.Name = "txbClientPostal";
             this.txbClientPostal.Size = new System.Drawing.Size(220, 31);
             this.txbClientPostal.TabIndex = 11;
-            this.txbClientPostal.TextChanged += new System.EventHandler(this.txbClientPostal_TextChanged);
             // 
             // lblClientAddress
             // 
@@ -277,7 +275,6 @@
             this.txbClientFAX.Name = "txbClientFAX";
             this.txbClientFAX.Size = new System.Drawing.Size(220, 31);
             this.txbClientFAX.TabIndex = 15;
-            this.txbClientFAX.TextChanged += new System.EventHandler(this.txbClientFAX_TextChanged);
             // 
             // lblClientHidden
             // 
@@ -337,7 +334,6 @@
             this.cmbHidden.Name = "cmbHidden";
             this.cmbHidden.Size = new System.Drawing.Size(220, 32);
             this.cmbHidden.TabIndex = 20;
-            this.cmbHidden.SelectedIndexChanged += new System.EventHandler(this.cmbHidden_SelectedIndexChanged);
             // 
             // btnClear
             // 
