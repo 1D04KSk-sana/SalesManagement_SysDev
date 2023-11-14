@@ -257,7 +257,6 @@
             this.dgvOrder.TabIndex = 50;
             this.dgvOrder.TabStop = false;
             this.dgvOrder.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrder_CellClick);
-            this.dgvOrder.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrder_CellContentClick);
             // 
             // txbHidden
             // 

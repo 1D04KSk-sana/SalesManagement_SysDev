@@ -47,6 +47,7 @@ namespace SalesManagement_SysDev
             { 5, "和歌山営業所"}
         };
 
+ 
         public F_HonshaClient()
         {
             InitializeComponent();
@@ -75,19 +76,6 @@ namespace SalesManagement_SysDev
             cmbView.SelectedIndex = 0;
         }
 
-        private void rdoSElect_CheckedChanged(object sender, EventArgs e)
-        {
-            //if (rdbRegister.Checked)
-            //{
-            //    var context = new SalesManagement_DevContext();
-
-            //    txbClientID.Text = (context.M_Clients.Count() + 1).ToString();
-            //}
-            //else
-            //{
-            //    txbClientID.Text = string.Empty;
-            //}
-        }
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
@@ -307,6 +295,7 @@ namespace SalesManagement_SysDev
         //機　能   ：登録データのセット
         ///////////////////////////////
         private M_Client GenerateDataAtRegistration()
+
         {
             return new M_Client
             {
@@ -743,6 +732,7 @@ namespace SalesManagement_SysDev
             //顧客登録フォームの透明化
             this.Opacity = 0;
         }
+        
 
         ///////////////////////////////
         //メソッド名：GenerateDataAtSelect()
@@ -828,14 +818,14 @@ namespace SalesManagement_SysDev
                 // 顧客IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbClientID.Text.Trim()))
                 {
-                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("商品IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbClientID.Focus();
                     return false;
                 }
                 //顧客IDの重複チェック
                 if (!clientDataAccess.CheckClientIDExistence(int.Parse(txbClientID.Text.Trim())))
                 {
-                    MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("商品IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbClientID.Focus();
                     return false;
                 }
@@ -1045,31 +1035,6 @@ namespace SalesManagement_SysDev
             cmbSalesOfficeID.SelectedIndex = -1;
             cmbHidden.SelectedIndex = -1;
             txbClientFAX.Text = string.Empty;
-        }
-
-        private void dgvClient_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void txbClientFAX_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txbClientPhone_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txbClientPostal_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmbHidden_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

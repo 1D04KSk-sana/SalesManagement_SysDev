@@ -11,12 +11,12 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         //メソッド名：GetPositionDspData()
         //引　数   ：なし
-        //戻り値   ：表示用役職データ
-        //機　能   ：表示用役職名データの取得
+        //戻り値   ：表示用役員データ
+        //機　能   ：表示用役員データの取得
         ///////////////////////////////
         public List<M_Position> GetPositionDspData()
         {
-            List<M_Position> listPosition= new List<M_Position>();
+            List<M_Position> listPosition = new List<M_Position>();
             try
             {
                 var context = new SalesManagement_DevContext();

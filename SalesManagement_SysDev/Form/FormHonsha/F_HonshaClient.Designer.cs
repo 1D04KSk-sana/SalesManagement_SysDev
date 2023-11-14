@@ -107,7 +107,6 @@
             this.rdbSearch.TabStop = true;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
-            this.rdbSearch.CheckedChanged += new System.EventHandler(this.rdoSElect_CheckedChanged);
             // 
             // rdbUpdate
             // 
@@ -121,7 +120,6 @@
             this.rdbUpdate.TabStop = true;
             this.rdbUpdate.Text = "更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
-            this.rdbUpdate.CheckedChanged += new System.EventHandler(this.rdoSElect_CheckedChanged);
             // 
             // rdbRegister
             // 
@@ -135,7 +133,6 @@
             this.rdbRegister.TabStop = true;
             this.rdbRegister.Text = "登録";
             this.rdbRegister.UseVisualStyleBackColor = true;
-            this.rdbRegister.CheckedChanged += new System.EventHandler(this.rdoSElect_CheckedChanged);
             // 
             // lblClientID
             // 
@@ -314,7 +311,6 @@
             this.dgvClient.Size = new System.Drawing.Size(1900, 495);
             this.dgvClient.TabIndex = 18;
             this.dgvClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRecordEditing_CellClick);
-            this.dgvClient.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClient_CellContentClick);
             // 
             // btnDone
             // 
