@@ -43,8 +43,8 @@
             // btnFormClient
             // 
             this.btnFormClient.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormClient.Location = new System.Drawing.Point(369, 138);
-            this.btnFormClient.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnFormClient.Location = new System.Drawing.Point(277, 110);
+            this.btnFormClient.Margin = new System.Windows.Forms.Padding(2);
             this.btnFormClient.Name = "btnFormClient";
             this.btnFormClient.Size = new System.Drawing.Size(680, 88);
             this.btnFormClient.TabIndex = 0;
@@ -56,8 +56,8 @@
             // btnLogOut
             // 
             this.btnLogOut.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnLogOut.Location = new System.Drawing.Point(15, 28);
-            this.btnLogOut.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnLogOut.Location = new System.Drawing.Point(11, 22);
+            this.btnLogOut.Margin = new System.Windows.Forms.Padding(2);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(147, 62);
             this.btnLogOut.TabIndex = 1;
@@ -168,8 +168,8 @@
             this.Controls.Add(this.btnFormSale);
             this.Controls.Add(this.btnFormEmployee);
             this.Controls.Add(this.btnFormClient);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "F_Honsha";
             this.Text = "本社画面";

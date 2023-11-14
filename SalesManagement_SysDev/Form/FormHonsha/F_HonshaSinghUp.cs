@@ -289,45 +289,5 @@ namespace SalesManagement_SysDev
         {
             this.Close();
         }
-
-        private void txbSinghUpPass_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblClientName_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblClientAddress_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblClientFax_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblSalesOfficeID_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblClientID_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txbSinghUpPhone_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -6,11 +6,13 @@ using System.Data.Entity.Core.Common.CommandTrees;
 using System.Data.Entity.Core.Metadata.Edm;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Data.Entity.Infrastructure.Design.Executor;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace SalesManagement_SysDev
 {
@@ -74,6 +76,9 @@ namespace SalesManagement_SysDev
             List<M_MajorClassification> mc = new List<M_MajorClassification>();
             List<M_SmallClassification> sc = new List<M_SmallClassification>();
             List<M_Product> pr = new List<M_Product>();
+            List<T_Sale> sa = new List<T_Sale>();
+            List<T_SaleDetail> sad = new List<T_SaleDetail>();
+
 
             {
                 ma.Add(new M_Maker()
@@ -433,6 +438,7 @@ namespace SalesManagement_SysDev
                     Price = 100000,
                     PrSafetyStock = 100,
                     M_SmallClassification = sc[0],
+                    M_MajorClassification = mc[0],
                     PrModelNumber = "1",
                     PrColor = "黒",
                     PrReleaseDate = new DateTime(2019, 5, 1),
@@ -445,6 +451,7 @@ namespace SalesManagement_SysDev
                     Price = 98000,
                     PrSafetyStock = 100,
                     M_SmallClassification = sc[0],
+                    M_MajorClassification = mc[0],
                     PrModelNumber = "1",
                     PrColor = "黒",
                     PrReleaseDate = new DateTime(2019, 5, 10),
@@ -457,6 +464,7 @@ namespace SalesManagement_SysDev
                     Price = 5000,
                     PrSafetyStock = 50,
                     M_SmallClassification = sc[1],
+                    M_MajorClassification = mc[0],
                     PrModelNumber = "1",
                     PrColor = "黒",
                     PrReleaseDate = new DateTime(2019, 10, 1),
@@ -469,6 +477,7 @@ namespace SalesManagement_SysDev
                     Price = 160000,
                     PrSafetyStock = 50,
                     M_SmallClassification = sc[2],
+                    M_MajorClassification = mc[1],
                     PrModelNumber = "1",
                     PrColor = "白",
                     PrReleaseDate = new DateTime(2020, 10, 1),
@@ -481,6 +490,7 @@ namespace SalesManagement_SysDev
                     Price = 200000,
                     PrSafetyStock = 50,
                     M_SmallClassification = sc[3],
+                    M_MajorClassification = mc[1],
                     PrModelNumber = "1",
                     PrColor = "白",
                     PrReleaseDate = new DateTime(2020, 1, 1),
@@ -493,6 +503,7 @@ namespace SalesManagement_SysDev
                     Price = 150000,
                     PrSafetyStock = 50,
                     M_SmallClassification = sc[4],
+                    M_MajorClassification = mc[1],
                     PrModelNumber = "1",
                     PrColor = "白",
                     PrReleaseDate = new DateTime(2019, 3, 1),
@@ -505,6 +516,7 @@ namespace SalesManagement_SysDev
                     Price = 6000,
                     PrSafetyStock = 10,
                     M_SmallClassification = sc[5],
+                    M_MajorClassification = mc[2],
                     PrModelNumber = "1",
                     PrColor = "黒",
                     PrReleaseDate = new DateTime(2020, 8, 1),
@@ -517,6 +529,7 @@ namespace SalesManagement_SysDev
                     Price = 5000,
                     PrSafetyStock = 100,
                     M_SmallClassification = sc[6],
+                    M_MajorClassification = mc[2],
                     PrModelNumber = "1",
                     PrColor = "赤",
                     PrReleaseDate = new DateTime(2019, 5, 1),
@@ -529,6 +542,7 @@ namespace SalesManagement_SysDev
                     Price = 78800,
                     PrSafetyStock = 50,
                     M_SmallClassification = sc[8],
+                    M_MajorClassification = mc[3],
                     PrModelNumber = "1",
                     PrColor = "ゴールド",
                     PrReleaseDate = new DateTime(2017, 9, 22),
@@ -541,6 +555,7 @@ namespace SalesManagement_SysDev
                     Price = 30000,
                     PrSafetyStock = 50,
                     M_SmallClassification = sc[9],
+                    M_MajorClassification = mc[3],
                     PrModelNumber = "1",
                     PrColor = "シルバー",
                     PrReleaseDate = new DateTime(2019, 5, 1),
@@ -553,6 +568,7 @@ namespace SalesManagement_SysDev
                     Price = 40000,
                     PrSafetyStock = 50,
                     M_SmallClassification = sc[9],
+                    M_MajorClassification = mc[3],
                     PrModelNumber = "1",
                     PrColor = "黒",
                     PrReleaseDate = new DateTime(2020, 11, 1),
@@ -735,6 +751,66 @@ namespace SalesManagement_SysDev
                 context.T_SyukkoDetails.AddRange(syd);
                 context.SaveChanges();
             }
+            {
+                sa.Add(new T_Sale()
+                {
+                    M_Employee = em[116],
+                    M_Client = cl[1],
+                    T_Chumon = ch[0],
+                    M_SalesOffice = so[0],
+                    SaDate = new DateTime(2023 , 10 , 27),
+                    SaFlag = 0,
+                });
+                sa.Add(new T_Sale()
+                {
+                    M_Employee = em[116],
+                    M_Client = cl[2],
+                    T_Chumon = ch[0],
+                    M_SalesOffice = so[1],
+                    SaDate = new DateTime(2023, 10, 31),
+                    SaFlag = 0,
+                });
+                sa.Add(new T_Sale()
+                {
+                    M_Employee = em[116],
+                    M_Client = cl[3],
+                    T_Chumon = ch[0],
+                    M_SalesOffice = so[2],
+                    SaDate = new DateTime(2023, 10, 31),
+                    SaFlag = 0,
+                });
+
+                context.T_Sales.AddRange(sa);
+                context.SaveChanges();
+            }
+            {
+                sad.Add(new T_SaleDetail()
+                {
+                    M_Product = pr[0],
+                    T_Sale = sa[0],
+                    SaQuantity = 1,
+                    SaTotalPrice = 100000,
+                });
+                sad.Add(new T_SaleDetail()
+                {
+                    M_Product = pr[1],
+                    T_Sale = sa[1],
+                    SaQuantity = 3,
+                    SaTotalPrice = 50000,
+                });
+                sad.Add(new T_SaleDetail()
+                {
+                    M_Product = pr[2],
+                    T_Sale = sa[2],
+                    SaQuantity = 5,
+                    SaTotalPrice = 600000,
+                });
+
+                context.T_SaleDetails.AddRange(sad);
+                context.SaveChanges();
+
+
+            }
 
             context.Dispose();
 
@@ -761,9 +837,14 @@ namespace SalesManagement_SysDev
             f_Eigyo.FormClosed += ChildForm_FormClosed;
             f_Eigyo.Show();
 
+            //F_Buturyu f_Buturyu = new F_Buturyu();
+
+            //f_Buturyu.Owner = this;
+            //f_Buturyu.FormClosed += ChildForm_FormClosed;
+            //f_Buturyu.Show();
 
 
-            ////this.Opacity = 0;
+            this.Opacity = 0;
         }
 
         private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -818,6 +899,11 @@ namespace SalesManagement_SysDev
             }
 
             return true;
+        }
+
+        private void F_Login_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -168,6 +168,15 @@
     <Compile Include="Form\FormEigyo\F_EigyoArrival.Designer.cs">
       <DependentUpon>F_EigyoArrival.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\FormButuryu\F_ButuryuChumon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_ButuryuChumon.Designer.cs">
+      <DependentUpon>F_ButuryuChumon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MonthPicker.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Form\FormButuryu\F_ButuryuStock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -216,11 +225,18 @@
     <Compile Include="Entity\T_Warehousing.cs" />
     <Compile Include="Entity\T_WarehousingDetail.cs" />
     <Compile Include="Form\DBAccess\SaleDataAccess.cs" />
+    <Compile Include="Form\DBAccess\SaleDetailDataAccess.cs" />
     <Compile Include="SalesManagement_DevContext.cs" />
     <Compile Include="Form\DBAccess\SalesOfficeDataAccess.cs" />
     <Compile Include="Entity\T_OperationLog.cs" />
     <Compile Include="Form\DBAccess\SmallDataAccess.cs" />
     <Compile Include="Form\DBAccess\StockDataAccess.cs" />
+    <EmbeddedResource Include="Form\FormButuryu\F_Buturyu.resx">
+      <DependentUpon>F_Buturyu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormHonsha\F_HonshaSale.resx">
+      <DependentUpon>F_HonshaSale.cs</DependentUpon>
+    </EmbeddedResource>
     <Compile Include="Form\DBAccess\ShipmentDataAccess.cs" />
     <Compile Include="Form\DBAccess\ShipmentDetailDataAccess.cs" />
     <Compile Include="Form\DBAccess\WarehousingDataAccess.cs" />
@@ -233,11 +249,20 @@
     <EmbeddedResource Include="Form\FormEigyo\F_EigyoStockView.resx">
       <DependentUpon>F_EigyoStockView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormHonsha\F_HonshaOperationLog.resx">
+      <DependentUpon>F_HonshaOperationLog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\FormHonsha\F_HonshaSinghUp.resx">
       <DependentUpon>F_HonshaSinghUp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\FormEigyo\F_Eigyo.resx">
       <DependentUpon>F_Eigyo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormHonsha\F_HonshaEmployee.resx">
+      <DependentUpon>F_HonshaEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormHonsha\F_HonshaProdact.resx">
+      <DependentUpon>F_HonshaProdact.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\F_login.resx">
       <DependentUpon>F_login.cs</DependentUpon>

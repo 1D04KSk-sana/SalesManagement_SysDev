@@ -120,7 +120,6 @@
             this.lblClientFax.Size = new System.Drawing.Size(133, 30);
             this.lblClientFax.TabIndex = 46;
             this.lblClientFax.Text = "営業所名";
-            this.lblClientFax.Click += new System.EventHandler(this.lblClientFax_Click);
             // 
             // lblClientAddress
             // 
@@ -132,7 +131,6 @@
             this.lblClientAddress.Size = new System.Drawing.Size(130, 30);
             this.lblClientAddress.TabIndex = 44;
             this.lblClientAddress.Text = "パスワード";
-            this.lblClientAddress.Click += new System.EventHandler(this.lblClientAddress_Click);
             // 
             // txbSinghUpPass
             // 
@@ -142,7 +140,6 @@
             this.txbSinghUpPass.Name = "txbSinghUpPass";
             this.txbSinghUpPass.Size = new System.Drawing.Size(220, 37);
             this.txbSinghUpPass.TabIndex = 43;
-            this.txbSinghUpPass.TextChanged += new System.EventHandler(this.txbSinghUpPass_TextChanged);
             // 
             // lblCilentPhone
             // 
@@ -162,7 +159,6 @@
             this.txbSinghUpPhone.Name = "txbSinghUpPhone";
             this.txbSinghUpPhone.Size = new System.Drawing.Size(220, 37);
             this.txbSinghUpPhone.TabIndex = 39;
-            this.txbSinghUpPhone.TextChanged += new System.EventHandler(this.txbSinghUpPhone_TextChanged);
             // 
             // lblSalesOfficeID
             // 
@@ -174,7 +170,6 @@
             this.lblSalesOfficeID.Size = new System.Drawing.Size(103, 30);
             this.lblSalesOfficeID.TabIndex = 38;
             this.lblSalesOfficeID.Text = "役職名";
-            this.lblSalesOfficeID.Click += new System.EventHandler(this.lblSalesOfficeID_Click);
             // 
             // lblClientName
             // 
@@ -186,7 +181,6 @@
             this.lblClientName.Size = new System.Drawing.Size(103, 30);
             this.lblClientName.TabIndex = 36;
             this.lblClientName.Text = "社員名";
-            this.lblClientName.Click += new System.EventHandler(this.lblClientName_Click);
             // 
             // txbEmployeeName
             // 
@@ -207,7 +201,6 @@
             this.lblClientID.Size = new System.Drawing.Size(163, 30);
             this.lblClientID.TabIndex = 34;
             this.lblClientID.Text = "入社年月日";
-            this.lblClientID.Click += new System.EventHandler(this.lblClientID_Click);
             // 
             // btnDone
             // 
@@ -259,11 +252,10 @@
             this.label1.Size = new System.Drawing.Size(99, 30);
             this.label1.TabIndex = 59;
             this.label1.Text = "社員ID";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // F_HonshaSinghUp
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(1902, 1033);
