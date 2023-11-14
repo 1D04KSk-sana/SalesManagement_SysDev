@@ -249,23 +249,11 @@
             // 
             // txbClientAddress
             // 
-            this.txbClientAddress.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.txbClientAddress.Location = new System.Drawing.Point(629, 367);
             this.txbClientAddress.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txbClientAddress.Name = "txbClientAddress";
             this.txbClientAddress.Size = new System.Drawing.Size(653, 31);
             this.txbClientAddress.TabIndex = 13;
-            // 
-            // lblClientFax
-            // 
-            this.lblClientFax.AutoSize = true;
-            this.lblClientFax.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.lblClientFax.Location = new System.Drawing.Point(1351, 370);
-            this.lblClientFax.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblClientFax.Name = "lblClientFax";
-            this.lblClientFax.Size = new System.Drawing.Size(52, 24);
-            this.lblClientFax.TabIndex = 14;
-            this.lblClientFax.Text = "FAX";
             // 
             // txbClientFAX
             // 

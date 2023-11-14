@@ -48,5 +48,81 @@ namespace SalesManagement_SysDev
 
             return logCount;
         }
+        ///////////////////////////////
+        //メソッド名：GetLogData()
+        //引　数：なし
+        //戻り値：操作ログデータ
+        //機　能：操作ログデータの全取得
+        ///////////////////////////////
+        public List<T_OperationLog> GetLogData()
+        {
+            List<T_OperationLog> listLog = new List<T_OperationLog>();
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listLog = context.T_OperationLogs.ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listLog;
+        }
+        ///////////////////////////////
+        //メソッド名：GetAndLogData()
+        //引　数：検索条件
+        //戻り値：条件完全一致操作ログデータ
+        //機　能：条件完全一致操作ログデータの取得
+        ///////////////////////////////
+        public List<T_OperationLog> GetAndLogData(T_OperationLog selectLog)
+        {
+            List<T_OperationLog> listLog = new List<T_OperationLog>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var query = context.T_OperationLogs.AsQueryable();
+
+                if (selectLog.EmID != null && selectLog.EmID != 0)
+                {
+                    query = query.Where(x => x.EmID == selectLog.EmID);
+                }
+
+                listLog = query.ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listLog;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetOrLogData()
+        //引　数：検索条件
+        //戻り値：条件一部一致操作ログデータ
+        //機　能：条件一部一致操作ログデータの取得
+        ///////////////////////////////
+        public List<T_OperationLog> GetOrLogData(T_OperationLog selectLog)
+        {
+            List<T_OperationLog> listLog = new List<T_OperationLog>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listLog = context.T_OperationLogs.Where(x => x.EmID == selectLog.EmID).ToList();
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listLog;
+        }
     }
 }
