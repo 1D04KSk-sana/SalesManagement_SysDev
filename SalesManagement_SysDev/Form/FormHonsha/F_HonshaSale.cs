@@ -271,13 +271,13 @@ namespace SalesManagement_SysDev
             dgvSale.Columns.Add("SaHidden", "非表示理由");
 
             dgvSale.Columns["SaID"].Width = 92;
-            dgvSale.Columns["ClID"].Width = 110;
-            dgvSale.Columns["SoID"].Width = 125;
-            dgvSale.Columns["EmID"].Width = 110;
-            dgvSale.Columns["ChID"].Width = 90;
-            dgvSale.Columns["SaDate"].Width = 140;
-            dgvSale.Columns["SaFlag"].Width = 100;
-            dgvSale.Columns["SaHidden"].Width = 420;
+            dgvSale.Columns["ClID"].Width = 130;
+            dgvSale.Columns["SoID"].Width = 145;
+            dgvSale.Columns["EmID"].Width = 150;
+            dgvSale.Columns["ChID"].Width = 110;
+            dgvSale.Columns["SaDate"].Width = 160;
+            dgvSale.Columns["SaFlag"].Width = 120;
+            dgvSale.Columns["SaHidden"].Width = 280;
 
 
             //並び替えができないようにする
@@ -314,11 +314,11 @@ namespace SalesManagement_SysDev
             dgvSaleDetail.Columns.Add("SaQuantity", "個数");
             dgvSaleDetail.Columns.Add("SaTotalPrice", "合計金額");
 
-            dgvSaleDetail.Columns["SaDetailID"].Width = 120;
+            dgvSaleDetail.Columns["SaDetailID"].Width = 150;
             dgvSaleDetail.Columns["SaID"].Width = 120;
             dgvSaleDetail.Columns["PrID"].Width = 120;
             dgvSaleDetail.Columns["SaQuantity"].Width = 120;
-            dgvSaleDetail.Columns["SaTotalPrice"].Width = 217;
+            dgvSaleDetail.Columns["SaTotalPrice"].Width = 187;
                         
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvSaleDetail.Columns)
