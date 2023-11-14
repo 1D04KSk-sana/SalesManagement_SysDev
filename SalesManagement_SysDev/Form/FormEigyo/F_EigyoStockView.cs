@@ -24,6 +24,17 @@ namespace SalesManagement_SysDev
         private static List<T_Stock> listStock = new List<T_Stock>();
         //フォームを呼び出しする際のインスタンス化
         private F_SearchDialog f_SearchDialog = new F_SearchDialog();
+        //コンボボックス用の社員データリスト
+        private static List<M_Product> listProdact = new List<M_Product>();
+        //DataGridView用に使用する商品のDictionary
+        private Dictionary<int, string> dictionaryProdact;
+        //DataGridView用に使用する表示形式のDictionary
+        private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
+        {
+            { 0, "表示" },
+            { 1, "非表示" },
+        };
+
 
         public F_EigyoStockView()
         {
@@ -81,6 +92,7 @@ namespace SalesManagement_SysDev
         {
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
+            DictionarySet();
 
             SetFormDataGridView();
 
@@ -133,6 +145,11 @@ namespace SalesManagement_SysDev
             dgvStockView.Columns.Add("PrID", "商品ID");
             dgvStockView.Columns.Add("StQuantity", "在庫数");
             dgvStockView.Columns.Add("StFlags", "在庫管理フラグ");
+
+            dgvStockView.Columns["StID"].Width = 92;
+            dgvStockView.Columns["PrID"].Width = 130;
+            dgvStockView.Columns["StQuantity"].Width = 145;
+            dgvStockView.Columns["StFlags"].Width = 120;
 
 
             //並び替えができないようにする
@@ -215,20 +232,20 @@ namespace SalesManagement_SysDev
                 }
             }
             // 商品IDの適否
-            if (!String.IsNullOrEmpty(txbProdactID.Text.Trim()))
+            if (!String.IsNullOrEmpty(txbProductID.Text.Trim()))
             {
                 // 商品IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbProdactID.Text.Trim()))
+                if (!dataInputCheck.CheckNumeric(txbProductID.Text.Trim()))
                 {
                     MessageBox.Show("商品IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactID.Focus();
+                    txbProductID.Focus();
                     return false;
                 }
                 //商品IDの重複チェック
-                if (!prodactDataAccess.CheckProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
+                if (!prodactDataAccess.CheckProdactIDExistence(int.Parse(txbProductID.Text.Trim())))
                 {
                     MessageBox.Show("商品IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactID.Focus();
+                    txbProductID.Focus();
                     return false;
                 }
             }
@@ -271,7 +288,7 @@ namespace SalesManagement_SysDev
             //1行ずつdgvStockに挿入
             foreach (var item in depData)
             {
-                dgvStockView.Rows.Add(item.StID, item.PrID, item.StQuantity, item.StFlag);
+                dgvStockView.Rows.Add(item.StID, dictionaryProdact[item.PrID], item.StQuantity,dictionaryHidden[item.StFlag]);
             }
 
             //dgvClientをリフレッシュ
@@ -388,7 +405,7 @@ namespace SalesManagement_SysDev
             {
                 intStockID = int.Parse(strStockID);
             }
-            string strProdactID = txbProdactID.Text.Trim();
+            string strProdactID = txbProductID.Text.Trim();
             int intProdactID = 0;
 
             if (!String.IsNullOrEmpty(strProdactID))
@@ -485,6 +502,83 @@ namespace SalesManagement_SysDev
 
         }
         private System.Windows.Forms.RadioButton rdbRegister;
-    }
 
+        private void txbstocknum_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txbProdactID_TextChanged(object sender, EventArgs e)
+        {
+            //nullの確認
+            string stringProdactID = txbProductID.Text.Trim();
+            int intProdactID = 0;
+
+            if (!String.IsNullOrEmpty(stringProdactID))
+            {
+                intProdactID = int.Parse(stringProdactID);
+            }
+
+            //存在確認
+            if (!prodactDataAccess.CheckProdactIDExistence(intProdactID))
+            {
+                txbProductName.Text = "商品IDが存在しません";
+                return;
+            }
+
+            //IDから名前を取り出す
+            var Prodact = listProdact.Single(x => x.PrID == intProdactID);
+
+            txbProductName.Text = Prodact.PrName;
+        }
+        ///////////////////////////////
+        //メソッド名：DictionarySet()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：Dictionaryのセット
+        ///////////////////////////////
+        private void DictionarySet()
+        {
+
+            //商品のデータを取得
+            listProdact = prodactDataAccess.GetProdactDspData();
+
+            dictionaryProdact = new Dictionary<int, string> { };
+
+            foreach (var item in listProdact)
+            {
+                dictionaryProdact.Add(item.PrID, item.PrName);
+            }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvStockView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvStockView.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            //選択された行に対してのコントロールの変更
+            SelectRowControl();
+        }
+        ///////////////////////////////
+        //メソッド名：SelectRowControl()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：選択された行に対してのコントロールの変更
+        ///////////////////////////////
+        private void SelectRowControl()
+        {
+            //データグリッドビューに乗っている情報をGUIに反映
+            txbstockID.Text = dgvStockView[0, dgvStockView.CurrentCellAddress.Y].Value.ToString();
+            txbProductID.Text =dictionaryProdact.FirstOrDefault(x=>x.Value== dgvStockView[1, dgvStockView.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            txbstocknum.Text = dgvStockView[2, dgvStockView.CurrentCellAddress.Y].Value.ToString();
+        }
+    }
 }
