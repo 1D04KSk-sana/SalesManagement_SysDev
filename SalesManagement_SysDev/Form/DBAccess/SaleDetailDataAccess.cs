@@ -34,7 +34,7 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：GetSaleDetailData()
+        //メソッド名：GetSaleDetailIDData()
         //引　数：なし
         //戻り値：受注詳細データ
         //機　能：受注詳細データの全取得

@@ -136,7 +136,7 @@ namespace SalesManagement_SysDev
                 }
                 if (selectSale.SaDate != null )
                 {
-                    query = query.Where(x => x.SaDate == selectSale.SaDate);
+                    query = query.Where(x => x.SaDate.Month == selectSale.SaDate.Month);
                 }
 
 
@@ -165,7 +165,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listSale = context.T_Sales.Where(x => x.SaID == selectSale.SaID || x.SoID == selectSale.SoID || x.ChID == selectSale.ChID || x.ClID == selectSale.ClID || x.SaDate == selectSale.SaDate).ToList();
+                listSale = context.T_Sales.Where(x => x.SaID == selectSale.SaID || x.SoID == selectSale.SoID || x.ChID == selectSale.ChID || x.ClID == selectSale.ClID || x.SaDate.Month == selectSale.SaDate.Month).ToList();
 
                 context.Dispose();
             }
