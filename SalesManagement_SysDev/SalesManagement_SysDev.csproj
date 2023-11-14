@@ -171,7 +171,7 @@
     <Compile Include="Form\FormButuryu\F_ButuryuChumon.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="F_ButuryuChumon.Designer.cs">
+    <Compile Include="Form\FormButuryu\F_ButuryuChumon.Designer.cs">
       <DependentUpon>F_ButuryuChumon.cs</DependentUpon>
     </Compile>
     <Compile Include="MonthPicker.cs">
