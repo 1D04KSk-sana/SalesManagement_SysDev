@@ -132,7 +132,6 @@
             this.rdbRegister.TabStop = true;
             this.rdbRegister.Text = "登録";
             this.rdbRegister.UseVisualStyleBackColor = true;
-            this.rdbRegister.CheckedChanged += new System.EventHandler(this.rdoSElect_CheckedChanged);
             // 
             // lblClientID
             // 
@@ -307,7 +306,6 @@
             this.dgvClient.Size = new System.Drawing.Size(1500, 442);
             this.dgvClient.TabIndex = 18;
             this.dgvClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRecordEditing_CellClick);
-            this.dgvClient.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClient_CellContentClick);
             // 
             // btnDone
             // 
