@@ -168,6 +168,12 @@
     <Compile Include="Form\FormEigyo\F_EigyoArrival.Designer.cs">
       <DependentUpon>F_EigyoArrival.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\FormButuryu\F_ButuryuChumon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="F_ButuryuChumon.Designer.cs">
+      <DependentUpon>F_ButuryuChumon.cs</DependentUpon>
+    </Compile>
     <Compile Include="MonthPicker.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -225,6 +231,9 @@
     <Compile Include="Entity\T_OperationLog.cs" />
     <Compile Include="Form\DBAccess\SmallDataAccess.cs" />
     <Compile Include="Form\DBAccess\StockDataAccess.cs" />
+    <EmbeddedResource Include="Form\FormButuryu\F_Buturyu.resx">
+      <DependentUpon>F_Buturyu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\FormHonsha\F_HonshaSale.resx">
       <DependentUpon>F_HonshaSale.cs</DependentUpon>
     </EmbeddedResource>
