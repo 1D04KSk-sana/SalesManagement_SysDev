@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.pnlButuryu = new System.Windows.Forms.Panel();
-            this.btnReturn = new System.Windows.Forms.Button();
             this.lblButuryuSyukko = new System.Windows.Forms.Label();
+            this.btnReturn = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnDone = new System.Windows.Forms.Button();
             this.cmbView = new System.Windows.Forms.ComboBox();
@@ -62,9 +62,9 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPageMax = new System.Windows.Forms.Button();
             this.pnlSelect = new System.Windows.Forms.Panel();
-            this.rdbSearch = new System.Windows.Forms.RadioButton();
-            this.rdbConfirm = new System.Windows.Forms.RadioButton();
             this.rdbHidden = new System.Windows.Forms.RadioButton();
+            this.rdbConfirm = new System.Windows.Forms.RadioButton();
+            this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.pnlButuryu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSyukko)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSyukkoDetail)).BeginInit();
@@ -81,6 +81,17 @@
             this.pnlButuryu.Size = new System.Drawing.Size(1920, 150);
             this.pnlButuryu.TabIndex = 0;
             // 
+            // lblButuryuSyukko
+            // 
+            this.lblButuryuSyukko.AutoSize = true;
+            this.lblButuryuSyukko.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblButuryuSyukko.ForeColor = System.Drawing.Color.White;
+            this.lblButuryuSyukko.Location = new System.Drawing.Point(742, 50);
+            this.lblButuryuSyukko.Name = "lblButuryuSyukko";
+            this.lblButuryuSyukko.Size = new System.Drawing.Size(417, 64);
+            this.lblButuryuSyukko.TabIndex = 1;
+            this.lblButuryuSyukko.Text = "出庫管理画面";
+            // 
             // btnReturn
             // 
             this.btnReturn.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
@@ -92,17 +103,6 @@
             this.btnReturn.Text = "戻る";
             this.btnReturn.UseVisualStyleBackColor = true;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
-            // 
-            // lblButuryuSyukko
-            // 
-            this.lblButuryuSyukko.AutoSize = true;
-            this.lblButuryuSyukko.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblButuryuSyukko.ForeColor = System.Drawing.Color.White;
-            this.lblButuryuSyukko.Location = new System.Drawing.Point(742, 50);
-            this.lblButuryuSyukko.Name = "lblButuryuSyukko";
-            this.lblButuryuSyukko.Size = new System.Drawing.Size(417, 64);
-            this.lblButuryuSyukko.TabIndex = 1;
-            this.lblButuryuSyukko.Text = "出庫管理画面";
             // 
             // btnClear
             // 
@@ -126,6 +126,7 @@
             this.btnDone.TabStop = false;
             this.btnDone.Text = "実行";
             this.btnDone.UseVisualStyleBackColor = true;
+            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // cmbView
             // 
@@ -411,18 +412,16 @@
             this.pnlSelect.Size = new System.Drawing.Size(431, 78);
             this.pnlSelect.TabIndex = 32;
             // 
-            // rdbSearch
+            // rdbHidden
             // 
-            this.rdbSearch.AutoSize = true;
-            this.rdbSearch.Checked = true;
-            this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(18, 24);
-            this.rdbSearch.Name = "rdbSearch";
-            this.rdbSearch.Size = new System.Drawing.Size(103, 39);
-            this.rdbSearch.TabIndex = 0;
-            this.rdbSearch.TabStop = true;
-            this.rdbSearch.Text = "検索";
-            this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbHidden.AutoSize = true;
+            this.rdbHidden.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbHidden.Location = new System.Drawing.Point(284, 24);
+            this.rdbHidden.Name = "rdbHidden";
+            this.rdbHidden.Size = new System.Drawing.Size(138, 39);
+            this.rdbHidden.TabIndex = 2;
+            this.rdbHidden.Text = "非表示";
+            this.rdbHidden.UseVisualStyleBackColor = true;
             // 
             // rdbConfirm
             // 
@@ -435,16 +434,18 @@
             this.rdbConfirm.Text = "確定";
             this.rdbConfirm.UseVisualStyleBackColor = true;
             // 
-            // rdbHidden
+            // rdbSearch
             // 
-            this.rdbHidden.AutoSize = true;
-            this.rdbHidden.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbHidden.Location = new System.Drawing.Point(284, 24);
-            this.rdbHidden.Name = "rdbHidden";
-            this.rdbHidden.Size = new System.Drawing.Size(138, 39);
-            this.rdbHidden.TabIndex = 2;
-            this.rdbHidden.Text = "非表示";
-            this.rdbHidden.UseVisualStyleBackColor = true;
+            this.rdbSearch.AutoSize = true;
+            this.rdbSearch.Checked = true;
+            this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbSearch.Location = new System.Drawing.Point(18, 24);
+            this.rdbSearch.Name = "rdbSearch";
+            this.rdbSearch.Size = new System.Drawing.Size(103, 39);
+            this.rdbSearch.TabIndex = 0;
+            this.rdbSearch.TabStop = true;
+            this.rdbSearch.Text = "検索";
+            this.rdbSearch.UseVisualStyleBackColor = true;
             // 
             // F_ButuryuSyukko
             // 
