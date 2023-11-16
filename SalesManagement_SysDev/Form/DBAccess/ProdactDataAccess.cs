@@ -101,9 +101,9 @@ namespace SalesManagement_SysDev
             {
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
             return prodactID;
-    	}
+        }
 
         ///////////////////////////////
         //メソッド名：GetAndProdactData()
@@ -278,6 +278,52 @@ namespace SalesManagement_SysDev
             }
 
             return Prodact;
+        }
+        ///////////////////////////////
+        //メソッド名：GetProdactData()
+        //引　数：なし
+        //戻り値：受注データ
+        //機　能：受注データの全取得
+        ///////////////////////////////
+        public List<M_Product> GetProdactData()
+        {
+            List<M_Product> listProdact = new List<M_Product>();
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listProdact = context.M_Products.ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listProdact;
+        }
+        ///////////////////////////////
+        //メソッド名：AddOrderData()
+        //引　数：regOrder = 受注データ
+        //戻り値：True or False
+        //機　能：受注データの登録
+        //      ：登録成功の場合True
+        //      ：登録失敗の場合False
+        ///////////////////////////////
+        public bool AddProductData(M_Product regOrder)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                context.M_Products.Add(regOrder);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
         }
     }
 }

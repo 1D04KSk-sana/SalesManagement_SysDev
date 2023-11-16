@@ -39,7 +39,7 @@
             this.txbProductID = new System.Windows.Forms.TextBox();
             this.lblProductID = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txbstockID = new System.Windows.Forms.TextBox();
+            this.txbStockID = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -195,15 +195,15 @@
             this.label1.TabIndex = 78;
             this.label1.Text = "在庫ID";
             // 
-            // txbstockID
+            // txbStockID
             // 
-            this.txbstockID.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbstockID.Location = new System.Drawing.Point(378, 392);
-            this.txbstockID.Margin = new System.Windows.Forms.Padding(2);
-            this.txbstockID.MaxLength = 4;
-            this.txbstockID.Name = "txbstockID";
-            this.txbstockID.Size = new System.Drawing.Size(220, 31);
-            this.txbstockID.TabIndex = 79;
+            this.txbStockID.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.txbStockID.Location = new System.Drawing.Point(378, 392);
+            this.txbStockID.Margin = new System.Windows.Forms.Padding(2);
+            this.txbStockID.MaxLength = 4;
+            this.txbStockID.Name = "txbStockID";
+            this.txbStockID.Size = new System.Drawing.Size(220, 31);
+            this.txbStockID.TabIndex = 79;
             // 
             // label2
             // 
@@ -422,7 +422,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txbstockID);
+            this.Controls.Add(this.txbStockID);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblProductID);
             this.Controls.Add(this.txbProductID);
@@ -458,7 +458,7 @@
         private System.Windows.Forms.TextBox txbProductID;
         private System.Windows.Forms.Label lblProductID;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txbstockID;
+        private System.Windows.Forms.TextBox txbStockID;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
