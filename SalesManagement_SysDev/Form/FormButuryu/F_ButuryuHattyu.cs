@@ -44,6 +44,18 @@ namespace SalesManagement_SysDev
         private Dictionary<int, string> dictionaryMaker;
         //データグリッドビュー用の発注詳細データ
         private static List<T_HattyuDetail> listHattyuDetail = new List<T_HattyuDetail>();
+        //フォームを呼び出しする際のインスタンス化
+        private F_SearchDialog f_SearchDialog = new F_SearchDialog();
+        //データベース注文テーブルアクセス用クラスのインスタンス化
+        WarehousingDataAccess warehousingDataAccess = new WarehousingDataAccess();
+        //コンボボックス用の営業所データリスト
+        private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
+        //データベースメーカーテーブルアクセス用クラスのインスタンス化
+        MakerDataAccess MakerDataAccess = new MakerDataAccess();
+
+
+
+
 
 
 
@@ -67,19 +79,29 @@ namespace SalesManagement_SysDev
             { 0, "未確定" },
             { 1, "確定" },
         };
-        private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
+        private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            f_SearchDialog.Close();
+            this.Opacity = 1;
+        }
+        private void txbNumPage_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
 
-            SaleSearchButtonClick(true);
         }
 
-        private void SearchDialog_btnOrSearchClick(object sender, EventArgs e)
+        private void txbPageSize_KeyPress(object sender, KeyPressEventArgs e)
         {
-            f_SearchDialog.Close();
-
-            SaleSearchButtonClick(false);
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
         }
+
         ///////////////////////////////
         //メソッド名：DictionarySet()
         //引　数   ：なし
@@ -138,6 +160,22 @@ namespace SalesManagement_SysDev
             };
         }
 
+        ///////////////////////////////
+        //メソッド名：GenerateWarehousingAtRegistration()
+        //引　数   ：入庫情報
+        //戻り値   ：入庫登録情報
+        //機　能   ：入庫登録データのセット
+        ///////////////////////////////
+        private T_Warehousing GenerateWarehousingAtRegistration(T_Warehousing Warehousing)
+        {
+            return new T_Warehousing
+            {
+                WaID = Warehousing.WaID,
+                HaID = Warehousing.HaID,
+                EmID = Warehousing.EmID,
+                WaDate = DateTime.Now,
+            };
+        }
 
         private void btnReturn_Click(object sender, EventArgs e)
         {
@@ -161,13 +199,31 @@ namespace SalesManagement_SysDev
         {
             txbHattyuID.Text = string.Empty;
             cmbMakerName.Text = string.Empty;
-            txbEmployeeID.Text = string.Empty;
+            txbEmployeeName.Text = string.Empty;
             txbHattyuDetailID.Text = string.Empty;
             txbProductID.Text = string.Empty;
             txbProductName.Text = string.Empty;
             txbHattyuQuantity.Text = string.Empty;
             dtpHattyuDate.Value = DateTime.Now;
         }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ClearImputDetail();
+        }
+        ///////////////////////////////
+        //メソッド名：ClearImputDetail()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：コントロールのクリア(Detail)
+        ///////////////////////////////
+        private void ClearImputDetail()
+        {
+            txbHattyuDetailID.Text = string.Empty;
+            txbProductID.Text = string.Empty;
+            txbProductName.Text = string.Empty;
+            txbHattyuQuantity.Text = string.Empty;
+        }
+
 
         ///////////////////////////////
         //メソッド名：GetDataGridView()
@@ -180,10 +236,9 @@ namespace SalesManagement_SysDev
             //表示用の売上リスト作成
             List<T_Hattyu> listViewHattyu = SetListHattyu();
 
-            List<T_HattyuDetail> listHattyuDetail = hattyuDetailDataAccess.GetHattyuDetailData();
 
             // DataGridViewに表示するデータを指定
-            SetDataGridView(listViewHattyu, listHattyuDetail);
+            SetDataGridView(listViewHattyu);
         }
 
         ///////////////////////////////
@@ -233,12 +288,10 @@ namespace SalesManagement_SysDev
         //戻り値   ：なし
         //機　能   ：データグリッドビューへの表示
         ///////////////////////////////
-        private void SetDataGridView(List<T_Hattyu> viewHattyu, List<T_HattyuDetail> viewHattyuDetail)
+        private void SetDataGridView(List<T_Hattyu> viewHattyu)
         {
             //中身を消去
             dgvHattyu.Rows.Clear();
-            //中身を消去
-            dgvHattyuDetail.Rows.Clear();
 
             //ページ行数を取得
             int pageSize = int.Parse(txbPageSize.Text.Trim());
@@ -250,13 +303,13 @@ namespace SalesManagement_SysDev
             //データからページに必要な部分だけを取り出す
             var depData = viewHattyu.Skip(pageSize * pageNum).Take(pageSize).ToList();
 
-            //1行ずつdgvClientに挿入
+            //1行ずつdgvHattyuに挿入
             foreach (var item in depData)
             {
-                dgvHattyu.Rows.Add(item.HaID, dictionaryMaker[item.MaID], dictionaryEmployee[item.EmID],item.HaDate, dictionaryHidden[item.HaFlag], item.HaHidden);
+                dgvHattyu.Rows.Add(item.HaID, dictionaryMaker[item.MaID], dictionaryEmployee[item.EmID], item.HaDate, dictionaryHidden[item.HaFlag],item.WaWarehouseFlag, item.HaHidden);
             }
 
-            //dgvClientをリフレッシュ
+            //dgvHattyuをリフレッシュ
             dgvHattyu.Refresh();
 
 
@@ -396,27 +449,27 @@ namespace SalesManagement_SysDev
 
 
             // 社員IDの適否
-            if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
+            if (!String.IsNullOrEmpty(txbEmployeeName.Text.Trim()))
             {
                 //社員IDの存在チェック
-                if (!employeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                if (!employeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeName.Text.Trim())))
                 {
                     MessageBox.Show("社員IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbEmployeeID.Focus();
+                    txbEmployeeName.Focus();
                     return false;
                 }
                 //社員IDが現在ログインしているIDと等しいかチェック
-                if (F_Login.intEmployeeID == int.Parse(txbEmployeeID.Text.Trim()))
+                if (F_Login.intEmployeeID == int.Parse(txbEmployeeName.Text.Trim()))
                 {
                     MessageBox.Show("自身の社員IDを入力してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbEmployeeID.Focus();
+                    txbEmployeeName.Focus();
                     return false;
                 }
             }
             else
             {
                 MessageBox.Show("社員IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbEmployeeID.Focus();
+                txbEmployeeName.Focus();
                 return false;
             }
 
@@ -634,25 +687,455 @@ namespace SalesManagement_SysDev
             ClearImput();
             ClearImputDetail();
         }
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ClearImputDetail();
-        }
         ///////////////////////////////
-        //メソッド名：ClearImputDetail()
+        //メソッド名：HattyuDataUpdate()
         //引　数   ：なし
         //戻り値   ：なし
-        //機　能   ：コントロールのクリア(Detail)
+        //機　能   ：発注情報更新の実行
         ///////////////////////////////
-        private void ClearImputDetail()
+        private void HattyuDataUpdate()
         {
-            txbHattyuDetailID.Text = string.Empty;
-            txbProductID.Text = string.Empty;
-            txbProductName.Text = string.Empty;
-            txbHattyuQuantity.Text = string.Empty;
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtUpdate())
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
+            // 受注情報作成
+            var updHattyu = GenerateDataAtUpdate();
+
+            // 受注情報更新
+            UpdateHattyu(updHattyu);
         }
+
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtUpdate()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：更新入力データの形式チェック
+        //          ：エラーがない場合True
+        //          ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtUpdate()
+        {
+            //発注IDの適否
+            if (!String.IsNullOrEmpty(txbHattyuID.Text.Trim()))
+            {
+                // 発注IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbHattyuID.Text.Trim()))
+                {
+                    MessageBox.Show("発注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbHattyuID.Focus();
+                    return false;
+                }
+                //発注IDの存在チェック
+                if (!hattyuDataAccess.CheckHattyuIDExistence(int.Parse(txbHattyuID.Text.Trim())))
+                {
+                    MessageBox.Show("発注IDが存在していません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbHattyuID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("発注IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbHattyuID.Focus();
+                return false;
+            }
+
+            //表示選択の適否
+            if (cmbHidden.SelectedIndex == -1)
+            {
+                MessageBox.Show("表示/非表示が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbHidden.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtUpdate()
+        //引　数   ：なし
+        //戻り値   ：発注更新情報
+        //機　能   ：更新データのセット
+        ///////////////////////////////
+        private T_Hattyu GenerateDataAtUpdate()
+        {
+            return new T_Hattyu
+            {
+                HaID = int.Parse(txbHattyuID.Text.Trim()),
+                HaFlag = cmbHidden.SelectedIndex,
+                HaHidden = txbHidden.Text.Trim(),
+            };
+        }
+
+        ///////////////////////////////
+        //メソッド名：UpdateHattyu()
+        //引　数   ：発注情報
+        //戻り値   ：なし
+        //機　能   ：発注情報の更新
+        ///////////////////////////////
+        private void UpdateHattyu(T_Hattyu updHattyu)
+        {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            // 発注情報の更新
+            bool flg = hattyuDataAccess.UpdateHattyuData(updHattyu);
+
+            if (flg == true)
+            {
+                MessageBox.Show("更新しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("更新に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //テキストボックス等のクリア
+            ClearImput();
+            ClearImputDetail();
+
+            // データグリッドビューの表示
+            GetDataGridView();
+        }
+
+        ///////////////////////////////
+        //メソッド名：HattyuDataSelect()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：発注情報検索の実行
+        ///////////////////////////////
+        private void HattyuDataSelect()
+        {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtSearch())
+            {
+                return;
+            }
+
+            //検索ダイアログのフォームを作成
+            f_SearchDialog = new F_SearchDialog();
+            //検索ダイアログのフォームのオーナー設定
+            f_SearchDialog.Owner = this;
+
+            //検索ダイアログのフォームのボタンクリックイベントにハンドラを追加
+            f_SearchDialog.btnAndSearchClick += SearchDialog_btnAndSearchClick;
+            f_SearchDialog.btnOrSearchClick += SearchDialog_btnOrSearchClick;
+
+            //検索ダイアログのフォームが閉じたときのイベントを設定
+            f_SearchDialog.FormClosed += ChildForm_FormClosed;
+            //検索ダイアログのフォームの表示
+            f_SearchDialog.Show();
+
+            //顧客登録フォームの透明化
+            this.Opacity = 0;
+        }
+        private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            HattyuSearchButtonClick(true);
+        }
+
+        private void SearchDialog_btnOrSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            HattyuSearchButtonClick(false);
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtSearch()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：検索入力データの形式チェック
+        //         ：エラーがない場合True
+        //         ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtSearch()
+        {
+            //検索条件の存在確認
+            if (String.IsNullOrEmpty(txbHattyuID.Text.Trim()) && cmbMakerName.SelectedIndex == -1 && String.IsNullOrEmpty(txbEmployeeName.Text.Trim()))
+            {
+                MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbHattyuID.Focus();
+                return false;
+            }
+
+            //発注IDの適否
+            if (!String.IsNullOrEmpty(txbHattyuID.Text.Trim()))
+            {
+                //発注IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbHattyuID.Text.Trim()))
+                {
+                    MessageBox.Show("発注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbHattyuID.Focus();
+                    return false;
+                }
+                //発注IDの重複チェック
+                if (!hattyuDataAccess.CheckHattyuIDExistence(int.Parse(txbHattyuID.Text.Trim())))
+                {
+                    MessageBox.Show("発注IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbHattyuID.Focus();
+                    return false;
+                }
+            }
+
+            //社員IDの適否
+            if (!String.IsNullOrEmpty(txbEmployeeName.Text.Trim()))
+            {
+                //社員IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbEmployeeName.Text.Trim()))
+                {
+                    MessageBox.Show("社員IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeName.Focus();
+                    return false;
+                }
+                //社員IDの重複チェック
+                if (!employeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeName.Text.Trim())))
+                {
+                    MessageBox.Show("社員IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeName.Focus();
+                    return false;
+                }
+            }
+
+
+            return true;
+        }
+
+        ///////////////////////////////
+        //メソッド名：HattyuSearchButtonClick()
+        //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：発注情報検索の実行
+        ///////////////////////////////
+        private void HattyuSearchButtonClick(bool searchFlg)
+        {
+            // 顧客情報抽出
+            GenerateDataAtSelect(searchFlg);
+
+            int intSearchCount = listHattyu.Count;
+
+            // 顧客抽出結果表示
+            GetDataGridView();
+
+            MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtSelect()
+        //引　数   ：searchFlg = And検索かOr検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：発注情報の取得
+        ///////////////////////////////
+        private void GenerateDataAtSelect(bool searchFlg)
+        {
+            string strHattyuID = txbHattyuID.Text.Trim();
+            int intHattyuID = 0;
+
+            if (!String.IsNullOrEmpty(strHattyuID))
+            {
+                intHattyuID = int.Parse(strHattyuID);
+            }
+
+            string strEmployeeID = txbEmployeeName.Text.Trim();
+            int intEmployeeID = 0;
+
+            if (!String.IsNullOrEmpty(strEmployeeID))
+            {
+                intEmployeeID = int.Parse(strEmployeeID);
+            }
+
+
+            // 検索条件のセット
+            T_Hattyu selectCondition = new T_Hattyu()
+            {
+                HaID = intHattyuID,
+                MaID = cmbMakerName.SelectedIndex + 1,
+                EmID = intEmployeeID,
+            };
+
+            if (searchFlg)
+            {
+                // 顧客データのAnd抽出
+                listHattyu = hattyuDataAccess.GetAndHattyuData(selectCondition);
+            }
+            else
+            {
+                // 顧客データのOr抽出
+                listHattyu = hattyuDataAccess.GetOrHattyuData(selectCondition);
+            }
+        }
+
+        ///////////////////////////////
+        //メソッド名：HattyuDataConfirm()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：発注情報確定の実行
+        ///////////////////////////////
+        private void HattyuDataConfirm()
+        {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtConfirm())
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbConfirm.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
+            // 発注情報作成
+            var cmfHattyu = GenerateDataAtConfirm();
+
+            // 発注情報更新
+            ConfirmHattyu(cmfHattyu);
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtConfirm()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：確定入力データの形式チェック
+        //          ：エラーがない場合True
+        //          ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtConfirm()
+        {
+            //発注IDの適否
+            if (!String.IsNullOrEmpty(txbHattyuID.Text.Trim()))
+            {
+                // 発注IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbHattyuID.Text.Trim()))
+                {
+                    MessageBox.Show("発注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbHattyuID.Focus();
+                    return false;
+                }
+                //発注IDの存在チェック
+                if (!hattyuDataAccess.CheckHattyuIDExistence(int.Parse(txbHattyuID.Text.Trim())))
+                {
+                    MessageBox.Show("発注IDが存在していません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbHattyuID.Focus();
+                    return false;
+                }
+
+                T_Hattyu hattyu = hattyuDataAccess.GetIDHattyuData(int.Parse(txbHattyuID.Text.Trim()));
+
+                //発注IDの確定チェック
+                if (hattyu.WaWarehouseFlag == 1)
+                {
+                    MessageBox.Show("発注IDはすでに確定しています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbHattyuID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("発注IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbHattyuID.Focus();
+                return false;
+            }
+
+            //確定選択の適否
+            if (cmbConfirm.SelectedIndex == -1)
+            {
+                MessageBox.Show("未確定/確定が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbConfirm.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtConfirm()
+        //引　数   ：なし
+        //戻り値   ：発注確定情報
+        //機　能   ：確定データのセット
+        ///////////////////////////////
+        private T_Hattyu GenerateDataAtConfirm()
+        {
+            return new T_Hattyu
+            {
+                HaID = int.Parse(txbHattyuID.Text.Trim()),
+                WaWarehouseFlag = cmbConfirm.SelectedIndex,
+            };
+        }
+
+        ///////////////////////////////
+        //メソッド名：ConfirmHattyu()
+        //引　数   ：発注情報
+        //戻り値   ：なし
+        //機　能   ：発注情報の確定
+        ///////////////////////////////
+        private void ConfirmHattyu(T_Hattyu cfmHattyu)
+        {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("確定しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            // 発注情報の更新
+            bool flg = hattyuDataAccess.ConfirmHattyuData(cfmHattyu);
+
+            if (flg == true)
+            {
+                MessageBox.Show("確定しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("確定に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            T_Hattyu Hattyu = hattyuDataAccess.GetIDHattyuData(int.Parse(txbHattyuID.Text.Trim()));
+
+            //T_Warehousing Warehousing = GenerateWarehousingAtRegistration(Hattyu);
+
+            //bool flgWarehousing = warehousingDataAccess.AddWarehousingData(Warehousing);
+
+            //if (flg == true)
+            //{
+            //    MessageBox.Show("入庫管理にデータを送信ました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
+            //else
+            //{
+            //    MessageBox.Show("入庫管理へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+
+            //テキストボックス等のクリア
+            ClearImput();
+            ClearImputDetail();
+
+            // データグリッドビューの表示
+            GetDataGridView();
+        }
+
 
         ///////////////////////////////
         //メソッド名：SetDataDetailGridView()
@@ -669,11 +1152,254 @@ namespace SalesManagement_SysDev
             //1行ずつdgvClientに挿入
             foreach (var item in listHattyuDetail)
             {
-                dgvHattyuDetail.Rows.Add(item.HaID, item.HaDetailID, dictionaryProdact[item.PrID], item.OrQuantity);
+                dgvHattyuDetail.Rows.Add(item.HaID, item.HaDetailID, dictionaryProdact[item.PrID], item.HaQuantity);
             }
 
             //dgvClientをリフレッシュ
             dgvHattyuDetail.Refresh();
+        }
+
+
+        private void dgvHattyu_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvHattyu.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            //選択された行に対してのコントロールの変更
+            SelectRowControl();
+
+            SetDataDetailGridView(int.Parse(dgvHattyu[0, dgvHattyu.CurrentCellAddress.Y].Value.ToString()));
+
+            ClearImputDetail();
+
+        }
+        private void dgvHattyuDetail_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvHattyuDetail.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            //選択された行に対してのコントロールの変更
+            SelectRowDetailControl();
+        }
+        ///////////////////////////////
+        //メソッド名：SelectRowControl()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：選択された行に対してのコントロールの変更
+        ///////////////////////////////
+        private void SelectRowControl()
+        {
+            //データグリッドビューに乗っている情報をGUIに反映
+            txbHattyuID.Text = dgvHattyu[0, dgvHattyu.CurrentCellAddress.Y].Value.ToString();
+            cmbMakerName.SelectedIndex = dictionaryMaker.FirstOrDefault(x => x.Value == dgvHattyu[1, dgvHattyu.CurrentCellAddress.Y].Value.ToString()).Key - 1;
+            txbEmployeeName.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvHattyu[2, dgvHattyu.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            dtpHattyuDate.Text = dgvHattyu[3, dgvHattyu.CurrentCellAddress.Y].Value.ToString();
+            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvHattyu[4, dgvHattyu.CurrentCellAddress.Y].Value.ToString()).Key;
+            cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvHattyu[5, dgvHattyu.CurrentCellAddress.Y].Value.ToString()).Key;
+            txbHidden.Text = dgvHattyu[6, dgvHattyu.CurrentCellAddress.Y]?.Value?.ToString();
+        }
+
+        ///////////////////////////////
+        //メソッド名：SelectRowDetailControl()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：選択された行に対してのコントロールの変更(Detail)
+        ///////////////////////////////
+        private void SelectRowDetailControl()
+        {
+            //データグリッドビューに乗っている情報をGUIに反映
+            txbHattyuID.Text = dgvHattyuDetail[0, dgvHattyuDetail.CurrentCellAddress.Y].Value.ToString();
+            txbHattyuDetailID.Text = dgvHattyuDetail[1, dgvHattyuDetail.CurrentCellAddress.Y].Value.ToString();
+            txbProductID.Text = dictionaryProdact.FirstOrDefault(x => x.Value == dgvHattyuDetail[2, dgvHattyuDetail.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            txbHattyuQuantity.Text = dgvHattyuDetail[3, dgvHattyuDetail.CurrentCellAddress.Y].Value.ToString();
+        }
+
+        private void F_ButuryuHattyu_Load(object sender, EventArgs e)
+             {
+            txbNumPage.Text = "1";
+            txbPageSize.Text = "3";
+
+            DictionarySet();
+            //メーカ名のデータを取得
+            listMaker = MakerDataAccess.GetMakerDspData();
+            //取得したデータをコンボボックスに挿入
+            cmbMakerName.DataSource = listMaker;
+            //表示する名前をMaNameに指定
+            cmbMakerName.DisplayMember = "MaName";
+            //項目の順番をMaIDに指定
+            cmbMakerName.ValueMember = "MaID";
+            //cmbMakerNameを未選択に
+            cmbMakerName.SelectedIndex = -1;
+
+            SetFormDataGridView();
+
+            //cmbViewを表示に
+            cmbView.SelectedIndex = 0;
+        }
+
+        ///////////////////////////////
+        //メソッド名：SetFormDataGridView()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：データグリッドビューの初期設定
+        ///////////////////////////////
+        private void SetFormDataGridView()
+            {
+            //列を自由に設定できるように
+            dgvHattyu.AutoGenerateColumns = false;
+            //行単位で選択するようにする
+            dgvHattyu.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //行と列の高さを変更できないように
+            dgvHattyu.AllowUserToResizeColumns = false;
+            dgvHattyu.AllowUserToResizeRows = false;
+            //セルの複数行選択をオフに
+            dgvHattyu.MultiSelect = false;
+            //セルの編集ができないように
+            dgvHattyu.ReadOnly = true;
+            //ユーザーが新しい行を追加できないようにする
+            dgvHattyu.AllowUserToAddRows = false;
+
+            //左端の項目列を削除
+            dgvHattyu.RowHeadersVisible = false;
+            //行の自動追加をオフ
+            dgvHattyu.AllowUserToAddRows = false;
+
+            //ヘッダー位置の指定
+            dgvHattyu.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dgvHattyu.Columns.Add("HaID", "発注ID");
+            dgvHattyu.Columns.Add("MaID", "メーカー名");
+            dgvHattyu.Columns.Add("EmID", "発注社員名");
+            dgvHattyu.Columns.Add("HaDate", "発注年月日");
+            dgvHattyu.Columns.Add("HaFlag", "発注管理フラグ");
+            dgvHattyu.Columns.Add("WaWarehouseFlag", "入庫済フラグ");
+            dgvHattyu.Columns.Add("HaHidden", "非表示理由");
+
+            dgvHattyu.Columns["HaID"].Width = 107;
+            dgvHattyu.Columns["MaID"].Width = 150;
+            dgvHattyu.Columns["EmID"].Width = 150;
+            dgvHattyu.Columns["HaDate"].Width = 160;
+            dgvHattyu.Columns["HaFlag"].Width = 170;
+            dgvHattyu.Columns["WaWarehouseFlag"].Width = 160;
+            dgvHattyu.Columns["HaHidden"].Width = 290;
+
+
+
+            //並び替えができないようにする
+            foreach (DataGridViewColumn dataColumn in dgvHattyu.Columns)
+            {
+                dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+            //列を自由に設定できるように
+            dgvHattyuDetail.AutoGenerateColumns = false;
+            //行単位で選択するようにする
+            dgvHattyuDetail.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //行と列の高さを変更できないように
+            dgvHattyuDetail.AllowUserToResizeColumns = false;
+            dgvHattyuDetail.AllowUserToResizeRows = false;
+            //セルの複数行選択をオフに
+            dgvHattyuDetail.MultiSelect = false;
+            //セルの編集ができないように
+            dgvHattyuDetail.ReadOnly = true;
+            //ユーザーが新しい行を追加できないようにする
+            dgvHattyuDetail.AllowUserToAddRows = false;
+
+            //左端の項目列を削除
+            dgvHattyuDetail.RowHeadersVisible = false;
+            //行の自動追加をオフ
+            dgvHattyuDetail.AllowUserToAddRows = false;
+
+            //ヘッダー位置の指定
+            dgvHattyuDetail.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dgvHattyuDetail.Columns.Add("HaID", "発注ID");
+            dgvHattyuDetail.Columns.Add("HaDetailID", "受注詳細ID");
+            dgvHattyuDetail.Columns.Add("PrID", "商品ID");
+            dgvHattyuDetail.Columns.Add("HaQuantity", "数量");
+
+            dgvHattyuDetail.Columns["HaID"].Width = 174;
+            dgvHattyuDetail.Columns["HaDetailID"].Width = 174;
+            dgvHattyuDetail.Columns["PrID"].Width = 174;
+            dgvHattyuDetail.Columns["HaQuantity"].Width = 175;
+
+
+            //並び替えができないようにする
+            foreach (DataGridViewColumn dataColumn in dgvHattyuDetail.Columns)
+            {
+                dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+        }
+
+            private void txbProductID_TextChanged(object sender, EventArgs e)
+        {
+            //nullの確認
+            string stringProdactID = txbProductID.Text.Trim();
+            int intProdactID = 0;
+
+            if (!String.IsNullOrEmpty(stringProdactID))
+            {
+                intProdactID = int.Parse(stringProdactID);
+            }
+
+            //存在確認
+            if (!prodactDataAccess.CheckProdactIDExistence(intProdactID))
+            {
+                txbProductName.Text = "商品IDが存在しません";
+                return;
+            }
+
+            //IDから名前を取り出す
+            var Prodact = listProdact.Single(x => x.PrID == intProdactID);
+
+            txbProductName.Text = Prodact.PrName;
+
+             }
+        private void btnPageSize_Click(object sender, EventArgs e)
+        {
+            GetDataGridView();
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) + 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) - 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnPageMin_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+
+            GetDataGridView();
+        }
+
+        private void btnPageMax_Click(object sender, EventArgs e)
+        {
+            List<T_Hattyu> viewHattyu = SetListHattyu();
+
+            //ページ行数を取得
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
+            //最終ページ数を取得（テキストボックスに代入する数字なので-1はしない）
+            int lastPage = (int)Math.Ceiling(viewHattyu.Count / (double)pageSize);
+
+            txbNumPage.Text = lastPage.ToString();
+
+            GetDataGridView();
         }
 
     }

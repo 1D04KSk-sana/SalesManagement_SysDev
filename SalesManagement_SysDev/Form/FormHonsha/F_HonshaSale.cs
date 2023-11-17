@@ -308,14 +308,14 @@ namespace SalesManagement_SysDev
             //ヘッダー位置の指定
             dgvSaleDetail.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            dgvSaleDetail.Columns.Add("SaDetailID", "売上明細ID");
             dgvSaleDetail.Columns.Add("SaID", "売上ID");
+            dgvSaleDetail.Columns.Add("SaDetailID", "売上明細ID");
             dgvSaleDetail.Columns.Add("PrID", "商品ID");
             dgvSaleDetail.Columns.Add("SaQuantity", "個数");
             dgvSaleDetail.Columns.Add("SaTotalPrice", "合計金額");
 
-            dgvSaleDetail.Columns["SaDetailID"].Width = 150;
             dgvSaleDetail.Columns["SaID"].Width = 120;
+            dgvSaleDetail.Columns["SaDetailID"].Width = 150;
             dgvSaleDetail.Columns["PrID"].Width = 120;
             dgvSaleDetail.Columns["SaQuantity"].Width = 120;
             dgvSaleDetail.Columns["SaTotalPrice"].Width = 187;
@@ -797,9 +797,5 @@ namespace SalesManagement_SysDev
             }
         }
 
-        private void dgvSale_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 }

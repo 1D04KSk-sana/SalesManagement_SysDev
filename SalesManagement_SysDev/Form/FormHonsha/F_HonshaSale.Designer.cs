@@ -175,7 +175,6 @@
             this.dgvSale.TabIndex = 56;
             this.dgvSale.TabStop = false;
             this.dgvSale.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSale_CellClick);
-            this.dgvSale.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSale_CellContentClick);
             this.dgvSale.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             // 
             // lblSaleDate

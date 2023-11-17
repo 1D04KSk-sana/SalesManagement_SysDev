@@ -15,6 +15,7 @@ namespace SalesManagement_SysDev
         {
             T_HattyuDetail = new HashSet<T_HattyuDetail>();
             T_Warehousing = new HashSet<T_Warehousing>();
+
         }
 
         [Key]

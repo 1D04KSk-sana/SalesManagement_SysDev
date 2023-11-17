@@ -126,7 +126,6 @@
             this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.Name = "F_Login";
             this.Text = "販売管理システムログイン画面";
-            this.Load += new System.EventHandler(this.F_Login_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

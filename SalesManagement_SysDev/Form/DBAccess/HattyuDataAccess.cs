@@ -22,9 +22,9 @@ namespace SalesManagement_SysDev
             bool flg = false;
             try
             {
-                var context = new HattyusManagement_DevContext();
+                var context = new SalesManagement_DevContext();
                 //部署CDで一致するデータが存在するか
-                flg = context.T_Hattyus.Any(x => x.haID == HattyuID);
+                flg = context.T_Hattyus.Any(x => x.HaID == HattyuID);
                 context.Dispose();
             }
             catch (Exception ex)
@@ -46,7 +46,7 @@ namespace SalesManagement_SysDev
 
             try
             {
-                var context = new HattyusManagement_DevContext();
+                var context = new SalesManagement_DevContext();
                 listHattyu = context.T_Hattyus.ToList();
                 context.Dispose();
             }
@@ -108,38 +108,32 @@ namespace SalesManagement_SysDev
         //戻り値：条件完全一致発注データ
         //機　能：条件完全一致発注データの取得
         ///////////////////////////////
-        public List<T_Hattyu> GetAndHattyuData(T_Sale selectHattyu)
+        public List<T_Hattyu> GetAndHattyuData(T_Hattyu selectHattyu)
         {
             List<T_Hattyu> listHattyu = new List<T_Hattyu>();
             try
             {
-                var context = new HattyusManagement_DevContext();
+                var context = new SalesManagement_DevContext();
                 var query = context.T_Hattyus.AsQueryable();
 
-                if (selectSale.SaID != null && selectSale.SaID != 0)
+                if (selectHattyu.HaID != 0)
                 {
-                    query = query.Where(x => x.SaID == selectSale.SaID);
+                    query = query.Where(x => x.HaID == selectHattyu.HaID);
                 }
 
-                if (selectSale.SoID != null && selectSale.SoID != 0)
+                if (selectHattyu.MaID != 0)
                 {
-                    query = query.Where(x => x.SoID == selectSale.SoID);
+                    query = query.Where(x => x.MaID == selectHattyu.MaID);
                 }
 
-                if (selectSale.ChID != null && selectSale.ChID != 0)
+                if (selectHattyu.EmID != 0)
                 {
-                    query = query.Where(x => x.ChID == selectSale.ChID);
+                    query = query.Where(x => x.EmID == selectHattyu.EmID);
                 }
-                if (selectSale.ClID != null && selectSale.ClID != 0)
+                if (selectHattyu.HaDate != null)
                 {
-                    query = query.Where(x => x.ClID == selectSale.ClID);
+                    query = query.Where(x => x.HaDate.Month == selectHattyu.HaDate.Month);
                 }
-                if (selectSale.SaDate != null)
-                {
-                    query = query.Where(x => x.SaDate.Month == selectSale.SaDate.Month);
-                }
-
-
 
 
                 listHattyu = query.ToList();
@@ -164,8 +158,8 @@ namespace SalesManagement_SysDev
             List<T_Hattyu> listHattyu = new List<T_Hattyu>();
             try
             {
-                var context = new HattyusManagement_DevContext();
-                listHattyu = context.T_Hattyus.Where(x => x.SaID == selectSale.SaID || x.SoID == selectSale.SoID || x.ChID == selectSale.ChID || x.ClID == selectSale.ClID || x.SaDate.Month == selectSale.SaDate.Month).ToList();
+                var context = new SalesManagement_DevContext();
+                listHattyu = context.T_Hattyus.Where(x => x.HaID == selectHattyu.HaID || x.EmID == selectHattyu.EmID || x.MaID == selectHattyu.MaID || x.HaDate.Month == selectHattyu.HaDate.Month).ToList();
 
                 context.Dispose();
             }
@@ -188,7 +182,7 @@ namespace SalesManagement_SysDev
         {
             try
             {
-                var context = new HattyusManagement_DevContext();
+                var context = new SalesManagement_DevContext();
                 var Hattyu = context.T_Hattyus.Single(x => x.HaID == updHattyu.HaID);
 
                 Hattyu.HaFlag = updHattyu.HaFlag;
@@ -223,6 +217,58 @@ namespace SalesManagement_SysDev
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+        }
+        ///////////////////////////////
+        //メソッド名：GetIDHattyuData()
+        //引　数：発注ID
+        //戻り値：発注IDの一致する発注データ
+        //機　能：発注IDの一致する発注データの取得
+        ///////////////////////////////
+        public T_Hattyu GetIDHattyuData(int HattyuID)
+        {
+            T_Hattyu Hattyu = new T_Hattyu { };
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                Hattyu = context.T_Hattyus.Single(x => x.HaID == HattyuID);
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Hattyu;
+        }
+        ///////////////////////////////
+        //メソッド名：ConfirmHattyuData()
+        //引　数：cfmHattyu = 発注データ
+        //戻り値：True or False
+        //機　能：発注データの確定
+        //      ：確定成功の場合True
+        //      ：確定失敗の場合False
+        ///////////////////////////////
+        public bool ConfirmHattyuData(T_Hattyu cfmHattyu)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Hattyu = context.T_Hattyus.Single(x => x.HaID == cfmHattyu.HaID);
+
+                Hattyu.WaWarehouseFlag = cfmHattyu.WaWarehouseFlag;
+
+                context.SaveChanges();
+                context.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }
