@@ -332,6 +332,7 @@
             // 
             // btnDone
             // 
+            this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnDone.Location = new System.Drawing.Point(1667, 194);
             this.btnDone.Margin = new System.Windows.Forms.Padding(2);
@@ -340,7 +341,7 @@
             this.btnDone.TabIndex = 88;
             this.btnDone.TabStop = false;
             this.btnDone.Text = "実行";
-            this.btnDone.UseVisualStyleBackColor = true;
+            this.btnDone.UseVisualStyleBackColor = false;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // cmbView
