@@ -64,13 +64,13 @@ namespace SalesManagement_SysDev
         //戻り値：管理Flgが非表示の商品データ
         //機　能：管理Flgが非表示の商品データの全取得
         ///////////////////////////////
-        public List<M_Product> GetProdactNotDspData(List<M_Product> dspClient)
+        public List<M_Product> GetProdactNotDspData(List<M_Product> dspProduct)
         {
             List<M_Product> listProdact = new List<M_Product>();
 
             try
             {
-                listProdact = dspClient.Where(x => x.PrFlag == 1).ToList();
+                listProdact = dspProduct.Where(x => x.PrFlag == 1).ToList();
             }
             catch (Exception ex)
             {
@@ -280,6 +280,29 @@ namespace SalesManagement_SysDev
             return Prodact;
         }
         ///////////////////////////////
+        //メソッド名：AddProductData()
+        //引　数：regProduct = 受注データ
+        //戻り値：True or False
+        //機　能：受注データの登録
+        //      ：登録成功の場合True
+        //      ：登録失敗の場合False
+        ///////////////////////////////
+        public bool AddProductData(M_Product regProduct)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                context.M_Products.Add(regProduct);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+        }
+        ///////////////////////////////
         //メソッド名：GetProdactData()
         //引　数：なし
         //戻り値：受注データ
@@ -303,27 +326,28 @@ namespace SalesManagement_SysDev
             return listProdact;
         }
         ///////////////////////////////
-        //メソッド名：AddOrderData()
-        //引　数：regOrder = 受注データ
-        //戻り値：True or False
-        //機　能：受注データの登録
-        //      ：登録成功の場合True
-        //      ：登録失敗の場合False
+        //メソッド名：CheckEmployeeIDExistence()
+        //引　数   ：社員ID
+        //戻り値   ：True or False
+        //機　能   ：一致する社員IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
         ///////////////////////////////
-        public bool AddProductData(M_Product regOrder)
+        public bool CheckProductIDExistence(int ProdactID)
         {
+            bool flg = false;
             try
             {
                 var context = new SalesManagement_DevContext();
-                context.M_Products.Add(regOrder);
-                context.SaveChanges();
-                return true;
+                //社員IDで一致するデータが存在するか
+                flg = context.M_Products.Any(x => x.PrID == ProdactID);
+                context.Dispose();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            return flg;
         }
     }
 }

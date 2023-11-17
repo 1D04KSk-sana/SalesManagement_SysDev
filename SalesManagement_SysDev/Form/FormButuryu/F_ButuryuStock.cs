@@ -20,6 +20,8 @@ namespace SalesManagement_SysDev
         ProdactDataAccess prodactDataAccess = new ProdactDataAccess();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
+        //フォームを呼び出しする際のインスタンス化
+        private F_SearchDialog f_SearchDialog = new F_SearchDialog();
         //コンボボックス用の商品データリスト
         private static List<M_Product> listProdact = new List<M_Product>();
         //データグリッドビュー用の全商品データ
@@ -40,6 +42,22 @@ namespace SalesManagement_SysDev
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
+        }
+        private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            ProductSearchButtonClick(true);
+        }
+        private void SearchDialog_btnOrSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            ProductSearchButtonClick(false);
+        }
+        private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Opacity = 1;
         }
         ///////////////////////////////
         //メソッド名：ClearImput()
@@ -67,7 +85,7 @@ namespace SalesManagement_SysDev
             //検索ラヂオボタンがチェックされているとき
             if (rdbSearch.Checked)
             {
-                //StockDataSelect();
+                StockDataSelect();
             }
         }
         ///////////////////////////////
@@ -94,10 +112,10 @@ namespace SalesManagement_SysDev
             }
 
             // 受注情報作成
-            var regOrder = GenerateDataAtRegistration();
+            var regProduct = GenerateDataAtRegistration();
 
             // 受注情報登録
-            RegistrationOrder(regOrder);
+            RegistrationProduct(regProduct);
         }
         ///////////////////////////////
         //メソッド名：GetValidDataAtRegistration()
@@ -109,27 +127,27 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-            //受注IDの適否
+            //在庫IDの適否
             if (!String.IsNullOrEmpty(txbStockID.Text.Trim()))
             {
                 //受注IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbStockID.Text.Trim()))
                 {
-                    MessageBox.Show("受注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("在庫IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbStockID.Focus();
                     return false;
                 }
                 //受注IDの存在チェック
                 if (orderDataAccess.CheckOrderIDExistence(int.Parse(txbStockID.Text.Trim())))
                 {
-                    MessageBox.Show("受注IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("在庫IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbStockID.Focus();
                     return false;
                 }
             }
             else
             {
-                MessageBox.Show("受注IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("在庫IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbStockID.Focus();
                 return false;
             }
@@ -150,7 +168,7 @@ namespace SalesManagement_SysDev
             txbPageSize.Text = "3";
 
             //cmbViewを表示に
-            cmbView.SelectedIndex = 0;
+            //cmbView.SelectedIndex = 0;
         }
         ///////////////////////////////
         //メソッド名：DictionarySet()
@@ -194,7 +212,7 @@ namespace SalesManagement_SysDev
         //戻り値   ：なし
         //機　能   ：受注データの登録
         ///////////////////////////////
-        private void RegistrationProduct(M_Product regOrder)
+        private void RegistrationProduct(M_Product regProduct)
         {
             // 登録確認メッセージ
             DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
@@ -205,7 +223,7 @@ namespace SalesManagement_SysDev
             }
 
             // 受注情報の登録
-            bool flg = ProdactDataAccess.AddProductData(regOrder);
+            bool flg = prodactDataAccess.AddProductData(regProduct);
 
             //登録成功・失敗メッセージ
             if (flg == true)
@@ -245,7 +263,7 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void GetDataGridView()
         {
-            //表示用の顧客リスト作成
+            //表示用の商品リスト作成
             List<M_Product> listViewProduct = SetListProduct();
 
             // DataGridViewに表示するデータを指定
@@ -259,10 +277,10 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private List<M_Product> SetListProduct()
         {
-            //顧客のデータを全取得
-            listAllProdact = ProdactDataAccess.GetProdactData();
+            //商品のデータを全取得
+            listAllProdact = prodactDataAccess.GetProdactData();
 
-            //表示用の顧客リスト作成
+            //表示用の商品リスト作成
             List<M_Product> listViewProduct = new List<M_Product>();
 
             //検索ラヂオボタンがチェックされているとき
@@ -281,12 +299,12 @@ namespace SalesManagement_SysDev
             if (cmbView.SelectedIndex == 0)
             {
                 // 管理Flgが表示の部署データの取得
-                listViewProduct = ProdactDataAccess.GetProdactDspData(listViewProduct);
+                listViewProduct = prodactDataAccess.GetProdactDspData(listViewProduct);
             }
             else
             {
                 // 管理Flgが非表示の部署データの取得
-                listViewProduct = ProdactDataAccess.GetProdactNotDspData(listViewProduct);
+                listViewProduct = prodactDataAccess.GetProdactNotDspData(listViewProduct);
             }
 
             return listViewProduct;
@@ -368,8 +386,176 @@ namespace SalesManagement_SysDev
                 //OrDate = dtpOrderDate.Value,
                 //OrStateFlag = 0,
                 //OrFlag = cmbHidden.SelectedIndex,
-                //OrHidden = txbHidden.Text.Trim(),
+                //OrHidden = txbHidden.Text.Trim().
             };
+        }
+        ///////////////////////////////
+        //メソッド名：StockDataSelect()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：在庫情報検索の実行
+        ///////////////////////////////
+        private void StockDataSelect()
+        {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtSearch())
+            {
+                return;
+            }
+
+            //検索ダイアログのフォームを作成
+            f_SearchDialog = new F_SearchDialog();
+            //検索ダイアログのフォームのオーナー設定
+            f_SearchDialog.Owner = this;
+
+            //検索ダイアログのフォームのボタンクリックイベントにハンドラを追加
+            f_SearchDialog.btnAndSearchClick += SearchDialog_btnAndSearchClick;
+            f_SearchDialog.btnOrSearchClick += SearchDialog_btnOrSearchClick;
+
+            //検索ダイアログのフォームが閉じたときのイベントを設定
+            f_SearchDialog.FormClosed += ChildForm_FormClosed;
+            //検索ダイアログのフォームの表示
+            f_SearchDialog.Show();
+
+            //顧客登録フォームの透明化
+            this.Opacity = 0;
+        }
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtSearch()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：検索入力データの形式チェック
+        //         ：エラーがない場合True
+        //         ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtSearch()
+        {
+            //検索条件の存在確認
+            if (String.IsNullOrEmpty(txbStockID.Text.Trim()))
+            {
+                MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbStockID.Focus();
+                return false;
+            }
+
+            //在庫IDの適否
+            if (!String.IsNullOrEmpty(txbStockID.Text.Trim()))
+            {
+                //在庫IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbStockID.Text.Trim()))
+                {
+                    MessageBox.Show("受注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbStockID.Focus();
+                    return false;
+                }
+                //在庫IDの重複チェック
+                if (!prodactDataAccess.CheckProductIDExistence(int.Parse(txbStockID.Text.Trim())))
+                {
+                    MessageBox.Show("受注IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbStockID.Focus();
+                    return false;
+                }
+            }
+
+            //商品IDの適否
+            if (!String.IsNullOrEmpty(txbProductID.Text.Trim()))
+            {
+                //商品IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbProductID.Text.Trim()))
+                {
+                    MessageBox.Show("社員IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProductID.Focus();
+                    return false;
+                }
+                //商品IDの重複チェック
+                if (!prodactDataAccess.CheckProductIDExistence(int.Parse(txbProductID.Text.Trim())))
+                {
+                    MessageBox.Show("社員IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProductID.Focus();
+                    return false;
+                }
+            }
+            return true;
+        }
+        ///////////////////////////////
+        //メソッド名：ProductSearchButtonClick()
+        //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：受注情報検索の実行
+        ///////////////////////////////
+        private void ProductSearchButtonClick(bool searchFlg)
+        {
+            // 顧客情報抽出
+            GenerateDataAtSelect(searchFlg);
+
+            int intSearchCount = listProdact.Count;
+
+            // 顧客抽出結果表示
+            GetDataGridView();
+
+            MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtSelect()
+        //引　数   ：searchFlg = And検索かOr検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：受注情報の取得
+        ///////////////////////////////
+        private void GenerateDataAtSelect(bool searchFlg)
+        {
+            string strStockID = txbStockID.Text.Trim();
+            int intStockID = 0;
+
+            if (!String.IsNullOrEmpty(strStockID))
+            {
+                intStockID = int.Parse(strStockID);
+            }
+
+            string strProductID = txbProductID.Text.Trim();
+            int intProdactID = 0;
+
+            if (!String.IsNullOrEmpty(strProductID))
+            {
+                intProdactID = int.Parse(strProductID);
+            }
+
+            // 検索条件のセット
+            M_Product selectProdact = new M_Product()
+            {
+                //PrID = intProdactID,
+                //SoID = cmbSalesOfficeID.SelectedIndex + 1,
+                //StID = intStockID,
+                //ClID = intClientID,
+            };
+
+            if (searchFlg)
+            {
+                // 顧客データのAnd抽出
+                listProdact = prodactDataAccess.GetAndProdactData(selectProdact);
+            }
+            else
+            {
+                // 顧客データのOr抽出
+                listProdact = prodactDataAccess.GetOrProdactData(selectProdact);
+            }
+        }
+        ///////////////////////////////
+        //メソッド名：OrderSearchButtonClick()
+        //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：受注情報検索の実行
+        ///////////////////////////////
+        private void ProductSearchButtonClick(bool searchFlg)
+        {
+            // 顧客情報抽出
+            GenerateDataAtSelect(searchFlg);
+
+            int intSearchCount = listProdact.Count;
+
+            // 顧客抽出結果表示
+            GetDataGridView();
+
+            MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
