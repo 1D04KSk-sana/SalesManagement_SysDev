@@ -16,10 +16,16 @@ namespace SalesManagement_SysDev
         SyukkoDataAccess SyukkoDataAccess = new SyukkoDataAccess();
         //データベース商品テーブルアクセス用クラスのインスタンス化
         SalesOfficeDataAccess SalesOfficeDataAccess = new SalesOfficeDataAccess();
+        //データベースメーカーテーブルアクセス用クラスのインスタンス化
+        MakerDataAccess MakerDataAccess = new MakerDataAccess();
+        //データベースメーカーテーブルアクセス用クラスのインスタンス化
+        SaleDataAccess SaleDataAccess = new SaleDataAccess();
         //データグリッドビュー用の全出庫データ
         private static List<T_Syukko> listAllSyukko = new List<T_Syukko>();
         //データグリッドビュー用の出庫データ
         private static List<T_Syukko> listsyukko = new List<T_Syukko>();
+        //データグリッドビュー用の出庫データ
+        private static List<T_Syukko> listsalesoffice = new List<T_Syukko>();
         //データグリッドビュー用の営業所データ
         private static List<M_SalesOffice> listSalesOfficeID = new List<M_SalesOffice>();
         //入力形式チェック用クラスのインスタンス化
@@ -47,6 +53,23 @@ namespace SalesManagement_SysDev
 
             SetFormDataGridView();
             DictionarySet();
+
+            //cmbSalesOfficeIDを未選択に
+            cmbSalesOfficeID.SelectedIndex = -1;
+
+            //cmbViewを表示に
+            //cmbView.SelectedIndex = 0;
+
+            ////メーカ名のデータを取得
+            //listSalesOfficeID = SaleDataAccess.GetSalesOfficeDspData();
+            ////取得したデータをコンボボックスに挿入
+            //cmbSalesOfficeID.DataSource = listSalesOfficeID;
+            ////表示する名前をMaNameに指定
+            //cmbSalesOfficeID.DisplayMember = "MaName";
+            ////項目の順番をMaIDに指定
+            //cmbSalesOfficeID.ValueMember = "SoID";
+            ////cmbMakerNameを未選択に
+            //cmbSalesOfficeID.SelectedIndex = -1;
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
@@ -74,6 +97,18 @@ namespace SalesManagement_SysDev
             if (rdbSearch.Checked)
             {
                 ProdactDataSelect();
+            }
+
+            //確定ラヂオボタンがチェックされているとき
+            if (rdbConfirm.Checked)
+            {
+
+            }
+
+            //非表示ラヂオボタンがチェックされているとき
+            if (rdbHidden.Checked)
+            {
+
             }
         }
 
@@ -301,7 +336,7 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void DictionarySet()
         {
-            //営業書名のデータを取得
+            //営業所名のデータを取得
             listSalesOfficeID = SalesOfficeDataAccess.GetSalesOfficeDspData();
 
             dictionarySoID = new Dictionary<int, string> { };
