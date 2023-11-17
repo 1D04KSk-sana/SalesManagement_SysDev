@@ -30,6 +30,7 @@
         {
             this.lblWarehousing = new System.Windows.Forms.Label();
             this.pnlButuryu = new System.Windows.Forms.Panel();
+            this.btnClose = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.txbProdactName = new System.Windows.Forms.TextBox();
             this.txbWarehousingDetailID = new System.Windows.Forms.TextBox();
@@ -38,7 +39,6 @@
             this.txbWarehousingQuantity = new System.Windows.Forms.TextBox();
             this.txbOrderID = new System.Windows.Forms.TextBox();
             this.txbWarehousingID = new System.Windows.Forms.TextBox();
-            this.btnClose = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -66,6 +66,8 @@
             this.dgvWarehousing = new System.Windows.Forms.DataGridView();
             this.label10 = new System.Windows.Forms.Label();
             this.dgvWarehousingDetail = new System.Windows.Forms.DataGridView();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.rdbDetailRegister = new System.Windows.Forms.RadioButton();
             this.pnlButuryu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarehousing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarehousingDetail)).BeginInit();
@@ -94,6 +96,18 @@
             this.pnlButuryu.Name = "pnlButuryu";
             this.pnlButuryu.Size = new System.Drawing.Size(1920, 150);
             this.pnlButuryu.TabIndex = 55;
+            // 
+            // btnClose
+            // 
+            this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnClose.Location = new System.Drawing.Point(1705, 51);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(2);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(160, 70);
+            this.btnClose.TabIndex = 63;
+            this.btnClose.TabStop = false;
+            this.btnClose.Text = "閉じる";
+            this.btnClose.UseVisualStyleBackColor = true;
             // 
             // btnReturn
             // 
@@ -176,18 +190,6 @@
             this.txbWarehousingID.Name = "txbWarehousingID";
             this.txbWarehousingID.Size = new System.Drawing.Size(220, 31);
             this.txbWarehousingID.TabIndex = 62;
-            // 
-            // btnClose
-            // 
-            this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClose.Location = new System.Drawing.Point(1705, 51);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(2);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(160, 70);
-            this.btnClose.TabIndex = 63;
-            this.btnClose.TabStop = false;
-            this.btnClose.Text = "閉じる";
-            this.btnClose.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -288,6 +290,7 @@
             // 
             // btnDone
             // 
+            this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnDone.Location = new System.Drawing.Point(1678, 171);
             this.btnDone.Margin = new System.Windows.Forms.Padding(2);
@@ -296,7 +299,7 @@
             this.btnDone.TabIndex = 102;
             this.btnDone.TabStop = false;
             this.btnDone.Text = "実行";
-            this.btnDone.UseVisualStyleBackColor = true;
+            this.btnDone.UseVisualStyleBackColor = false;
             // 
             // btnClear
             // 
@@ -430,10 +433,10 @@
             // 
             // txbHidden
             // 
-            this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbHidden.Location = new System.Drawing.Point(271, 443);
+            this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbHidden.Location = new System.Drawing.Point(271, 437);
             this.txbHidden.Name = "txbHidden";
-            this.txbHidden.Size = new System.Drawing.Size(1565, 28);
+            this.txbHidden.Size = new System.Drawing.Size(1565, 42);
             this.txbHidden.TabIndex = 114;
             // 
             // cmbView
@@ -467,7 +470,7 @@
             // 
             this.dgvWarehousing.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvWarehousing.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.dgvWarehousing.Location = new System.Drawing.Point(11, 484);
+            this.dgvWarehousing.Location = new System.Drawing.Point(15, 484);
             this.dgvWarehousing.Margin = new System.Windows.Forms.Padding(2);
             this.dgvWarehousing.Name = "dgvWarehousing";
             this.dgvWarehousing.RowHeadersWidth = 51;
@@ -480,7 +483,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label10.Location = new System.Drawing.Point(119, 447);
+            this.label10.Location = new System.Drawing.Point(119, 437);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(130, 24);
@@ -500,12 +503,36 @@
             this.dgvWarehousingDetail.TabIndex = 119;
             this.dgvWarehousingDetail.TabStop = false;
             // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(0, 0);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(88, 16);
+            this.radioButton1.TabIndex = 120;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "radioButton1";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // rdbDetailRegister
+            // 
+            this.rdbDetailRegister.AutoSize = true;
+            this.rdbDetailRegister.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbDetailRegister.Location = new System.Drawing.Point(153, 186);
+            this.rdbDetailRegister.Name = "rdbDetailRegister";
+            this.rdbDetailRegister.Size = new System.Drawing.Size(173, 39);
+            this.rdbDetailRegister.TabIndex = 121;
+            this.rdbDetailRegister.Text = "詳細登録";
+            this.rdbDetailRegister.UseVisualStyleBackColor = true;
+            // 
             // F_ButuryuWarehousing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(1904, 1011);
+            this.Controls.Add(this.rdbDetailRegister);
+            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.dgvWarehousingDetail);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.dgvWarehousing);
@@ -591,5 +618,7 @@
         private System.Windows.Forms.DataGridView dgvWarehousing;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DataGridView dgvWarehousingDetail;
+        private System.Windows.Forms.RadioButton radioButton1;
+        public System.Windows.Forms.RadioButton rdbDetailRegister;
     }
 }
