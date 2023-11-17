@@ -133,11 +133,15 @@
             this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbView.FormattingEnabled = true;
+            this.cmbView.Items.AddRange(new object[] {
+            "表示",
+            "非表示"});
             this.cmbView.Location = new System.Drawing.Point(1106, 194);
             this.cmbView.Name = "cmbView";
             this.cmbView.Size = new System.Drawing.Size(360, 43);
             this.cmbView.TabIndex = 3;
             this.cmbView.TabStop = false;
+            this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
             // 
             // txbSyukkoID
             // 

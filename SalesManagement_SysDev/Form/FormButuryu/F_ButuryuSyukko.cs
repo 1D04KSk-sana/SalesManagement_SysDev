@@ -58,9 +58,9 @@ namespace SalesManagement_SysDev
             cmbSalesOfficeID.SelectedIndex = -1;
 
             //cmbViewを表示に
-            //cmbView.SelectedIndex = 0;
+            cmbView.SelectedIndex = 0;
 
-            ////メーカ名のデータを取得
+            ////営業所名のデータを取得
             //listSalesOfficeID = SaleDataAccess.GetSalesOfficeDspData();
             ////取得したデータをコンボボックスに挿入
             //cmbSalesOfficeID.DataSource = listSalesOfficeID;
@@ -70,6 +70,12 @@ namespace SalesManagement_SysDev
             //cmbSalesOfficeID.ValueMember = "SoID";
             ////cmbMakerNameを未選択に
             //cmbSalesOfficeID.SelectedIndex = -1;
+        }
+        
+        private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //データグリッドビューのデータ取得
+            GetDataGridView();
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
@@ -458,5 +464,7 @@ namespace SalesManagement_SysDev
                 btnBack.Visible = true;
             }
         }
+
+
     }
 }
