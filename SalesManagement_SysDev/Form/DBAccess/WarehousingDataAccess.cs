@@ -24,6 +24,7 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 context.T_Warehousings.Add(regWarehousing);
                 context.SaveChanges();
+                context.Dispose();
                 return true;
             }
             catch (Exception ex)

@@ -166,14 +166,14 @@ namespace SalesManagement_SysDev
         //戻り値   ：入庫登録情報
         //機　能   ：入庫登録データのセット
         ///////////////////////////////
-        private T_Warehousing GenerateWarehousingAtRegistration(T_Warehousing Warehousing)
+        private T_Warehousing GenerateWarehousingAtRegistration(T_Hattyu Hattyu)
         {
             return new T_Warehousing
             {
-                WaID = Warehousing.WaID,
-                HaID = Warehousing.HaID,
-                EmID = Warehousing.EmID,
-                WaDate = DateTime.Now,
+                WaID = Hattyu.HaID,
+                HaID = Hattyu.HaID,
+                WaShelfFlag = 0,
+                WaFlag = 0,
             };
         }
 
@@ -198,25 +198,25 @@ namespace SalesManagement_SysDev
         private void ClearImput()
         {
             txbHattyuID.Text = string.Empty;
-            cmbMakerName.Text = string.Empty;
+            cmbMakerName.SelectedIndex = -1;
             txbEmployeeName.Text = string.Empty;
-            txbHattyuDetailID.Text = string.Empty;
-            txbProductID.Text = string.Empty;
-            txbProductName.Text = string.Empty;
-            txbHattyuQuantity.Text = string.Empty;
             dtpHattyuDate.Value = DateTime.Now;
+            cmbHidden.SelectedIndex = -1;
+            cmbConfirm.SelectedIndex = -1;
+            txbHidden.Text = string.Empty;
+
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void btnDetailClear_Click(object sender, EventArgs e)
         {
             ClearImputDetail();
         }
-        ///////////////////////////////
-        //メソッド名：ClearImputDetail()
-        //引　数   ：なし
-        //戻り値   ：なし
-        //機　能   ：コントロールのクリア(Detail)
-        ///////////////////////////////
-        private void ClearImputDetail()
+            ///////////////////////////////
+            //メソッド名：ClearImputDetail()
+            //引　数   ：なし
+            //戻り値   ：なし
+            //機　能   ：コントロールのクリア(Detail)
+            ///////////////////////////////
+            private void ClearImputDetail()
         {
             txbHattyuDetailID.Text = string.Empty;
             txbProductID.Text = string.Empty;
@@ -306,7 +306,7 @@ namespace SalesManagement_SysDev
             //1行ずつdgvHattyuに挿入
             foreach (var item in depData)
             {
-                dgvHattyu.Rows.Add(item.HaID, dictionaryMaker[item.MaID], dictionaryEmployee[item.EmID], item.HaDate, dictionaryHidden[item.HaFlag],item.WaWarehouseFlag, item.HaHidden);
+                dgvHattyu.Rows.Add(item.HaID, dictionaryMaker[item.MaID], dictionaryEmployee[item.EmID], item.HaDate, dictionaryHidden[item.HaFlag], dictionaryConfirm[item.WaWarehouseFlag], item.HaHidden);
             }
 
             //dgvHattyuをリフレッシュ
@@ -460,7 +460,7 @@ namespace SalesManagement_SysDev
                     return false;
                 }
                 //社員IDが現在ログインしているIDと等しいかチェック
-                if (F_Login.intEmployeeID == int.Parse(txbEmployeeName.Text.Trim()))
+                if (F_Login.intEmployeeID != int.Parse(txbEmployeeName.Text.Trim()))
                 {
                     MessageBox.Show("自身の社員IDを入力してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbEmployeeName.Focus();
@@ -590,7 +590,7 @@ namespace SalesManagement_SysDev
                     return false;
                 }
                 //発注詳細IDの存在チェック
-                if (hattyuDataAccess.CheckHattyuIDExistence(int.Parse(txbHattyuID.Text.Trim())))
+                if (hattyuDetailDataAccess.CheckHattyuDetailIDExistence(int.Parse(txbHattyuDetailID.Text.Trim())))
                 {
                     MessageBox.Show("発注詳細IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbHattyuDetailID.Focus();
@@ -610,7 +610,7 @@ namespace SalesManagement_SysDev
                 //発注IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbHattyuID.Text.Trim()))
                 {
-                    MessageBox.Show("受注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("発注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbHattyuID.Focus();
                     return false;
                 }
@@ -668,7 +668,7 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 受注情報の登録
+            // 発注情報の登録
             bool flg = hattyuDetailDataAccess.AddHattyuDetailData(regHattyu);
 
             //登録成功・失敗メッセージ
@@ -711,10 +711,10 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 受注情報作成
+            // 発注情報作成
             var updHattyu = GenerateDataAtUpdate();
 
-            // 受注情報更新
+            // 発注情報更新
             UpdateHattyu(updHattyu);
         }
 
@@ -872,7 +872,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbHattyuID.Text.Trim()) && cmbMakerName.SelectedIndex == -1 && String.IsNullOrEmpty(txbEmployeeName.Text.Trim()))
+            if (String.IsNullOrEmpty(txbHattyuID.Text.Trim()) && cmbMakerName.SelectedIndex == -1 && String.IsNullOrEmpty(txbEmployeeName.Text.Trim())&&dtpHattyuDate.Value==null)
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbHattyuID.Focus();
@@ -1116,18 +1116,18 @@ namespace SalesManagement_SysDev
 
             T_Hattyu Hattyu = hattyuDataAccess.GetIDHattyuData(int.Parse(txbHattyuID.Text.Trim()));
 
-            //T_Warehousing Warehousing = GenerateWarehousingAtRegistration(Hattyu);
+            T_Warehousing Warehousing = GenerateWarehousingAtRegistration(Hattyu);
 
-            //bool flgWarehousing = warehousingDataAccess.AddWarehousingData(Warehousing);
+            bool flgWarehousing = warehousingDataAccess.AddWarehousingData(Warehousing);
 
-            //if (flg == true)
-            //{
-            //    MessageBox.Show("入庫管理にデータを送信ました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
-            //else
-            //{
-            //    MessageBox.Show("入庫管理へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+            if (flgWarehousing == true)
+            {
+                MessageBox.Show("入庫管理にデータを送信ました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("入庫管理へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             //テキストボックス等のクリア
             ClearImput();
@@ -1321,7 +1321,7 @@ namespace SalesManagement_SysDev
             dgvHattyuDetail.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             dgvHattyuDetail.Columns.Add("HaID", "発注ID");
-            dgvHattyuDetail.Columns.Add("HaDetailID", "受注詳細ID");
+            dgvHattyuDetail.Columns.Add("HaDetailID", "発注詳細ID");
             dgvHattyuDetail.Columns.Add("PrID", "商品ID");
             dgvHattyuDetail.Columns.Add("HaQuantity", "数量");
 
@@ -1423,5 +1423,33 @@ namespace SalesManagement_SysDev
             SelectRowDetailControl();
 
         }
+
+        private void rdbUpdate_CheckedChanged(object sender, EventArgs e)
+        {
+            if(rdbUpdate.Checked)
+            {
+                cmbMakerName.Enabled = false;
+                txbEmployeeName.Enabled = false;
+                dtpHattyuDate.Enabled = false;
+                txbHattyuDetailID.Enabled = false;
+                txbHattyuQuantity.Enabled = false;
+                txbProductID.Enabled = false;
+                txbProductName.Enabled = false;
+
+            }
+            else
+            {
+                cmbMakerName.Enabled = true;
+                txbEmployeeName.Enabled = true;
+                dtpHattyuDate.Enabled = true;
+                txbHattyuDetailID.Enabled = true;
+                txbHattyuQuantity.Enabled = true;
+                txbProductID.Enabled = true;
+                txbProductName.Enabled = true;
+
+            }
+        }
+
+       
     }
 }

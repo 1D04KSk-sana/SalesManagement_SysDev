@@ -78,6 +78,30 @@ namespace SalesManagement_SysDev
 
             return listHattyuDetail;
         }
+        ///////////////////////////////
+        //メソッド名：CheckHattyuDetailIDExistence()
+        //引　数   ：発注コード
+        //戻り値   ：True or False
+        //機　能   ：一致する発注IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckHattyuDetailIDExistence(int HattyuDetailID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                //部署CDで一致するデータが存在するか
+                flg = context.T_HattyuDetails.Any(x => x.HaDetailID == HattyuDetailID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
 
     }
 }

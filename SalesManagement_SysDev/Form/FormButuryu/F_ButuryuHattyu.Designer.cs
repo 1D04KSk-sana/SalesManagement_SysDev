@@ -137,6 +137,7 @@
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 105;
             this.txbNumPage.TabStop = false;
+            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbNumPage_KeyPress);
             // 
             // btnPageMin
             // 
@@ -238,6 +239,7 @@
             this.txbPageSize.Size = new System.Drawing.Size(50, 28);
             this.txbPageSize.TabIndex = 97;
             this.txbPageSize.TabStop = false;
+            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbPageSize_KeyPress);
             // 
             // cmbView
             // 
@@ -413,10 +415,11 @@
             this.rdbUpdate.Location = new System.Drawing.Point(475, 179);
             this.rdbUpdate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbUpdate.Name = "rdbUpdate";
-            this.rdbUpdate.Size = new System.Drawing.Size(208, 39);
+            this.rdbUpdate.Size = new System.Drawing.Size(173, 39);
             this.rdbUpdate.TabIndex = 110;
-            this.rdbUpdate.Text = "非表示更新";
+            this.rdbUpdate.Text = "表示更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
+            this.rdbUpdate.CheckedChanged += new System.EventHandler(this.rdbUpdate_CheckedChanged);
             // 
             // rdbDetailRegister
             // 
@@ -546,13 +549,13 @@
             this.btnDetailClear.TabStop = false;
             this.btnDetailClear.Text = "詳細クリア";
             this.btnDetailClear.UseVisualStyleBackColor = true;
-            this.btnDetailClear.Click += new System.EventHandler(this.button1_Click);
+            this.btnDetailClear.Click += new System.EventHandler(this.btnDetailClear_Click);
             // 
             // rdbConfirm
             // 
             this.rdbConfirm.AutoSize = true;
             this.rdbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbConfirm.Location = new System.Drawing.Point(721, 179);
+            this.rdbConfirm.Location = new System.Drawing.Point(686, 179);
             this.rdbConfirm.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbConfirm.Name = "rdbConfirm";
             this.rdbConfirm.Size = new System.Drawing.Size(103, 39);
@@ -580,7 +583,7 @@
             this.lblConfirm.Name = "lblConfirm";
             this.lblConfirm.Size = new System.Drawing.Size(142, 24);
             this.lblConfirm.TabIndex = 125;
-            this.lblConfirm.Text = "確定/未確定";
+            this.lblConfirm.Text = "未確定/確定";
             // 
             // cmbConfirm
             // 
@@ -588,8 +591,8 @@
             this.cmbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbConfirm.FormattingEnabled = true;
             this.cmbConfirm.Items.AddRange(new object[] {
-            "表示",
-            "非表示"});
+            "未確定",
+            "確定"});
             this.cmbConfirm.Location = new System.Drawing.Point(696, 433);
             this.cmbConfirm.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cmbConfirm.Name = "cmbConfirm";

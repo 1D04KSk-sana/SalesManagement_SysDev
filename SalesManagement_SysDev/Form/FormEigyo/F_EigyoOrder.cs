@@ -492,7 +492,7 @@ namespace SalesManagement_SysDev
                     return false;
                 }
                 //社員IDが現在ログインしているIDと等しいかチェック
-                if (F_Login.intEmployeeID == int.Parse(txbEmployeeID.Text.Trim()))
+                if (F_Login.intEmployeeID != int.Parse(txbEmployeeID.Text.Trim()))
                 {
                     MessageBox.Show("自身の社員IDを入力してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbEmployeeID.Focus();
@@ -989,7 +989,7 @@ namespace SalesManagement_SysDev
 
             bool flgChumon = chumonDataAccess.AddChumonData(Chumon);
 
-            if (flg == true)
+            if (flgChumon == true)
             {
                 MessageBox.Show("注文管理にデータを送信ました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

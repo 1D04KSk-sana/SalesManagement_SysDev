@@ -186,6 +186,7 @@ namespace SalesManagement_SysDev
                 var Hattyu = context.T_Hattyus.Single(x => x.HaID == updHattyu.HaID);
 
                 Hattyu.HaFlag = updHattyu.HaFlag;
+                Hattyu.HaHidden = updHattyu.HaHidden;
                 context.SaveChanges();
                 context.Dispose();
 
