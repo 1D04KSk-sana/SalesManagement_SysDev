@@ -172,6 +172,7 @@ namespace SalesManagement_SysDev
             {
                 WaID = Hattyu.HaID,
                 HaID = Hattyu.HaID,
+                EmID = F_Login.intEmployeeID,
                 WaShelfFlag = 0,
                 WaFlag = 0,
             };
@@ -1082,7 +1083,7 @@ namespace SalesManagement_SysDev
             return new T_Hattyu
             {
                 HaID = int.Parse(txbHattyuID.Text.Trim()),
-                WaWarehouseFlag = cmbConfirm.SelectedIndex,
+                WaWarehouseFlag = 1,
             };
         }
 
@@ -1450,6 +1451,76 @@ namespace SalesManagement_SysDev
             }
         }
 
-       
+        private void rdbRegister_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbUpdate.Checked)
+            {
+                txbHattyuDetailID.Enabled = false;
+                txbHattyuQuantity.Enabled = false;
+                txbProductID.Enabled = false;
+                txbProductName.Enabled = false;
+            }
+            else
+            {
+                txbHattyuDetailID.Enabled = true;
+                txbHattyuQuantity.Enabled = true;
+                txbProductID.Enabled = true;
+                txbProductName.Enabled = true;
+            }
+
+        }
+
+        private void rdbDetailRegister_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbUpdate.Checked)
+            {
+                cmbMakerName.Enabled = false;
+                txbEmployeeName.Enabled = false;
+                dtpHattyuDate.Enabled = false;
+            }
+            else
+            {
+                cmbMakerName.Enabled = true;
+                txbEmployeeName.Enabled = true;
+                dtpHattyuDate.Enabled = true;
+            }
+
+        }
+
+        private void rdbSearch_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbUpdate.Checked)
+            {
+                txbHattyuDetailID.Enabled = false;
+                txbHattyuQuantity.Enabled = false;
+                txbProductID.Enabled = false;
+                txbProductName.Enabled = false;
+            }
+            else
+            {
+                txbHattyuDetailID.Enabled = true;
+                txbHattyuQuantity.Enabled = true;
+                txbProductID.Enabled = true;
+                txbProductName.Enabled = true;
+            }
+        }
+
+        private void rdbConfirm_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbUpdate.Checked)
+            {
+                txbHattyuDetailID.Enabled = false;
+                txbHattyuQuantity.Enabled = false;
+                txbProductID.Enabled = false;
+                txbProductName.Enabled = false;
+            }
+            else
+            {
+                txbHattyuDetailID.Enabled = true;
+                txbHattyuQuantity.Enabled = true;
+                txbProductID.Enabled = true;
+                txbProductName.Enabled = true;
+            }
+        }
     }
 }

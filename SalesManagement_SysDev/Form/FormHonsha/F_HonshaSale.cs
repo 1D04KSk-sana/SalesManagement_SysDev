@@ -41,7 +41,7 @@ namespace SalesManagement_SysDev
         //DataGridView用に使用する顧客のDictionary
         private Dictionary<int, string> dictionaryClient;
         //DataGridView用に使用す営業所のDictionary
-        private Dictionary<int?, string> dictionarySalesOffice;
+        private Dictionary<int, string> dictionarySalesOffice;
 
 
 
@@ -90,7 +90,7 @@ namespace SalesManagement_SysDev
             //営業所のデータを取得
             listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
 
-            dictionarySalesOffice = new Dictionary<int?, string> { };
+            dictionarySalesOffice = new Dictionary<int, string> { };
 
             foreach (var item in listSalesOffice)
             {
@@ -528,7 +528,7 @@ namespace SalesManagement_SysDev
             //1行ずつdgvClientに挿入
             foreach (var item in depData)
             {
-                dgvSale.Rows.Add(item.SaID, dictionaryClient[item.ClID.Value], dictionarySalesOffice[item.SoID], item.EmID, item.ChID, item.SaDate, dictionaryHidden[item.SaFlag], item.SaHidden);
+                dgvSale.Rows.Add(item.SaID, dictionaryClient[item.ClID], dictionarySalesOffice[item.SoID], item.EmID, item.ChID, item.SaDate, dictionaryHidden[item.SaFlag], item.SaHidden);
             }
 
             //dgvClientをリフレッシュ
@@ -576,7 +576,7 @@ namespace SalesManagement_SysDev
             //データグリッドビューに乗っている情報をGUIに反映
             txbSaleID.Text = dgvSale[0, dgvSale.CurrentCellAddress.Y].Value.ToString();
             txbClientName.Text = dgvSale[1, dgvSale.CurrentCellAddress.Y].Value.ToString();
-            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvSale[2, dgvSale.CurrentCellAddress.Y].Value.ToString()).Key.Value - 1;
+            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvSale[2, dgvSale.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbClientPostal.Text = dgvSale[4, dgvSale.CurrentCellAddress.Y].Value.ToString();
             dtpSaleDate.Text = dgvSale[5, dgvSale.CurrentCellAddress.Y].Value.ToString();
         }
@@ -797,5 +797,20 @@ namespace SalesManagement_SysDev
             }
         }
 
+        private void rdbHiddenUpdate_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbHiddenUpdate.Checked)
+            {
+                txbClientName.Enabled = false;
+                cmbSalesOfficeID.Enabled = false;
+                txbClientPostal.Enabled = false;
+            }
+            else
+            {
+                txbClientName.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                txbClientPostal.Enabled = true;
+            }
+        }
     }
 }

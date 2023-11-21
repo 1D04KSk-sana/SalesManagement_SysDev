@@ -11,7 +11,7 @@ namespace SalesManagement_SysDev
     {
         ///////////////////////////////
         //メソッド名：AddWarehousingData()
-        //引　数：regWarehousing = 注文データ
+        //引　数：regWarehousing = 入庫データ
         //戻り値：True or False
         //機　能：入庫データの登録
         //      ：登録成功の場合True

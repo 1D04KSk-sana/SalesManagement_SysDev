@@ -89,6 +89,7 @@
             this.rdbSearch.TabIndex = 82;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.rdbSearch_CheckedChanged);
             // 
             // rdbRegister
             // 
@@ -101,6 +102,7 @@
             this.rdbRegister.TabIndex = 107;
             this.rdbRegister.Text = "登録";
             this.rdbRegister.UseVisualStyleBackColor = true;
+            this.rdbRegister.CheckedChanged += new System.EventHandler(this.rdbRegister_CheckedChanged);
             // 
             // cmbHidden
             // 
@@ -432,6 +434,7 @@
             this.rdbDetailRegister.TabIndex = 111;
             this.rdbDetailRegister.Text = "詳細登録";
             this.rdbDetailRegister.UseVisualStyleBackColor = true;
+            this.rdbDetailRegister.CheckedChanged += new System.EventHandler(this.rdbDetailRegister_CheckedChanged);
             // 
             // txbEmployeeName
             // 
@@ -562,6 +565,7 @@
             this.rdbConfirm.TabIndex = 123;
             this.rdbConfirm.Text = "確定";
             this.rdbConfirm.UseVisualStyleBackColor = true;
+            this.rdbConfirm.CheckedChanged += new System.EventHandler(this.rdbConfirm_CheckedChanged);
             // 
             // lblHidden
             // 

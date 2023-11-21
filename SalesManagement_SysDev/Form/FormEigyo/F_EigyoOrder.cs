@@ -951,7 +951,7 @@ namespace SalesManagement_SysDev
             return new T_Order
             {
                 OrID = int.Parse(txbOrderID.Text.Trim()),
-                OrStateFlag = cmbConfirm.SelectedIndex,
+                OrStateFlag = 1,
             };
         }
 
