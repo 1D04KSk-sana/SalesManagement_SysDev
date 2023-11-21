@@ -234,7 +234,7 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void GetDataGridView()
         {
-            //表示用の売上リスト作成
+            //表示用の発注リスト作成
             List<T_Hattyu> listViewHattyu = SetListHattyu();
 
 
@@ -250,10 +250,10 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private List<T_Hattyu> SetListHattyu()
         {
-            //売上のデータを全取得
+            //発注のデータを全取得
             listAllHattyu = hattyuDataAccess.GetHattyuData();
 
-            //表示用の売上リスト作成
+            //表示用の発注リスト作成
             List<T_Hattyu> listViewHattyu = new List<T_Hattyu>();
 
             //検索ラヂオボタンがチェックされているとき
@@ -271,12 +271,12 @@ namespace SalesManagement_SysDev
             //一覧表示cmbViewが表示を選択されているとき
             if (cmbView.SelectedIndex == 0)
             {
-                // 管理Flgが表示の売上データの取得
+                // 管理Flgが表示の発注データの取得
                 listViewHattyu = hattyuDataAccess.GetHattyuDspData(listViewHattyu);
             }
             else
             {
-                // 管理Flgが非表示の売上データの取得
+                // 管理Flgが非表示の発注データの取得
                 listViewHattyu = hattyuDataAccess.GetHattyuNotDspData(listViewHattyu);
             }
 
@@ -930,12 +930,12 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void HattyuSearchButtonClick(bool searchFlg)
         {
-            // 顧客情報抽出
+            // 発注情報抽出
             GenerateDataAtSelect(searchFlg);
 
             int intSearchCount = listHattyu.Count;
 
-            // 顧客抽出結果表示
+            // 発注抽出結果表示
             GetDataGridView();
 
             MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -976,12 +976,12 @@ namespace SalesManagement_SysDev
 
             if (searchFlg)
             {
-                // 顧客データのAnd抽出
+                // 発注データのAnd抽出
                 listHattyu = hattyuDataAccess.GetAndHattyuData(selectCondition);
             }
             else
             {
-                // 顧客データのOr抽出
+                // 発注データのOr抽出
                 listHattyu = hattyuDataAccess.GetOrHattyuData(selectCondition);
             }
         }

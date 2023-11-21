@@ -210,7 +210,6 @@ namespace SalesManagement_SysDev
         {
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
-            //dtpSaleDate.Value=DateTime.Now;
             DictionarySet();
             SetFormDataGridView();
 
@@ -812,5 +811,6 @@ namespace SalesManagement_SysDev
                 txbClientPostal.Enabled = true;
             }
         }
+
     }
 }
