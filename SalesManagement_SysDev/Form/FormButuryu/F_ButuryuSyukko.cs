@@ -16,14 +16,16 @@ namespace SalesManagement_SysDev
         SyukkoDataAccess SyukkoDataAccess = new SyukkoDataAccess();
         //データベース商品テーブルアクセス用クラスのインスタンス化
         SalesOfficeDataAccess SalesOfficeDataAccess = new SalesOfficeDataAccess();
-        //データベースメーカーテーブルアクセス用クラスのインスタンス化
-        MakerDataAccess MakerDataAccess = new MakerDataAccess();
-        //データベースメーカーテーブルアクセス用クラスのインスタンス化
-        SaleDataAccess SaleDataAccess = new SaleDataAccess();
+        //データベース商品テーブルアクセス用クラスのインスタンス化
+        SyukkoDetailDataAccess SyukkoDetailDataAccess = new SyukkoDetailDataAccess();
         //データグリッドビュー用の全出庫データ
         private static List<T_Syukko> listAllSyukko = new List<T_Syukko>();
         //データグリッドビュー用の出庫データ
         private static List<T_Syukko> listsyukko = new List<T_Syukko>();
+        //データグリッドビュー用の出庫データ
+        private static List<T_SyukkoDetail> listsyukkodetail = new List<T_SyukkoDetail>();
+        //データグリッドビュー用の全出庫データ
+        private static List<T_SyukkoDetail> listAllSyukkoDetail = new List<T_SyukkoDetail>();
         //データグリッドビュー用の出庫データ
         private static List<T_Syukko> listsalesoffice = new List<T_Syukko>();
         //データグリッドビュー用の営業所データ
@@ -232,9 +234,12 @@ namespace SalesManagement_SysDev
         {
             //表示用の商品リスト作成
             List<T_Syukko> listViewSyukko = SetListSyukko();
+            List<T_SyukkoDetail> listViewSyukkoDetail = SetListSyukkoDetail();
 
             // DataGridViewに表示するデータを指定
             SetDataGridView(listViewSyukko);
+
+            SetDataGtidViewDetail(listViewSyukkoDetail);
         }
 
         ///////////////////////////////
@@ -276,6 +281,47 @@ namespace SalesManagement_SysDev
             }
 
             return listViewSyukko;
+        }
+
+        ///////////////////////////////
+        //メソッド名：SetListClient()
+        //引　数   ：なし
+        //戻り値   ：表示用出庫データ
+        //機　能   ：表示用出庫データの準備
+        ///////////////////////////////
+        private List<T_SyukkoDetail> SetListSyukkoDetail()
+        {
+            //商品のデータを全取得
+            listAllSyukko = SyukkoDataAccess.GetSyukkoDspData();
+
+            //表示用の顧客リスト作成
+            List<T_SyukkoDetail> listViewSyukkoDetail = new List<T_SyukkoDetail>();
+
+            //検索ラヂオボタンがチェックされているとき
+            if (rdbSearch.Checked)
+            {
+                //表示している（検索結果）のデータをとってくる
+                listViewSyukkoDetail = listsyukkodetail;
+            }
+            else
+            {
+                //全データをとってくる
+                listViewSyukkoDetail = listAllSyukkoDetail;
+            }
+
+            //一覧表示cmbViewが表示を選択されているとき
+            if (cmbView.SelectedIndex == 0)
+            {
+                // 管理Flgが表示の商品データの取得
+                listViewSyukkoDetail = SyukkoDetailDataAccess.GetSyukkoDetailtDspData(listViewSyukkoDetail);
+            }
+            else
+            {
+                // 管理Flgが非表示の商品データの取得
+                listViewSyukkoDetail = SyukkoDetailDataAccess.GetSyukkoDetailNotDspData(listViewSyukkoDetail);
+            }
+
+            return listViewSyukkoDetail;
         }
 
         ///////////////////////////////
@@ -409,6 +455,45 @@ namespace SalesManagement_SysDev
             {
                 dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+
+            //列を自由に設定できるように
+            dgvSyukkoDetail.AutoGenerateColumns = false;
+            //行単位で選択するようにする
+            dgvSyukko.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //行と列の高さを変更できないように
+            dgvSyukkoDetail.AllowUserToResizeColumns = false;
+            dgvSyukkoDetail.AllowUserToResizeRows = false;
+            //セルの複数行選択をオフに
+            dgvSyukkoDetail.MultiSelect = false;
+            //セルの編集ができないように
+            dgvSyukkoDetail.ReadOnly = true;
+            //ユーザーが新しい行を追加できないようにする
+            dgvSyukkoDetail.AllowUserToAddRows = false;
+
+            //左端の項目列を削除
+            dgvSyukkoDetail.RowHeadersVisible = false;
+            //行の自動追加をオフ
+            dgvSyukkoDetail.AllowUserToAddRows = false;
+
+            //ヘッダー位置の指定
+            dgvSyukkoDetail.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dgvSyukkoDetail.Columns.Add("SyDetailID", "出庫詳細ID");
+            dgvSyukkoDetail.Columns.Add("SyID", "出庫ID");
+            dgvSyukkoDetail.Columns.Add("PrID", "商品ID");
+            dgvSyukkoDetail.Columns.Add("SyQuantity", "数量");
+
+
+            dgvSyukkoDetail.Columns["SyDetailID"].Width = 200;
+            dgvSyukkoDetail.Columns["SyID"].Width = 200;
+            dgvSyukkoDetail.Columns["PrID"].Width = 200;
+            dgvSyukkoDetail.Columns["SyQuantity"].Width = 200;
+
+            //並び替えができないようにする
+            foreach (DataGridViewColumn dataColumn in dgvSyukkoDetail.Columns)
+            {
+                dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
 
         ///////////////////////////////
@@ -432,23 +517,22 @@ namespace SalesManagement_SysDev
             //データからページに必要な部分だけを取り出す
             var depData = viewSyukko.Skip(pageSize * pageNum).Take(pageSize).ToList();
 
-            //1行ずつdgvClientに挿入
+            //1行ずつdgvSyukkoに挿入
             foreach (var item in depData)
             {
                 dgvSyukko.Rows.Add(item.SyID, item.EmID, item.ClID, item.SoID, item.OrID, item.SyDate,
                     item.SyDate, dictionaryHidden[item.SyStateFlag], item.SyHidden);
             }
-            //SyFlagだけまだ
 
-            //dgvClientをリフレッシュ
+            //dgvSyukkotをリフレッシュ
             dgvSyukko.Refresh();
 
-            if (lastPage == pageNum)
+            if (lastPage == -1 || (lastPage == pageNum && pageNum == 0))
             {
                 btnPageMax.Visible = false;
                 btnNext.Visible = false;
-                btnPageMin.Visible = true;
-                btnBack.Visible = true;
+                btnPageMin.Visible = false;
+                btnBack.Visible = false;
             }
             else if (pageNum == 0)
             {
@@ -456,6 +540,13 @@ namespace SalesManagement_SysDev
                 btnNext.Visible = true;
                 btnPageMin.Visible = false;
                 btnBack.Visible = false;
+            }
+            else if (lastPage == pageNum)
+            {
+                btnPageMax.Visible = false;
+                btnNext.Visible = false;
+                btnPageMin.Visible = true;
+                btnBack.Visible = true;
             }
             else
             {
@@ -466,12 +557,34 @@ namespace SalesManagement_SysDev
             }
         }   
 
-         private void btnNext_Click(object sender, EventArgs e)
+        private void SetDataGtidViewDetail(List<T_SyukkoDetail> viewSyukkoDetail)
+        {
+            //中身を消去
+            dgvSyukko.Rows.Clear();
+
+            //ページ行数を取得
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
+            //ページ数を取得
+            int pageNum = int.Parse(txbNumPage.Text.Trim()) - 1;
+            //最終ページ数を取得
+            int lastPage = (int)Math.Ceiling(viewSyukkoDetail.Count / (double)pageSize) - 1;
+
+            //データからページに必要な部分だけを取り出す
+            var depData = viewSyukkoDetail.Skip(pageSize * pageNum).Take(pageSize).ToList();
+
+            //1行ずつdgvSyukkoに挿入
+            foreach (var item in depData)
+            {
+                dgvSyukko.Rows.Add(item.SyDetailID, item.SyID, item.PrID, item, item.SyQuantity);
+            }
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
          {
             txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) + 1).ToString();
 
             GetDataGridView();
-         }
+        }
         
         private void btnPageMax_Click(object sender, EventArgs e)
         {
