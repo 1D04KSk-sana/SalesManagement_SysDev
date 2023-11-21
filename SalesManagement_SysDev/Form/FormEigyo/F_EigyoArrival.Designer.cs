@@ -30,7 +30,7 @@
         {
             this.btnClose = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
-            this.pnlButuryu = new System.Windows.Forms.Panel();
+            this.pnlEigyo = new System.Windows.Forms.Panel();
             this.lblWarehousing = new System.Windows.Forms.Label();
             this.txbArrivalID = new System.Windows.Forms.TextBox();
             this.txbClientName = new System.Windows.Forms.TextBox();
@@ -64,7 +64,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.cmbHidden = new System.Windows.Forms.ComboBox();
             this.txbArrivalHidden = new System.Windows.Forms.TextBox();
-            this.pnlButuryu.SuspendLayout();
+            this.pnlEigyo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArrivalDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArrival)).BeginInit();
             this.SuspendLayout();
@@ -92,17 +92,17 @@
             this.btnReturn.Text = "戻る";
             this.btnReturn.UseVisualStyleBackColor = true;
             // 
-            // pnlButuryu
+            // pnlEigyo
             // 
-            this.pnlButuryu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(181)))), ((int)(((byte)(128)))));
-            this.pnlButuryu.Controls.Add(this.btnClose);
-            this.pnlButuryu.Controls.Add(this.btnReturn);
-            this.pnlButuryu.Controls.Add(this.lblWarehousing);
-            this.pnlButuryu.Location = new System.Drawing.Point(0, 0);
-            this.pnlButuryu.Margin = new System.Windows.Forms.Padding(4);
-            this.pnlButuryu.Name = "pnlButuryu";
-            this.pnlButuryu.Size = new System.Drawing.Size(1920, 150);
-            this.pnlButuryu.TabIndex = 56;
+            this.pnlEigyo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(181)))), ((int)(((byte)(128)))));
+            this.pnlEigyo.Controls.Add(this.btnClose);
+            this.pnlEigyo.Controls.Add(this.btnReturn);
+            this.pnlEigyo.Controls.Add(this.lblWarehousing);
+            this.pnlEigyo.Location = new System.Drawing.Point(0, 0);
+            this.pnlEigyo.Margin = new System.Windows.Forms.Padding(4);
+            this.pnlEigyo.Name = "pnlEigyo";
+            this.pnlEigyo.Size = new System.Drawing.Size(1920, 150);
+            this.pnlEigyo.TabIndex = 56;
             // 
             // lblWarehousing
             // 
@@ -525,11 +525,11 @@
             this.Controls.Add(this.txbSalesOfficeID);
             this.Controls.Add(this.txbClientName);
             this.Controls.Add(this.txbArrivalID);
-            this.Controls.Add(this.pnlButuryu);
+            this.Controls.Add(this.pnlEigyo);
             this.Name = "F_EigyoArrival";
             this.Text = "F_EigyoArrival";
-            this.pnlButuryu.ResumeLayout(false);
-            this.pnlButuryu.PerformLayout();
+            this.pnlEigyo.ResumeLayout(false);
+            this.pnlEigyo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArrivalDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArrival)).EndInit();
             this.ResumeLayout(false);
@@ -541,7 +541,7 @@
 
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnReturn;
-        private System.Windows.Forms.Panel pnlButuryu;
+        private System.Windows.Forms.Panel pnlEigyo;
         private System.Windows.Forms.Label lblWarehousing;
         private System.Windows.Forms.TextBox txbArrivalID;
         private System.Windows.Forms.TextBox txbClientName;
