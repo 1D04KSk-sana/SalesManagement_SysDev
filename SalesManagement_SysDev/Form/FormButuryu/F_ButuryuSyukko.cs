@@ -97,6 +97,7 @@ namespace SalesManagement_SysDev
             GetDataGridView();
         }
 
+       
         private void btnDone_Click(object sender, EventArgs e)
         {
             //検索ラヂオボタンがチェックされているとき
@@ -434,8 +435,8 @@ namespace SalesManagement_SysDev
             //1行ずつdgvClientに挿入
             foreach (var item in depData)
             {
-                dgvSyukko.Rows.Add(item.SyID, item.EmID, item.ClID, item.SoID, item.OrID,item.SyDate,
-                    item.SyDate, dictionaryHidden[item.SyStateFlag],item.SyHidden);
+                dgvSyukko.Rows.Add(item.SyID, item.EmID, item.ClID, item.SoID, item.OrID, item.SyDate,
+                    item.SyDate, dictionaryHidden[item.SyStateFlag], item.SyHidden);
             }
             //SyFlagだけまだ
 
@@ -463,8 +464,41 @@ namespace SalesManagement_SysDev
                 btnPageMin.Visible = true;
                 btnBack.Visible = true;
             }
+        }   
+
+         private void btnNext_Click(object sender, EventArgs e)
+         {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) + 1).ToString();
+
+            GetDataGridView();
+         }
+        
+        private void btnPageMax_Click(object sender, EventArgs e)
+        {
+            List<T_Syukko> viewSyukko = SetListSyukko();
+
+            //ページ行数を取得
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
+            //最終ページ数を取得（テキストボックスに代入する数字なので-1はしない）
+            int lastPage = (int)Math.Ceiling(viewSyukko.Count / (double)pageSize);
+
+            txbNumPage.Text = lastPage.ToString();
+
+            GetDataGridView();
         }
 
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) - 1).ToString();
 
+            GetDataGridView();
+        }
+
+        private void btnPageMin_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+
+            GetDataGridView();
+        }
     }
 }
