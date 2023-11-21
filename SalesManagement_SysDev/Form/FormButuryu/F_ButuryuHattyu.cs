@@ -439,6 +439,7 @@ namespace SalesManagement_SysDev
                 txbHattyuID.Focus();
                 return false;
             }
+
             // メーカー名の適否
             if (cmbHidden.SelectedIndex == -1)
             {
@@ -1339,7 +1340,7 @@ namespace SalesManagement_SysDev
         }
 
             private void txbProductID_TextChanged(object sender, EventArgs e)
-        {
+            {
             //nullの確認
             string stringProdactID = txbProductID.Text.Trim();
             int intProdactID = 0;
@@ -1361,15 +1362,23 @@ namespace SalesManagement_SysDev
 
             txbProductName.Text = Prodact.PrName;
 
-             }
+             
+        }
+
+        private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //データグリッドビューのデータ取得
+            GetDataGridView();
+        }
+
         private void btnPageSize_Click(object sender, EventArgs e)
         {
             GetDataGridView();
         }
 
-        private void btnNext_Click(object sender, EventArgs e)
+        private void btnPageMin_Click(object sender, EventArgs e)
         {
-            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) + 1).ToString();
+            txbNumPage.Text = "1";
 
             GetDataGridView();
         }
@@ -1381,9 +1390,9 @@ namespace SalesManagement_SysDev
             GetDataGridView();
         }
 
-        private void btnPageMin_Click(object sender, EventArgs e)
+        private void btnNext_Click(object sender, EventArgs e)
         {
-            txbNumPage.Text = "1";
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) + 1).ToString();
 
             GetDataGridView();
         }
@@ -1402,5 +1411,17 @@ namespace SalesManagement_SysDev
             GetDataGridView();
         }
 
+        private void dgvHattyuDetail_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvHattyuDetail.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            //選択された行に対してのコントロールの変更
+            SelectRowDetailControl();
+
+        }
     }
 }

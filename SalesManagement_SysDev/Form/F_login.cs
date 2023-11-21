@@ -883,17 +883,17 @@ namespace SalesManagement_SysDev
             //f_Honsha.FormClosed += ChildForm_FormClosed;
             //f_Honsha.Show();
 
-            F_Eigyo f_Eigyo = new F_Eigyo();
+            //F_Eigyo f_Eigyo = new F_Eigyo();
 
-            f_Eigyo.Owner = this;
-            f_Eigyo.FormClosed += ChildForm_FormClosed;
-            f_Eigyo.Show();
+            //f_Eigyo.Owner = this;
+            //f_Eigyo.FormClosed += ChildForm_FormClosed;
+            //f_Eigyo.Show();
 
-            //F_Buturyu f_Buturyu = new F_Buturyu();
+            F_Buturyu f_Buturyu = new F_Buturyu();
 
-            //f_Buturyu.Owner = this;
-            //f_Buturyu.FormClosed += ChildForm_FormClosed;
-            //f_Buturyu.Show();
+            f_Buturyu.Owner = this;
+            f_Buturyu.FormClosed += ChildForm_FormClosed;
+            f_Buturyu.Show();
 
 
             this.Opacity = 0;

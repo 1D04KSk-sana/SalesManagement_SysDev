@@ -72,7 +72,7 @@
             this.lblHidden = new System.Windows.Forms.Label();
             this.lblConfirm = new System.Windows.Forms.Label();
             this.cmbConfirm = new System.Windows.Forms.ComboBox();
-            this.dtpHattyuDate = new SalesManagement_SysDev.MonthPicker();
+            this.dtpHattyuDate = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHattyuDetail)).BeginInit();
             this.pnlHonsha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHattyu)).BeginInit();
@@ -149,6 +149,7 @@
             this.btnPageMin.TabStop = false;
             this.btnPageMin.Text = "|◀";
             this.btnPageMin.UseVisualStyleBackColor = true;
+            this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
             // 
             // btnBack
             // 
@@ -162,6 +163,7 @@
             this.btnBack.TabStop = false;
             this.btnBack.Text = "◀";
             this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnNext
             // 
@@ -174,6 +176,7 @@
             this.btnNext.TabStop = false;
             this.btnNext.Text = "▶";
             this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPageMax
             // 
@@ -186,6 +189,7 @@
             this.btnPageMax.TabStop = false;
             this.btnPageMax.Text = "▶|";
             this.btnPageMax.UseVisualStyleBackColor = true;
+            this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
             // dgvHattyuDetail
             // 
@@ -199,6 +203,7 @@
             this.dgvHattyuDetail.Size = new System.Drawing.Size(700, 480);
             this.dgvHattyuDetail.TabIndex = 100;
             this.dgvHattyuDetail.TabStop = false;
+            this.dgvHattyuDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHattyuDetail_CellClick_1);
             // 
             // btnPageSize
             // 
@@ -211,6 +216,7 @@
             this.btnPageSize.TabStop = false;
             this.btnPageSize.Text = "行数変更";
             this.btnPageSize.UseVisualStyleBackColor = true;
+            this.btnPageSize.Click += new System.EventHandler(this.btnPageSize_Click);
             // 
             // lblPageSize
             // 
@@ -247,6 +253,7 @@
             this.cmbView.Size = new System.Drawing.Size(360, 43);
             this.cmbView.TabIndex = 96;
             this.cmbView.TabStop = false;
+            this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
             // 
             // pnlHonsha
             // 
@@ -315,7 +322,7 @@
             // 
             this.lblHattyuDate.AutoSize = true;
             this.lblHattyuDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblHattyuDate.Location = new System.Drawing.Point(505, 363);
+            this.lblHattyuDate.Location = new System.Drawing.Point(505, 356);
             this.lblHattyuDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblHattyuDate.Name = "lblHattyuDate";
             this.lblHattyuDate.Size = new System.Drawing.Size(130, 24);
@@ -426,7 +433,7 @@
             // txbEmployeeName
             // 
             this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbEmployeeName.Location = new System.Drawing.Point(230, 356);
+            this.txbEmployeeName.Location = new System.Drawing.Point(230, 349);
             this.txbEmployeeName.Margin = new System.Windows.Forms.Padding(2);
             this.txbEmployeeName.Name = "txbEmployeeName";
             this.txbEmployeeName.ShortcutsEnabled = false;
@@ -592,14 +599,12 @@
             // 
             // dtpHattyuDate
             // 
-            this.dtpHattyuDate.CustomFormat = "MMMM yyyy";
             this.dtpHattyuDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.dtpHattyuDate.Location = new System.Drawing.Point(696, 356);
+            this.dtpHattyuDate.Location = new System.Drawing.Point(696, 353);
             this.dtpHattyuDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpHattyuDate.Name = "dtpHattyuDate";
             this.dtpHattyuDate.Size = new System.Drawing.Size(220, 31);
-            this.dtpHattyuDate.TabIndex = 109;
-            this.dtpHattyuDate.TabStop = false;
+            this.dtpHattyuDate.TabIndex = 127;
             // 
             // F_ButuryuHattyu
             // 
@@ -608,6 +613,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(1904, 1041);
             this.ControlBox = false;
+            this.Controls.Add(this.dtpHattyuDate);
             this.Controls.Add(this.cmbConfirm);
             this.Controls.Add(this.lblConfirm);
             this.Controls.Add(this.lblHidden);
@@ -627,7 +633,6 @@
             this.Controls.Add(this.rdbUpdate);
             this.Controls.Add(this.rdbSearch);
             this.Controls.Add(this.rdbRegister);
-            this.Controls.Add(this.dtpHattyuDate);
             this.Controls.Add(this.cmbHidden);
             this.Controls.Add(this.lblNumPage);
             this.Controls.Add(this.txbNumPage);
@@ -670,7 +675,6 @@
 
         private System.Windows.Forms.RadioButton rdbSearch;
         private System.Windows.Forms.RadioButton rdbRegister;
-        private MonthPicker dtpHattyuDate;
         private System.Windows.Forms.ComboBox cmbHidden;
         private System.Windows.Forms.Label lblNumPage;
         private System.Windows.Forms.TextBox txbNumPage;
@@ -713,5 +717,6 @@
         private System.Windows.Forms.Label lblHidden;
         private System.Windows.Forms.Label lblConfirm;
         private System.Windows.Forms.ComboBox cmbConfirm;
+        private System.Windows.Forms.DateTimePicker dtpHattyuDate;
     }
 }
