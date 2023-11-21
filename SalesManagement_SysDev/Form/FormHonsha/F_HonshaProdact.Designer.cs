@@ -531,7 +531,7 @@
             this.lblProdact.Location = new System.Drawing.Point(778, 58);
             this.lblProdact.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProdact.Name = "lblProdact";
-            this.lblProdact.Size = new System.Drawing.Size(417, 64);
+            this.lblProdact.Size = new System.Drawing.Size(418, 64);
             this.lblProdact.TabIndex = 1;
             this.lblProdact.Text = "商品管理画面";
             // 

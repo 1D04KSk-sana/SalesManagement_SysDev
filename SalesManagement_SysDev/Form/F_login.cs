@@ -905,5 +905,10 @@ namespace SalesManagement_SysDev
         {
 
         }
+
+        private void lblProdact_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
