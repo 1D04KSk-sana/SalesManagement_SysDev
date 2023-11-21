@@ -266,7 +266,7 @@ namespace SalesManagement_SysDev
             };
         }
         ///////////////////////////////
-        //メソッド名：RegistrationOrder()
+        //メソッド名：RegistrationStock()
         //引　数   ：受注情報
         //戻り値   ：なし
         //機　能   ：受注データの登録
@@ -329,7 +329,7 @@ namespace SalesManagement_SysDev
             SetDataGridView(listViewStock);
         }
         ///////////////////////////////
-        //メソッド名：SetListProduct()
+        //メソッド名：SetListStock()
         //引　数   ：なし
         //戻り値   ：表示用商品データ
         //機　能   ：表示用商品データの準備
@@ -533,7 +533,7 @@ namespace SalesManagement_SysDev
             return true;
         }
         ///////////////////////////////
-        //メソッド名：OrderSearchButtonClick()
+        //メソッド名：StockSearchButtonClick()
         //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
         //戻り値   ：なし
         //機　能   ：受注情報検索の実行
