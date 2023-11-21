@@ -63,6 +63,61 @@ namespace SalesManagement_SysDev
         {
             this.Opacity = 1;
         }
+        private void btnPageMin_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+
+            GetDataGridView();
+        }
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) - 1).ToString();
+
+            GetDataGridView();
+        }
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) + 1).ToString();
+
+            GetDataGridView();
+        }
+        private void btnPageMax_Click(object sender, EventArgs e)
+        {
+            List<T_Stock> viewStock = SetListStock();
+
+            //ページ行数を取得
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
+            //最終ページ数を取得（テキストボックスに代入する数字なので-1はしない）
+            int lastPage = (int)Math.Ceiling(viewStock.Count / (double)pageSize);
+
+            txbNumPage.Text = lastPage.ToString();
+
+            GetDataGridView();
+        }
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
+        private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //データグリッドビューのデータ取得
+            GetDataGridView();
+        }
+        private void dgvStock_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvStock.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            //選択された行に対してのコントロールの変更
+            SelectRowControl();
+        }
         ///////////////////////////////
         //メソッド名：ClearImput()
         //引　数   ：なし
@@ -189,7 +244,7 @@ namespace SalesManagement_SysDev
 
             foreach (var item in listProduct)
             {
-                dictionaryProdact.Add(item.PrID,item.PrName);
+                dictionaryProdact.Add(item.PrID, item.PrName);
             }
         }
         ///////////////////////////////
@@ -444,14 +499,14 @@ namespace SalesManagement_SysDev
                 //在庫IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbStockID.Text.Trim()))
                 {
-                    MessageBox.Show("受注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("在庫IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbStockID.Focus();
                     return false;
                 }
                 //在庫IDの重複チェック
                 if (!stockDataAccess.CheckStockIDExistence(int.Parse(txbStockID.Text.Trim())))
                 {
-                    MessageBox.Show("受注IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("在庫IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbStockID.Focus();
                     return false;
                 }
@@ -463,14 +518,14 @@ namespace SalesManagement_SysDev
                 //商品IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbProductID.Text.Trim()))
                 {
-                    MessageBox.Show("社員IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("商品IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbProductID.Focus();
                     return false;
                 }
                 //商品IDの重複チェック
                 if (!prodactDataAccess.CheckProdactIDExistence(int.Parse(txbProductID.Text.Trim())))
                 {
-                    MessageBox.Show("社員IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("商品IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbProductID.Focus();
                     return false;
                 }
@@ -536,6 +591,19 @@ namespace SalesManagement_SysDev
                 // 顧客データのOr抽出
                 listStock = stockDataAccess.GetOrStockData(selectStock);
             }
+        }
+        ///////////////////////////////
+        //メソッド名：SelectRowControl()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：選択された行に対してのコントロールの変更
+        ///////////////////////////////
+        private void SelectRowControl()
+        {
+            //データグリッドビューに乗っている情報をGUIに反映
+            txbProductID.Text = dgvStock[0, dgvStock.CurrentCellAddress.Y].Value.ToString();
+            txbStockID.Text = dgvStock[1, dgvStock.CurrentCellAddress.Y].Value.ToString();
+            txbStockQuentity.Text = dgvStock[2, dgvStock.CurrentCellAddress.Y].Value.ToString();
         }
     }
 }
