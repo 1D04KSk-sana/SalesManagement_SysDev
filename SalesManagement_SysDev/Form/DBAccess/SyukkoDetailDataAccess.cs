@@ -10,47 +10,27 @@ namespace SalesManagement_SysDev
     internal class SyukkoDetailDataAccess
     {
         ///////////////////////////////
-        //メソッド名：GetSyukkoDetailtDspData()
+        //メソッド名：GetOrderDetailData()
         //引　数：なし
-        //戻り値：管理Flgが表示の商品データ
-        //機　能：管理Flgが表示の商品データの全取得
+        //戻り値：受注詳細データ
+        //機　能：受注詳細データの全取得
         ///////////////////////////////
-        public List<T_SyukkoDetail> GetSyukkoDetailtDspData(List<T_SyukkoDetail> dspProdact)
+        public List<T_SyukkoDetail> GetSyukkoDetailIDData(int syukkoID)
         {
-            List<T_SyukkoDetail> listProdact = new List<T_SyukkoDetail>();
+            List<T_SyukkoDetail> listOrderDetail = new List<T_SyukkoDetail>();
 
             try
             {
-                listProdact = dspProdact.Where(x => x.SyDetailID == 0).ToList();
+                var context = new SalesManagement_DevContext();
+                listOrderDetail = context.T_SyukkoDetails.Where(x => x.SyID == syukkoID).ToList();
+                context.Dispose();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            return listProdact;
-        }
-
-        ///////////////////////////////
-        //メソッド名：GetSyukkotNotDspData()
-        //引　数：なし
-        //戻り値：管理Flgが非表示の商品データ
-        //機　能：管理Flgが非表示の商品データの全取得
-        ///////////////////////////////
-        public List<T_SyukkoDetail> GetSyukkoDetailNotDspData(List<T_SyukkoDetail> dspClient)
-        {
-            List<T_SyukkoDetail> listProdact = new List<T_SyukkoDetail>();
-
-            try
-            {
-                listProdact = dspClient.Where(x => x.SyDetailID == 1).ToList();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return listProdact;
+            return listOrderDetail;
         }
     }
 }

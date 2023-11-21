@@ -261,6 +261,9 @@
             this.cmbHidden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbHidden.FormattingEnabled = true;
+            this.cmbHidden.Items.AddRange(new object[] {
+            "表示",
+            "非表示"});
             this.cmbHidden.Location = new System.Drawing.Point(1361, 281);
             this.cmbHidden.Name = "cmbHidden";
             this.cmbHidden.Size = new System.Drawing.Size(220, 32);
@@ -304,6 +307,7 @@
             this.dgvSyukko.Size = new System.Drawing.Size(859, 561);
             this.dgvSyukko.TabIndex = 21;
             this.dgvSyukko.TabStop = false;
+            this.dgvSyukko.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSyukko_CellClick);
             // 
             // dgvSyukkoDetail
             // 

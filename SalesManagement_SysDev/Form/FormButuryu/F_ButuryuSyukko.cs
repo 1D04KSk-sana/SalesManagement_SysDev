@@ -18,6 +18,12 @@ namespace SalesManagement_SysDev
         SalesOfficeDataAccess SalesOfficeDataAccess = new SalesOfficeDataAccess();
         //データベース商品テーブルアクセス用クラスのインスタンス化
         SyukkoDetailDataAccess SyukkoDetailDataAccess = new SyukkoDetailDataAccess();
+        //データベース受注テーブルアクセス用クラスのインスタンス化
+        OrderDetailDataAccess orderDetailDataAccess = new OrderDetailDataAccess();
+        //データベース社員テーブルアクセス用クラスのインスタンス化
+        EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
+        //データベース顧客テーブルアクセス用クラスのインスタンス化
+        ClientDataAccess clientDataAccess = new ClientDataAccess();
         //データグリッドビュー用の全出庫データ
         private static List<T_Syukko> listAllSyukko = new List<T_Syukko>();
         //データグリッドビュー用の出庫データ
@@ -34,8 +40,19 @@ namespace SalesManagement_SysDev
         DataInputCheck dataInputCheck = new DataInputCheck();
         //フォームを呼び出しする際のインスタンス化
         private F_SearchDialog f_SearchDialog = new F_SearchDialog();
+        //コンボボックス用の社員データリスト
+        private static List<M_Employee> listEmployee = new List<M_Employee>();
+        //コンボボックス用の顧客データリスト
+        private static List<M_Client> listClient = new List<M_Client>();
+
+        //DataGridView用に使用する営業所のDictionary
+        private Dictionary<int, string> dictionarySalesOffice;
         //DataGridView用に使用する大分類名のDictionary
-        private Dictionary<int, string> dictionarySoID;
+        //private Dictionary<int, string> dictionarySoID;
+        //DataGridView用に使用する顧客のDictionary
+        private Dictionary<int, string> dictionaryClient;
+        //DataGridView用に使用する社員のDictionary
+        private Dictionary<int, string> dictionaryEmployee;
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
         {
@@ -53,25 +70,21 @@ namespace SalesManagement_SysDev
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 
-            SetFormDataGridView();
             DictionarySet();
+
+            // 取得したデータをコンボボックスに挿入
+            cmbSalesOfficeID.DataSource = listSalesOfficeID;
+            //表示する名前をSoNameに指定
+            cmbSalesOfficeID.DisplayMember = "SoName";
+            //項目の順番をSoIDに指定
+            cmbSalesOfficeID.ValueMember = "SoID";
 
             //cmbSalesOfficeIDを未選択に
             cmbSalesOfficeID.SelectedIndex = -1;
+            SetFormDataGridView();
 
             //cmbViewを表示に
             cmbView.SelectedIndex = 0;
-
-            ////営業所名のデータを取得
-            //listSalesOfficeID = SaleDataAccess.GetSalesOfficeDspData();
-            ////取得したデータをコンボボックスに挿入
-            //cmbSalesOfficeID.DataSource = listSalesOfficeID;
-            ////表示する名前をMaNameに指定
-            //cmbSalesOfficeID.DisplayMember = "MaName";
-            ////項目の順番をMaIDに指定
-            //cmbSalesOfficeID.ValueMember = "SoID";
-            ////cmbMakerNameを未選択に
-            //cmbSalesOfficeID.SelectedIndex = -1;
         }
         
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
@@ -119,6 +132,22 @@ namespace SalesManagement_SysDev
             {
 
             }
+        }
+        
+        private void dgvSyukko_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvSyukko.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            //選択された行に対してのコントロールの変更
+            SelectRowControl();
+
+            SetDataDetailGridView(int.Parse(dgvSyukko[0, dgvSyukko.CurrentCellAddress.Y].Value.ToString()));
+
+            ClearImputDetail();
         }
 
         private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
@@ -234,12 +263,10 @@ namespace SalesManagement_SysDev
         {
             //表示用の商品リスト作成
             List<T_Syukko> listViewSyukko = SetListSyukko();
-            List<T_SyukkoDetail> listViewSyukkoDetail = SetListSyukkoDetail();
 
             // DataGridViewに表示するデータを指定
             SetDataGridView(listViewSyukko);
 
-            SetDataGtidViewDetail(listViewSyukkoDetail);
         }
 
         ///////////////////////////////
@@ -283,46 +310,6 @@ namespace SalesManagement_SysDev
             return listViewSyukko;
         }
 
-        ///////////////////////////////
-        //メソッド名：SetListClient()
-        //引　数   ：なし
-        //戻り値   ：表示用出庫データ
-        //機　能   ：表示用出庫データの準備
-        ///////////////////////////////
-        private List<T_SyukkoDetail> SetListSyukkoDetail()
-        {
-            //商品のデータを全取得
-            listAllSyukko = SyukkoDataAccess.GetSyukkoDspData();
-
-            //表示用の顧客リスト作成
-            List<T_SyukkoDetail> listViewSyukkoDetail = new List<T_SyukkoDetail>();
-
-            //検索ラヂオボタンがチェックされているとき
-            if (rdbSearch.Checked)
-            {
-                //表示している（検索結果）のデータをとってくる
-                listViewSyukkoDetail = listsyukkodetail;
-            }
-            else
-            {
-                //全データをとってくる
-                listViewSyukkoDetail = listAllSyukkoDetail;
-            }
-
-            //一覧表示cmbViewが表示を選択されているとき
-            if (cmbView.SelectedIndex == 0)
-            {
-                // 管理Flgが表示の商品データの取得
-                listViewSyukkoDetail = SyukkoDetailDataAccess.GetSyukkoDetailtDspData(listViewSyukkoDetail);
-            }
-            else
-            {
-                // 管理Flgが非表示の商品データの取得
-                listViewSyukkoDetail = SyukkoDetailDataAccess.GetSyukkoDetailNotDspData(listViewSyukkoDetail);
-            }
-
-            return listViewSyukkoDetail;
-        }
 
         ///////////////////////////////
         //メソッド名：GenerateDataAtSelect()
@@ -392,11 +379,31 @@ namespace SalesManagement_SysDev
             //営業所名のデータを取得
             listSalesOfficeID = SalesOfficeDataAccess.GetSalesOfficeDspData();
 
-            dictionarySoID = new Dictionary<int, string> { };
+            dictionarySalesOffice = new Dictionary<int, string> { };
 
             foreach (var item in listSalesOfficeID)
             {
-                dictionarySoID.Add(item.SoID, item.SoName);
+                dictionarySalesOffice.Add(item.SoID, item.SoName);
+            }
+
+            //社員名のデータを取得
+            listEmployee = employeeDataAccess.GetEmployeeDspData();
+
+            dictionaryEmployee = new Dictionary<int, string> { };
+
+            foreach (var item in listEmployee)
+            {
+                dictionaryEmployee.Add(item.EmID, item.EmName);
+            }
+
+            //顧客名のデータを取得
+            listClient = clientDataAccess.GetClientDspData();
+
+            dictionaryClient = new Dictionary<int, string> { };
+
+            foreach (var item in listClient)
+            {
+                dictionaryClient.Add(item.ClID.Value, item.ClName);
             }
         }
 
@@ -520,8 +527,8 @@ namespace SalesManagement_SysDev
             //1行ずつdgvSyukkoに挿入
             foreach (var item in depData)
             {
-                dgvSyukko.Rows.Add(item.SyID, item.EmID, item.ClID, item.SoID, item.OrID, item.SyDate,
-                    item.SyDate, dictionaryHidden[item.SyStateFlag], item.SyHidden);
+                dgvSyukko.Rows.Add(item.SyID, dictionaryEmployee[item.EmID.Value], dictionaryClient[item.ClID], dictionarySalesOffice[item.SoID], item.OrID, item.SyDate,
+                   item.SyStateFlag, dictionaryHidden[item.SyFlag], item.SyHidden);
             }
 
             //dgvSyukkotをリフレッシュ
@@ -555,29 +562,32 @@ namespace SalesManagement_SysDev
                 btnPageMin.Visible = true;
                 btnBack.Visible = true;
             }
-        }   
+        }
 
-        private void SetDataGtidViewDetail(List<T_SyukkoDetail> viewSyukkoDetail)
+        ///////////////////////////////
+        //メソッド名：SetDataGtidViewDetail()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：データグリッドビューへの表示
+        ///////////////////////////////
+        private void SetDataGtidViewDetail(int intOrderID)
         {
             //中身を消去
-            dgvSyukko.Rows.Clear();
+            dgvSyukkoDetail.Rows.Clear();
 
-            //ページ行数を取得
-            int pageSize = int.Parse(txbPageSize.Text.Trim());
-            //ページ数を取得
-            int pageNum = int.Parse(txbNumPage.Text.Trim()) - 1;
-            //最終ページ数を取得
-            int lastPage = (int)Math.Ceiling(viewSyukkoDetail.Count / (double)pageSize) - 1;
-
-            //データからページに必要な部分だけを取り出す
-            var depData = viewSyukkoDetail.Skip(pageSize * pageNum).Take(pageSize).ToList();
+            listAllSyukkoDetail = SyukkoDetailDataAccess.GetSyukkoDetailIDData(intOrderID);
 
             //1行ずつdgvSyukkoに挿入
-            foreach (var item in depData)
+            foreach (var item in listAllSyukkoDetail)
             {
-                dgvSyukko.Rows.Add(item.SyDetailID, item.SyID, item.PrID, item, item.SyQuantity);
+                dgvSyukkoDetail.Rows.Add(item.SyDetailID, item.SyID, item.PrID, item, item.SyQuantity);
             }
+
+            //dgvClientをリフレッシュ
+            dgvSyukkoDetail.Refresh();
+
         }
+
 
         private void btnNext_Click(object sender, EventArgs e)
          {
@@ -613,5 +623,62 @@ namespace SalesManagement_SysDev
 
             GetDataGridView();
         }
+
+        ///////////////////////////////
+        //メソッド名：SetDataDetailGridView()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：詳細データグリッドビューへの表示
+        ///////////////////////////////
+        private void SetDataDetailGridView(int intSyukkoID)
+        {
+            dgvSyukkoDetail.Rows.Clear();
+
+            listAllSyukkoDetail = SyukkoDetailDataAccess.GetSyukkoDetailIDData(intSyukkoID);
+
+            //1行ずつdgvClientに挿入
+            foreach (var item in listAllSyukkoDetail)
+            {
+                dgvSyukkoDetail.Rows.Add(item.SyDetailID, item.SyID, item.PrID, item.SyQuantity);
+            }
+
+            //dgvClientをリフレッシュ
+            dgvSyukkoDetail.Refresh();
+        }
+
+        ///////////////////////////////
+        //メソッド名：SelectRowControl()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：選択された行に対してのコントロールの変更
+        ///////////////////////////////
+        private void SelectRowControl()
+        {
+            //データグリッドビューに乗っている情報をGUIに反映
+            txbSyukkoID.Text = dgvSyukko[0, dgvSyukko.CurrentCellAddress.Y].Value.ToString();
+            txbEmployeeName.Text = dgvSyukko[1, dgvSyukko.CurrentCellAddress.Y].Value.ToString();
+            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvSyukko[3, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key - 1;
+            txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvSyukko[2, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            txbChumonID.Text = dgvSyukko[4, dgvSyukko.CurrentCellAddress.Y].Value.ToString();
+            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSyukko[7, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key;
+            txbHidden.Text = dgvSyukko[8, dgvSyukko.CurrentCellAddress.Y]?.Value?.ToString();
+        }
+
+        ///////////////////////////////
+        //メソッド名：ClearImputDetail()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：コントロールのクリア(Detail)
+        ///////////////////////////////
+        private void ClearImputDetail()
+        {
+            txbSyukkoID.Text = string.Empty;
+            txbClientID.Text = string.Empty;
+            txbEmployeeName.Text = string.Empty;
+            txbChumonID.Text = string.Empty;
+            txbHidden.Text= string.Empty;
+        }
+
+
     }
 }
