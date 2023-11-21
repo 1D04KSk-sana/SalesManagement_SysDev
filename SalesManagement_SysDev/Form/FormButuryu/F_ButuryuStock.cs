@@ -18,14 +18,18 @@ namespace SalesManagement_SysDev
         OrderDataAccess orderDataAccess = new OrderDataAccess();
         //データベース商品テーブルアクセス用クラスのインスタンス化
         ProdactDataAccess prodactDataAccess = new ProdactDataAccess();
+        //データベース在庫テーブルアクセス用クラスのインスタンス化
+        StockDataAccess stockDataAccess = new StockDataAccess();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
         //フォームを呼び出しする際のインスタンス化
         private F_SearchDialog f_SearchDialog = new F_SearchDialog();
         //コンボボックス用の商品データリスト
-        private static List<M_Product> listProdact = new List<M_Product>();
+        private static List<T_Stock> listStock = new List<T_Stock>();
+        //コンボボックス用の商品データリスト
+        private static List<M_Product> listProduct = new List<M_Product>();
         //データグリッドビュー用の全商品データ
-        private static List<M_Product> listAllProdact = new List<M_Product>();
+        private static List<T_Stock> listAllStock = new List<T_Stock>();
         //DataGridView用に使用する商品のDictionary
         private Dictionary<int, string> dictionaryProdact;
 
@@ -47,13 +51,13 @@ namespace SalesManagement_SysDev
         {
             f_SearchDialog.Close();
 
-            ProductSearchButtonClick(true);
+            StockSearchButtonClick(true);
         }
         private void SearchDialog_btnOrSearchClick(object sender, EventArgs e)
         {
             f_SearchDialog.Close();
 
-            ProductSearchButtonClick(false);
+            StockSearchButtonClick(false);
         }
         private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -112,10 +116,10 @@ namespace SalesManagement_SysDev
             }
 
             // 受注情報作成
-            var regProduct = GenerateDataAtRegistration();
+            var regStock = GenerateDataAtRegistration();
 
             // 受注情報登録
-            RegistrationProduct(regProduct);
+            RegistrationStock(regStock);
         }
         ///////////////////////////////
         //メソッド名：GetValidDataAtRegistration()
@@ -179,13 +183,13 @@ namespace SalesManagement_SysDev
         private void DictionarySet()
         {
             //商品のデータを取得
-            listProdact = prodactDataAccess.GetProdactDspData();
+            listProduct = prodactDataAccess.GetProdactDspData();
 
             dictionaryProdact = new Dictionary<int, string> { };
 
-            foreach (var item in listProdact)
+            foreach (var item in listProduct)
             {
-                dictionaryProdact.Add(item.PrID, item.PrName);
+                dictionaryProdact.Add(item.PrID,item.PrName);
             }
         }
         ///////////////////////////////
@@ -212,7 +216,7 @@ namespace SalesManagement_SysDev
         //戻り値   ：なし
         //機　能   ：受注データの登録
         ///////////////////////////////
-        private void RegistrationProduct(M_Product regProduct)
+        private void RegistrationStock(T_Stock regStock)
         {
             // 登録確認メッセージ
             DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
@@ -223,7 +227,7 @@ namespace SalesManagement_SysDev
             }
 
             // 受注情報の登録
-            bool flg = prodactDataAccess.AddProductData(regProduct);
+            bool flg = stockDataAccess.AddStockData(regStock);
 
             //登録成功・失敗メッセージ
             if (flg == true)
@@ -264,10 +268,10 @@ namespace SalesManagement_SysDev
         private void GetDataGridView()
         {
             //表示用の商品リスト作成
-            List<M_Product> listViewProduct = SetListProduct();
+            List<T_Stock> listViewStock = SetListStock();
 
             // DataGridViewに表示するデータを指定
-            SetDataGridView(listViewProduct);
+            SetDataGridView(listViewStock);
         }
         ///////////////////////////////
         //メソッド名：SetListProduct()
@@ -275,39 +279,39 @@ namespace SalesManagement_SysDev
         //戻り値   ：表示用商品データ
         //機　能   ：表示用商品データの準備
         ///////////////////////////////
-        private List<M_Product> SetListProduct()
+        private List<T_Stock> SetListStock()
         {
             //商品のデータを全取得
-            listAllProdact = prodactDataAccess.GetProdactData();
+            listAllStock = stockDataAccess.GetStockData();
 
             //表示用の商品リスト作成
-            List<M_Product> listViewProduct = new List<M_Product>();
+            List<T_Stock> listViewStock = new List<T_Stock>();
 
             //検索ラヂオボタンがチェックされているとき
             if (rdbSearch.Checked)
             {
                 //表示している（検索結果）のデータをとってくる
-                listViewProduct = listProdact;
+                listViewStock = listStock;
             }
             else
             {
                 //全データをとってくる
-                listViewProduct = listAllProdact;
+                listViewStock = listAllStock;
             }
 
             //一覧表示cmbViewが表示を選択されているとき
             if (cmbView.SelectedIndex == 0)
             {
                 // 管理Flgが表示の部署データの取得
-                listViewProduct = prodactDataAccess.GetProdactDspData(listViewProduct);
+                listViewStock = stockDataAccess.GetStockDspData(listViewStock);
             }
             else
             {
                 // 管理Flgが非表示の部署データの取得
-                listViewProduct = prodactDataAccess.GetProdactNotDspData(listViewProduct);
+                listViewStock = stockDataAccess.GetStockNotDspData(listViewStock);
             }
 
-            return listViewProduct;
+            return listViewStock;
         }
         ///////////////////////////////
         //メソッド名：SetDataGridView()
@@ -315,7 +319,7 @@ namespace SalesManagement_SysDev
         //戻り値   ：なし
         //機　能   ：データグリッドビューへの表示
         ///////////////////////////////
-        private void SetDataGridView(List<M_Product> viewProduct)
+        private void SetDataGridView(List<T_Stock> viewStock)
         {
             //中身を消去
             dgvStock.Rows.Clear();
@@ -325,15 +329,15 @@ namespace SalesManagement_SysDev
             //ページ数を取得
             int pageNum = int.Parse(txbNumPage.Text.Trim()) - 1;
             //最終ページ数を取得
-            int lastPage = (int)Math.Ceiling(viewProduct.Count / (double)pageSize) - 1;
+            int lastPage = (int)Math.Ceiling(viewStock.Count / (double)pageSize) - 1;
 
             //データからページに必要な部分だけを取り出す
-            var depData = viewProduct.Skip(pageSize * pageNum).Take(pageSize).ToList();
+            var depData = viewStock.Skip(pageSize * pageNum).Take(pageSize).ToList();
 
             //1行ずつdgvClientに挿入
             foreach (var item in depData)
             {
-                dgvStock.Rows.Add(item.PrID, item.PrName);
+                dgvStock.Rows.Add(item.PrID, item.StID, item.StQuantity);
             }
 
             //dgvStockをリフレッシュ
@@ -374,19 +378,15 @@ namespace SalesManagement_SysDev
         //戻り値   ：受注登録情報
         //機　能   ：登録データのセット
         ///////////////////////////////
-        private M_Product GenerateDataAtRegistration()
+        private T_Stock GenerateDataAtRegistration()
         {
-            return new M_Product
+            return new T_Stock
             {
-                //PrID = int.Parse(txbProductID.Text.Trim()),
-                //SoID = cmbSalesOfficeID.SelectedIndex + 1,
-                //EmID = F_Login.intEmployeeID,
-                //PrName = ProdactDataAccess.GetProdactID(txbProdactName.Text.Trim()),
-                //ClCharge = txbOrderManager.Text.Trim(),
-                //OrDate = dtpOrderDate.Value,
-                //OrStateFlag = 0,
-                //OrFlag = cmbHidden.SelectedIndex,
-                //OrHidden = txbHidden.Text.Trim().
+                PrID = int.Parse(txbProductID.Text.Trim()),
+                StID = int.Parse(txbStockID.Text.Trim()),
+                StQuantity = int.Parse(txbStockQuentity.Text.Trim()),
+                StFlag = cmbHidden.SelectedIndex,
+
             };
         }
         ///////////////////////////////
@@ -449,7 +449,7 @@ namespace SalesManagement_SysDev
                     return false;
                 }
                 //在庫IDの重複チェック
-                if (!prodactDataAccess.CheckProductIDExistence(int.Parse(txbStockID.Text.Trim())))
+                if (!stockDataAccess.CheckStockIDExistence(int.Parse(txbStockID.Text.Trim())))
                 {
                     MessageBox.Show("受注IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbStockID.Focus();
@@ -468,7 +468,7 @@ namespace SalesManagement_SysDev
                     return false;
                 }
                 //商品IDの重複チェック
-                if (!prodactDataAccess.CheckProductIDExistence(int.Parse(txbProductID.Text.Trim())))
+                if (!prodactDataAccess.CheckProdactIDExistence(int.Parse(txbProductID.Text.Trim())))
                 {
                     MessageBox.Show("社員IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbProductID.Focus();
@@ -478,17 +478,17 @@ namespace SalesManagement_SysDev
             return true;
         }
         ///////////////////////////////
-        //メソッド名：ProductSearchButtonClick()
+        //メソッド名：OrderSearchButtonClick()
         //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
         //戻り値   ：なし
         //機　能   ：受注情報検索の実行
         ///////////////////////////////
-        private void ProductSearchButtonClick(bool searchFlg)
+        private void StockSearchButtonClick(bool searchFlg)
         {
             // 顧客情報抽出
             GenerateDataAtSelect(searchFlg);
 
-            int intSearchCount = listProdact.Count;
+            int intSearchCount = listStock.Count;
 
             // 顧客抽出結果表示
             GetDataGridView();
@@ -520,42 +520,22 @@ namespace SalesManagement_SysDev
             }
 
             // 検索条件のセット
-            M_Product selectProdact = new M_Product()
+            T_Stock selectStock = new T_Stock()
             {
-                //PrID = intProdactID,
-                //SoID = cmbSalesOfficeID.SelectedIndex + 1,
-                //StID = intStockID,
-                //ClID = intClientID,
+                PrID = intProdactID,
+                StID = intStockID,
             };
 
             if (searchFlg)
             {
                 // 顧客データのAnd抽出
-                listProdact = prodactDataAccess.GetAndProdactData(selectProdact);
+                listStock = stockDataAccess.GetAndStockData(selectStock);
             }
             else
             {
                 // 顧客データのOr抽出
-                listProdact = prodactDataAccess.GetOrProdactData(selectProdact);
+                listStock = stockDataAccess.GetOrStockData(selectStock);
             }
-        }
-        ///////////////////////////////
-        //メソッド名：OrderSearchButtonClick()
-        //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
-        //戻り値   ：なし
-        //機　能   ：受注情報検索の実行
-        ///////////////////////////////
-        private void ProductSearchButtonClick(bool searchFlg)
-        {
-            // 顧客情報抽出
-            GenerateDataAtSelect(searchFlg);
-
-            int intSearchCount = listProdact.Count;
-
-            // 顧客抽出結果表示
-            GetDataGridView();
-
-            MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
