@@ -27,11 +27,10 @@ namespace SalesManagement_SysDev
         private void InitializeComponent()
         {
             this.pnlButuryu = new System.Windows.Forms.Panel();
+            this.lblClient = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
-            this.txbChumonDetailID = new System.Windows.Forms.TextBox();
-            this.lblChumonDetailID = new System.Windows.Forms.Label();
             this.pnlSelect = new System.Windows.Forms.Panel();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.rdbConfirm = new System.Windows.Forms.RadioButton();
@@ -44,12 +43,6 @@ namespace SalesManagement_SysDev
             this.cmbSalesOfficeID = new System.Windows.Forms.ComboBox();
             this.txbOrderID = new System.Windows.Forms.TextBox();
             this.lblOrderID = new System.Windows.Forms.Label();
-            this.txbProdactID = new System.Windows.Forms.TextBox();
-            this.lblProdactID = new System.Windows.Forms.Label();
-            this.txbProdactName = new System.Windows.Forms.TextBox();
-            this.lblProdactName = new System.Windows.Forms.Label();
-            this.txbChumonQuentity = new System.Windows.Forms.TextBox();
-            this.lblChumonQuentity = new System.Windows.Forms.Label();
             this.btnDone = new System.Windows.Forms.Button();
             this.cmbView = new System.Windows.Forms.ComboBox();
             this.btnPageSize = new System.Windows.Forms.Button();
@@ -63,7 +56,10 @@ namespace SalesManagement_SysDev
             this.btnPageMax = new System.Windows.Forms.Button();
             this.dgvChumon = new System.Windows.Forms.DataGridView();
             this.dgvChumonDetail = new System.Windows.Forms.DataGridView();
-            this.lblClient = new System.Windows.Forms.Label();
+            this.lblHidden = new System.Windows.Forms.Label();
+            this.cmbHidden = new System.Windows.Forms.ComboBox();
+            this.txbHidden = new System.Windows.Forms.TextBox();
+            this.lblClientHidden = new System.Windows.Forms.Label();
             this.pnlButuryu.SuspendLayout();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChumon)).BeginInit();
@@ -80,6 +76,18 @@ namespace SalesManagement_SysDev
             this.pnlButuryu.Name = "pnlButuryu";
             this.pnlButuryu.Size = new System.Drawing.Size(1920, 125);
             this.pnlButuryu.TabIndex = 0;
+            // 
+            // lblClient
+            // 
+            this.lblClient.AutoSize = true;
+            this.lblClient.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblClient.ForeColor = System.Drawing.Color.White;
+            this.lblClient.Location = new System.Drawing.Point(752, 30);
+            this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblClient.Name = "lblClient";
+            this.lblClient.Size = new System.Drawing.Size(417, 64);
+            this.lblClient.TabIndex = 27;
+            this.lblClient.Text = "注文管理画面";
             // 
             // btnClose
             // 
@@ -106,6 +114,7 @@ namespace SalesManagement_SysDev
             this.btnReturn.TabStop = false;
             this.btnReturn.Text = "戻る";
             this.btnReturn.UseVisualStyleBackColor = false;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
             // btnClear
             // 
@@ -119,26 +128,6 @@ namespace SalesManagement_SysDev
             this.btnClear.TabStop = false;
             this.btnClear.Text = "クリア";
             this.btnClear.UseVisualStyleBackColor = false;
-            // 
-            // txbChumonDetailID
-            // 
-            this.txbChumonDetailID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbChumonDetailID.Location = new System.Drawing.Point(1442, 157);
-            this.txbChumonDetailID.Margin = new System.Windows.Forms.Padding(2);
-            this.txbChumonDetailID.Name = "txbChumonDetailID";
-            this.txbChumonDetailID.Size = new System.Drawing.Size(220, 31);
-            this.txbChumonDetailID.TabIndex = 33;
-            // 
-            // lblChumonDetailID
-            // 
-            this.lblChumonDetailID.AutoSize = true;
-            this.lblChumonDetailID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblChumonDetailID.Location = new System.Drawing.Point(1310, 160);
-            this.lblChumonDetailID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblChumonDetailID.Name = "lblChumonDetailID";
-            this.lblChumonDetailID.Size = new System.Drawing.Size(128, 24);
-            this.lblChumonDetailID.TabIndex = 32;
-            this.lblChumonDetailID.Text = "発注詳細ID";
             // 
             // pnlSelect
             // 
@@ -275,66 +264,6 @@ namespace SalesManagement_SysDev
             this.lblOrderID.TabIndex = 42;
             this.lblOrderID.Text = "受注ID";
             // 
-            // txbProdactID
-            // 
-            this.txbProdactID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProdactID.Location = new System.Drawing.Point(1467, 242);
-            this.txbProdactID.Margin = new System.Windows.Forms.Padding(2);
-            this.txbProdactID.Name = "txbProdactID";
-            this.txbProdactID.Size = new System.Drawing.Size(220, 31);
-            this.txbProdactID.TabIndex = 45;
-            // 
-            // lblProdactID
-            // 
-            this.lblProdactID.AutoSize = true;
-            this.lblProdactID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProdactID.Location = new System.Drawing.Point(1358, 245);
-            this.lblProdactID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblProdactID.Name = "lblProdactID";
-            this.lblProdactID.Size = new System.Drawing.Size(80, 24);
-            this.lblProdactID.TabIndex = 44;
-            this.lblProdactID.Text = "商品ID";
-            // 
-            // txbProdactName
-            // 
-            this.txbProdactName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProdactName.Location = new System.Drawing.Point(1467, 305);
-            this.txbProdactName.Margin = new System.Windows.Forms.Padding(2);
-            this.txbProdactName.Name = "txbProdactName";
-            this.txbProdactName.Size = new System.Drawing.Size(220, 31);
-            this.txbProdactName.TabIndex = 47;
-            // 
-            // lblProdactName
-            // 
-            this.lblProdactName.AutoSize = true;
-            this.lblProdactName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProdactName.Location = new System.Drawing.Point(1358, 308);
-            this.lblProdactName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblProdactName.Name = "lblProdactName";
-            this.lblProdactName.Size = new System.Drawing.Size(82, 24);
-            this.lblProdactName.TabIndex = 46;
-            this.lblProdactName.Text = "商品名";
-            // 
-            // txbChumonQuentity
-            // 
-            this.txbChumonQuentity.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbChumonQuentity.Location = new System.Drawing.Point(1467, 371);
-            this.txbChumonQuentity.Margin = new System.Windows.Forms.Padding(2);
-            this.txbChumonQuentity.Name = "txbChumonQuentity";
-            this.txbChumonQuentity.Size = new System.Drawing.Size(220, 31);
-            this.txbChumonQuentity.TabIndex = 49;
-            // 
-            // lblChumonQuentity
-            // 
-            this.lblChumonQuentity.AutoSize = true;
-            this.lblChumonQuentity.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblChumonQuentity.Location = new System.Drawing.Point(1358, 374);
-            this.lblChumonQuentity.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblChumonQuentity.Name = "lblChumonQuentity";
-            this.lblChumonQuentity.Size = new System.Drawing.Size(58, 24);
-            this.lblChumonQuentity.TabIndex = 48;
-            this.lblChumonQuentity.Text = "数量";
-            // 
             // btnDone
             // 
             this.btnDone.BackColor = System.Drawing.Color.Red;
@@ -347,6 +276,7 @@ namespace SalesManagement_SysDev
             this.btnDone.TabStop = false;
             this.btnDone.Text = "実行";
             this.btnDone.UseVisualStyleBackColor = false;
+            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // cmbView
             // 
@@ -363,6 +293,7 @@ namespace SalesManagement_SysDev
             this.cmbView.Size = new System.Drawing.Size(360, 43);
             this.cmbView.TabIndex = 51;
             this.cmbView.TabStop = false;
+            this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
             // 
             // btnPageSize
             // 
@@ -473,7 +404,7 @@ namespace SalesManagement_SysDev
             // 
             this.dgvChumon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvChumon.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.dgvChumon.Location = new System.Drawing.Point(11, 545);
+            this.dgvChumon.Location = new System.Drawing.Point(15, 545);
             this.dgvChumon.Margin = new System.Windows.Forms.Padding(2);
             this.dgvChumon.Name = "dgvChumon";
             this.dgvChumon.RowHeadersWidth = 51;
@@ -481,6 +412,7 @@ namespace SalesManagement_SysDev
             this.dgvChumon.Size = new System.Drawing.Size(1190, 480);
             this.dgvChumon.TabIndex = 76;
             this.dgvChumon.TabStop = false;
+            this.dgvChumon.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChumon_CellClick);
             // 
             // dgvChumonDetail
             // 
@@ -495,23 +427,59 @@ namespace SalesManagement_SysDev
             this.dgvChumonDetail.TabIndex = 77;
             this.dgvChumonDetail.TabStop = false;
             // 
-            // lblClient
+            // lblHidden
             // 
-            this.lblClient.AutoSize = true;
-            this.lblClient.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClient.ForeColor = System.Drawing.Color.White;
-            this.lblClient.Location = new System.Drawing.Point(752, 30);
-            this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(417, 64);
-            this.lblClient.TabIndex = 27;
-            this.lblClient.Text = "注文管理画面";
+            this.lblHidden.AutoSize = true;
+            this.lblHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblHidden.Location = new System.Drawing.Point(146, 440);
+            this.lblHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblHidden.Name = "lblHidden";
+            this.lblHidden.Size = new System.Drawing.Size(142, 24);
+            this.lblHidden.TabIndex = 78;
+            this.lblHidden.Text = "表示/非表示";
+            // 
+            // cmbHidden
+            // 
+            this.cmbHidden.BackColor = System.Drawing.Color.White;
+            this.cmbHidden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbHidden.FormattingEnabled = true;
+            this.cmbHidden.Location = new System.Drawing.Point(302, 437);
+            this.cmbHidden.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbHidden.Name = "cmbHidden";
+            this.cmbHidden.Size = new System.Drawing.Size(220, 32);
+            this.cmbHidden.TabIndex = 79;
+            this.cmbHidden.TabStop = false;
+            // 
+            // txbHidden
+            // 
+            this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.txbHidden.Location = new System.Drawing.Point(307, 502);
+            this.txbHidden.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txbHidden.Name = "txbHidden";
+            this.txbHidden.Size = new System.Drawing.Size(815, 31);
+            this.txbHidden.TabIndex = 81;
+            // 
+            // lblClientHidden
+            // 
+            this.lblClientHidden.AutoSize = true;
+            this.lblClientHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.lblClientHidden.Location = new System.Drawing.Point(156, 505);
+            this.lblClientHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblClientHidden.Name = "lblClientHidden";
+            this.lblClientHidden.Size = new System.Drawing.Size(130, 24);
+            this.lblClientHidden.TabIndex = 80;
+            this.lblClientHidden.Text = "非表示理由";
             // 
             // F_ButuryuChumon
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.txbHidden);
+            this.Controls.Add(this.lblClientHidden);
+            this.Controls.Add(this.cmbHidden);
+            this.Controls.Add(this.lblHidden);
             this.Controls.Add(this.dgvChumonDetail);
             this.Controls.Add(this.dgvChumon);
             this.Controls.Add(this.lblNumPage);
@@ -525,12 +493,6 @@ namespace SalesManagement_SysDev
             this.Controls.Add(this.txbPageSize);
             this.Controls.Add(this.cmbView);
             this.Controls.Add(this.btnDone);
-            this.Controls.Add(this.txbChumonQuentity);
-            this.Controls.Add(this.lblChumonQuentity);
-            this.Controls.Add(this.txbProdactName);
-            this.Controls.Add(this.lblProdactName);
-            this.Controls.Add(this.txbProdactID);
-            this.Controls.Add(this.lblProdactID);
             this.Controls.Add(this.txbOrderID);
             this.Controls.Add(this.lblOrderID);
             this.Controls.Add(this.cmbSalesOfficeID);
@@ -540,8 +502,6 @@ namespace SalesManagement_SysDev
             this.Controls.Add(this.txbChumonID);
             this.Controls.Add(this.lblChumonID);
             this.Controls.Add(this.pnlSelect);
-            this.Controls.Add(this.txbChumonDetailID);
-            this.Controls.Add(this.lblChumonDetailID);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.pnlButuryu);
             this.ForeColor = System.Drawing.Color.Black;
@@ -549,6 +509,7 @@ namespace SalesManagement_SysDev
             this.MaximizeBox = false;
             this.Name = "F_ButuryuChumon";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.F_ButuryuChumon_Load);
             this.pnlButuryu.ResumeLayout(false);
             this.pnlButuryu.PerformLayout();
             this.pnlSelect.ResumeLayout(false);
@@ -557,14 +518,13 @@ namespace SalesManagement_SysDev
             ((System.ComponentModel.ISupportInitialize)(this.dgvChumonDetail)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         } 
 
         #endregion
         private System.Windows.Forms.Button btnReturn;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.TextBox txbChumonDetailID;
-        private System.Windows.Forms.Label lblChumonDetailID;
         private System.Windows.Forms.Panel pnlSelect;
         private System.Windows.Forms.RadioButton rdbSearch;
         private System.Windows.Forms.RadioButton rdbConfirm;
@@ -577,12 +537,6 @@ namespace SalesManagement_SysDev
         private System.Windows.Forms.ComboBox cmbSalesOfficeID;
         private System.Windows.Forms.TextBox txbOrderID;
         private System.Windows.Forms.Label lblOrderID;
-        private System.Windows.Forms.TextBox txbProdactID;
-        private System.Windows.Forms.Label lblProdactID;
-        private System.Windows.Forms.TextBox txbProdactName;
-        private System.Windows.Forms.Label lblProdactName;
-        private System.Windows.Forms.TextBox txbChumonQuentity;
-        private System.Windows.Forms.Label lblChumonQuentity;
         private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.ComboBox cmbView;
         private System.Windows.Forms.Button btnPageSize;
@@ -598,5 +552,9 @@ namespace SalesManagement_SysDev
         private System.Windows.Forms.DataGridView dgvChumonDetail;
         private System.Windows.Forms.Label lblClient;
         private System.Windows.Forms.Panel pnlButuryu;
+        private Label lblHidden;
+        private ComboBox cmbHidden;
+        private TextBox txbHidden;
+        private Label lblClientHidden;
     }
 }

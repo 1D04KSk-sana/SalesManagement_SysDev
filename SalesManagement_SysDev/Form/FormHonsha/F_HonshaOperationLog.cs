@@ -25,7 +25,7 @@ namespace SalesManagement_SysDev
         //コンボボックス用の社員データリスト
         private static List<M_Employee> listEmployee = new List<M_Employee>();
         //データベース社員テーブルアクセス用クラスのインスタンス化
-        EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
+        ChumonDetailDataAccess employeeDataAccess = new ChumonDetailDataAccess();
 
 
         public F_HonshaOperationLog()

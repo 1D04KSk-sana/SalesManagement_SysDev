@@ -21,7 +21,7 @@ namespace SalesManagement_SysDev
         //データベース受注テーブルアクセス用クラスのインスタンス化
         OrderDetailDataAccess orderDetailDataAccess = new OrderDetailDataAccess();
         //データベース社員テーブルアクセス用クラスのインスタンス化
-        EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
+        ChumonDetailDataAccess employeeDataAccess = new ChumonDetailDataAccess();
         //データベース商品テーブルアクセス用クラスのインスタンス化
         ProdactDataAccess prodactDataAccess = new ProdactDataAccess();
         //データベース顧客テーブルアクセス用クラスのインスタンス化
@@ -987,7 +987,7 @@ namespace SalesManagement_SysDev
 
             T_Chumon Chumon = GenerateChumonAtRegistration(Order);
 
-            bool flgChumon = chumonDataAccess.AddChumonData(Chumon);
+            bool flgChumon = orderDataAccess.AddOrderData(Order);
 
             if (flg == true)
             {

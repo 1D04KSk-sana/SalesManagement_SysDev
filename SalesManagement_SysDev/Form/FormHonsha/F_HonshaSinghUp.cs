@@ -17,7 +17,7 @@ namespace SalesManagement_SysDev
         //データベース営業所テーブルアクセス用クラスのインスタンス化
         SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
         //データベース社員テーブルアクセス用クラスのインスタンス化
-        EmployeeDataAccess EmployeeDataAccess = new EmployeeDataAccess();
+        ChumonDetailDataAccess EmployeeDataAccess = new ChumonDetailDataAccess();
         //データベース営業所テーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogDataAccess = new OperationLogDataAccess();
         //コンボボックス用の営業所データリスト

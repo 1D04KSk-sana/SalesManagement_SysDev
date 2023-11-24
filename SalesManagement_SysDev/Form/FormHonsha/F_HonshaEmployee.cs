@@ -13,13 +13,13 @@ namespace SalesManagement_SysDev
     public partial class F_HonshaEmployee : Form
     {
         //データベース社員テーブルアクセス用クラスのインスタンス化
-        EmployeeDataAccess EmployeeDataAccess = new EmployeeDataAccess();
+        ChumonDetailDataAccess EmployeeDataAccess = new ChumonDetailDataAccess();
         //データベース営業所テーブルアクセス用クラスのインスタンス化
         SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
         //データベース顧客テーブルアクセス用クラスのインスタンス化
         ClientDataAccess clientDataAccess = new ClientDataAccess();
         //データベース社員テーブルアクセス用クラスのインスタンス化
-        EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
+        ChumonDetailDataAccess employeeDataAccess = new ChumonDetailDataAccess();
         //データベース役所テーブルアクセス用クラスのインスタンス化
         PositionDataAccess PositionDataAccess = new PositionDataAccess();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
@@ -859,6 +859,11 @@ namespace SalesManagement_SysDev
             {
                 e.Handled = true;
             }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
