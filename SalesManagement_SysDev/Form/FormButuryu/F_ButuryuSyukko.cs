@@ -133,7 +133,7 @@ namespace SalesManagement_SysDev
             //非表示ラヂオボタンがチェックされているとき
             if (rdbHidden.Checked)
             {
-
+                OrderDataUpdate();
             }
         }
         
@@ -151,7 +151,6 @@ namespace SalesManagement_SysDev
             SetDataDetailGridView(int.Parse(dgvSyukko[0, dgvSyukko.CurrentCellAddress.Y].Value.ToString()));
         }
 
-
         private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
         {
             f_SearchDialog.Close();
@@ -164,6 +163,82 @@ namespace SalesManagement_SysDev
             f_SearchDialog.Close();
 
             ProdactSearchButtonClick(false);
+        }
+
+        ///////////////////////////////
+        //メソッド名：OrderDataUpdate()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：受注情報更新の実行
+        ///////////////////////////////
+        private void OrderDataUpdate()
+        {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtUpdate())
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
+            // 受注情報作成
+            var updOrder = GenerateDataAtUpdate();
+
+            // 受注情報更新
+            UpdateOrder(updOrder);
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtUpdate()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：更新入力データの形式チェック
+        //          ：エラーがない場合True
+        //          ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtUpdate()
+        {
+            //出庫IDの適否
+            if (!String.IsNullOrEmpty(txbSyukkoID.Text.Trim()))
+            {
+                // 受注IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbOrderID.Text.Trim()))
+                {
+                    MessageBox.Show("受注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbOrderID.Focus();
+                    return false;
+                }
+                //受注IDの存在チェック
+                if (!orderDataAccess.CheckOrderIDExistence(int.Parse(txbOrderID.Text.Trim())))
+                {
+                    MessageBox.Show("受注IDが存在していません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbOrderID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("受注IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbOrderID.Focus();
+                return false;
+            }
+
+            //表示選択の適否
+            if (cmbHidden.SelectedIndex == -1)
+            {
+                MessageBox.Show("表示/非表示が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbHidden.Focus();
+                return false;
+            }
+
+            return true;
         }
 
         ///////////////////////////////
