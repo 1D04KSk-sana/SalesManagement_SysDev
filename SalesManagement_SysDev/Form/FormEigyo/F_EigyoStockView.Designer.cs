@@ -42,7 +42,7 @@
             this.btnPageSize = new System.Windows.Forms.Button();
             this.txbPageSize = new System.Windows.Forms.TextBox();
             this.lblPageSize = new System.Windows.Forms.Label();
-            this.pnlHonsha = new System.Windows.Forms.Panel();
+            this.pnlEigyo = new System.Windows.Forms.Panel();
             this.lblStockView = new System.Windows.Forms.Label();
             this.btnReturn = new System.Windows.Forms.Button();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
@@ -55,7 +55,7 @@
             this.txbProductName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockView)).BeginInit();
-            this.pnlHonsha.SuspendLayout();
+            this.pnlEigyo.SuspendLayout();
             this.SuspendLayout();
             // 
             // txbstocknum
@@ -231,18 +231,18 @@
             this.lblPageSize.TabIndex = 68;
             this.lblPageSize.Text = "1ページ行数";
             // 
-            // pnlHonsha
+            // pnlEigyo
             // 
-            this.pnlHonsha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(181)))), ((int)(((byte)(128)))));
-            this.pnlHonsha.Controls.Add(this.lblStockView);
-            this.pnlHonsha.Controls.Add(this.btnReturn);
-            this.pnlHonsha.Controls.Add(this.btnClose);
-            this.pnlHonsha.Location = new System.Drawing.Point(1, -2);
-            this.pnlHonsha.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlHonsha.Name = "pnlHonsha";
-            this.pnlHonsha.Size = new System.Drawing.Size(1920, 150);
-            this.pnlHonsha.TabIndex = 69;
-            this.pnlHonsha.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlHonsha_Paint);
+            this.pnlEigyo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(181)))), ((int)(((byte)(128)))));
+            this.pnlEigyo.Controls.Add(this.lblStockView);
+            this.pnlEigyo.Controls.Add(this.btnReturn);
+            this.pnlEigyo.Controls.Add(this.btnClose);
+            this.pnlEigyo.Location = new System.Drawing.Point(1, -2);
+            this.pnlEigyo.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlEigyo.Name = "pnlEigyo";
+            this.pnlEigyo.Size = new System.Drawing.Size(1920, 150);
+            this.pnlEigyo.TabIndex = 69;
+            this.pnlEigyo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlHonsha_Paint);
             // 
             // lblStockView
             // 
@@ -332,6 +332,7 @@
             // 
             // btnDone
             // 
+            this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnDone.Location = new System.Drawing.Point(1667, 194);
             this.btnDone.Margin = new System.Windows.Forms.Padding(2);
@@ -340,7 +341,7 @@
             this.btnDone.TabIndex = 88;
             this.btnDone.TabStop = false;
             this.btnDone.Text = "実行";
-            this.btnDone.UseVisualStyleBackColor = true;
+            this.btnDone.UseVisualStyleBackColor = false;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // cmbView
@@ -398,7 +399,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblEmployeeID);
             this.Controls.Add(this.rdbSearch);
-            this.Controls.Add(this.pnlHonsha);
+            this.Controls.Add(this.pnlEigyo);
             this.Controls.Add(this.lblPageSize);
             this.Controls.Add(this.txbPageSize);
             this.Controls.Add(this.btnPageSize);
@@ -419,8 +420,8 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.F_EigyoStockView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockView)).EndInit();
-            this.pnlHonsha.ResumeLayout(false);
-            this.pnlHonsha.PerformLayout();
+            this.pnlEigyo.ResumeLayout(false);
+            this.pnlEigyo.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -441,7 +442,7 @@
         private System.Windows.Forms.Button btnPageSize;
         private System.Windows.Forms.TextBox txbPageSize;
         private System.Windows.Forms.Label lblPageSize;
-        private System.Windows.Forms.Panel pnlHonsha;
+        private System.Windows.Forms.Panel pnlEigyo;
         private System.Windows.Forms.Label lblStockView;
         private System.Windows.Forms.Button btnReturn;
         private System.Windows.Forms.RadioButton rdbSearch;
