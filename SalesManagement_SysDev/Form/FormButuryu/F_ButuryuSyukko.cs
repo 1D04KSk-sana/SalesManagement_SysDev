@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,6 +25,8 @@ namespace SalesManagement_SysDev
         EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
         //データベース顧客テーブルアクセス用クラスのインスタンス化
         ClientDataAccess clientDataAccess = new ClientDataAccess();
+        //データベース操作ログテーブルアクセス用クラスのインスタンス化
+        OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
         //データグリッドビュー用の全出庫データ
         private static List<T_Syukko> listAllSyukko = new List<T_Syukko>();
         //データグリッドビュー用の出庫データ
@@ -107,7 +110,7 @@ namespace SalesManagement_SysDev
         {
             ClearImput();
 
-            rdbSearch.Checked = true;
+            rdbConfirm.Checked = true;
 
             GetDataGridView();
         }
@@ -124,7 +127,7 @@ namespace SalesManagement_SysDev
             //確定ラヂオボタンがチェックされているとき
             if (rdbConfirm.Checked)
             {
-
+                OrderDataConfirm();
             }
 
             //非表示ラヂオボタンがチェックされているとき
@@ -146,9 +149,8 @@ namespace SalesManagement_SysDev
             SelectRowControl();
 
             SetDataDetailGridView(int.Parse(dgvSyukko[0, dgvSyukko.CurrentCellAddress.Y].Value.ToString()));
-
-            ClearImputDetail();
         }
+
 
         private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
         {
@@ -164,6 +166,147 @@ namespace SalesManagement_SysDev
             ProdactSearchButtonClick(false);
         }
 
+        ///////////////////////////////
+        //メソッド名：OrderDataConfirm()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：出庫情報確定の実行
+        ///////////////////////////////
+        private void OrderDataConfirm()
+        {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtConfirm())
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbConfirm.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
+            // 受注情報作成
+            var cmfSyukko = GenerateDataAtConfirm();
+
+            // 受注情報更新
+            ConfirmSyukko(cmfSyukko);
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtRegistration()
+        //引　数   ：なし
+        //戻り値   ：受注登録情報
+        //機　能   ：確定データのセット
+        ///////////////////////////////
+        private T_Syukko GenerateDataAtConfirm()
+        {
+            return new T_Syukko
+            {
+                SyID = int.Parse(txbSyukkoID.Text.Trim()),
+                SyStateFlag = 1,
+            };
+        }
+
+        ///////////////////////////////
+        //メソッド名：ConfirmOrder()
+        //引　数   ：受注情報
+        //戻り値   ：なし
+        //機　能   ：受注情報の確定
+        ///////////////////////////////
+        private void ConfirmSyukko(T_Syukko cfmOrder)
+        {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("確定しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            // 出庫情報の更新
+            bool flg = SyukkoDataAccess.ConfirmSyukkoData(cfmOrder);
+
+            if (flg == true)
+            {
+                MessageBox.Show("確定しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("確定に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            T_Syukko Syukko = SyukkoDataAccess.GetIDSyukkoData(int.Parse(txbSyukkoID.Text.Trim()));
+
+
+            if (flg == true)
+            {
+                MessageBox.Show("注文管理にデータを送信しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("注文管理へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //テキストボックス等のクリア
+            ClearImput();
+
+            // データグリッドビューの表示
+            GetDataGridView();
+        }
+
+
+
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtConfirm()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：確定入力データの形式チェック
+        //          ：エラーがない場合True
+        //          ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtConfirm()
+        {
+            //出庫IDの適否
+            if (!String.IsNullOrEmpty(txbSyukkoID.Text.Trim()))
+            {
+                // 出庫IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbSyukkoID.Text.Trim()))
+                {
+                    MessageBox.Show("受注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSyukkoID.Focus();
+                    return false;
+                }
+                //出庫IDの存在チェック
+                if (!SyukkoDataAccess.CheckSyukkoIDExistence(int.Parse(txbSyukkoID.Text.Trim())))
+                {
+                    MessageBox.Show("受注IDが存在していません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSyukkoID.Focus();
+                    return false;
+                }
+
+                T_Syukko order = SyukkoDataAccess.GetSyukkoIDOrderData(int.Parse(txbSyukkoID.Text.Trim()));
+
+                //受注IDの確定チェック
+               if (order.SyStateFlag == 1)
+                {
+                    MessageBox.Show("受注IDはすでに確定しています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSyukkoID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("受注IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbSyukkoID.Focus();
+                return false;
+            }
+
+            return true;
+        }
         ///////////////////////////////
         //メソッド名：ProdactDataSelect()
         //引　数   ：なし
@@ -194,6 +337,25 @@ namespace SalesManagement_SysDev
 
             //商品登録フォームの透明化
             this.Opacity = 0;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateLogAtRegistration()
+        //引　数   ：操作名
+        //戻り値   ：操作ログ登録情報
+        //機　能   ：操作ログ情報登録データのセット
+        ///////////////////////////////
+        private T_OperationLog GenerateLogAtRegistration(string OperationDone)
+        {
+            return new T_OperationLog
+            {
+                OpHistoryID = operationLogAccess.OperationLogNum() + 1,
+                EmID = F_Login.intEmployeeID,
+                FormName = "受注管理画面",
+                OpDone = OperationDone,
+                OpDBID = int.Parse(txbSyukkoID.Text.Trim()),
+                OpSetTime = DateTime.Now,
+            };
         }
 
         ///////////////////////////////
@@ -438,24 +600,24 @@ namespace SalesManagement_SysDev
             dgvSyukko.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             dgvSyukko.Columns.Add("SyID", "出庫ID");
-            dgvSyukko.Columns.Add("EmID", "社員ID");
-            dgvSyukko.Columns.Add("ClID", "顧客ID");
-            dgvSyukko.Columns.Add("SoID", "営業所ID");
+            dgvSyukko.Columns.Add("EmID", "社員名");
+            dgvSyukko.Columns.Add("ClID", "顧客名");
+            dgvSyukko.Columns.Add("SoID", "営業所名");
             dgvSyukko.Columns.Add("OrID", "受注ID");
             dgvSyukko.Columns.Add("SyDate", "出庫年月日");
             dgvSyukko.Columns.Add("SyStateFlag", "出庫状態フラグ");
             dgvSyukko.Columns.Add("SyFlag", "出庫管理フラグ");
             dgvSyukko.Columns.Add("SyHidden", "非表示理由");
 
-            dgvSyukko.Columns["SyID"].Width = 80;
+            dgvSyukko.Columns["SyID"].Width = 60;
             dgvSyukko.Columns["EmID"].Width = 80;
             dgvSyukko.Columns["ClID"].Width = 80;
             dgvSyukko.Columns["SoID"].Width = 80;
             dgvSyukko.Columns["OrID"].Width = 80;
-            dgvSyukko.Columns["SyDate"].Width = 80;
-            dgvSyukko.Columns["SyStateFlag"].Width = 80;
-            dgvSyukko.Columns["SyFlag"].Width = 80;
-            dgvSyukko.Columns["SyHidden"].Width = 80;
+            dgvSyukko.Columns["SyDate"].Width = 150;
+            dgvSyukko.Columns["SyStateFlag"].Width = 100;
+            dgvSyukko.Columns["SyFlag"].Width = 100;
+            dgvSyukko.Columns["SyHidden"].Width = 126;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvSyukko.Columns)
@@ -663,22 +825,5 @@ namespace SalesManagement_SysDev
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSyukko[7, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvSyukko[8, dgvSyukko.CurrentCellAddress.Y]?.Value?.ToString();
         }
-
-        ///////////////////////////////
-        //メソッド名：ClearImputDetail()
-        //引　数   ：なし
-        //戻り値   ：なし
-        //機　能   ：コントロールのクリア(Detail)
-        ///////////////////////////////
-        private void ClearImputDetail()
-        {
-            txbSyukkoID.Text = string.Empty;
-            txbClientID.Text = string.Empty;
-            txbEmployeeName.Text = string.Empty;
-            txbChumonID.Text = string.Empty;
-            txbHidden.Text= string.Empty;
-        }
-
-
     }
 }

@@ -47,7 +47,7 @@
             this.lblSyukkoDate = new System.Windows.Forms.Label();
             this.dtpSyukkoDate = new System.Windows.Forms.DateTimePicker();
             this.cmbHidden = new System.Windows.Forms.ComboBox();
-            this.lblprodactdspHidden = new System.Windows.Forms.Label();
+            this.lblConfirm = new System.Windows.Forms.Label();
             this.lblHidden = new System.Windows.Forms.Label();
             this.txbHidden = new System.Windows.Forms.TextBox();
             this.dgvSyukko = new System.Windows.Forms.DataGridView();
@@ -65,6 +65,8 @@
             this.rdbHidden = new System.Windows.Forms.RadioButton();
             this.rdbConfirm = new System.Windows.Forms.RadioButton();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbConfirm = new System.Windows.Forms.ComboBox();
             this.pnlButuryu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSyukko)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSyukkoDetail)).BeginInit();
@@ -165,7 +167,7 @@
             // 
             this.lblClientID.AutoSize = true;
             this.lblClientID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientID.Location = new System.Drawing.Point(453, 281);
+            this.lblClientID.Location = new System.Drawing.Point(429, 281);
             this.lblClientID.Name = "lblClientID";
             this.lblClientID.Size = new System.Drawing.Size(82, 24);
             this.lblClientID.TabIndex = 7;
@@ -174,7 +176,7 @@
             // txbClientID
             // 
             this.txbClientID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientID.Location = new System.Drawing.Point(539, 278);
+            this.txbClientID.Location = new System.Drawing.Point(517, 278);
             this.txbClientID.Name = "txbClientID";
             this.txbClientID.Size = new System.Drawing.Size(220, 31);
             this.txbClientID.TabIndex = 6;
@@ -183,7 +185,7 @@
             // 
             this.lblSalesOfficeID.AutoSize = true;
             this.lblSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblSalesOfficeID.Location = new System.Drawing.Point(816, 281);
+            this.lblSalesOfficeID.Location = new System.Drawing.Point(749, 278);
             this.lblSalesOfficeID.Name = "lblSalesOfficeID";
             this.lblSalesOfficeID.Size = new System.Drawing.Size(106, 24);
             this.lblSalesOfficeID.TabIndex = 9;
@@ -194,7 +196,7 @@
             this.cmbSalesOfficeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSalesOfficeID.FormattingEnabled = true;
-            this.cmbSalesOfficeID.Location = new System.Drawing.Point(939, 269);
+            this.cmbSalesOfficeID.Location = new System.Drawing.Point(876, 275);
             this.cmbSalesOfficeID.Name = "cmbSalesOfficeID";
             this.cmbSalesOfficeID.Size = new System.Drawing.Size(220, 32);
             this.cmbSalesOfficeID.TabIndex = 10;
@@ -222,7 +224,7 @@
             // 
             this.lblChumonID.AutoSize = true;
             this.lblChumonID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblChumonID.Location = new System.Drawing.Point(453, 350);
+            this.lblChumonID.Location = new System.Drawing.Point(431, 350);
             this.lblChumonID.Name = "lblChumonID";
             this.lblChumonID.Size = new System.Drawing.Size(80, 24);
             this.lblChumonID.TabIndex = 14;
@@ -231,7 +233,7 @@
             // txbChumonID
             // 
             this.txbChumonID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbChumonID.Location = new System.Drawing.Point(539, 347);
+            this.txbChumonID.Location = new System.Drawing.Point(517, 347);
             this.txbChumonID.Name = "txbChumonID";
             this.txbChumonID.Size = new System.Drawing.Size(220, 31);
             this.txbChumonID.TabIndex = 13;
@@ -240,7 +242,7 @@
             // 
             this.lblSyukkoDate.AutoSize = true;
             this.lblSyukkoDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblSyukkoDate.Location = new System.Drawing.Point(792, 354);
+            this.lblSyukkoDate.Location = new System.Drawing.Point(749, 354);
             this.lblSyukkoDate.Name = "lblSyukkoDate";
             this.lblSyukkoDate.Size = new System.Drawing.Size(130, 24);
             this.lblSyukkoDate.TabIndex = 15;
@@ -250,7 +252,7 @@
             // 
             this.dtpSyukkoDate.CalendarFont = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.dtpSyukkoDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.dtpSyukkoDate.Location = new System.Drawing.Point(939, 350);
+            this.dtpSyukkoDate.Location = new System.Drawing.Point(876, 345);
             this.dtpSyukkoDate.Name = "dtpSyukkoDate";
             this.dtpSyukkoDate.Size = new System.Drawing.Size(220, 31);
             this.dtpSyukkoDate.TabIndex = 16;
@@ -264,27 +266,27 @@
             this.cmbHidden.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbHidden.Location = new System.Drawing.Point(1361, 281);
+            this.cmbHidden.Location = new System.Drawing.Point(1620, 278);
             this.cmbHidden.Name = "cmbHidden";
             this.cmbHidden.Size = new System.Drawing.Size(220, 32);
             this.cmbHidden.TabIndex = 17;
             this.cmbHidden.TabStop = false;
             // 
-            // lblprodactdspHidden
+            // lblConfirm
             // 
-            this.lblprodactdspHidden.AutoSize = true;
-            this.lblprodactdspHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblprodactdspHidden.Location = new System.Drawing.Point(1174, 281);
-            this.lblprodactdspHidden.Name = "lblprodactdspHidden";
-            this.lblprodactdspHidden.Size = new System.Drawing.Size(142, 24);
-            this.lblprodactdspHidden.TabIndex = 18;
-            this.lblprodactdspHidden.Text = "表示/非表示";
+            this.lblConfirm.AutoSize = true;
+            this.lblConfirm.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblConfirm.Location = new System.Drawing.Point(1472, 281);
+            this.lblConfirm.Name = "lblConfirm";
+            this.lblConfirm.Size = new System.Drawing.Size(142, 24);
+            this.lblConfirm.TabIndex = 18;
+            this.lblConfirm.Text = "表示/非表示";
             // 
             // lblHidden
             // 
             this.lblHidden.AutoSize = true;
             this.lblHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblHidden.Location = new System.Drawing.Point(1186, 350);
+            this.lblHidden.Location = new System.Drawing.Point(1196, 347);
             this.lblHidden.Name = "lblHidden";
             this.lblHidden.Size = new System.Drawing.Size(130, 24);
             this.lblHidden.TabIndex = 19;
@@ -459,6 +461,33 @@
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label1.Location = new System.Drawing.Point(1098, 281);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(142, 24);
+            this.label1.TabIndex = 33;
+            this.label1.Text = "確定/未確定";
+            // 
+            // cmbConfirm
+            // 
+            this.cmbConfirm.AutoCompleteCustomSource.AddRange(new string[] {
+            "確定",
+            "未確定"});
+            this.cmbConfirm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbConfirm.FormattingEnabled = true;
+            this.cmbConfirm.Items.AddRange(new object[] {
+            "確定",
+            "未確定"});
+            this.cmbConfirm.Location = new System.Drawing.Point(1246, 275);
+            this.cmbConfirm.Name = "cmbConfirm";
+            this.cmbConfirm.Size = new System.Drawing.Size(220, 32);
+            this.cmbConfirm.TabIndex = 34;
+            this.cmbConfirm.TabStop = false;
+            // 
             // F_ButuryuSyukko
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -466,6 +495,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.cmbConfirm);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pnlSelect);
             this.Controls.Add(this.btnPageMax);
             this.Controls.Add(this.btnNext);
@@ -480,7 +511,7 @@
             this.Controls.Add(this.dgvSyukko);
             this.Controls.Add(this.txbHidden);
             this.Controls.Add(this.lblHidden);
-            this.Controls.Add(this.lblprodactdspHidden);
+            this.Controls.Add(this.lblConfirm);
             this.Controls.Add(this.cmbHidden);
             this.Controls.Add(this.dtpSyukkoDate);
             this.Controls.Add(this.lblSyukkoDate);
@@ -536,7 +567,7 @@
         private System.Windows.Forms.Label lblSyukkoDate;
         private System.Windows.Forms.DateTimePicker dtpSyukkoDate;
         private System.Windows.Forms.ComboBox cmbHidden;
-        private System.Windows.Forms.Label lblprodactdspHidden;
+        private System.Windows.Forms.Label lblConfirm;
         private System.Windows.Forms.Label lblHidden;
         private System.Windows.Forms.TextBox txbHidden;
         private System.Windows.Forms.DataGridView dgvSyukko;
@@ -554,5 +585,7 @@
         private System.Windows.Forms.RadioButton rdbHidden;
         private System.Windows.Forms.RadioButton rdbConfirm;
         private System.Windows.Forms.RadioButton rdbSearch;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cmbConfirm;
     }
 }
