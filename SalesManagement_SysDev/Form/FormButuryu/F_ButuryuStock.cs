@@ -33,6 +33,13 @@ namespace SalesManagement_SysDev
         //DataGridView用に使用する商品のDictionary
         private Dictionary<int, string> dictionaryProdact;
 
+        //DataGridView用に使用する表示形式のDictionary
+        private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
+        {
+            { 0, "表示" },
+            { 1, "非表示" },
+        };
+
         public F_ButuryuStock()
         {
             InitializeComponent();
@@ -131,7 +138,6 @@ namespace SalesManagement_SysDev
             txbProductID.Text = string.Empty;
             txbProdactName.Text = string.Empty;
             cmbHidden.SelectedIndex = -1;
-            cmbView.SelectedIndex = -1;
         }
 
         private void btnDone_Click(object sender, EventArgs e)
@@ -189,15 +195,15 @@ namespace SalesManagement_SysDev
             //在庫IDの適否
             if (!String.IsNullOrEmpty(txbStockID.Text.Trim()))
             {
-                //受注IDの数字チェック
+                //在庫IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbStockID.Text.Trim()))
                 {
                     MessageBox.Show("在庫IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbStockID.Focus();
                     return false;
                 }
-                //受注IDの存在チェック
-                if (orderDataAccess.CheckOrderIDExistence(int.Parse(txbStockID.Text.Trim())))
+                //在庫IDの存在チェック
+                if (stockDataAccess.CheckStockIDExistence(int.Parse(txbStockID.Text.Trim())))
                 {
                     MessageBox.Show("在庫IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbStockID.Focus();
@@ -208,6 +214,40 @@ namespace SalesManagement_SysDev
             {
                 MessageBox.Show("在庫IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbStockID.Focus();
+                return false;
+            }
+            //商品IDの適否
+            if (!String.IsNullOrEmpty(txbProductID.Text.Trim()))
+            {
+                //商品IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbProductID.Text.Trim()))
+                {
+                    MessageBox.Show("商品IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProductID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("商品IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbProductID.Focus();
+                return false;
+            }
+            //在庫数の適否
+            if (!String.IsNullOrEmpty(txbStockQuentity.Text.Trim()))
+            {
+                //在庫数の数字チェック
+                if (!dataInputCheck.CheckNumeric(txbStockQuentity.Text.Trim()))
+                {
+                    MessageBox.Show("在庫数は全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbStockQuentity.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("在庫数が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbStockQuentity.Focus();
                 return false;
             }
             //表示選択の適否
@@ -226,8 +266,11 @@ namespace SalesManagement_SysDev
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 
+            DictionarySet();
+            SetFormDataGridView();
+
             //cmbViewを表示に
-            //cmbView.SelectedIndex = 0;
+            cmbView.SelectedIndex = 0;
         }
         ///////////////////////////////
         //メソッド名：DictionarySet()
@@ -392,7 +435,7 @@ namespace SalesManagement_SysDev
             //1行ずつdgvClientに挿入
             foreach (var item in depData)
             {
-                dgvStock.Rows.Add(item.PrID, item.StID, item.StQuantity);
+                dgvStock.Rows.Add(dictionaryProdact[item.PrID], item.StID, item.StQuantity, dictionaryHidden[item.StFlag]);
             }
 
             //dgvStockをリフレッシュ
@@ -601,9 +644,80 @@ namespace SalesManagement_SysDev
         private void SelectRowControl()
         {
             //データグリッドビューに乗っている情報をGUIに反映
-            txbProductID.Text = dgvStock[0, dgvStock.CurrentCellAddress.Y].Value.ToString();
+            txbProductID.Text = (dictionaryProdact.FirstOrDefault(x => x.Value == dgvStock[0, dgvStock.CurrentCellAddress.Y].Value.ToString()).Key ).ToString();
             txbStockID.Text = dgvStock[1, dgvStock.CurrentCellAddress.Y].Value.ToString();
             txbStockQuentity.Text = dgvStock[2, dgvStock.CurrentCellAddress.Y].Value.ToString();
+            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvStock[3, dgvStock.CurrentCellAddress.Y].Value.ToString()).Key;
+        }
+        ///////////////////////////////
+        //メソッド名：SetFormDataGridView()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：データグリッドビューの初期設定
+        ///////////////////////////////
+        private void SetFormDataGridView()
+        {
+            //列を自由に設定できるように
+            dgvStock.AutoGenerateColumns = false;
+            //行単位で選択するようにする
+            dgvStock.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //行と列の高さを変更できないように
+            dgvStock.AllowUserToResizeColumns = false;
+            dgvStock.AllowUserToResizeRows = false;
+            //セルの複数行選択をオフに
+            dgvStock.MultiSelect = false;
+            //セルの編集ができないように
+            dgvStock.ReadOnly = true;
+            //ユーザーが新しい行を追加できないようにする
+            dgvStock.AllowUserToAddRows = false;
+
+            //左端の項目列を削除
+            dgvStock.RowHeadersVisible = false;
+            //行の自動追加をオフ
+            dgvStock.AllowUserToAddRows = false;
+
+            //ヘッダー位置の指定
+            dgvStock.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dgvStock.Columns.Add("PrID", "商品ID");
+            dgvStock.Columns.Add("StID", "在庫ID");
+            dgvStock.Columns.Add("StQuantity", "在庫数");
+            dgvStock.Columns.Add("StFlag", "在庫管理フラグ");
+
+            dgvStock.Columns["PrID"].Width = 475;
+            dgvStock.Columns["StID"].Width = 475;
+            dgvStock.Columns["StQuantity"].Width = 475;
+            dgvStock.Columns["StFlag"].Width = 475;
+
+            //並び替えができないようにする
+            foreach (DataGridViewColumn dataColumn in dgvStock.Columns)
+            {
+                dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+        }
+
+        private void txbProductID_TextChanged(object sender, EventArgs e)
+        {
+            //nullの確認
+            string stringProdactID = txbProductID.Text.Trim();
+            int intProdactID = 0;
+
+            if (!String.IsNullOrEmpty(stringProdactID))
+            {
+                intProdactID = int.Parse(stringProdactID);
+            }
+
+            //存在確認
+            if (!prodactDataAccess.CheckProdactIDExistence(intProdactID))
+            {
+                txbProdactName.Text = "商品IDが存在しません";
+                return;
+            }
+
+            //IDから名前を取り出す
+            var Prodact = listProduct.Single(x => x.PrID == intProdactID);
+
+            txbProdactName.Text = Prodact.PrName;
         }
     }
 }

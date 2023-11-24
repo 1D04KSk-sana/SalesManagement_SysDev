@@ -172,6 +172,8 @@
             this.txbProductID.Name = "txbProductID";
             this.txbProductID.Size = new System.Drawing.Size(220, 31);
             this.txbProductID.TabIndex = 76;
+            this.txbProductID.TextChanged += new System.EventHandler(this.txbProductID_TextChanged);
+            this.txbProductID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblProductID
             // 
@@ -255,6 +257,7 @@
             this.txbProdactName.Margin = new System.Windows.Forms.Padding(2);
             this.txbProdactName.MaxLength = 4;
             this.txbProdactName.Name = "txbProdactName";
+            this.txbProdactName.ReadOnly = true;
             this.txbProdactName.Size = new System.Drawing.Size(220, 31);
             this.txbProdactName.TabIndex = 84;
             // 
@@ -263,6 +266,9 @@
             this.cmbHidden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.cmbHidden.FormattingEnabled = true;
+            this.cmbHidden.Items.AddRange(new object[] {
+            "表示",
+            "非表示"});
             this.cmbHidden.Location = new System.Drawing.Point(415, 542);
             this.cmbHidden.Name = "cmbHidden";
             this.cmbHidden.Size = new System.Drawing.Size(220, 32);
@@ -399,6 +405,9 @@
             this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 26F);
             this.cmbView.FormattingEnabled = true;
+            this.cmbView.Items.AddRange(new object[] {
+            "表示",
+            "非表示"});
             this.cmbView.Location = new System.Drawing.Point(1256, 590);
             this.cmbView.Name = "cmbView";
             this.cmbView.Size = new System.Drawing.Size(360, 43);
