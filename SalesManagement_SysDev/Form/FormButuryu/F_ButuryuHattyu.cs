@@ -129,7 +129,7 @@ namespace SalesManagement_SysDev
             {
                 dictionaryProdact.Add(item.PrID, item.PrName);
             }
-            //メーカーのデータを取得
+            //メーカー名のデータを取得
             listMaker = makerDataAccess.GetMakerDspData();
 
             dictionaryMaker = new Dictionary<int, string> { };
@@ -564,17 +564,17 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 発注情報作成
+            // 発注詳細情報作成
             var regHattyu = GenerateDetailDataAtRegistration();
 
-            // 発注情報登録
+            // 発注詳細情報登録
             RegistrationHattyuDetail(regHattyu);
         }
         ///////////////////////////////
         //メソッド名：GetValidDetailDataAtRegistration()
         //引　数   ：なし
         //戻り値   ：true or false
-        //機　能   ：登録入力データの形式チェック
+        //機　能   ：詳細登録入力データの形式チェック
         //          ：エラーがない場合True
         //          ：エラーがある場合False
         ///////////////////////////////
