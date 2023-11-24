@@ -234,6 +234,15 @@
     <EmbeddedResource Include="Form\FormButuryu\F_Buturyu.resx">
       <DependentUpon>F_Buturyu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormButuryu\F_ButuryuWarehousing.resx">
+      <DependentUpon>F_ButuryuWarehousing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormEigyo\F_EigyoArrival.resx">
+      <DependentUpon>F_EigyoArrival.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormEigyo\F_EigyoShipment.resx">
+      <DependentUpon>F_EigyoShipment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\FormHonsha\F_HonshaSale.resx">
       <DependentUpon>F_HonshaSale.cs</DependentUpon>
     </EmbeddedResource>

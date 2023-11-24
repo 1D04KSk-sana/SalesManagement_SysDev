@@ -16,5 +16,35 @@ namespace SalesManagement_SysDev
         {
             InitializeComponent();
         }
+
+        private void rdbSearch_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdbUpdate_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvWarehousing_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
