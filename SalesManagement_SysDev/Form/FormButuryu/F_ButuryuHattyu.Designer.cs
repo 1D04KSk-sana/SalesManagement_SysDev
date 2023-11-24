@@ -251,7 +251,7 @@
             this.cmbView.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbView.Location = new System.Drawing.Point(864, 175);
+            this.cmbView.Location = new System.Drawing.Point(884, 175);
             this.cmbView.Margin = new System.Windows.Forms.Padding(2);
             this.cmbView.Name = "cmbView";
             this.cmbView.Size = new System.Drawing.Size(360, 43);
@@ -298,7 +298,7 @@
             // btnClear
             // 
             this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClear.Location = new System.Drawing.Point(1488, 160);
+            this.btnClear.Location = new System.Drawing.Point(1506, 160);
             this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(160, 70);
@@ -341,7 +341,7 @@
             this.txbHattyuDetailID.Name = "txbHattyuDetailID";
             this.txbHattyuDetailID.ShortcutsEnabled = false;
             this.txbHattyuDetailID.Size = new System.Drawing.Size(220, 31);
-            this.txbHattyuDetailID.TabIndex = 90;
+            this.txbHattyuDetailID.TabIndex = 87;
             // 
             // lblHattyuDetailID
             // 
@@ -444,7 +444,7 @@
             this.txbEmployeeName.Name = "txbEmployeeName";
             this.txbEmployeeName.ShortcutsEnabled = false;
             this.txbEmployeeName.Size = new System.Drawing.Size(220, 31);
-            this.txbEmployeeName.TabIndex = 112;
+            this.txbEmployeeName.TabIndex = 85;
             // 
             // txbHidden
             // 
@@ -453,7 +453,7 @@
             this.txbHidden.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txbHidden.Name = "txbHidden";
             this.txbHidden.Size = new System.Drawing.Size(662, 31);
-            this.txbHidden.TabIndex = 114;
+            this.txbHidden.TabIndex = 86;
             // 
             // lblButuryuHidden
             // 
@@ -474,17 +474,18 @@
             this.txbHattyuQuantity.Name = "txbHattyuQuantity";
             this.txbHattyuQuantity.ShortcutsEnabled = false;
             this.txbHattyuQuantity.Size = new System.Drawing.Size(220, 31);
-            this.txbHattyuQuantity.TabIndex = 115;
+            this.txbHattyuQuantity.TabIndex = 88;
             // 
             // txbProductName
             // 
+            this.txbProductName.Enabled = false;
             this.txbProductName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbProductName.Location = new System.Drawing.Point(1639, 353);
             this.txbProductName.Margin = new System.Windows.Forms.Padding(2);
             this.txbProductName.Name = "txbProductName";
             this.txbProductName.ShortcutsEnabled = false;
             this.txbProductName.Size = new System.Drawing.Size(220, 31);
-            this.txbProductName.TabIndex = 116;
+            this.txbProductName.TabIndex = 90;
             // 
             // txbProductID
             // 
@@ -494,7 +495,7 @@
             this.txbProductID.Name = "txbProductID";
             this.txbProductID.ShortcutsEnabled = false;
             this.txbProductID.Size = new System.Drawing.Size(220, 31);
-            this.txbProductID.TabIndex = 117;
+            this.txbProductID.TabIndex = 89;
             this.txbProductID.TextChanged += new System.EventHandler(this.txbProductID_TextChanged);
             // 
             // lbltxbHattyuQuentity
@@ -540,11 +541,12 @@
             this.cmbMakerName.Name = "cmbMakerName";
             this.cmbMakerName.Size = new System.Drawing.Size(220, 32);
             this.cmbMakerName.TabIndex = 121;
+            this.cmbMakerName.TabStop = false;
             // 
             // btnDetailClear
             // 
             this.btnDetailClear.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnDetailClear.Location = new System.Drawing.Point(1277, 160);
+            this.btnDetailClear.Location = new System.Drawing.Point(1285, 160);
             this.btnDetailClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnDetailClear.Name = "btnDetailClear";
             this.btnDetailClear.Size = new System.Drawing.Size(187, 70);
@@ -610,8 +612,10 @@
             this.dtpHattyuDate.Location = new System.Drawing.Point(696, 353);
             this.dtpHattyuDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpHattyuDate.Name = "dtpHattyuDate";
+            this.dtpHattyuDate.ShowCheckBox = true;
             this.dtpHattyuDate.Size = new System.Drawing.Size(220, 31);
             this.dtpHattyuDate.TabIndex = 127;
+            this.dtpHattyuDate.TabStop = false;
             // 
             // F_ButuryuHattyu
             // 

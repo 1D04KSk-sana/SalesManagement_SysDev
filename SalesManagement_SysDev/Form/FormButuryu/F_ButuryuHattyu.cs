@@ -873,7 +873,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbHattyuID.Text.Trim()) && cmbMakerName.SelectedIndex == -1 && String.IsNullOrEmpty(txbEmployeeName.Text.Trim())&&dtpHattyuDate.Value==null)
+            if (String.IsNullOrEmpty(txbHattyuID.Text.Trim()) && cmbMakerName.SelectedIndex == -1 && String.IsNullOrEmpty(txbEmployeeName.Text.Trim())&&dtpHattyuDate.Checked==false)
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbHattyuID.Focus();
@@ -965,13 +965,19 @@ namespace SalesManagement_SysDev
                 intEmployeeID = int.Parse(strEmployeeID);
             }
 
+            DateTime? dateSale = null;
 
-            // 検索条件のセット
+            if (dtpHattyuDate.Checked)
+            {
+                dateSale = dtpHattyuDate.Value.Date;
+            }
+                // 検索条件のセット
             T_Hattyu selectCondition = new T_Hattyu()
             {
                 HaID = intHattyuID,
                 MaID = cmbMakerName.SelectedIndex + 1,
                 EmID = intEmployeeID,
+                HaDate = dateSale,
             };
 
             if (searchFlg)

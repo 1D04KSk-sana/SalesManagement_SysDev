@@ -38,7 +38,7 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.dgvSale = new System.Windows.Forms.DataGridView();
             this.lblSaleDate = new System.Windows.Forms.Label();
-            this.txbClientPostal = new System.Windows.Forms.TextBox();
+            this.txbChumonID = new System.Windows.Forms.TextBox();
             this.lblChumonID = new System.Windows.Forms.Label();
             this.cmbSalesOfficeID = new System.Windows.Forms.ComboBox();
             this.lblSalesOfficeID = new System.Windows.Forms.Label();
@@ -188,15 +188,15 @@
             this.lblSaleDate.TabIndex = 50;
             this.lblSaleDate.Text = "売上日時";
             // 
-            // txbClientPostal
+            // txbChumonID
             // 
-            this.txbClientPostal.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientPostal.Location = new System.Drawing.Point(321, 407);
-            this.txbClientPostal.Margin = new System.Windows.Forms.Padding(2);
-            this.txbClientPostal.Name = "txbClientPostal";
-            this.txbClientPostal.ShortcutsEnabled = false;
-            this.txbClientPostal.Size = new System.Drawing.Size(220, 31);
-            this.txbClientPostal.TabIndex = 49;
+            this.txbChumonID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbChumonID.Location = new System.Drawing.Point(321, 407);
+            this.txbChumonID.Margin = new System.Windows.Forms.Padding(2);
+            this.txbChumonID.Name = "txbChumonID";
+            this.txbChumonID.ShortcutsEnabled = false;
+            this.txbChumonID.Size = new System.Drawing.Size(220, 31);
+            this.txbChumonID.TabIndex = 49;
             // 
             // lblChumonID
             // 
@@ -452,7 +452,7 @@
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.dgvSale);
             this.Controls.Add(this.lblSaleDate);
-            this.Controls.Add(this.txbClientPostal);
+            this.Controls.Add(this.txbChumonID);
             this.Controls.Add(this.lblChumonID);
             this.Controls.Add(this.cmbSalesOfficeID);
             this.Controls.Add(this.lblSalesOfficeID);
@@ -487,7 +487,7 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.DataGridView dgvSale;
         private System.Windows.Forms.Label lblSaleDate;
-        private System.Windows.Forms.TextBox txbClientPostal;
+        private System.Windows.Forms.TextBox txbChumonID;
         private System.Windows.Forms.Label lblChumonID;
         private System.Windows.Forms.ComboBox cmbSalesOfficeID;
         private System.Windows.Forms.Label lblSalesOfficeID;

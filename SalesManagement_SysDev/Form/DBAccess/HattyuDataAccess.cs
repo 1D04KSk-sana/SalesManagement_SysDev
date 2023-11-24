@@ -132,7 +132,7 @@ namespace SalesManagement_SysDev
                 }
                 if (selectHattyu.HaDate != null)
                 {
-                    query = query.Where(x => x.HaDate.Month == selectHattyu.HaDate.Month);
+                    query = query.Where(x => x.HaDate.Value == selectHattyu.HaDate.Value);
                 }
 
 
@@ -159,7 +159,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listHattyu = context.T_Hattyus.Where(x => x.HaID == selectHattyu.HaID || x.EmID == selectHattyu.EmID || x.MaID == selectHattyu.MaID || x.HaDate.Month == selectHattyu.HaDate.Month).ToList();
+                listHattyu = context.T_Hattyus.Where(x => x.HaID == selectHattyu.HaID || x.EmID == selectHattyu.EmID || x.MaID == selectHattyu.MaID || x.HaDate.Value == selectHattyu.HaDate.Value).ToList();
 
                 context.Dispose();
             }

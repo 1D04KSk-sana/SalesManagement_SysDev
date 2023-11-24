@@ -162,7 +162,7 @@ namespace SalesManagement_SysDev
             {
                 intSaleID = int.Parse(strSaleID);
             }
-            string strtxbClientPostal = txbClientPostal.Text.Trim();
+            string strtxbClientPostal = txbChumonID.Text.Trim();
             int inttxbClientPostal = 0;
 
             if (!String.IsNullOrEmpty(strtxbClientPostal))
@@ -389,7 +389,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbSaleID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbClientPostal.Text.Trim()) && String.IsNullOrEmpty(txbClientName.Text.Trim()) && dtpSaleDate.Value == null
+            if (String.IsNullOrEmpty(txbSaleID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbChumonID.Text.Trim()) && String.IsNullOrEmpty(txbClientName.Text.Trim()) && dtpSaleDate.Value == null
                 )
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -436,8 +436,8 @@ namespace SalesManagement_SysDev
         {
             txbSaleID.Text = string.Empty;
             txbClientName.Text = string.Empty;
-            txbClientPostal.Text = string.Empty;
-            txbClientPostal.Text = string.Empty;
+            txbChumonID.Text = string.Empty;
+            txbChumonID.Text = string.Empty;
             dtpSaleDate.Value= DateTime.Now;
             cmbSalesOfficeID.SelectedIndex = -1;
         }
@@ -576,7 +576,7 @@ namespace SalesManagement_SysDev
             txbSaleID.Text = dgvSale[0, dgvSale.CurrentCellAddress.Y].Value.ToString();
             txbClientName.Text = dgvSale[1, dgvSale.CurrentCellAddress.Y].Value.ToString();
             cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvSale[2, dgvSale.CurrentCellAddress.Y].Value.ToString()).Key - 1;
-            txbClientPostal.Text = dgvSale[4, dgvSale.CurrentCellAddress.Y].Value.ToString();
+            txbChumonID.Text = dgvSale[4, dgvSale.CurrentCellAddress.Y].Value.ToString();
             dtpSaleDate.Text = dgvSale[5, dgvSale.CurrentCellAddress.Y].Value.ToString();
         }
 
@@ -802,13 +802,13 @@ namespace SalesManagement_SysDev
             {
                 txbClientName.Enabled = false;
                 cmbSalesOfficeID.Enabled = false;
-                txbClientPostal.Enabled = false;
+                txbChumonID.Enabled = false;
             }
             else
             {
                 txbClientName.Enabled = true;
                 cmbSalesOfficeID.Enabled = true;
-                txbClientPostal.Enabled = true;
+                txbChumonID.Enabled = true;
             }
         }
 
