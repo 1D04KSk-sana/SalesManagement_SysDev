@@ -15,14 +15,14 @@ namespace SalesManagement_SysDev
         //戻り値：受注詳細データ
         //機　能：受注詳細データの全取得
         ///////////////////////////////
-        public List<T_Syukko> GetOrderData(int orderID)
+        public List<T_Syukko> GetSyukkoData()
         {
-            List<T_Syukko> listOrderDetail = new List<T_Syukko>();
+            List<T_Syukko> listSyukko = new List<T_Syukko>();
 
             try
             {
                 var context = new SalesManagement_DevContext();
-                listOrderDetail = context.T_Syukkos.Where(x => x.OrID == orderID).ToList();
+                listSyukko = context.T_Syukkos.ToList();
                 context.Dispose();
             }
             catch (Exception ex)
@@ -30,11 +30,11 @@ namespace SalesManagement_SysDev
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            return listOrderDetail;
+            return listSyukko;
         }
 
         ///////////////////////////////
-        //メソッド名：CheckProdactIDExistence()
+        //メソッド名：CheckSyukkoIDExistence()
         //引　数   ：商品コード
         //戻り値   ：True or False
         //機　能   ：一致する商品IDの有無を確認
@@ -84,6 +84,36 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：UpdateOrderData()
+        //引　数：updOrder = 出庫データ
+        //戻り値：True or False
+        //機　能：出庫データの更新
+        //      ：更新成功の場合True
+        //      ：更新失敗の場合False
+        ///////////////////////////////
+        public bool UpdateSyukkoData(T_Syukko updSyukko)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Order = context.T_Syukkos.Single(x => x.SyID == updSyukko.SyID);
+
+                Order.SyFlag = updSyukko.SyFlag;
+                Order.SyHidden = updSyukko.SyHidden;
+
+                context.SaveChanges();
+                context.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        ///////////////////////////////
         //メソッド名：ConfirmSyukkoData()
         //引　数：cfmOrder = 受注データ
         //戻り値：True or False
@@ -91,14 +121,14 @@ namespace SalesManagement_SysDev
         //      ：確定成功の場合True
         //      ：確定失敗の場合False
         ///////////////////////////////
-        public bool ConfirmSyukkoData(T_Syukko cfmOrder)
+        public bool ConfirmSyukkoData(T_Syukko cfmSyukko)
         {
             try
             {
                 var context = new SalesManagement_DevContext();
-                var Syukko = context.T_Syukkos.Single(x => x.SyID == cfmOrder.SyID);
+                var Syukko = context.T_Syukkos.Single(x => x.SyID == cfmSyukko.SyID);
 
-                Syukko.SyStateFlag = cfmOrder.SyStateFlag;
+                Syukko.SyStateFlag = cfmSyukko.SyStateFlag;
 
                 context.SaveChanges();
                 context.Dispose();
@@ -118,14 +148,14 @@ namespace SalesManagement_SysDev
         //戻り値：受注IDの一致する受注データ
         //機　能：受注IDの一致する受注データの取得
         ///////////////////////////////
-        public T_Syukko GetIDSyukkoData(int OrderID)
+        public T_Syukko GetIDSyukkoData(int SyukkoID)
         {
             T_Syukko Order = new T_Syukko { };
 
             try
             {
                 var context = new SalesManagement_DevContext();
-                Order = context.T_Syukkos.Single(x => x.OrID == OrderID);
+                Order = context.T_Syukkos.Single(x => x.OrID == SyukkoID);
 
                 context.Dispose();
             }

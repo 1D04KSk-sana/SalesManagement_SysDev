@@ -19,8 +19,6 @@ namespace SalesManagement_SysDev
         SalesOfficeDataAccess SalesOfficeDataAccess = new SalesOfficeDataAccess();
         //データベース商品テーブルアクセス用クラスのインスタンス化
         SyukkoDetailDataAccess SyukkoDetailDataAccess = new SyukkoDetailDataAccess();
-        //データベース受注テーブルアクセス用クラスのインスタンス化
-        OrderDetailDataAccess orderDetailDataAccess = new OrderDetailDataAccess();
         //データベース社員テーブルアクセス用クラスのインスタンス化
         EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
         //データベース顧客テーブルアクセス用クラスのインスタンス化
@@ -127,7 +125,7 @@ namespace SalesManagement_SysDev
             //確定ラヂオボタンがチェックされているとき
             if (rdbConfirm.Checked)
             {
-                OrderDataConfirm();
+                SyukkoDataConfirm();
             }
 
             //非表示ラヂオボタンがチェックされているとき
@@ -169,7 +167,7 @@ namespace SalesManagement_SysDev
         //メソッド名：OrderDataUpdate()
         //引　数   ：なし
         //戻り値   ：なし
-        //機　能   ：受注情報更新の実行
+        //機　能   ：出庫情報更新の実行
         ///////////////////////////////
         private void OrderDataUpdate()
         {
@@ -180,7 +178,7 @@ namespace SalesManagement_SysDev
             }
 
             //操作ログデータ取得
-            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
+            var regOperationLog = GenerateLogAtRegistration(rdbHidden.Text);
 
             //操作ログデータの登録（成功 = true,失敗 = false）
             if (!operationLogAccess.AddOperationLogData(regOperationLog))
@@ -188,11 +186,62 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 受注情報作成
-            var updOrder = GenerateDataAtUpdate();
+            // 出庫情報作成
+            var updSyukko = GenerateDataAtUpdate();
 
-            // 受注情報更新
-            UpdateOrder(updOrder);
+            // 出庫情報更新
+            UpdateSyukko(updSyukko);
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtUpdate()
+        //引　数   ：なし
+        //戻り値   ：受注更新情報
+        //機　能   ：更新データのセット
+        ///////////////////////////////
+        private T_Syukko GenerateDataAtUpdate()
+        {
+            return new T_Syukko
+            {
+                SyID = int.Parse(txbSyukkoID.Text.Trim()),
+                SyFlag = 1,
+                SyHidden = txbHidden.Text.Trim(),
+            };
+        }
+
+        ///////////////////////////////
+        //メソッド名：UpdateSyukko()
+        //引　数   ：受注情報
+        //戻り値   ：なし
+        //機　能   ：受注情報の更新
+        ///////////////////////////////
+        private void UpdateSyukko(T_Syukko updSyukko)
+        {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            // 受注情報の更新
+            bool flg = SyukkoDataAccess.UpdateSyukkoData(updSyukko);
+
+            if (flg == true)
+            {
+                MessageBox.Show("更新しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("更新に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //テキストボックス等のクリア
+            ClearImput();
+
+            // データグリッドビューの表示
+            GetDataGridView();
         }
 
         ///////////////////////////////
@@ -209,24 +258,24 @@ namespace SalesManagement_SysDev
             if (!String.IsNullOrEmpty(txbSyukkoID.Text.Trim()))
             {
                 // 受注IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbOrderID.Text.Trim()))
+                if (!dataInputCheck.CheckNumeric(txbSyukkoID.Text.Trim()))
                 {
                     MessageBox.Show("受注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbOrderID.Focus();
+                    txbSyukkoID.Focus();
                     return false;
                 }
                 //受注IDの存在チェック
-                if (!orderDataAccess.CheckOrderIDExistence(int.Parse(txbOrderID.Text.Trim())))
+                if (!SyukkoDataAccess.CheckSyukkoIDExistence(int.Parse(txbSyukkoID.Text.Trim())))
                 {
                     MessageBox.Show("受注IDが存在していません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbOrderID.Focus();
+                    txbSyukkoID.Focus();
                     return false;
                 }
             }
             else
             {
-                MessageBox.Show("受注IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbOrderID.Focus();
+                MessageBox.Show("出庫IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbSyukkoID.Focus();
                 return false;
             }
 
@@ -247,7 +296,7 @@ namespace SalesManagement_SysDev
         //戻り値   ：なし
         //機　能   ：出庫情報確定の実行
         ///////////////////////////////
-        private void OrderDataConfirm()
+        private void SyukkoDataConfirm()
         {
             //テキストボックス等の入力チェック
             if (!GetValidDataAtConfirm())
@@ -287,12 +336,12 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：ConfirmOrder()
+        //メソッド名：ConfirmSyukko()
         //引　数   ：受注情報
         //戻り値   ：なし
         //機　能   ：受注情報の確定
         ///////////////////////////////
-        private void ConfirmSyukko(T_Syukko cfmOrder)
+        private void ConfirmSyukko(T_Syukko cfmSyukko)
         {
             // 更新確認メッセージ
             DialogResult result = MessageBox.Show("確定しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
@@ -303,7 +352,7 @@ namespace SalesManagement_SysDev
             }
 
             // 出庫情報の更新
-            bool flg = SyukkoDataAccess.ConfirmSyukkoData(cfmOrder);
+            bool flg = SyukkoDataAccess.ConfirmSyukkoData(cfmSyukko);
 
             if (flg == true)
             {
@@ -351,14 +400,14 @@ namespace SalesManagement_SysDev
                 // 出庫IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbSyukkoID.Text.Trim()))
                 {
-                    MessageBox.Show("受注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("出庫IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSyukkoID.Focus();
                     return false;
                 }
                 //出庫IDの存在チェック
                 if (!SyukkoDataAccess.CheckSyukkoIDExistence(int.Parse(txbSyukkoID.Text.Trim())))
                 {
-                    MessageBox.Show("受注IDが存在していません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("出庫IDが存在していません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSyukkoID.Focus();
                     return false;
                 }
@@ -368,14 +417,14 @@ namespace SalesManagement_SysDev
                 //受注IDの確定チェック
                if (order.SyStateFlag == 1)
                 {
-                    MessageBox.Show("受注IDはすでに確定しています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("出庫IDはすでに確定しています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSyukkoID.Focus();
                     return false;
                 }
             }
             else
             {
-                MessageBox.Show("受注IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("出庫IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbSyukkoID.Focus();
                 return false;
             }
@@ -507,7 +556,7 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：SetListClient()
+        //メソッド名：SetListSyukko()
         //引　数   ：なし
         //戻り値   ：表示用出庫データ
         //機　能   ：表示用出庫データの準備
@@ -515,7 +564,7 @@ namespace SalesManagement_SysDev
         private List<T_Syukko> SetListSyukko()
         {
             //商品のデータを全取得
-            listAllSyukko = SyukkoDataAccess.GetSyukkoDspData();
+            listAllSyukko = SyukkoDataAccess.GetSyukkoData();
 
             //表示用の顧客リスト作成
             List<T_Syukko> listViewSyukko = new List<T_Syukko>();
@@ -800,31 +849,6 @@ namespace SalesManagement_SysDev
                 btnBack.Visible = true;
             }
         }
-
-        ///////////////////////////////
-        //メソッド名：SetDataGtidViewDetail()
-        //引　数   ：なし
-        //戻り値   ：なし
-        //機　能   ：データグリッドビューへの表示
-        ///////////////////////////////
-        private void SetDataGtidViewDetail(int intOrderID)
-        {
-            //中身を消去
-            dgvSyukkoDetail.Rows.Clear();
-
-            listAllSyukkoDetail = SyukkoDetailDataAccess.GetSyukkoDetailIDData(intOrderID);
-
-            //1行ずつdgvSyukkoに挿入
-            foreach (var item in listAllSyukkoDetail)
-            {
-                dgvSyukkoDetail.Rows.Add(item.SyDetailID, item.SyID, item.PrID, item, item.SyQuantity);
-            }
-
-            //dgvClientをリフレッシュ
-            dgvSyukkoDetail.Refresh();
-
-        }
-
 
         private void btnNext_Click(object sender, EventArgs e)
          {
