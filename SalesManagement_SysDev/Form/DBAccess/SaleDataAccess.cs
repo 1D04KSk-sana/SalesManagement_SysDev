@@ -116,22 +116,21 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.T_Sales.AsQueryable();
 
-                if (selectSale.SaID != null && selectSale.SaID != 0)
+                if ( selectSale.SaID != 0)
                 {
                     query = query.Where(x => x.SaID == selectSale.SaID);
                 }
 
-                if (selectSale.SoID != null && selectSale.SoID != 0)
+                if ( selectSale.SoID != 0)
                 {
                     query = query.Where(x => x.SoID == selectSale.SoID);
                 }
 
-                if (selectSale.ChID != null && selectSale.ChID != 0)
+                if ( selectSale.ChID != 0)
                 {
                     query = query.Where(x => x.ChID == selectSale.ChID);
                 }
-
-                if (selectSale.ClID != null && selectSale.ClID != 0)
+                if (selectSale.ClID != 0)
                 {
                     query = query.Where(x => x.ClID == selectSale.ClID);
                 }
