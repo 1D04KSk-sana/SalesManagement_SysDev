@@ -301,7 +301,7 @@ namespace SalesManagement_SysDev
             //存在確認
             if (!clientDataAccess.CheckClientIDExistence(intClientID))
             {
-                txbClientName.Text = "社員IDが存在しません";
+                txbClientName.Text = "顧客IDが存在しません";
                 return;
             }
 

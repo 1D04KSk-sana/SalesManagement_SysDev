@@ -16,5 +16,30 @@ namespace SalesManagement_SysDev
         {
             InitializeComponent();
         }
+
+        private void txbstockID_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPageMax_Click(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnPageMin_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

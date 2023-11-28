@@ -237,6 +237,15 @@
     <EmbeddedResource Include="Form\FormButuryu\F_ButuryuHattyu.resx">
       <DependentUpon>F_ButuryuHattyu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormButuryu\F_ButuryuWarehousing.resx">
+      <DependentUpon>F_ButuryuWarehousing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormEigyo\F_EigyoArrival.resx">
+      <DependentUpon>F_EigyoArrival.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormEigyo\F_EigyoShipment.resx">
+      <DependentUpon>F_EigyoShipment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\FormHonsha\F_HonshaSale.resx">
       <DependentUpon>F_HonshaSale.cs</DependentUpon>
     </EmbeddedResource>
@@ -248,6 +257,9 @@
     <Compile Include="Form\DBAccess\SyukkoDetailDataAccess.cs" />
     <EmbeddedResource Include="Form\FormEigyo\F_EigyoOrder.resx">
       <DependentUpon>F_EigyoOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormEigyo\F_EigyoStockView.resx">
+      <DependentUpon>F_EigyoStockView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\FormHonsha\F_HonshaOperationLog.resx">
       <DependentUpon>F_HonshaOperationLog.cs</DependentUpon>

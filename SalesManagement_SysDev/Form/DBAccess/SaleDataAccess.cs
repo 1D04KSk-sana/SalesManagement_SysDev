@@ -134,13 +134,11 @@ namespace SalesManagement_SysDev
                 {
                     query = query.Where(x => x.ClID == selectSale.ClID);
                 }
-                if (selectSale.SaDate != null )
+
+                if (selectSale.SaDate != null)
                 {
-                    query = query.Where(x => x.SaDate.Month == selectSale.SaDate.Month);
+                    query = query.Where(x => x.SaDate.Value.Month == selectSale.SaDate.Value.Month);
                 }
-
-
-
 
                 listSale = query.ToList();
                 context.Dispose();
@@ -165,7 +163,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listSale = context.T_Sales.Where(x => x.SaID == selectSale.SaID || x.SoID == selectSale.SoID || x.ChID == selectSale.ChID || x.ClID == selectSale.ClID || x.SaDate.Month == selectSale.SaDate.Month).ToList();
+                listSale = context.T_Sales.Where(x => x.SaID == selectSale.SaID || x.SoID == selectSale.SoID || x.ChID == selectSale.ChID || x.ClID == selectSale.ClID || x.SaDate.Value.Month == selectSale.SaDate.Value.Month).ToList();
 
                 context.Dispose();
             }
