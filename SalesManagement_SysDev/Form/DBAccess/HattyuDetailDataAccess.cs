@@ -10,29 +10,6 @@ namespace SalesManagement_SysDev
     internal class HattyuDetailDataAccess
     {
         ///////////////////////////////
-        //メソッド名：GetHattyuDetailData()
-        //引　数：なし
-        //戻り値：発注詳細データ
-        //機　能：発注詳細データの全取得
-        ///////////////////////////////
-        public List<T_HattyuDetail> GetHattyuDetailData()
-        {
-            List<T_HattyuDetail> listHattyuDetail = new List<T_HattyuDetail>();
-
-            try
-            {
-                var context = new SalesManagement_DevContext();
-                listHattyuDetail = context.T_HattyuDetails.ToList();
-                context.Dispose();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return listHattyuDetail;
-        }
-        ///////////////////////////////
         //メソッド名：AddHattyuDetailData()
         //引　数：regHattyu = 発注詳細データ
         //戻り値：True or False
@@ -80,9 +57,9 @@ namespace SalesManagement_SysDev
         }
         ///////////////////////////////
         //メソッド名：CheckHattyuDetailIDExistence()
-        //引　数   ：発注コード
+        //引　数   ：発注詳細コード
         //戻り値   ：True or False
-        //機　能   ：一致する発注IDの有無を確認
+        //機　能   ：一致する発注詳細IDの有無を確認
         //          ：一致データありの場合True
         //          ：一致データなしの場合False
         ///////////////////////////////

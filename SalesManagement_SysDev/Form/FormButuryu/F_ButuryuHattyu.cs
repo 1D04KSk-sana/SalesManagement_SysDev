@@ -1459,7 +1459,7 @@ namespace SalesManagement_SysDev
 
         private void rdbRegister_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdbUpdate.Checked)
+            if (rdbRegister.Checked)
             {
                 txbHattyuDetailID.Enabled = false;
                 txbHattyuQuantity.Enabled = false;
@@ -1478,7 +1478,7 @@ namespace SalesManagement_SysDev
 
         private void rdbDetailRegister_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdbUpdate.Checked)
+            if (rdbDetailRegister.Checked)
             {
                 cmbMakerName.Enabled = false;
                 txbEmployeeName.Enabled = false;
@@ -1495,7 +1495,7 @@ namespace SalesManagement_SysDev
 
         private void rdbSearch_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdbUpdate.Checked)
+            if (rdbSearch.Checked)
             {
                 txbHattyuDetailID.Enabled = false;
                 txbHattyuQuantity.Enabled = false;
@@ -1513,7 +1513,7 @@ namespace SalesManagement_SysDev
 
         private void rdbConfirm_CheckedChanged(object sender, EventArgs e)
         {
-            if (rdbUpdate.Checked)
+            if (rdbConfirm.Checked)
             {
                 txbHattyuDetailID.Enabled = false;
                 txbHattyuQuantity.Enabled = false;
