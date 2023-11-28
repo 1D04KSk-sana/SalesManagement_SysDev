@@ -261,7 +261,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listChumon = context.T_Chumons.Where(x => x.OrID == selectChumon.OrID || x.SoID == selectChumon.SoID || x.ChID == selectChumon.ChID || x.ClName == selectChumon.ClName).ToList();
+                listChumon = context.T_Chumons.Where(x => x.OrID == selectChumon.OrID || x.SoID == selectChumon.SoID || x.ChID == selectChumon.ChID || x.ClID == selectChumon.ClID).ToList();
 
                 context.Dispose();
             }

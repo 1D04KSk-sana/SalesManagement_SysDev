@@ -25,7 +25,6 @@ namespace SalesManagement_SysDev
         public int ClID { get; set; }               //顧客ID	
         public int OrID { get; set; }               //受注ID
         public int PrID { get; set; }               //商品ID
-        public int ClName { get; set; }               //顧客名
         [DataType(DataType.Date)]
         [Column(TypeName = "date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]

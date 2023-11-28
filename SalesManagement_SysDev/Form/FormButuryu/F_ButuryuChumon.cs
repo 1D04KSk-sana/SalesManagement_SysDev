@@ -203,7 +203,7 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-           
+
 
             return true;
         }
@@ -219,7 +219,7 @@ namespace SalesManagement_SysDev
             return new T_Chumon
             {
                 ChID = int.Parse(txbOrderID.Text.Trim()),
-              //  ChStateFlag = cmbConfirm.SelectedIndex,
+                //  ChStateFlag = cmbConfirm.SelectedIndex,
             };
         }
         ///////////////////////////////
@@ -286,6 +286,8 @@ namespace SalesManagement_SysDev
             GetDataGridView();
         }
 
+
+
         ///////////////////////////////
         //メソッド名：GetValidDataAtHidden()
         //引　数   ：なし
@@ -303,21 +305,21 @@ namespace SalesManagement_SysDev
                 if (!dataInputCheck.CheckNumeric(txbChumonID.Text.Trim()))
                 {
                     MessageBox.Show("注文IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbOrderID.Focus();
+                    txbChumonID.Focus();
                     return false;
                 }
                 //受注IDの存在チェック
                 if (!chumonDataAccess.CheckChumonIDExistence(int.Parse(txbChumonID.Text.Trim())))
                 {
                     MessageBox.Show("注文IDが存在していません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbOrderID.Focus();
+                    txbChumonID.Focus();
                     return false;
                 }
             }
             else
             {
                 MessageBox.Show("注文IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbOrderID.Focus();
+                txbChumonID.Focus();
                 return false;
             }
 
@@ -341,7 +343,7 @@ namespace SalesManagement_SysDev
         {
             return new T_Chumon
             {
-                ChID = int.Parse(txbOrderID.Text.Trim()),
+                ChID = int.Parse(txbChumonID.Text.Trim()),
                 ChFlag = cmbHidden.SelectedIndex,
                 ChHidden = txbHidden.Text.Trim(),
             };
@@ -397,7 +399,7 @@ namespace SalesManagement_SysDev
 
             bool flgChumon = chumonDataAccess.AddChumonData(Chumon);
 
-            
+
 
             //テキストボックス等のクリア
             ClearImput();
@@ -413,9 +415,13 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void ClearImput()
         {
+            txbChumonID.Text = string.Empty;
             txbOrderID.Text = string.Empty;
+            txbClientID.Text = string.Empty;
             cmbSalesOfficeID.SelectedIndex = -1;
+            cmbHidden.SelectedIndex = -1;
             txbClientName.Text = string.Empty;
+            lblClientHidden.Text = string.Empty;
 
         }
 
@@ -471,7 +477,7 @@ namespace SalesManagement_SysDev
         }
 
 
-        
+
 
         ///////////////////////////////
         //メソッド名：GenerateDataAtSelect()
@@ -510,7 +516,7 @@ namespace SalesManagement_SysDev
             {
                 ChID = intChumonID,
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
-                ClName = intClientName,
+                ClID = intClientName,
                 OrID = intOrderID,
             };
 
@@ -572,8 +578,7 @@ namespace SalesManagement_SysDev
             dgvChumon.Columns.Add("ChID", "注文ID");
             dgvChumon.Columns.Add("SoID", "営業所名");
             dgvChumon.Columns.Add("ClName", "顧客名");
-            dgvChumon.Columns.Add("OrID", "受注ID");
-           // dgvChumon.Columns.Add("EmName", "社員名");
+            // dgvChumon.Columns.Add("OrID", "受注ID");
             dgvChumon.Columns.Add("ChDate", "受注年月日");
             dgvChumon.Columns.Add("ChFlag", "受注管理フラグ");
             dgvChumon.Columns.Add("ChStateFlag", "受注情報フラグ");
@@ -583,9 +588,9 @@ namespace SalesManagement_SysDev
             dgvChumon.Columns["SoID"].Width = 150;
             dgvChumon.Columns["ClName"].Width = 150;
             dgvChumon.Columns["ChDate"].Width = 150;
-            dgvChumon.Columns["ChFlag"].Width = 150;
-            dgvChumon.Columns["ChStateFlag"].Width = 150;
-            dgvChumon.Columns["ChHidden"].Width = 250;
+            dgvChumon.Columns["ChFlag"].Width = 200;
+            dgvChumon.Columns["ChStateFlag"].Width = 200;
+            dgvChumon.Columns["ChHidden"].Width = 200;
 
 
             //並び替えができないようにする
@@ -616,11 +621,19 @@ namespace SalesManagement_SysDev
             //ヘッダー位置の指定
             dgvChumonDetail.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            dgvChumonDetail.Columns.Add("OrID", "受注ID");
-            dgvChumonDetail.Columns.Add("OrDetailID", "受注詳細ID");
+            dgvChumonDetail.Columns.Add("ChID", "注文ID");
+            dgvChumonDetail.Columns.Add("ChDetailID", "注文詳細ID");
             dgvChumonDetail.Columns.Add("PrID", "商品ID");
             dgvChumonDetail.Columns.Add("OrQuantity", "数量");
             dgvChumonDetail.Columns.Add("OrTotalPrice", "合計金額");
+
+
+            dgvChumonDetail.Columns["ChID"].Width = 150;
+            dgvChumonDetail.Columns["ChDetailID"].Width = 150;
+            dgvChumonDetail.Columns["PrID"].Width = 150;
+            dgvChumonDetail.Columns["OrQuantity"].Width = 100;
+            dgvChumonDetail.Columns["OrTotalPrice"].Width = 150;
+            
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvChumonDetail.Columns)
@@ -653,7 +666,7 @@ namespace SalesManagement_SysDev
             //1行ずつdgvClientに挿入
             foreach (var item in depData)
             {
-                dgvChumon.Rows.Add(item.OrID, dictionarySalesOffice[item.SoID], dictionaryClient[item.ClID], dictionaryProdact[item.PrID], dictionaryEmployee[item.EmID.Value], item.ChDate, dictionaryHidden[item.ChFlag], dictionaryConfirm[item.ChStateFlag], item.ChHidden);
+                dgvChumon.Rows.Add(item.ChID, dictionarySalesOffice[item.SoID], dictionaryClient[item.ClID], item.ChDate, dictionaryHidden[item.ChFlag], dictionaryConfirm[item.ChStateFlag], item.ChHidden);
             }
 
             //dgvClientをリフレッシュ
@@ -788,13 +801,29 @@ namespace SalesManagement_SysDev
             //データグリッドビューに乗っている情報をGUIに反映
             txbChumonID.Text = dgvChumon[0, dgvChumon.CurrentCellAddress.Y].Value.ToString();
             cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvChumon[1, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key - 1;
-            txbClientName.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvChumon[2, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvChumon[2, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             //txbChumonManager.Text = dgvChumon[3, dgvChumon.CurrentCellAddress.Y].Value.ToString();
-            txbOrderID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvChumon[4, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
-           // dtpChumonDate.Text = dgvChumon[5, dgvChumon.CurrentCellAddress.Y].Value.ToString();
-            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvChumon[6, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key;
-           // cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvChumon[7, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key;
-            txbHidden.Text = dgvChumon[8, dgvChumon.CurrentCellAddress.Y]?.Value?.ToString();
+            txbOrderID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvChumon[3, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            //  ch4Date.Text = dgvChumon[6, dgvChumon.CurrentCellAddress.Y]?.Value.ToString();
+
+            // dtpChumonDate.Text = dgvChumon[5, dgvChumon.CurrentCellAddress.Y].Value.ToString();
+            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvChumon[4, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key;
+            // cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvChumon[7, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key;
+            txbHidden.Text = dgvChumon[5, dgvChumon.CurrentCellAddress.Y]?.Value?.ToString();
+        }
+
+        ///////////////////////////////
+        //メソッド名：SelectRowDetailControl()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：選択された行に対してのコントロールの変更(Detail)
+        ///////////////////////////////
+        private void SelectRowDetailControl()
+        {
+            //データグリッドビューに乗っている情報をGUIに反映
+            // txbODetailID.Text = dgvChumonDetail[1, dgvChumonDetail.CurrentCellAddress.Y].Value.ToString();
+            // txbProductID.Text = dictionaryProdact.FirstOrDefault(x => x.Value == dgvChumonDetail[2, dgvChumonDetail.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            // txbChumonQuantity.Text = dgvChumonDetail[3, dgvChumonDetail.CurrentCellAddress.Y].Value.ToString();
         }
 
         ///////////////////////////////
@@ -855,7 +884,7 @@ namespace SalesManagement_SysDev
                     return false;
                 }
             }
-            
+
             //受注IDの適否
             if (!String.IsNullOrEmpty(txbOrderID.Text.Trim()))
             {
@@ -947,9 +976,107 @@ namespace SalesManagement_SysDev
 
                 SetDataDetailGridView(int.Parse(dgvChumon[0, dgvChumon.CurrentCellAddress.Y].Value.ToString()));
 
-              //  ClearImputDetail();
+                //  ClearImputDetail();
             }
         }
+
+        private void dgvChumonDetail_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            {
+                //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+                if (dgvChumonDetail.SelectedCells.Count == 0)
+                {
+                    return;
+                }
+
+                //選択された行に対してのコントロールの変更
+                SelectRowDetailControl();
+            }
+
+
+        }
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txbClientID_TextChanged(object sender, EventArgs e)
+        {
+            //nullの確認
+            string stringClientID = txbClientID.Text.Trim();
+            int intClientID = 0;
+
+            if (!String.IsNullOrEmpty(stringClientID))
+            {
+                intClientID = int.Parse(stringClientID);
+            }
+
+            //存在確認
+            if (!clientDataAccess.CheckClientIDExistence(intClientID))
+            {
+                txbClientName.Text = "社員IDが存在しません";
+                return;
+            }
+
+            //IDから名前を取り出す
+            var Client = listClient.Single(x => x.ClID == intClientID);
+
+            txbClientName.Text = Client.ClName;
+
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearImput();
+
+            rdbSearch.Checked = true;
+
+            GetDataGridView();
+        }
+
+        private void btnPageSize_Click(object sender, EventArgs e)
+        {
+            GetDataGridView();
+        }
+
+        private void btnPageMax_Click(object sender, EventArgs e)
+        {
+            List<T_Chumon> viewOrder = SetListChumon();
+
+            //ページ行数を取得
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
+            //最終ページ数を取得（テキストボックスに代入する数字なので-1はしない）
+            int lastPage = (int)Math.Ceiling(viewOrder.Count / (double)pageSize);
+
+            txbNumPage.Text = lastPage.ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) + 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) - 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnPageMin_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+
+            GetDataGridView();
+        }
     }
-      }
+}
 
