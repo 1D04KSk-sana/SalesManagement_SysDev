@@ -32,12 +32,12 @@
             this.pnlButuryu = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
-            this.txbProdactName = new System.Windows.Forms.TextBox();
+            this.txbProductName = new System.Windows.Forms.TextBox();
             this.txbWarehousingDetailID = new System.Windows.Forms.TextBox();
             this.txbProductID = new System.Windows.Forms.TextBox();
             this.txbEmployeeName = new System.Windows.Forms.TextBox();
             this.txbWarehousingQuantity = new System.Windows.Forms.TextBox();
-            this.txbOrderID = new System.Windows.Forms.TextBox();
+            this.txbHattyuID = new System.Windows.Forms.TextBox();
             this.txbWarehousingID = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -60,14 +60,19 @@
             this.btnPageMax = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.cmbHidden = new System.Windows.Forms.ComboBox();
-            this.txbWarehousingHidden = new System.Windows.Forms.TextBox();
+            this.txbHidden = new System.Windows.Forms.TextBox();
             this.cmbView = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.dgvWarehousing = new System.Windows.Forms.DataGridView();
             this.label10 = new System.Windows.Forms.Label();
             this.dgvWarehousingDetail = new System.Windows.Forms.DataGridView();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.rdbDetailRegister = new System.Windows.Forms.RadioButton();
+            this.btnDetailClear = new System.Windows.Forms.Button();
+            this.rdbConfirm = new System.Windows.Forms.RadioButton();
+            this.rdbUpdate = new System.Windows.Forms.RadioButton();
+            this.cmbConfirm = new System.Windows.Forms.ComboBox();
+            this.lblConfirm = new System.Windows.Forms.Label();
+            this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.pnlButuryu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarehousing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarehousingDetail)).BeginInit();
@@ -81,7 +86,7 @@
             this.lblWarehousing.Location = new System.Drawing.Point(754, 44);
             this.lblWarehousing.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWarehousing.Name = "lblWarehousing";
-            this.lblWarehousing.Size = new System.Drawing.Size(418, 64);
+            this.lblWarehousing.Size = new System.Drawing.Size(417, 64);
             this.lblWarehousing.TabIndex = 24;
             this.lblWarehousing.Text = "入庫管理画面";
             // 
@@ -119,17 +124,17 @@
             this.btnReturn.TabIndex = 0;
             this.btnReturn.Text = "戻る";
             this.btnReturn.UseVisualStyleBackColor = true;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
-            // txbProdactName
+            // txbProductName
             // 
-            this.txbProdactName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProdactName.ForeColor = System.Drawing.Color.Black;
-            this.txbProdactName.Location = new System.Drawing.Point(1429, 350);
-            this.txbProdactName.Margin = new System.Windows.Forms.Padding(2);
-            this.txbProdactName.Name = "txbProdactName";
-            this.txbProdactName.Size = new System.Drawing.Size(220, 31);
-            this.txbProdactName.TabIndex = 56;
-            this.txbProdactName.TextChanged += new System.EventHandler(this.txbstockID_TextChanged);
+            this.txbProductName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbProductName.ForeColor = System.Drawing.Color.Black;
+            this.txbProductName.Location = new System.Drawing.Point(1429, 350);
+            this.txbProductName.Margin = new System.Windows.Forms.Padding(2);
+            this.txbProductName.Name = "txbProductName";
+            this.txbProductName.Size = new System.Drawing.Size(220, 31);
+            this.txbProductName.TabIndex = 56;
             // 
             // txbWarehousingDetailID
             // 
@@ -155,7 +160,7 @@
             // 
             this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbEmployeeName.ForeColor = System.Drawing.Color.Black;
-            this.txbEmployeeName.Location = new System.Drawing.Point(869, 286);
+            this.txbEmployeeName.Location = new System.Drawing.Point(869, 258);
             this.txbEmployeeName.Margin = new System.Windows.Forms.Padding(2);
             this.txbEmployeeName.Name = "txbEmployeeName";
             this.txbEmployeeName.Size = new System.Drawing.Size(220, 31);
@@ -171,15 +176,15 @@
             this.txbWarehousingQuantity.Size = new System.Drawing.Size(220, 31);
             this.txbWarehousingQuantity.TabIndex = 60;
             // 
-            // txbOrderID
+            // txbHattyuID
             // 
-            this.txbOrderID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbOrderID.ForeColor = System.Drawing.Color.Black;
-            this.txbOrderID.Location = new System.Drawing.Point(271, 323);
-            this.txbOrderID.Margin = new System.Windows.Forms.Padding(2);
-            this.txbOrderID.Name = "txbOrderID";
-            this.txbOrderID.Size = new System.Drawing.Size(220, 31);
-            this.txbOrderID.TabIndex = 61;
+            this.txbHattyuID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbHattyuID.ForeColor = System.Drawing.Color.Black;
+            this.txbHattyuID.Location = new System.Drawing.Point(271, 323);
+            this.txbHattyuID.Margin = new System.Windows.Forms.Padding(2);
+            this.txbHattyuID.Name = "txbHattyuID";
+            this.txbHattyuID.Size = new System.Drawing.Size(220, 31);
+            this.txbHattyuID.TabIndex = 61;
             // 
             // txbWarehousingID
             // 
@@ -217,7 +222,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(668, 369);
+            this.label2.Location = new System.Drawing.Point(668, 326);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(178, 24);
@@ -228,7 +233,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label4.Location = new System.Drawing.Point(668, 297);
+            this.label4.Location = new System.Drawing.Point(668, 265);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(178, 24);
@@ -282,7 +287,7 @@
             // dtpWarehousingDate
             // 
             this.dtpWarehousingDate.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.dtpWarehousingDate.Location = new System.Drawing.Point(869, 369);
+            this.dtpWarehousingDate.Location = new System.Drawing.Point(869, 325);
             this.dtpWarehousingDate.Margin = new System.Windows.Forms.Padding(4);
             this.dtpWarehousingDate.Name = "dtpWarehousingDate";
             this.dtpWarehousingDate.Size = new System.Drawing.Size(220, 29);
@@ -292,7 +297,7 @@
             // 
             this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnDone.Location = new System.Drawing.Point(1678, 171);
+            this.btnDone.Location = new System.Drawing.Point(1703, 167);
             this.btnDone.Margin = new System.Windows.Forms.Padding(2);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(160, 70);
@@ -300,11 +305,12 @@
             this.btnDone.TabStop = false;
             this.btnDone.Text = "実行";
             this.btnDone.UseVisualStyleBackColor = false;
+            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // btnClear
             // 
             this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClear.Location = new System.Drawing.Point(1485, 171);
+            this.btnClear.Location = new System.Drawing.Point(1510, 167);
             this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(160, 70);
@@ -312,6 +318,7 @@
             this.btnClear.TabStop = false;
             this.btnClear.Text = "クリア";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // lblPageSize
             // 
@@ -380,7 +387,6 @@
             this.btnPageMin.TabStop = false;
             this.btnPageMin.Text = "|◀";
             this.btnPageMin.UseVisualStyleBackColor = false;
-            this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
             // 
             // btnBack
             // 
@@ -394,7 +400,6 @@
             this.btnBack.TabStop = false;
             this.btnBack.Text = "◀";
             this.btnBack.UseVisualStyleBackColor = false;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnPageMax
             // 
@@ -408,7 +413,6 @@
             this.btnPageMax.TabStop = false;
             this.btnPageMax.Text = "▶|";
             this.btnPageMax.UseVisualStyleBackColor = false;
-            this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
             // btnNext
             // 
@@ -422,7 +426,6 @@
             this.btnNext.TabStop = false;
             this.btnNext.Text = "▶";
             this.btnNext.UseVisualStyleBackColor = false;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // cmbHidden
             // 
@@ -435,13 +438,13 @@
             this.cmbHidden.Size = new System.Drawing.Size(220, 32);
             this.cmbHidden.TabIndex = 113;
             // 
-            // txbWarehousingHidden
+            // txbHidden
             // 
-            this.txbWarehousingHidden.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbWarehousingHidden.Location = new System.Drawing.Point(271, 437);
-            this.txbWarehousingHidden.Name = "txbWarehousingHidden";
-            this.txbWarehousingHidden.Size = new System.Drawing.Size(1565, 42);
-            this.txbWarehousingHidden.TabIndex = 114;
+            this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbHidden.Location = new System.Drawing.Point(271, 437);
+            this.txbHidden.Name = "txbHidden";
+            this.txbHidden.Size = new System.Drawing.Size(1565, 42);
+            this.txbHidden.TabIndex = 114;
             // 
             // cmbView
             // 
@@ -452,7 +455,7 @@
             this.cmbView.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbView.Location = new System.Drawing.Point(1067, 186);
+            this.cmbView.Location = new System.Drawing.Point(894, 181);
             this.cmbView.Margin = new System.Windows.Forms.Padding(2);
             this.cmbView.Name = "cmbView";
             this.cmbView.Size = new System.Drawing.Size(360, 43);
@@ -479,7 +482,7 @@
             this.dgvWarehousing.Name = "dgvWarehousing";
             this.dgvWarehousing.RowHeadersWidth = 51;
             this.dgvWarehousing.RowTemplate.Height = 24;
-            this.dgvWarehousing.Size = new System.Drawing.Size(1102, 480);
+            this.dgvWarehousing.Size = new System.Drawing.Size(1170, 480);
             this.dgvWarehousing.TabIndex = 117;
             this.dgvWarehousing.TabStop = false;
             // 
@@ -498,36 +501,100 @@
             // 
             this.dgvWarehousingDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvWarehousingDetail.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.dgvWarehousingDetail.Location = new System.Drawing.Point(1135, 509);
+            this.dgvWarehousingDetail.Location = new System.Drawing.Point(1193, 509);
             this.dgvWarehousingDetail.Margin = new System.Windows.Forms.Padding(2);
             this.dgvWarehousingDetail.Name = "dgvWarehousingDetail";
             this.dgvWarehousingDetail.RowHeadersWidth = 51;
             this.dgvWarehousingDetail.RowTemplate.Height = 24;
-            this.dgvWarehousingDetail.Size = new System.Drawing.Size(748, 480);
+            this.dgvWarehousingDetail.Size = new System.Drawing.Size(700, 480);
             this.dgvWarehousingDetail.TabIndex = 119;
             this.dgvWarehousingDetail.TabStop = false;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(0, 0);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(88, 16);
-            this.radioButton1.TabIndex = 120;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "radioButton1";
-            this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // rdbDetailRegister
             // 
             this.rdbDetailRegister.AutoSize = true;
             this.rdbDetailRegister.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbDetailRegister.Location = new System.Drawing.Point(153, 186);
+            this.rdbDetailRegister.Location = new System.Drawing.Point(141, 183);
             this.rdbDetailRegister.Name = "rdbDetailRegister";
             this.rdbDetailRegister.Size = new System.Drawing.Size(173, 39);
             this.rdbDetailRegister.TabIndex = 121;
             this.rdbDetailRegister.Text = "詳細登録";
             this.rdbDetailRegister.UseVisualStyleBackColor = true;
+            // 
+            // btnDetailClear
+            // 
+            this.btnDetailClear.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnDetailClear.Location = new System.Drawing.Point(1288, 167);
+            this.btnDetailClear.Margin = new System.Windows.Forms.Padding(2);
+            this.btnDetailClear.Name = "btnDetailClear";
+            this.btnDetailClear.Size = new System.Drawing.Size(187, 70);
+            this.btnDetailClear.TabIndex = 123;
+            this.btnDetailClear.TabStop = false;
+            this.btnDetailClear.Text = "詳細クリア";
+            this.btnDetailClear.UseVisualStyleBackColor = true;
+            this.btnDetailClear.Click += new System.EventHandler(this.btnDetailClear_Click);
+            // 
+            // rdbConfirm
+            // 
+            this.rdbConfirm.AutoSize = true;
+            this.rdbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbConfirm.Location = new System.Drawing.Point(541, 183);
+            this.rdbConfirm.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.rdbConfirm.Name = "rdbConfirm";
+            this.rdbConfirm.Size = new System.Drawing.Size(103, 39);
+            this.rdbConfirm.TabIndex = 125;
+            this.rdbConfirm.Text = "確定";
+            this.rdbConfirm.UseVisualStyleBackColor = true;
+            // 
+            // rdbUpdate
+            // 
+            this.rdbUpdate.AutoSize = true;
+            this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbUpdate.Location = new System.Drawing.Point(330, 183);
+            this.rdbUpdate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.rdbUpdate.Name = "rdbUpdate";
+            this.rdbUpdate.Size = new System.Drawing.Size(173, 39);
+            this.rdbUpdate.TabIndex = 124;
+            this.rdbUpdate.Text = "表示更新";
+            this.rdbUpdate.UseVisualStyleBackColor = true;
+            // 
+            // cmbConfirm
+            // 
+            this.cmbConfirm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbConfirm.FormattingEnabled = true;
+            this.cmbConfirm.Items.AddRange(new object[] {
+            "未確定",
+            "確定"});
+            this.cmbConfirm.Location = new System.Drawing.Point(871, 384);
+            this.cmbConfirm.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.cmbConfirm.Name = "cmbConfirm";
+            this.cmbConfirm.Size = new System.Drawing.Size(220, 32);
+            this.cmbConfirm.TabIndex = 128;
+            this.cmbConfirm.TabStop = false;
+            // 
+            // lblConfirm
+            // 
+            this.lblConfirm.AutoSize = true;
+            this.lblConfirm.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblConfirm.Location = new System.Drawing.Point(695, 392);
+            this.lblConfirm.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblConfirm.Name = "lblConfirm";
+            this.lblConfirm.Size = new System.Drawing.Size(142, 24);
+            this.lblConfirm.TabIndex = 127;
+            this.lblConfirm.Text = "未確定/確定";
+            // 
+            // rdbSearch
+            // 
+            this.rdbSearch.AutoSize = true;
+            this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbSearch.Location = new System.Drawing.Point(22, 183);
+            this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
+            this.rdbSearch.Name = "rdbSearch";
+            this.rdbSearch.Size = new System.Drawing.Size(103, 39);
+            this.rdbSearch.TabIndex = 129;
+            this.rdbSearch.Text = "検索";
+            this.rdbSearch.UseVisualStyleBackColor = true;
             // 
             // F_ButuryuWarehousing
             // 
@@ -535,14 +602,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.Controls.Add(this.rdbSearch);
+            this.Controls.Add(this.cmbConfirm);
+            this.Controls.Add(this.lblConfirm);
+            this.Controls.Add(this.rdbConfirm);
+            this.Controls.Add(this.rdbUpdate);
+            this.Controls.Add(this.btnDetailClear);
             this.Controls.Add(this.rdbDetailRegister);
-            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.dgvWarehousingDetail);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.dgvWarehousing);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.cmbView);
-            this.Controls.Add(this.txbWarehousingHidden);
+            this.Controls.Add(this.txbHidden);
             this.Controls.Add(this.cmbHidden);
             this.Controls.Add(this.lblPageSize);
             this.Controls.Add(this.txbPageSize);
@@ -565,15 +637,16 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txbWarehousingID);
-            this.Controls.Add(this.txbOrderID);
+            this.Controls.Add(this.txbHattyuID);
             this.Controls.Add(this.txbWarehousingQuantity);
             this.Controls.Add(this.txbEmployeeName);
             this.Controls.Add(this.txbProductID);
             this.Controls.Add(this.txbWarehousingDetailID);
-            this.Controls.Add(this.txbProdactName);
+            this.Controls.Add(this.txbProductName);
             this.Controls.Add(this.pnlButuryu);
             this.Name = "F_ButuryuWarehousing";
             this.Text = "F_ButuryuWarehousing";
+            this.Load += new System.EventHandler(this.F_ButuryuWarehousing_Load);
             this.pnlButuryu.ResumeLayout(false);
             this.pnlButuryu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarehousing)).EndInit();
@@ -587,12 +660,12 @@
         private System.Windows.Forms.Label lblWarehousing;
         private System.Windows.Forms.Panel pnlButuryu;
         private System.Windows.Forms.Button btnReturn;
-        private System.Windows.Forms.TextBox txbProdactName;
+        private System.Windows.Forms.TextBox txbProductName;
         private System.Windows.Forms.TextBox txbWarehousingDetailID;
         private System.Windows.Forms.TextBox txbProductID;
         private System.Windows.Forms.TextBox txbEmployeeName;
         private System.Windows.Forms.TextBox txbWarehousingQuantity;
-        private System.Windows.Forms.TextBox txbOrderID;
+        private System.Windows.Forms.TextBox txbHattyuID;
         private System.Windows.Forms.TextBox txbWarehousingID;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label label3;
@@ -616,13 +689,18 @@
         private System.Windows.Forms.Button btnPageMax;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.ComboBox cmbHidden;
-        private System.Windows.Forms.TextBox txbWarehousingHidden;
+        private System.Windows.Forms.TextBox txbHidden;
         private System.Windows.Forms.ComboBox cmbView;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DataGridView dgvWarehousing;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DataGridView dgvWarehousingDetail;
-        private System.Windows.Forms.RadioButton radioButton1;
         public System.Windows.Forms.RadioButton rdbDetailRegister;
+        private System.Windows.Forms.Button btnDetailClear;
+        private System.Windows.Forms.RadioButton rdbConfirm;
+        private System.Windows.Forms.RadioButton rdbUpdate;
+        private System.Windows.Forms.ComboBox cmbConfirm;
+        private System.Windows.Forms.Label lblConfirm;
+        private System.Windows.Forms.RadioButton rdbSearch;
     }
 }

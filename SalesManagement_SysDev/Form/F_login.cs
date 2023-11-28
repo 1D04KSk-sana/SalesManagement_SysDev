@@ -87,6 +87,8 @@ namespace SalesManagement_SysDev
             List<T_HattyuDetail> had = new List<T_HattyuDetail>();
             List<T_Stock> st = new List<T_Stock>();
             List<T_Syukko> sy = new List<T_Syukko>();
+            List<T_Warehousing> wh = new List<T_Warehousing>();
+            List<T_WarehousingDetail> whd = new List<T_WarehousingDetail>();
 
 
 
@@ -863,7 +865,56 @@ namespace SalesManagement_SysDev
                 context.SaveChanges();
 
             }
+            {
+                wh.Add(new T_Warehousing()
+                {
+                    T_Hattyu = ha[0],
+                    M_Employee = em[116],
+                    WaDate = new DateTime(2023, 11, 16),
+                    WaShelfFlag = 1,
+                    WaFlag = 0,
 
+                });
+                wh.Add(new T_Warehousing()
+                {
+                    T_Hattyu = ha[1],
+                    M_Employee = em[310],
+                    WaDate = new DateTime(2023, 11, 16),
+                    WaShelfFlag = 1,
+                    WaFlag = 0,
+
+                });
+                wh.Add(new T_Warehousing()
+                {
+                    T_Hattyu = ha[1],
+                    M_Employee = em[116],
+                    WaDate = new DateTime(2023, 11, 16),
+                    WaShelfFlag = 1,
+                    WaFlag = 0,
+
+                });
+            }
+            {
+                whd.Add(new T_WarehousingDetail()
+                {
+                    T_Warehousing = wh[0],
+                    M_Product = pr[0],
+                    WaQuantity = 50,
+                });
+                whd.Add(new T_WarehousingDetail()
+                {
+                    T_Warehousing = wh[0],
+                    M_Product = pr[1],
+                    WaQuantity = 30,
+                });
+                whd.Add(new T_WarehousingDetail()
+                {
+                    T_Warehousing = wh[1],
+                    M_Product = pr[2],
+                    WaQuantity = 80,
+                });
+
+            }
             context.Dispose();
 
             MessageBox.Show("サンプルデータ登録完了");
