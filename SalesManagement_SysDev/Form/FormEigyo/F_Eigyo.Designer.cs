@@ -40,10 +40,11 @@
             // 
             // btnLogOut
             // 
-            this.btnLogOut.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnLogOut.Location = new System.Drawing.Point(12, 8);
+            this.btnLogOut.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnLogOut.Location = new System.Drawing.Point(48, 36);
+            this.btnLogOut.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLogOut.Name = "btnLogOut";
-            this.btnLogOut.Size = new System.Drawing.Size(183, 75);
+            this.btnLogOut.Size = new System.Drawing.Size(160, 70);
             this.btnLogOut.TabIndex = 0;
             this.btnLogOut.TabStop = false;
             this.btnLogOut.Text = "ログアウト";
@@ -52,10 +53,11 @@
             // 
             // btnclose
             // 
-            this.btnclose.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnclose.Location = new System.Drawing.Point(868, 8);
+            this.btnclose.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnclose.Location = new System.Drawing.Point(1700, 36);
+            this.btnclose.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnclose.Name = "btnclose";
-            this.btnclose.Size = new System.Drawing.Size(183, 75);
+            this.btnclose.Size = new System.Drawing.Size(160, 70);
             this.btnclose.TabIndex = 1;
             this.btnclose.TabStop = false;
             this.btnclose.Text = "閉じる";
@@ -64,7 +66,8 @@
             // btnFormStockView
             // 
             this.btnFormStockView.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormStockView.Location = new System.Drawing.Point(247, 113);
+            this.btnFormStockView.Location = new System.Drawing.Point(696, 299);
+            this.btnFormStockView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnFormStockView.Name = "btnFormStockView";
             this.btnFormStockView.Size = new System.Drawing.Size(510, 100);
             this.btnFormStockView.TabIndex = 2;
@@ -76,7 +79,8 @@
             // btnFormOrder
             // 
             this.btnFormOrder.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormOrder.Location = new System.Drawing.Point(247, 219);
+            this.btnFormOrder.Location = new System.Drawing.Point(696, 826);
+            this.btnFormOrder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnFormOrder.Name = "btnFormOrder";
             this.btnFormOrder.Size = new System.Drawing.Size(510, 100);
             this.btnFormOrder.TabIndex = 3;
@@ -88,7 +92,8 @@
             // btnFormSyukko
             // 
             this.btnFormSyukko.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormSyukko.Location = new System.Drawing.Point(247, 325);
+            this.btnFormSyukko.Location = new System.Drawing.Point(696, 470);
+            this.btnFormSyukko.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnFormSyukko.Name = "btnFormSyukko";
             this.btnFormSyukko.Size = new System.Drawing.Size(510, 100);
             this.btnFormSyukko.TabIndex = 4;
@@ -100,7 +105,8 @@
             // btnFormArrival
             // 
             this.btnFormArrival.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormArrival.Location = new System.Drawing.Point(247, 431);
+            this.btnFormArrival.Location = new System.Drawing.Point(696, 650);
+            this.btnFormArrival.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnFormArrival.Name = "btnFormArrival";
             this.btnFormArrival.Size = new System.Drawing.Size(510, 100);
             this.btnFormArrival.TabIndex = 5;
@@ -115,22 +121,24 @@
             this.pnlEigyo.Controls.Add(this.btnLogOut);
             this.pnlEigyo.Controls.Add(this.btnclose);
             this.pnlEigyo.Location = new System.Drawing.Point(0, 0);
+            this.pnlEigyo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlEigyo.Name = "pnlEigyo";
-            this.pnlEigyo.Size = new System.Drawing.Size(1085, 90);
+            this.pnlEigyo.Size = new System.Drawing.Size(1920, 150);
             this.pnlEigyo.TabIndex = 6;
             // 
             // F_Eigyo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(219)))), ((int)(((byte)(193)))));
-            this.ClientSize = new System.Drawing.Size(1063, 554);
+            this.ClientSize = new System.Drawing.Size(1904, 1041);
             this.Controls.Add(this.pnlEigyo);
             this.Controls.Add(this.btnFormArrival);
             this.Controls.Add(this.btnFormSyukko);
             this.Controls.Add(this.btnFormOrder);
             this.Controls.Add(this.btnFormStockView);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "F_Eigyo";
             this.Text = "営業画面";
             this.pnlEigyo.ResumeLayout(false);

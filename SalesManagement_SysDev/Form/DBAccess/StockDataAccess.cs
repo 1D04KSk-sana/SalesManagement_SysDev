@@ -32,6 +32,30 @@ namespace SalesManagement_SysDev
                 return false;
             }
         }
+        //メソッド名：CheckstockIDExistence()
+        //引　数   ：在庫コード
+        //戻り値   ：True or False
+        //機　能   ：一致する在庫IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckstockIDExistence(int stockID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                //顧客IDで一致するデータが存在するか
+                flg = context.T_Stocks.Any(x => x.StID == stockID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+    return flg;
+        }
+
         ///////////////////////////////
         //メソッド名：GetOrderDspData()
         //引　数：なし
@@ -135,6 +159,11 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.T_Stocks.AsQueryable();
 
+                if (selectStock.StID != null && selectStock.StID != 0)
+                {
+                    query = query.Where(x => x.StID == selectStock.StID);
+                }
+
                 if (selectStock.PrID != null && selectStock.PrID != 0)
                 {
                     query = query.Where(x => x.PrID == selectStock.PrID);
@@ -143,6 +172,10 @@ namespace SalesManagement_SysDev
                 if (selectStock.StID != null && selectStock.StID != 0)
                 {
                     query = query.Where(x => x.StID == selectStock.StID);
+                }
+                if (selectStock.StQuantity != null && selectStock.StQuantity != 0)
+                {
+                    query = query.Where(x => x.StQuantity == selectStock.StQuantity);
                 }
 
                 listStock = query.ToList();
@@ -167,7 +200,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listStock = context.T_Stocks.Where(x => x.PrID == selectStock.PrID || x.StID == selectStock.StID ).ToList();
+                listStock = context.T_Stocks.Where(x => x.StID == selectStock.StID || x.PrID == selectStock.PrID || x.StQuantity == selectStock.StQuantity).ToList();
 
                 context.Dispose();
             }

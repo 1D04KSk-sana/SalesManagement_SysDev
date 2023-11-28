@@ -38,7 +38,7 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.dgvSale = new System.Windows.Forms.DataGridView();
             this.lblSaleDate = new System.Windows.Forms.Label();
-            this.txbClientPostal = new System.Windows.Forms.TextBox();
+            this.txbChumonID = new System.Windows.Forms.TextBox();
             this.lblChumonID = new System.Windows.Forms.Label();
             this.cmbSalesOfficeID = new System.Windows.Forms.ComboBox();
             this.lblSalesOfficeID = new System.Windows.Forms.Label();
@@ -58,6 +58,9 @@
             this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.rdbHiddenUpdate = new System.Windows.Forms.RadioButton();
             this.dtpSaleDate = new SalesManagement_SysDev.MonthPicker();
+            this.lblHidden = new System.Windows.Forms.Label();
+            this.txbClientID = new System.Windows.Forms.TextBox();
+            this.lblClientID = new System.Windows.Forms.Label();
             this.pnlHonsha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSaleDetail)).BeginInit();
@@ -166,6 +169,7 @@
             // dgvSale
             // 
             this.dgvSale.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSale.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.dgvSale.Location = new System.Drawing.Point(11, 537);
             this.dgvSale.Margin = new System.Windows.Forms.Padding(2);
             this.dgvSale.Name = "dgvSale";
@@ -175,35 +179,33 @@
             this.dgvSale.TabIndex = 56;
             this.dgvSale.TabStop = false;
             this.dgvSale.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSale_CellClick);
-            this.dgvSale.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSale_CellContentClick);
-            this.dgvSale.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             // 
             // lblSaleDate
             // 
             this.lblSaleDate.AutoSize = true;
             this.lblSaleDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblSaleDate.Location = new System.Drawing.Point(731, 414);
+            this.lblSaleDate.Location = new System.Drawing.Point(731, 375);
             this.lblSaleDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSaleDate.Name = "lblSaleDate";
             this.lblSaleDate.Size = new System.Drawing.Size(159, 36);
             this.lblSaleDate.TabIndex = 50;
             this.lblSaleDate.Text = "売上日時";
             // 
-            // txbClientPostal
+            // txbChumonID
             // 
-            this.txbClientPostal.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientPostal.Location = new System.Drawing.Point(321, 407);
-            this.txbClientPostal.Margin = new System.Windows.Forms.Padding(2);
-            this.txbClientPostal.Name = "txbClientPostal";
-            this.txbClientPostal.ShortcutsEnabled = false;
-            this.txbClientPostal.Size = new System.Drawing.Size(220, 43);
-            this.txbClientPostal.TabIndex = 49;
+            this.txbChumonID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbChumonID.Location = new System.Drawing.Point(321, 367);
+            this.txbChumonID.Margin = new System.Windows.Forms.Padding(2);
+            this.txbChumonID.Name = "txbChumonID";
+            this.txbChumonID.ShortcutsEnabled = false;
+            this.txbChumonID.Size = new System.Drawing.Size(220, 43);
+            this.txbChumonID.TabIndex = 49;
             // 
             // lblChumonID
             // 
             this.lblChumonID.AutoSize = true;
             this.lblChumonID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblChumonID.Location = new System.Drawing.Point(93, 414);
+            this.lblChumonID.Location = new System.Drawing.Point(93, 375);
             this.lblChumonID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblChumonID.Name = "lblChumonID";
             this.lblChumonID.Size = new System.Drawing.Size(119, 36);
@@ -215,7 +217,7 @@
             this.cmbSalesOfficeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSalesOfficeID.FormattingEnabled = true;
-            this.cmbSalesOfficeID.Location = new System.Drawing.Point(1619, 292);
+            this.cmbSalesOfficeID.Location = new System.Drawing.Point(1617, 367);
             this.cmbSalesOfficeID.Margin = new System.Windows.Forms.Padding(2);
             this.cmbSalesOfficeID.Name = "cmbSalesOfficeID";
             this.cmbSalesOfficeID.Size = new System.Drawing.Size(220, 44);
@@ -226,7 +228,7 @@
             // 
             this.lblSalesOfficeID.AutoSize = true;
             this.lblSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblSalesOfficeID.Location = new System.Drawing.Point(1364, 299);
+            this.lblSalesOfficeID.Location = new System.Drawing.Point(1367, 375);
             this.lblSalesOfficeID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSalesOfficeID.Name = "lblSalesOfficeID";
             this.lblSalesOfficeID.Size = new System.Drawing.Size(159, 36);
@@ -236,9 +238,10 @@
             // txbClientName
             // 
             this.txbClientName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientName.Location = new System.Drawing.Point(981, 292);
+            this.txbClientName.Location = new System.Drawing.Point(1617, 291);
             this.txbClientName.Margin = new System.Windows.Forms.Padding(2);
             this.txbClientName.Name = "txbClientName";
+            this.txbClientName.ReadOnly = true;
             this.txbClientName.ShortcutsEnabled = false;
             this.txbClientName.Size = new System.Drawing.Size(220, 43);
             this.txbClientName.TabIndex = 43;
@@ -247,7 +250,7 @@
             // 
             this.lblClientName.AutoSize = true;
             this.lblClientName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientName.Location = new System.Drawing.Point(755, 298);
+            this.lblClientName.Location = new System.Drawing.Point(1391, 297);
             this.lblClientName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(123, 36);
@@ -291,6 +294,7 @@
             // dgvSaleDetail
             // 
             this.dgvSaleDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSaleDetail.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.dgvSaleDetail.Location = new System.Drawing.Point(1209, 537);
             this.dgvSaleDetail.Margin = new System.Windows.Forms.Padding(2);
             this.dgvSaleDetail.Name = "dgvSaleDetail";
@@ -299,7 +303,6 @@
             this.dgvSaleDetail.Size = new System.Drawing.Size(700, 480);
             this.dgvSaleDetail.TabIndex = 72;
             this.dgvSaleDetail.TabStop = false;
-            this.dgvSaleDetail.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             // 
             // lblNumPage
             // 
@@ -384,7 +387,7 @@
             this.cmbHidden.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbHidden.Location = new System.Drawing.Point(1619, 407);
+            this.cmbHidden.Location = new System.Drawing.Point(321, 445);
             this.cmbHidden.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cmbHidden.Name = "cmbHidden";
             this.cmbHidden.Size = new System.Drawing.Size(220, 44);
@@ -414,17 +417,53 @@
             this.rdbHiddenUpdate.TabIndex = 79;
             this.rdbHiddenUpdate.Text = "表示更新";
             this.rdbHiddenUpdate.UseVisualStyleBackColor = true;
+            this.rdbHiddenUpdate.CheckedChanged += new System.EventHandler(this.rdbHiddenUpdate_CheckedChanged);
             // 
             // dtpSaleDate
             // 
             this.dtpSaleDate.CustomFormat = "MMMM yyyy";
             this.dtpSaleDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.dtpSaleDate.Location = new System.Drawing.Point(981, 407);
+            this.dtpSaleDate.Location = new System.Drawing.Point(981, 368);
             this.dtpSaleDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpSaleDate.Name = "dtpSaleDate";
+            this.dtpSaleDate.ShowCheckBox = true;
             this.dtpSaleDate.Size = new System.Drawing.Size(220, 43);
             this.dtpSaleDate.TabIndex = 81;
             this.dtpSaleDate.TabStop = false;
+            // 
+            // lblHidden
+            // 
+            this.lblHidden.AutoSize = true;
+            this.lblHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblHidden.Location = new System.Drawing.Point(93, 448);
+            this.lblHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblHidden.Name = "lblHidden";
+            this.lblHidden.Size = new System.Drawing.Size(213, 36);
+            this.lblHidden.TabIndex = 82;
+            this.lblHidden.Text = "表示/非表示";
+            // 
+            // txbClientID
+            // 
+            this.txbClientID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbClientID.Location = new System.Drawing.Point(981, 294);
+            this.txbClientID.Margin = new System.Windows.Forms.Padding(2);
+            this.txbClientID.Name = "txbClientID";
+            this.txbClientID.ShortcutsEnabled = false;
+            this.txbClientID.Size = new System.Drawing.Size(220, 43);
+            this.txbClientID.TabIndex = 83;
+            this.txbClientID.TextChanged += new System.EventHandler(this.txbClientID_TextChanged);
+            this.txbClientID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
+            // 
+            // lblClientID
+            // 
+            this.lblClientID.AutoSize = true;
+            this.lblClientID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblClientID.Location = new System.Drawing.Point(755, 294);
+            this.lblClientID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblClientID.Name = "lblClientID";
+            this.lblClientID.Size = new System.Drawing.Size(119, 36);
+            this.lblClientID.TabIndex = 84;
+            this.lblClientID.Text = "顧客ID";
             // 
             // F_HonshaSale
             // 
@@ -433,6 +472,9 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.lblClientID);
+            this.Controls.Add(this.txbClientID);
+            this.Controls.Add(this.lblHidden);
             this.Controls.Add(this.rdbSearch);
             this.Controls.Add(this.rdbHiddenUpdate);
             this.Controls.Add(this.dtpSaleDate);
@@ -452,7 +494,7 @@
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.dgvSale);
             this.Controls.Add(this.lblSaleDate);
-            this.Controls.Add(this.txbClientPostal);
+            this.Controls.Add(this.txbChumonID);
             this.Controls.Add(this.lblChumonID);
             this.Controls.Add(this.cmbSalesOfficeID);
             this.Controls.Add(this.lblSalesOfficeID);
@@ -487,7 +529,7 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.DataGridView dgvSale;
         private System.Windows.Forms.Label lblSaleDate;
-        private System.Windows.Forms.TextBox txbClientPostal;
+        private System.Windows.Forms.TextBox txbChumonID;
         private System.Windows.Forms.Label lblChumonID;
         private System.Windows.Forms.ComboBox cmbSalesOfficeID;
         private System.Windows.Forms.Label lblSalesOfficeID;
@@ -508,5 +550,8 @@
         private System.Windows.Forms.RadioButton rdbSearch;
         private System.Windows.Forms.RadioButton rdbHiddenUpdate;
         private System.Windows.Forms.Label lblClient;
+        private System.Windows.Forms.Label lblHidden;
+        private System.Windows.Forms.TextBox txbClientID;
+        private System.Windows.Forms.Label lblClientID;
     }
 }
