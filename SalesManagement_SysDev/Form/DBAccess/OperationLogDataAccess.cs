@@ -124,5 +124,37 @@ namespace SalesManagement_SysDev
 
             return listLog;
         }
+
+        ///////////////////////////////
+        //メソッド名：GetDateLogData()
+        //引　数：操作ログデータ、始まりの月日、終わりの月日
+        //戻り値：操作ログデータ
+        //機　能：操作ログデータの取得
+        ///////////////////////////////
+        public List<T_OperationLog> GetDateLogData(List<T_OperationLog> selectLog, DateTime? dateStart, DateTime? dateEnd)
+        {
+            try
+            {
+                if (dateStart != null && dateEnd != null)
+                {
+                    selectLog = selectLog.Where(x => x.OpSetTime.Date.CompareTo(dateStart) >= 0).ToList();
+                    selectLog = selectLog.Where(x => x.OpSetTime.Date.CompareTo(dateEnd) <= 0).ToList();
+                }
+                else if (dateStart != null && dateEnd == null)
+                {
+                    selectLog = selectLog.Where(x => x.OpSetTime.Date.CompareTo(dateStart) >= 0).ToList();
+                }
+                else if (dateStart == null && dateEnd != null)
+                {
+                    selectLog = selectLog.Where(x => x.OpSetTime.Date.CompareTo(dateEnd) <= 0).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return selectLog;
+        }
     }
 }

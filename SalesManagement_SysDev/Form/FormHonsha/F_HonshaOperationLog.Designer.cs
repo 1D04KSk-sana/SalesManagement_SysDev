@@ -76,14 +76,14 @@
             this.lblOperationLog.Location = new System.Drawing.Point(754, 26);
             this.lblOperationLog.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOperationLog.Name = "lblOperationLog";
-            this.lblOperationLog.Size = new System.Drawing.Size(385, 64);
+            this.lblOperationLog.Size = new System.Drawing.Size(384, 64);
             this.lblOperationLog.TabIndex = 24;
             this.lblOperationLog.Text = "ログ管理画面";
             // 
             // btnReturn
             // 
             this.btnReturn.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnReturn.Location = new System.Drawing.Point(10, 20);
+            this.btnReturn.Location = new System.Drawing.Point(46, 33);
             this.btnReturn.Margin = new System.Windows.Forms.Padding(2);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(160, 70);
@@ -148,7 +148,7 @@
             // txbEmployeeID
             // 
             this.txbEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbEmployeeID.Location = new System.Drawing.Point(388, 327);
+            this.txbEmployeeID.Location = new System.Drawing.Point(213, 311);
             this.txbEmployeeID.Margin = new System.Windows.Forms.Padding(2);
             this.txbEmployeeID.Name = "txbEmployeeID";
             this.txbEmployeeID.Size = new System.Drawing.Size(220, 31);
@@ -160,7 +160,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(283, 330);
+            this.label1.Location = new System.Drawing.Point(108, 314);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(84, 24);
@@ -188,6 +188,7 @@
             this.dtpStartDate.Location = new System.Drawing.Point(1128, 313);
             this.dtpStartDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpStartDate.Name = "dtpStartDate";
+            this.dtpStartDate.ShowCheckBox = true;
             this.dtpStartDate.Size = new System.Drawing.Size(220, 31);
             this.dtpStartDate.TabIndex = 13;
             this.dtpStartDate.TabStop = false;
@@ -198,6 +199,7 @@
             this.dtpEndoDate.Location = new System.Drawing.Point(1391, 313);
             this.dtpEndoDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpEndoDate.Name = "dtpEndoDate";
+            this.dtpEndoDate.ShowCheckBox = true;
             this.dtpEndoDate.Size = new System.Drawing.Size(220, 31);
             this.dtpEndoDate.TabIndex = 14;
             this.dtpEndoDate.TabStop = false;
@@ -317,7 +319,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label3.Location = new System.Drawing.Point(283, 297);
+            this.label3.Location = new System.Drawing.Point(550, 314);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(85, 24);
@@ -327,7 +329,7 @@
             // txbEmployeeName
             // 
             this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbEmployeeName.Location = new System.Drawing.Point(388, 294);
+            this.txbEmployeeName.Location = new System.Drawing.Point(655, 311);
             this.txbEmployeeName.Margin = new System.Windows.Forms.Padding(2);
             this.txbEmployeeName.Name = "txbEmployeeName";
             this.txbEmployeeName.ReadOnly = true;

@@ -12,6 +12,8 @@ namespace SalesManagement_SysDev
 {
     public partial class F_HonshaOperationLog : Form
     {
+        //入力形式チェック用クラスのインスタンス化
+        DataInputCheck dataInputCheck = new DataInputCheck();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess LogDataAccess = new OperationLogDataAccess();
         //データグリッドビュー用の全操作ログデータ
@@ -48,6 +50,8 @@ namespace SalesManagement_SysDev
         }
         private void btnClear_Click(object sender, EventArgs e)
         {
+            rdbSearch.Checked = false;
+
             ClearImput();
         }
         private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -285,31 +289,31 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
+            if (String.IsNullOrEmpty(txbEmployeeID.Text.Trim()) && dtpStartDate.Checked == false && dtpEndoDate.Checked == false)
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbEmployeeID.Focus();
                 return false;
             }
 
-            //// 顧客IDの適否
-            //if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
-            //{
-            //    // 顧客IDの数字チェック
-            //    if (!dataInputCheck.CheckNumeric(txbEmployeeID.Text.Trim()))
-            //    {
-            //        MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        txbEmployeeID.Focus();
-            //        return false;
-            //    }
-            //    //顧客IDの重複チェック
-            //    if (!LogDataAccess.CheckClientIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
-            //    {
-            //        MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //        txbEmployeeID.Focus();
-            //        return false;
-            //    }
-            //}
+            // 社員IDの適否
+            if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
+            {
+                // 社員IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbEmployeeID.Text.Trim()))
+                {
+                    MessageBox.Show("社員IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+                //社員IDの重複チェック
+                if (!employeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    MessageBox.Show("社員IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+            }
 
             return true;
         }
@@ -325,6 +329,8 @@ namespace SalesManagement_SysDev
             GenerateDataAtSelect(searchFlg);
 
             int intSearchCount = listLog.Count;
+
+            txbNumPage.Text = "1";
 
             // 顧客抽出結果表示
             GetDataGridView();
@@ -347,6 +353,20 @@ namespace SalesManagement_SysDev
                 intEmployeeID = int.Parse(strEmployeeID);
             }
 
+            DateTime? dateStart = null;
+
+            if (dtpStartDate.Checked)
+            {
+                dateStart = dtpStartDate.Value.Date;
+            }
+
+            DateTime? dateEnd = null;
+
+            if (dtpEndoDate.Checked)
+            {
+                dateEnd = dtpEndoDate.Value.Date;
+            }
+
             // 検索条件のセット
             T_OperationLog selectCondition = new T_OperationLog()
             {
@@ -364,6 +384,12 @@ namespace SalesManagement_SysDev
                 listLog = LogDataAccess.GetOrLogData(selectCondition);
             }
 
+            if (dtpStartDate.Checked == false && dtpEndoDate.Checked == false)
+            {
+                return;
+            }
+
+            listLog = LogDataAccess.GetDateLogData(listLog, dateStart, dateEnd);
         }
 
         private void btnPageMin_Click(object sender, EventArgs e)
