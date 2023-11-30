@@ -64,13 +64,13 @@ namespace SalesManagement_SysDev
         //戻り値：管理Flgが非表示の商品データ
         //機　能：管理Flgが非表示の商品データの全取得
         ///////////////////////////////
-        public List<M_Product> GetProdactNotDspData(List<M_Product> dspClient)
+        public List<M_Product> GetProdactNotDspData(List<M_Product> dspProduct)
         {
             List<M_Product> listProdact = new List<M_Product>();
 
             try
             {
-                listProdact = dspClient.Where(x => x.PrFlag == 1).ToList();
+                listProdact = dspProduct.Where(x => x.PrFlag == 1).ToList();
             }
             catch (Exception ex)
             {
@@ -101,9 +101,9 @@ namespace SalesManagement_SysDev
             {
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
             return prodactID;
-    	}
+        }
 
         ///////////////////////////////
         //メソッド名：GetAndProdactData()

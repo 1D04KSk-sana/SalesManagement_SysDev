@@ -15,6 +15,7 @@ namespace SalesManagement_SysDev
         {
             T_HattyuDetail = new HashSet<T_HattyuDetail>();
             T_Warehousing = new HashSet<T_Warehousing>();
+
         }
 
         [Key]
@@ -24,7 +25,7 @@ namespace SalesManagement_SysDev
         [DataType(DataType.Date)]
         [Column(TypeName = "date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
-        public DateTime HaDate { get; set; }            //発注年月日	
+        public DateTime? HaDate { get; set; }            //発注年月日	
         public int WaWarehouseFlag { get; set; }	    //入庫済フラグ（倉庫）
         public int HaFlag { get; set; }	                //発注管理フラグ
         public string HaHidden { get; set; }            //非表示理由	

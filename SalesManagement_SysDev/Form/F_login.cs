@@ -78,6 +78,16 @@ namespace SalesManagement_SysDev
             List<M_Product> pr = new List<M_Product>();
             List<T_Sale> sa = new List<T_Sale>();
             List<T_SaleDetail> sad = new List<T_SaleDetail>();
+            List<T_Order> or = new List<T_Order>();
+            List<T_OrderDetail> ord = new List<T_OrderDetail>();
+            List<T_Chumon> ch = new List<T_Chumon>();
+            List<T_ChumonDetail> chd = new List<T_ChumonDetail>();
+            List<T_SyukkoDetail> syd = new List<T_SyukkoDetail>();
+            List<T_Hattyu> ha = new List<T_Hattyu>();
+            List<T_HattyuDetail> had = new List<T_HattyuDetail>();
+            List<T_Stock> st = new List<T_Stock>();
+            List<T_Syukko> sy = new List<T_Syukko>();
+
 
 
             {
@@ -577,7 +587,6 @@ namespace SalesManagement_SysDev
                 context.M_Products.AddRange(pr);
                 context.SaveChanges();
             }
-            List<T_Stock> st = new List<T_Stock>();
             {
                 st.Add(new T_Stock()
                 {
@@ -624,7 +633,6 @@ namespace SalesManagement_SysDev
                 context.T_Stocks.AddRange(st);
                 context.SaveChanges();
             }
-            List<T_Order> or = new List<T_Order>();
             {
                 or.Add(new T_Order
                 {
@@ -649,7 +657,6 @@ namespace SalesManagement_SysDev
                 context.T_Orders.AddRange(or);
                 context.SaveChanges();
             }
-            List<T_OrderDetail> ord = new List<T_OrderDetail>();
             {
                 ord.Add(new T_OrderDetail()
                 {
@@ -689,7 +696,6 @@ namespace SalesManagement_SysDev
                 context.T_OrderDetails.AddRange(ord);
                 context.SaveChanges();
             }
-            List<T_Chumon> ch = new List<T_Chumon>();
             {
                 ch.Add(new T_Chumon()
                 {
@@ -704,7 +710,6 @@ namespace SalesManagement_SysDev
                 context.T_Chumons.AddRange(ch);
                 context.SaveChanges();
             }
-            List<T_ChumonDetail> chd = new List<T_ChumonDetail>();
             {
                 chd.Add(new T_ChumonDetail()
                 {
@@ -721,7 +726,6 @@ namespace SalesManagement_SysDev
                 context.T_ChumonDetails.AddRange(chd);
                 context.SaveChanges();
             }
-            List<T_Syukko> sy = new List<T_Syukko>();
             {
                 sy.Add(new T_Syukko()
                 {
@@ -735,7 +739,6 @@ namespace SalesManagement_SysDev
                 context.T_Syukkos.AddRange(sy);
                 context.SaveChanges();
             }
-            List<T_SyukkoDetail> syd = new List<T_SyukkoDetail>();
             {
                 syd.Add(new T_SyukkoDetail()
                 {
@@ -810,6 +813,55 @@ namespace SalesManagement_SysDev
                 context.T_SaleDetails.AddRange(sad);
                 context.SaveChanges();
 
+
+            }
+            {
+                ha.Add(new T_Hattyu()
+                {
+                    M_Maker = ma[0],
+                    M_Employee = em[310],
+                    HaDate = new DateTime(2023, 11, 17),
+                    WaWarehouseFlag = 1,
+                    HaFlag = 0,
+
+                });
+                ha.Add(new T_Hattyu()
+                {
+                    M_Maker = ma[1],
+                    M_Employee = em[116],
+                    HaDate = new DateTime(2023, 11, 16),
+                    WaWarehouseFlag = 1,
+                    HaFlag = 0,
+
+                });
+                ha.Add(new T_Hattyu()
+                {
+                    M_Maker = ma[2],
+                    M_Employee = em[310],
+                    HaDate = new DateTime(2023, 10, 17),
+                    WaWarehouseFlag = 0,
+                    HaFlag = 0,
+
+                });
+
+                context.T_Hattyus.AddRange(ha);
+                context.SaveChanges();
+            }
+            {
+                had.Add(new T_HattyuDetail()
+                {
+                    T_Hattyu = ha[0],
+                    M_Product = pr[0],
+                    HaQuantity = 50,
+                });
+                had.Add(new T_HattyuDetail()
+                {
+                    T_Hattyu = ha[0],
+                    M_Product = pr[1],
+                    HaQuantity = 30,
+                });
+                context.T_HattyuDetails.AddRange(had);
+                context.SaveChanges();
 
             }
 
@@ -902,9 +954,5 @@ namespace SalesManagement_SysDev
             return true;
         }
 
-        private void F_Login_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

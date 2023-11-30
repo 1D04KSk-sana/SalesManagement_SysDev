@@ -301,7 +301,7 @@ namespace SalesManagement_SysDev
             //存在確認
             if (!clientDataAccess.CheckClientIDExistence(intClientID))
             {
-                txbClientName.Text = "社員IDが存在しません";
+                txbClientName.Text = "顧客IDが存在しません";
                 return;
             }
 
@@ -492,7 +492,7 @@ namespace SalesManagement_SysDev
                     return false;
                 }
                 //社員IDが現在ログインしているIDと等しいかチェック
-                if (F_Login.intEmployeeID == int.Parse(txbEmployeeID.Text.Trim()))
+                if (F_Login.intEmployeeID != int.Parse(txbEmployeeID.Text.Trim()))
                 {
                     MessageBox.Show("自身の社員IDを入力してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbEmployeeID.Focus();
@@ -951,7 +951,7 @@ namespace SalesManagement_SysDev
             return new T_Order
             {
                 OrID = int.Parse(txbOrderID.Text.Trim()),
-                OrStateFlag = cmbConfirm.SelectedIndex,
+                OrStateFlag = 1,
             };
         }
 
@@ -989,7 +989,7 @@ namespace SalesManagement_SysDev
 
             bool flgChumon = chumonDataAccess.AddChumonData(Chumon);
 
-            if (flg == true)
+            if (flgChumon == true)
             {
                 MessageBox.Show("注文管理にデータを送信ました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -1512,5 +1512,6 @@ namespace SalesManagement_SysDev
             txbProductID.Text = dictionaryProdact.FirstOrDefault(x => x.Value == dgvOrderDetail[2, dgvOrderDetail.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbOrderQuantity.Text = dgvOrderDetail[3, dgvOrderDetail.CurrentCellAddress.Y].Value.ToString();
         }
+
     }
 }
