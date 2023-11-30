@@ -205,7 +205,6 @@ namespace SalesManagement_SysDev
             cmbHidden.SelectedIndex = -1;
             cmbConfirm.SelectedIndex = -1;
             txbHidden.Text = string.Empty;
-
         }
         private void btnDetailClear_Click(object sender, EventArgs e)
         {
@@ -1289,13 +1288,13 @@ namespace SalesManagement_SysDev
             dgvHattyu.Columns.Add("WaWarehouseFlag", "入庫済フラグ");
             dgvHattyu.Columns.Add("HaHidden", "非表示理由");
 
-            dgvHattyu.Columns["HaID"].Width = 107;
+            dgvHattyu.Columns["HaID"].Width = 110;
             dgvHattyu.Columns["MaID"].Width = 150;
             dgvHattyu.Columns["EmID"].Width = 150;
             dgvHattyu.Columns["HaDate"].Width = 160;
             dgvHattyu.Columns["HaFlag"].Width = 170;
             dgvHattyu.Columns["WaWarehouseFlag"].Width = 160;
-            dgvHattyu.Columns["HaHidden"].Width = 290;
+            dgvHattyu.Columns["HaHidden"].Width = 267;
 
 
 
