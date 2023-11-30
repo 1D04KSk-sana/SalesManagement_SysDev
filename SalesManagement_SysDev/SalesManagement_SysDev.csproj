@@ -234,6 +234,9 @@
     <EmbeddedResource Include="Form\FormButuryu\F_Buturyu.resx">
       <DependentUpon>F_Buturyu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormButuryu\F_ButuryuSyukko.resx">
+      <DependentUpon>F_ButuryuSyukko.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\FormButuryu\F_ButuryuStock.resx">
       <DependentUpon>F_ButuryuStock.cs</DependentUpon>
     </EmbeddedResource>

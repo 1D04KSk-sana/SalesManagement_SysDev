@@ -730,6 +730,7 @@ namespace SalesManagement_SysDev
                 sy.Add(new T_Syukko()
                 {
                     M_Client = cl[1],
+                    M_Employee = em[116],
                     M_SalesOffice = so[0],
                     T_Order = or[0],
                     SyStateFlag = 0,
