@@ -303,6 +303,7 @@
             this.dgvClient.RowTemplate.Height = 24;
             this.dgvClient.Size = new System.Drawing.Size(1900, 495);
             this.dgvClient.TabIndex = 18;
+            this.dgvClient.TabStop = false;
             this.dgvClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRecordEditing_CellClick);
             // 
             // btnDone
