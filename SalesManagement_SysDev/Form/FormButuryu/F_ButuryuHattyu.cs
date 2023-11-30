@@ -935,6 +935,8 @@ namespace SalesManagement_SysDev
 
             int intSearchCount = listHattyu.Count;
 
+            txbNumPage.Text = "1";
+
             // 発注抽出結果表示
             GetDataGridView();
 

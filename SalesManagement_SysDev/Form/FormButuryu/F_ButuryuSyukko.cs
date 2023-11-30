@@ -752,7 +752,7 @@ namespace SalesManagement_SysDev
             //列を自由に設定できるように
             dgvSyukkoDetail.AutoGenerateColumns = false;
             //行単位で選択するようにする
-            dgvSyukko.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvSyukkoDetail.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             //行と列の高さを変更できないように
             dgvSyukkoDetail.AllowUserToResizeColumns = false;
             dgvSyukkoDetail.AllowUserToResizeRows = false;

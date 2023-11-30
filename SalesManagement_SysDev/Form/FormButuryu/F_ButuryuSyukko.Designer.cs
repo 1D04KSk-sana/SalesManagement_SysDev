@@ -50,8 +50,6 @@
             this.lblConfirm = new System.Windows.Forms.Label();
             this.lblHidden = new System.Windows.Forms.Label();
             this.txbHidden = new System.Windows.Forms.TextBox();
-            this.dgvSyukko = new System.Windows.Forms.DataGridView();
-            this.dgvSyukkoDetail = new System.Windows.Forms.DataGridView();
             this.lblPageSize = new System.Windows.Forms.Label();
             this.txbPageSize = new System.Windows.Forms.TextBox();
             this.btnPagesize = new System.Windows.Forms.Button();
@@ -67,10 +65,13 @@
             this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbConfirm = new System.Windows.Forms.ComboBox();
+            this.dgvSyukko = new System.Windows.Forms.DataGridView();
+            this.dgvSyukkoDetail = new System.Windows.Forms.DataGridView();
+            this.lblEmployeeID = new System.Windows.Forms.Label();
             this.pnlButuryu.SuspendLayout();
+            this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSyukko)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSyukkoDetail)).BeginInit();
-            this.pnlSelect.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlButuryu
@@ -167,7 +168,7 @@
             // 
             this.lblClientID.AutoSize = true;
             this.lblClientID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientID.Location = new System.Drawing.Point(429, 281);
+            this.lblClientID.Location = new System.Drawing.Point(429, 417);
             this.lblClientID.Name = "lblClientID";
             this.lblClientID.Size = new System.Drawing.Size(82, 24);
             this.lblClientID.TabIndex = 7;
@@ -176,7 +177,7 @@
             // txbClientID
             // 
             this.txbClientID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientID.Location = new System.Drawing.Point(517, 278);
+            this.txbClientID.Location = new System.Drawing.Point(514, 414);
             this.txbClientID.Name = "txbClientID";
             this.txbClientID.Size = new System.Drawing.Size(220, 31);
             this.txbClientID.TabIndex = 6;
@@ -206,7 +207,7 @@
             // 
             this.lblEmployeeName.AutoSize = true;
             this.lblEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblEmployeeName.Location = new System.Drawing.Point(107, 350);
+            this.lblEmployeeName.Location = new System.Drawing.Point(428, 350);
             this.lblEmployeeName.Name = "lblEmployeeName";
             this.lblEmployeeName.Size = new System.Drawing.Size(82, 24);
             this.lblEmployeeName.TabIndex = 12;
@@ -215,7 +216,7 @@
             // txbEmployeeName
             // 
             this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbEmployeeName.Location = new System.Drawing.Point(193, 347);
+            this.txbEmployeeName.Location = new System.Drawing.Point(514, 347);
             this.txbEmployeeName.Name = "txbEmployeeName";
             this.txbEmployeeName.Size = new System.Drawing.Size(220, 31);
             this.txbEmployeeName.TabIndex = 11;
@@ -224,7 +225,7 @@
             // 
             this.lblChumonID.AutoSize = true;
             this.lblChumonID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblChumonID.Location = new System.Drawing.Point(431, 350);
+            this.lblChumonID.Location = new System.Drawing.Point(428, 281);
             this.lblChumonID.Name = "lblChumonID";
             this.lblChumonID.Size = new System.Drawing.Size(80, 24);
             this.lblChumonID.TabIndex = 14;
@@ -233,7 +234,7 @@
             // txbChumonID
             // 
             this.txbChumonID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbChumonID.Location = new System.Drawing.Point(517, 347);
+            this.txbChumonID.Location = new System.Drawing.Point(514, 278);
             this.txbChumonID.Name = "txbChumonID";
             this.txbChumonID.Size = new System.Drawing.Size(220, 31);
             this.txbChumonID.TabIndex = 13;
@@ -242,7 +243,7 @@
             // 
             this.lblSyukkoDate.AutoSize = true;
             this.lblSyukkoDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblSyukkoDate.Location = new System.Drawing.Point(749, 354);
+            this.lblSyukkoDate.Location = new System.Drawing.Point(749, 350);
             this.lblSyukkoDate.Name = "lblSyukkoDate";
             this.lblSyukkoDate.Size = new System.Drawing.Size(130, 24);
             this.lblSyukkoDate.TabIndex = 15;
@@ -300,27 +301,6 @@
             this.txbHidden.Size = new System.Drawing.Size(498, 31);
             this.txbHidden.TabIndex = 20;
             // 
-            // dgvSyukko
-            // 
-            this.dgvSyukko.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSyukko.Location = new System.Drawing.Point(50, 424);
-            this.dgvSyukko.Name = "dgvSyukko";
-            this.dgvSyukko.RowTemplate.Height = 21;
-            this.dgvSyukko.Size = new System.Drawing.Size(859, 561);
-            this.dgvSyukko.TabIndex = 21;
-            this.dgvSyukko.TabStop = false;
-            this.dgvSyukko.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSyukko_CellClick);
-            // 
-            // dgvSyukkoDetail
-            // 
-            this.dgvSyukkoDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSyukkoDetail.Location = new System.Drawing.Point(939, 424);
-            this.dgvSyukkoDetail.Name = "dgvSyukkoDetail";
-            this.dgvSyukkoDetail.RowTemplate.Height = 21;
-            this.dgvSyukkoDetail.Size = new System.Drawing.Size(901, 561);
-            this.dgvSyukkoDetail.TabIndex = 22;
-            this.dgvSyukkoDetail.TabStop = false;
-            // 
             // lblPageSize
             // 
             this.lblPageSize.AutoSize = true;
@@ -353,7 +333,7 @@
             // btnPageMin
             // 
             this.btnPageMin.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnPageMin.Location = new System.Drawing.Point(776, 1012);
+            this.btnPageMin.Location = new System.Drawing.Point(796, 1011);
             this.btnPageMin.Name = "btnPageMin";
             this.btnPageMin.Size = new System.Drawing.Size(50, 40);
             this.btnPageMin.TabIndex = 26;
@@ -365,7 +345,7 @@
             // txbNumPage
             // 
             this.txbNumPage.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbNumPage.Location = new System.Drawing.Point(639, 1019);
+            this.txbNumPage.Location = new System.Drawing.Point(659, 1018);
             this.txbNumPage.Name = "txbNumPage";
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 27;
@@ -374,7 +354,7 @@
             // 
             this.lblNumPage.AutoSize = true;
             this.lblNumPage.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblNumPage.Location = new System.Drawing.Point(695, 1026);
+            this.lblNumPage.Location = new System.Drawing.Point(715, 1025);
             this.lblNumPage.Name = "lblNumPage";
             this.lblNumPage.Size = new System.Drawing.Size(64, 21);
             this.lblNumPage.TabIndex = 28;
@@ -383,7 +363,7 @@
             // btnBack
             // 
             this.btnBack.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnBack.Location = new System.Drawing.Point(845, 1012);
+            this.btnBack.Location = new System.Drawing.Point(865, 1011);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(50, 40);
             this.btnBack.TabIndex = 29;
@@ -395,7 +375,7 @@
             // btnNext
             // 
             this.btnNext.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnNext.Location = new System.Drawing.Point(951, 1012);
+            this.btnNext.Location = new System.Drawing.Point(971, 1011);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(50, 40);
             this.btnNext.TabIndex = 30;
@@ -407,7 +387,7 @@
             // btnPageMax
             // 
             this.btnPageMax.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnPageMax.Location = new System.Drawing.Point(1018, 1012);
+            this.btnPageMax.Location = new System.Drawing.Point(1038, 1011);
             this.btnPageMax.Name = "btnPageMax";
             this.btnPageMax.Size = new System.Drawing.Size(50, 40);
             this.btnPageMax.TabIndex = 31;
@@ -488,6 +468,43 @@
             this.cmbConfirm.TabIndex = 34;
             this.cmbConfirm.TabStop = false;
             // 
+            // dgvSyukko
+            // 
+            this.dgvSyukko.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSyukko.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.dgvSyukko.Location = new System.Drawing.Point(11, 498);
+            this.dgvSyukko.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.dgvSyukko.Name = "dgvSyukko";
+            this.dgvSyukko.RowHeadersWidth = 51;
+            this.dgvSyukko.RowTemplate.Height = 24;
+            this.dgvSyukko.Size = new System.Drawing.Size(1106, 487);
+            this.dgvSyukko.TabIndex = 35;
+            this.dgvSyukko.TabStop = false;
+            this.dgvSyukko.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSyukko_CellClick);
+            // 
+            // dgvSyukkoDetail
+            // 
+            this.dgvSyukkoDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSyukkoDetail.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.dgvSyukkoDetail.Location = new System.Drawing.Point(1132, 498);
+            this.dgvSyukkoDetail.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.dgvSyukkoDetail.Name = "dgvSyukkoDetail";
+            this.dgvSyukkoDetail.RowHeadersWidth = 51;
+            this.dgvSyukkoDetail.RowTemplate.Height = 24;
+            this.dgvSyukkoDetail.Size = new System.Drawing.Size(770, 487);
+            this.dgvSyukkoDetail.TabIndex = 36;
+            this.dgvSyukkoDetail.TabStop = false;
+            // 
+            // lblEmployeeID
+            // 
+            this.lblEmployeeID.AutoSize = true;
+            this.lblEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblEmployeeID.Location = new System.Drawing.Point(107, 350);
+            this.lblEmployeeID.Name = "lblEmployeeID";
+            this.lblEmployeeID.Size = new System.Drawing.Size(80, 24);
+            this.lblEmployeeID.TabIndex = 37;
+            this.lblEmployeeID.Text = "社員ID";
+            // 
             // F_ButuryuSyukko
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -495,6 +512,9 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.lblEmployeeID);
+            this.Controls.Add(this.dgvSyukkoDetail);
+            this.Controls.Add(this.dgvSyukko);
             this.Controls.Add(this.cmbConfirm);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pnlSelect);
@@ -507,8 +527,6 @@
             this.Controls.Add(this.btnPagesize);
             this.Controls.Add(this.txbPageSize);
             this.Controls.Add(this.lblPageSize);
-            this.Controls.Add(this.dgvSyukkoDetail);
-            this.Controls.Add(this.dgvSyukko);
             this.Controls.Add(this.txbHidden);
             this.Controls.Add(this.lblHidden);
             this.Controls.Add(this.lblConfirm);
@@ -537,10 +555,10 @@
             this.Load += new System.EventHandler(this.F_ButuryuSyukko_Load);
             this.pnlButuryu.ResumeLayout(false);
             this.pnlButuryu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSyukko)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSyukkoDetail)).EndInit();
             this.pnlSelect.ResumeLayout(false);
             this.pnlSelect.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSyukko)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSyukkoDetail)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -570,8 +588,6 @@
         private System.Windows.Forms.Label lblConfirm;
         private System.Windows.Forms.Label lblHidden;
         private System.Windows.Forms.TextBox txbHidden;
-        private System.Windows.Forms.DataGridView dgvSyukko;
-        private System.Windows.Forms.DataGridView dgvSyukkoDetail;
         private System.Windows.Forms.Label lblPageSize;
         private System.Windows.Forms.TextBox txbPageSize;
         private System.Windows.Forms.Button btnPagesize;
@@ -587,5 +603,8 @@
         private System.Windows.Forms.RadioButton rdbSearch;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbConfirm;
+        private System.Windows.Forms.DataGridView dgvSyukko;
+        private System.Windows.Forms.DataGridView dgvSyukkoDetail;
+        private System.Windows.Forms.Label lblEmployeeID;
     }
 }
