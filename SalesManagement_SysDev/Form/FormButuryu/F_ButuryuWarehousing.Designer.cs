@@ -461,6 +461,7 @@
             this.cmbView.Size = new System.Drawing.Size(360, 43);
             this.cmbView.TabIndex = 115;
             this.cmbView.TabStop = false;
+            this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
             // 
             // label9
             // 
@@ -485,6 +486,7 @@
             this.dgvWarehousing.Size = new System.Drawing.Size(1170, 480);
             this.dgvWarehousing.TabIndex = 117;
             this.dgvWarehousing.TabStop = false;
+            this.dgvWarehousing.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvWarehousing_CellClick);
             // 
             // label10
             // 
@@ -509,6 +511,7 @@
             this.dgvWarehousingDetail.Size = new System.Drawing.Size(700, 480);
             this.dgvWarehousingDetail.TabIndex = 119;
             this.dgvWarehousingDetail.TabStop = false;
+            this.dgvWarehousingDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvWarehousingDetail_CellClick);
             // 
             // rdbDetailRegister
             // 

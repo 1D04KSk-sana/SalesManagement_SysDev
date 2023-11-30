@@ -188,5 +188,34 @@ namespace SalesManagement_SysDev
 
             return listStock;
         }
+        ///////////////////////////////
+        //メソッド名：UpdateStockData()
+        //引　数：updStock = 在庫データ
+        //戻り値：True or False
+        //機　能：在庫データの更新
+        //      ：更新成功の場合True
+        //      ：更新失敗の場合False
+        ///////////////////////////////
+        public bool UpdateStockData(T_Stock updStock)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Stock = context.T_Stocks.Single(x => x.StID == updStock.StID);
+
+
+
+                context.SaveChanges();
+                context.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
     }
 }

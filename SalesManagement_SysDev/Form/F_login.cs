@@ -893,6 +893,9 @@ namespace SalesManagement_SysDev
                     WaFlag = 0,
 
                 });
+                context.T_Warehousings.AddRange(wh);
+                context.SaveChanges();
+
             }
             {
                 whd.Add(new T_WarehousingDetail()
@@ -913,7 +916,8 @@ namespace SalesManagement_SysDev
                     M_Product = pr[2],
                     WaQuantity = 80,
                 });
-
+                context.T_WarehousingDetails.AddRange(whd);
+                context.SaveChanges();
             }
             context.Dispose();
 
