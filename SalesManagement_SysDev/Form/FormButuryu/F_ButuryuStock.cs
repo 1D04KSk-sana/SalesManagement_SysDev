@@ -19,7 +19,7 @@ namespace SalesManagement_SysDev
         //データベース商品テーブルアクセス用クラスのインスタンス化
         ProdactDataAccess prodactDataAccess = new ProdactDataAccess();
         //データベース在庫テーブルアクセス用クラスのインスタンス化
-        StockDataAccess stockDataAccess = new Q();
+        StockDataAccess stockDataAccess = new StockDataAccess();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
         //フォームを呼び出しする際のインスタンス化
