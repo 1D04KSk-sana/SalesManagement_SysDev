@@ -148,20 +148,20 @@ namespace SalesManagement_SysDev
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26F);
-            this.rdbSearch.Location = new System.Drawing.Point(46, 16);
+            this.rdbSearch.Location = new System.Drawing.Point(410, 16);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
             this.rdbSearch.TabIndex = 2;
-            this.rdbSearch.TabStop = true;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
             // 
             // rdbConfirm
             // 
             this.rdbConfirm.AutoSize = true;
+            this.rdbConfirm.Checked = true;
             this.rdbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 26F);
-            this.rdbConfirm.Location = new System.Drawing.Point(218, 16);
+            this.rdbConfirm.Location = new System.Drawing.Point(48, 16);
             this.rdbConfirm.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbConfirm.Name = "rdbConfirm";
             this.rdbConfirm.Size = new System.Drawing.Size(103, 39);
@@ -174,12 +174,11 @@ namespace SalesManagement_SysDev
             // 
             this.rdbHidden.AutoSize = true;
             this.rdbHidden.Font = new System.Drawing.Font("MS UI Gothic", 26F);
-            this.rdbHidden.Location = new System.Drawing.Point(385, 16);
+            this.rdbHidden.Location = new System.Drawing.Point(216, 16);
             this.rdbHidden.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbHidden.Name = "rdbHidden";
             this.rdbHidden.Size = new System.Drawing.Size(138, 39);
             this.rdbHidden.TabIndex = 0;
-            this.rdbHidden.TabStop = true;
             this.rdbHidden.Text = "非表示";
             this.rdbHidden.UseVisualStyleBackColor = true;
             // 

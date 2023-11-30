@@ -17,14 +17,14 @@ namespace SalesManagement_SysDev
         //          ：一致データありの場合True
         //          ：一致データなしの場合False
         ///////////////////////////////
-        public bool CheckChumonIDExistence(int employeeID)
+        public bool CheckChumonIDExistence(int ChumonID)
         {
             bool flg = false;
             try
             {
                 var context = new SalesManagement_DevContext();
                 //注文IDで一致するデータが存在するか
-                flg = context.M_Employees.Any(x => x.EmID == employeeID);
+                flg = context.T_Chumons.Any(x => x.ChID == ChumonID);
                 context.Dispose();
             }
             catch (Exception ex)

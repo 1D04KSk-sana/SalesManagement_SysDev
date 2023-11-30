@@ -422,6 +422,7 @@ namespace SalesManagement_SysDev
             cmbHidden.SelectedIndex = -1;
             txbClientName.Text = string.Empty;
             lblClientHidden.Text = string.Empty;
+            txbHidden.Text = string.Empty;
 
         }
 
@@ -503,12 +504,12 @@ namespace SalesManagement_SysDev
                 intChumonID = int.Parse(strChumonID);
             }
 
-            string strClientName = txbClientName.Text.Trim();
-            int intClientName = 0;
+            string strClientID = txbClientID.Text.Trim();
+            int intClientID = 0;
 
-            if (!String.IsNullOrEmpty(strClientName))
+            if (!String.IsNullOrEmpty(strClientID))
             {
-                intClientName = int.Parse(strClientName);
+                intClientID = int.Parse(strClientID);
             }
 
             // 検索条件のセット
@@ -516,7 +517,7 @@ namespace SalesManagement_SysDev
             {
                 ChID = intChumonID,
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
-                ClID = intClientName,
+                ClID = intClientID,
                 OrID = intOrderID,
             };
 
@@ -544,6 +545,7 @@ namespace SalesManagement_SysDev
 
             // DataGridViewに表示するデータを指定
             SetDataGridView(listViewChumon);
+
         }
         ///////////////////////////////
         //メソッド名：SetFormDataGridView()
@@ -809,7 +811,7 @@ namespace SalesManagement_SysDev
             // dtpChumonDate.Text = dgvChumon[5, dgvChumon.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvChumon[4, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key;
             // cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvChumon[7, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key;
-            txbHidden.Text = dgvChumon[5, dgvChumon.CurrentCellAddress.Y]?.Value?.ToString();
+            //txbHidden.Text = dgvChumon[5, dgvChumon.CurrentCellAddress.Y]?.Value?.ToString();
         }
 
         ///////////////////////////////
@@ -821,8 +823,8 @@ namespace SalesManagement_SysDev
         private void SelectRowDetailControl()
         {
             //データグリッドビューに乗っている情報をGUIに反映
-            // txbODetailID.Text = dgvChumonDetail[1, dgvChumonDetail.CurrentCellAddress.Y].Value.ToString();
-            // txbProductID.Text = dictionaryProdact.FirstOrDefault(x => x.Value == dgvChumonDetail[2, dgvChumonDetail.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+             //txbChumonDetailID.Text = dgvChumonDetail[1, dgvChumonDetail.CurrentCellAddress.Y].Value.ToString();
+             //txbProductID.Text = dictionaryProdact.FirstOrDefault(x => x.Value == dgvChumonDetail[2, dgvChumonDetail.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             // txbChumonQuantity.Text = dgvChumonDetail[3, dgvChumonDetail.CurrentCellAddress.Y].Value.ToString();
         }
 
