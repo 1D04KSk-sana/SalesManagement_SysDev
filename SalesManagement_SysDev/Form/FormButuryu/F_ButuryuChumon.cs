@@ -63,6 +63,7 @@ namespace SalesManagement_SysDev
         private Dictionary<int, string> dictionaryEmployee;
         //DataGridView用に使用する商品のDictionary
         private Dictionary<int, string> dictionaryProdact;
+        
 
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
@@ -580,15 +581,16 @@ namespace SalesManagement_SysDev
             dgvChumon.Columns.Add("ChID", "注文ID");
             dgvChumon.Columns.Add("SoID", "営業所名");
             dgvChumon.Columns.Add("ClName", "顧客名");
-            // dgvChumon.Columns.Add("OrID", "受注ID");
+             dgvChumon.Columns.Add("OrID", "受注ID");
             dgvChumon.Columns.Add("ChDate", "受注年月日");
             dgvChumon.Columns.Add("ChFlag", "受注管理フラグ");
             dgvChumon.Columns.Add("ChStateFlag", "受注情報フラグ");
             dgvChumon.Columns.Add("ChHidden", "非表示理由");
 
-            dgvChumon.Columns["ChID"].Width = 150;
+            dgvChumon.Columns["ChID"].Width = 100;
             dgvChumon.Columns["SoID"].Width = 150;
             dgvChumon.Columns["ClName"].Width = 150;
+            dgvChumon.Columns["OrID"].Width = 100;
             dgvChumon.Columns["ChDate"].Width = 150;
             dgvChumon.Columns["ChFlag"].Width = 200;
             dgvChumon.Columns["ChStateFlag"].Width = 200;
@@ -668,7 +670,7 @@ namespace SalesManagement_SysDev
             //1行ずつdgvClientに挿入
             foreach (var item in depData)
             {
-                dgvChumon.Rows.Add(item.ChID, dictionarySalesOffice[item.SoID], dictionaryClient[item.ClID], item.ChDate, dictionaryHidden[item.ChFlag], dictionaryConfirm[item.ChStateFlag], item.ChHidden);
+                dgvChumon.Rows.Add(item.ChID, dictionarySalesOffice[item.SoID], dictionaryClient[item.ClID],item.OrID,item.ChDate, dictionaryHidden[item.ChFlag], dictionaryConfirm[item.ChStateFlag], item.ChHidden);
             }
 
             //dgvClientをリフレッシュ
@@ -805,7 +807,7 @@ namespace SalesManagement_SysDev
             cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvChumon[1, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvChumon[2, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             //txbChumonManager.Text = dgvChumon[3, dgvChumon.CurrentCellAddress.Y].Value.ToString();
-            txbOrderID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvChumon[3, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            txbOrderID.Text = dgvChumon[3, dgvChumon.CurrentCellAddress.Y].Value.ToString();
             //  ch4Date.Text = dgvChumon[6, dgvChumon.CurrentCellAddress.Y]?.Value.ToString();
 
             // dtpChumonDate.Text = dgvChumon[5, dgvChumon.CurrentCellAddress.Y].Value.ToString();
@@ -861,7 +863,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbChumonID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbChumonID.Text.Trim()) && String.IsNullOrEmpty(txbClientName.Text.Trim()) && String.IsNullOrEmpty(txbOrderID.Text.Trim()))
+            if (String.IsNullOrEmpty(txbChumonID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbChumonID.Text.Trim()) && String.IsNullOrEmpty(txbClientName.Text.Trim())&& String.IsNullOrEmpty(txbOrderID.Text.Trim()))
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbChumonID.Focus();
@@ -942,26 +944,26 @@ namespace SalesManagement_SysDev
 
         private void F_ButuryuChumon_Load(object sender, EventArgs e)
         {
-            {
-                txbNumPage.Text = "1";
-                txbPageSize.Text = "3";
 
-                DictionarySet();
+            txbNumPage.Text = "1";
+            txbPageSize.Text = "3";
 
-                //取得したデータをコンボボックスに挿入
-                cmbSalesOfficeID.DataSource = listSalesOffice;
-                //表示する名前をSoNameに指定
-                cmbSalesOfficeID.DisplayMember = "SoName";
-                //項目の順番をSoIDに指定
-                cmbSalesOfficeID.ValueMember = "SoID";
+            DictionarySet();
 
-                //cmbSalesOfficeIDを未選択に
-                cmbSalesOfficeID.SelectedIndex = -1;
-                SetFormDataGridView();
+            //取得したデータをコンボボックスに挿入
+            cmbSalesOfficeID.DataSource = listSalesOffice;
+            //表示する名前をSoNameに指定
+            cmbSalesOfficeID.DisplayMember = "SoName";
+            //項目の順番をSoIDに指定
+            cmbSalesOfficeID.ValueMember = "SoID";
 
-                //cmbViewを表示に
-                cmbView.SelectedIndex = 0;
-            }
+            //cmbSalesOfficeIDを未選択に
+            cmbSalesOfficeID.SelectedIndex = -1;
+            SetFormDataGridView();
+
+            //cmbViewを表示に
+            cmbView.SelectedIndex = 0;
+
         }
 
         private void dgvChumon_CellClick(object sender, DataGridViewCellEventArgs e)
