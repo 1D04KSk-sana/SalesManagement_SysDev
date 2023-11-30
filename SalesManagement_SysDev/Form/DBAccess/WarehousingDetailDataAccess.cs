@@ -80,5 +80,29 @@ namespace SalesManagement_SysDev
             return flg;
         }
 
+        ///////////////////////////////
+        //メソッド名：GetIDWarehousingDetailData()
+        //引　数：入庫ID
+        //戻り値：入庫IDの一致する入庫詳細データ
+        //機　能：入庫IDの一致する入庫詳細データの取得
+        ///////////////////////////////
+        public List<T_WarehousingDetail> GetIDWarehousingDetailData(int WarehousingID)
+        {
+            List<T_WarehousingDetail> listWarehousingDetail = new List<T_WarehousingDetail> { };
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listWarehousingDetail = context.T_WarehousingDetails.Where(x => x.WaID == WarehousingID).ToList();
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listWarehousingDetail;
+        }
     }
 }

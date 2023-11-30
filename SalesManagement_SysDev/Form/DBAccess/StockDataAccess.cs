@@ -212,21 +212,21 @@ namespace SalesManagement_SysDev
             return listStock;
         }
         ///////////////////////////////
-        //メソッド名：UpdateStockData()
-        //引　数：updStock = 在庫データ
+        //メソッド名：UpdateStockQuantityData()
+        //引　数：updWarehousingDEtail = 入庫詳細データ
         //戻り値：True or False
         //機　能：在庫データの更新
         //      ：更新成功の場合True
         //      ：更新失敗の場合False
         ///////////////////////////////
-        public bool UpdateStockData(T_Stock updStock)
+        public bool UpdateStockQuantityData(T_WarehousingDetail updWarehousingDetail)
         {
             try
             {
                 var context = new SalesManagement_DevContext();
-                var Stock = context.T_Stocks.Single(x => x.StID == updStock.StID);
+                var Stock = context.T_Stocks.Single(x => x.PrID == updWarehousingDetail.PrID);
 
-
+                Stock.StQuantity = Stock.StQuantity + updWarehousingDetail.WaQuantity;
 
                 context.SaveChanges();
                 context.Dispose();

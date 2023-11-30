@@ -80,5 +80,29 @@ namespace SalesManagement_SysDev
             return flg;
         }
 
+        ///////////////////////////////
+        //メソッド名：GetIDHattyuDetailData()
+        //引　数：発注ID
+        //戻り値：発注IDの一致する発注詳細データ
+        //機　能：発注IDの一致する発注詳細データの取得
+        ///////////////////////////////
+        public List<T_HattyuDetail> GetIDHattyuDetailData(int HattyuID)
+        {
+            List<T_HattyuDetail> listHattyuDetail = new List<T_HattyuDetail> { };
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listHattyuDetail = context.T_HattyuDetails.Where(x => x.HaID == HattyuID).ToList();
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listHattyuDetail;
+        }
     }
 }

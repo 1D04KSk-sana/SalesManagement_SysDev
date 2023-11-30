@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -451,11 +452,17 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SelectRowControl()
         {
+            var warehousingDate = dgvWarehousing[3, dgvWarehousing.CurrentCellAddress.Y].Value;
+
+            if (warehousingDate != null)
+            {
+                dtpWarehousingDate.Text = warehousingDate.ToString();
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbWarehousingID.Text = dgvWarehousing[0, dgvWarehousing.CurrentCellAddress.Y].Value.ToString();
             txbEmployeeName.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvWarehousing[1, dgvWarehousing.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbHattyuID.Text = dgvWarehousing[2, dgvWarehousing.CurrentCellAddress.Y].Value.ToString();
-            dtpWarehousingDate.Text = dgvWarehousing[3, dgvWarehousing.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvWarehousing[4, dgvWarehousing.CurrentCellAddress.Y].Value.ToString()).Key;
             cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvWarehousing[5, dgvWarehousing.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvWarehousing[6, dgvWarehousing.CurrentCellAddress.Y]?.Value?.ToString();
@@ -801,7 +808,7 @@ namespace SalesManagement_SysDev
         {
             f_SearchDialog.Close();
 
-            HattyuSearchButtonClick(true);
+            //HattyuSearchButtonClick(true);
         }
         private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -811,7 +818,7 @@ namespace SalesManagement_SysDev
         {
             f_SearchDialog.Close();
 
-            HattyuSearchButtonClick(false);
+            //HattyuSearchButtonClick(false);
         }
 
         ///////////////////////////////
@@ -1098,13 +1105,27 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("確定に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            T_Warehousing Warehousing = warehousingDataAccess.GetIDWarehousingData(int.Parse(txbWarehousingID.Text.Trim()));
+            List<T_WarehousingDetail> WarehousingDetail = warehousingDetailDataAccess.GetIDWarehousingDetailData(int.Parse(txbWarehousingID.Text.Trim()));
 
-            T_Stock Stock = GenerateStockAtRegistration(Warehousing);
+            List<bool> flgStocklist = new List<bool>();
+            bool flgStock = true;
 
-            bool flgStock = stockDataAccess.UpdateStockData(Stock);
+            foreach (var item in WarehousingDetail)
+            {
+                flgStocklist.Add(stockDataAccess.UpdateStockQuantityData(item));
+            }
 
-            if (flgStock == true)
+            foreach (var item in flgStocklist)
+            {
+                if (!item)
+                {
+                    flgStock = false;
+                }
+            }
+
+            //T_Stock Stock = GenerateStockAtRegistration(Warehousing);
+
+            if (flgStock)
             {
                 MessageBox.Show("在庫数を更新しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

@@ -48,6 +48,8 @@ namespace SalesManagement_SysDev
         private F_SearchDialog f_SearchDialog = new F_SearchDialog();
         //データベース注文テーブルアクセス用クラスのインスタンス化
         WarehousingDataAccess warehousingDataAccess = new WarehousingDataAccess();
+        //データベース入庫詳細テーブルアクセス用クラスのインスタンス化
+        WarehousingDetailDataAccess warehousingDetailDataAccess = new WarehousingDetailDataAccess();
         //コンボボックス用の営業所データリスト
         private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
         //データベースメーカーテーブルアクセス用クラスのインスタンス化
@@ -1135,6 +1137,35 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("入庫管理へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            List<T_HattyuDetail> listHattyuDetail = hattyuDetailDataAccess.GetIDHattyuDetailData(int.Parse(txbHattyuID.Text.Trim()));
+
+            List<bool> flgHattyulist = new List<bool>();
+            bool flgHattyu = true;
+
+            foreach (var item in listHattyuDetail)
+            {
+                T_WarehousingDetail WarehousingDetail = GenerateWarehousingDetailAtRegistration(item);
+
+                flgHattyulist.Add(warehousingDetailDataAccess.AddWarehousingDetailData(WarehousingDetail));
+            }
+
+            foreach (var item in flgHattyulist)
+            {
+                if (!item)
+                {
+                    flgHattyu = false;
+                }
+            }
+
+            if (flgHattyu)
+            {
+                MessageBox.Show("入庫詳細へデータを送信しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("入庫詳細へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             //テキストボックス等のクリア
             ClearImput();
             ClearImputDetail();
@@ -1143,6 +1174,21 @@ namespace SalesManagement_SysDev
             GetDataGridView();
         }
 
+        ///////////////////////////////
+        //メソッド名：GenerateWarehousingDetailAtRegistration()
+        //引　数   ：入庫情報
+        //戻り値   ：入庫登録情報
+        //機　能   ：入庫登録データのセット
+        ///////////////////////////////
+        private T_WarehousingDetail GenerateWarehousingDetailAtRegistration(T_HattyuDetail HattyuDetail)
+        {
+            return new T_WarehousingDetail
+            {
+                WaID = HattyuDetail.HaID,
+                PrID = HattyuDetail.PrID,
+                WaQuantity = HattyuDetail.HaQuantity
+            };
+        }
 
         ///////////////////////////////
         //メソッド名：SetDataDetailGridView()

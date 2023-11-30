@@ -432,6 +432,9 @@
             this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbHidden.ForeColor = System.Drawing.Color.Black;
             this.cmbHidden.FormattingEnabled = true;
+            this.cmbHidden.Items.AddRange(new object[] {
+            "表示",
+            "非表示"});
             this.cmbHidden.Location = new System.Drawing.Point(271, 381);
             this.cmbHidden.Margin = new System.Windows.Forms.Padding(4);
             this.cmbHidden.Name = "cmbHidden";
