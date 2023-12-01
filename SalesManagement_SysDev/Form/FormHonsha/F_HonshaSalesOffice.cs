@@ -76,7 +76,61 @@ namespace SalesManagement_SysDev
         {
             this.Opacity = 1;
         }
-        private void btnDone_Click(object sender, EventArgs e)
+        private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //データグリッドビューのデータ取得
+            GetDataGridView();
+        }
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
+        private void btnPageMin_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+
+            GetDataGridView();
+        }
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) - 1).ToString();
+
+            GetDataGridView();
+        }
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) + 1).ToString();
+
+            GetDataGridView();
+        }
+        private void btnPageMax_Click(object sender, EventArgs e)
+        {
+            List<M_SalesOffice> viewSalesOffice = SetListSalesOffice();
+
+            //ページ行数を取得
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
+            //最終ページ数を取得（テキストボックスに代入する数字なので-1はしない）
+            int lastPage = (int)Math.Ceiling(viewSalesOffice.Count / (double)pageSize);
+
+            txbNumPage.Text = lastPage.ToString();
+
+            GetDataGridView();
+        }
+        private void dgvSalesOffice_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvSalesOffice.SelectedCells.Count == 0)
+            {
+                return;
+            }
+            //選択された行に対してのコントロールの変更
+            SelectRowControl();
+        }
+            private void btnDone_Click(object sender, EventArgs e)
         {
             //登録ラヂオボタンがチェックされているとき
             if (rdbRegister.Checked)
@@ -868,6 +922,24 @@ namespace SalesManagement_SysDev
             {
                 dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+        }
+        ///////////////////////////////
+        //メソッド名：SelectRowControl()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：選択された行に対してのコントロールの変更
+        ///////////////////////////////
+        private void SelectRowControl()
+        {
+            //データグリッドビューに乗っている情報をGUIに反映
+            txbSalesOfficeID.Text = dgvSalesOffice[0, dgvSalesOffice.CurrentCellAddress.Y].Value.ToString();
+            txbSalesOfficeName.Text = dgvSalesOffice[1, dgvSalesOffice.CurrentCellAddress.Y].Value.ToString();
+            txbSalesOfficeAddress.Text = dgvSalesOffice[2, dgvSalesOffice.CurrentCellAddress.Y].Value.ToString();
+            txbSalesOfficePhone.Text = dgvSalesOffice[3, dgvSalesOffice.CurrentCellAddress.Y].Value.ToString();
+            txbSalesOfficePostal.Text = dgvSalesOffice[4, dgvSalesOffice.CurrentCellAddress.Y].Value.ToString();
+            txbSalesOfficeFAX.Text = dgvSalesOffice[5, dgvSalesOffice.CurrentCellAddress.Y].Value.ToString();
+            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSalesOffice[6, dgvSalesOffice.CurrentCellAddress.Y].Value.ToString()).Key;
+            txbHidden.Text = dgvSalesOffice[7, dgvSalesOffice.CurrentCellAddress.Y]?.Value?.ToString();
         }
     }
 }

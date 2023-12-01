@@ -183,6 +183,7 @@ namespace SalesManagement_SysDev
             this.cmbView.Name = "cmbView";
             this.cmbView.Size = new System.Drawing.Size(360, 43);
             this.cmbView.TabIndex = 26;
+            this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
             // 
             // btnClear
             // 
@@ -383,6 +384,7 @@ namespace SalesManagement_SysDev
             this.dgvSalesOffice.RowTemplate.Height = 24;
             this.dgvSalesOffice.Size = new System.Drawing.Size(1900, 495);
             this.dgvSalesOffice.TabIndex = 45;
+            this.dgvSalesOffice.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSalesOffice_CellClick);
             // 
             // btnPageSize
             // 
@@ -416,6 +418,7 @@ namespace SalesManagement_SysDev
             this.txbPageSize.Size = new System.Drawing.Size(50, 29);
             this.txbPageSize.TabIndex = 46;
             this.txbPageSize.TabStop = false;
+            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblNumPage
             // 
@@ -437,6 +440,7 @@ namespace SalesManagement_SysDev
             this.txbNumPage.Size = new System.Drawing.Size(50, 29);
             this.txbNumPage.TabIndex = 53;
             this.txbNumPage.TabStop = false;
+            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // btnPageMin
             // 
