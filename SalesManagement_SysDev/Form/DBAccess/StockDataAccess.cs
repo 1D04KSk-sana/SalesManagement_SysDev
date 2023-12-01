@@ -211,5 +211,34 @@ namespace SalesManagement_SysDev
 
             return listStock;
         }
+        ///////////////////////////////
+        //メソッド名：UpdateStockQuantityData()
+        //引　数：updWarehousingDEtail = 入庫詳細データ
+        //戻り値：True or False
+        //機　能：在庫データの更新
+        //      ：更新成功の場合True
+        //      ：更新失敗の場合False
+        ///////////////////////////////
+        public bool UpdateStockQuantityData(T_WarehousingDetail updWarehousingDetail)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Stock = context.T_Stocks.Single(x => x.PrID == updWarehousingDetail.PrID);
+
+                Stock.StQuantity = Stock.StQuantity + updWarehousingDetail.WaQuantity;
+
+                context.SaveChanges();
+                context.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
     }
 }

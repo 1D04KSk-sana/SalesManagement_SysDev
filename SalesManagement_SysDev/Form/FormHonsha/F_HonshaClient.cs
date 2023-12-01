@@ -801,6 +801,8 @@ namespace SalesManagement_SysDev
 
             int intSearchCount = listClient.Count;
 
+            txbNumPage.Text = "1";
+
             // 顧客抽出結果表示
             GetDataGridView();
 

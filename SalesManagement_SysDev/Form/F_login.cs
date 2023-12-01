@@ -87,6 +87,8 @@ namespace SalesManagement_SysDev
             List<T_HattyuDetail> had = new List<T_HattyuDetail>();
             List<T_Stock> st = new List<T_Stock>();
             List<T_Syukko> sy = new List<T_Syukko>();
+            List<T_Warehousing> wh = new List<T_Warehousing>();
+            List<T_WarehousingDetail> whd = new List<T_WarehousingDetail>();
 
 
 
@@ -707,6 +709,17 @@ namespace SalesManagement_SysDev
                     ChStateFlag = 1,
                     ChFlag = 0,
                 });
+                ch.Add(new T_Chumon()
+                {
+                    M_SalesOffice = so[1],
+                    M_Employee = em[116],
+                    M_Client = cl[2],
+                    T_Order = or[1],
+                    ChDate = new DateTime(2020, 11, 11),
+                    ChStateFlag = 1,
+                    ChFlag = 0,
+                });
+
                 context.T_Chumons.AddRange(ch);
                 context.SaveChanges();
             }
@@ -821,7 +834,7 @@ namespace SalesManagement_SysDev
                     M_Maker = ma[0],
                     M_Employee = em[310],
                     HaDate = new DateTime(2023, 11, 17),
-                    WaWarehouseFlag = 1,
+                    WaWarehouseFlag = 0,
                     HaFlag = 0,
 
                 });
@@ -830,7 +843,7 @@ namespace SalesManagement_SysDev
                     M_Maker = ma[1],
                     M_Employee = em[116],
                     HaDate = new DateTime(2023, 11, 16),
-                    WaWarehouseFlag = 1,
+                    WaWarehouseFlag = 0,
                     HaFlag = 0,
 
                 });
@@ -864,7 +877,60 @@ namespace SalesManagement_SysDev
                 context.SaveChanges();
 
             }
+            {
+                wh.Add(new T_Warehousing()
+                {
+                    T_Hattyu = ha[0],
+                    M_Employee = em[116],
+                    WaDate = new DateTime(2023, 11, 16),
+                    WaShelfFlag = 1,
+                    WaFlag = 0,
 
+                });
+                wh.Add(new T_Warehousing()
+                {
+                    T_Hattyu = ha[1],
+                    M_Employee = em[310],
+                    WaDate = new DateTime(2023, 10, 16),
+                    WaShelfFlag = 1,
+                    WaFlag = 0,
+
+                });
+                wh.Add(new T_Warehousing()
+                {
+                    T_Hattyu = ha[1],
+                    M_Employee = em[116],
+                    WaDate = new DateTime(2023, 11, 1),
+                    WaShelfFlag = 1,
+                    WaFlag = 0,
+
+                });
+                context.T_Warehousings.AddRange(wh);
+                context.SaveChanges();
+
+            }
+            {
+                whd.Add(new T_WarehousingDetail()
+                {
+                    T_Warehousing = wh[0],
+                    M_Product = pr[0],
+                    WaQuantity = 50,
+                });
+                whd.Add(new T_WarehousingDetail()
+                {
+                    T_Warehousing = wh[0],
+                    M_Product = pr[1],
+                    WaQuantity = 30,
+                });
+                whd.Add(new T_WarehousingDetail()
+                {
+                    T_Warehousing = wh[1],
+                    M_Product = pr[2],
+                    WaQuantity = 80,
+                });
+                context.T_WarehousingDetails.AddRange(whd);
+                context.SaveChanges();
+            }
             context.Dispose();
 
             MessageBox.Show("サンプルデータ登録完了");
