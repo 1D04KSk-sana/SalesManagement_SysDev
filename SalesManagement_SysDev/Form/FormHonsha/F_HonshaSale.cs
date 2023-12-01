@@ -145,6 +145,8 @@ namespace SalesManagement_SysDev
 
             int intSearchCount = listSale.Count;
 
+            txbNumPage.Text = "1";
+
             // 売上抽出結果表示
             GetDataGridView();
 

@@ -987,7 +987,7 @@ namespace SalesManagement_SysDev
 
             T_Chumon Chumon = GenerateChumonAtRegistration(Order);
 
-            bool flgChumon = chumonDataAccess.AddChumonData(Chumon);
+            bool flgChumon = orderDataAccess.AddOrderData(Order);
 
             if (flgChumon == true)
             {
@@ -1128,6 +1128,8 @@ namespace SalesManagement_SysDev
             GenerateDataAtSelect(searchFlg);
 
             int intSearchCount = listOrder.Count;
+
+            txbNumPage.Text = "1";
 
             // 顧客抽出結果表示
             GetDataGridView();

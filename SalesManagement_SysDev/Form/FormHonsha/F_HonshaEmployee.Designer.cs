@@ -34,8 +34,8 @@
             this.btnDone = new System.Windows.Forms.Button();
             this.cmbView = new System.Windows.Forms.ComboBox();
             this.pnlSelect = new System.Windows.Forms.Panel();
-            this.rdbUpdate = new System.Windows.Forms.RadioButton();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
+            this.rdbUpdate = new System.Windows.Forms.RadioButton();
             this.cmbHidden = new System.Windows.Forms.ComboBox();
             this.txbHidden = new System.Windows.Forms.TextBox();
             this.lblEmployeeHidden = new System.Windows.Forms.Label();
@@ -96,6 +96,7 @@
             this.btnClose.TabStop = false;
             this.btnClose.Text = "閉じる";
             this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnClear
             // 
@@ -155,6 +156,18 @@
             this.pnlSelect.TabIndex = 29;
             this.pnlSelect.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlSelect_Paint);
             // 
+            // rdbSearch
+            // 
+            this.rdbSearch.AutoSize = true;
+            this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbSearch.Location = new System.Drawing.Point(100, 14);
+            this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
+            this.rdbSearch.Name = "rdbSearch";
+            this.rdbSearch.Size = new System.Drawing.Size(109, 41);
+            this.rdbSearch.TabIndex = 0;
+            this.rdbSearch.Text = "検索";
+            this.rdbSearch.UseVisualStyleBackColor = true;
+            // 
             // rdbUpdate
             // 
             this.rdbUpdate.AutoSize = true;
@@ -168,18 +181,6 @@
             this.rdbUpdate.TabStop = true;
             this.rdbUpdate.Text = "更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
-            // 
-            // rdbSearch
-            // 
-            this.rdbSearch.AutoSize = true;
-            this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(100, 14);
-            this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
-            this.rdbSearch.Name = "rdbSearch";
-            this.rdbSearch.Size = new System.Drawing.Size(109, 41);
-            this.rdbSearch.TabIndex = 0;
-            this.rdbSearch.Text = "検索";
-            this.rdbSearch.UseVisualStyleBackColor = true;
             // 
             // cmbHidden
             // 
@@ -334,6 +335,7 @@
             // dgvEmployee
             // 
             this.dgvEmployee.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvEmployee.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.dgvEmployee.Location = new System.Drawing.Point(9, 521);
             this.dgvEmployee.Margin = new System.Windows.Forms.Padding(2);
             this.dgvEmployee.Name = "dgvEmployee";
@@ -343,8 +345,6 @@
             this.dgvEmployee.TabIndex = 50;
             this.dgvEmployee.TabStop = false;
             this.dgvEmployee.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEmployee_CellClick);
-            this.dgvEmployee.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-
             // 
             // pnlHonsha
             // 

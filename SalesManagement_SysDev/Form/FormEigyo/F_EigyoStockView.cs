@@ -385,6 +385,8 @@ namespace SalesManagement_SysDev
 
             int intSearchCount = listStock.Count;
 
+            txbNumPage.Text = "1";
+
             // 在庫抽出結果表示
             GetDataGridView();
 

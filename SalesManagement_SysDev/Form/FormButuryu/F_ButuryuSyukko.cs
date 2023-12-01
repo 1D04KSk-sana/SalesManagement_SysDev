@@ -752,7 +752,7 @@ namespace SalesManagement_SysDev
             //列を自由に設定できるように
             dgvSyukkoDetail.AutoGenerateColumns = false;
             //行単位で選択するようにする
-            dgvSyukko.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvSyukkoDetail.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             //行と列の高さを変更できないように
             dgvSyukkoDetail.AllowUserToResizeColumns = false;
             dgvSyukkoDetail.AllowUserToResizeRows = false;
@@ -917,7 +917,7 @@ namespace SalesManagement_SysDev
         {
             //データグリッドビューに乗っている情報をGUIに反映
             txbSyukkoID.Text = dgvSyukko[0, dgvSyukko.CurrentCellAddress.Y].Value.ToString();
-            txbEmployeeName.Text = dgvSyukko[1, dgvSyukko.CurrentCellAddress.Y].Value.ToString();
+            txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvSyukko[1, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvSyukko[3, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvSyukko[2, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbChumonID.Text = dgvSyukko[4, dgvSyukko.CurrentCellAddress.Y].Value.ToString();
