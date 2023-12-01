@@ -12,6 +12,19 @@ namespace SalesManagement_SysDev
 {
     public partial class F_HonshaSalesOffice : Form
     {
+        //データベース営業所テーブルアクセス用クラスのインスタンス化
+        SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
+        //データベース操作ログテーブルアクセス用クラスのインスタンス化
+        OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
+        //入力形式チェック用クラスのインスタンス化
+        DataInputCheck dataInputCheck = new DataInputCheck();
+
+        //DataGridView用に使用する表示形式のDictionary
+        private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
+        {
+            { 0, "表示" },
+            { 1, "非表示" },
+        };
         public F_HonshaSalesOffice()
         {
             InitializeComponent();
@@ -19,7 +32,408 @@ namespace SalesManagement_SysDev
 
         private void F_HonshaSalesOffice_Load(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+            txbPageSize.Text = "3";
 
+            //cmbViewを表示に
+            cmbView.SelectedIndex = 0;
+        }
+
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearImput();
+
+            rdbRegister.Checked = true;
+        }
+        private void btnDone_Click(object sender, EventArgs e)
+        {
+            //登録ラヂオボタンがチェックされているとき
+            if (rdbRegister.Checked)
+            {
+                SalesOfficeDataRegister();
+            }
+        }
+        ///////////////////////////////
+        //メソッド名：ClearImput()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：テキストボックスやコンボボックスの中身のクリア
+        ///////////////////////////////
+        private void ClearImput()
+        {
+            txbSalesOfficeID.Text = string.Empty;
+            txbSalesOfficePhone.Text = string.Empty;
+            txbSalesOfficePostal.Text = string.Empty;
+            txbSalesOfficeAddress.Text = string.Empty;
+            txbHidden.Text = string.Empty;
+            txbSalesOfficeName.Text = string.Empty;
+            cmbHidden.SelectedIndex = -1;
+            txbSalesOfficeFAX.Text = string.Empty;
+        }
+        ///////////////////////////////
+        //メソッド名：GetDataGridView()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：データグリッドビューに表示するデータの全取得
+        ///////////////////////////////
+        private void GetDataGridView()
+        {
+            //表示用の顧客リスト作成
+            List<M_SalesOffice> listViewSalesOffice = SetListSalesOffice();
+
+            // DataGridViewに表示するデータを指定
+            SetDataGridView(listViewSalesOffice);
+        }
+        ///////////////////////////////
+        //メソッド名：SetListSalesOffice()
+        //引　数   ：なし
+        //戻り値   ：表示用営業所データ
+        //機　能   ：表示用営業所データの準備
+        ///////////////////////////////
+        private List<M_SalesOffice> SetListSalesOffice()
+        {
+            //顧客のデータを全取得
+            listAllSalesOffice = salesOfficeDataAccess.GetSalesOfficeData();
+
+            //表示用の顧客リスト作成
+            List<M_SalesOffice> listViewSalesOffice = new List<M_SalesOffice>();
+
+            //検索ラヂオボタンがチェックされているとき
+            if (rdbSearch.Checked)
+            {
+                //表示している（検索結果）のデータをとってくる
+                listViewSalesOffice = listSalesOffice;
+            }
+            else
+            {
+                //全データをとってくる
+                listViewSalesOffice = listAllSalesOffice;
+            }
+
+            //一覧表示cmbViewが表示を選択されているとき
+            if (cmbView.SelectedIndex == 0)
+            {
+                // 管理Flgが表示の部署データの取得
+                listViewSalesOffice = salesOfficeDataAccess.GetsalesOfficeDspData(listViewSalesOffice);
+            }
+            else
+            {
+                // 管理Flgが非表示の部署データの取得
+                listViewSalesOffice = salesOfficeDataAccess.GetsalesOfficeNotDspData(listViewSalesOffice);
+            }
+
+            return listViewSalesOffice;
+        }
+        ///////////////////////////////
+        //メソッド名：SalesOfficeDataRegister()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：顧客情報登録の実行
+        ///////////////////////////////
+        private void SalesOfficeDataRegister()
+        {
+            // 登録確認メッセージ
+            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtRegistration())
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbRegister.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
+            // 顧客情報作成
+            var regSalesOffice = GenerateDataAtRegistration();
+
+            // 顧客情報登録
+            RegistrationSalesOffice(regSalesOffice);
+        }
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtRegistration()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：登録入力データの形式チェック
+        //          ：エラーがない場合True
+        //          ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtRegistration()
+        {
+            // 営業所IDの適否
+            if (!String.IsNullOrEmpty(txbSalesOfficeID.Text.Trim()))
+            {
+                // 営業所IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbSalesOfficeID.Text.Trim()))
+                {
+                    MessageBox.Show("営業所IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSalesOfficeID.Focus();
+                    return false;
+                }
+                //営業所IDの重複チェック
+                if (salesOfficeDataAccess.CheckClientIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
+                {
+                    MessageBox.Show("営業所IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSalesOfficeID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("顧客IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbSalesOfficeID.Focus();
+                return false;
+            }
+
+            // 営業所名の適否
+            if (!String.IsNullOrEmpty(txbSalesOfficeName.Text.Trim()))
+            {
+    
+                //営業所名の重複チェック
+                if (salesOfficeDataAccess.CheckClientIDExistence(int.Parse(txbSalesOfficeName.Text.Trim())))
+                {
+                    MessageBox.Show("営業所名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSalesOfficeName.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("営業所名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbSalesOfficeName.Focus();
+                return false;
+            }
+
+            // 電話番号の適否
+            if (!String.IsNullOrEmpty(txbSalesOfficePhone.Text.Trim()))
+            {
+                // 電話番号の文字数チェック
+                if (txbSalesOfficePhone.TextLength > 13)
+                {
+                    MessageBox.Show("電話番号は13文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSalesOfficePhone.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("電話番号が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbSalesOfficePhone.Focus();
+                return false;
+            }
+
+
+            // 郵便番号の適否
+            if (!String.IsNullOrEmpty(txbSalesOfficePostal.Text.Trim()))
+            {
+                // 郵便番号の数字チェック
+                if (!dataInputCheck.CheckNumeric(txbSalesOfficePostal.Text.Trim()))
+                {
+                    MessageBox.Show("郵便番号は全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSalesOfficePostal.Focus();
+                    return false;
+                }
+                // 郵便番号の文字数チェック
+                if (txbSalesOfficePostal.TextLength > 7)
+                {
+                    MessageBox.Show("郵便番号は7文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSalesOfficePostal.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("郵便番号が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbSalesOfficePostal.Focus();
+                return false;
+            }
+
+            // 住所の適否
+            if (!String.IsNullOrEmpty(txbSalesOfficeAddress.Text.Trim()))
+            {
+                // 住所の文字数チェック
+                if (txbSalesOfficeAddress.TextLength > 50)
+                {
+                    MessageBox.Show("住所は50文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSalesOfficeAddress.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("住所が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbSalesOfficeAddress.Focus();
+                return false;
+            }
+
+            // FAXの適否
+            if (!String.IsNullOrEmpty(txbSalesOfficeFAX.Text.Trim()))
+            {
+                // FAXの文字数チェック
+                if (txbSalesOfficeFAX.TextLength > 13)
+                {
+                    MessageBox.Show("FAXは13文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSalesOfficeFAX.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("FAXが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbSalesOfficeFAX.Focus();
+                return false;
+            }
+
+            //表示非表示選択の適否
+            if (cmbHidden.SelectedIndex == -1)
+            {
+                MessageBox.Show("表示家選択が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbHidden.Focus();
+                return false;
+            }
+
+            return true;
+        }
+        ///////////////////////////////
+        //メソッド名：GenerateLogAtRegistration()
+        //引　数   ：操作名
+        //戻り値   ：操作ログ登録情報
+        //機　能   ：操作ログ情報登録データのセット
+        ///////////////////////////////
+        private T_OperationLog GenerateLogAtRegistration(string OperationDone)
+        {
+            return new T_OperationLog
+            {
+                OpHistoryID = operationLogAccess.OperationLogNum() + 1,
+                EmID = F_Login.intEmployeeID,
+                FormName = "顧客管理画面",
+                OpDone = OperationDone,
+                OpDBID = int.Parse(txbSalesOfficeID.Text.Trim()),
+                OpSetTime = DateTime.Now,
+            };
+        }
+                ///////////////////////////////
+        //メソッド名：GenerateDataAtRegistration()
+        //引　数   ：なし
+        //戻り値   ：営業所登録情報
+        //機　能   ：登録データのセット
+        ///////////////////////////////
+        private M_SalesOffice GenerateDataAtRegistration()
+
+        {
+            return new M_SalesOffice
+            {
+                SoID = int.Parse(txbSalesOfficeID.Text.Trim()),
+                SoName = string.Format(txbSalesOfficeName.Text.Trim()),
+                SoAddress = txbSalesOfficeAddress.Text.Trim(),
+                SoPhone = txbSalesOfficePhone.Text.Trim(),
+                SoPostal = txbSalesOfficePostal.Text.Trim(),
+                SoFAX = txbSalesOfficeFAX.Text.Trim(),
+                SoFlag = cmbHidden.SelectedIndex,
+                SoHidden = txbHidden.Text.Trim(),
+            };
+        }
+        ///////////////////////////////
+        //メソッド名：RegistrationSalesOffice()
+        //引　数   ：顧客情報
+        //戻り値   ：なし
+        //機　能   ：顧客データの登録
+        ///////////////////////////////
+        private void RegistrationSalesOffice(M_SalesOffice regSalesOffice)
+        {
+            // 営業所情報の登録
+            bool flg = salesOfficeDataAccess.AddSalesOfficeData(regSalesOffice);
+
+            //登録成功・失敗メッセージ
+            if (flg == true)
+            {
+                MessageBox.Show("データを登録しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("データの登録に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            // 入力エリアのクリア
+            ClearImput();
+
+            // データグリッドビューの表示
+            GetDataGridView();
+        }
+        ///////////////////////////////
+        //メソッド名：SetDataGridView()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：データグリッドビューへの表示
+        ///////////////////////////////
+        private void SetDataGridView(List<M_SalesOffice> viewSalesOffice)
+        {
+            //中身を消去
+            dgvSalesOffice.Rows.Clear();
+
+            //ページ行数を取得
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
+            //ページ数を取得
+            int pageNum = int.Parse(txbNumPage.Text.Trim()) - 1;
+            //最終ページ数を取得
+            int lastPage = (int)Math.Ceiling(viewSalesOffice.Count / (double)pageSize) - 1;
+
+            //データからページに必要な部分だけを取り出す
+            var depData = viewSalesOffice.Skip(pageSize * pageNum).Take(pageSize).ToList();
+
+            //1行ずつdgvSalesOfficeに挿入
+            foreach (var item in depData)
+            {
+                dgvSalesOffice.Rows.Add(item.SoID,  item.SoName, item.SoAddress, item.SoPhone, item.SoPostal, item.SoFAX, dictionaryHidden[item.SoFlag], item.SoHidden);
+            }
+
+            //dgvClientをリフレッシュ
+            dgvSalesOffice.Refresh();
+
+            if (lastPage == -1 || (lastPage == pageNum && pageNum == 0))
+            {
+                btnPageMax.Visible = false;
+                btnNext.Visible = false;
+                btnPageMin.Visible = false;
+                btnBack.Visible = false;
+            }
+            else if (pageNum == 0)
+            {
+                btnPageMax.Visible = true;
+                btnNext.Visible = true;
+                btnPageMin.Visible = false;
+                btnBack.Visible = false;
+            }
+            else if (lastPage == pageNum)
+            {
+                btnPageMax.Visible = false;
+                btnNext.Visible = false;
+                btnPageMin.Visible = true;
+                btnBack.Visible = true;
+            }
+            else
+            {
+                btnPageMax.Visible = true;
+                btnNext.Visible = true;
+                btnPageMin.Visible = true;
+                btnBack.Visible = true;
+            }
         }
     }
 }

@@ -49,14 +49,13 @@ namespace SalesManagement_SysDev
             this.txbSalesOfficePostal = new System.Windows.Forms.TextBox();
             this.lblClientPostal = new System.Windows.Forms.Label();
             this.lblCilentPhone = new System.Windows.Forms.Label();
-            this.cmbSalesOfficeID = new System.Windows.Forms.ComboBox();
             this.txbSalesOfficePhone = new System.Windows.Forms.TextBox();
-            this.lblSalesOfficeID = new System.Windows.Forms.Label();
+            this.lblSalesOfficeName = new System.Windows.Forms.Label();
             this.txbSalesOfficeID = new System.Windows.Forms.TextBox();
             this.lblClientID = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.dgvClient = new System.Windows.Forms.DataGridView();
+            this.dgvSalesOffice = new System.Windows.Forms.DataGridView();
             this.btnPageSize = new System.Windows.Forms.Button();
             this.lblPageSize = new System.Windows.Forms.Label();
             this.txbPageSize = new System.Windows.Forms.TextBox();
@@ -66,9 +65,10 @@ namespace SalesManagement_SysDev
             this.btnBack = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPageMax = new System.Windows.Forms.Button();
+            this.txbSalesOfficeName = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.pnlSelect.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSalesOffice)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -117,6 +117,7 @@ namespace SalesManagement_SysDev
             this.btnReturn.Text = "戻る";
             this.btnReturn.UseCompatibleTextRendering = true;
             this.btnReturn.UseVisualStyleBackColor = true;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
             // pnlSelect
             // 
@@ -194,6 +195,7 @@ namespace SalesManagement_SysDev
             this.btnClear.TabStop = false;
             this.btnClear.Text = "クリア";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnDone
             // 
@@ -206,6 +208,7 @@ namespace SalesManagement_SysDev
             this.btnDone.TabStop = false;
             this.btnDone.Text = "実行";
             this.btnDone.UseVisualStyleBackColor = true;
+            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // cmbHidden
             // 
@@ -305,17 +308,6 @@ namespace SalesManagement_SysDev
             this.lblCilentPhone.TabIndex = 34;
             this.lblCilentPhone.Text = "電話番号";
             // 
-            // cmbSalesOfficeID
-            // 
-            this.cmbSalesOfficeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.cmbSalesOfficeID.FormattingEnabled = true;
-            this.cmbSalesOfficeID.Location = new System.Drawing.Point(684, 308);
-            this.cmbSalesOfficeID.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.cmbSalesOfficeID.Name = "cmbSalesOfficeID";
-            this.cmbSalesOfficeID.Size = new System.Drawing.Size(220, 32);
-            this.cmbSalesOfficeID.TabIndex = 33;
-            // 
             // txbSalesOfficePhone
             // 
             this.txbSalesOfficePhone.Font = new System.Drawing.Font("MS UI Gothic", 18F);
@@ -326,16 +318,16 @@ namespace SalesManagement_SysDev
             this.txbSalesOfficePhone.TabIndex = 32;
             this.txbSalesOfficePhone.TabStop = false;
             // 
-            // lblSalesOfficeID
+            // lblSalesOfficeName
             // 
-            this.lblSalesOfficeID.AutoSize = true;
-            this.lblSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.lblSalesOfficeID.Location = new System.Drawing.Point(545, 311);
-            this.lblSalesOfficeID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblSalesOfficeID.Name = "lblSalesOfficeID";
-            this.lblSalesOfficeID.Size = new System.Drawing.Size(104, 24);
-            this.lblSalesOfficeID.TabIndex = 31;
-            this.lblSalesOfficeID.Text = "営業所ID";
+            this.lblSalesOfficeName.AutoSize = true;
+            this.lblSalesOfficeName.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.lblSalesOfficeName.Location = new System.Drawing.Point(545, 311);
+            this.lblSalesOfficeName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSalesOfficeName.Name = "lblSalesOfficeName";
+            this.lblSalesOfficeName.Size = new System.Drawing.Size(106, 24);
+            this.lblSalesOfficeName.TabIndex = 31;
+            this.lblSalesOfficeName.Text = "営業所名";
             // 
             // txbSalesOfficeID
             // 
@@ -380,17 +372,17 @@ namespace SalesManagement_SysDev
             this.label2.TabIndex = 44;
             this.label2.Text = "非表示/表示";
             // 
-            // dgvClient
+            // dgvSalesOffice
             // 
-            this.dgvClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClient.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.dgvClient.Location = new System.Drawing.Point(9, 522);
-            this.dgvClient.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.dgvClient.Name = "dgvClient";
-            this.dgvClient.RowHeadersWidth = 51;
-            this.dgvClient.RowTemplate.Height = 24;
-            this.dgvClient.Size = new System.Drawing.Size(1900, 495);
-            this.dgvClient.TabIndex = 45;
+            this.dgvSalesOffice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSalesOffice.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.dgvSalesOffice.Location = new System.Drawing.Point(9, 522);
+            this.dgvSalesOffice.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.dgvSalesOffice.Name = "dgvSalesOffice";
+            this.dgvSalesOffice.RowHeadersWidth = 51;
+            this.dgvSalesOffice.RowTemplate.Height = 24;
+            this.dgvSalesOffice.Size = new System.Drawing.Size(1900, 495);
+            this.dgvSalesOffice.TabIndex = 45;
             // 
             // btnPageSize
             // 
@@ -494,12 +486,23 @@ namespace SalesManagement_SysDev
             this.btnPageMax.Text = "▶|";
             this.btnPageMax.UseVisualStyleBackColor = true;
             // 
+            // txbSalesOfficeName
+            // 
+            this.txbSalesOfficeName.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.txbSalesOfficeName.Location = new System.Drawing.Point(681, 308);
+            this.txbSalesOfficeName.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txbSalesOfficeName.Name = "txbSalesOfficeName";
+            this.txbSalesOfficeName.Size = new System.Drawing.Size(220, 31);
+            this.txbSalesOfficeName.TabIndex = 55;
+            this.txbSalesOfficeName.TabStop = false;
+            // 
             // F_HonshaSalesOffice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.txbSalesOfficeName);
             this.Controls.Add(this.lblNumPage);
             this.Controls.Add(this.txbNumPage);
             this.Controls.Add(this.btnPageMin);
@@ -509,7 +512,7 @@ namespace SalesManagement_SysDev
             this.Controls.Add(this.btnPageSize);
             this.Controls.Add(this.lblPageSize);
             this.Controls.Add(this.txbPageSize);
-            this.Controls.Add(this.dgvClient);
+            this.Controls.Add(this.dgvSalesOffice);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbHidden);
@@ -521,9 +524,8 @@ namespace SalesManagement_SysDev
             this.Controls.Add(this.txbSalesOfficePostal);
             this.Controls.Add(this.lblClientPostal);
             this.Controls.Add(this.lblCilentPhone);
-            this.Controls.Add(this.cmbSalesOfficeID);
             this.Controls.Add(this.txbSalesOfficePhone);
-            this.Controls.Add(this.lblSalesOfficeID);
+            this.Controls.Add(this.lblSalesOfficeName);
             this.Controls.Add(this.txbSalesOfficeID);
             this.Controls.Add(this.lblClientID);
             this.Controls.Add(this.cmbView);
@@ -541,7 +543,7 @@ namespace SalesManagement_SysDev
             this.panel1.PerformLayout();
             this.pnlSelect.ResumeLayout(false);
             this.pnlSelect.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSalesOffice)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -569,14 +571,13 @@ namespace SalesManagement_SysDev
         private System.Windows.Forms.TextBox txbSalesOfficePostal;
         private System.Windows.Forms.Label lblClientPostal;
         private System.Windows.Forms.Label lblCilentPhone;
-        private System.Windows.Forms.ComboBox cmbSalesOfficeID;
         private System.Windows.Forms.TextBox txbSalesOfficePhone;
-        private System.Windows.Forms.Label lblSalesOfficeID;
+        private System.Windows.Forms.Label lblSalesOfficeName;
         private System.Windows.Forms.TextBox txbSalesOfficeID;
         private System.Windows.Forms.Label lblClientID;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dgvClient;
+        private System.Windows.Forms.DataGridView dgvSalesOffice;
         private System.Windows.Forms.Button btnPageSize;
         private System.Windows.Forms.Label lblPageSize;
         private System.Windows.Forms.TextBox txbPageSize;
@@ -586,5 +587,6 @@ namespace SalesManagement_SysDev
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPageMax;
+        private System.Windows.Forms.TextBox txbSalesOfficeName;
     }
 }
