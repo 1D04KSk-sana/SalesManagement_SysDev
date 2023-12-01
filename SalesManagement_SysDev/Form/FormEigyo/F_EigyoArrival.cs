@@ -17,11 +17,6 @@ namespace SalesManagement_SysDev
             InitializeComponent();
         }
 
-        private void rdbSearch_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void rdbUpdate_CheckedChanged(object sender, EventArgs e)
         {
 
