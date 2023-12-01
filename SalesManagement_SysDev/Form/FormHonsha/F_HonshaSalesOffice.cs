@@ -41,6 +41,8 @@ namespace SalesManagement_SysDev
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 
+            SetFormDataGridView();
+
             //cmbViewを表示に
             cmbView.SelectedIndex = 0;
         }
@@ -55,6 +57,8 @@ namespace SalesManagement_SysDev
             ClearImput();
 
             rdbRegister.Checked = true;
+
+            GetDataGridView();
         }
         private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
         {
@@ -810,6 +814,60 @@ namespace SalesManagement_SysDev
 
             // データグリッドビューの表示
             GetDataGridView();
+        }
+        ///////////////////////////////
+        //メソッド名：SetFormDataGridView()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：データグリッドビューの初期設定
+        ///////////////////////////////
+        private void SetFormDataGridView()
+        {
+            //列を自由に設定できるように
+            dgvSalesOffice.AutoGenerateColumns = false;
+            //行単位で選択するようにする
+            dgvSalesOffice.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //行と列の高さを変更できないように
+            dgvSalesOffice.AllowUserToResizeColumns = false;
+            dgvSalesOffice.AllowUserToResizeRows = false;
+            //セルの複数行選択をオフに
+            dgvSalesOffice.MultiSelect = false;
+            //セルの編集ができないように
+            dgvSalesOffice.ReadOnly = true;
+            //ユーザーが新しい行を追加できないようにする
+            dgvSalesOffice.AllowUserToAddRows = false;
+
+            //左端の項目列を削除
+            dgvSalesOffice.RowHeadersVisible = false;
+            //行の自動追加をオフ
+            dgvSalesOffice.AllowUserToAddRows = false;
+
+            //ヘッダー位置の指定
+            dgvSalesOffice.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dgvSalesOffice.Columns.Add("SoID", "営業所ID");
+            dgvSalesOffice.Columns.Add("SoName", "営業所名");
+            dgvSalesOffice.Columns.Add("SoAddress", "住所");
+            dgvSalesOffice.Columns.Add("SoPhone", "電話番号");
+            dgvSalesOffice.Columns.Add("SoPostal", "郵便番号");
+            dgvSalesOffice.Columns.Add("SoFAX", "FAX");
+            dgvSalesOffice.Columns.Add("SoFlag", "営業所管理フラグ");
+            dgvSalesOffice.Columns.Add("SoHidden", "非表示理由");
+
+            dgvSalesOffice.Columns["SoID"].Width = 241;
+            dgvSalesOffice.Columns["SoName"].Width = 237;
+            dgvSalesOffice.Columns["SoAddress"].Width = 237;
+            dgvSalesOffice.Columns["SoPhone"].Width = 237;
+            dgvSalesOffice.Columns["SoPostal"].Width = 237;
+            dgvSalesOffice.Columns["SoFAX"].Width = 237;
+            dgvSalesOffice.Columns["SoFlag"].Width = 237;
+            dgvSalesOffice.Columns["SoHidden"].Width = 237;
+
+            //並び替えができないようにする
+            foreach (DataGridViewColumn dataColumn in dgvSalesOffice.Columns)
+            {
+                dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
     }
 }
