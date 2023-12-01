@@ -23,6 +23,8 @@ namespace SalesManagement_SysDev
         EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
         //データベース顧客テーブルアクセス用クラスのインスタンス化
         ClientDataAccess clientDataAccess = new ClientDataAccess();
+        //データベース社員テーブルアクセス用クラスのインスタンス化
+        ChumonDataAccess chumonDataAccess = new ChumonDataAccess();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
         //データグリッドビュー用の全出庫データ
@@ -131,7 +133,7 @@ namespace SalesManagement_SysDev
             //非表示ラヂオボタンがチェックされているとき
             if (rdbHidden.Checked)
             {
-                OrderDataUpdate();
+                SyukkoDataUpdate();
             }
         }
         
@@ -164,12 +166,12 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：OrderDataUpdate()
+        //メソッド名：SyukkoDataUpdate()
         //引　数   ：なし
         //戻り値   ：なし
         //機　能   ：出庫情報更新の実行
         ///////////////////////////////
-        private void OrderDataUpdate()
+        private void SyukkoDataUpdate()
         {
             //テキストボックス等の入力チェック
             if (!GetValidDataAtUpdate())
@@ -291,7 +293,7 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：OrderDataConfirm()
+        //メソッド名：SyukkoDataConfirm()
         //引　数   ：なし
         //戻り値   ：なし
         //機　能   ：出庫情報確定の実行
@@ -412,10 +414,10 @@ namespace SalesManagement_SysDev
                     return false;
                 }
 
-                T_Syukko order = SyukkoDataAccess.GetSyukkoIDOrderData(int.Parse(txbSyukkoID.Text.Trim()));
+                T_Syukko syukko = SyukkoDataAccess.GetSyukkoIDOrderData(int.Parse(txbSyukkoID.Text.Trim()));
 
                 //受注IDの確定チェック
-               if (order.SyStateFlag == 1)
+               if (syukko.SyStateFlag == 1)
                 {
                     MessageBox.Show("出庫IDはすでに確定しています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSyukkoID.Focus();
@@ -492,6 +494,7 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtSearch()
         {
+            //検索の部分で受注IDに出庫IDを入れているので修正してほしい 
             //検索条件の存在確認
             if (String.IsNullOrEmpty(txbSyukkoID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbChumonID.Text.Trim()))
             {
@@ -511,7 +514,7 @@ namespace SalesManagement_SysDev
                     return false;
                 }
                 //顧客IDの重複チェック
-                if (!SyukkoDataAccess.CheckSyukkoIDExistence(int.Parse(txbChumonID.Text.Trim())))
+                if (!chumonDataAccess.CheckChumonIDExistence(int.Parse(txbChumonID.Text.Trim())))
                 {
                     MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbChumonID.Focus();
