@@ -17,7 +17,7 @@ namespace SalesManagement_SysDev
         //データベース営業所テーブルアクセス用クラスのインスタンス化
         SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
         //データベース社員テーブルアクセス用クラスのインスタンス化
-        ChumonDetailDataAccess EmployeeDataAccess = new ChumonDetailDataAccess();
+        EmployeeDataAccess EmployeeDataAccess = new EmployeeDataAccess();
         //データベース営業所テーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogDataAccess = new OperationLogDataAccess();
         //コンボボックス用の営業所データリスト
@@ -199,7 +199,7 @@ namespace SalesManagement_SysDev
             //役職名の適否
             if (cmbPositionID.SelectedIndex == -1)
             {
-                MessageBox.Show("営業名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("役職名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbPositionID.Focus();
                 return false;
             }

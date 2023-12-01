@@ -21,7 +21,7 @@ namespace SalesManagement_SysDev
         //データベース受注テーブルアクセス用クラスのインスタンス化
         OrderDetailDataAccess orderDetailDataAccess = new OrderDetailDataAccess();
         //データベース社員テーブルアクセス用クラスのインスタンス化
-        ChumonDetailDataAccess employeeDataAccess = new ChumonDetailDataAccess();
+        EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
         //データベース商品テーブルアクセス用クラスのインスタンス化
         ProdactDataAccess prodactDataAccess = new ProdactDataAccess();
         //データベース顧客テーブルアクセス用クラスのインスタンス化
@@ -301,7 +301,7 @@ namespace SalesManagement_SysDev
             //存在確認
             if (!clientDataAccess.CheckClientIDExistence(intClientID))
             {
-                txbClientName.Text = "社員IDが存在しません";
+                txbClientName.Text = "顧客IDが存在しません";
                 return;
             }
 
@@ -492,7 +492,7 @@ namespace SalesManagement_SysDev
                     return false;
                 }
                 //社員IDが現在ログインしているIDと等しいかチェック
-                if (F_Login.intEmployeeID == int.Parse(txbEmployeeID.Text.Trim()))
+                if (F_Login.intEmployeeID != int.Parse(txbEmployeeID.Text.Trim()))
                 {
                     MessageBox.Show("自身の社員IDを入力してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbEmployeeID.Focus();
@@ -951,7 +951,7 @@ namespace SalesManagement_SysDev
             return new T_Order
             {
                 OrID = int.Parse(txbOrderID.Text.Trim()),
-                OrStateFlag = cmbConfirm.SelectedIndex,
+                OrStateFlag = 1,
             };
         }
 
@@ -989,7 +989,7 @@ namespace SalesManagement_SysDev
 
             bool flgChumon = orderDataAccess.AddOrderData(Order);
 
-            if (flg == true)
+            if (flgChumon == true)
             {
                 MessageBox.Show("注文管理にデータを送信ました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -1128,6 +1128,8 @@ namespace SalesManagement_SysDev
             GenerateDataAtSelect(searchFlg);
 
             int intSearchCount = listOrder.Count;
+
+            txbNumPage.Text = "1";
 
             // 顧客抽出結果表示
             GetDataGridView();
@@ -1489,10 +1491,10 @@ namespace SalesManagement_SysDev
         {
             //データグリッドビューに乗っている情報をGUIに反映
             txbOrderID.Text = dgvOrder[0, dgvOrder.CurrentCellAddress.Y].Value.ToString();
-            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvOrder[1, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key - 1;
+            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvOrder[3, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvOrder[2, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
-            txbOrderManager.Text = dgvOrder[3, dgvOrder.CurrentCellAddress.Y].Value.ToString();
-            txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvOrder[4, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            txbOrderManager.Text = dgvOrder[4, dgvOrder.CurrentCellAddress.Y].Value.ToString();
+            txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvOrder[1, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             dtpOrderDate.Text = dgvOrder[5, dgvOrder.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvOrder[6, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key;
             cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvOrder[7, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key;
@@ -1512,5 +1514,6 @@ namespace SalesManagement_SysDev
             txbProductID.Text = dictionaryProdact.FirstOrDefault(x => x.Value == dgvOrderDetail[2, dgvOrderDetail.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbOrderQuantity.Text = dgvOrderDetail[3, dgvOrderDetail.CurrentCellAddress.Y].Value.ToString();
         }
+
     }
 }

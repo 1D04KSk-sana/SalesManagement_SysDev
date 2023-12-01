@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace SalesManagement_SysDev
 {
-    internal class SyukkoDetailDataAccess
+    internal class ChumonDetailDataAccess
     {
         ///////////////////////////////
         //メソッド名：GetOrderDetailData()
@@ -15,14 +15,14 @@ namespace SalesManagement_SysDev
         //戻り値：受注詳細データ
         //機　能：受注詳細データの全取得
         ///////////////////////////////
-        public List<T_SyukkoDetail> GetSyukkoDetailIDData(int syukkoID)
+        public List<T_ChumonDetail> GetChumonDetailIDData(int chumonID)
         {
-            List<T_SyukkoDetail> listOrderDetail = new List<T_SyukkoDetail>();
+            List<T_ChumonDetail> listChumonDetail = new List<T_ChumonDetail>();
 
             try
             {
                 var context = new SalesManagement_DevContext();
-                listOrderDetail = context.T_SyukkoDetails.Where(x => x.SyID == syukkoID).ToList();
+                listChumonDetail = context.T_ChumonDetails.Where(x => x.ChID == chumonID).ToList();
                 context.Dispose();
             }
             catch (Exception ex)
@@ -30,7 +30,7 @@ namespace SalesManagement_SysDev
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            return listOrderDetail;
+            return listChumonDetail;
         }
     }
 }

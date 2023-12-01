@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form\DBAccess\ChumonDetailDataAccess.cs" />
     <Compile Include="Form\DBAccess\ArrivalDetailDataAccess.cs" />
     <Compile Include="Form\DBAccess\ArrivalDataAccess.cs" />
     <Compile Include="Form\DBAccess\ChumonDataAccess.cs" />
@@ -237,6 +238,24 @@
     <EmbeddedResource Include="Form\FormButuryu\F_ButuryuChumon.resx">
       <DependentUpon>F_ButuryuChumon.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormButuryu\F_ButuryuSyukko.resx">
+      <DependentUpon>F_ButuryuSyukko.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormButuryu\F_ButuryuStock.resx">
+      <DependentUpon>F_ButuryuStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormButuryu\F_ButuryuHattyu.resx">
+      <DependentUpon>F_ButuryuHattyu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormButuryu\F_ButuryuWarehousing.resx">
+      <DependentUpon>F_ButuryuWarehousing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormEigyo\F_EigyoArrival.resx">
+      <DependentUpon>F_EigyoArrival.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormEigyo\F_EigyoShipment.resx">
+      <DependentUpon>F_EigyoShipment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\FormHonsha\F_HonshaSale.resx">
       <DependentUpon>F_HonshaSale.cs</DependentUpon>
     </EmbeddedResource>
@@ -248,6 +267,9 @@
     <Compile Include="Form\DBAccess\SyukkoDetailDataAccess.cs" />
     <EmbeddedResource Include="Form\FormEigyo\F_EigyoOrder.resx">
       <DependentUpon>F_EigyoOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormEigyo\F_EigyoStockView.resx">
+      <DependentUpon>F_EigyoStockView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\FormHonsha\F_HonshaOperationLog.resx">
       <DependentUpon>F_HonshaOperationLog.cs</DependentUpon>

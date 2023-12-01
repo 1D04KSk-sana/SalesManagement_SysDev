@@ -41,12 +41,7 @@ namespace SalesManagement_SysDev
         //DataGridView用に使用する顧客のDictionary
         private Dictionary<int, string> dictionaryClient;
         //DataGridView用に使用す営業所のDictionary
-        private Dictionary<int?, string> dictionarySalesOffice;
-
-
-
-
-
+        private Dictionary<int, string> dictionarySalesOffice;
 
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
@@ -64,6 +59,15 @@ namespace SalesManagement_SysDev
         public F_HonshaSale()
         {
             InitializeComponent();
+        }
+
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
         }
 
         private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
@@ -90,7 +94,7 @@ namespace SalesManagement_SysDev
             //営業所のデータを取得
             listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
 
-            dictionarySalesOffice = new Dictionary<int?, string> { };
+            dictionarySalesOffice = new Dictionary<int, string> { };
 
             foreach (var item in listSalesOffice)
             {
@@ -141,6 +145,8 @@ namespace SalesManagement_SysDev
 
             int intSearchCount = listSale.Count;
 
+            txbNumPage.Text = "1";
+
             // 売上抽出結果表示
             GetDataGridView();
 
@@ -162,22 +168,27 @@ namespace SalesManagement_SysDev
             {
                 intSaleID = int.Parse(strSaleID);
             }
-            string strtxbClientPostal = txbClientPostal.Text.Trim();
+            string strtxbClientPostal = txbChumonID.Text.Trim();
             int inttxbClientPostal = 0;
 
             if (!String.IsNullOrEmpty(strtxbClientPostal))
             {
                 inttxbClientPostal = int.Parse(strtxbClientPostal);
             }
-            string strtxbClientName = txbClientName.Text.Trim();
-            int inttxbClientName = 0;
+            string strtxbClientID = txbClientID.Text.Trim();
+            int inttxbClientID = 0;
 
-            if (!String.IsNullOrEmpty(strtxbClientName))
+            if (!String.IsNullOrEmpty(strtxbClientID))
             {
-                inttxbClientName = int.Parse(strtxbClientName);
+                inttxbClientID = int.Parse(strtxbClientID);
             }
 
+            DateTime? dateSale = null;
 
+            if (dtpSaleDate.Checked)
+            {
+                dateSale = dtpSaleDate.Value;
+            }
 
             // 検索条件のセット
             T_Sale selectCondition = new T_Sale()
@@ -185,8 +196,8 @@ namespace SalesManagement_SysDev
                 SaID = intSaleID,
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 ChID = inttxbClientPostal,
-                ClID= inttxbClientName,
-                SaDate = dtpSaleDate.Value,
+                ClID= inttxbClientID,
+                SaDate = dateSale,
             };
 
             if (searchFlg)
@@ -210,7 +221,6 @@ namespace SalesManagement_SysDev
         {
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
-            //dtpSaleDate.Value=DateTime.Now;
             DictionarySet();
             SetFormDataGridView();
 
@@ -308,14 +318,14 @@ namespace SalesManagement_SysDev
             //ヘッダー位置の指定
             dgvSaleDetail.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            dgvSaleDetail.Columns.Add("SaDetailID", "売上明細ID");
             dgvSaleDetail.Columns.Add("SaID", "売上ID");
+            dgvSaleDetail.Columns.Add("SaDetailID", "売上明細ID");
             dgvSaleDetail.Columns.Add("PrID", "商品ID");
             dgvSaleDetail.Columns.Add("SaQuantity", "個数");
             dgvSaleDetail.Columns.Add("SaTotalPrice", "合計金額");
 
-            dgvSaleDetail.Columns["SaDetailID"].Width = 150;
             dgvSaleDetail.Columns["SaID"].Width = 120;
+            dgvSaleDetail.Columns["SaDetailID"].Width = 150;
             dgvSaleDetail.Columns["PrID"].Width = 120;
             dgvSaleDetail.Columns["SaQuantity"].Width = 120;
             dgvSaleDetail.Columns["SaTotalPrice"].Width = 187;
@@ -390,8 +400,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbSaleID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbClientPostal.Text.Trim()) && String.IsNullOrEmpty(txbClientName.Text.Trim()) && dtpSaleDate.Value == null
-                )
+            if (String.IsNullOrEmpty(txbSaleID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbChumonID.Text.Trim()) && String.IsNullOrEmpty(txbClientName.Text.Trim()) && dtpSaleDate.Checked == false)
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbSaleID.Focus();
@@ -436,11 +445,13 @@ namespace SalesManagement_SysDev
         private void ClearImput()
         {
             txbSaleID.Text = string.Empty;
+            txbClientID.Text = string.Empty;
             txbClientName.Text = string.Empty;
-            txbClientPostal.Text = string.Empty;
-            txbClientPostal.Text = string.Empty;
+            txbChumonID.Text = string.Empty;
+            txbChumonID.Text = string.Empty;
             dtpSaleDate.Value= DateTime.Now;
             cmbSalesOfficeID.SelectedIndex = -1;
+            cmbHidden.SelectedIndex = -1;
         }
 
 
@@ -528,7 +539,7 @@ namespace SalesManagement_SysDev
             //1行ずつdgvClientに挿入
             foreach (var item in depData)
             {
-                dgvSale.Rows.Add(item.SaID, dictionaryClient[item.ClID.Value], dictionarySalesOffice[item.SoID], item.EmID, item.ChID, item.SaDate, dictionaryHidden[item.SaFlag], item.SaHidden);
+                dgvSale.Rows.Add(item.SaID, dictionaryClient[item.ClID], dictionarySalesOffice[item.SoID], item.EmID, item.ChID, item.SaDate, dictionaryHidden[item.SaFlag], item.SaHidden);
             }
 
             //dgvClientをリフレッシュ
@@ -575,10 +586,11 @@ namespace SalesManagement_SysDev
         {
             //データグリッドビューに乗っている情報をGUIに反映
             txbSaleID.Text = dgvSale[0, dgvSale.CurrentCellAddress.Y].Value.ToString();
-            txbClientName.Text = dgvSale[1, dgvSale.CurrentCellAddress.Y].Value.ToString();
-            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvSale[2, dgvSale.CurrentCellAddress.Y].Value.ToString()).Key.Value - 1;
-            txbClientPostal.Text = dgvSale[4, dgvSale.CurrentCellAddress.Y].Value.ToString();
+            txbClientID.Text = (dictionaryClient.FirstOrDefault(x => x.Value == dgvSale[1, dgvSale.CurrentCellAddress.Y].Value.ToString()).Key - 1).ToString();
+            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvSale[2, dgvSale.CurrentCellAddress.Y].Value.ToString()).Key - 1;
+            txbChumonID.Text = dgvSale[4, dgvSale.CurrentCellAddress.Y].Value.ToString();
             dtpSaleDate.Text = dgvSale[5, dgvSale.CurrentCellAddress.Y].Value.ToString();
+            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSale[6, dgvSale.CurrentCellAddress.Y].Value.ToString()).Key;
         }
 
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
@@ -797,9 +809,44 @@ namespace SalesManagement_SysDev
             }
         }
 
-        private void dgvSale_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void rdbHiddenUpdate_CheckedChanged(object sender, EventArgs e)
         {
+            if (rdbHiddenUpdate.Checked)
+            {
+                txbClientName.Enabled = false;
+                cmbSalesOfficeID.Enabled = false;
+                txbChumonID.Enabled = false;
+            }
+            else
+            {
+                txbClientName.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                txbChumonID.Enabled = true;
+            }
+        }
 
+        private void txbClientID_TextChanged(object sender, EventArgs e)
+        {
+            //nullの確認
+            string stringClientID = txbClientID.Text.Trim();
+            int intClientID = 0;
+
+            if (!String.IsNullOrEmpty(stringClientID))
+            {
+                intClientID = int.Parse(stringClientID);
+            }
+
+            //存在確認
+            if (!clientDataAccess.CheckClientIDExistence(intClientID))
+            {
+                txbClientName.Text = "顧客IDが存在しません";
+                return;
+            }
+
+            //IDから名前を取り出す
+            var Client = listClient.Single(x => x.ClID == intClientID);
+
+            txbClientName.Text = Client.ClName;
         }
     }
 }

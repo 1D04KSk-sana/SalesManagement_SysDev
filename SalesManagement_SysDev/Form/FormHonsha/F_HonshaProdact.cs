@@ -892,12 +892,12 @@ namespace SalesManagement_SysDev
             //dgvClientをリフレッシュ
             dgvProdact.Refresh();
 
-            if (lastPage == pageNum)
+            if (lastPage == -1 || (lastPage == pageNum && pageNum == 0))
             {
                 btnPageMax.Visible = false;
                 btnNext.Visible = false;
-                btnPageMin.Visible = true;
-                btnBack.Visible = true;
+                btnPageMin.Visible = false;
+                btnBack.Visible = false;
             }
             else if (pageNum == 0)
             {
@@ -905,6 +905,13 @@ namespace SalesManagement_SysDev
                 btnNext.Visible = true;
                 btnPageMin.Visible = false;
                 btnBack.Visible = false;
+            }
+            else if (lastPage == pageNum)
+            {
+                btnPageMax.Visible = false;
+                btnNext.Visible = false;
+                btnPageMin.Visible = true;
+                btnBack.Visible = true;
             }
             else
             {
@@ -960,18 +967,18 @@ namespace SalesManagement_SysDev
             dgvProdact.Columns.Add("PrHidden", "非表示理由");
 
             dgvProdact.Columns["PrID"].Width = 102;
-            dgvProdact.Columns["MaID"].Width = 100;
-            dgvProdact.Columns["PrName"].Width = 130;
+            dgvProdact.Columns["MaID"].Width = 85;
+            dgvProdact.Columns["PrName"].Width = 150;
             dgvProdact.Columns["Price"].Width = 120;
-            dgvProdact.Columns["PrJCode"].Width = 100;
-            dgvProdact.Columns["PrSafetyStock"].Width = 70;
-            dgvProdact.Columns["McID"].Width = 150;
-            dgvProdact.Columns["ScID"].Width = 120;
-            dgvProdact.Columns["PrModelNumber"].Width = 60;
-            dgvProdact.Columns["PrColor"].Width = 60;
-            dgvProdact.Columns["PrFlag"].Width = 102;
-            dgvProdact.Columns["PrReleaseDate"].Width = 120;
-            dgvProdact.Columns["PrHidden"].Width = 258;
+            dgvProdact.Columns["PrJCode"].Width = 70;
+            dgvProdact.Columns["PrSafetyStock"].Width = 140;
+            dgvProdact.Columns["McID"].Width = 290;
+            dgvProdact.Columns["ScID"].Width = 142;
+            dgvProdact.Columns["PrModelNumber"].Width = 80;
+            dgvProdact.Columns["PrColor"].Width = 95;
+            dgvProdact.Columns["PrFlag"].Width = 115;
+            dgvProdact.Columns["PrReleaseDate"].Width = 210;
+            dgvProdact.Columns["PrHidden"].Width = 298;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvProdact.Columns)
@@ -1096,8 +1103,9 @@ namespace SalesManagement_SysDev
 
             int intSearchCount = listProdact.Count;
 
-            // 顧客抽出結果表示
             txbNumPage.Text = "1";
+
+            // 顧客抽出結果表示
             GetDataGridView();
 
             MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1151,5 +1159,6 @@ namespace SalesManagement_SysDev
                 e.Handled = true;
             }
         }
+
     }
 }

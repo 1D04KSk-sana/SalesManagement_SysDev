@@ -116,31 +116,29 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.T_Sales.AsQueryable();
 
-                if (selectSale.SaID != null && selectSale.SaID != 0)
+                if ( selectSale.SaID != 0)
                 {
                     query = query.Where(x => x.SaID == selectSale.SaID);
                 }
 
-                if (selectSale.SoID != null && selectSale.SoID != 0)
+                if ( selectSale.SoID != 0)
                 {
                     query = query.Where(x => x.SoID == selectSale.SoID);
                 }
 
-                if (selectSale.ChID != null && selectSale.ChID != 0)
+                if ( selectSale.ChID != 0)
                 {
                     query = query.Where(x => x.ChID == selectSale.ChID);
                 }
-                if (selectSale.ClID != null && selectSale.ClID != 0)
+                if (selectSale.ClID != 0)
                 {
                     query = query.Where(x => x.ClID == selectSale.ClID);
                 }
-                if (selectSale.SaDate != null )
+
+                if (selectSale.SaDate != null)
                 {
-                    query = query.Where(x => x.SaDate.Month == selectSale.SaDate.Month);
+                    query = query.Where(x => x.SaDate.Value.Month == selectSale.SaDate.Value.Month);
                 }
-
-
-
 
                 listSale = query.ToList();
                 context.Dispose();
@@ -165,7 +163,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listSale = context.T_Sales.Where(x => x.SaID == selectSale.SaID || x.SoID == selectSale.SoID || x.ChID == selectSale.ChID || x.ClID == selectSale.ClID || x.SaDate.Month == selectSale.SaDate.Month).ToList();
+                listSale = context.T_Sales.Where(x => x.SaID == selectSale.SaID || x.SoID == selectSale.SoID || x.ChID == selectSale.ChID || x.ClID == selectSale.ClID || x.SaDate.Value.Month == selectSale.SaDate.Value.Month).ToList();
 
                 context.Dispose();
             }

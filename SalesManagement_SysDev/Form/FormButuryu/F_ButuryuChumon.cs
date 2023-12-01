@@ -21,7 +21,7 @@ namespace SalesManagement_SysDev
         //データベース受注テーブルアクセス用クラスのインスタンス化
         OrderDetailDataAccess orderDetailDataAccess = new OrderDetailDataAccess();
         //データベース社員テーブルアクセス用クラスのインスタンス化
-        ChumonDetailDataAccess employeeDataAccess = new ChumonDetailDataAccess();
+        EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
         //データベース商品テーブルアクセス用クラスのインスタンス化
         ProdactDataAccess prodactDataAccess = new ProdactDataAccess();
         //データグリッドビュー用の顧客データ

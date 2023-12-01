@@ -13,13 +13,13 @@ namespace SalesManagement_SysDev
     public partial class F_HonshaEmployee : Form
     {
         //データベース社員テーブルアクセス用クラスのインスタンス化
-        ChumonDetailDataAccess EmployeeDataAccess = new ChumonDetailDataAccess();
+        EmployeeDataAccess EmployeeDataAccess = new EmployeeDataAccess();
         //データベース営業所テーブルアクセス用クラスのインスタンス化
         SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
         //データベース顧客テーブルアクセス用クラスのインスタンス化
         ClientDataAccess clientDataAccess = new ClientDataAccess();
         //データベース社員テーブルアクセス用クラスのインスタンス化
-        ChumonDetailDataAccess employeeDataAccess = new ChumonDetailDataAccess();
+        EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
         //データベース役所テーブルアクセス用クラスのインスタンス化
         PositionDataAccess PositionDataAccess = new PositionDataAccess();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
@@ -774,6 +774,8 @@ namespace SalesManagement_SysDev
             GenerateDataAtSelect(searchFlg);
 
             int intSearchCount = listEmployee.Count;
+
+            txbNumPage.Text = "1";
 
             // 社員抽出結果表示
             GetDataGridView();
