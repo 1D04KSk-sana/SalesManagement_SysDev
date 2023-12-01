@@ -198,7 +198,7 @@
             // 
             this.dgvHattyuDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvHattyuDetail.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.dgvHattyuDetail.Location = new System.Drawing.Point(1201, 523);
+            this.dgvHattyuDetail.Location = new System.Drawing.Point(1193, 523);
             this.dgvHattyuDetail.Margin = new System.Windows.Forms.Padding(2);
             this.dgvHattyuDetail.Name = "dgvHattyuDetail";
             this.dgvHattyuDetail.RowHeadersWidth = 51;
@@ -312,12 +312,12 @@
             // 
             this.dgvHattyu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvHattyu.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.dgvHattyu.Location = new System.Drawing.Point(3, 523);
+            this.dgvHattyu.Location = new System.Drawing.Point(11, 523);
             this.dgvHattyu.Margin = new System.Windows.Forms.Padding(2);
             this.dgvHattyu.Name = "dgvHattyu";
             this.dgvHattyu.RowHeadersWidth = 51;
             this.dgvHattyu.RowTemplate.Height = 24;
-            this.dgvHattyu.Size = new System.Drawing.Size(1190, 480);
+            this.dgvHattyu.Size = new System.Drawing.Size(1170, 480);
             this.dgvHattyu.TabIndex = 92;
             this.dgvHattyu.TabStop = false;
             this.dgvHattyu.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHattyu_CellClick);

@@ -50,6 +50,8 @@ namespace SalesManagement_SysDev
         private F_SearchDialog f_SearchDialog = new F_SearchDialog();
         //データベース注文テーブルアクセス用クラスのインスタンス化
         WarehousingDataAccess warehousingDataAccess = new WarehousingDataAccess();
+        //データベース入庫詳細テーブルアクセス用クラスのインスタンス化
+        WarehousingDetailDataAccess warehousingDetailDataAccess = new WarehousingDetailDataAccess();
         //コンボボックス用の営業所データリスト
         private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
         //データベースメーカーテーブルアクセス用クラスのインスタンス化
@@ -207,7 +209,6 @@ namespace SalesManagement_SysDev
             cmbHidden.SelectedIndex = -1;
             cmbConfirm.SelectedIndex = -1;
             txbHidden.Text = string.Empty;
-
         }
         private void btnDetailClear_Click(object sender, EventArgs e)
         {
@@ -444,7 +445,7 @@ namespace SalesManagement_SysDev
             }
 
             // メーカー名の適否
-            if (cmbHidden.SelectedIndex == -1)
+            if (cmbMakerName.SelectedIndex == -1)
             {
                 MessageBox.Show("メーカー名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbMakerName.Focus();
@@ -1140,6 +1141,35 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("入庫管理へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            List<T_HattyuDetail> listHattyuDetail = hattyuDetailDataAccess.GetIDHattyuDetailData(int.Parse(txbHattyuID.Text.Trim()));
+
+            List<bool> flgHattyulist = new List<bool>();
+            bool flgHattyu = true;
+
+            foreach (var item in listHattyuDetail)
+            {
+                T_WarehousingDetail WarehousingDetail = GenerateWarehousingDetailAtRegistration(item);
+
+                flgHattyulist.Add(warehousingDetailDataAccess.AddWarehousingDetailData(WarehousingDetail));
+            }
+
+            foreach (var item in flgHattyulist)
+            {
+                if (!item)
+                {
+                    flgHattyu = false;
+                }
+            }
+
+            if (flgHattyu)
+            {
+                MessageBox.Show("入庫詳細へデータを送信しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("入庫詳細へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             //テキストボックス等のクリア
             ClearImput();
             ClearImputDetail();
@@ -1148,6 +1178,21 @@ namespace SalesManagement_SysDev
             GetDataGridView();
         }
 
+        ///////////////////////////////
+        //メソッド名：GenerateWarehousingDetailAtRegistration()
+        //引　数   ：入庫情報
+        //戻り値   ：入庫登録情報
+        //機　能   ：入庫登録データのセット
+        ///////////////////////////////
+        private T_WarehousingDetail GenerateWarehousingDetailAtRegistration(T_HattyuDetail HattyuDetail)
+        {
+            return new T_WarehousingDetail
+            {
+                WaID = HattyuDetail.HaID,
+                PrID = HattyuDetail.PrID,
+                WaQuantity = HattyuDetail.HaQuantity
+            };
+        }
 
         ///////////////////////////////
         //メソッド名：SetDataDetailGridView()
@@ -1293,13 +1338,13 @@ namespace SalesManagement_SysDev
             dgvHattyu.Columns.Add("WaWarehouseFlag", "入庫済フラグ");
             dgvHattyu.Columns.Add("HaHidden", "非表示理由");
 
-            dgvHattyu.Columns["HaID"].Width = 107;
+            dgvHattyu.Columns["HaID"].Width = 110;
             dgvHattyu.Columns["MaID"].Width = 150;
             dgvHattyu.Columns["EmID"].Width = 150;
             dgvHattyu.Columns["HaDate"].Width = 160;
             dgvHattyu.Columns["HaFlag"].Width = 170;
             dgvHattyu.Columns["WaWarehouseFlag"].Width = 160;
-            dgvHattyu.Columns["HaHidden"].Width = 290;
+            dgvHattyu.Columns["HaHidden"].Width = 267;
 
 
 
@@ -1446,6 +1491,7 @@ namespace SalesManagement_SysDev
                 txbHattyuQuantity.Enabled = false;
                 txbProductID.Enabled = false;
                 txbProductName.Enabled = false;
+                cmbConfirm.Enabled = false;
 
             }
             else
@@ -1457,7 +1503,7 @@ namespace SalesManagement_SysDev
                 txbHattyuQuantity.Enabled = true;
                 txbProductID.Enabled = true;
                 txbProductName.Enabled = true;
-
+                cmbConfirm.Enabled=true;
             }
         }
 
@@ -1469,6 +1515,8 @@ namespace SalesManagement_SysDev
                 txbHattyuQuantity.Enabled = false;
                 txbProductID.Enabled = false;
                 txbProductName.Enabled = false;
+                txbHidden.Enabled = false;
+                cmbConfirm.Enabled=false;
             }
             else
             {
@@ -1476,6 +1524,7 @@ namespace SalesManagement_SysDev
                 txbHattyuQuantity.Enabled = true;
                 txbProductID.Enabled = true;
                 txbProductName.Enabled = true;
+                cmbConfirm.Enabled= true;
             }
 
         }
@@ -1487,12 +1536,18 @@ namespace SalesManagement_SysDev
                 cmbMakerName.Enabled = false;
                 txbEmployeeName.Enabled = false;
                 dtpHattyuDate.Enabled = false;
+                cmbHidden.Enabled = false;
+                cmbConfirm.Enabled = false;
+                txbHidden.Enabled=false;
             }
             else
             {
                 cmbMakerName.Enabled = true;
                 txbEmployeeName.Enabled = true;
                 dtpHattyuDate.Enabled = true;
+                cmbHidden.Enabled = true;
+                cmbConfirm.Enabled = true;
+                txbHidden.Enabled = true;
             }
 
         }
@@ -1505,6 +1560,9 @@ namespace SalesManagement_SysDev
                 txbHattyuQuantity.Enabled = false;
                 txbProductID.Enabled = false;
                 txbProductName.Enabled = false;
+                txbHidden.Enabled = false;
+                cmbConfirm.Enabled=false;
+                cmbHidden .Enabled=false;
             }
             else
             {
@@ -1512,6 +1570,10 @@ namespace SalesManagement_SysDev
                 txbHattyuQuantity.Enabled = true;
                 txbProductID.Enabled = true;
                 txbProductName.Enabled = true;
+                txbHidden.Enabled = true;
+                cmbConfirm.Enabled = true;
+                cmbHidden.Enabled = true;
+
             }
         }
 
@@ -1519,6 +1581,11 @@ namespace SalesManagement_SysDev
         {
             if (rdbConfirm.Checked)
             {
+                cmbMakerName.Enabled = false;
+                txbEmployeeName.Enabled = false;
+                dtpHattyuDate.Enabled = false;
+                cmbHidden.Enabled=false;
+                txbHidden .Enabled=false;
                 txbHattyuDetailID.Enabled = false;
                 txbHattyuQuantity.Enabled = false;
                 txbProductID.Enabled = false;
@@ -1526,6 +1593,11 @@ namespace SalesManagement_SysDev
             }
             else
             {
+                cmbMakerName.Enabled = true;
+                txbEmployeeName.Enabled = true;
+                dtpHattyuDate.Enabled = true;
+                cmbHidden.Enabled = true;
+                txbHidden.Enabled = true;
                 txbHattyuDetailID.Enabled = true;
                 txbHattyuQuantity.Enabled = true;
                 txbProductID.Enabled = true;
