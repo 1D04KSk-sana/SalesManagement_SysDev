@@ -987,7 +987,7 @@ namespace SalesManagement_SysDev
 
             T_Chumon Chumon = GenerateChumonAtRegistration(Order);
 
-            bool flgChumon = chumonDataAccess.AddChumonData(Chumon);
+            bool flgChumon = orderDataAccess.AddOrderData(Order);
 
             if (flgChumon == true)
             {

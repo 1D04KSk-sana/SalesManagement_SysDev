@@ -707,6 +707,17 @@ namespace SalesManagement_SysDev
                     ChStateFlag = 1,
                     ChFlag = 0,
                 });
+                ch.Add(new T_Chumon()
+                {
+                    M_SalesOffice = so[1],
+                    M_Employee = em[116],
+                    M_Client = cl[2],
+                    T_Order = or[1],
+                    ChDate = new DateTime(2020, 11, 11),
+                    ChStateFlag = 1,
+                    ChFlag = 0,
+                });
+
                 context.T_Chumons.AddRange(ch);
                 context.SaveChanges();
             }

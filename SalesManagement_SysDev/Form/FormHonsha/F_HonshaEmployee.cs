@@ -862,5 +862,10 @@ namespace SalesManagement_SysDev
                 e.Handled = true;
             }
         }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
