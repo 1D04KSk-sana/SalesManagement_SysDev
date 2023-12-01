@@ -56,11 +56,18 @@ namespace SalesManagement_SysDev
         private Dictionary<int, string> dictionaryClient;
         //DataGridView用に使用する社員のDictionary
         private Dictionary<int, string> dictionaryEmployee;
+
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
         {
             { 0, "表示" },
             { 1, "非表示" },
+        };
+        //DataGridView用に使用する表示形式のDictionary
+        private Dictionary<int, string> dictionaryFlag = new Dictionary<int, string>
+        {
+            { 0, "未確定" },
+            { 1, "確定" },
         };
 
         public F_ButuryuSyukko()
@@ -540,6 +547,7 @@ namespace SalesManagement_SysDev
             txbChumonID.Text = string.Empty;
             cmbHidden.SelectedIndex = -1;
             txbHidden.Text = string.Empty;
+            txbEmployeeID.Text = string.Empty;
         }
 
         ///////////////////////////////
@@ -736,15 +744,15 @@ namespace SalesManagement_SysDev
             dgvSyukko.Columns.Add("SyFlag", "出庫管理フラグ");
             dgvSyukko.Columns.Add("SyHidden", "非表示理由");
 
-            dgvSyukko.Columns["SyID"].Width = 60;
-            dgvSyukko.Columns["EmID"].Width = 80;
-            dgvSyukko.Columns["ClID"].Width = 80;
-            dgvSyukko.Columns["SoID"].Width = 80;
-            dgvSyukko.Columns["OrID"].Width = 80;
+            dgvSyukko.Columns["SyID"].Width = 100;
+            dgvSyukko.Columns["EmID"].Width = 110;
+            dgvSyukko.Columns["ClID"].Width = 110;
+            dgvSyukko.Columns["SoID"].Width = 160;
+            dgvSyukko.Columns["OrID"].Width = 110;
             dgvSyukko.Columns["SyDate"].Width = 150;
             dgvSyukko.Columns["SyStateFlag"].Width = 100;
             dgvSyukko.Columns["SyFlag"].Width = 100;
-            dgvSyukko.Columns["SyHidden"].Width = 126;
+            dgvSyukko.Columns["SyHidden"].Width = 163;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvSyukko.Columns)
@@ -780,10 +788,10 @@ namespace SalesManagement_SysDev
             dgvSyukkoDetail.Columns.Add("SyQuantity", "数量");
 
 
-            dgvSyukkoDetail.Columns["SyDetailID"].Width = 200;
-            dgvSyukkoDetail.Columns["SyID"].Width = 200;
-            dgvSyukkoDetail.Columns["PrID"].Width = 200;
-            dgvSyukkoDetail.Columns["SyQuantity"].Width = 200;
+            dgvSyukkoDetail.Columns["SyDetailID"].Width = 192;
+            dgvSyukkoDetail.Columns["SyID"].Width = 192;
+            dgvSyukkoDetail.Columns["PrID"].Width = 192;
+            dgvSyukkoDetail.Columns["SyQuantity"].Width = 191;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvSyukkoDetail.Columns)
@@ -817,7 +825,7 @@ namespace SalesManagement_SysDev
             foreach (var item in depData)
             {
                 dgvSyukko.Rows.Add(item.SyID, dictionaryEmployee[item.EmID.Value], dictionaryClient[item.ClID], dictionarySalesOffice[item.SoID], item.OrID, item.SyDate,
-                   item.SyStateFlag, dictionaryHidden[item.SyFlag], item.SyHidden);
+                   dictionaryFlag[item.SyStateFlag], dictionaryHidden[item.SyFlag], item.SyHidden);
             }
 
             //dgvSyukkotをリフレッシュ
@@ -926,6 +934,66 @@ namespace SalesManagement_SysDev
             txbChumonID.Text = dgvSyukko[4, dgvSyukko.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSyukko[7, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvSyukko[8, dgvSyukko.CurrentCellAddress.Y]?.Value?.ToString();
+            cmbConfirm.SelectedIndex = dictionaryFlag.FirstOrDefault(x => x.Value == dgvSyukko[6, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key;
+
+
+        }
+
+        private void txbEmployeeID_TextChanged(object sender, EventArgs e)
+        {
+            //nullの確認
+            string stringEmployeeID = txbEmployeeID.Text.Trim();
+            int intEmployeeID = 0;
+
+            if (!String.IsNullOrEmpty(stringEmployeeID))
+            {
+                intEmployeeID = int.Parse(stringEmployeeID);
+            }
+
+            //存在確認
+            if (!employeeDataAccess.CheckEmployeeIDExistence(intEmployeeID))
+            {
+                txbEmployeeName.Text = "社員IDが存在しません";
+                return;
+            }
+
+            //IDから名前を取り出す
+            var Employee = listEmployee.Single(x => x.EmID == intEmployeeID);
+
+            txbEmployeeName.Text = Employee.EmName;
+        }
+
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txbClientID_TextChanged(object sender, EventArgs e)
+        {
+            //nullの確認
+            string stringClientID = txbClientID.Text.Trim();
+            int intClientID = 0;
+
+            if (!String.IsNullOrEmpty(stringClientID))
+            {
+                intClientID = int.Parse(stringClientID);
+            }
+
+            //存在確認
+            if (!clientDataAccess.CheckClientIDExistence(intClientID))
+            {
+                txbClientName.Text = "顧客IDが存在しません";
+                return;
+            }
+
+            //IDから名前を取り出す
+            var Client = listClient.Single(x => x.ClID == intClientID);
+
+            txbClientName.Text = Client.ClName;
         }
     }
 }
