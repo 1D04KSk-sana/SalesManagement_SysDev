@@ -68,6 +68,9 @@
             this.dgvSyukko = new System.Windows.Forms.DataGridView();
             this.dgvSyukkoDetail = new System.Windows.Forms.DataGridView();
             this.lblEmployeeID = new System.Windows.Forms.Label();
+            this.lblClientName = new System.Windows.Forms.Label();
+            this.txbClientName = new System.Windows.Forms.TextBox();
+            this.txbEmployeeID = new System.Windows.Forms.TextBox();
             this.pnlButuryu.SuspendLayout();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSyukko)).BeginInit();
@@ -168,16 +171,16 @@
             // 
             this.lblClientID.AutoSize = true;
             this.lblClientID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientID.Location = new System.Drawing.Point(429, 417);
+            this.lblClientID.Location = new System.Drawing.Point(108, 414);
             this.lblClientID.Name = "lblClientID";
-            this.lblClientID.Size = new System.Drawing.Size(82, 24);
+            this.lblClientID.Size = new System.Drawing.Size(80, 24);
             this.lblClientID.TabIndex = 7;
-            this.lblClientID.Text = "顧客名";
+            this.lblClientID.Text = "顧客ID";
             // 
             // txbClientID
             // 
             this.txbClientID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientID.Location = new System.Drawing.Point(514, 414);
+            this.txbClientID.Location = new System.Drawing.Point(193, 411);
             this.txbClientID.Name = "txbClientID";
             this.txbClientID.Size = new System.Drawing.Size(220, 31);
             this.txbClientID.TabIndex = 6;
@@ -218,6 +221,7 @@
             this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbEmployeeName.Location = new System.Drawing.Point(514, 347);
             this.txbEmployeeName.Name = "txbEmployeeName";
+            this.txbEmployeeName.ReadOnly = true;
             this.txbEmployeeName.Size = new System.Drawing.Size(220, 31);
             this.txbEmployeeName.TabIndex = 11;
             // 
@@ -287,7 +291,7 @@
             // 
             this.lblHidden.AutoSize = true;
             this.lblHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblHidden.Location = new System.Drawing.Point(1196, 347);
+            this.lblHidden.Location = new System.Drawing.Point(1102, 350);
             this.lblHidden.Name = "lblHidden";
             this.lblHidden.Size = new System.Drawing.Size(130, 24);
             this.lblHidden.TabIndex = 19;
@@ -296,9 +300,9 @@
             // txbHidden
             // 
             this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbHidden.Location = new System.Drawing.Point(1342, 343);
+            this.txbHidden.Location = new System.Drawing.Point(1246, 347);
             this.txbHidden.Name = "txbHidden";
-            this.txbHidden.Size = new System.Drawing.Size(498, 31);
+            this.txbHidden.Size = new System.Drawing.Size(594, 31);
             this.txbHidden.TabIndex = 20;
             // 
             // lblPageSize
@@ -505,6 +509,33 @@
             this.lblEmployeeID.TabIndex = 37;
             this.lblEmployeeID.Text = "社員ID";
             // 
+            // lblClientName
+            // 
+            this.lblClientName.AutoSize = true;
+            this.lblClientName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblClientName.Location = new System.Drawing.Point(429, 414);
+            this.lblClientName.Name = "lblClientName";
+            this.lblClientName.Size = new System.Drawing.Size(82, 24);
+            this.lblClientName.TabIndex = 39;
+            this.lblClientName.Text = "顧客名";
+            // 
+            // txbClientName
+            // 
+            this.txbClientName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbClientName.Location = new System.Drawing.Point(514, 411);
+            this.txbClientName.Name = "txbClientName";
+            this.txbClientName.ReadOnly = true;
+            this.txbClientName.Size = new System.Drawing.Size(220, 31);
+            this.txbClientName.TabIndex = 38;
+            // 
+            // txbEmployeeID
+            // 
+            this.txbEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbEmployeeID.Location = new System.Drawing.Point(193, 347);
+            this.txbEmployeeID.Name = "txbEmployeeID";
+            this.txbEmployeeID.Size = new System.Drawing.Size(220, 31);
+            this.txbEmployeeID.TabIndex = 40;
+            // 
             // F_ButuryuSyukko
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -512,6 +543,9 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.txbEmployeeID);
+            this.Controls.Add(this.lblClientName);
+            this.Controls.Add(this.txbClientName);
             this.Controls.Add(this.lblEmployeeID);
             this.Controls.Add(this.dgvSyukkoDetail);
             this.Controls.Add(this.dgvSyukko);
@@ -606,5 +640,8 @@
         private System.Windows.Forms.DataGridView dgvSyukko;
         private System.Windows.Forms.DataGridView dgvSyukkoDetail;
         private System.Windows.Forms.Label lblEmployeeID;
+        private System.Windows.Forms.Label lblClientName;
+        private System.Windows.Forms.TextBox txbClientName;
+        private System.Windows.Forms.TextBox txbEmployeeID;
     }
 }

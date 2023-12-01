@@ -377,7 +377,7 @@
             this.lblClient.Name = "lblClient";
             this.lblClient.Size = new System.Drawing.Size(417, 64);
             this.lblClient.TabIndex = 23;
-            this.lblClient.Text = "顧客登録画面";
+            this.lblClient.Text = "顧客管理画面";
             // 
             // cmbView
             // 
