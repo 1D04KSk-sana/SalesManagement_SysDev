@@ -384,7 +384,7 @@
             // 
             this.btnPageMin.BackColor = System.Drawing.Color.White;
             this.btnPageMin.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnPageMin.Location = new System.Drawing.Point(883, 993);
+            this.btnPageMin.Location = new System.Drawing.Point(883, 997);
             this.btnPageMin.Margin = new System.Windows.Forms.Padding(2);
             this.btnPageMin.Name = "btnPageMin";
             this.btnPageMin.Size = new System.Drawing.Size(50, 40);
@@ -398,7 +398,7 @@
             // 
             this.btnBack.BackColor = System.Drawing.Color.White;
             this.btnBack.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnBack.Location = new System.Drawing.Point(937, 993);
+            this.btnBack.Location = new System.Drawing.Point(937, 998);
             this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(50, 40);
@@ -412,7 +412,7 @@
             // 
             this.btnPageMax.BackColor = System.Drawing.Color.White;
             this.btnPageMax.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnPageMax.Location = new System.Drawing.Point(1045, 993);
+            this.btnPageMax.Location = new System.Drawing.Point(1045, 998);
             this.btnPageMax.Margin = new System.Windows.Forms.Padding(2);
             this.btnPageMax.Name = "btnPageMax";
             this.btnPageMax.Size = new System.Drawing.Size(50, 40);
@@ -426,7 +426,7 @@
             // 
             this.btnNext.BackColor = System.Drawing.Color.White;
             this.btnNext.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnNext.Location = new System.Drawing.Point(991, 993);
+            this.btnNext.Location = new System.Drawing.Point(991, 998);
             this.btnNext.Margin = new System.Windows.Forms.Padding(2);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(50, 40);
