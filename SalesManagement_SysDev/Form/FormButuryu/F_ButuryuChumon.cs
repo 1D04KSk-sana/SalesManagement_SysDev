@@ -513,13 +513,16 @@ namespace SalesManagement_SysDev
                 intClientID = int.Parse(strClientID);
             }
 
+          
+
             // 検索条件のセット
             T_Chumon selectCondition = new T_Chumon()
             {
                 ChID = intChumonID,
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 ClID = intClientID,
-                OrID = intOrderID,
+                OrID = intOrderID, 
+            
             };
 
             if (searchFlg)
@@ -863,7 +866,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbChumonID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbChumonID.Text.Trim()) && String.IsNullOrEmpty(txbClientName.Text.Trim())&& String.IsNullOrEmpty(txbOrderID.Text.Trim()))
+            if (String.IsNullOrEmpty(txbChumonID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1  && String.IsNullOrEmpty(txbClientID.Text.Trim())&& String.IsNullOrEmpty(txbOrderID.Text.Trim()))
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbChumonID.Focus();
@@ -907,31 +910,25 @@ namespace SalesManagement_SysDev
                     return false;
                 }
             }
-            // 顧客名の適否
-            if (!String.IsNullOrEmpty(txbClientName.Text.Trim()))
+            // 顧客IDの適否
+            if (!String.IsNullOrEmpty(txbClientID.Text.Trim()))
             {
-                // 顧客名の文字数チェック
-                if (txbClientName.TextLength >= 50)
+                // 顧客IDの文字数チェック
+                if (txbClientID.TextLength >= 50)
                 {
                     MessageBox.Show("顧客名は50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbClientName.Focus();
+                    txbClientID.Focus();
                     return false;
                 }
             }
             else
             {
                 MessageBox.Show("顧客名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbClientName.Focus();
+                txbClientID.Focus();
                 return false;
             }
 
-            //営業所選択の適否
-            if (cmbSalesOfficeID.SelectedIndex == -1)
-            {
-                MessageBox.Show("営業所が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                cmbSalesOfficeID.Focus();
-                return false;
-            }
+            
 
             return true;
         }
