@@ -1257,7 +1257,7 @@ namespace SalesManagement_SysDev
                 txbProductID.Enabled = false;
                 txbProductName.Enabled = false;
                 cmbConfirm.Enabled = false;
-
+                dtpWarehousingDate.Enabled = false;
             }
             else
             {
@@ -1268,6 +1268,7 @@ namespace SalesManagement_SysDev
                 txbProductID.Enabled = true;
                 txbProductName.Enabled = true;
                 cmbConfirm.Enabled = true;
+                dtpWarehousingDate.Enabled=true;
             }
 
         }
