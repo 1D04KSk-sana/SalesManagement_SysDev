@@ -123,7 +123,7 @@ namespace SalesManagement_SysDev
             return listSalesOffice;
         }
         ///////////////////////////////
-        //メソッド名：GetClientNotDspData()
+        //メソッド名：GetSalesOfficeNotDspData()
         //引　数：なし
         //戻り値：管理Flgが非表示の営業所データ
         //機　能：管理Flgが非表示の営業所データの全取得
@@ -142,6 +142,98 @@ namespace SalesManagement_SysDev
             }
 
             return listSalesOffice;
+        }
+        ///////////////////////////////
+        //メソッド名：GetAndSalesOfficeData()
+        //引　数：検索条件
+        //戻り値：条件完全一致営業所データ
+        //機　能：条件完全一致営業所データの取得
+        ///////////////////////////////
+        public List<M_SalesOffice> GetAndSalesOfficeData(M_SalesOffice selectClient)
+        {
+            List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var query = context.M_SalesOffices.AsQueryable();
+
+                if (selectClient.SoID != null && selectClient.SoID != 0)
+                {
+                    query = query.Where(x => x.SoID == selectClient.SoID);
+                }
+
+                if (selectClient.SoPhone != null && selectClient.SoPhone != "")
+                {
+                    query = query.Where(x => x.SoPhone == selectClient.SoPhone);
+                }
+
+                listSalesOffice = query.ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listSalesOffice;
+        }
+        ///////////////////////////////
+        //メソッド名：GetOrSalesOfficeData()
+        //引　数：検索条件
+        //戻り値：条件一部一営業所データ
+        //機　能：条件一部一致営業所データの取得
+        ///////////////////////////////
+        public List<M_SalesOffice> GetOrSalesOfficetData(M_SalesOffice selectSalesOffice)
+        {
+            List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listSalesOffice = context.M_SalesOffices.Where(x =>  x.SoID == selectSalesOffice.SoID || x.SoPhone == selectSalesOffice.SoPhone).ToList();
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listSalesOffice;
+        }
+        ///////////////////////////////
+        //メソッド名：UpdateSalesOfficeData()
+        //引　数：updClient = 営業所データ
+        //戻り値：True or False
+        //機　能：営業所データの更新
+        //      ：更新成功の場合True
+        //      ：更新失敗の場合False
+        ///////////////////////////////
+        public bool UpdateSalesOfficeData(M_SalesOffice updSalesOffice)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var SalesOffice = context.M_SalesOffices.Single(x => x.SoID == updSalesOffice.SoID);
+
+                SalesOffice.SoName = updSalesOffice.SoName;
+                SalesOffice.SoFlag = updSalesOffice.SoFlag;
+                SalesOffice.SoHidden = updSalesOffice.SoHidden;
+                SalesOffice.SoFAX = updSalesOffice.SoFAX;
+                SalesOffice.SoPhone = updSalesOffice.SoPhone;
+                SalesOffice.SoAddress = updSalesOffice.SoAddress;
+                SalesOffice.SoID = updSalesOffice.SoID;
+                SalesOffice.SoPostal = updSalesOffice.SoPostal;
+
+                context.SaveChanges();
+                context.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
     }
 }
