@@ -443,7 +443,7 @@ namespace SalesManagement_SysDev
             }
 
             // メーカー名の適否
-            if (cmbHidden.SelectedIndex == -1)
+            if (cmbMakerName.SelectedIndex == -1)
             {
                 MessageBox.Show("メーカー名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbMakerName.Focus();
@@ -1487,6 +1487,7 @@ namespace SalesManagement_SysDev
                 txbHattyuQuantity.Enabled = false;
                 txbProductID.Enabled = false;
                 txbProductName.Enabled = false;
+                cmbConfirm.Enabled = false;
 
             }
             else
@@ -1498,7 +1499,7 @@ namespace SalesManagement_SysDev
                 txbHattyuQuantity.Enabled = true;
                 txbProductID.Enabled = true;
                 txbProductName.Enabled = true;
-
+                cmbConfirm.Enabled=true;
             }
         }
 
@@ -1510,6 +1511,8 @@ namespace SalesManagement_SysDev
                 txbHattyuQuantity.Enabled = false;
                 txbProductID.Enabled = false;
                 txbProductName.Enabled = false;
+                txbHidden.Enabled = false;
+                cmbConfirm.Enabled=false;
             }
             else
             {
@@ -1517,6 +1520,7 @@ namespace SalesManagement_SysDev
                 txbHattyuQuantity.Enabled = true;
                 txbProductID.Enabled = true;
                 txbProductName.Enabled = true;
+                cmbConfirm.Enabled= true;
             }
 
         }
@@ -1528,12 +1532,18 @@ namespace SalesManagement_SysDev
                 cmbMakerName.Enabled = false;
                 txbEmployeeName.Enabled = false;
                 dtpHattyuDate.Enabled = false;
+                cmbHidden.Enabled = false;
+                cmbConfirm.Enabled = false;
+                txbHidden.Enabled=false;
             }
             else
             {
                 cmbMakerName.Enabled = true;
                 txbEmployeeName.Enabled = true;
                 dtpHattyuDate.Enabled = true;
+                cmbHidden.Enabled = true;
+                cmbConfirm.Enabled = true;
+                txbHidden.Enabled = true;
             }
 
         }
@@ -1546,6 +1556,9 @@ namespace SalesManagement_SysDev
                 txbHattyuQuantity.Enabled = false;
                 txbProductID.Enabled = false;
                 txbProductName.Enabled = false;
+                txbHidden.Enabled = false;
+                cmbConfirm.Enabled=false;
+                cmbHidden .Enabled=false;
             }
             else
             {
@@ -1553,6 +1566,10 @@ namespace SalesManagement_SysDev
                 txbHattyuQuantity.Enabled = true;
                 txbProductID.Enabled = true;
                 txbProductName.Enabled = true;
+                txbHidden.Enabled = true;
+                cmbConfirm.Enabled = true;
+                cmbHidden.Enabled = true;
+
             }
         }
 
@@ -1560,6 +1577,11 @@ namespace SalesManagement_SysDev
         {
             if (rdbConfirm.Checked)
             {
+                cmbMakerName.Enabled = false;
+                txbEmployeeName.Enabled = false;
+                dtpHattyuDate.Enabled = false;
+                cmbHidden.Enabled=false;
+                txbHidden .Enabled=false;
                 txbHattyuDetailID.Enabled = false;
                 txbHattyuQuantity.Enabled = false;
                 txbProductID.Enabled = false;
@@ -1567,6 +1589,11 @@ namespace SalesManagement_SysDev
             }
             else
             {
+                cmbMakerName.Enabled = true;
+                txbEmployeeName.Enabled = true;
+                dtpHattyuDate.Enabled = true;
+                cmbHidden.Enabled = true;
+                txbHidden.Enabled = true;
                 txbHattyuDetailID.Enabled = true;
                 txbHattyuQuantity.Enabled = true;
                 txbProductID.Enabled = true;

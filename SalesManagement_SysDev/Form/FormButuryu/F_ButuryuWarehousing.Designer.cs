@@ -128,6 +128,7 @@
             // 
             // txbProductName
             // 
+            this.txbProductName.Enabled = false;
             this.txbProductName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbProductName.ForeColor = System.Drawing.Color.Black;
             this.txbProductName.Location = new System.Drawing.Point(1429, 350);
@@ -155,6 +156,7 @@
             this.txbProductID.Name = "txbProductID";
             this.txbProductID.Size = new System.Drawing.Size(220, 31);
             this.txbProductID.TabIndex = 58;
+            this.txbProductID.TextChanged += new System.EventHandler(this.txbProductID_TextChanged);
             // 
             // txbEmployeeName
             // 
@@ -290,8 +292,10 @@
             this.dtpWarehousingDate.Location = new System.Drawing.Point(869, 325);
             this.dtpWarehousingDate.Margin = new System.Windows.Forms.Padding(4);
             this.dtpWarehousingDate.Name = "dtpWarehousingDate";
+            this.dtpWarehousingDate.ShowCheckBox = true;
             this.dtpWarehousingDate.Size = new System.Drawing.Size(220, 29);
             this.dtpWarehousingDate.TabIndex = 101;
+            this.dtpWarehousingDate.TabStop = false;
             // 
             // btnDone
             // 
@@ -353,6 +357,7 @@
             this.btnPageSize.TabStop = false;
             this.btnPageSize.Text = "行数変更";
             this.btnPageSize.UseVisualStyleBackColor = false;
+            this.btnPageSize.Click += new System.EventHandler(this.btnPageSize_Click);
             // 
             // lblNumPage
             // 
@@ -387,6 +392,7 @@
             this.btnPageMin.TabStop = false;
             this.btnPageMin.Text = "|◀";
             this.btnPageMin.UseVisualStyleBackColor = false;
+            this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
             // 
             // btnBack
             // 
@@ -400,6 +406,7 @@
             this.btnBack.TabStop = false;
             this.btnBack.Text = "◀";
             this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnPageMax
             // 
@@ -413,6 +420,7 @@
             this.btnPageMax.TabStop = false;
             this.btnPageMax.Text = "▶|";
             this.btnPageMax.UseVisualStyleBackColor = false;
+            this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
             // btnNext
             // 
@@ -426,9 +434,11 @@
             this.btnNext.TabStop = false;
             this.btnNext.Text = "▶";
             this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // cmbHidden
             // 
+            this.cmbHidden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbHidden.ForeColor = System.Drawing.Color.Black;
             this.cmbHidden.FormattingEnabled = true;
@@ -551,6 +561,7 @@
             this.rdbConfirm.TabIndex = 125;
             this.rdbConfirm.Text = "確定";
             this.rdbConfirm.UseVisualStyleBackColor = true;
+            this.rdbConfirm.CheckedChanged += new System.EventHandler(this.rdbConfirm_CheckedChanged);
             // 
             // rdbUpdate
             // 
@@ -563,6 +574,7 @@
             this.rdbUpdate.TabIndex = 124;
             this.rdbUpdate.Text = "表示更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
+            this.rdbUpdate.CheckedChanged += new System.EventHandler(this.rdbUpdate_CheckedChanged);
             // 
             // cmbConfirm
             // 
@@ -572,7 +584,7 @@
             this.cmbConfirm.Items.AddRange(new object[] {
             "未確定",
             "確定"});
-            this.cmbConfirm.Location = new System.Drawing.Point(871, 384);
+            this.cmbConfirm.Location = new System.Drawing.Point(869, 381);
             this.cmbConfirm.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cmbConfirm.Name = "cmbConfirm";
             this.cmbConfirm.Size = new System.Drawing.Size(220, 32);
@@ -583,7 +595,7 @@
             // 
             this.lblConfirm.AutoSize = true;
             this.lblConfirm.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblConfirm.Location = new System.Drawing.Point(695, 392);
+            this.lblConfirm.Location = new System.Drawing.Point(695, 384);
             this.lblConfirm.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblConfirm.Name = "lblConfirm";
             this.lblConfirm.Size = new System.Drawing.Size(142, 24);
@@ -601,6 +613,7 @@
             this.rdbSearch.TabIndex = 129;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.rdbSearch_CheckedChanged);
             // 
             // F_ButuryuWarehousing
             // 
@@ -652,6 +665,7 @@
             this.Controls.Add(this.pnlButuryu);
             this.Name = "F_ButuryuWarehousing";
             this.Text = "F_ButuryuWarehousing";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.F_ButuryuWarehousing_Load);
             this.pnlButuryu.ResumeLayout(false);
             this.pnlButuryu.PerformLayout();

@@ -136,6 +136,30 @@ namespace SalesManagement_SysDev
 
             };
         }
+        private void txbProductID_TextChanged(object sender, EventArgs e)
+        {
+            //nullの確認
+            string stringProdactID = txbProductID.Text.Trim();
+            int intProdactID = 0;
+
+            if (!String.IsNullOrEmpty(stringProdactID))
+            {
+                intProdactID = int.Parse(stringProdactID);
+            }
+
+            //存在確認
+            if (!prodactDataAccess.CheckProdactIDExistence(intProdactID))
+            {
+                txbProductName.Text = "商品IDが存在しません";
+                return;
+            }
+
+            //IDから名前を取り出す
+            var Prodact = listProdact.Single(x => x.PrID == intProdactID);
+
+            txbProductName.Text = Prodact.PrName;
+        }
+
         private void btnDetailClear_Click(object sender, EventArgs e)
         {
             ClearImputDetail();
@@ -808,7 +832,7 @@ namespace SalesManagement_SysDev
         {
             f_SearchDialog.Close();
 
-            //HattyuSearchButtonClick(true);
+            WarehousingSearchButtonClick(true);
         }
         private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -818,7 +842,7 @@ namespace SalesManagement_SysDev
         {
             f_SearchDialog.Close();
 
-            //HattyuSearchButtonClick(false);
+            WarehousingSearchButtonClick(false);
         }
 
         ///////////////////////////////
@@ -832,7 +856,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbWarehousingID.Text.Trim()) && String.IsNullOrEmpty(txbEmployeeName.Text.Trim()) && String.IsNullOrEmpty(txbHattyuID.Text.Trim())&& dtpWarehousingDate.Checked == false)
+            if (String.IsNullOrEmpty(txbWarehousingID.Text.Trim()) && String.IsNullOrEmpty(txbEmployeeName.Text.Trim()) && String.IsNullOrEmpty(txbHattyuID.Text.Trim())&& dtpWarehousingDate.Checked == false )
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbWarehousingID.Focus();
@@ -1158,5 +1182,123 @@ namespace SalesManagement_SysDev
             };
         }
 
+        private void btnPageMax_Click(object sender, EventArgs e)
+        {
+            List<T_Warehousing> viewWarehousing = SetListWarehousing();
+
+            //ページ行数を取得
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
+            //最終ページ数を取得（テキストボックスに代入する数字なので-1はしない）
+            int lastPage = (int)Math.Ceiling(viewWarehousing.Count / (double)pageSize);
+
+            txbNumPage.Text = lastPage.ToString();
+
+            GetDataGridView();
+
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) + 1).ToString();
+
+            GetDataGridView();
+
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) - 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnPageMin_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+
+            GetDataGridView();
+        }
+
+        private void btnPageSize_Click(object sender, EventArgs e)
+        {
+            GetDataGridView();
+        }
+
+        private void rdbSearch_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+                txbWarehousingDetailID.Enabled = false;
+                txbWarehousingQuantity.Enabled = false;
+                txbProductID.Enabled = false;
+                txbProductName.Enabled = false;
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
+            }
+            else
+            {
+                txbWarehousingDetailID.Enabled = true;
+                txbWarehousingQuantity.Enabled = true;
+                txbProductID.Enabled = true;
+                txbProductName.Enabled = true;
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
+            }
+        }
+
+        private void rdbUpdate_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbUpdate.Checked)
+            {
+                txbEmployeeName.Enabled = false;
+                txbHattyuID.Enabled = false;
+                txbWarehousingDetailID.Enabled = false;
+                txbWarehousingQuantity.Enabled = false;
+                txbProductID.Enabled = false;
+                txbProductName.Enabled = false;
+                cmbConfirm.Enabled = false;
+
+            }
+            else
+            {
+                txbEmployeeName.Enabled = true;
+                txbHattyuID.Enabled = true;
+                txbWarehousingDetailID.Enabled = true;
+                txbWarehousingQuantity.Enabled = true;
+                txbProductID.Enabled = true;
+                txbProductName.Enabled = true;
+                cmbConfirm.Enabled = true;
+            }
+
+        }
+
+        private void rdbConfirm_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbConfirm.Checked)
+            {
+                txbEmployeeName.Enabled = false;
+                txbHattyuID.Enabled = false;
+                dtpWarehousingDate.Enabled = false;
+                cmbHidden.Enabled = false;
+                txbHidden.Enabled = false;
+                txbWarehousingDetailID.Enabled = false;
+                txbWarehousingQuantity.Enabled = false;
+                txbProductID.Enabled = false;
+                txbProductName.Enabled = false;
+            }
+            else
+            {
+                txbEmployeeName.Enabled = true;
+                txbHattyuID.Enabled = true;
+                dtpWarehousingDate.Enabled = true;
+                cmbHidden.Enabled = true;
+                txbHidden.Enabled = true;
+                txbWarehousingDetailID.Enabled = true;
+                txbWarehousingQuantity.Enabled = true;
+                txbProductID.Enabled = true;
+                txbProductName.Enabled = true;
+            }
+
+        }
     }
 }
