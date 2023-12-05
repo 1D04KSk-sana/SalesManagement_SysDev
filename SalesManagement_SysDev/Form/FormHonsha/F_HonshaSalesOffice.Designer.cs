@@ -259,10 +259,11 @@ namespace SalesManagement_SysDev
             // 
             // txbSalesOfficeAddress
             // 
+            this.txbSalesOfficeAddress.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.txbSalesOfficeAddress.Location = new System.Drawing.Point(707, 388);
             this.txbSalesOfficeAddress.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txbSalesOfficeAddress.Name = "txbSalesOfficeAddress";
-            this.txbSalesOfficeAddress.Size = new System.Drawing.Size(653, 19);
+            this.txbSalesOfficeAddress.Size = new System.Drawing.Size(653, 31);
             this.txbSalesOfficeAddress.TabIndex = 38;
             this.txbSalesOfficeAddress.TabStop = false;
             // 
