@@ -52,6 +52,9 @@ namespace SalesManagement_SysDev
         //発注詳細
         public DbSet<T_HattyuDetail> T_HattyuDetails { get; set; }
 
+        //ログイン記憶情報
+        public DbSet<T_LoginSave> T_LoginSaves { get; set; }
+
         //操作ログ（オリジナル）
         public DbSet<T_OperationLog> T_OperationLogs { get; set; }
 

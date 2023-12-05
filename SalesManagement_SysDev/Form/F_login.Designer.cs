@@ -39,6 +39,7 @@
             this.btnclose = new System.Windows.Forms.Button();
             this.lblProdact = new System.Windows.Forms.Label();
             this.pctPassEye = new System.Windows.Forms.PictureBox();
+            this.chbPassSave = new System.Windows.Forms.CheckBox();
             this.pnlLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctPassEye)).BeginInit();
             this.SuspendLayout();
@@ -167,12 +168,24 @@
             this.pctPassEye.TabStop = false;
             this.pctPassEye.Click += new System.EventHandler(this.pctPassEye_Click);
             // 
+            // chbPassSave
+            // 
+            this.chbPassSave.AutoSize = true;
+            this.chbPassSave.Font = new System.Drawing.Font("MS UI Gothic", 15F, System.Drawing.FontStyle.Bold);
+            this.chbPassSave.Location = new System.Drawing.Point(830, 663);
+            this.chbPassSave.Name = "chbPassSave";
+            this.chbPassSave.Size = new System.Drawing.Size(278, 24);
+            this.chbPassSave.TabIndex = 45;
+            this.chbPassSave.Text = "社員IDとパスワードを記憶する";
+            this.chbPassSave.UseVisualStyleBackColor = true;
+            // 
             // F_Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(250)))), ((int)(((byte)(237)))));
             this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.Controls.Add(this.chbPassSave);
             this.Controls.Add(this.pctPassEye);
             this.Controls.Add(this.pnlLogin);
             this.Controls.Add(this.lblSinghUpPass);
@@ -187,6 +200,7 @@
             this.Name = "F_Login";
             this.Text = "販売管理システムログイン画面";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.F_Login_Load);
             this.pnlLogin.ResumeLayout(false);
             this.pnlLogin.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctPassEye)).EndInit();
@@ -208,6 +222,7 @@
         private System.Windows.Forms.Label lblProdact;
         private System.Windows.Forms.Button btnclose;
         private System.Windows.Forms.PictureBox pctPassEye;
+        private System.Windows.Forms.CheckBox chbPassSave;
     }
 }
 
