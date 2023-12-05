@@ -775,6 +775,8 @@ namespace SalesManagement_SysDev
 
             int intSearchCount = listEmployee.Count;
 
+            txbNumPage.Text = "1";
+
             // 社員抽出結果表示
             GetDataGridView();
 
@@ -859,6 +861,11 @@ namespace SalesManagement_SysDev
             {
                 e.Handled = true;
             }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

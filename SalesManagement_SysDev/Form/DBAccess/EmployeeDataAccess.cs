@@ -33,6 +33,7 @@ namespace SalesManagement_SysDev
             }
             return flg;
         }
+
         ///////////////////////////////
         //メソッド名：GetEmployeeData()
         //引　数：なし

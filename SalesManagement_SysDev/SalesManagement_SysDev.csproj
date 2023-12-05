@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form\DBAccess\ChumonDetailDataAccess.cs" />
     <Compile Include="Form\DBAccess\ArrivalDetailDataAccess.cs" />
     <Compile Include="Form\DBAccess\ArrivalDataAccess.cs" />
     <Compile Include="Form\DBAccess\ChumonDataAccess.cs" />
@@ -171,7 +172,7 @@
     <Compile Include="Form\FormButuryu\F_ButuryuChumon.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="F_ButuryuChumon.Designer.cs">
+    <Compile Include="Form\FormButuryu\F_ButuryuChumon.Designer.cs">
       <DependentUpon>F_ButuryuChumon.cs</DependentUpon>
     </Compile>
     <Compile Include="Form\FormHonsha\F_HonshaSalesOffice.cs">
@@ -239,6 +240,12 @@
     <Compile Include="Form\DBAccess\StockDataAccess.cs" />
     <EmbeddedResource Include="Form\FormButuryu\F_Buturyu.resx">
       <DependentUpon>F_Buturyu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormButuryu\F_ButuryuChumon.resx">
+      <DependentUpon>F_ButuryuChumon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormButuryu\F_ButuryuSyukko.resx">
+      <DependentUpon>F_ButuryuSyukko.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\FormButuryu\F_ButuryuStock.resx">
       <DependentUpon>F_ButuryuStock.cs</DependentUpon>
