@@ -36,7 +36,7 @@ namespace SalesManagement_SysDev
         [Column(TypeName = "date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime EmHiredate { get; set; }    //入社年月日
-        [MaxLength(10)]
+        //[MaxLength(10)]
         [Required]
         public string EmPassword { get; set; }      //パスワード
         [MaxLength(13)]

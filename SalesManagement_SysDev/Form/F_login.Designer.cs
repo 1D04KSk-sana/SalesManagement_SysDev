@@ -37,6 +37,7 @@
             this.lblSinghUpPass = new System.Windows.Forms.Label();
             this.pnlLogin = new System.Windows.Forms.Panel();
             this.lblProdact = new System.Windows.Forms.Label();
+            this.btnclose = new System.Windows.Forms.Button();
             this.pnlLogin.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,6 +48,7 @@
             this.btn_CleateDabase.Name = "btn_CleateDabase";
             this.btn_CleateDabase.Size = new System.Drawing.Size(212, 84);
             this.btn_CleateDabase.TabIndex = 0;
+            this.btn_CleateDabase.TabStop = false;
             this.btn_CleateDabase.Text = "データベース生成";
             this.btn_CleateDabase.UseVisualStyleBackColor = true;
             this.btn_CleateDabase.Click += new System.EventHandler(this.btn_CleateDabase_Click);
@@ -58,6 +60,7 @@
             this.btn_InsertSampleData.Name = "btn_InsertSampleData";
             this.btn_InsertSampleData.Size = new System.Drawing.Size(212, 84);
             this.btn_InsertSampleData.TabIndex = 0;
+            this.btn_InsertSampleData.TabStop = false;
             this.btn_InsertSampleData.Text = "サンプルデータ登録";
             this.btn_InsertSampleData.UseVisualStyleBackColor = true;
             this.btn_InsertSampleData.Click += new System.EventHandler(this.btn_InsertSampleData_Click);
@@ -70,6 +73,7 @@
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(406, 108);
             this.btnLogin.TabIndex = 2;
+            this.btnLogin.TabStop = false;
             this.btnLogin.Text = "ログイン";
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -77,7 +81,7 @@
             // txbEmployeeID
             // 
             this.txbEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbEmployeeID.Location = new System.Drawing.Point(868, 317);
+            this.txbEmployeeID.Location = new System.Drawing.Point(878, 317);
             this.txbEmployeeID.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txbEmployeeID.Name = "txbEmployeeID";
             this.txbEmployeeID.Size = new System.Drawing.Size(309, 42);
@@ -117,6 +121,7 @@
             // pnlLogin
             // 
             this.pnlLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(255)))), ((int)(((byte)(242)))));
+            this.pnlLogin.Controls.Add(this.btnclose);
             this.pnlLogin.Controls.Add(this.lblProdact);
             this.pnlLogin.Location = new System.Drawing.Point(1, 0);
             this.pnlLogin.Margin = new System.Windows.Forms.Padding(2);
@@ -131,9 +136,22 @@
             this.lblProdact.Location = new System.Drawing.Point(801, 42);
             this.lblProdact.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProdact.Name = "lblProdact";
-            this.lblProdact.Size = new System.Drawing.Size(351, 64);
+            this.lblProdact.Size = new System.Drawing.Size(350, 64);
             this.lblProdact.TabIndex = 1;
             this.lblProdact.Text = "ログイン画面";
+            // 
+            // btnclose
+            // 
+            this.btnclose.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnclose.Location = new System.Drawing.Point(1722, 39);
+            this.btnclose.Margin = new System.Windows.Forms.Padding(2);
+            this.btnclose.Name = "btnclose";
+            this.btnclose.Size = new System.Drawing.Size(160, 70);
+            this.btnclose.TabIndex = 2;
+            this.btnclose.TabStop = false;
+            this.btnclose.Text = "閉じる";
+            this.btnclose.UseVisualStyleBackColor = true;
+            this.btnclose.Click += new System.EventHandler(this.btnclose_Click);
             // 
             // F_Login
             // 
@@ -152,6 +170,8 @@
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "F_Login";
             this.Text = "販売管理システムログイン画面";
+            this.pnlLogin.ResumeLayout(false);
+            this.pnlLogin.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -168,6 +188,7 @@
         private System.Windows.Forms.Label lblSinghUpPass;
         private System.Windows.Forms.Panel pnlLogin;
         private System.Windows.Forms.Label lblProdact;
+        private System.Windows.Forms.Button btnclose;
     }
 }
 
