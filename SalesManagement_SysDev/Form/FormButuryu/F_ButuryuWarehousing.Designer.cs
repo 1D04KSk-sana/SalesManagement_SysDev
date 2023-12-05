@@ -122,6 +122,7 @@
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(160, 70);
             this.btnReturn.TabIndex = 0;
+            this.btnReturn.TabStop = false;
             this.btnReturn.Text = "戻る";
             this.btnReturn.UseVisualStyleBackColor = true;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
@@ -166,7 +167,7 @@
             this.txbEmployeeName.Margin = new System.Windows.Forms.Padding(2);
             this.txbEmployeeName.Name = "txbEmployeeName";
             this.txbEmployeeName.Size = new System.Drawing.Size(220, 31);
-            this.txbEmployeeName.TabIndex = 59;
+            this.txbEmployeeName.TabIndex = 2;
             // 
             // txbWarehousingQuantity
             // 
@@ -186,7 +187,7 @@
             this.txbHattyuID.Margin = new System.Windows.Forms.Padding(2);
             this.txbHattyuID.Name = "txbHattyuID";
             this.txbHattyuID.Size = new System.Drawing.Size(220, 31);
-            this.txbHattyuID.TabIndex = 61;
+            this.txbHattyuID.TabIndex = 3;
             // 
             // txbWarehousingID
             // 
@@ -196,7 +197,7 @@
             this.txbWarehousingID.Margin = new System.Windows.Forms.Padding(2);
             this.txbWarehousingID.Name = "txbWarehousingID";
             this.txbWarehousingID.Size = new System.Drawing.Size(220, 31);
-            this.txbWarehousingID.TabIndex = 62;
+            this.txbWarehousingID.TabIndex = 1;
             // 
             // label3
             // 
@@ -235,12 +236,12 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label4.Location = new System.Drawing.Point(668, 265);
+            this.label4.Location = new System.Drawing.Point(755, 265);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(178, 24);
+            this.label4.Size = new System.Drawing.Size(82, 24);
             this.label4.TabIndex = 96;
-            this.label4.Text = "入庫確認社員名";
+            this.label4.Text = "社員名";
             // 
             // label5
             // 
@@ -451,6 +452,7 @@
             this.cmbHidden.Name = "cmbHidden";
             this.cmbHidden.Size = new System.Drawing.Size(220, 32);
             this.cmbHidden.TabIndex = 113;
+            this.cmbHidden.TabStop = false;
             // 
             // txbHidden
             // 
@@ -459,6 +461,7 @@
             this.txbHidden.Name = "txbHidden";
             this.txbHidden.Size = new System.Drawing.Size(1565, 42);
             this.txbHidden.TabIndex = 114;
+            this.txbHidden.TabStop = false;
             // 
             // cmbView
             // 
@@ -531,7 +534,7 @@
             // 
             this.rdbDetailRegister.AutoSize = true;
             this.rdbDetailRegister.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbDetailRegister.Location = new System.Drawing.Point(141, 183);
+            this.rdbDetailRegister.Location = new System.Drawing.Point(184, 182);
             this.rdbDetailRegister.Name = "rdbDetailRegister";
             this.rdbDetailRegister.Size = new System.Drawing.Size(173, 39);
             this.rdbDetailRegister.TabIndex = 121;
@@ -555,7 +558,7 @@
             // 
             this.rdbConfirm.AutoSize = true;
             this.rdbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbConfirm.Location = new System.Drawing.Point(541, 183);
+            this.rdbConfirm.Location = new System.Drawing.Point(590, 183);
             this.rdbConfirm.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbConfirm.Name = "rdbConfirm";
             this.rdbConfirm.Size = new System.Drawing.Size(103, 39);
@@ -568,7 +571,7 @@
             // 
             this.rdbUpdate.AutoSize = true;
             this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbUpdate.Location = new System.Drawing.Point(330, 183);
+            this.rdbUpdate.Location = new System.Drawing.Point(387, 183);
             this.rdbUpdate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbUpdate.Name = "rdbUpdate";
             this.rdbUpdate.Size = new System.Drawing.Size(173, 39);
@@ -607,7 +610,7 @@
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(22, 183);
+            this.rdbSearch.Location = new System.Drawing.Point(58, 182);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
