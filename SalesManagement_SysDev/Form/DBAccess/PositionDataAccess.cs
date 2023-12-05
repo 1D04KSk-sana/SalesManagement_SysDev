@@ -30,5 +30,29 @@ namespace SalesManagement_SysDev
 
             return listPosition;
         }
+
+        ///////////////////////////////
+        //メソッド名：GetPositionData()
+        //引　数：なし
+        //戻り値：役職データ
+        //機　能：役職データの全取得
+        ///////////////////////////////
+        public List<M_Position> GetPositionData()
+        {
+            List<M_Position> listPosition = new List<M_Position>();
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listPosition = context.M_Positions.ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listPosition;
+        }
     }
 }
