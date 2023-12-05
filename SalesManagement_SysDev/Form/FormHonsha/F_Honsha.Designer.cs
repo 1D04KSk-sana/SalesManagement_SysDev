@@ -37,6 +37,7 @@
             this.btnFormSinghUp = new System.Windows.Forms.Button();
             this.btnFormOperationLog = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnFormSalesOffice = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -148,12 +149,25 @@
             this.panel1.Size = new System.Drawing.Size(1920, 150);
             this.panel1.TabIndex = 8;
             // 
+            // btnFormSalesOffice
+            // 
+            this.btnFormSalesOffice.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormSalesOffice.Location = new System.Drawing.Point(1288, 940);
+            this.btnFormSalesOffice.Name = "btnFormSalesOffice";
+            this.btnFormSalesOffice.Size = new System.Drawing.Size(510, 100);
+            this.btnFormSalesOffice.TabIndex = 9;
+            this.btnFormSalesOffice.TabStop = false;
+            this.btnFormSalesOffice.Text = "営業所管理画面";
+            this.btnFormSalesOffice.UseVisualStyleBackColor = true;
+            this.btnFormSalesOffice.Click += new System.EventHandler(this.btnFormSalesOffice_Click);
+            // 
             // F_Honsha
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.btnFormSalesOffice);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnFormOperationLog);
             this.Controls.Add(this.btnFormSinghUp);
@@ -182,5 +196,6 @@
         private System.Windows.Forms.Button btnFormSinghUp;
         private System.Windows.Forms.Button btnFormOperationLog;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnFormSalesOffice;
     }
 }

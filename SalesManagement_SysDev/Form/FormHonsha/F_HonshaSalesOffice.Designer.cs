@@ -453,6 +453,7 @@ namespace SalesManagement_SysDev
             this.btnPageMin.TabStop = false;
             this.btnPageMin.Text = "|◀";
             this.btnPageMin.UseVisualStyleBackColor = true;
+            this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
             // 
             // btnBack
             // 
@@ -465,6 +466,7 @@ namespace SalesManagement_SysDev
             this.btnBack.TabStop = false;
             this.btnBack.Text = "◀";
             this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnNext
             // 
@@ -477,6 +479,7 @@ namespace SalesManagement_SysDev
             this.btnNext.TabStop = false;
             this.btnNext.Text = "▶";
             this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPageMax
             // 
@@ -489,6 +492,7 @@ namespace SalesManagement_SysDev
             this.btnPageMax.TabStop = false;
             this.btnPageMax.Text = "▶|";
             this.btnPageMax.UseVisualStyleBackColor = true;
+            this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
             // txbSalesOfficeName
             // 

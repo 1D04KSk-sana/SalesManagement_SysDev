@@ -92,6 +92,16 @@ namespace SalesManagement_SysDev
 
             this.Opacity = 0;
         }
+        private void btnFormSalesOffice_Click(object sender, EventArgs e)
+        {
+            F_HonshaSalesOffice F_HonshaSalesOffice = new F_HonshaSalesOffice();
+
+            F_HonshaSalesOffice.Owner = this;
+            F_HonshaSalesOffice.FormClosed += ChildForm_FormClosed;
+            F_HonshaSalesOffice.Show();
+
+            this.Opacity = 0;
+        }
 
         private void btnClose_Click(object sender, EventArgs e)
         {

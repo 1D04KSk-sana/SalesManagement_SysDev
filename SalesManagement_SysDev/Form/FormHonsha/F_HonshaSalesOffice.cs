@@ -296,11 +296,10 @@ namespace SalesManagement_SysDev
             // 営業所名の適否
             if (!String.IsNullOrEmpty(txbSalesOfficeName.Text.Trim()))
             {
-    
-                //営業所名の重複チェック
-                if (salesOfficeDataAccess.CheckClientIDExistence(int.Parse(txbSalesOfficeName.Text.Trim())))
+                // 営業所名の文字数チェック
+                if (txbSalesOfficeName.TextLength > 50)
                 {
-                    MessageBox.Show("営業所名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("営業所名は50文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSalesOfficeName.Focus();
                     return false;
                 }
@@ -582,14 +581,14 @@ namespace SalesManagement_SysDev
                 // 営業所IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbSalesOfficeID.Text.Trim()))
                 {
-                    MessageBox.Show("商品IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("営業所IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSalesOfficeID.Focus();
                     return false;
                 }
                 //営業所IDの重複チェック
                 if (!salesOfficeDataAccess.CheckClientIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
                 {
-                    MessageBox.Show("商品IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("営業所IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSalesOfficeID.Focus();
                     return false;
                 }
@@ -711,6 +710,16 @@ namespace SalesManagement_SysDev
 
             // 営業所名の適否
             if (!String.IsNullOrEmpty(txbSalesOfficeName.Text.Trim()))
+            {
+                // 営業所名の文字数チェック
+                if (txbSalesOfficeName.TextLength > 50)
+                {
+                    MessageBox.Show("営業所名は50文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSalesOfficeName.Focus();
+                    return false;
+                }
+            }
+            else
             {
                 MessageBox.Show("営業所名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbSalesOfficeName.Focus();
