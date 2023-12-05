@@ -24,13 +24,19 @@ namespace SalesManagement_SysDev
         PasswordHash passwordHash = new PasswordHash();
         //データベース社員テーブルアクセス用クラスのインスタンス化
         EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
+        //データベース操作ログテーブルアクセス用クラスのインスタンス化
+        OperationLogDataAccess operationLogDataAccess = new OperationLogDataAccess();
 
         M_Employee Employee = new M_Employee();
+
+        private int intPassEye = 1;
 
         //他フォームでも使用できるようにinternal
         //社員ID
         internal static int intEmployeeID = 116;
+        //役職ID
         internal static int intPositionID = 0;
+        //営業所ID
         internal static int intSalesOfficeID = 0;
 
         public F_Login()
@@ -949,6 +955,24 @@ namespace SalesManagement_SysDev
             Application.Exit();
         }
 
+        private void pctPassEye_Click(object sender, EventArgs e)
+        {
+            if (intPassEye == 0)
+            {
+                txbSinghUpPass.PasswordChar = '*';
+                pctPassEye.Image = Properties.Resources.PassEyeNot;
+
+                intPassEye = 1;
+            }
+            else if (intPassEye == 1)
+            {
+                txbSinghUpPass.PasswordChar = '\0';
+                pctPassEye.Image = Properties.Resources.PassEye;
+
+                intPassEye = 0;
+            }
+        }
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             //ログイン入力データの形式チェック
@@ -958,6 +982,19 @@ namespace SalesManagement_SysDev
             }
 
             if (!CheckIDPass())
+            {
+                return;
+            }
+
+            intEmployeeID = Employee.EmID;
+            intPositionID = Employee.PoID;
+            intSalesOfficeID = Employee.SoID;
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration("ログイン");
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogDataAccess.AddOperationLogData(regOperationLog))
             {
                 return;
             }
@@ -1079,11 +1116,26 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            intEmployeeID = Employee.EmID;
-            intPositionID = Employee.PoID;
-            intSalesOfficeID = Employee.SoID;
-
             return true;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateLogAtRegistration()
+        //引　数   ：操作名
+        //戻り値   ：操作ログ登録情報
+        //機　能   ：操作ログ情報登録データのセット
+        ///////////////////////////////
+        private T_OperationLog GenerateLogAtRegistration(string OperationDone)
+        {
+            return new T_OperationLog
+            {
+                OpHistoryID = operationLogDataAccess.OperationLogNum() + 1,
+                EmID = F_Login.intEmployeeID,
+                FormName = "ログイン画面",
+                OpDone = OperationDone,
+                OpDBID = null,
+                OpSetTime = DateTime.Now,
+            };
         }
     }
 }

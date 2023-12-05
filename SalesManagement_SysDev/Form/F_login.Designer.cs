@@ -36,9 +36,11 @@
             this.lblEmployeeID = new System.Windows.Forms.Label();
             this.lblSinghUpPass = new System.Windows.Forms.Label();
             this.pnlLogin = new System.Windows.Forms.Panel();
-            this.lblProdact = new System.Windows.Forms.Label();
             this.btnclose = new System.Windows.Forms.Button();
+            this.lblProdact = new System.Windows.Forms.Label();
+            this.pctPassEye = new System.Windows.Forms.PictureBox();
             this.pnlLogin.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctPassEye)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_CleateDabase
@@ -93,6 +95,7 @@
             this.txbSinghUpPass.Location = new System.Drawing.Point(878, 468);
             this.txbSinghUpPass.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txbSinghUpPass.Name = "txbSinghUpPass";
+            this.txbSinghUpPass.PasswordChar = '*';
             this.txbSinghUpPass.Size = new System.Drawing.Size(299, 42);
             this.txbSinghUpPass.TabIndex = 7;
             // 
@@ -129,17 +132,6 @@
             this.pnlLogin.Size = new System.Drawing.Size(1920, 150);
             this.pnlLogin.TabIndex = 43;
             // 
-            // lblProdact
-            // 
-            this.lblProdact.AutoSize = true;
-            this.lblProdact.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProdact.Location = new System.Drawing.Point(801, 42);
-            this.lblProdact.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblProdact.Name = "lblProdact";
-            this.lblProdact.Size = new System.Drawing.Size(350, 64);
-            this.lblProdact.TabIndex = 1;
-            this.lblProdact.Text = "ログイン画面";
-            // 
             // btnclose
             // 
             this.btnclose.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
@@ -153,12 +145,35 @@
             this.btnclose.UseVisualStyleBackColor = true;
             this.btnclose.Click += new System.EventHandler(this.btnclose_Click);
             // 
+            // lblProdact
+            // 
+            this.lblProdact.AutoSize = true;
+            this.lblProdact.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblProdact.Location = new System.Drawing.Point(801, 42);
+            this.lblProdact.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblProdact.Name = "lblProdact";
+            this.lblProdact.Size = new System.Drawing.Size(350, 64);
+            this.lblProdact.TabIndex = 1;
+            this.lblProdact.Text = "ログイン画面";
+            // 
+            // pctPassEye
+            // 
+            this.pctPassEye.Image = global::SalesManagement_SysDev.Properties.Resources.PassEyeNot;
+            this.pctPassEye.Location = new System.Drawing.Point(1201, 466);
+            this.pctPassEye.Name = "pctPassEye";
+            this.pctPassEye.Size = new System.Drawing.Size(73, 50);
+            this.pctPassEye.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctPassEye.TabIndex = 44;
+            this.pctPassEye.TabStop = false;
+            this.pctPassEye.Click += new System.EventHandler(this.pctPassEye_Click);
+            // 
             // F_Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(250)))), ((int)(((byte)(237)))));
             this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.Controls.Add(this.pctPassEye);
             this.Controls.Add(this.pnlLogin);
             this.Controls.Add(this.lblSinghUpPass);
             this.Controls.Add(this.lblEmployeeID);
@@ -168,10 +183,13 @@
             this.Controls.Add(this.btn_InsertSampleData);
             this.Controls.Add(this.btn_CleateDabase);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "F_Login";
             this.Text = "販売管理システムログイン画面";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.pnlLogin.ResumeLayout(false);
             this.pnlLogin.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctPassEye)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -189,6 +207,7 @@
         private System.Windows.Forms.Panel pnlLogin;
         private System.Windows.Forms.Label lblProdact;
         private System.Windows.Forms.Button btnclose;
+        private System.Windows.Forms.PictureBox pctPassEye;
     }
 }
 
