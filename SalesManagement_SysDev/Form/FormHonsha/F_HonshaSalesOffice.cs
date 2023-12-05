@@ -288,7 +288,7 @@ namespace SalesManagement_SysDev
             }
             else
             {
-                MessageBox.Show("顧客IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("営業所IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbSalesOfficeID.Focus();
                 return false;
             }
@@ -300,6 +300,13 @@ namespace SalesManagement_SysDev
                 if (txbSalesOfficeName.TextLength > 50)
                 {
                     MessageBox.Show("営業所名は50文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSalesOfficeName.Focus();
+                    return false;
+                }
+                //営業所名の重複チェック
+                if (salesOfficeDataAccess.CheckClientNameExistence(string.Format(txbSalesOfficeName.Text.Trim())))
+                {
+                    MessageBox.Show("営業所名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSalesOfficeName.Focus();
                     return false;
                 }
@@ -413,7 +420,7 @@ namespace SalesManagement_SysDev
             {
                 OpHistoryID = operationLogAccess.OperationLogNum() + 1,
                 EmID = F_Login.intEmployeeID,
-                FormName = "顧客管理画面",
+                FormName = "営業所管理画面",
                 OpDone = OperationDone,
                 OpDBID = int.Parse(txbSalesOfficeID.Text.Trim()),
                 OpSetTime = DateTime.Now,

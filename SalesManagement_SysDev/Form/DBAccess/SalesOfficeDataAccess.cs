@@ -235,5 +235,30 @@ namespace SalesManagement_SysDev
                 return false;
             }
         }
+
+        ///////////////////////////////
+        //メソッド名：CheckClientNameExistence()
+        //引　数   ：営業所コード
+        //戻り値   ：True or False
+        //機　能   ：一致する営業所名の有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckClientNameExistence(string SalesOfficeName)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                //営業所IDで一致するデータが存在するか
+                flg = context.M_SalesOffices.Any(x => x.SoName == SalesOfficeName);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
     }
 }
