@@ -175,6 +175,12 @@
     <Compile Include="Form\FormButuryu\F_ButuryuChumon.Designer.cs">
       <DependentUpon>F_ButuryuChumon.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\FormHonsha\F_HonshaSalesOffice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\FormHonsha\F_HonshaSalesOffice.Designer.cs">
+      <DependentUpon>F_HonshaSalesOffice.cs</DependentUpon>
+    </Compile>
     <Compile Include="MonthPicker.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -273,6 +279,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\FormHonsha\F_HonshaOperationLog.resx">
       <DependentUpon>F_HonshaOperationLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormHonsha\F_HonshaSalesOffice.resx">
+      <DependentUpon>F_HonshaSalesOffice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\FormHonsha\F_HonshaSinghUp.resx">
       <DependentUpon>F_HonshaSinghUp.cs</DependentUpon>
