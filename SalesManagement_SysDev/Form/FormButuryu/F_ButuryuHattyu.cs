@@ -1180,9 +1180,9 @@ namespace SalesManagement_SysDev
 
         ///////////////////////////////
         //メソッド名：GenerateWarehousingDetailAtRegistration()
-        //引　数   ：入庫情報
-        //戻り値   ：入庫登録情報
-        //機　能   ：入庫登録データのセット
+        //引　数   ：入庫詳細情報
+        //戻り値   ：入庫詳細登録情報
+        //機　能   ：入庫詳細登録データのセット
         ///////////////////////////////
         private T_WarehousingDetail GenerateWarehousingDetailAtRegistration(T_HattyuDetail HattyuDetail)
         {

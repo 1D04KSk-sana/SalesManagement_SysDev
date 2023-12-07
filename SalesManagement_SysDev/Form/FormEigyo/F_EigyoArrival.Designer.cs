@@ -59,7 +59,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.cmbHidden = new System.Windows.Forms.ComboBox();
             this.txbHidden = new System.Windows.Forms.TextBox();
             this.cmbConfirm = new System.Windows.Forms.ComboBox();
             this.lblConfirm = new System.Windows.Forms.Label();
@@ -71,6 +70,7 @@
             this.txbEmployeeName = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txbClientName = new System.Windows.Forms.TextBox();
+            this.cmbHidden = new System.Windows.Forms.ComboBox();
             this.pnlEigyo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArrivalDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArrival)).BeginInit();
@@ -225,6 +225,7 @@
             this.txbPageSize.Size = new System.Drawing.Size(50, 28);
             this.txbPageSize.TabIndex = 127;
             this.txbPageSize.TabStop = false;
+            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbPageSize_KeyPress);
             // 
             // btnPageSize
             // 
@@ -238,6 +239,7 @@
             this.btnPageSize.TabStop = false;
             this.btnPageSize.Text = "行数変更";
             this.btnPageSize.UseVisualStyleBackColor = false;
+            this.btnPageSize.Click += new System.EventHandler(this.btnPageSize_Click);
             // 
             // lblNumPage
             // 
@@ -259,6 +261,7 @@
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 124;
             this.txbNumPage.TabStop = false;
+            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbNumPage_KeyPress);
             // 
             // btnPageMin
             // 
@@ -272,6 +275,7 @@
             this.btnPageMin.TabStop = false;
             this.btnPageMin.Text = "|◀";
             this.btnPageMin.UseVisualStyleBackColor = false;
+            this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
             // 
             // btnBack
             // 
@@ -285,6 +289,7 @@
             this.btnBack.TabStop = false;
             this.btnBack.Text = "◀";
             this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnPageMax
             // 
@@ -298,6 +303,7 @@
             this.btnPageMax.TabStop = false;
             this.btnPageMax.Text = "▶|";
             this.btnPageMax.UseVisualStyleBackColor = false;
+            this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
             // btnNext
             // 
@@ -311,6 +317,7 @@
             this.btnNext.TabStop = false;
             this.btnNext.Text = "▶";
             this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // cmbView
             // 
@@ -444,21 +451,6 @@
             this.label8.TabIndex = 141;
             this.label8.Text = "表示/非表示";
             // 
-            // cmbHidden
-            // 
-            this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cmbHidden.ForeColor = System.Drawing.Color.Black;
-            this.cmbHidden.FormattingEnabled = true;
-            this.cmbHidden.Items.AddRange(new object[] {
-            "表示",
-            "非表示"});
-            this.cmbHidden.Location = new System.Drawing.Point(263, 447);
-            this.cmbHidden.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbHidden.Name = "cmbHidden";
-            this.cmbHidden.Size = new System.Drawing.Size(220, 32);
-            this.cmbHidden.TabIndex = 7;
-            this.cmbHidden.TabStop = false;
-            // 
             // txbHidden
             // 
             this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
@@ -504,6 +496,7 @@
             this.rdbSearch.TabIndex = 148;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.rdbSearch_CheckedChanged);
             // 
             // rdbConfirm
             // 
@@ -516,18 +509,20 @@
             this.rdbConfirm.TabIndex = 147;
             this.rdbConfirm.Text = "確定";
             this.rdbConfirm.UseVisualStyleBackColor = true;
+            this.rdbConfirm.CheckedChanged += new System.EventHandler(this.rdbConfirm_CheckedChanged);
             // 
             // rdbUpdate
             // 
             this.rdbUpdate.AutoSize = true;
             this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbUpdate.Location = new System.Drawing.Point(254, 185);
+            this.rdbUpdate.Location = new System.Drawing.Point(250, 185);
             this.rdbUpdate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbUpdate.Name = "rdbUpdate";
             this.rdbUpdate.Size = new System.Drawing.Size(173, 39);
             this.rdbUpdate.TabIndex = 146;
             this.rdbUpdate.Text = "表示更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
+            this.rdbUpdate.CheckedChanged += new System.EventHandler(this.rdbUpdate_CheckedChanged);
             // 
             // cmbSalesOfficeID
             // 
@@ -585,12 +580,29 @@
             this.txbClientName.Size = new System.Drawing.Size(220, 31);
             this.txbClientName.TabIndex = 151;
             // 
+            // cmbHidden
+            // 
+            this.cmbHidden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbHidden.ForeColor = System.Drawing.Color.Black;
+            this.cmbHidden.FormattingEnabled = true;
+            this.cmbHidden.Items.AddRange(new object[] {
+            "表示",
+            "非表示"});
+            this.cmbHidden.Location = new System.Drawing.Point(263, 447);
+            this.cmbHidden.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbHidden.Name = "cmbHidden";
+            this.cmbHidden.Size = new System.Drawing.Size(220, 32);
+            this.cmbHidden.TabIndex = 153;
+            this.cmbHidden.TabStop = false;
+            // 
             // F_EigyoArrival
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(219)))), ((int)(((byte)(193)))));
             this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.Controls.Add(this.cmbHidden);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txbClientName);
             this.Controls.Add(this.label9);
@@ -602,7 +614,6 @@
             this.Controls.Add(this.cmbConfirm);
             this.Controls.Add(this.lblConfirm);
             this.Controls.Add(this.txbHidden);
-            this.Controls.Add(this.cmbHidden);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label5);
@@ -676,7 +687,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox cmbHidden;
         private System.Windows.Forms.TextBox txbHidden;
         private System.Windows.Forms.ComboBox cmbConfirm;
         private System.Windows.Forms.Label lblConfirm;
@@ -688,5 +698,6 @@
         private System.Windows.Forms.TextBox txbEmployeeName;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txbClientName;
+        private System.Windows.Forms.ComboBox cmbHidden;
     }
 }

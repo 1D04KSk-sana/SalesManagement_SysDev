@@ -64,7 +64,23 @@ namespace SalesManagement_SysDev
             { 0, "未確定" },
             { 1, "確定" },
         };
+        private void txbNumPage_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
 
+        }
+        private void txbPageSize_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
         private void btnReturn_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -1098,6 +1114,7 @@ namespace SalesManagement_SysDev
             {
                 WaID = int.Parse(txbWarehousingID.Text.Trim()),
                 WaShelfFlag = 1,
+                EmID = F_Login.intEmployeeID
             };
         }
 

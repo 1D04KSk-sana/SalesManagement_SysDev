@@ -264,6 +264,9 @@ namespace SalesManagement_SysDev
                 var Warehousing = context.T_Warehousings.Single(x => x.WaID == cfmWarehousing.WaID);
 
                 Warehousing.WaShelfFlag = cfmWarehousing.WaShelfFlag;
+                Warehousing.EmID = cfmWarehousing.EmID;
+
+
 
                 context.SaveChanges();
                 context.Dispose();

@@ -961,7 +961,7 @@ namespace SalesManagement_SysDev
                     M_Client = cl[3],
                     T_Order = or[1],
                     ArDate = new DateTime(2023, 1, 05),
-                    ArStateFlag = 1,
+                    ArStateFlag = 0,
                     ArFlag = 0,
                 });
                 context.T_Arrivals.AddRange(ar);

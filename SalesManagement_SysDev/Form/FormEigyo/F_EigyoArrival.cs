@@ -30,6 +30,10 @@ namespace SalesManagement_SysDev
         ProdactDataAccess prodactDataAccess = new ProdactDataAccess();
         //データベース受注テーブルアクセス用クラスのインスタンス化
         OrderDataAccess orderDataAccess = new OrderDataAccess();
+        //データベース出荷テーブルアクセス用クラスのインスタンス化
+        ShipmentDataAccess shipmentDataAccess = new ShipmentDataAccess();
+        //データベース出荷テーブルアクセス用クラスのインスタンス化
+        ShipmentDetailDataAccess shipmentDetailDataAccess = new ShipmentDetailDataAccess();
         //コンボボックス用の社員データリスト
         private static List<M_Employee> listEmployee = new List<M_Employee>();
         //コンボボックス用の商品データリスト
@@ -74,6 +78,23 @@ namespace SalesManagement_SysDev
             { 0, "未確定" },
             { 1, "確定" },
         };
+        private void txbNumPage_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+
+        }
+        private void txbPageSize_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
         private void btnReturn_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -353,14 +374,14 @@ namespace SalesManagement_SysDev
             dgvArrival.Columns.Add("ArStateFlag", "入荷済フラグ");
             dgvArrival.Columns.Add("ArHidden", "非表示理由");
 
-            dgvArrival.Columns["ArID"].Width = 132;
-            dgvArrival.Columns["SoID"].Width = 132;
+            dgvArrival.Columns["ArID"].Width = 112;
+            dgvArrival.Columns["SoID"].Width = 162;
             dgvArrival.Columns["EmID"].Width = 150;
-            dgvArrival.Columns["ClID"].Width = 132;
-            dgvArrival.Columns["OrID"].Width = 130;
+            dgvArrival.Columns["ClID"].Width = 152;
+            dgvArrival.Columns["OrID"].Width = 100;
             dgvArrival.Columns["ArDate"].Width = 160;
             dgvArrival.Columns["ArFlag"].Width = 170;
-            dgvArrival.Columns["ArStateFlag"].Width = 160;
+            dgvArrival.Columns["ArStateFlag"].Width = 161;
             dgvArrival.Columns["ArHidden"].Width = 265;
 
 
@@ -540,7 +561,7 @@ namespace SalesManagement_SysDev
             //確定ラヂオボタンがチェックされているとき
             if (rdbConfirm.Checked)
             {
-                //ArrivalDataConfirm();
+                ArrivalDataConfirm();
             }
         }
 
@@ -900,6 +921,324 @@ namespace SalesManagement_SysDev
                 listArrival = arrivalDataAccess.GetOrArrivalData(selectCondition);
             }
         }
+        ///////////////////////////////
+        //メソッド名：ArrivalDataConfirm()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：入荷情報確定の実行
+        ///////////////////////////////
+        private void ArrivalDataConfirm()
+        {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtConfirm())
+            {
+                return;
+            }
 
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbConfirm.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
+            // 入荷情報作成
+            var cmfArrival = GenerateDataAtConfirm();
+
+            // 入荷情報更新
+            ConfirmArrival(cmfArrival);
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtConfirm()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：確定入力データの形式チェック
+        //          ：エラーがない場合True
+        //          ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtConfirm()
+        {
+            //入荷IDの適否
+            if (!String.IsNullOrEmpty(txbArrivalID.Text.Trim()))
+            {
+                // 入荷IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbArrivalID.Text.Trim()))
+                {
+                    MessageBox.Show("入荷IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbArrivalID.Focus();
+                    return false;
+                }
+                //入庫IDの存在チェック
+                if (!arrivalDataAccess.CheckArrivalIDExistence(int.Parse(txbArrivalID.Text.Trim())))
+                {
+                    MessageBox.Show("入荷IDが存在していません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbArrivalID.Focus();
+                    return false;
+                }
+
+                T_Arrival arrival = arrivalDataAccess.GetIDArrivalData(int.Parse(txbArrivalID.Text.Trim()));
+
+                //入庫IDの確定チェック
+                if (arrival.ArStateFlag == 1)
+                {
+                    MessageBox.Show("入荷IDはすでに確定しています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbArrivalID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("入荷IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbArrivalID.Focus();
+                return false;
+            }
+
+            //確定選択の適否
+            if (cmbConfirm.SelectedIndex == -1)
+            {
+                MessageBox.Show("未確定/確定が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbConfirm.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtConfirm()
+        //引　数   ：なし
+        //戻り値   ：入荷確定情報
+        //機　能   ：確定データのセット
+        ///////////////////////////////
+        private T_Arrival GenerateDataAtConfirm()
+        {
+            return new T_Arrival
+            {
+                ArID = int.Parse(txbArrivalID.Text.Trim()),
+                ArStateFlag = 1,
+                EmID = F_Login.intEmployeeID,
+            };
+        }
+
+        ///////////////////////////////
+        //メソッド名：ConfirmArrival()
+        //引　数   ：入荷情報
+        //戻り値   ：なし
+        //機　能   ：入荷情報の確定
+        ///////////////////////////////
+        private void ConfirmArrival(T_Arrival cfmArrival)
+        {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("確定しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            // 発注情報の更新
+            bool flg = arrivalDataAccess.ConfirmArrivalData(cfmArrival);
+
+            if (flg == true)
+            {
+                MessageBox.Show("確定しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("確定に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            T_Arrival Arrival = arrivalDataAccess.GetIDArrivalData(int.Parse(txbArrivalID.Text.Trim()));
+
+            T_Shipment Shipment = GenerateShipmentAtRegistration(Arrival);
+
+            bool flgShipment = shipmentDataAccess.AddShipmentData(Shipment);
+
+            if (flgShipment == true)
+            {
+                MessageBox.Show("出荷管理にデータを送信ました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("出荷管理へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            List<T_ArrivalDetail> listArrivalDetail = arrivalDetailDataAccess.GetIDArrivalDetailData(int.Parse(txbArrivalID.Text.Trim()));
+
+            List<bool> flgArrivallist = new List<bool>();
+            bool flgArrival = true;
+
+            foreach (var item in listArrivalDetail)
+            {
+                T_ShipmentDetail ShipmentDetail = GenerateShipmentDetailAtRegistration(item);
+
+                flgArrivallist.Add(shipmentDetailDataAccess.AddShipmentDetailData(ShipmentDetail));
+            }
+
+            foreach (var item in flgArrivallist)
+            {
+                if (!item)
+                {
+                    flgArrival = false;
+                }
+            }
+
+            if (flgArrival)
+            {
+                MessageBox.Show("出荷詳細へデータを送信しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("出荷詳細へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //テキストボックス等のクリア
+            ClearImput();
+
+            // データグリッドビューの表示
+            GetDataGridView();
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateShipmentAtRegistration()
+        //引　数   ：出荷情報
+        //戻り値   ：出荷登録情報
+        //機　能   ：出荷登録データのセット
+        ///////////////////////////////
+        private T_Shipment GenerateShipmentAtRegistration(T_Arrival Arrival)
+        {
+            return new T_Shipment
+            {
+                ShID = Arrival.ArID,
+                ClID = Arrival.ClID,
+                EmID = F_Login.intEmployeeID,
+                SoID = Arrival.SoID,
+                OrID = Arrival.OrID,
+                ShStateFlag = 0,
+                ShFlag = 0,
+            };
+        }
+        ///////////////////////////////
+        //メソッド名：GenerateShipmentDetailAtRegistration()
+        //引　数   ：入荷詳細情報
+        //戻り値   ：入荷詳細登録情報
+        //機　能   ：入荷詳細登録データのセット
+        ///////////////////////////////
+        private T_ShipmentDetail GenerateShipmentDetailAtRegistration(T_ArrivalDetail ArrivalDetail)
+        {
+            return new T_ShipmentDetail
+            {
+                ShID = ArrivalDetail.ArID,
+                PrID = ArrivalDetail.PrID,
+                ShQuantity = ArrivalDetail.ArQuantity
+            };
+        }
+
+        private void rdbSearch_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
+                cmbConfirm.Enabled = false;
+            }
+            else
+            {
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
+                cmbConfirm.Enabled = true;
+            }
+        }
+
+        private void rdbUpdate_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbUpdate.Checked)
+            {
+                txbArrivalID.Enabled = false;
+                txbClientID.Enabled = false;
+                txbEmployeeID.Enabled = false;
+                txbOrderID.Enabled = false;
+                cmbConfirm.Enabled = false;
+                cmbSalesOfficeID.Enabled = false;
+                dtpArrivalDate.Enabled = false;
+            }
+            else
+            {
+                txbArrivalID.Enabled = true;
+                txbClientID.Enabled= true;
+                txbEmployeeID.Enabled = true;
+                txbOrderID.Enabled = true;
+                cmbConfirm.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                dtpArrivalDate.Enabled = true;
+            }
+        }
+
+        private void rdbConfirm_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbConfirm.Checked)
+            {
+                txbClientID.Enabled = false;
+                txbEmployeeID.Enabled = false;
+                txbOrderID.Enabled = false;
+                cmbSalesOfficeID.Enabled = false;
+                dtpArrivalDate.Enabled = false;
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
+            }
+            else
+            {
+                txbClientID.Enabled = true;
+                txbEmployeeID.Enabled = true;
+                txbOrderID.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                dtpArrivalDate.Enabled = true;
+                txbHidden.Enabled=true;
+                cmbHidden.Enabled = true;
+            }
+        }
+
+        private void btnPageMax_Click(object sender, EventArgs e)
+        {
+            List<T_Arrival> viewArrival= SetListArrival();
+
+            //ページ行数を取得
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
+            //最終ページ数を取得（テキストボックスに代入する数字なので-1はしない）
+            int lastPage = (int)Math.Ceiling(viewArrival.Count / (double)pageSize);
+
+            txbNumPage.Text = lastPage.ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) + 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) - 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnPageMin_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+
+            GetDataGridView();
+        }
+
+        private void btnPageSize_Click(object sender, EventArgs e)
+        {
+            GetDataGridView();
+        }
     }
 }

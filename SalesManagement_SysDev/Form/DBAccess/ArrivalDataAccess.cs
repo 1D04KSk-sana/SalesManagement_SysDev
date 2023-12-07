@@ -248,7 +248,7 @@ namespace SalesManagement_SysDev
                 var Arrival = context.T_Arrivals.Single(x => x.ArID == cfmArrival.ArID);
 
                 Arrival.ArStateFlag = cfmArrival.ArStateFlag;
-
+                Arrival.EmID = cfmArrival.EmID;
                 context.SaveChanges();
                 context.Dispose();
 

@@ -86,5 +86,10 @@ namespace SalesManagement_SysDev
             this.Opacity = 0;
 
         }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

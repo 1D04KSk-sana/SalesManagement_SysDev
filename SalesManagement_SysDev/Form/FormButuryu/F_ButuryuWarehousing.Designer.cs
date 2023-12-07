@@ -346,6 +346,7 @@
             this.txbPageSize.Size = new System.Drawing.Size(50, 28);
             this.txbPageSize.TabIndex = 111;
             this.txbPageSize.TabStop = false;
+            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbPageSize_KeyPress);
             // 
             // btnPageSize
             // 
@@ -381,6 +382,7 @@
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 108;
             this.txbNumPage.TabStop = false;
+            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbNumPage_KeyPress);
             // 
             // btnPageMin
             // 
