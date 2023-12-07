@@ -177,6 +177,7 @@
             this.dtpArrivalDate.ShowCheckBox = true;
             this.dtpArrivalDate.Size = new System.Drawing.Size(220, 29);
             this.dtpArrivalDate.TabIndex = 6;
+            this.dtpArrivalDate.TabStop = false;
             // 
             // dgvArrivalDetail
             // 
