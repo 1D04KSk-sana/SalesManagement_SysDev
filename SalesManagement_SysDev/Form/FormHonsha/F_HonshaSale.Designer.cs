@@ -57,10 +57,11 @@
             this.cmbHidden = new System.Windows.Forms.ComboBox();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.rdbHiddenUpdate = new System.Windows.Forms.RadioButton();
-            this.dtpSaleDate = new SalesManagement_SysDev.MonthPicker();
             this.lblHidden = new System.Windows.Forms.Label();
             this.txbClientID = new System.Windows.Forms.TextBox();
             this.lblClientID = new System.Windows.Forms.Label();
+            this.dtpSaleDate = new SalesManagement_SysDev.MonthPicker();
+            this.button1 = new System.Windows.Forms.Button();
             this.pnlHonsha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSaleDetail)).BeginInit();
@@ -74,7 +75,7 @@
             this.lblClient.Location = new System.Drawing.Point(784, 41);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(417, 64);
+            this.lblClient.Size = new System.Drawing.Size(418, 64);
             this.lblClient.TabIndex = 23;
             this.lblClient.Text = "売上管理画面";
             // 
@@ -132,6 +133,7 @@
             // pnlHonsha
             // 
             this.pnlHonsha.BackColor = System.Drawing.Color.Lime;
+            this.pnlHonsha.Controls.Add(this.button1);
             this.pnlHonsha.Controls.Add(this.lblClient);
             this.pnlHonsha.Controls.Add(this.btnReturn);
             this.pnlHonsha.Location = new System.Drawing.Point(0, 0);
@@ -419,18 +421,6 @@
             this.rdbHiddenUpdate.UseVisualStyleBackColor = true;
             this.rdbHiddenUpdate.CheckedChanged += new System.EventHandler(this.rdbHiddenUpdate_CheckedChanged);
             // 
-            // dtpSaleDate
-            // 
-            this.dtpSaleDate.CustomFormat = "MMMM yyyy";
-            this.dtpSaleDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.dtpSaleDate.Location = new System.Drawing.Point(981, 368);
-            this.dtpSaleDate.Margin = new System.Windows.Forms.Padding(2);
-            this.dtpSaleDate.Name = "dtpSaleDate";
-            this.dtpSaleDate.ShowCheckBox = true;
-            this.dtpSaleDate.Size = new System.Drawing.Size(220, 31);
-            this.dtpSaleDate.TabIndex = 81;
-            this.dtpSaleDate.TabStop = false;
-            // 
             // lblHidden
             // 
             this.lblHidden.AutoSize = true;
@@ -464,6 +454,30 @@
             this.lblClientID.Size = new System.Drawing.Size(80, 24);
             this.lblClientID.TabIndex = 84;
             this.lblClientID.Text = "顧客ID";
+            // 
+            // dtpSaleDate
+            // 
+            this.dtpSaleDate.CustomFormat = "MMMM yyyy";
+            this.dtpSaleDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.dtpSaleDate.Location = new System.Drawing.Point(981, 368);
+            this.dtpSaleDate.Margin = new System.Windows.Forms.Padding(2);
+            this.dtpSaleDate.Name = "dtpSaleDate";
+            this.dtpSaleDate.ShowCheckBox = true;
+            this.dtpSaleDate.Size = new System.Drawing.Size(220, 31);
+            this.dtpSaleDate.TabIndex = 81;
+            this.dtpSaleDate.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button1.Location = new System.Drawing.Point(1729, 41);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(160, 70);
+            this.button1.TabIndex = 85;
+            this.button1.TabStop = false;
+            this.button1.Text = "閉じる";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // F_HonshaSale
             // 
@@ -553,5 +567,6 @@
         private System.Windows.Forms.Label lblHidden;
         private System.Windows.Forms.TextBox txbClientID;
         private System.Windows.Forms.Label lblClientID;
+        private System.Windows.Forms.Button button1;
     }
 }

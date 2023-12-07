@@ -73,6 +73,7 @@
             this.lblConfirm = new System.Windows.Forms.Label();
             this.cmbConfirm = new System.Windows.Forms.ComboBox();
             this.dtpHattyuDate = new System.Windows.Forms.DateTimePicker();
+            this.btnClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHattyuDetail)).BeginInit();
             this.pnlHonsha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHattyu)).BeginInit();
@@ -262,6 +263,7 @@
             // pnlHonsha
             // 
             this.pnlHonsha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(136)))), ((int)(((byte)(179)))));
+            this.pnlHonsha.Controls.Add(this.btnClose);
             this.pnlHonsha.Controls.Add(this.lblClient);
             this.pnlHonsha.Controls.Add(this.btnReturn);
             this.pnlHonsha.Location = new System.Drawing.Point(-8, -14);
@@ -278,7 +280,7 @@
             this.lblClient.Location = new System.Drawing.Point(784, 41);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(417, 64);
+            this.lblClient.Size = new System.Drawing.Size(418, 64);
             this.lblClient.TabIndex = 23;
             this.lblClient.Text = "発注管理画面";
             // 
@@ -617,6 +619,19 @@
             this.dtpHattyuDate.TabIndex = 127;
             this.dtpHattyuDate.TabStop = false;
             // 
+            // btnClose
+            // 
+            this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnClose.Location = new System.Drawing.Point(1707, 48);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(2);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(160, 70);
+            this.btnClose.TabIndex = 128;
+            this.btnClose.TabStop = false;
+            this.btnClose.Text = "閉じる";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // F_ButuryuHattyu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -729,5 +744,6 @@
         private System.Windows.Forms.Label lblConfirm;
         private System.Windows.Forms.ComboBox cmbConfirm;
         private System.Windows.Forms.DateTimePicker dtpHattyuDate;
+        private System.Windows.Forms.Button btnClose;
     }
 }

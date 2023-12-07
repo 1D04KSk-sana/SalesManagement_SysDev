@@ -1604,5 +1604,10 @@ namespace SalesManagement_SysDev
                 txbProductName.Enabled = true;
             }
         }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

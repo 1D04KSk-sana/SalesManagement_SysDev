@@ -47,6 +47,7 @@
             this.dtpHireDate = new System.Windows.Forms.DateTimePicker();
             this.txbEmployeeID = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnClose = new System.Windows.Forms.Button();
             this.pnlHonsha.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,13 +59,14 @@
             this.lblSinghup.Location = new System.Drawing.Point(760, 28);
             this.lblSinghup.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSinghup.Name = "lblSinghup";
-            this.lblSinghup.Size = new System.Drawing.Size(287, 64);
+            this.lblSinghup.Size = new System.Drawing.Size(288, 64);
             this.lblSinghup.TabIndex = 23;
             this.lblSinghup.Text = "新規登録";
             // 
             // pnlHonsha
             // 
             this.pnlHonsha.BackColor = System.Drawing.Color.Lime;
+            this.pnlHonsha.Controls.Add(this.btnClose);
             this.pnlHonsha.Controls.Add(this.lblSinghup);
             this.pnlHonsha.Controls.Add(this.btnReturn);
             this.pnlHonsha.Location = new System.Drawing.Point(1, -1);
@@ -253,6 +255,18 @@
             this.label1.TabIndex = 59;
             this.label1.Text = "社員ID";
             // 
+            // btnClose
+            // 
+            this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 30F);
+            this.btnClose.Location = new System.Drawing.Point(1674, 38);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(200, 80);
+            this.btnClose.TabIndex = 60;
+            this.btnClose.Text = "閉じる";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // F_HonshaSinghUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
@@ -313,5 +327,6 @@
         private System.Windows.Forms.DateTimePicker dtpHireDate;
         private System.Windows.Forms.MaskedTextBox txbEmployeeID;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnClose;
     }
 }

@@ -86,7 +86,7 @@
             this.lblWarehousing.Location = new System.Drawing.Point(754, 44);
             this.lblWarehousing.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWarehousing.Name = "lblWarehousing";
-            this.lblWarehousing.Size = new System.Drawing.Size(417, 64);
+            this.lblWarehousing.Size = new System.Drawing.Size(418, 64);
             this.lblWarehousing.TabIndex = 24;
             this.lblWarehousing.Text = "入庫管理画面";
             // 
@@ -105,7 +105,7 @@
             // btnClose
             // 
             this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClose.Location = new System.Drawing.Point(1705, 51);
+            this.btnClose.Location = new System.Drawing.Point(1703, 37);
             this.btnClose.Margin = new System.Windows.Forms.Padding(2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(160, 70);
@@ -113,6 +113,7 @@
             this.btnClose.TabStop = false;
             this.btnClose.Text = "閉じる";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnReturn
             // 

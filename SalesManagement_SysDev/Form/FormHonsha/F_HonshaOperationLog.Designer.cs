@@ -76,7 +76,7 @@
             this.lblOperationLog.Location = new System.Drawing.Point(754, 26);
             this.lblOperationLog.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOperationLog.Name = "lblOperationLog";
-            this.lblOperationLog.Size = new System.Drawing.Size(384, 64);
+            this.lblOperationLog.Size = new System.Drawing.Size(385, 64);
             this.lblOperationLog.TabIndex = 24;
             this.lblOperationLog.Text = "ログ管理画面";
             // 
@@ -104,6 +104,7 @@
             this.btnClose.TabStop = false;
             this.btnClose.Text = "閉じる";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnClear
             // 

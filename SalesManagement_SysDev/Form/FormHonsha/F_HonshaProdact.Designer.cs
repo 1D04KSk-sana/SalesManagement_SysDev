@@ -74,6 +74,7 @@
             this.cmbSmallID = new System.Windows.Forms.ComboBox();
             this.dtpProdactReleaseDate = new System.Windows.Forms.DateTimePicker();
             this.lblprodactdspHidden = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdact)).BeginInit();
             this.pnlProdact.SuspendLayout();
@@ -516,6 +517,7 @@
             // pnlProdact
             // 
             this.pnlProdact.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(255)))), ((int)(((byte)(112)))));
+            this.pnlProdact.Controls.Add(this.button1);
             this.pnlProdact.Controls.Add(this.lblProdact);
             this.pnlProdact.Controls.Add(this.btnReturn);
             this.pnlProdact.Location = new System.Drawing.Point(1, 0);
@@ -614,6 +616,18 @@
             this.lblprodactdspHidden.Size = new System.Drawing.Size(142, 24);
             this.lblprodactdspHidden.TabIndex = 49;
             this.lblprodactdspHidden.Text = "表示/非表示";
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button1.Location = new System.Drawing.Point(1724, 38);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(160, 70);
+            this.button1.TabIndex = 50;
+            this.button1.TabStop = false;
+            this.button1.Text = "閉じる";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // F_HonshaProdact
             // 
@@ -728,5 +742,6 @@
         private System.Windows.Forms.ComboBox cmbSmallID;
         private System.Windows.Forms.DateTimePicker dtpProdactReleaseDate;
         private System.Windows.Forms.Label lblprodactdspHidden;
+        private System.Windows.Forms.Button button1;
     }
 }
