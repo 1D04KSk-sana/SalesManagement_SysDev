@@ -97,7 +97,7 @@ namespace SalesManagement_SysDev
 
             GetDataGridView();
         }
-        
+           
         private void F_EigyoShipment_Load(object sender, EventArgs e)
         {
             txbNumPage.Text = "1";
@@ -118,6 +118,20 @@ namespace SalesManagement_SysDev
 
             //cmbViewを表示に
             cmbView.SelectedIndex = 0;
+        }
+        
+        private void dgvShipment_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvShipment.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            //選択された行に対してのコントロールの変更
+            SelectRowControl();
+
+            SetDataDetailGridView(int.Parse(dgvShipment[0, dgvShipment.CurrentCellAddress.Y].Value.ToString()));
         }
         
         private void btnPageSize_Click(object sender, EventArgs e)
@@ -603,10 +617,34 @@ namespace SalesManagement_SysDev
             }
         }
 
+        ///////////////////////////////
+        //メソッド名：SelectRowControl()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：選択された行に対してのコントロールの変更
+        ///////////////////////////////
+        private void SelectRowControl()
+        {
+            //データグリッドビューに乗っている情報をguiに反映
+            txbShipmentID.Text = dgvShipment[0, dgvShipment.CurrentCellAddress.Y].Value.ToString();
+            txbClientName.Text = dgvShipment[1, dgvShipment.CurrentCellAddress.Y].Value.ToString();
+
+            //cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvShipment[3, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key - 1;
+            //txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvShipment[2, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            //txbOrderManager.Text = dgvShipment[4, dgvShipment.CurrentCellAddress.Y].Value.ToString();
+            //txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvShipment[1, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            //dtpOrderDate.Text = dgvShipment[5, dgvShipment.CurrentCellAddress.Y].Value.ToString();
+            //cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvShipment[6, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key;
+            //cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvShipment[7, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key;
+            //txbHidden.Text = dgvShipment[8, dgvShipment.CurrentCellAddress.Y]?.Value?.ToString();
+        }
+
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {
             //データグリッドビューのデータ取得
             GetDataGridView();
         }
+
+
     }
 }
