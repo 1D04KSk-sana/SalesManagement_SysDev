@@ -58,12 +58,38 @@ namespace SalesManagement_SysDev
             //cmbViewを表示に
             cmbView.SelectedIndex = 0;
         }
+        private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            MakerSearchButtonClick(true);
+        }
+        private void SearchDialog_btnOrSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            MakerSearchButtonClick(false);
+        }
+        private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Opacity = 1;
+        }
         private void btnDone_Click(object sender, EventArgs e)
         {
             //登録ラヂオボタンがチェックされているとき
             if (rdbRegister.Checked)
             {
                 MakerDataRegister();
+            }
+            //更新ラヂオボタンがチェックされているとき
+            if (rdbUpdate.Checked)
+            {
+                MakerDataUpdate();
+            }
+            //検索ラヂオボタンがチェックされているとき
+            if (rdbSearch.Checked)
+            {
+                MakerDataSelect();
             }
         }
     ///////////////////////////////
@@ -502,6 +528,365 @@ namespace SalesManagement_SysDev
 
             // データグリッドビューの表示
             GetDataGridView();
+        }
+        ///////////////////////////////
+        //メソッド名：MakerDataUpdate()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：メーカー情報更新の実行
+        ///////////////////////////////
+        private void MakerDataUpdate()
+        {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtUpdate())
+            {
+                return;
+            }
+
+            // 顧客情報作成
+            var updMaker = GenerateDataAtUpdate();
+
+            // 顧客情報更新
+            UpdateMaker(updMaker);
+        }
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtUpdate()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：更新入力データの形式チェック
+        //         ：エラーがない場合True
+        //         ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtUpdate()
+        {
+            // 営業所IDの適否
+            if (!String.IsNullOrEmpty(txbMakerID.Text.Trim()))
+            {
+                // 営業所IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbMakerID.Text.Trim()))
+                {
+                    MessageBox.Show("営業所IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMakerID.Focus();
+                    return false;
+                }
+                //営業所IDの重複チェック
+                if (MakerDataAccess.CheckClientIDExistence(int.Parse(txbMakerID.Text.Trim())))
+                {
+                    MessageBox.Show("営業所IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMakerID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("営業所IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbMakerID.Focus();
+                return false;
+            }
+
+            // 営業所名の適否
+            if (!String.IsNullOrEmpty(txbMakerName.Text.Trim()))
+            {
+                // 営業所名の文字数チェック
+                if (txbMakerName.TextLength > 50)
+                {
+                    MessageBox.Show("営業所名は50文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMakerName.Focus();
+                    return false;
+                }
+                //営業所名の重複チェック
+                if (MakerDataAccess.CheckClientNameExistence(string.Format(txbMakerName.Text.Trim())))
+                {
+                    MessageBox.Show("営業所名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMakerName.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("営業所名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbMakerName.Focus();
+                return false;
+            }
+
+            // 電話番号の適否
+            if (!String.IsNullOrEmpty(txbMakerPhone.Text.Trim()))
+            {
+                // 電話番号の文字数チェック
+                if (txbMakerPhone.TextLength > 13)
+                {
+                    MessageBox.Show("電話番号は13文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMakerPhone.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("電話番号が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbMakerPhone.Focus();
+                return false;
+            }
+
+
+            // 郵便番号の適否
+            if (!String.IsNullOrEmpty(txbMakerPostal.Text.Trim()))
+            {
+                // 郵便番号の数字チェック
+                if (!dataInputCheck.CheckNumeric(txbMakerPostal.Text.Trim()))
+                {
+                    MessageBox.Show("郵便番号は全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMakerPostal.Focus();
+                    return false;
+                }
+                // 郵便番号の文字数チェック
+                if (txbMakerPostal.TextLength > 7)
+                {
+                    MessageBox.Show("郵便番号は7文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMakerPostal.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("郵便番号が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbMakerPostal.Focus();
+                return false;
+            }
+
+            // 住所の適否
+            if (!String.IsNullOrEmpty(txbMakerAddress.Text.Trim()))
+            {
+                // 住所の文字数チェック
+                if (txbMakerAddress.TextLength > 50)
+                {
+                    MessageBox.Show("住所は50文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMakerAddress.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("住所が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbMakerAddress.Focus();
+                return false;
+            }
+
+            // FAXの適否
+            if (!String.IsNullOrEmpty(txbMakerFAX.Text.Trim()))
+            {
+                // FAXの文字数チェック
+                if (txbMakerFAX.TextLength > 13)
+                {
+                    MessageBox.Show("FAXは13文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMakerFAX.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("FAXが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbMakerFAX.Focus();
+                return false;
+            }
+
+            //表示非表示選択の適否
+            if (cmbHidden.SelectedIndex == -1)
+            {
+                MessageBox.Show("表示家選択が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbHidden.Focus();
+                return false;
+            }
+
+            return true;
+        }
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtUpdate()
+        //引　数   ：なし
+        //戻り値   ：メーカー更新情報
+        //機　能   ：更新データのセット
+        ///////////////////////////////
+        private M_Maker GenerateDataAtUpdate()
+        {
+            return new M_Maker
+            {
+                MaID = int.Parse(txbMakerID.Text.Trim()),
+                MaName = string.Format(txbMakerName.Text.Trim()),
+                MaAddress = txbMakerAddress.Text.Trim(),
+                MaPhone = txbMakerPhone.Text.Trim(),
+                MaPostal = txbMakerPostal.Text.Trim(),
+                MaFAX = txbMakerFAX.Text.Trim(),
+                MaFlag = cmbHidden.SelectedIndex,
+                MaHidden = txbHidden.Text.Trim(),
+            };
+        }
+        ///////////////////////////////
+        //メソッド名：UpdateSalesOffice()
+        //引　数   ：顧客情報
+        //戻り値   ：なし
+        //機　能   ：顧客情報の更新
+        ///////////////////////////////
+        private void UpdateMaker(M_Maker updMaker)
+        {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
+            // 顧客情報の更新
+            bool flg = MakerDataAccess.UpdateMakerData(updMaker);
+            if (flg == true)
+            {
+                MessageBox.Show("更新しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("更新に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //テキストボックス等のクリア
+            ClearImput();
+
+            // データグリッドビューの表示
+            GetDataGridView();
+        }
+        ///////////////////////////////
+        //メソッド名：MakerDataSelect()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：メーカー情報検索の実行
+        ///////////////////////////////
+        private void MakerDataSelect()
+        {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtSearch())
+            {
+                return;
+            }
+
+            //検索ダイアログのフォームを作成
+            f_SearchDialog = new F_SearchDialog();
+            //検索ダイアログのフォームのオーナー設定
+            f_SearchDialog.Owner = this;
+
+            //検索ダイアログのフォームのボタンクリックイベントにハンドラを追加
+            f_SearchDialog.btnAndSearchClick += SearchDialog_btnAndSearchClick;
+            f_SearchDialog.btnOrSearchClick += SearchDialog_btnOrSearchClick;
+
+            //検索ダイアログのフォームが閉じたときのイベントを設定
+            f_SearchDialog.FormClosed += ChildForm_FormClosed;
+            //検索ダイアログのフォームの表示
+            f_SearchDialog.Show();
+
+            //顧客登録フォームの透明化
+            this.Opacity = 0;
+        }
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtSearch()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：検索入力データの形式チェック
+        //         ：エラーがない場合True
+        //         ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtSearch()
+        {
+            //検索条件の存在確認
+            if (String.IsNullOrEmpty(txbMakerID.Text.Trim()) && String.IsNullOrEmpty(txbMakerName.Text.Trim()) && String.IsNullOrEmpty(txbMakerPhone.Text.Trim()))
+            {
+                MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbMakerID.Focus();
+                return false;
+            }
+
+            // 営業所IDの適否
+            if (!String.IsNullOrEmpty(txbMakerID.Text.Trim()))
+            {
+                // 営業所IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbMakerID.Text.Trim()))
+                {
+                    MessageBox.Show("営業所IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMakerID.Focus();
+                    return false;
+                }
+                //営業所IDの重複チェック
+                if (!MakerDataAccess.CheckClientIDExistence(int.Parse(txbMakerID.Text.Trim())))
+                {
+                    MessageBox.Show("営業所IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMakerID.Focus();
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        ///////////////////////////////
+        //メソッド名：ClientSearchButtonClick()
+        //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：顧客情報検索の実行
+        ///////////////////////////////
+        private void MakerSearchButtonClick(bool searchFlg)
+        {
+            // 顧客情報抽出
+            GenerateDataAtSelect(searchFlg);
+
+            int intSearchCount = listMaker.Count;
+
+            // 顧客抽出結果表示
+            GetDataGridView();
+
+            MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtSelect()
+        //引　数   ：searchFlg = And検索かOr検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：営業所情報の取得
+        ///////////////////////////////
+        private void GenerateDataAtSelect(bool searchFlg)
+        {
+            string strMakerID = txbMakerID.Text.Trim();
+            int intMakerID = 0;
+
+            if (!String.IsNullOrEmpty(strMakerID))
+            {
+                intMakerID = int.Parse(strMakerID);
+            }
+
+            // 検索条件のセット
+            M_Maker selectCondition = new M_Maker()
+            {
+                MaID = intMakerID,
+                //SoName = txbSalesOfficeName.Text.Trim()
+                MaPhone = txbMakerPhone.Text.Trim(),
+                //SoPostal= txbSalesOfficePostal.Text.Trim(),
+                //SoAddress= txbSalesOfficeAddress.Text.Trim(),
+                //SoFAX=txbSalesOfficeFax.Text.Trim(),
+                //SoHidden=txbHidden.Text.Trim()
+            };
+
+            if (searchFlg)
+            {
+                // 顧客データのAnd抽出
+                listMaker = MakerDataAccess.GetAndMakerData(selectCondition);
+            }
+            else
+            {
+                // 顧客データのOr抽出
+                listMaker = MakerDataAccess.GetOrMakerData(selectCondition);
+            }
         }
     }
 }

@@ -124,13 +124,13 @@ namespace SalesManagement_SysDev
         }
         ///////////////////////////////
         //メソッド名：AddSaleOfficeData()
-        //引　数：regSalesOffice = 営業所データ
+        //引　数：regMaker = メーカーデータ
         //戻り値：True or False
         //機　能：メーカーデータの登録
         //      ：登録成功の場合True
         //      ：登録失敗の場合False
         ///////////////////////////////
-        public bool AddSalesOfficeData(M_Maker regMaker)
+        public bool AddMakerData(M_Maker regMaker)
         {
             try
             {
@@ -144,6 +144,98 @@ namespace SalesManagement_SysDev
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
+        }
+        ///////////////////////////////
+        //メソッド名：UpdateSalesOfficeData()
+        //引　数：updClient = 営業所データ
+        //戻り値：True or False
+        //機　能：営業所データの更新
+        //      ：更新成功の場合True
+        //      ：更新失敗の場合False
+        ///////////////////////////////
+        public bool UpdateMakerData(M_Maker updMaker)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Maker = context.M_Makers.Single(x => x.MaID == updMaker.MaID);
+
+                Maker.MaName = updMaker.MaName;
+                Maker.MaFlag = updMaker.MaFlag;
+                Maker.MaHidden = updMaker.MaHidden;
+                Maker.MaFAX = updMaker.MaFAX;
+                Maker.MaPhone = updMaker.MaPhone;
+                Maker.MaAddress = updMaker.MaAddress;
+                Maker.MaID = updMaker.MaID;
+                Maker.MaPostal = updMaker.MaPostal;
+
+                context.SaveChanges();
+                context.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+        ///////////////////////////////
+        //メソッド名：GetAndSalesOfficeData()
+        //引　数：検索条件
+        //戻り値：条件完全一致メーカーデータ
+        //機　能：条件完全一致メーカーデータの取得
+        ///////////////////////////////
+        public List<M_Maker> GetAndMakerData(M_Maker selectMaker)
+        {
+            List<M_Maker> listMaker = new List<M_Maker>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var query = context.M_Makers.AsQueryable();
+
+                if (selectMaker.MaID != null && selectMaker.MaID != 0)
+                {
+                    query = query.Where(x => x.MaID == selectMaker.MaID);
+                }
+
+                if (selectMaker.MaPhone != null && selectMaker.MaPhone != "")
+                {
+                    query = query.Where(x => x.MaPhone == selectMaker.MaPhone);
+                }
+
+                listMaker = query.ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listMaker;
+        }
+        ///////////////////////////////
+        //メソッド名：GetOrSalesOfficeData()
+        //引　数：検索条件
+        //戻り値：条件一部一営業所データ
+        //機　能：条件一部一致営業所データの取得
+        ///////////////////////////////
+        public List<M_Maker> GetOrMakerData(M_Maker selectMaker)
+        {
+            List<M_Maker> listSalesOffice = new List<M_SalesOffice>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listSalesOffice = context.M_SalesOffices.Where(x => x.SoID == selectSalesOffice.SoID || x.SoPhone == selectSalesOffice.SoPhone).ToList();
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listSalesOffice;
         }
     }
 }
