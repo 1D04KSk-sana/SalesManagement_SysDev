@@ -86,6 +86,8 @@ namespace SalesManagement_SysDev
             List<T_Hattyu> ha = new List<T_Hattyu>();
             List<T_HattyuDetail> had = new List<T_HattyuDetail>();
             List<T_Stock> st = new List<T_Stock>();
+            List<T_Shipment> sh = new List<T_Shipment>();
+            List<T_ShipmentDetail> shd = new List<T_ShipmentDetail>();
             List<T_Syukko> sy = new List<T_Syukko>();
             List<T_Warehousing> wh = new List<T_Warehousing>();
             List<T_WarehousingDetail> whd = new List<T_WarehousingDetail>();
@@ -635,6 +637,7 @@ namespace SalesManagement_SysDev
                 context.T_Stocks.AddRange(st);
                 context.SaveChanges();
             }
+
             {
                 or.Add(new T_Order
                 {
@@ -698,6 +701,49 @@ namespace SalesManagement_SysDev
                 context.T_OrderDetails.AddRange(ord);
                 context.SaveChanges();
             }
+
+            {
+                sh.Add(new T_Shipment()
+                {
+                    M_Client = cl[1],
+                    M_Employee = em[116],
+                    M_SalesOffice = so[1],
+                    T_Order = or[1],
+                    ShStateFlag = 0,
+                    ShFinishDate = new DateTime(2020, 11, 19),
+                    ShFlag = 0,
+                });
+                sh.Add(new T_Shipment()
+                {
+                    M_Client = cl[2],
+                    M_Employee = em[116],
+                    M_SalesOffice = so[1],
+                    T_Order = or[1],
+                    ShStateFlag = 0,
+                    ShFinishDate = new DateTime(2020, 11, 23),
+                    ShFlag = 0,
+                });
+                context.T_Shipments.AddRange(sh);
+                context.SaveChanges();
+            }
+
+            {
+                shd.Add(new T_ShipmentDetail()
+                {
+                    T_Shipment = sh[0],
+                    M_Product = pr[0],
+                    ShQuantity = 20,
+                });
+                shd.Add(new T_ShipmentDetail()
+                {
+                    T_Shipment = sh[1],
+                    M_Product = pr[1],
+                    ShQuantity = 30,
+                });
+                context.T_ShipmentDetails.AddRange(shd);
+                context.SaveChanges();
+            }
+
             {
                 ch.Add(new T_Chumon()
                 {

@@ -22,7 +22,21 @@ namespace SalesManagement_SysDev
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
         //データベース顧客テーブルアクセス用クラスのインスタンス化
         ClientDataAccess clientDataAccess = new ClientDataAccess();
+        //データベース社員テーブルアクセス用クラスのインスタンス化
+        EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
+        //データベース商品テーブルアクセス用クラスのインスタンス化
+        ProdactDataAccess prodactDataAccess = new ProdactDataAccess();
+        //データベース受注テーブルアクセス用クラスのインスタンス化
+        OrderDataAccess OrderDataAccess = new OrderDataAccess();
 
+        //コンボボックス用の顧客データリスト
+        private static List<M_Client> listClient = new List<M_Client>();
+        //コンボボックス用の社員データリスト
+        private static List<M_Employee> listEmployee = new List<M_Employee>();
+        //コンボボックス用の社員データリスト
+        private static List<M_Product> listProdact = new List<M_Product>();
+        //コンボボックス用の受注データリスト
+        private static List<T_Order> listOrder = new List<T_Order>();
         //データグリッドビュー用の全顧客データ
         private static List<T_Shipment> listAllShipment = new List<T_Shipment>();
         //データグリッドビュー用の顧客データ
@@ -37,6 +51,10 @@ namespace SalesManagement_SysDev
         private Dictionary<int, string> dictionaryClient;
         //DataGridView用に使用する社員のDictionary
         private Dictionary<int, string> dictionaryEmployee;
+        //DataGridView用に使用する商品のDictionary
+        private Dictionary<int, string> dictionaryProdact;
+        //DataGridView用に使用する商品のDictionary
+        private Dictionary<int, string> dictionaryOrder;
 
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
@@ -166,10 +184,10 @@ namespace SalesManagement_SysDev
             }
 
             // 受注情報作成
-            var updOrder = GenerateDataAtUpdate();
+            var updShipment = GenerateDataAtUpdate();
 
             // 受注情報更新
-            UpdateOrder(updOrder);
+            UpdateShipment(updShipment);
         }
 
         ///////////////////////////////
@@ -260,6 +278,57 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：GenerateDataAtUpdate()
+        //引　数   ：なし
+        //戻り値   ：受注更新情報
+        //機　能   ：更新データのセット
+        ///////////////////////////////
+        private T_Shipment GenerateDataAtUpdate()
+        {
+            return new T_Shipment
+            {
+                ShID = int.Parse(txbOrderID.Text.Trim()),
+                ShFlag = cmbShipmentHidden.SelectedIndex,
+                ShHidden = txbShipmentHidden.Text.Trim(),
+            };
+        }
+
+        ///////////////////////////////
+        //メソッド名：UpdateOrder()
+        //引　数   ：受注情報
+        //戻り値   ：なし
+        //機　能   ：受注情報の更新
+        ///////////////////////////////
+        private void UpdateShipment(T_Shipment updShipment)
+        {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            // 受注情報の更新
+            bool flg = ShipmentDataAccess.UpdateShipmentData(updShipment);
+
+            if (flg == true)
+            {
+                MessageBox.Show("更新しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("更新に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //テキストボックス等のクリア
+            ClearImput();
+
+            // データグリッドビューの表示
+            GetDataGridView();
+        }
+
+        ///////////////////////////////
         //メソッド名：DictionarySet()
         //引　数   ：なし
         //戻り値   ：なし
@@ -277,32 +346,42 @@ namespace SalesManagement_SysDev
                 dictionarySalesOffice.Add(item.SoID, item.SoName);
             }
 
-            //listClient = clientDataAccess.GetClientDspData();
+            listClient = clientDataAccess.GetClientDspData();
 
-            //dictionaryClient = new Dictionary<int, string> { };
+            dictionaryClient = new Dictionary<int, string> { };
 
-            //foreach (var item in listClient)
+            foreach (var item in listClient)
+            {
+                dictionaryClient.Add(item.ClID.Value, item.ClName);
+            }
+
+            listEmployee = employeeDataAccess.GetEmployeeDspData();
+
+            dictionaryEmployee = new Dictionary<int, string> { };
+
+            foreach (var item in listEmployee)
+            {
+                dictionaryEmployee.Add(item.EmID, item.EmName);
+            }
+
+            //商品のデータを取得
+            listProdact = prodactDataAccess.GetProdactDspData();
+
+            dictionaryProdact = new Dictionary<int, string> { };
+
+            foreach (var item in listProdact)
+            {
+                dictionaryProdact.Add(item.PrID, item.PrName);
+            }
+
+            ////受注のデータを取得
+            //listOrder = OrderDataAccess.GetOrderData();
+
+            //dictionaryOrder = new Dictionary<int, string> { };
+
+            //foreach (var item in listOrder)
             //{
-            //    dictionaryClient.Add(item.ClID.Value, item.ClName);
-            //}
-
-            //listEmployee = employeeDataAccess.GetEmployeeDspData();
-
-            //dictionaryEmployee = new Dictionary<int, string> { };
-
-            //foreach (var item in listEmployee)
-            //{
-            //    dictionaryEmployee.Add(item.EmID, item.EmName);
-            //}
-
-            ////商品のデータを取得
-            //listProdact = prodactDataAccess.GetProdactDspData();
-
-            //dictionaryProdact = new Dictionary<int, string> { };
-
-            //foreach (var item in listProdact)
-            //{
-            //    dictionaryProdact.Add(item.PrID, item.PrName);
+            //    dictionaryOrder.Add(item.OrID, item.Or);
             //}
         }
         ///////////////////////////////
@@ -484,14 +563,14 @@ namespace SalesManagement_SysDev
             //データからページに必要な部分だけを取り出す
             var depData = viewShipment.Skip(pageSize * pageNum).Take(pageSize).ToList();
 
-            //1行ずつdgvClientに挿入
+            //1行ずつdgvShipmentに挿入
             foreach (var item in depData)
             {
                 dgvShipment.Rows.Add(item.ShID,item.OrID, dictionaryClient[item.ClID], dictionaryEmployee[item.EmID], 
-                    dictionarySalesOffice[item.SoID],item.OrID, dictionaryConfirm[item.ShStateFlag], item.ShFinishDate, dictionaryHidden[item.ShFlag], item.ShHidden);
+                    dictionarySalesOffice[item.SoID], dictionaryConfirm[item.ShStateFlag], item.ShFinishDate, dictionaryHidden[item.ShFlag], item.ShHidden);
             }
 
-            //dgvClientをリフレッシュ
+            //dgvShipmentをリフレッシュ
             dgvShipment.Refresh();
 
             if (lastPage == -1 || (lastPage == pageNum && pageNum == 0))
@@ -524,6 +603,10 @@ namespace SalesManagement_SysDev
             }
         }
 
-
+        private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //データグリッドビューのデータ取得
+            GetDataGridView();
+        }
     }
 }
