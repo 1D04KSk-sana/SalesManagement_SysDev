@@ -97,5 +97,16 @@ namespace SalesManagement_SysDev
         {
 
         }
+
+        private void btnPsition_Click(object sender, EventArgs e)
+        {
+            F_HonshaPosition F_HonshaPosition = new F_HonshaPosition();
+
+            F_HonshaPosition.Owner = this;
+            F_HonshaPosition.FormClosed += ChildForm_FormClosed;
+            F_HonshaPosition.Show();
+
+            this.Opacity = 0;
+        }
     }
 }

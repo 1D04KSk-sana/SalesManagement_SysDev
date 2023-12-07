@@ -23,7 +23,7 @@ namespace SalesManagement_SysDev
         //コンボボックス用の営業所データリスト
         private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
         //データベース役職名テーブルアクセス用クラスのインスタンス化
-       PositionDataAccess PositionDataAccess = new PositionDataAccess();
+       PositionDataAccess positionDataAccess = new PositionDataAccess();
         //コンボボックス用の役職名データリスト
         private static List<M_Position> listPosition = new List<M_Position>();
 
@@ -273,7 +273,7 @@ namespace SalesManagement_SysDev
             cmbSalesOfficeID.SelectedIndex = -1;
 
             //役職名のデータを取得
-            listPosition = PositionDataAccess.GetPositionDspData();
+            listPosition = positionDataAccess.GetPositionDspData();
             //取得したデータをコンボボックスに挿入
             cmbPositionID.DataSource = listPosition;
             //表示する名前をSoNameに指定

@@ -40,11 +40,11 @@
             this.lblPositionID = new System.Windows.Forms.Label();
             this.txbPositionName = new System.Windows.Forms.TextBox();
             this.PositionName = new System.Windows.Forms.Label();
-            this.txbPositionListFlug = new System.Windows.Forms.TextBox();
-            this.lblPositionListFlug = new System.Windows.Forms.Label();
+            this.txbPositionListFlag = new System.Windows.Forms.TextBox();
+            this.lblPositionListFlag = new System.Windows.Forms.Label();
             this.txbHidden = new System.Windows.Forms.TextBox();
             this.lblClientHidden = new System.Windows.Forms.Label();
-            this.dgvClient = new System.Windows.Forms.DataGridView();
+            this.dgvPosition = new System.Windows.Forms.DataGridView();
             this.btnPageSize = new System.Windows.Forms.Button();
             this.lblPageSize = new System.Windows.Forms.Label();
             this.txbPageSize = new System.Windows.Forms.TextBox();
@@ -57,9 +57,10 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.btnDone = new System.Windows.Forms.Button();
             this.cmbView = new System.Windows.Forms.ComboBox();
+            this.cmbHidden = new System.Windows.Forms.ComboBox();
             this.pnlHonsha.SuspendLayout();
             this.pnlSelect.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPosition)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHonsha
@@ -200,25 +201,25 @@
             this.PositionName.TabIndex = 27;
             this.PositionName.Text = "役職名";
             // 
-            // txbPositionListFlug
+            // txbPositionListFlag
             // 
-            this.txbPositionListFlug.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbPositionListFlug.Location = new System.Drawing.Point(1357, 311);
-            this.txbPositionListFlug.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.txbPositionListFlug.Name = "txbPositionListFlug";
-            this.txbPositionListFlug.Size = new System.Drawing.Size(220, 31);
-            this.txbPositionListFlug.TabIndex = 30;
+            this.txbPositionListFlag.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.txbPositionListFlag.Location = new System.Drawing.Point(1357, 311);
+            this.txbPositionListFlag.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txbPositionListFlag.Name = "txbPositionListFlag";
+            this.txbPositionListFlag.Size = new System.Drawing.Size(220, 31);
+            this.txbPositionListFlag.TabIndex = 30;
             // 
-            // lblPositionListFlug
+            // lblPositionListFlag
             // 
-            this.lblPositionListFlug.AutoSize = true;
-            this.lblPositionListFlug.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.lblPositionListFlug.Location = new System.Drawing.Point(1192, 314);
-            this.lblPositionListFlug.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblPositionListFlug.Name = "lblPositionListFlug";
-            this.lblPositionListFlug.Size = new System.Drawing.Size(157, 24);
-            this.lblPositionListFlug.TabIndex = 29;
-            this.lblPositionListFlug.Text = "役職管理フラグ";
+            this.lblPositionListFlag.AutoSize = true;
+            this.lblPositionListFlag.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.lblPositionListFlag.Location = new System.Drawing.Point(1192, 314);
+            this.lblPositionListFlag.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPositionListFlag.Name = "lblPositionListFlag";
+            this.lblPositionListFlag.Size = new System.Drawing.Size(157, 24);
+            this.lblPositionListFlag.TabIndex = 29;
+            this.lblPositionListFlag.Text = "役職管理フラグ";
             // 
             // txbHidden
             // 
@@ -240,18 +241,19 @@
             this.lblClientHidden.TabIndex = 31;
             this.lblClientHidden.Text = "非表示理由";
             // 
-            // dgvClient
+            // dgvPosition
             // 
-            this.dgvClient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvClient.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.dgvClient.Location = new System.Drawing.Point(11, 459);
-            this.dgvClient.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.dgvClient.Name = "dgvClient";
-            this.dgvClient.RowHeadersWidth = 51;
-            this.dgvClient.RowTemplate.Height = 24;
-            this.dgvClient.Size = new System.Drawing.Size(1880, 495);
-            this.dgvClient.TabIndex = 33;
-            this.dgvClient.TabStop = false;
+            this.dgvPosition.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPosition.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.dgvPosition.Location = new System.Drawing.Point(11, 459);
+            this.dgvPosition.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.dgvPosition.Name = "dgvPosition";
+            this.dgvPosition.RowHeadersWidth = 51;
+            this.dgvPosition.RowTemplate.Height = 24;
+            this.dgvPosition.Size = new System.Drawing.Size(1880, 495);
+            this.dgvPosition.TabIndex = 33;
+            this.dgvPosition.TabStop = false;
+            this.dgvPosition.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPosition_CellClick);
             // 
             // btnPageSize
             // 
@@ -392,6 +394,21 @@
             this.cmbView.Name = "cmbView";
             this.cmbView.Size = new System.Drawing.Size(360, 43);
             this.cmbView.TabIndex = 97;
+            this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
+            // 
+            // cmbHidden
+            // 
+            this.cmbHidden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.cmbHidden.FormattingEnabled = true;
+            this.cmbHidden.Items.AddRange(new object[] {
+            "表示",
+            "非表示"});
+            this.cmbHidden.Location = new System.Drawing.Point(61, 388);
+            this.cmbHidden.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.cmbHidden.Name = "cmbHidden";
+            this.cmbHidden.Size = new System.Drawing.Size(220, 32);
+            this.cmbHidden.TabIndex = 98;
             // 
             // F_HonshaPosition
             // 
@@ -399,6 +416,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.Controls.Add(this.cmbHidden);
             this.Controls.Add(this.cmbView);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnDone);
@@ -411,11 +429,11 @@
             this.Controls.Add(this.btnPageSize);
             this.Controls.Add(this.lblPageSize);
             this.Controls.Add(this.txbPageSize);
-            this.Controls.Add(this.dgvClient);
+            this.Controls.Add(this.dgvPosition);
             this.Controls.Add(this.txbHidden);
             this.Controls.Add(this.lblClientHidden);
-            this.Controls.Add(this.txbPositionListFlug);
-            this.Controls.Add(this.lblPositionListFlug);
+            this.Controls.Add(this.txbPositionListFlag);
+            this.Controls.Add(this.lblPositionListFlag);
             this.Controls.Add(this.txbPositionName);
             this.Controls.Add(this.PositionName);
             this.Controls.Add(this.txbPositionID);
@@ -424,11 +442,12 @@
             this.Controls.Add(this.pnlHonsha);
             this.Name = "F_HonshaPosition";
             this.Text = "F_HonshaPosition";
+            this.Load += new System.EventHandler(this.F_HonshaPosition_Load);
             this.pnlHonsha.ResumeLayout(false);
             this.pnlHonsha.PerformLayout();
             this.pnlSelect.ResumeLayout(false);
             this.pnlSelect.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPosition)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -448,11 +467,11 @@
         private System.Windows.Forms.Label lblPositionID;
         private System.Windows.Forms.TextBox txbPositionName;
         private System.Windows.Forms.Label PositionName;
-        private System.Windows.Forms.TextBox txbPositionListFlug;
-        private System.Windows.Forms.Label lblPositionListFlug;
+        private System.Windows.Forms.TextBox txbPositionListFlag;
+        private System.Windows.Forms.Label lblPositionListFlag;
         private System.Windows.Forms.TextBox txbHidden;
         private System.Windows.Forms.Label lblClientHidden;
-        private System.Windows.Forms.DataGridView dgvClient;
+        private System.Windows.Forms.DataGridView dgvPosition;
         private System.Windows.Forms.Button btnPageSize;
         private System.Windows.Forms.Label lblPageSize;
         private System.Windows.Forms.TextBox txbPageSize;
@@ -465,5 +484,6 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.ComboBox cmbView;
+        private System.Windows.Forms.ComboBox cmbHidden;
     }
 }

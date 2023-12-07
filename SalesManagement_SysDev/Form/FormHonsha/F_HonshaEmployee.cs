@@ -21,7 +21,7 @@ namespace SalesManagement_SysDev
         //データベース社員テーブルアクセス用クラスのインスタンス化
         EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
         //データベース役所テーブルアクセス用クラスのインスタンス化
-        PositionDataAccess PositionDataAccess = new PositionDataAccess();
+        PositionDataAccess positionDataAccess = new PositionDataAccess();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
         //入力形式チェック用クラスのインスタンス化
@@ -103,7 +103,7 @@ namespace SalesManagement_SysDev
             cmbSalesOfficeID.SelectedIndex = -1;
 
             //役職のデータを取得
-            listPosition = PositionDataAccess.GetPositionDspData();
+            listPosition = positionDataAccess.GetPositionDspData();
             //取得したデータをコンボボックスに挿入
             cmbPositionName.DataSource = listPosition;
             //表示する名前をPoNameに指定
@@ -280,7 +280,7 @@ namespace SalesManagement_SysDev
             }
 
             //役職のデータを取得
-            listPosition = PositionDataAccess.GetPositionDspData();
+            listPosition = positionDataAccess.GetPositionDspData();
 
             dictionaryPositionname = new Dictionary<int, string> { };
 
