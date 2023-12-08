@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 namespace SalesManagement_SysDev
 {
     public partial class F_HonshaClient : Form
@@ -73,11 +74,6 @@ namespace SalesManagement_SysDev
 
             //cmbViewを表示に
             cmbView.SelectedIndex = 0;
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void rdoSElect_CheckedChanged(object sender, EventArgs e)
@@ -837,14 +833,14 @@ namespace SalesManagement_SysDev
                 // 顧客IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbClientID.Text.Trim()))
                 {
-                    MessageBox.Show("商品IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbClientID.Focus();
                     return false;
                 }
                 //顧客IDの重複チェック
                 if (!clientDataAccess.CheckClientIDExistence(int.Parse(txbClientID.Text.Trim())))
                 {
-                    MessageBox.Show("商品IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbClientID.Focus();
                     return false;
                 }
@@ -1056,7 +1052,7 @@ namespace SalesManagement_SysDev
             txbClientFAX.Text = string.Empty;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }

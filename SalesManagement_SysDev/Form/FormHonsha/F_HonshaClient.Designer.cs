@@ -54,7 +54,8 @@
             this.cmbHidden = new System.Windows.Forms.ComboBox();
             this.btnClear = new System.Windows.Forms.Button();
             this.pnlHonsha = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.pctHint = new System.Windows.Forms.PictureBox();
+            this.btnClose = new System.Windows.Forms.Button();
             this.lblClient = new System.Windows.Forms.Label();
             this.cmbView = new System.Windows.Forms.ComboBox();
             this.txbPageSize = new System.Windows.Forms.TextBox();
@@ -66,7 +67,7 @@
             this.btnPageMin = new System.Windows.Forms.Button();
             this.txbNumPage = new System.Windows.Forms.TextBox();
             this.lblNumPage = new System.Windows.Forms.Label();
-            this.pctHint = new System.Windows.Forms.PictureBox();
+            this.lblHidden = new System.Windows.Forms.Label();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             this.pnlHonsha.SuspendLayout();
@@ -350,7 +351,7 @@
             // 
             this.pnlHonsha.BackColor = System.Drawing.Color.Lime;
             this.pnlHonsha.Controls.Add(this.pctHint);
-            this.pnlHonsha.Controls.Add(this.button1);
+            this.pnlHonsha.Controls.Add(this.btnClose);
             this.pnlHonsha.Controls.Add(this.lblClient);
             this.pnlHonsha.Controls.Add(this.btnReturn);
             this.pnlHonsha.Location = new System.Drawing.Point(1, 1);
@@ -359,17 +360,28 @@
             this.pnlHonsha.Size = new System.Drawing.Size(1920, 150);
             this.pnlHonsha.TabIndex = 22;
             // 
-            // button1
+            // pctHint
             // 
-            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(1725, 36);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(160, 70);
-            this.button1.TabIndex = 26;
-            this.button1.TabStop = false;
-            this.button1.Text = "閉じる";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1632, 46);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 34;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnClose.Location = new System.Drawing.Point(1725, 36);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(160, 70);
+            this.btnClose.TabIndex = 26;
+            this.btnClose.TabStop = false;
+            this.btnClose.Text = "閉じる";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // lblClient
             // 
@@ -379,7 +391,7 @@
             this.lblClient.Location = new System.Drawing.Point(720, 46);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(418, 64);
+            this.lblClient.Size = new System.Drawing.Size(417, 64);
             this.lblClient.TabIndex = 23;
             this.lblClient.Text = "顧客管理画面";
             // 
@@ -500,16 +512,16 @@
             this.lblNumPage.TabIndex = 32;
             this.lblNumPage.Text = "ページ";
             // 
-            // pctHint
+            // lblHidden
             // 
-            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
-            this.pctHint.Location = new System.Drawing.Point(1632, 46);
-            this.pctHint.Name = "pctHint";
-            this.pctHint.Size = new System.Drawing.Size(60, 60);
-            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pctHint.TabIndex = 34;
-            this.pctHint.TabStop = false;
-            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            this.lblHidden.AutoSize = true;
+            this.lblHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblHidden.Location = new System.Drawing.Point(2, 453);
+            this.lblHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblHidden.Name = "lblHidden";
+            this.lblHidden.Size = new System.Drawing.Size(142, 24);
+            this.lblHidden.TabIndex = 125;
+            this.lblHidden.Text = "表示/非表示";
             // 
             // F_HonshaClient
             // 
@@ -518,6 +530,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.lblHidden);
             this.Controls.Add(this.lblNumPage);
             this.Controls.Add(this.txbNumPage);
             this.Controls.Add(this.btnPageMin);
@@ -605,7 +618,8 @@
         private System.Windows.Forms.Button btnPageMin;
         private System.Windows.Forms.TextBox txbNumPage;
         private System.Windows.Forms.Label lblNumPage;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.PictureBox pctHint;
+        private System.Windows.Forms.Label lblHidden;
     }
 }
