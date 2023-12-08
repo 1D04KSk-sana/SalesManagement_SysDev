@@ -14,7 +14,7 @@ namespace SalesManagement_SysDev
     public partial class F_HonshaMaker : Form
     {
         //データベースメーカーテーブルアクセス用クラスのインスタンス化
-        MakerDataAccess MakerDataAccess = new MakerDataAccess();
+        MakerDataAccess makerDataAccess = new MakerDataAccess();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
         //入力形式チェック用クラスのインスタンス化
@@ -74,6 +74,63 @@ namespace SalesManagement_SysDev
         {
             this.Opacity = 1;
         }
+        private void btnPageMax_Click(object sender, EventArgs e)
+        {
+            List<M_Maker> viewMaker = SetListMaker();
+
+            //ページ行数を取得
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
+            //最終ページ数を取得（テキストボックスに代入する数字なので-1はしない）
+            int lastPage = (int)Math.Ceiling(viewMaker.Count / (double)pageSize);
+
+            txbNumPage.Text = lastPage.ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) + 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) - 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnPageMin_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+
+            GetDataGridView();
+        }
+        private void dgvMaker_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvMaker.SelectedCells.Count == 0)
+            {
+                return;
+            }
+            //選択された行に対してのコントロールの変更
+            SelectRowControl();
+        }
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
+        private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //データグリッドビューのデータ取得
+            GetDataGridView();
+        }
         private void btnDone_Click(object sender, EventArgs e)
         {
             //登録ラヂオボタンがチェックされているとき
@@ -131,14 +188,14 @@ namespace SalesManagement_SysDev
             dgvMaker.Columns.Add("MaFlag", "メーカー管理フラグ");
             dgvMaker.Columns.Add("MaHidden", "非表示理由");
 
-            dgvMaker.Columns["SoID"].Width = 241;
-            dgvMaker.Columns["SoName"].Width = 237;
-            dgvMaker.Columns["SoAddress"].Width = 237;
-            dgvMaker.Columns["SoPhone"].Width = 237;
-            dgvMaker.Columns["SoPostal"].Width = 237;
-            dgvMaker.Columns["SoFAX"].Width = 237;
-            dgvMaker.Columns["SoFlag"].Width = 237;
-            dgvMaker.Columns["SoHidden"].Width = 237;
+            dgvMaker.Columns["MaID"].Width = 241;
+            dgvMaker.Columns["MaName"].Width = 237;
+            dgvMaker.Columns["MaAddress"].Width = 237;
+            dgvMaker.Columns["MaPhone"].Width = 237;
+            dgvMaker.Columns["MaPostal"].Width = 237;
+            dgvMaker.Columns["MaFAX"].Width = 237;
+            dgvMaker.Columns["MaFlag"].Width = 237;
+            dgvMaker.Columns["MaHidden"].Width = 237;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvMaker.Columns)
@@ -180,13 +237,13 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         //メソッド名：SetListMaker()
         //引　数   ：なし
-        //戻り値   ：表示用営業所データ
-        //機　能   ：表示用営業所データの準備
+        //戻り値   ：表示用メーカーデータ
+        //機　能   ：表示用メーカーデータの準備
         ///////////////////////////////
         private List<M_Maker> SetListMaker()
         {
             //顧客のデータを全取得
-            listAllMaker = MakerDataAccess.GetMakerData();
+            listAllMaker = makerDataAccess.GetMakerData();
 
             //表示用の顧客リスト作成
             List<M_Maker> listViewMaker = new List<M_Maker>();
@@ -207,12 +264,12 @@ namespace SalesManagement_SysDev
             if (cmbView.SelectedIndex == 0)
             {
                 // 管理Flgが表示の部署データの取得
-                listViewMaker = MakerDataAccess.GetMakerDspData(listViewMaker);
+                listViewMaker = makerDataAccess.GetMakerDspData(listViewMaker);
             }
             else
             {
                 // 管理Flgが非表示の部署データの取得
-                listViewMaker = MakerDataAccess.GetMakerNotDspData(listViewMaker);
+                listViewMaker = makerDataAccess.GetMakerNotDspData(listViewMaker);
             }
 
             return listViewMaker;
@@ -323,52 +380,52 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-            // 営業所IDの適否
+            // メーカーIDの適否
             if (!String.IsNullOrEmpty(txbMakerID.Text.Trim()))
             {
-                // 営業所IDの数字チェック
+                // メーカーIDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbMakerID.Text.Trim()))
                 {
-                    MessageBox.Show("営業所IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("メーカーIDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbMakerID.Focus();
                     return false;
                 }
-                //営業所IDの重複チェック
-                if (MakerDataAccess.CheckClientIDExistence(int.Parse(txbMakerID.Text.Trim())))
+                //メーカーIDの重複チェック
+                if (makerDataAccess.CheckMakerIDExistence(int.Parse(txbMakerID.Text.Trim())))
                 {
-                    MessageBox.Show("営業所IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("メーカーIDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbMakerID.Focus();
                     return false;
                 }
             }
             else
             {
-                MessageBox.Show("営業所IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("メーカーIDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbMakerID.Focus();
                 return false;
             }
 
-            // 営業所名の適否
+            // メーカー名の適否
             if (!String.IsNullOrEmpty(txbMakerName.Text.Trim()))
             {
-                // 営業所名の文字数チェック
+                // メーカー名の文字数チェック
                 if (txbMakerName.TextLength > 50)
                 {
-                    MessageBox.Show("営業所名は50文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("メーカー名は50文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbMakerName.Focus();
                     return false;
                 }
-                //営業所名の重複チェック
-                if (MakerDataAccess.CheckClientNameExistence(string.Format(txbMakerName.Text.Trim())))
+                //メーカー名の重複チェック
+                if (makerDataAccess.CheckMakerNameExistence(string.Format(txbMakerName.Text.Trim())))
                 {
-                    MessageBox.Show("営業所名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("メーカー名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbMakerName.Focus();
                     return false;
                 }
             }
             else
             {
-                MessageBox.Show("営業所名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("メーカー名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbMakerName.Focus();
                 return false;
             }
@@ -456,7 +513,7 @@ namespace SalesManagement_SysDev
             //表示非表示選択の適否
             if (cmbHidden.SelectedIndex == -1)
             {
-                MessageBox.Show("表示家選択が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("表示非表示が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbHidden.Focus();
                 return false;
             }
@@ -503,7 +560,7 @@ namespace SalesManagement_SysDev
             };
         }
         ///////////////////////////////
-        //メソッド名：RegistrationSalesOffice()
+        //メソッド名：RegistrationMaker()
         //引　数   ：メーカー情報
         //戻り値   ：なし
         //機　能   ：メーカーデータの登録
@@ -511,7 +568,7 @@ namespace SalesManagement_SysDev
         private void RegistrationMaker(M_Maker regMaker)
         {
             // 営業所情報の登録
-            bool flg = MakerDataAccess.AddMakerData(regMaker);
+            bool flg = makerDataAccess.AddMakerData(regMaker);
 
             //登録成功・失敗メッセージ
             if (flg == true)
@@ -559,52 +616,45 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtUpdate()
         {
-            // 営業所IDの適否
+            // メーカーIDの適否
             if (!String.IsNullOrEmpty(txbMakerID.Text.Trim()))
             {
-                // 営業所IDの数字チェック
+                // メーカーIDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbMakerID.Text.Trim()))
                 {
-                    MessageBox.Show("営業所IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("メーカーIDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbMakerID.Focus();
                     return false;
                 }
-                //営業所IDの重複チェック
-                if (MakerDataAccess.CheckClientIDExistence(int.Parse(txbMakerID.Text.Trim())))
+                //メーカーIDの存在チェック
+                if (!makerDataAccess.CheckMakerIDExistence(int.Parse(txbMakerID.Text.Trim())))
                 {
-                    MessageBox.Show("営業所IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("メーカーIDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbMakerID.Focus();
                     return false;
                 }
             }
             else
             {
-                MessageBox.Show("営業所IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("メーカーIDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbMakerID.Focus();
                 return false;
             }
 
-            // 営業所名の適否
+            // メーカー名の適否
             if (!String.IsNullOrEmpty(txbMakerName.Text.Trim()))
             {
-                // 営業所名の文字数チェック
+                // メーカー名の文字数チェック
                 if (txbMakerName.TextLength > 50)
                 {
-                    MessageBox.Show("営業所名は50文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMakerName.Focus();
-                    return false;
-                }
-                //営業所名の重複チェック
-                if (MakerDataAccess.CheckClientNameExistence(string.Format(txbMakerName.Text.Trim())))
-                {
-                    MessageBox.Show("営業所名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("メーカー名は50文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbMakerName.Focus();
                     return false;
                 }
             }
             else
             {
-                MessageBox.Show("営業所名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("メーカー名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbMakerName.Focus();
                 return false;
             }
@@ -692,7 +742,7 @@ namespace SalesManagement_SysDev
             //表示非表示選択の適否
             if (cmbHidden.SelectedIndex == -1)
             {
-                MessageBox.Show("表示家選択が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("表示非表示が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbHidden.Focus();
                 return false;
             }
@@ -720,7 +770,7 @@ namespace SalesManagement_SysDev
             };
         }
         ///////////////////////////////
-        //メソッド名：UpdateSalesOffice()
+        //メソッド名：UpdateMaker()
         //引　数   ：顧客情報
         //戻り値   ：なし
         //機　能   ：顧客情報の更新
@@ -745,7 +795,7 @@ namespace SalesManagement_SysDev
             }
 
             // 顧客情報の更新
-            bool flg = MakerDataAccess.UpdateMakerData(updMaker);
+            bool flg = makerDataAccess.UpdateMakerData(updMaker);
             if (flg == true)
             {
                 MessageBox.Show("更新しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -810,20 +860,20 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            // 営業所IDの適否
+            // メーカーIDの適否
             if (!String.IsNullOrEmpty(txbMakerID.Text.Trim()))
             {
-                // 営業所IDの数字チェック
+                // メーカーIDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbMakerID.Text.Trim()))
                 {
-                    MessageBox.Show("営業所IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("メーカーIDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbMakerID.Focus();
                     return false;
                 }
-                //営業所IDの重複チェック
-                if (!MakerDataAccess.CheckClientIDExistence(int.Parse(txbMakerID.Text.Trim())))
+                //メーカーIDの重複チェック
+                if (!makerDataAccess.CheckMakerIDExistence(int.Parse(txbMakerID.Text.Trim())))
                 {
-                    MessageBox.Show("営業所IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("メーカーIDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbMakerID.Focus();
                     return false;
                 }
@@ -832,7 +882,7 @@ namespace SalesManagement_SysDev
             return true;
         }
         ///////////////////////////////
-        //メソッド名：ClientSearchButtonClick()
+        //メソッド名：MakerSearchButtonClick()
         //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
         //戻り値   ：なし
         //機　能   ：顧客情報検索の実行
@@ -853,7 +903,7 @@ namespace SalesManagement_SysDev
         //メソッド名：GenerateDataAtSelect()
         //引　数   ：searchFlg = And検索かOr検索か判別するためのBool値
         //戻り値   ：なし
-        //機　能   ：営業所情報の取得
+        //機　能   ：メーカー情報の取得
         ///////////////////////////////
         private void GenerateDataAtSelect(bool searchFlg)
         {
@@ -880,13 +930,31 @@ namespace SalesManagement_SysDev
             if (searchFlg)
             {
                 // 顧客データのAnd抽出
-                listMaker = MakerDataAccess.GetAndMakerData(selectCondition);
+                listMaker = makerDataAccess.GetAndMakerData(selectCondition);
             }
             else
             {
                 // 顧客データのOr抽出
-                listMaker = MakerDataAccess.GetOrMakerData(selectCondition);
+                listMaker = makerDataAccess.GetOrMakerData(selectCondition);
             }
+        }
+        ///////////////////////////////
+        //メソッド名：SelectRowControl()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：選択された行に対してのコントロールの変更
+        ///////////////////////////////
+        private void SelectRowControl()
+        {
+            //データグリッドビューに乗っている情報をGUIに反映
+            txbMakerID.Text = dgvMaker[0, dgvMaker.CurrentCellAddress.Y].Value.ToString();
+            txbMakerName.Text = dgvMaker[1, dgvMaker.CurrentCellAddress.Y].Value.ToString();
+            txbMakerAddress.Text = dgvMaker[2, dgvMaker.CurrentCellAddress.Y].Value.ToString();
+            txbMakerPhone.Text = dgvMaker[3, dgvMaker.CurrentCellAddress.Y].Value.ToString();
+            txbMakerPostal.Text = dgvMaker[4, dgvMaker.CurrentCellAddress.Y].Value.ToString();
+            txbMakerFAX.Text = dgvMaker[5, dgvMaker.CurrentCellAddress.Y].Value.ToString();
+            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvMaker[6, dgvMaker.CurrentCellAddress.Y].Value.ToString()).Key;
+            txbHidden.Text = dgvMaker[7, dgvMaker.CurrentCellAddress.Y]?.Value?.ToString();
         }
     }
 }

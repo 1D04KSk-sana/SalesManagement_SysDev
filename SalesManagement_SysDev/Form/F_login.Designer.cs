@@ -152,6 +152,8 @@
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "F_Login";
             this.Text = "販売管理システムログイン画面";
+            this.pnlLogin.ResumeLayout(false);
+            this.pnlLogin.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

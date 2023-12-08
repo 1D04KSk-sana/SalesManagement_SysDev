@@ -132,6 +132,7 @@ namespace SalesManagement_SysDev
             this.cmbView.Name = "cmbView";
             this.cmbView.Size = new System.Drawing.Size(360, 43);
             this.cmbView.TabIndex = 29;
+            this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
             // 
             // btnClear
             // 
@@ -394,6 +395,7 @@ namespace SalesManagement_SysDev
             this.dgvMaker.RowTemplate.Height = 24;
             this.dgvMaker.Size = new System.Drawing.Size(1900, 495);
             this.dgvMaker.TabIndex = 72;
+            this.dgvMaker.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMaker_CellClick);
             // 
             // btnPageSize
             // 
@@ -427,6 +429,7 @@ namespace SalesManagement_SysDev
             this.txbPageSize.Size = new System.Drawing.Size(50, 29);
             this.txbPageSize.TabIndex = 73;
             this.txbPageSize.TabStop = false;
+            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblNumPage
             // 
@@ -448,6 +451,7 @@ namespace SalesManagement_SysDev
             this.txbNumPage.Size = new System.Drawing.Size(50, 29);
             this.txbNumPage.TabIndex = 80;
             this.txbNumPage.TabStop = false;
+            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // btnPageMin
             // 
@@ -460,6 +464,7 @@ namespace SalesManagement_SysDev
             this.btnPageMin.TabStop = false;
             this.btnPageMin.Text = "|◀";
             this.btnPageMin.UseVisualStyleBackColor = true;
+            this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
             // 
             // btnBack
             // 
@@ -472,6 +477,7 @@ namespace SalesManagement_SysDev
             this.btnBack.TabStop = false;
             this.btnBack.Text = "◀";
             this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnNext
             // 
@@ -484,6 +490,7 @@ namespace SalesManagement_SysDev
             this.btnNext.TabStop = false;
             this.btnNext.Text = "▶";
             this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPageMax
             // 
@@ -496,6 +503,7 @@ namespace SalesManagement_SysDev
             this.btnPageMax.TabStop = false;
             this.btnPageMax.Text = "▶|";
             this.btnPageMax.UseVisualStyleBackColor = true;
+            this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
             // F_HonshaMaker
             // 

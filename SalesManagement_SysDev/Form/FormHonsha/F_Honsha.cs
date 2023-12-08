@@ -103,9 +103,15 @@ namespace SalesManagement_SysDev
             this.Opacity = 0;
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
+        private void btnFormMaker_Click(object sender, EventArgs e)
         {
+            F_HonshaMaker F_HonshaMaker = new F_HonshaMaker();
 
+            F_HonshaMaker.Owner = this;
+            F_HonshaMaker.FormClosed += ChildForm_FormClosed;
+            F_HonshaMaker.Show();
+
+            this.Opacity = 0;
         }
     }
 }

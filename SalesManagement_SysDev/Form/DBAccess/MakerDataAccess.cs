@@ -31,6 +31,28 @@ namespace SalesManagement_SysDev
             return listMaker;
         }
         ///////////////////////////////
+        //メソッド名：GetSalesOfficeDspData()
+        //引　数   ：なし
+        //戻り値   ：表示用メーカーデータ
+        //機　能   ：表示用メーカーデータの取得
+        ///////////////////////////////
+        public List<M_Maker> GetMakerDspData()
+        {
+            List<M_Maker> listMaker = new List<M_Maker>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listMaker = context.M_Makers.Where(x => x.MaFlag == 0).ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listMaker;
+        }
+        ///////////////////////////////
         //メソッド名：GetMakerNotDspData()
         //引　数：なし
         //戻り値：管理Flgが非表示のメーカーデータ
@@ -75,14 +97,14 @@ namespace SalesManagement_SysDev
             return listMaker;
         }
         ///////////////////////////////
-        //メソッド名：CheckClientIDExistence()
-        //引　数   ：営業所コード
+        //メソッド名：CheckMakerIDExistence()
+        //引　数   ：メーカーコード
         //戻り値   ：True or False
-        //機　能   ：一致するmメーカーIDの有無を確認
+        //機　能   ：一致するメーカーIDの有無を確認
         //          ：一致データありの場合True
         //          ：一致データなしの場合False
         ///////////////////////////////
-        public bool CheckClientIDExistence(int MakerID)
+        public bool CheckMakerIDExistence(int MakerID)
         {
             bool flg = false;
             try
@@ -99,14 +121,14 @@ namespace SalesManagement_SysDev
             return flg;
         }
         ///////////////////////////////
-        //メソッド名：CheckClientNameExistence()
-        //引　数   ：営業所コード
+        //メソッド名：CheckMakerNameExistence()
+        //引　数   ：メーカーコード
         //戻り値   ：True or False
-        //機　能   ：一致する営業所名の有無を確認
+        //機　能   ：一致するメーカー名の有無を確認
         //          ：一致データありの場合True
         //          ：一致データなしの場合False
         ///////////////////////////////
-        public bool CheckClientNameExistence(string MakerName)
+        public bool CheckMakerNameExistence(string MakerName)
         {
             bool flg = false;
             try
@@ -123,7 +145,7 @@ namespace SalesManagement_SysDev
             return flg;
         }
         ///////////////////////////////
-        //メソッド名：AddSaleOfficeData()
+        //メソッド名：AddMakerData()
         //引　数：regMaker = メーカーデータ
         //戻り値：True or False
         //機　能：メーカーデータの登録
@@ -146,10 +168,10 @@ namespace SalesManagement_SysDev
             }
         }
         ///////////////////////////////
-        //メソッド名：UpdateSalesOfficeData()
-        //引　数：updClient = 営業所データ
+        //メソッド名：UpdateMakerData()
+        //引　数：updMaker = メーカーデータ
         //戻り値：True or False
-        //機　能：営業所データの更新
+        //機　能：メーカーデータの更新
         //      ：更新成功の場合True
         //      ：更新失敗の場合False
         ///////////////////////////////
@@ -181,7 +203,7 @@ namespace SalesManagement_SysDev
             }
         }
         ///////////////////////////////
-        //メソッド名：GetAndSalesOfficeData()
+        //メソッド名：GetAndMakerData()
         //引　数：検索条件
         //戻り値：条件完全一致メーカーデータ
         //機　能：条件完全一致メーカーデータの取得
@@ -215,18 +237,18 @@ namespace SalesManagement_SysDev
             return listMaker;
         }
         ///////////////////////////////
-        //メソッド名：GetOrSalesOfficeData()
+        //メソッド名：GetOrMakerData()
         //引　数：検索条件
-        //戻り値：条件一部一営業所データ
-        //機　能：条件一部一致営業所データの取得
+        //戻り値：条件一部一メーカーデータ
+        //機　能：条件一部一致メーカーデータの取得
         ///////////////////////////////
         public List<M_Maker> GetOrMakerData(M_Maker selectMaker)
         {
-            List<M_Maker> listSalesOffice = new List<M_SalesOffice>();
+            List<M_Maker> listMaker = new List<M_Maker>();
             try
             {
                 var context = new SalesManagement_DevContext();
-                listSalesOffice = context.M_SalesOffices.Where(x => x.SoID == selectSalesOffice.SoID || x.SoPhone == selectSalesOffice.SoPhone).ToList();
+                listMaker = context.M_Makers.Where(x => x.MaID == selectMaker.MaID || x.MaPhone == selectMaker.MaPhone).ToList();
 
                 context.Dispose();
             }
@@ -235,7 +257,7 @@ namespace SalesManagement_SysDev
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            return listSalesOffice;
+            return listMaker;
         }
     }
 }
