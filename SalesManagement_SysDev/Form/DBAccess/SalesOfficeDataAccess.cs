@@ -39,7 +39,7 @@ namespace SalesManagement_SysDev
         //          ：一致データありの場合True
         //          ：一致データなしの場合False
         ///////////////////////////////
-        public bool CheckClientIDExistence(int SalesOfficeID)
+        public bool CheckSalesOfficeIDExistence(int SalesOfficeID)
         {
             bool flg = false;
             try
@@ -244,7 +244,7 @@ namespace SalesManagement_SysDev
         //          ：一致データありの場合True
         //          ：一致データなしの場合False
         ///////////////////////////////
-        public bool CheckClientNameExistence(string SalesOfficeName)
+        public bool CheckSalesOfficeNameExistence(string SalesOfficeName)
         {
             bool flg = false;
             try

@@ -279,7 +279,7 @@ namespace SalesManagement_SysDev
                     return false;
                 }
                 //営業所IDの重複チェック
-                if (salesOfficeDataAccess.CheckClientIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
+                if (salesOfficeDataAccess.CheckSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
                 {
                     MessageBox.Show("営業所IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSalesOfficeID.Focus();
@@ -304,7 +304,7 @@ namespace SalesManagement_SysDev
                     return false;
                 }
                 //営業所名の重複チェック
-                if (salesOfficeDataAccess.CheckClientNameExistence(string.Format(txbSalesOfficeName.Text.Trim())))
+                if (salesOfficeDataAccess.CheckSalesOfficeNameExistence(string.Format(txbSalesOfficeName.Text.Trim())))
                 {
                     MessageBox.Show("営業所名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSalesOfficeName.Focus();
@@ -593,7 +593,7 @@ namespace SalesManagement_SysDev
                     return false;
                 }
                 //営業所IDの重複チェック
-                if (!salesOfficeDataAccess.CheckClientIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
+                if (!salesOfficeDataAccess.CheckSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
                 {
                     MessageBox.Show("営業所IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSalesOfficeID.Focus();
@@ -701,7 +701,7 @@ namespace SalesManagement_SysDev
                     return false;
                 }
                 //営業所IDの存在チェック
-                if (!salesOfficeDataAccess.CheckClientIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
+                if (!salesOfficeDataAccess.CheckSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
                 {
                     MessageBox.Show("営業所IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSalesOfficeID.Focus();
@@ -723,6 +723,13 @@ namespace SalesManagement_SysDev
                 {
                     MessageBox.Show("営業所名は50文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSalesOfficeName.Focus();
+                    return false;
+                }
+                //営業所名存在チェック
+                if (!salesOfficeDataAccess.CheckSalesOfficeNameExistence(txbSalesOfficeName.Text.Trim()))
+                {
+                    MessageBox.Show("メーカー名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSalesOfficeID.Focus();
                     return false;
                 }
             }
