@@ -646,7 +646,7 @@ namespace SalesManagement_SysDev
         private void SelectRowControl()
         {
             //データグリッドビューに乗っている情報をGUIに反映
-            txbProductID.Text = (dictionaryProdact.FirstOrDefault(x => x.Value == dgvStock[0, dgvStock.CurrentCellAddress.Y].Value.ToString()).Key ).ToString();
+            txbProductID.Text = (dictionaryProdact.FirstOrDefault(x => x.Value == dgvStock[0, dgvStock.CurrentCellAddress.Y].Value.ToString()).Key).ToString();
             txbStockID.Text = dgvStock[1, dgvStock.CurrentCellAddress.Y].Value.ToString();
             txbStockQuentity.Text = dgvStock[2, dgvStock.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvStock[3, dgvStock.CurrentCellAddress.Y].Value.ToString()).Key;
@@ -726,5 +726,14 @@ namespace SalesManagement_SysDev
         {
             Application.Exit();
         }
+
+        private void pctHint_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://docs.google.com/document/d/1uhR5cLzstFzykefN7f-r67N1qg6Ox-Vs/edit=true",
+                UseShellExecute = true
+            });
+         }
     }
 }

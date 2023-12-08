@@ -52,13 +52,16 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txbEmployeeName = new System.Windows.Forms.TextBox();
             this.btnBack = new System.Windows.Forms.Button();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.pnlHonsha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOperationLog)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHonsha
             // 
             this.pnlHonsha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(255)))), ((int)(((byte)(112)))));
+            this.pnlHonsha.Controls.Add(this.pctHint);
             this.pnlHonsha.Controls.Add(this.lblOperationLog);
             this.pnlHonsha.Controls.Add(this.btnReturn);
             this.pnlHonsha.Controls.Add(this.btnClose);
@@ -73,7 +76,7 @@
             this.lblOperationLog.AutoSize = true;
             this.lblOperationLog.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblOperationLog.ForeColor = System.Drawing.Color.White;
-            this.lblOperationLog.Location = new System.Drawing.Point(754, 26);
+            this.lblOperationLog.Location = new System.Drawing.Point(754, 39);
             this.lblOperationLog.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOperationLog.Name = "lblOperationLog";
             this.lblOperationLog.Size = new System.Drawing.Size(385, 64);
@@ -96,7 +99,7 @@
             // btnClose
             // 
             this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClose.Location = new System.Drawing.Point(1748, 20);
+            this.btnClose.Location = new System.Drawing.Point(1715, 33);
             this.btnClose.Margin = new System.Windows.Forms.Padding(2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(160, 70);
@@ -110,7 +113,7 @@
             // 
             this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(172)))), ((int)(((byte)(242)))));
             this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClear.Location = new System.Drawing.Point(1483, 157);
+            this.btnClear.Location = new System.Drawing.Point(1492, 182);
             this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(160, 70);
@@ -124,7 +127,7 @@
             // 
             this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnDone.Location = new System.Drawing.Point(1674, 157);
+            this.btnDone.Location = new System.Drawing.Point(1695, 182);
             this.btnDone.Margin = new System.Windows.Forms.Padding(2);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(160, 70);
@@ -138,7 +141,7 @@
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(172, 173);
+            this.rdbSearch.Location = new System.Drawing.Point(172, 182);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
@@ -351,6 +354,16 @@
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1618, 39);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 72;
+            this.pctHint.TabStop = false;
+            // 
             // F_HonshaOperationLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -389,6 +402,7 @@
             this.pnlHonsha.ResumeLayout(false);
             this.pnlHonsha.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOperationLog)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -420,5 +434,6 @@
         private System.Windows.Forms.TextBox txbEmployeeName;
         private System.Windows.Forms.Label lblOperationLog;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.PictureBox pctHint;
     }
 }

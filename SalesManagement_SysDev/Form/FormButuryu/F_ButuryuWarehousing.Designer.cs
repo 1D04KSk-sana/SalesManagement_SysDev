@@ -73,9 +73,11 @@
             this.cmbConfirm = new System.Windows.Forms.ComboBox();
             this.lblConfirm = new System.Windows.Forms.Label();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.pnlButuryu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarehousing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarehousingDetail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
             // lblWarehousing
@@ -93,6 +95,7 @@
             // pnlButuryu
             // 
             this.pnlButuryu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(136)))), ((int)(((byte)(179)))));
+            this.pnlButuryu.Controls.Add(this.pctHint);
             this.pnlButuryu.Controls.Add(this.btnClose);
             this.pnlButuryu.Controls.Add(this.btnReturn);
             this.pnlButuryu.Controls.Add(this.lblWarehousing);
@@ -622,6 +625,17 @@
             this.rdbSearch.UseVisualStyleBackColor = true;
             this.rdbSearch.CheckedChanged += new System.EventHandler(this.rdbSearch_CheckedChanged);
             // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1610, 44);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 130;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            // 
             // F_ButuryuWarehousing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -678,6 +692,7 @@
             this.pnlButuryu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarehousing)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarehousingDetail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -729,5 +744,6 @@
         private System.Windows.Forms.ComboBox cmbConfirm;
         private System.Windows.Forms.Label lblConfirm;
         private System.Windows.Forms.RadioButton rdbSearch;
+        private System.Windows.Forms.PictureBox pctHint;
     }
 }
