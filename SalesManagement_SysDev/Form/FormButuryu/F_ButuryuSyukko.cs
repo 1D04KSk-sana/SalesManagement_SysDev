@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace SalesManagement_SysDev
 {
     public partial class F_ButuryuSyukko : Form
