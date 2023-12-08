@@ -62,6 +62,8 @@
             this.lblClientID = new System.Windows.Forms.Label();
             this.dtpSaleDate = new SalesManagement_SysDev.MonthPicker();
             this.button1 = new System.Windows.Forms.Button();
+            this.txbHidden = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.pnlHonsha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSaleDetail)).BeginInit();
@@ -186,7 +188,7 @@
             // 
             this.lblSaleDate.AutoSize = true;
             this.lblSaleDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblSaleDate.Location = new System.Drawing.Point(731, 375);
+            this.lblSaleDate.Location = new System.Drawing.Point(1367, 370);
             this.lblSaleDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSaleDate.Name = "lblSaleDate";
             this.lblSaleDate.Size = new System.Drawing.Size(106, 24);
@@ -196,7 +198,7 @@
             // txbChumonID
             // 
             this.txbChumonID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbChumonID.Location = new System.Drawing.Point(321, 367);
+            this.txbChumonID.Location = new System.Drawing.Point(1617, 291);
             this.txbChumonID.Margin = new System.Windows.Forms.Padding(2);
             this.txbChumonID.Name = "txbChumonID";
             this.txbChumonID.ShortcutsEnabled = false;
@@ -207,7 +209,7 @@
             // 
             this.lblChumonID.AutoSize = true;
             this.lblChumonID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblChumonID.Location = new System.Drawing.Point(93, 375);
+            this.lblChumonID.Location = new System.Drawing.Point(1393, 294);
             this.lblChumonID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblChumonID.Name = "lblChumonID";
             this.lblChumonID.Size = new System.Drawing.Size(80, 24);
@@ -219,7 +221,7 @@
             this.cmbSalesOfficeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSalesOfficeID.FormattingEnabled = true;
-            this.cmbSalesOfficeID.Location = new System.Drawing.Point(1617, 367);
+            this.cmbSalesOfficeID.Location = new System.Drawing.Point(975, 290);
             this.cmbSalesOfficeID.Margin = new System.Windows.Forms.Padding(2);
             this.cmbSalesOfficeID.Name = "cmbSalesOfficeID";
             this.cmbSalesOfficeID.Size = new System.Drawing.Size(220, 32);
@@ -230,7 +232,7 @@
             // 
             this.lblSalesOfficeID.AutoSize = true;
             this.lblSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblSalesOfficeID.Location = new System.Drawing.Point(1367, 375);
+            this.lblSalesOfficeID.Location = new System.Drawing.Point(725, 293);
             this.lblSalesOfficeID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSalesOfficeID.Name = "lblSalesOfficeID";
             this.lblSalesOfficeID.Size = new System.Drawing.Size(106, 24);
@@ -240,7 +242,7 @@
             // txbClientName
             // 
             this.txbClientName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientName.Location = new System.Drawing.Point(1617, 291);
+            this.txbClientName.Location = new System.Drawing.Point(975, 367);
             this.txbClientName.Margin = new System.Windows.Forms.Padding(2);
             this.txbClientName.Name = "txbClientName";
             this.txbClientName.ReadOnly = true;
@@ -252,7 +254,7 @@
             // 
             this.lblClientName.AutoSize = true;
             this.lblClientName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientName.Location = new System.Drawing.Point(1391, 297);
+            this.lblClientName.Location = new System.Drawing.Point(749, 370);
             this.lblClientName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(82, 24);
@@ -407,6 +409,7 @@
             this.rdbSearch.TabIndex = 2;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.rdbSearch_CheckedChanged);
             // 
             // rdbHiddenUpdate
             // 
@@ -420,6 +423,19 @@
             this.rdbHiddenUpdate.Text = "非表示更新";
             this.rdbHiddenUpdate.UseVisualStyleBackColor = true;
             this.rdbHiddenUpdate.CheckedChanged += new System.EventHandler(this.rdbHiddenUpdate_CheckedChanged);
+            // 
+            // dtpSaleDate
+            // 
+            this.dtpSaleDate.Checked = false;
+            this.dtpSaleDate.CustomFormat = "MMMM yyyy";
+            this.dtpSaleDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.dtpSaleDate.Location = new System.Drawing.Point(1617, 368);
+            this.dtpSaleDate.Margin = new System.Windows.Forms.Padding(2);
+            this.dtpSaleDate.Name = "dtpSaleDate";
+            this.dtpSaleDate.ShowCheckBox = true;
+            this.dtpSaleDate.Size = new System.Drawing.Size(220, 31);
+            this.dtpSaleDate.TabIndex = 81;
+            this.dtpSaleDate.TabStop = false;
             // 
             // lblHidden
             // 
@@ -435,7 +451,7 @@
             // txbClientID
             // 
             this.txbClientID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientID.Location = new System.Drawing.Point(981, 294);
+            this.txbClientID.Location = new System.Drawing.Point(321, 363);
             this.txbClientID.Margin = new System.Windows.Forms.Padding(2);
             this.txbClientID.Name = "txbClientID";
             this.txbClientID.ShortcutsEnabled = false;
@@ -448,7 +464,7 @@
             // 
             this.lblClientID.AutoSize = true;
             this.lblClientID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientID.Location = new System.Drawing.Point(755, 294);
+            this.lblClientID.Location = new System.Drawing.Point(93, 370);
             this.lblClientID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClientID.Name = "lblClientID";
             this.lblClientID.Size = new System.Drawing.Size(80, 24);
@@ -478,6 +494,24 @@
             this.button1.Text = "閉じる";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // txbHidden
+            // 
+            this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbHidden.Location = new System.Drawing.Point(975, 436);
+            this.txbHidden.Name = "txbHidden";
+            this.txbHidden.Size = new System.Drawing.Size(862, 42);
+            this.txbHidden.TabIndex = 145;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label7.Location = new System.Drawing.Point(716, 448);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(130, 24);
+            this.label7.TabIndex = 144;
+            this.label7.Text = "非表示理由";
             // 
             // F_HonshaSale
             // 
@@ -486,6 +520,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.txbHidden);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.lblClientID);
             this.Controls.Add(this.txbClientID);
             this.Controls.Add(this.lblHidden);
@@ -568,5 +604,7 @@
         private System.Windows.Forms.TextBox txbClientID;
         private System.Windows.Forms.Label lblClientID;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox txbHidden;
+        private System.Windows.Forms.Label label7;
     }
 }

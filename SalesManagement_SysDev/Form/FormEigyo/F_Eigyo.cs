@@ -68,7 +68,7 @@ namespace SalesManagement_SysDev
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void btnclose_Click(object sender, EventArgs e)

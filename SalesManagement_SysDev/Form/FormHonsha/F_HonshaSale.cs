@@ -452,6 +452,7 @@ namespace SalesManagement_SysDev
             dtpSaleDate.Value= DateTime.Now;
             cmbSalesOfficeID.SelectedIndex = -1;
             cmbHidden.SelectedIndex = -1;
+            txbHidden.Text = string.Empty;
         }
 
 
@@ -591,6 +592,7 @@ namespace SalesManagement_SysDev
             txbChumonID.Text = dgvSale[4, dgvSale.CurrentCellAddress.Y].Value.ToString();
             dtpSaleDate.Text = dgvSale[5, dgvSale.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSale[6, dgvSale.CurrentCellAddress.Y].Value.ToString()).Key;
+            txbHidden.Text = dgvSale[7, dgvSale.CurrentCellAddress.Y]?.Value?.ToString();
         }
 
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
@@ -620,7 +622,7 @@ namespace SalesManagement_SysDev
                 dgvSaleDetail.Rows.Add(item.SaDetailID, item.SaID, item.PrID, item.SaQuantity, item.SaTotalPrice);
             }
 
-            //dgvClientをリフレッシュ
+            //dgvSaleDetailをリフレッシュ
             dgvSaleDetail.Refresh();
 
         }
@@ -701,6 +703,7 @@ namespace SalesManagement_SysDev
             {
                 SaID = int.Parse(txbSaleID.Text.Trim()),
                 SaFlag= cmbHidden.SelectedIndex,
+                SaHidden=txbHidden.Text.Trim(),
             };
         }
         ///////////////////////////////
@@ -816,12 +819,14 @@ namespace SalesManagement_SysDev
                 txbClientName.Enabled = false;
                 cmbSalesOfficeID.Enabled = false;
                 txbChumonID.Enabled = false;
+                dtpSaleDate.Enabled = false;
             }
             else
             {
                 txbClientName.Enabled = true;
                 cmbSalesOfficeID.Enabled = true;
                 txbChumonID.Enabled = true;
+                dtpSaleDate.Enabled = true;
             }
         }
 
@@ -852,6 +857,20 @@ namespace SalesManagement_SysDev
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+        
+        private void rdbSearch_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+                cmbHidden.Enabled = false;
+                txbHidden.Enabled = false;
+            }
+            else
+            {
+                cmbHidden.Enabled = true;
+                txbHidden.Enabled = true;
+            }
         }
     }
 }

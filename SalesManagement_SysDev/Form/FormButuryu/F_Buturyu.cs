@@ -91,5 +91,9 @@ namespace SalesManagement_SysDev
         {
             Application.Exit();
         }
+                private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

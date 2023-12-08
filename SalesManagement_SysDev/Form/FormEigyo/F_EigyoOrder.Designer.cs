@@ -200,6 +200,7 @@
             this.txbPageSize.Size = new System.Drawing.Size(46, 22);
             this.txbPageSize.TabIndex = 55;
             this.txbPageSize.TabStop = false;
+            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // cmbView
             // 
