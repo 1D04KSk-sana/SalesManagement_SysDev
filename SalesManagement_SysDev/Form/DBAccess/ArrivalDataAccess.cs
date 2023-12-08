@@ -13,7 +13,7 @@ namespace SalesManagement_SysDev
         //メソッド名：CheckArrivalIDExistence()
         //引　数   ：入荷コード
         //戻り値   ：True or False
-        //機　能   ：一致する発注IDの有無を確認
+        //機　能   ：一致する入荷IDの有無を確認
         //          ：一致データありの場合True
         //          ：一致データなしの場合False
         ///////////////////////////////
