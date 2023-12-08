@@ -82,6 +82,7 @@
             this.lblConfirm = new System.Windows.Forms.Label();
             this.cmbConfirm = new System.Windows.Forms.ComboBox();
             this.btnDetailClear = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).BeginInit();
             this.pnlSelect.SuspendLayout();
             this.pnlHonsha.SuspendLayout();
@@ -454,6 +455,7 @@
             // pnlHonsha
             // 
             this.pnlHonsha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(181)))), ((int)(((byte)(128)))));
+            this.pnlHonsha.Controls.Add(this.button1);
             this.pnlHonsha.Controls.Add(this.lblOrder);
             this.pnlHonsha.Controls.Add(this.btnReturn);
             this.pnlHonsha.Location = new System.Drawing.Point(0, 0);
@@ -719,6 +721,18 @@
             this.btnDetailClear.UseVisualStyleBackColor = true;
             this.btnDetailClear.Click += new System.EventHandler(this.btnDetailClear_Click);
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button1.Location = new System.Drawing.Point(750, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(160, 70);
+            this.button1.TabIndex = 88;
+            this.button1.TabStop = false;
+            this.button1.Text = "閉じる";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // F_EigyoOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -844,5 +858,6 @@
         private System.Windows.Forms.ComboBox cmbConfirm;
         private System.Windows.Forms.RadioButton rdbUpdate;
         private System.Windows.Forms.Button btnDetailClear;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -854,6 +854,11 @@ namespace SalesManagement_SysDev
             txbClientName.Text = Client.ClName;
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        
         private void rdbSearch_CheckedChanged(object sender, EventArgs e)
         {
             if (rdbSearch.Checked)

@@ -70,5 +70,10 @@ namespace SalesManagement_SysDev
         {
             this.Close();
         }
+
+        private void btnclose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

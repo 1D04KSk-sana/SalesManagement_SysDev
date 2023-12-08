@@ -87,7 +87,7 @@ namespace SalesManagement_SysDev
             this.lblClient.Location = new System.Drawing.Point(752, 30);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(417, 64);
+            this.lblClient.Size = new System.Drawing.Size(418, 64);
             this.lblClient.TabIndex = 27;
             this.lblClient.Text = "注文管理画面";
             // 
@@ -103,6 +103,7 @@ namespace SalesManagement_SysDev
             this.btnClose.TabStop = false;
             this.btnClose.Text = "閉じる";
             this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnReturn
             // 

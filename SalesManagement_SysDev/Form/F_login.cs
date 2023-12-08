@@ -1016,7 +1016,7 @@ namespace SalesManagement_SysDev
         {
             var context = new SalesManagement_DevContext();
 
-            if (context.T_LoginSaves.Count() != 0)
+            if (context.T_LoginSaves.Count() != 0) 
             {
                 var LoginSave = loginSaveDataAccess.GetSaveLogData();
 

@@ -1056,5 +1056,10 @@ namespace SalesManagement_SysDev
             cmbHidden.SelectedIndex = -1;
             txbClientFAX.Text = string.Empty;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

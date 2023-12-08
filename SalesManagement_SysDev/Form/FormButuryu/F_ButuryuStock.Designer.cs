@@ -76,7 +76,7 @@
             // btnClose
             // 
             this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 26F);
-            this.btnClose.Location = new System.Drawing.Point(1699, 30);
+            this.btnClose.Location = new System.Drawing.Point(1719, 40);
             this.btnClose.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(160, 70);
@@ -84,6 +84,7 @@
             this.btnClose.TabStop = false;
             this.btnClose.Text = "閉じる";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // lblClient
             // 

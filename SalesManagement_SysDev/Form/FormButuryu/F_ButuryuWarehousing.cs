@@ -1318,5 +1318,10 @@ namespace SalesManagement_SysDev
             }
 
         }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
