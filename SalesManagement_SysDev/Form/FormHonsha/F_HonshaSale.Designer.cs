@@ -34,6 +34,7 @@
             this.txbPageSize = new System.Windows.Forms.TextBox();
             this.cmbView = new System.Windows.Forms.ComboBox();
             this.pnlHonsha = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.dgvSale = new System.Windows.Forms.DataGridView();
@@ -61,12 +62,13 @@
             this.txbClientID = new System.Windows.Forms.TextBox();
             this.lblClientID = new System.Windows.Forms.Label();
             this.dtpSaleDate = new SalesManagement_SysDev.MonthPicker();
-            this.button1 = new System.Windows.Forms.Button();
             this.txbHidden = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.pnlHonsha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSaleDetail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
             // lblClient
@@ -135,6 +137,7 @@
             // pnlHonsha
             // 
             this.pnlHonsha.BackColor = System.Drawing.Color.Lime;
+            this.pnlHonsha.Controls.Add(this.pctHint);
             this.pnlHonsha.Controls.Add(this.button1);
             this.pnlHonsha.Controls.Add(this.lblClient);
             this.pnlHonsha.Controls.Add(this.btnReturn);
@@ -143,6 +146,18 @@
             this.pnlHonsha.Name = "pnlHonsha";
             this.pnlHonsha.Size = new System.Drawing.Size(1920, 150);
             this.pnlHonsha.TabIndex = 60;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button1.Location = new System.Drawing.Point(1729, 41);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(160, 70);
+            this.button1.TabIndex = 85;
+            this.button1.TabStop = false;
+            this.button1.Text = "閉じる";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnReturn
             // 
@@ -424,19 +439,6 @@
             this.rdbHiddenUpdate.UseVisualStyleBackColor = true;
             this.rdbHiddenUpdate.CheckedChanged += new System.EventHandler(this.rdbHiddenUpdate_CheckedChanged);
             // 
-            // dtpSaleDate
-            // 
-            this.dtpSaleDate.Checked = false;
-            this.dtpSaleDate.CustomFormat = "MMMM yyyy";
-            this.dtpSaleDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.dtpSaleDate.Location = new System.Drawing.Point(1617, 368);
-            this.dtpSaleDate.Margin = new System.Windows.Forms.Padding(2);
-            this.dtpSaleDate.Name = "dtpSaleDate";
-            this.dtpSaleDate.ShowCheckBox = true;
-            this.dtpSaleDate.Size = new System.Drawing.Size(220, 31);
-            this.dtpSaleDate.TabIndex = 81;
-            this.dtpSaleDate.TabStop = false;
-            // 
             // lblHidden
             // 
             this.lblHidden.AutoSize = true;
@@ -473,6 +475,7 @@
             // 
             // dtpSaleDate
             // 
+            this.dtpSaleDate.Checked = false;
             this.dtpSaleDate.CustomFormat = "MMMM yyyy";
             this.dtpSaleDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.dtpSaleDate.Location = new System.Drawing.Point(981, 368);
@@ -483,17 +486,6 @@
             this.dtpSaleDate.TabIndex = 81;
             this.dtpSaleDate.TabStop = false;
             // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(1729, 41);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(160, 70);
-            this.button1.TabIndex = 85;
-            this.button1.TabStop = false;
-            this.button1.Text = "閉じる";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // txbHidden
             // 
             this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
@@ -512,6 +504,17 @@
             this.label7.Size = new System.Drawing.Size(130, 24);
             this.label7.TabIndex = 144;
             this.label7.Text = "非表示理由";
+            // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1639, 45);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 146;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
             // 
             // F_HonshaSale
             // 
@@ -564,6 +567,7 @@
             this.pnlHonsha.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSaleDetail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -606,5 +610,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txbHidden;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.PictureBox pctHint;
     }
 }

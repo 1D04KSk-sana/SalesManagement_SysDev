@@ -57,13 +57,16 @@
             this.lblNumPage = new System.Windows.Forms.Label();
             this.txbNumPage = new System.Windows.Forms.TextBox();
             this.cmbView = new System.Windows.Forms.ComboBox();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.pnlButuryu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlButuryu
             // 
             this.pnlButuryu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(136)))), ((int)(((byte)(179)))));
+            this.pnlButuryu.Controls.Add(this.pctHint);
             this.pnlButuryu.Controls.Add(this.btnClose);
             this.pnlButuryu.Controls.Add(this.lblClient);
             this.pnlButuryu.Controls.Add(this.btnReturn);
@@ -415,6 +418,17 @@
             this.cmbView.TabIndex = 97;
             this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
             // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1623, 46);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 98;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            // 
             // F_ButuryuStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -457,6 +471,7 @@
             this.pnlButuryu.ResumeLayout(false);
             this.pnlButuryu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -493,5 +508,6 @@
         private System.Windows.Forms.Label lblNumPage;
         private System.Windows.Forms.TextBox txbNumPage;
         private System.Windows.Forms.ComboBox cmbView;
+        private System.Windows.Forms.PictureBox pctHint;
     }
 }

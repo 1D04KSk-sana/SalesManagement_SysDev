@@ -66,6 +66,7 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPageMax = new System.Windows.Forms.Button();
             this.pnlProdact = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.lblProdact = new System.Windows.Forms.Label();
             this.txbProdactJanCode = new System.Windows.Forms.TextBox();
             this.lblProdactJanCode = new System.Windows.Forms.Label();
@@ -74,10 +75,11 @@
             this.cmbSmallID = new System.Windows.Forms.ComboBox();
             this.dtpProdactReleaseDate = new System.Windows.Forms.DateTimePicker();
             this.lblprodactdspHidden = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdact)).BeginInit();
             this.pnlProdact.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
             // btnReturn
@@ -517,6 +519,7 @@
             // pnlProdact
             // 
             this.pnlProdact.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(255)))), ((int)(((byte)(112)))));
+            this.pnlProdact.Controls.Add(this.pctHint);
             this.pnlProdact.Controls.Add(this.button1);
             this.pnlProdact.Controls.Add(this.lblProdact);
             this.pnlProdact.Controls.Add(this.btnReturn);
@@ -525,6 +528,18 @@
             this.pnlProdact.Name = "pnlProdact";
             this.pnlProdact.Size = new System.Drawing.Size(1920, 150);
             this.pnlProdact.TabIndex = 42;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button1.Location = new System.Drawing.Point(1724, 38);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(160, 70);
+            this.button1.TabIndex = 50;
+            this.button1.TabStop = false;
+            this.button1.Text = "閉じる";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // lblProdact
             // 
@@ -617,17 +632,16 @@
             this.lblprodactdspHidden.TabIndex = 49;
             this.lblprodactdspHidden.Text = "表示/非表示";
             // 
-            // button1
+            // pctHint
             // 
-            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(1724, 38);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(160, 70);
-            this.button1.TabIndex = 50;
-            this.button1.TabStop = false;
-            this.button1.Text = "閉じる";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1621, 42);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 73;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
             // 
             // F_HonshaProdact
             // 
@@ -689,6 +703,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdact)).EndInit();
             this.pnlProdact.ResumeLayout(false);
             this.pnlProdact.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -743,5 +758,6 @@
         private System.Windows.Forms.DateTimePicker dtpProdactReleaseDate;
         private System.Windows.Forms.Label lblprodactdspHidden;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox pctHint;
     }
 }

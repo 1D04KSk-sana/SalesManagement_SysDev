@@ -65,9 +65,11 @@
             this.txbPageSize = new System.Windows.Forms.TextBox();
             this.cmbPositionName = new System.Windows.Forms.ComboBox();
             this.btnSinghUp = new System.Windows.Forms.Button();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployee)).BeginInit();
             this.pnlHonsha.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
             // btnReturn
@@ -349,6 +351,7 @@
             // pnlHonsha
             // 
             this.pnlHonsha.BackColor = System.Drawing.Color.Lime;
+            this.pnlHonsha.Controls.Add(this.pctHint);
             this.pnlHonsha.Controls.Add(this.lblHonsha);
             this.pnlHonsha.Controls.Add(this.btnClose);
             this.pnlHonsha.Controls.Add(this.btnReturn);
@@ -365,7 +368,7 @@
             this.lblHonsha.Location = new System.Drawing.Point(788, 57);
             this.lblHonsha.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblHonsha.Name = "lblHonsha";
-            this.lblHonsha.Size = new System.Drawing.Size(417, 64);
+            this.lblHonsha.Size = new System.Drawing.Size(418, 64);
             this.lblHonsha.TabIndex = 26;
             this.lblHonsha.Text = "社員管理画面";
             // 
@@ -508,6 +511,17 @@
             this.btnSinghUp.UseVisualStyleBackColor = false;
             this.btnSinghUp.Click += new System.EventHandler(this.btnSinghUp_Click);
             // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1647, 48);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 71;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            // 
             // F_HonshaEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -558,6 +572,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployee)).EndInit();
             this.pnlHonsha.ResumeLayout(false);
             this.pnlHonsha.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -601,5 +616,6 @@
         private System.Windows.Forms.TextBox txbPageSize;
         private System.Windows.Forms.ComboBox cmbPositionName;
         private System.Windows.Forms.Button btnSinghUp;
+        private System.Windows.Forms.PictureBox pctHint;
     }
 }

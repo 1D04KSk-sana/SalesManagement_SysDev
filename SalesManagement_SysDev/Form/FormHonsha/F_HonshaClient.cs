@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace SalesManagement_SysDev
 {
     public partial class F_HonshaClient : Form
@@ -1060,6 +1059,15 @@ namespace SalesManagement_SysDev
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void pctHint_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://docs.google.com/document/d/1tSBtymj0B82Q-tjiNp3mP2HDdMxDpypI/edit=true",
+                UseShellExecute = true
+            });
         }
     }
 }

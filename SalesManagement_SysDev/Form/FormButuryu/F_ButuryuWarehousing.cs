@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -1322,6 +1322,15 @@ namespace SalesManagement_SysDev
         private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void pctHint_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://docs.google.com/document/d/1Q0uZtxk67w69u3Lqq8Qs0JZucHhzYclU/edit=true",
+                UseShellExecute = true
+            });
         }
     }
 }

@@ -1633,5 +1633,14 @@ namespace SalesManagement_SysDev
         {
             Application.Exit();
         }
+
+        private void pctHint_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://docs.google.com/document/d/1ek0yP4S7QgqV0NlQk6M91KyCYdRDb5GE/edit=true",
+                UseShellExecute = true
+            });
+        }
     }
 }

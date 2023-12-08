@@ -59,6 +59,7 @@
             this.rdbRegister = new System.Windows.Forms.RadioButton();
             this.btnDone = new System.Windows.Forms.Button();
             this.pnlHonsha = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.lblOrder = new System.Windows.Forms.Label();
             this.btnReturn = new System.Windows.Forms.Button();
             this.dgvOrderDetail = new System.Windows.Forms.DataGridView();
@@ -82,11 +83,12 @@
             this.lblConfirm = new System.Windows.Forms.Label();
             this.cmbConfirm = new System.Windows.Forms.ComboBox();
             this.btnDetailClear = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).BeginInit();
             this.pnlSelect.SuspendLayout();
             this.pnlHonsha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNumPage
@@ -455,6 +457,7 @@
             // pnlHonsha
             // 
             this.pnlHonsha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(181)))), ((int)(((byte)(128)))));
+            this.pnlHonsha.Controls.Add(this.pctHint);
             this.pnlHonsha.Controls.Add(this.button1);
             this.pnlHonsha.Controls.Add(this.lblOrder);
             this.pnlHonsha.Controls.Add(this.btnReturn);
@@ -463,6 +466,18 @@
             this.pnlHonsha.Name = "pnlHonsha";
             this.pnlHonsha.Size = new System.Drawing.Size(922, 72);
             this.pnlHonsha.TabIndex = 64;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button1.Location = new System.Drawing.Point(750, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(160, 70);
+            this.button1.TabIndex = 88;
+            this.button1.TabStop = false;
+            this.button1.Text = "閉じる";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // lblOrder
             // 
@@ -721,17 +736,16 @@
             this.btnDetailClear.UseVisualStyleBackColor = true;
             this.btnDetailClear.Click += new System.EventHandler(this.btnDetailClear_Click);
             // 
-            // button1
+            // pctHint
             // 
-            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(750, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(160, 70);
-            this.button1.TabIndex = 88;
-            this.button1.TabStop = false;
-            this.button1.Text = "閉じる";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(667, 9);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 88;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
             // 
             // F_EigyoOrder
             // 
@@ -797,6 +811,7 @@
             this.pnlHonsha.ResumeLayout(false);
             this.pnlHonsha.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -859,5 +874,6 @@
         private System.Windows.Forms.RadioButton rdbUpdate;
         private System.Windows.Forms.Button btnDetailClear;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox pctHint;
     }
 }
