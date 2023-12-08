@@ -105,6 +105,8 @@ namespace SalesManagement_SysDev
             List<T_Syukko> sy = new List<T_Syukko>();
             List<T_Warehousing> wh = new List<T_Warehousing>();
             List<T_WarehousingDetail> whd = new List<T_WarehousingDetail>();
+            List<T_Arrival> ar = new List<T_Arrival>();
+            List<T_ArrivalDetail> ard = new List<T_ArrivalDetail>();
 
 
 
@@ -947,6 +949,64 @@ namespace SalesManagement_SysDev
                 context.T_WarehousingDetails.AddRange(whd);
                 context.SaveChanges();
             }
+            {
+                ar.Add(new T_Arrival()
+                {
+                    M_SalesOffice = so[0],
+                    M_Employee = em[116],
+                    M_Client = cl[1],
+                    T_Order = or[0],
+                    ArDate = new DateTime(2023, 12, 05),
+                    ArStateFlag = 1,
+                    ArFlag = 0,
+                });
+                ar.Add(new T_Arrival()
+                {
+                    M_SalesOffice = so[1],
+                    M_Employee = em[310],
+                    M_Client = cl[2],
+                    T_Order = or[1],
+                    ArDate = new DateTime(2023, 11, 05),
+                    ArStateFlag = 1,
+                    ArFlag = 0,
+                });
+                ar.Add(new T_Arrival()
+                {
+                    M_SalesOffice = so[2],
+                    M_Employee = em[1002],
+                    M_Client = cl[3],
+                    T_Order = or[1],
+                    ArDate = new DateTime(2023, 1, 05),
+                    ArStateFlag = 0,
+                    ArFlag = 0,
+                });
+                context.T_Arrivals.AddRange(ar);
+                context.SaveChanges();
+            }
+            {
+                ard.Add(new T_ArrivalDetail()
+                {
+                    T_Arrival = ar[0],
+                    M_Product = pr[1],
+                    ArQuantity = 50,
+                });
+                ard.Add(new T_ArrivalDetail()
+                {
+                    T_Arrival = ar[1],
+                    M_Product = pr[3],
+                    ArQuantity = 30,
+                });
+                ard.Add(new T_ArrivalDetail()
+                {
+                    T_Arrival = ar[0],
+                    M_Product = pr[2],
+                    ArQuantity = 80,
+                });
+
+                context.T_ArrivalDetails.AddRange(ard);
+                context.SaveChanges();
+            }
+
             context.Dispose();
 
             MessageBox.Show("サンプルデータ登録完了");

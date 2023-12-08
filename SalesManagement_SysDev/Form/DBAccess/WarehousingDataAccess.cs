@@ -184,13 +184,10 @@ namespace SalesManagement_SysDev
             {
                 var context = new SalesManagement_DevContext();
 
-                if (selectWarehousing.WaShelfFlag == 1)
-                {
-
-                }
                 listWarehousing = context.T_Warehousings.Where(x => x.WaID == selectWarehousing.WaID || x.EmID == selectWarehousing.EmID || x.HaID == selectWarehousing.HaID || x.WaDate.Value == selectWarehousing.WaDate.Value).ToList();
 
                 context.Dispose();
+
             }
             catch (Exception ex)
             {
@@ -267,6 +264,9 @@ namespace SalesManagement_SysDev
                 var Warehousing = context.T_Warehousings.Single(x => x.WaID == cfmWarehousing.WaID);
 
                 Warehousing.WaShelfFlag = cfmWarehousing.WaShelfFlag;
+                Warehousing.EmID = cfmWarehousing.EmID;
+
+
 
                 context.SaveChanges();
                 context.Dispose();
