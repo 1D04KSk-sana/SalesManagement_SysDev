@@ -131,6 +131,10 @@ namespace SalesManagement_SysDev
             //データグリッドビューのデータ取得
             GetDataGridView();
         }
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
         private void btnDone_Click(object sender, EventArgs e)
         {
             //登録ラヂオボタンがチェックされているとき

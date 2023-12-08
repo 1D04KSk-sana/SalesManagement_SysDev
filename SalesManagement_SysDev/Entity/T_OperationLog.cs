@@ -16,7 +16,7 @@ namespace SalesManagement_SysDev
         [Required]
         public string FormName { get; set; }        //フォーム名
         public string OpDone { get; set; }          //操作内容
-        public int OpDBID { get; set; }             //操作ID
+        public int? OpDBID { get; set; }             //操作ID
         public DateTime OpSetTime { get; set; }     //操作日時
 
         public virtual M_Employee M_Employee { get; set; }

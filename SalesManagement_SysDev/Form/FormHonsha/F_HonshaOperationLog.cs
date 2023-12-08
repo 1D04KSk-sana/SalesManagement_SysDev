@@ -497,5 +497,10 @@ namespace SalesManagement_SysDev
 
             txbEmployeeName.Text = Employee.EmName;
         }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

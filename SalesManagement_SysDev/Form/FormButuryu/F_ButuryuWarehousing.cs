@@ -64,7 +64,23 @@ namespace SalesManagement_SysDev
             { 0, "未確定" },
             { 1, "確定" },
         };
+        private void txbNumPage_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
 
+        }
+        private void txbPageSize_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+        }
         private void btnReturn_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -208,7 +224,7 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void GetDataGridView()
         {
-            //表示用の発注リスト作成
+            //表示用の入庫リスト作成
             List<T_Warehousing> listViewWarehousing = SetListWarehousing();
 
 
@@ -382,7 +398,7 @@ namespace SalesManagement_SysDev
             dgvWarehousing.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             dgvWarehousing.Columns.Add("WaID", "入庫ID");
-            dgvWarehousing.Columns.Add("EmID", "入庫社員名");
+            dgvWarehousing.Columns.Add("EmID", "社員名");
             dgvWarehousing.Columns.Add("HaID", "発注ID");
             dgvWarehousing.Columns.Add("WaDate", "入庫年月日");
             dgvWarehousing.Columns.Add("WaFlag", "入庫管理フラグ");
@@ -547,7 +563,7 @@ namespace SalesManagement_SysDev
         //メソッド名：WarehousingDetailDataRegister()
         //引　数   ：なし
         //戻り値   ：なし
-        //機　能   ：発注詳細情報登録の実行
+        //機　能   ：入庫詳細情報登録の実行
         ///////////////////////////////
         private void WarehousingDetailDataRegister()
         {
@@ -566,10 +582,10 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 発注詳細情報作成
+            // 入庫詳細情報作成
             var regWarehousing = GenerateDetailDataAtRegistration();
 
-            // 発注詳細情報登録
+            // 入庫詳細情報登録
             RegistrationWarehousingDetail(regWarehousing);
         }
         ///////////////////////////////
@@ -650,7 +666,7 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 発注情報の登録
+            // 入庫情報の登録
             bool flg = warehousingDetailDataAccess.AddWarehousingDetailData(regWarehousing);
 
             //登録成功・失敗メッセージ
@@ -710,27 +726,27 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtUpdate()
         {
-            //発注IDの適否
+            //入庫IDの適否
             if (!String.IsNullOrEmpty(txbWarehousingID.Text.Trim()))
             {
-                // 発注IDの数字チェック
+                // 入庫IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbWarehousingID.Text.Trim()))
                 {
-                    MessageBox.Show("発注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("入庫IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbWarehousingID.Focus();
                     return false;
                 }
-                //発注IDの存在チェック
+                //入庫IDの存在チェック
                 if (!warehousingDataAccess.CheckWarehousingIDExistence(int.Parse(txbWarehousingID.Text.Trim())))
                 {
-                    MessageBox.Show("発注IDが存在していません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("入庫IDが存在していません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbWarehousingID.Focus();
                     return false;
                 }
             }
             else
             {
-                MessageBox.Show("発注IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("入庫IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbWarehousingID.Focus();
                 return false;
             }
@@ -749,7 +765,7 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         //メソッド名：GenerateDataAtUpdate()
         //引　数   ：なし
-        //戻り値   ：発注更新情報
+        //戻り値   ：入庫更新情報
         //機　能   ：更新データのセット
         ///////////////////////////////
         private T_Warehousing GenerateDataAtUpdate()
@@ -778,7 +794,7 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 発注情報の更新
+            // 入庫情報の更新
             bool flg = warehousingDataAccess.UpdateWarehousingData(updWarehousing);
 
             if (flg == true)
@@ -825,7 +841,7 @@ namespace SalesManagement_SysDev
             //検索ダイアログのフォームの表示
             f_SearchDialog.Show();
 
-            //顧客登録フォームの透明化
+            //入庫登録フォームの透明化
             this.Opacity = 0;
         }
         private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
@@ -876,7 +892,7 @@ namespace SalesManagement_SysDev
                 //入庫IDの重複チェック
                 if (!warehousingDataAccess.CheckWarehousingIDExistence(int.Parse(txbWarehousingID.Text.Trim())))
                 {
-                    MessageBox.Show("発注IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("入庫IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbWarehousingID.Focus();
                     return false;
                 }
@@ -931,12 +947,12 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void WarehousingSearchButtonClick(bool searchFlg)
         {
-            // 発注情報抽出
+            // 入庫情報抽出
             GenerateDataAtSelect(searchFlg);
 
             int intSearchCount = listWarehousing.Count;
 
-            // 発注抽出結果表示
+            // 入庫抽出結果表示
             GetDataGridView();
 
             MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -946,7 +962,7 @@ namespace SalesManagement_SysDev
         //メソッド名：GenerateDataAtSelect()
         //引　数   ：searchFlg = And検索かOr検索か判別するためのBool値
         //戻り値   ：なし
-        //機　能   ：発注情報の取得
+        //機　能   ：入庫情報の取得
         ///////////////////////////////
         private void GenerateDataAtSelect(bool searchFlg)
         {
@@ -984,19 +1000,19 @@ namespace SalesManagement_SysDev
             T_Warehousing selectCondition = new T_Warehousing()
             {
                 WaID = intWarehousingID,
-                HaID = intWarehousingID,
+                HaID = intHattyuID,
                 EmID = intEmployeeID,
                 WaDate = dateSale,
             };
 
             if (searchFlg)
             {
-                // 発注データのAnd抽出
+                // 入庫データのAnd抽出
                 listWarehousing = warehousingDataAccess.GetAndWarehousingData(selectCondition);
             }
             else
             {
-                // 発注データのOr抽出
+                // 入庫データのOr抽出
                 listWarehousing = warehousingDataAccess.GetOrWarehousingData(selectCondition);
             }
         }
@@ -1023,10 +1039,10 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 発注情報作成
+            // 入庫情報作成
             var cmfWarehousing = GenerateDataAtConfirm();
 
-            // 発注情報更新
+            // 入庫情報更新
             ConfirmWarehousing(cmfWarehousing);
         }
 
@@ -1040,27 +1056,27 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtConfirm()
         {
-            //発注IDの適否
+            //入庫IDの適否
             if (!String.IsNullOrEmpty(txbWarehousingID.Text.Trim()))
             {
-                // 発注IDの数字チェック
+                // 入庫IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbWarehousingID.Text.Trim()))
                 {
-                    MessageBox.Show("発注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("入庫IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbWarehousingID.Focus();
                     return false;
                 }
-                //発注IDの存在チェック
+                //入庫IDの存在チェック
                 if (!warehousingDataAccess.CheckWarehousingIDExistence(int.Parse(txbWarehousingID.Text.Trim())))
                 {
-                    MessageBox.Show("発注IDが存在していません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("入庫IDが存在していません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbWarehousingID.Focus();
                     return false;
                 }
 
                 T_Warehousing warehousing = warehousingDataAccess.GetIDWarehousingData(int.Parse(txbWarehousingID.Text.Trim()));
 
-                //発注IDの確定チェック
+                //入庫IDの確定チェック
                 if (warehousing.WaShelfFlag == 1)
                 {
                     MessageBox.Show("入庫IDはすでに確定しています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1089,7 +1105,7 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         //メソッド名：GenerateDataAtConfirm()
         //引　数   ：なし
-        //戻り値   ：発注確定情報
+        //戻り値   ：入庫確定情報
         //機　能   ：確定データのセット
         ///////////////////////////////
         private T_Warehousing GenerateDataAtConfirm()
@@ -1098,14 +1114,15 @@ namespace SalesManagement_SysDev
             {
                 WaID = int.Parse(txbWarehousingID.Text.Trim()),
                 WaShelfFlag = 1,
+                EmID = F_Login.intEmployeeID
             };
         }
 
         ///////////////////////////////
         //メソッド名：ConfirmWarehousing()
-        //引　数   ：発注情報
+        //引　数   ：入庫情報
         //戻り値   ：なし
-        //機　能   ：発注情報の確定
+        //機　能   ：入庫情報の確定
         ///////////////////////////////
         private void ConfirmWarehousing(T_Warehousing cfmWarehousing)
         {
@@ -1117,7 +1134,7 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 発注情報の更新
+            // 入庫情報の更新
             bool flg = warehousingDataAccess.ConfirmWarehousingData(cfmWarehousing);
 
             if (flg == true)
@@ -1300,6 +1317,11 @@ namespace SalesManagement_SysDev
                 txbProductName.Enabled = true;
             }
 
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

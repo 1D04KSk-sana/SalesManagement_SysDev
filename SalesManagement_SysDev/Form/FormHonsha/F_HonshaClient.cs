@@ -76,6 +76,11 @@ namespace SalesManagement_SysDev
             cmbView.SelectedIndex = 0;
         }
 
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
         private void rdoSElect_CheckedChanged(object sender, EventArgs e)
         {
             if (rdbRegister.Checked)
@@ -1052,9 +1057,9 @@ namespace SalesManagement_SysDev
             txbClientFAX.Text = string.Empty;
         }
 
-        private void txbPageSize_TextChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
+            Application.Exit();
         }
     }
 }

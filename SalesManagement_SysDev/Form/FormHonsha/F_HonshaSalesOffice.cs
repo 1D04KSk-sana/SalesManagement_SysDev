@@ -964,5 +964,10 @@ namespace SalesManagement_SysDev
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSalesOffice[6, dgvSalesOffice.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvSalesOffice[7, dgvSalesOffice.CurrentCellAddress.Y]?.Value?.ToString();
         }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

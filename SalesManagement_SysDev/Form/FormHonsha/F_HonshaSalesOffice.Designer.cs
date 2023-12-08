@@ -31,7 +31,6 @@ namespace SalesManagement_SysDev
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblSalesOffice = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.pnlSelect = new System.Windows.Forms.Panel();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
@@ -66,6 +65,7 @@ namespace SalesManagement_SysDev
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPageMax = new System.Windows.Forms.Button();
             this.txbSalesOfficeName = new System.Windows.Forms.TextBox();
+            this.btnClose = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesOffice)).BeginInit();
@@ -94,17 +94,6 @@ namespace SalesManagement_SysDev
             this.lblSalesOffice.Size = new System.Drawing.Size(483, 64);
             this.lblSalesOffice.TabIndex = 24;
             this.lblSalesOffice.Text = "営業所管理画面";
-            // 
-            // btnClose
-            // 
-            this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 30F);
-            this.btnClose.Location = new System.Drawing.Point(1682, 33);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(200, 80);
-            this.btnClose.TabIndex = 25;
-            this.btnClose.Text = "閉じる";
-            this.btnClose.UseVisualStyleBackColor = true;
             // 
             // btnReturn
             // 
@@ -505,6 +494,18 @@ namespace SalesManagement_SysDev
             this.txbSalesOfficeName.TabIndex = 55;
             this.txbSalesOfficeName.TabStop = false;
             // 
+            // btnClose
+            // 
+            this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 30F);
+            this.btnClose.Location = new System.Drawing.Point(1682, 33);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(200, 80);
+            this.btnClose.TabIndex = 25;
+            this.btnClose.Text = "閉じる";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // F_HonshaSalesOffice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -562,7 +563,6 @@ namespace SalesManagement_SysDev
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnReturn;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lblSalesOffice;
         private System.Windows.Forms.Panel pnlSelect;
         private System.Windows.Forms.RadioButton rdbSearch;
@@ -597,5 +597,6 @@ namespace SalesManagement_SysDev
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPageMax;
         private System.Windows.Forms.TextBox txbSalesOfficeName;
+        private System.Windows.Forms.Button btnClose;
     }
 }

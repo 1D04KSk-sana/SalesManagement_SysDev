@@ -71,6 +71,7 @@
             this.lblClientName = new System.Windows.Forms.Label();
             this.txbClientName = new System.Windows.Forms.TextBox();
             this.txbEmployeeID = new System.Windows.Forms.TextBox();
+            this.btnClose = new System.Windows.Forms.Button();
             this.pnlButuryu.SuspendLayout();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSyukko)).BeginInit();
@@ -80,6 +81,7 @@
             // pnlButuryu
             // 
             this.pnlButuryu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(136)))), ((int)(((byte)(179)))));
+            this.pnlButuryu.Controls.Add(this.btnClose);
             this.pnlButuryu.Controls.Add(this.lblButuryuSyukko);
             this.pnlButuryu.Controls.Add(this.btnReturn);
             this.pnlButuryu.Location = new System.Drawing.Point(0, 0);
@@ -94,7 +96,7 @@
             this.lblButuryuSyukko.ForeColor = System.Drawing.Color.White;
             this.lblButuryuSyukko.Location = new System.Drawing.Point(742, 50);
             this.lblButuryuSyukko.Name = "lblButuryuSyukko";
-            this.lblButuryuSyukko.Size = new System.Drawing.Size(417, 64);
+            this.lblButuryuSyukko.Size = new System.Drawing.Size(418, 64);
             this.lblButuryuSyukko.TabIndex = 1;
             this.lblButuryuSyukko.Text = "出庫管理画面";
             // 
@@ -124,6 +126,7 @@
             // 
             // btnDone
             // 
+            this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnDone.Location = new System.Drawing.Point(1680, 179);
             this.btnDone.Name = "btnDone";
@@ -131,7 +134,7 @@
             this.btnDone.TabIndex = 2;
             this.btnDone.TabStop = false;
             this.btnDone.Text = "実行";
-            this.btnDone.UseVisualStyleBackColor = true;
+            this.btnDone.UseVisualStyleBackColor = false;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // cmbView
@@ -184,6 +187,7 @@
             this.txbClientID.Name = "txbClientID";
             this.txbClientID.Size = new System.Drawing.Size(220, 31);
             this.txbClientID.TabIndex = 6;
+            this.txbClientID.TextChanged += new System.EventHandler(this.txbClientID_TextChanged);
             // 
             // lblSalesOfficeID
             // 
@@ -322,6 +326,7 @@
             this.txbPageSize.Name = "txbPageSize";
             this.txbPageSize.Size = new System.Drawing.Size(50, 28);
             this.txbPageSize.TabIndex = 24;
+            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // btnPagesize
             // 
@@ -464,8 +469,8 @@
             this.cmbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbConfirm.FormattingEnabled = true;
             this.cmbConfirm.Items.AddRange(new object[] {
-            "確定",
-            "未確定"});
+            "未確定",
+            "確定"});
             this.cmbConfirm.Location = new System.Drawing.Point(1246, 275);
             this.cmbConfirm.Name = "cmbConfirm";
             this.cmbConfirm.Size = new System.Drawing.Size(220, 32);
@@ -535,6 +540,20 @@
             this.txbEmployeeID.Name = "txbEmployeeID";
             this.txbEmployeeID.Size = new System.Drawing.Size(220, 31);
             this.txbEmployeeID.TabIndex = 40;
+            this.txbEmployeeID.TextChanged += new System.EventHandler(this.txbEmployeeID_TextChanged);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnClose.Location = new System.Drawing.Point(1742, 44);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(2);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(160, 70);
+            this.btnClose.TabIndex = 64;
+            this.btnClose.TabStop = false;
+            this.btnClose.Text = "閉じる";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // F_ButuryuSyukko
             // 
@@ -643,5 +662,6 @@
         private System.Windows.Forms.Label lblClientName;
         private System.Windows.Forms.TextBox txbClientName;
         private System.Windows.Forms.TextBox txbEmployeeID;
+        private System.Windows.Forms.Button btnClose;
     }
 }

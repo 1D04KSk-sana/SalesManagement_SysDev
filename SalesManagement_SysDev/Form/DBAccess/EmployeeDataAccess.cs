@@ -189,45 +189,6 @@ namespace SalesManagement_SysDev
         //戻り値：条件完全一致社員データ
         //機　能：条件完全一致社員データの取得
         ///////////////////////////////
-        public List<M_Client> GetAndClientData(M_Client selectClient)
-        {
-            List<M_Client> listClient = new List<M_Client>();
-            try
-            {
-                var context = new SalesManagement_DevContext();
-                var query = context.M_Clients.AsQueryable();
-
-                if (selectClient.ClID != null && selectClient.ClID != 0)
-                {
-                    query = query.Where(x => x.ClID == selectClient.ClID);
-                }
-
-                if (selectClient.SoID != null && selectClient.SoID != 0)
-                {
-                    query = query.Where(x => x.SoID == selectClient.SoID);
-                }
-
-                if (selectClient.ClPhone != null && selectClient.ClPhone != "")
-                {
-                    query = query.Where(x => x.ClPhone == selectClient.ClPhone);
-                }
-
-                listClient = query.ToList();
-                context.Dispose();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return listClient;
-        }
-        ///////////////////////////////
-        //メソッド名：GetAndEmployeeData()
-        //引　数：検索条件
-        //戻り値：条件完全一致社員データ
-        //機　能：条件完全一致社員データの取得
-        ///////////////////////////////
         public List<M_Employee> GetAndEmployeeData(M_Employee selectEmployee)
         {
             List<M_Employee> listEmployee = new List<M_Employee>();
@@ -315,33 +276,6 @@ namespace SalesManagement_SysDev
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return flg;
-        }
-
-        ///////////////////////////////
-        //メソッド名：GetEmployeeID()
-        //引　数   ：社員名
-        //戻り値   ：社員ID
-        //機　能   ：一致する社員名を取り出して、IDを取得
-        ///////////////////////////////
-        public int GetEmployeeID(string employeeName)
-        {
-            int employeeID = 0;
-
-            try
-            {
-                var context = new SalesManagement_DevContext();
-                var Employee = context.M_Employees.Single(x => x.EmName == employeeName);
-
-                employeeID = Employee.EmID;
-
-                context.Dispose();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return employeeID;
         }
     }
 }

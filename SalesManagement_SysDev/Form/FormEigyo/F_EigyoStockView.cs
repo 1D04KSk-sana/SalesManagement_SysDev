@@ -57,7 +57,7 @@ namespace SalesManagement_SysDev
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            Application.Exit();
         }
 
         private void lblOrder_Click(object sender, EventArgs e)

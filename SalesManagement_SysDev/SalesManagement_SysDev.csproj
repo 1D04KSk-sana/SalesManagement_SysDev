@@ -187,6 +187,13 @@
     <Compile Include="Form\FormHonsha\F_HonshaSalesOffice.Designer.cs">
       <DependentUpon>F_HonshaSalesOffice.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\DBAccess\LoginSaveDataAccess.cs" />
+    <Compile Include="Form\F_Load.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\F_Load.Designer.cs">
+      <DependentUpon>F_Load.cs</DependentUpon>
+    </Compile>
     <Compile Include="MonthPicker.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -216,6 +223,7 @@
     <Compile Include="Form\FormButuryu\F_ButuryuSyukko.Designer.cs">
       <DependentUpon>F_ButuryuSyukko.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\PasswordHash.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entity\T_Arrival.cs" />
@@ -224,8 +232,6 @@
     <Compile Include="Entity\T_ChumonDetail.cs" />
     <Compile Include="Entity\T_Hattyu.cs" />
     <Compile Include="Entity\T_HattyuDetail.cs" />
-    <Compile Include="Entity\T_LoginHistory.cs" />
-    <Compile Include="Entity\T_OperationHistory.cs" />
     <Compile Include="Entity\T_Order.cs" />
     <Compile Include="Entity\T_OrderDetail.cs" />
     <Compile Include="Entity\T_Sale.cs" />
@@ -244,6 +250,7 @@
     <Compile Include="Entity\T_OperationLog.cs" />
     <Compile Include="Form\DBAccess\SmallDataAccess.cs" />
     <Compile Include="Form\DBAccess\StockDataAccess.cs" />
+    <Compile Include="Entity\T_LoginSave.cs" />
     <EmbeddedResource Include="Form\FormButuryu\F_Buturyu.resx">
       <DependentUpon>F_Buturyu.cs</DependentUpon>
     </EmbeddedResource>
@@ -304,6 +311,9 @@
     <EmbeddedResource Include="Form\FormHonsha\F_HonshaProdact.resx">
       <DependentUpon>F_HonshaProdact.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form\F_Load.resx">
+      <DependentUpon>F_Load.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\F_login.resx">
       <DependentUpon>F_login.cs</DependentUpon>
     </EmbeddedResource>
@@ -340,7 +350,15 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\PassEyeNot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PassEye.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Question.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

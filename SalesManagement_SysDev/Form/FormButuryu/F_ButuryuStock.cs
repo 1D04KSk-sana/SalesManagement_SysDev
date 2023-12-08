@@ -721,5 +721,10 @@ namespace SalesManagement_SysDev
 
             txbProdactName.Text = Prodact.PrName;
         }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
