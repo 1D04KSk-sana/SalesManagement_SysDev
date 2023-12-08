@@ -20,10 +20,26 @@ namespace SalesManagement_SysDev
     {
         //入力チェッククラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
+        //パスワードハッシュ化クラスのインスタンス化
+        PasswordHash passwordHash = new PasswordHash();
+        //データベース社員テーブルアクセス用クラスのインスタンス化
+        EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
+        //データベース操作ログテーブルアクセス用クラスのインスタンス化
+        OperationLogDataAccess operationLogDataAccess = new OperationLogDataAccess();
+        //データベースログイン記憶テーブルアクセス用クラスのインスタンス化
+        LoginSaveDataAccess loginSaveDataAccess = new LoginSaveDataAccess();
+
+        M_Employee Employee = new M_Employee();
+
+        private int intPassEye = 1;
 
         //他フォームでも使用できるようにinternal
         //社員ID
         internal static int intEmployeeID = 116;
+        //役職ID
+        internal static int intPositionID = 0;
+        //営業所ID
+        internal static int intSalesOfficeID = 0;
 
         public F_Login()
         {
@@ -265,7 +281,7 @@ namespace SalesManagement_SysDev
                         EmID = 116,
                         EmName = "坂口郁美",
                         EmHiredate = new DateTime(1980, 6, 17),
-                        EmPassword = "0116",
+                        EmPassword = PasswordHash.CreatePasswordHash("0116"),
                         EmPhone = "06-6813-5485",
                         M_SalesOffice = so[1],
                         M_Position = po[2],
@@ -278,7 +294,7 @@ namespace SalesManagement_SysDev
                         EmID = 310,
                         EmName = "高谷春男",
                         EmHiredate = new DateTime(1973, 3, 21),
-                        EmPassword = "0310",
+                        EmPassword = PasswordHash.CreatePasswordHash("0310"),
                         EmPhone = "06-6356-8742",
                         M_SalesOffice = so[0],
                         M_Position = po[1],
@@ -291,7 +307,7 @@ namespace SalesManagement_SysDev
                         EmID = 1002,
                         EmName = "日下部俊夫",
                         EmHiredate = new DateTime(1990, 9, 4),
-                        EmPassword = "1002",
+                        EmPassword = PasswordHash.CreatePasswordHash("1002"),
                         EmPhone = "06-6579-0622",
                         M_SalesOffice = so[0],
                         M_Position = po[1],
@@ -304,7 +320,7 @@ namespace SalesManagement_SysDev
                         EmID = 1007,
                         EmName = "岸本芽生",
                         EmHiredate = new DateTime(1997, 2, 4),
-                        EmPassword = "1007",
+                        EmPassword = PasswordHash.CreatePasswordHash("1007"),
                         EmPhone = "075-425-3371",
                         M_SalesOffice = so[2],
                         M_Position = po[1],
@@ -317,7 +333,7 @@ namespace SalesManagement_SysDev
                         EmID = 1111,
                         EmName = "奥村敦彦",
                         EmHiredate = new DateTime(1985, 3, 17),
-                        EmPassword = "999",
+                        EmPassword = PasswordHash.CreatePasswordHash("0999"),
                         EmPhone = "079-145-6121",
                         M_SalesOffice = so[3],
                         M_Position = po[2],
@@ -330,7 +346,7 @@ namespace SalesManagement_SysDev
                         EmID = 1208,
                         EmName = "渋谷秋昴",
                         EmHiredate = new DateTime(1994, 1, 31),
-                        EmPassword = "1208",
+                        EmPassword = PasswordHash.CreatePasswordHash("1208"),
                         EmPhone = "0790-68-8043",
                         M_SalesOffice = so[4],
                         M_Position = po[1],
@@ -343,7 +359,7 @@ namespace SalesManagement_SysDev
                         EmID = 1227,
                         EmName = "生田徳次郎",
                         EmHiredate = new DateTime(1964, 3, 20),
-                        EmPassword = "1227",
+                        EmPassword = PasswordHash.CreatePasswordHash("1227"),
                         EmPhone = "06-3021-1630",
                         M_SalesOffice = so[0],
                         M_Position = po[0],
@@ -996,32 +1012,85 @@ namespace SalesManagement_SysDev
             MessageBox.Show("サンプルデータ登録完了");
         }
 
+        private void F_Login_Load(object sender, EventArgs e)
+        {
+            var context = new SalesManagement_DevContext();
+
+            if (context.T_LoginSaves.Count() != 0)
+            {
+                var LoginSave = loginSaveDataAccess.GetSaveLogData();
+
+                txbEmployeeID.Text = LoginSave.SaveEmployeeID.ToString();
+                txbSinghUpPass.Text = PasswordHash.ReversePasswordHash(LoginSave.SaveSinghUpPass);
+            }
+        }
+
+        private void btnclose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void pctPassEye_Click(object sender, EventArgs e)
+        {
+            if (intPassEye == 0)
+            {
+                txbSinghUpPass.PasswordChar = '*';
+                pctPassEye.Image = Properties.Resources.PassEyeNot;
+
+                intPassEye = 1;
+            }
+            else if (intPassEye == 1)
+            {
+                txbSinghUpPass.PasswordChar = '\0';
+                pctPassEye.Image = Properties.Resources.PassEye;
+
+                intPassEye = 0;
+            }
+        }
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             //ログイン入力データの形式チェック
-            //if (!GetValidDataAtLogin())
-            //{
-            //    return;
-            //}
+            if (!GetValidDataAtLogin())
+            {
+                return;
+            }
 
-            F_Honsha f_Honsha = new F_Honsha();
+            if (!CheckIDPass())
+            {
+                return;
+            }
 
-            f_Honsha.Owner = this;
-            f_Honsha.FormClosed += ChildForm_FormClosed;
-            f_Honsha.Show();
+            intEmployeeID = Employee.EmID;
+            intPositionID = Employee.PoID;
+            intSalesOfficeID = Employee.SoID;
 
-            F_Eigyo f_Eigyo = new F_Eigyo();
+            LoginOther();
 
-            f_Eigyo.Owner = this;
-            f_Eigyo.FormClosed += ChildForm_FormClosed;
-            f_Eigyo.Show();
+            if (intPositionID == 1)
+            {
+                F_Honsha f_Honsha = new F_Honsha();
 
-            F_Buturyu f_Buturyu = new F_Buturyu();
+                f_Honsha.Owner = this;
+                f_Honsha.FormClosed += ChildForm_FormClosed;
+                f_Honsha.Show();
+            }
+            if (intPositionID == 2)
+            {
+                F_Eigyo f_Eigyo = new F_Eigyo();
 
-            f_Buturyu.Owner = this;
-            f_Buturyu.FormClosed += ChildForm_FormClosed;
-            f_Buturyu.Show();
+                f_Eigyo.Owner = this;
+                f_Eigyo.FormClosed += ChildForm_FormClosed;
+                f_Eigyo.Show();
+            }
+            if (intPositionID == 3)
+            {
+                F_Buturyu f_Buturyu = new F_Buturyu();
 
+                f_Buturyu.Owner = this;
+                f_Buturyu.FormClosed += ChildForm_FormClosed;
+                f_Buturyu.Show();
+            }
 
             this.Opacity = 0;
         }
@@ -1051,6 +1120,14 @@ namespace SalesManagement_SysDev
                     txbEmployeeID.Focus();
                     return false;
                 }
+                //社員IDの存在チェック
+                if (!employeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    //"存在しない社員IDです"と言うわけにもいかないので"ログインに失敗しました"にしてる
+                    MessageBox.Show("パスワード・社員IDが違います", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
             }
             else
             {
@@ -1063,9 +1140,9 @@ namespace SalesManagement_SysDev
             if (!String.IsNullOrEmpty(txbSinghUpPass.Text.Trim()))
             {
                 //パスワードの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbSinghUpPass.Text.Trim()))
+                if (!dataInputCheck.CheckHalfAlphabetNumeric(txbSinghUpPass.Text.Trim()))
                 {
-                    MessageBox.Show("パスワードは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("パスワードは全て英数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSinghUpPass.Focus();
                     return false;
                 }
@@ -1080,5 +1157,129 @@ namespace SalesManagement_SysDev
             return true;
         }
 
+        ///////////////////////////////
+        //メソッド名：CheckIDPass()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：ログイン入力データの形式チェック
+        //          ：エラーがない場合True
+        //          ：エラーがある場合False
+        ///////////////////////////////
+        private bool CheckIDPass()
+        {
+            List<M_Employee> listEmployee = employeeDataAccess.GetEmployeeDspData();
+
+            try
+            {
+                Employee = listEmployee.Single(x => x.EmID == int.Parse(txbEmployeeID.Text.Trim()));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (Employee.EmPassword != PasswordHash.CreatePasswordHash(txbSinghUpPass.Text.Trim()))
+            {
+                MessageBox.Show("パスワード・社員IDが違います", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateLogAtRegistration()
+        //引　数   ：操作名
+        //戻り値   ：操作ログ登録情報
+        //機　能   ：操作ログ情報登録データのセット
+        ///////////////////////////////
+        private T_OperationLog GenerateLogAtRegistration(string OperationDone)
+        {
+            return new T_OperationLog
+            {
+                OpHistoryID = operationLogDataAccess.OperationLogNum() + 1,
+                EmID = F_Login.intEmployeeID,
+                FormName = "ログイン画面",
+                OpDone = OperationDone,
+                OpDBID = null,
+                OpSetTime = DateTime.Now,
+            };
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateSaveAtRegistration()
+        //引　数   ：なし
+        //戻り値   ：ログイン記憶情報
+        //機　能   ：ログイン記憶情報データのセット
+        ///////////////////////////////
+        private T_LoginSave GenerateSaveAtRegistration()
+        {
+            return new T_LoginSave
+            {
+                SaveId = 1,
+                SaveEmployeeID = intEmployeeID,
+                SaveSinghUpPass = PasswordHash.CreatePasswordHash(txbSinghUpPass.Text.Trim())
+            };
+        }
+
+        ///////////////////////////////
+        //メソッド名：LoginOther()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：ログイン入力データの保存可否と操作ログの登録
+        //          ：エラーがない場合True
+        //          ：エラーがある場合False
+        ///////////////////////////////
+        private bool LoginOther()
+        {
+            if (chbPassSave.Checked)
+            {
+                var context = new SalesManagement_DevContext();
+
+                if (context.T_LoginSaves.Count() == 0)
+                {
+                    var regLoginSave = GenerateSaveAtRegistration();
+
+                    if (!loginSaveDataAccess.AddOperationLogData(regLoginSave))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    var updLoginSave = GenerateSaveAtRegistration();
+
+                    if (!loginSaveDataAccess.UpdateOperationLogData(updLoginSave))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                var context = new SalesManagement_DevContext();
+
+                if (context.T_LoginSaves.Count() != 0)
+                {
+                    var delLoginSave = loginSaveDataAccess.GetSaveLogData();
+
+                    if (!loginSaveDataAccess.DeleteSaveLogData(delLoginSave))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration("ログイン");
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogDataAccess.AddOperationLogData(regOperationLog))
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

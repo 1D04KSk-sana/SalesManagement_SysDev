@@ -220,6 +220,7 @@ namespace SalesManagement_SysDev
                 return false;
             }
         }
+
         ///////////////////////////////
         //メソッド名：UpdateOrderData()
         //引　数：hidChumon = 受注データ
@@ -270,13 +271,10 @@ namespace SalesManagement_SysDev
             {
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
             return listChumon;
         }
-    }
 
-   
-
-   
     }
+}
+
 

@@ -135,7 +135,7 @@ namespace SalesManagement_SysDev
             {
                 EmID = int.Parse(txbEmployeeID.Text.Trim()),
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
-                EmPassword = txbSinghUpPass.Text.Trim(),
+                EmPassword = PasswordHash.CreatePasswordHash(txbSinghUpPass.Text.Trim()),
                 EmHiredate = dtpHireDate.Value,
                 EmPhone = txbSinghUpPhone.Text.Trim(),
                 PoID = cmbPositionID.SelectedIndex +1,
