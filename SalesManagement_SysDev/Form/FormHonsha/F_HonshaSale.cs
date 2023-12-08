@@ -42,19 +42,13 @@ namespace SalesManagement_SysDev
         //DataGridView用に使用す営業所のDictionary
         private Dictionary<int, string> dictionarySalesOffice;
 
+
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
         {
             { 0, "表示" },
             { 1, "非表示" },
         };
-        //DataGridView用に使用する確定形式のDictionary
-        private Dictionary<int, string> dictionaryConfirm = new Dictionary<int, string>
-        {
-            { 0, "未確定" },
-            { 1, "確定" },
-        };
-
         public F_HonshaSale()
         {
             InitializeComponent();
@@ -431,7 +425,7 @@ namespace SalesManagement_SysDev
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
-
+            dtpSaleDate.Checked = false;
             GetDataGridView();            
         }
 

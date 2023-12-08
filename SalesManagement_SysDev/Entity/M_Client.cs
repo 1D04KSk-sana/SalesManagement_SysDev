@@ -23,7 +23,7 @@ namespace SalesManagement_SysDev
 
         [Key]
         public int? ClID { get; set; }           //顧客ID		
-        public int? SoID { get; set; }           //営業所ID
+        public int SoID { get; set; }           //営業所ID
         [MaxLength(50)]
         [Required]
         public string ClName { get; set; }      //顧客名
