@@ -1080,13 +1080,18 @@ namespace SalesManagement_SysDev
             GetDataGridView();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void pctHint_Click(object sender, EventArgs e)
         {
             Process.Start(new ProcessStartInfo
             {
                 FileName = "https://docs.google.com/document/d/1yYyPRRkTIaRLV_tuXHSAWTVoa1-09lZ6/edit?usp=drive_web&ouid=103069670281955437168&rtpof=true",
                 UseShellExecute = true
             });
+        }
+        
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

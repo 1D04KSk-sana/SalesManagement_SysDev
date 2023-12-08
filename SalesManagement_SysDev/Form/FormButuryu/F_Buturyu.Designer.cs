@@ -103,6 +103,7 @@
             this.btnClose.TabIndex = 5;
             this.btnClose.Text = "閉じる";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnLogOut
             // 
@@ -113,6 +114,7 @@
             this.btnLogOut.TabIndex = 6;
             this.btnLogOut.Text = "ログアウト";
             this.btnLogOut.UseVisualStyleBackColor = true;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
             // panel1
             // 
