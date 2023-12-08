@@ -651,6 +651,13 @@ namespace SalesManagement_SysDev
                     txbMakerName.Focus();
                     return false;
                 }
+                //メーカー名存在チェック
+                if (!makerDataAccess.CheckMakerNameExistence(txbMakerName.Text.Trim()))
+                {
+                    MessageBox.Show("メーカー名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMakerID.Focus();
+                    return false;
+                }
             }
             else
             {
@@ -885,7 +892,7 @@ namespace SalesManagement_SysDev
         //メソッド名：MakerSearchButtonClick()
         //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
         //戻り値   ：なし
-        //機　能   ：顧客情報検索の実行
+        //機　能   ：メーカー情報検索の実行
         ///////////////////////////////
         private void MakerSearchButtonClick(bool searchFlg)
         {
