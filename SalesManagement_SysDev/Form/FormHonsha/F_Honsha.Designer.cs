@@ -38,6 +38,7 @@
             this.btnFormOperationLog = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnFormSalesOffice = new System.Windows.Forms.Button();
+            this.btnFormMaker = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -161,12 +162,25 @@
             this.btnFormSalesOffice.UseVisualStyleBackColor = true;
             this.btnFormSalesOffice.Click += new System.EventHandler(this.btnFormSalesOffice_Click);
             // 
+            // btnFormMaker
+            // 
+            this.btnFormMaker.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormMaker.Location = new System.Drawing.Point(1288, 788);
+            this.btnFormMaker.Name = "btnFormMaker";
+            this.btnFormMaker.Size = new System.Drawing.Size(510, 100);
+            this.btnFormMaker.TabIndex = 10;
+            this.btnFormMaker.TabStop = false;
+            this.btnFormMaker.Text = "メーカー管理画面";
+            this.btnFormMaker.UseVisualStyleBackColor = true;
+            this.btnFormMaker.Click += new System.EventHandler(this.btnFormMaker_Click);
+            // 
             // F_Honsha
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.btnFormMaker);
             this.Controls.Add(this.btnFormSalesOffice);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnFormOperationLog);
@@ -197,5 +211,6 @@
         private System.Windows.Forms.Button btnFormOperationLog;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnFormSalesOffice;
+        private System.Windows.Forms.Button btnFormMaker;
     }
 }
