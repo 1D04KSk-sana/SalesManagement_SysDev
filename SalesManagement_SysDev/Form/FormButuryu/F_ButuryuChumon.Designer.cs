@@ -27,6 +27,7 @@ namespace SalesManagement_SysDev
         private void InitializeComponent()
         {
             this.pnlButuryu = new System.Windows.Forms.Panel();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.lblClient = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
@@ -63,6 +64,7 @@ namespace SalesManagement_SysDev
             this.txbClientID = new System.Windows.Forms.TextBox();
             this.lblClientID = new System.Windows.Forms.Label();
             this.pnlButuryu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChumon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChumonDetail)).BeginInit();
@@ -71,6 +73,7 @@ namespace SalesManagement_SysDev
             // pnlButuryu
             // 
             this.pnlButuryu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(136)))), ((int)(((byte)(179)))));
+            this.pnlButuryu.Controls.Add(this.pctHint);
             this.pnlButuryu.Controls.Add(this.lblClient);
             this.pnlButuryu.Controls.Add(this.btnClose);
             this.pnlButuryu.Controls.Add(this.btnReturn);
@@ -78,6 +81,17 @@ namespace SalesManagement_SysDev
             this.pnlButuryu.Name = "pnlButuryu";
             this.pnlButuryu.Size = new System.Drawing.Size(1920, 125);
             this.pnlButuryu.TabIndex = 0;
+            // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1643, 30);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 28;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
             // 
             // lblClient
             // 
@@ -87,7 +101,7 @@ namespace SalesManagement_SysDev
             this.lblClient.Location = new System.Drawing.Point(752, 30);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(418, 64);
+            this.lblClient.Size = new System.Drawing.Size(417, 64);
             this.lblClient.TabIndex = 27;
             this.lblClient.Text = "注文管理画面";
             // 
@@ -551,6 +565,7 @@ namespace SalesManagement_SysDev
             this.Load += new System.EventHandler(this.F_ButuryuChumon_Load);
             this.pnlButuryu.ResumeLayout(false);
             this.pnlButuryu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.pnlSelect.ResumeLayout(false);
             this.pnlSelect.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChumon)).EndInit();
@@ -597,5 +612,6 @@ namespace SalesManagement_SysDev
         private Label lblClientHidden;
         private TextBox txbClientID;
         private Label lblClientID;
+        private PictureBox pctHint;
     }
 }
