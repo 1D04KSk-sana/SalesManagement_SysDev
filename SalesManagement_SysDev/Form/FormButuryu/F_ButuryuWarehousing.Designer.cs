@@ -30,6 +30,7 @@
         {
             this.lblWarehousing = new System.Windows.Forms.Label();
             this.pnlButuryu = new System.Windows.Forms.Panel();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.txbProductName = new System.Windows.Forms.TextBox();
@@ -73,11 +74,12 @@
             this.cmbConfirm = new System.Windows.Forms.ComboBox();
             this.lblConfirm = new System.Windows.Forms.Label();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
-            this.pctHint = new System.Windows.Forms.PictureBox();
+            this.lblEmployeeID = new System.Windows.Forms.Label();
+            this.txbEmployeeID = new System.Windows.Forms.TextBox();
             this.pnlButuryu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarehousing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarehousingDetail)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
             // lblWarehousing
@@ -88,7 +90,7 @@
             this.lblWarehousing.Location = new System.Drawing.Point(754, 44);
             this.lblWarehousing.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWarehousing.Name = "lblWarehousing";
-            this.lblWarehousing.Size = new System.Drawing.Size(418, 64);
+            this.lblWarehousing.Size = new System.Drawing.Size(417, 64);
             this.lblWarehousing.TabIndex = 24;
             this.lblWarehousing.Text = "入庫管理画面";
             // 
@@ -104,6 +106,17 @@
             this.pnlButuryu.Name = "pnlButuryu";
             this.pnlButuryu.Size = new System.Drawing.Size(1920, 150);
             this.pnlButuryu.TabIndex = 55;
+            // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1610, 44);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 130;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
             // 
             // btnClose
             // 
@@ -139,6 +152,7 @@
             this.txbProductName.Location = new System.Drawing.Point(1429, 350);
             this.txbProductName.Margin = new System.Windows.Forms.Padding(2);
             this.txbProductName.Name = "txbProductName";
+            this.txbProductName.ReadOnly = true;
             this.txbProductName.Size = new System.Drawing.Size(220, 31);
             this.txbProductName.TabIndex = 56;
             // 
@@ -162,14 +176,16 @@
             this.txbProductID.Size = new System.Drawing.Size(220, 31);
             this.txbProductID.TabIndex = 58;
             this.txbProductID.TextChanged += new System.EventHandler(this.txbProductID_TextChanged);
+            this.txbProductID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // txbEmployeeName
             // 
             this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbEmployeeName.ForeColor = System.Drawing.Color.Black;
-            this.txbEmployeeName.Location = new System.Drawing.Point(869, 258);
+            this.txbEmployeeName.Location = new System.Drawing.Point(869, 325);
             this.txbEmployeeName.Margin = new System.Windows.Forms.Padding(2);
             this.txbEmployeeName.Name = "txbEmployeeName";
+            this.txbEmployeeName.ReadOnly = true;
             this.txbEmployeeName.Size = new System.Drawing.Size(220, 31);
             this.txbEmployeeName.TabIndex = 2;
             // 
@@ -187,7 +203,7 @@
             // 
             this.txbHattyuID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbHattyuID.ForeColor = System.Drawing.Color.Black;
-            this.txbHattyuID.Location = new System.Drawing.Point(271, 323);
+            this.txbHattyuID.Location = new System.Drawing.Point(869, 262);
             this.txbHattyuID.Margin = new System.Windows.Forms.Padding(2);
             this.txbHattyuID.Name = "txbHattyuID";
             this.txbHattyuID.Size = new System.Drawing.Size(220, 31);
@@ -229,7 +245,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(707, 330);
+            this.label2.Location = new System.Drawing.Point(717, 392);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(130, 24);
@@ -240,7 +256,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label4.Location = new System.Drawing.Point(755, 265);
+            this.label4.Location = new System.Drawing.Point(765, 328);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(82, 24);
@@ -251,7 +267,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label5.Location = new System.Drawing.Point(169, 330);
+            this.label5.Location = new System.Drawing.Point(767, 269);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(80, 24);
@@ -295,7 +311,7 @@
             // 
             this.dtpWarehousingDate.Checked = false;
             this.dtpWarehousingDate.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.dtpWarehousingDate.Location = new System.Drawing.Point(869, 325);
+            this.dtpWarehousingDate.Location = new System.Drawing.Point(869, 389);
             this.dtpWarehousingDate.Margin = new System.Windows.Forms.Padding(4);
             this.dtpWarehousingDate.Name = "dtpWarehousingDate";
             this.dtpWarehousingDate.ShowCheckBox = true;
@@ -350,7 +366,7 @@
             this.txbPageSize.Size = new System.Drawing.Size(50, 28);
             this.txbPageSize.TabIndex = 111;
             this.txbPageSize.TabStop = false;
-            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbPageSize_KeyPress);
+            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // btnPageSize
             // 
@@ -386,7 +402,7 @@
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 108;
             this.txbNumPage.TabStop = false;
-            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbNumPage_KeyPress);
+            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // btnPageMin
             // 
@@ -453,7 +469,7 @@
             this.cmbHidden.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbHidden.Location = new System.Drawing.Point(271, 381);
+            this.cmbHidden.Location = new System.Drawing.Point(271, 449);
             this.cmbHidden.Margin = new System.Windows.Forms.Padding(4);
             this.cmbHidden.Name = "cmbHidden";
             this.cmbHidden.Size = new System.Drawing.Size(220, 32);
@@ -462,10 +478,10 @@
             // 
             // txbHidden
             // 
-            this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbHidden.Location = new System.Drawing.Point(271, 437);
+            this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.txbHidden.Location = new System.Drawing.Point(869, 449);
             this.txbHidden.Name = "txbHidden";
-            this.txbHidden.Size = new System.Drawing.Size(1565, 42);
+            this.txbHidden.Size = new System.Drawing.Size(780, 31);
             this.txbHidden.TabIndex = 114;
             this.txbHidden.TabStop = false;
             // 
@@ -490,7 +506,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label9.Location = new System.Drawing.Point(107, 384);
+            this.label9.Location = new System.Drawing.Point(107, 452);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(142, 24);
@@ -515,7 +531,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label10.Location = new System.Drawing.Point(119, 437);
+            this.label10.Location = new System.Drawing.Point(707, 452);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(130, 24);
@@ -594,7 +610,7 @@
             this.cmbConfirm.Items.AddRange(new object[] {
             "未確定",
             "確定"});
-            this.cmbConfirm.Location = new System.Drawing.Point(869, 381);
+            this.cmbConfirm.Location = new System.Drawing.Point(271, 389);
             this.cmbConfirm.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cmbConfirm.Name = "cmbConfirm";
             this.cmbConfirm.Size = new System.Drawing.Size(220, 32);
@@ -605,7 +621,7 @@
             // 
             this.lblConfirm.AutoSize = true;
             this.lblConfirm.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblConfirm.Location = new System.Drawing.Point(695, 384);
+            this.lblConfirm.Location = new System.Drawing.Point(97, 392);
             this.lblConfirm.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblConfirm.Name = "lblConfirm";
             this.lblConfirm.Size = new System.Drawing.Size(142, 24);
@@ -625,16 +641,28 @@
             this.rdbSearch.UseVisualStyleBackColor = true;
             this.rdbSearch.CheckedChanged += new System.EventHandler(this.rdbSearch_CheckedChanged);
             // 
-            // pctHint
+            // lblEmployeeID
             // 
-            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
-            this.pctHint.Location = new System.Drawing.Point(1610, 44);
-            this.pctHint.Name = "pctHint";
-            this.pctHint.Size = new System.Drawing.Size(60, 60);
-            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pctHint.TabIndex = 130;
-            this.pctHint.TabStop = false;
-            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            this.lblEmployeeID.AutoSize = true;
+            this.lblEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblEmployeeID.Location = new System.Drawing.Point(167, 328);
+            this.lblEmployeeID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblEmployeeID.Name = "lblEmployeeID";
+            this.lblEmployeeID.Size = new System.Drawing.Size(80, 24);
+            this.lblEmployeeID.TabIndex = 131;
+            this.lblEmployeeID.Text = "社員ID";
+            // 
+            // txbEmployeeID
+            // 
+            this.txbEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbEmployeeID.ForeColor = System.Drawing.Color.Black;
+            this.txbEmployeeID.Location = new System.Drawing.Point(271, 325);
+            this.txbEmployeeID.Margin = new System.Windows.Forms.Padding(2);
+            this.txbEmployeeID.Name = "txbEmployeeID";
+            this.txbEmployeeID.Size = new System.Drawing.Size(220, 31);
+            this.txbEmployeeID.TabIndex = 130;
+            this.txbEmployeeID.TextChanged += new System.EventHandler(this.txbEmployeeID_TextChanged);
+            this.txbEmployeeID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // F_ButuryuWarehousing
             // 
@@ -642,6 +670,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.Controls.Add(this.lblEmployeeID);
+            this.Controls.Add(this.txbEmployeeID);
             this.Controls.Add(this.rdbSearch);
             this.Controls.Add(this.cmbConfirm);
             this.Controls.Add(this.lblConfirm);
@@ -690,9 +720,9 @@
             this.Load += new System.EventHandler(this.F_ButuryuWarehousing_Load);
             this.pnlButuryu.ResumeLayout(false);
             this.pnlButuryu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarehousing)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvWarehousingDetail)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -745,5 +775,7 @@
         private System.Windows.Forms.Label lblConfirm;
         private System.Windows.Forms.RadioButton rdbSearch;
         private System.Windows.Forms.PictureBox pctHint;
+        private System.Windows.Forms.Label lblEmployeeID;
+        private System.Windows.Forms.TextBox txbEmployeeID;
     }
 }

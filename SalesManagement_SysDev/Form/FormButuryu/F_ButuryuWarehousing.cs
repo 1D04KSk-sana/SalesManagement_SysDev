@@ -64,21 +64,29 @@ namespace SalesManagement_SysDev
             { 0, "未確定" },
             { 1, "確定" },
         };
-        private void txbNumPage_KeyPress(object sender, KeyPressEventArgs e)
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
         {
+            TextBox textBox = sender as TextBox;
+
             //0～9と、バックスペース以外の時は、イベントをキャンセルする
             if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
             {
                 e.Handled = true;
+                return;
             }
 
-        }
-        private void txbPageSize_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //0～9と、バックスペース以外の時は、イベントをキャンセルする
-            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            if (e.KeyChar > '0' && '9' > e.KeyChar)
             {
-                e.Handled = true;
+                // テキストボックスに入力されている値を取得
+                string inputText = textBox.Text + e.KeyChar;
+
+                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
+                int parsedValue;
+                if (!int.TryParse(inputText, out parsedValue))
+                {
+                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Handled = true;
+                }
             }
         }
         private void btnReturn_Click(object sender, EventArgs e)
@@ -210,7 +218,7 @@ namespace SalesManagement_SysDev
         {
             txbWarehousingID.Text = string.Empty;
             txbHattyuID.Text = string.Empty;
-            txbEmployeeName.Text = string.Empty;
+            txbEmployeeID.Text = string.Empty;
             dtpWarehousingDate.Value = DateTime.Now;
             cmbHidden.SelectedIndex = -1;
             cmbConfirm.SelectedIndex = -1;
@@ -501,7 +509,7 @@ namespace SalesManagement_SysDev
 
             //データグリッドビューに乗っている情報をGUIに反映
             txbWarehousingID.Text = dgvWarehousing[0, dgvWarehousing.CurrentCellAddress.Y].Value.ToString();
-            txbEmployeeName.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvWarehousing[1, dgvWarehousing.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvWarehousing[1, dgvWarehousing.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbHattyuID.Text = dgvWarehousing[2, dgvWarehousing.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvWarehousing[4, dgvWarehousing.CurrentCellAddress.Y].Value.ToString()).Key;
             cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvWarehousing[5, dgvWarehousing.CurrentCellAddress.Y].Value.ToString()).Key;
@@ -899,17 +907,17 @@ namespace SalesManagement_SysDev
             }
 
             //社員IDの適否
-            if (!String.IsNullOrEmpty(txbEmployeeName.Text.Trim()))
+            if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
             {
                 //社員IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbEmployeeName.Text.Trim()))
+                if (!dataInputCheck.CheckNumeric(txbEmployeeID.Text.Trim()))
                 {
                     MessageBox.Show("社員IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbEmployeeName.Focus();
                     return false;
                 }
                 //社員IDの重複チェック
-                if (!employeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeName.Text.Trim())))
+                if (!employeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
                 {
                     MessageBox.Show("社員IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbEmployeeName.Focus();
@@ -976,7 +984,7 @@ namespace SalesManagement_SysDev
                 intWarehousingID = int.Parse(strWarehousingID);
             }
 
-            string strEmployeeID = txbEmployeeName.Text.Trim();
+            string strEmployeeID = txbEmployeeID.Text.Trim();
             int intEmployeeID = 0;
 
             if (!String.IsNullOrEmpty(strEmployeeID))
@@ -1333,6 +1341,30 @@ namespace SalesManagement_SysDev
                 FileName = "https://docs.google.com/document/d/1Q0uZtxk67w69u3Lqq8Qs0JZucHhzYclU/edit=true",
                 UseShellExecute = true
             });
+        }
+
+        private void txbEmployeeID_TextChanged(object sender, EventArgs e)
+        {
+            //nullの確認
+            string stringEmployeeID = txbEmployeeID.Text.Trim();
+            int intEmployeeID = 0;
+
+            if (!String.IsNullOrEmpty(stringEmployeeID))
+            {
+                intEmployeeID = int.Parse(stringEmployeeID);
+            }
+
+            //存在確認
+            if (!employeeDataAccess.CheckEmployeeIDExistence(intEmployeeID))
+            {
+                txbEmployeeName.Text = "社員IDが存在しません";
+                return;
+            }
+
+            //IDから名前を取り出す
+            var Employee = listEmployee.Single(x => x.EmID == intEmployeeID);
+
+            txbEmployeeName.Text = Employee.EmName;
         }
     }
 }

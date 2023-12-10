@@ -144,7 +144,7 @@
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 105;
             this.txbNumPage.TabStop = false;
-            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbNumPage_KeyPress);
+            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // btnPageMin
             // 
@@ -246,7 +246,7 @@
             this.txbPageSize.Size = new System.Drawing.Size(50, 28);
             this.txbPageSize.TabIndex = 97;
             this.txbPageSize.TabStop = false;
-            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbPageSize_KeyPress);
+            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // cmbView
             // 
@@ -309,7 +309,7 @@
             this.lblClient.Location = new System.Drawing.Point(780, 47);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(418, 64);
+            this.lblClient.Size = new System.Drawing.Size(417, 64);
             this.lblClient.TabIndex = 23;
             this.lblClient.Text = "発注管理画面";
             // 
@@ -477,6 +477,7 @@
             this.txbEmployeeID.Size = new System.Drawing.Size(220, 31);
             this.txbEmployeeID.TabIndex = 85;
             this.txbEmployeeID.TextChanged += new System.EventHandler(this.txbEmployeeID_TextChanged);
+            this.txbEmployeeID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // txbHidden
             // 
@@ -515,6 +516,7 @@
             this.txbProductName.Location = new System.Drawing.Point(1590, 383);
             this.txbProductName.Margin = new System.Windows.Forms.Padding(2);
             this.txbProductName.Name = "txbProductName";
+            this.txbProductName.ReadOnly = true;
             this.txbProductName.ShortcutsEnabled = false;
             this.txbProductName.Size = new System.Drawing.Size(220, 31);
             this.txbProductName.TabIndex = 90;
@@ -529,6 +531,7 @@
             this.txbProductID.Size = new System.Drawing.Size(220, 31);
             this.txbProductID.TabIndex = 88;
             this.txbProductID.TextChanged += new System.EventHandler(this.txbProductID_TextChanged);
+            this.txbProductID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lbltxbHattyuQuentity
             // 
@@ -656,6 +659,7 @@
             this.txbEmployeeName.Location = new System.Drawing.Point(1081, 275);
             this.txbEmployeeName.Margin = new System.Windows.Forms.Padding(2);
             this.txbEmployeeName.Name = "txbEmployeeName";
+            this.txbEmployeeName.ReadOnly = true;
             this.txbEmployeeName.ShortcutsEnabled = false;
             this.txbEmployeeName.Size = new System.Drawing.Size(220, 31);
             this.txbEmployeeName.TabIndex = 128;

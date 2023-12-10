@@ -74,10 +74,27 @@ namespace SalesManagement_SysDev
         }
         private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
         {
+            TextBox textBox = sender as TextBox;
+
             //0～9と、バックスペース以外の時は、イベントをキャンセルする
             if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
             {
                 e.Handled = true;
+                return;
+            }
+
+            if (e.KeyChar > '0' && '9' > e.KeyChar)
+            {
+                // テキストボックスに入力されている値を取得
+                string inputText = textBox.Text + e.KeyChar;
+
+                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
+                int parsedValue;
+                if (!int.TryParse(inputText, out parsedValue))
+                {
+                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Handled = true;
+                }
             }
         }
         private void btnDone_Click(object sender, EventArgs e)
@@ -222,22 +239,22 @@ namespace SalesManagement_SysDev
             //操作ログのデータを全取得
             listAllLog = LogDataAccess.GetLogData();
 
-            ////表示用の操作ログ作成
-            //List<T_OperationLog> listViewLog = new List<T_OperationLog>();
+            //表示用の操作ログ作成
+            List<T_OperationLog> listViewLog = new List<T_OperationLog>();
 
-            ////検索ラヂオボタンがチェックされているとき
-            //if (rdbSearch.Checked)
-            //{
-            //    //表示している（検索結果）のデータをとってくる
-            //    listViewLog = listLog;
-            //}
-            //else
-            //{
-            //    //全データをとってくる
-            //    listViewLog = listAllLog;
-            //}
+            //検索ラヂオボタンがチェックされているとき
+            if (rdbSearch.Checked)
+            {
+                //表示している（検索結果）のデータをとってくる
+                listViewLog = listLog;
+            }
+            else
+            {
+                //全データをとってくる
+                listViewLog = listAllLog;
+            }
 
-            return listAllLog;
+            return listViewLog;
         }
         ///////////////////////////////
         //メソッド名：ClearImput()

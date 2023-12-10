@@ -123,7 +123,7 @@
             this.lblButuryuSyukko.ForeColor = System.Drawing.Color.White;
             this.lblButuryuSyukko.Location = new System.Drawing.Point(742, 50);
             this.lblButuryuSyukko.Name = "lblButuryuSyukko";
-            this.lblButuryuSyukko.Size = new System.Drawing.Size(418, 64);
+            this.lblButuryuSyukko.Size = new System.Drawing.Size(417, 64);
             this.lblButuryuSyukko.TabIndex = 1;
             this.lblButuryuSyukko.Text = "出庫管理画面";
             // 
@@ -215,6 +215,7 @@
             this.txbClientID.Size = new System.Drawing.Size(220, 31);
             this.txbClientID.TabIndex = 6;
             this.txbClientID.TextChanged += new System.EventHandler(this.txbClientID_TextChanged);
+            this.txbClientID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblSalesOfficeID
             // 
@@ -385,6 +386,7 @@
             this.txbNumPage.Name = "txbNumPage";
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 27;
+            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblNumPage
             // 
@@ -568,6 +570,7 @@
             this.txbEmployeeID.Size = new System.Drawing.Size(220, 31);
             this.txbEmployeeID.TabIndex = 40;
             this.txbEmployeeID.TextChanged += new System.EventHandler(this.txbEmployeeID_TextChanged);
+            this.txbEmployeeID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // F_ButuryuSyukko
             // 
