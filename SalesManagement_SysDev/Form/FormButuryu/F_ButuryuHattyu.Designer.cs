@@ -87,27 +87,29 @@
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(347, 179);
+            this.rdbSearch.Location = new System.Drawing.Point(695, 179);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
             this.rdbSearch.TabIndex = 82;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
-            this.rdbSearch.CheckedChanged += new System.EventHandler(this.rdbSearch_CheckedChanged);
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbRegister
             // 
             this.rdbRegister.AutoSize = true;
+            this.rdbRegister.Checked = true;
             this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbRegister.Location = new System.Drawing.Point(28, 179);
             this.rdbRegister.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbRegister.Name = "rdbRegister";
             this.rdbRegister.Size = new System.Drawing.Size(103, 39);
             this.rdbRegister.TabIndex = 107;
+            this.rdbRegister.TabStop = true;
             this.rdbRegister.Text = "登録";
             this.rdbRegister.UseVisualStyleBackColor = true;
-            this.rdbRegister.CheckedChanged += new System.EventHandler(this.rdbRegister_CheckedChanged);
+            this.rdbRegister.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // cmbHidden
             // 
@@ -445,14 +447,14 @@
             // 
             this.rdbUpdate.AutoSize = true;
             this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbUpdate.Location = new System.Drawing.Point(475, 179);
+            this.rdbUpdate.Location = new System.Drawing.Point(352, 179);
             this.rdbUpdate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbUpdate.Name = "rdbUpdate";
             this.rdbUpdate.Size = new System.Drawing.Size(173, 39);
             this.rdbUpdate.TabIndex = 110;
             this.rdbUpdate.Text = "表示更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
-            this.rdbUpdate.CheckedChanged += new System.EventHandler(this.rdbUpdate_CheckedChanged);
+            this.rdbUpdate.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbDetailRegister
             // 
@@ -465,7 +467,7 @@
             this.rdbDetailRegister.TabIndex = 111;
             this.rdbDetailRegister.Text = "詳細登録";
             this.rdbDetailRegister.UseVisualStyleBackColor = true;
-            this.rdbDetailRegister.CheckedChanged += new System.EventHandler(this.rdbDetailRegister_CheckedChanged);
+            this.rdbDetailRegister.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // txbEmployeeID
             // 
@@ -595,14 +597,14 @@
             // 
             this.rdbConfirm.AutoSize = true;
             this.rdbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbConfirm.Location = new System.Drawing.Point(686, 179);
+            this.rdbConfirm.Location = new System.Drawing.Point(563, 179);
             this.rdbConfirm.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbConfirm.Name = "rdbConfirm";
             this.rdbConfirm.Size = new System.Drawing.Size(103, 39);
             this.rdbConfirm.TabIndex = 123;
             this.rdbConfirm.Text = "確定";
             this.rdbConfirm.UseVisualStyleBackColor = true;
-            this.rdbConfirm.CheckedChanged += new System.EventHandler(this.rdbConfirm_CheckedChanged);
+            this.rdbConfirm.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // lblHidden
             // 

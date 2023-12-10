@@ -32,7 +32,6 @@ namespace SalesManagement_SysDev
             this.btnClose = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
-            this.pnlSelect = new System.Windows.Forms.Panel();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.rdbConfirm = new System.Windows.Forms.RadioButton();
             this.rdbHidden = new System.Windows.Forms.RadioButton();
@@ -65,7 +64,6 @@ namespace SalesManagement_SysDev
             this.lblClientID = new System.Windows.Forms.Label();
             this.pnlButuryu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
-            this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChumon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChumonDetail)).BeginInit();
             this.SuspendLayout();
@@ -101,7 +99,7 @@ namespace SalesManagement_SysDev
             this.lblClient.Location = new System.Drawing.Point(752, 30);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(418, 64);
+            this.lblClient.Size = new System.Drawing.Size(417, 64);
             this.lblClient.TabIndex = 27;
             this.lblClient.Text = "注文管理画面";
             // 
@@ -147,55 +145,46 @@ namespace SalesManagement_SysDev
             this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // pnlSelect
-            // 
-            this.pnlSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
-            this.pnlSelect.Controls.Add(this.rdbSearch);
-            this.pnlSelect.Controls.Add(this.rdbConfirm);
-            this.pnlSelect.Controls.Add(this.rdbHidden);
-            this.pnlSelect.Location = new System.Drawing.Point(137, 170);
-            this.pnlSelect.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.pnlSelect.Name = "pnlSelect";
-            this.pnlSelect.Size = new System.Drawing.Size(577, 78);
-            this.pnlSelect.TabIndex = 34;
-            // 
             // rdbSearch
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26F);
-            this.rdbSearch.Location = new System.Drawing.Point(410, 16);
+            this.rdbSearch.Location = new System.Drawing.Point(419, 186);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
             this.rdbSearch.TabIndex = 2;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbConfirm
             // 
             this.rdbConfirm.AutoSize = true;
-            this.rdbConfirm.Checked = true;
             this.rdbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 26F);
-            this.rdbConfirm.Location = new System.Drawing.Point(48, 16);
+            this.rdbConfirm.Location = new System.Drawing.Point(241, 186);
             this.rdbConfirm.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbConfirm.Name = "rdbConfirm";
             this.rdbConfirm.Size = new System.Drawing.Size(103, 39);
             this.rdbConfirm.TabIndex = 1;
-            this.rdbConfirm.TabStop = true;
             this.rdbConfirm.Text = "確定";
             this.rdbConfirm.UseVisualStyleBackColor = true;
+            this.rdbConfirm.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbHidden
             // 
             this.rdbHidden.AutoSize = true;
+            this.rdbHidden.Checked = true;
             this.rdbHidden.Font = new System.Drawing.Font("MS UI Gothic", 26F);
-            this.rdbHidden.Location = new System.Drawing.Point(216, 16);
+            this.rdbHidden.Location = new System.Drawing.Point(55, 186);
             this.rdbHidden.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbHidden.Name = "rdbHidden";
             this.rdbHidden.Size = new System.Drawing.Size(138, 39);
             this.rdbHidden.TabIndex = 0;
+            this.rdbHidden.TabStop = true;
             this.rdbHidden.Text = "非表示";
             this.rdbHidden.UseVisualStyleBackColor = true;
+            this.rdbHidden.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // txbChumonID
             // 
@@ -527,8 +516,11 @@ namespace SalesManagement_SysDev
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.rdbSearch);
             this.Controls.Add(this.txbClientID);
+            this.Controls.Add(this.rdbConfirm);
             this.Controls.Add(this.lblClientID);
+            this.Controls.Add(this.rdbHidden);
             this.Controls.Add(this.txbHidden);
             this.Controls.Add(this.lblClientHidden);
             this.Controls.Add(this.cmbHidden);
@@ -554,7 +546,6 @@ namespace SalesManagement_SysDev
             this.Controls.Add(this.lblClientName);
             this.Controls.Add(this.txbChumonID);
             this.Controls.Add(this.lblChumonID);
-            this.Controls.Add(this.pnlSelect);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.pnlButuryu);
             this.ForeColor = System.Drawing.Color.Black;
@@ -566,8 +557,6 @@ namespace SalesManagement_SysDev
             this.pnlButuryu.ResumeLayout(false);
             this.pnlButuryu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
-            this.pnlSelect.ResumeLayout(false);
-            this.pnlSelect.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChumon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChumonDetail)).EndInit();
             this.ResumeLayout(false);
@@ -579,7 +568,6 @@ namespace SalesManagement_SysDev
         private System.Windows.Forms.Button btnReturn;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Panel pnlSelect;
         private System.Windows.Forms.RadioButton rdbSearch;
         private System.Windows.Forms.RadioButton rdbConfirm;
         private System.Windows.Forms.RadioButton rdbHidden;

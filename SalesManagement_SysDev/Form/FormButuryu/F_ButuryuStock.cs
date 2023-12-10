@@ -54,6 +54,10 @@ namespace SalesManagement_SysDev
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
+
+            rdbRegister.Checked = true;
+
+            GetDataGridView();
         }
         private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
         {
@@ -171,6 +175,28 @@ namespace SalesManagement_SysDev
                 StockDataSelect();
             }
         }
+
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbRegister.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
         ///////////////////////////////
         //メソッド名：StockDataRegister()
         //引　数   ：なし

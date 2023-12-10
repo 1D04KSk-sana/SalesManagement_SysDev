@@ -33,21 +33,13 @@
             this.pctHint = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
-            this.txbProductName = new System.Windows.Forms.TextBox();
-            this.txbWarehousingDetailID = new System.Windows.Forms.TextBox();
-            this.txbProductID = new System.Windows.Forms.TextBox();
             this.txbEmployeeName = new System.Windows.Forms.TextBox();
-            this.txbWarehousingQuantity = new System.Windows.Forms.TextBox();
             this.txbHattyuID = new System.Windows.Forms.TextBox();
             this.txbWarehousingID = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.dtpWarehousingDate = new System.Windows.Forms.DateTimePicker();
             this.btnDone = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
@@ -67,8 +59,6 @@
             this.dgvWarehousing = new System.Windows.Forms.DataGridView();
             this.label10 = new System.Windows.Forms.Label();
             this.dgvWarehousingDetail = new System.Windows.Forms.DataGridView();
-            this.rdbDetailRegister = new System.Windows.Forms.RadioButton();
-            this.btnDetailClear = new System.Windows.Forms.Button();
             this.rdbConfirm = new System.Windows.Forms.RadioButton();
             this.rdbUpdate = new System.Windows.Forms.RadioButton();
             this.cmbConfirm = new System.Windows.Forms.ComboBox();
@@ -144,40 +134,6 @@
             this.btnReturn.UseVisualStyleBackColor = true;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
-            // txbProductName
-            // 
-            this.txbProductName.Enabled = false;
-            this.txbProductName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProductName.ForeColor = System.Drawing.Color.Black;
-            this.txbProductName.Location = new System.Drawing.Point(1429, 350);
-            this.txbProductName.Margin = new System.Windows.Forms.Padding(2);
-            this.txbProductName.Name = "txbProductName";
-            this.txbProductName.ReadOnly = true;
-            this.txbProductName.Size = new System.Drawing.Size(220, 31);
-            this.txbProductName.TabIndex = 56;
-            // 
-            // txbWarehousingDetailID
-            // 
-            this.txbWarehousingDetailID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbWarehousingDetailID.ForeColor = System.Drawing.Color.Black;
-            this.txbWarehousingDetailID.Location = new System.Drawing.Point(1429, 262);
-            this.txbWarehousingDetailID.Margin = new System.Windows.Forms.Padding(2);
-            this.txbWarehousingDetailID.Name = "txbWarehousingDetailID";
-            this.txbWarehousingDetailID.Size = new System.Drawing.Size(220, 31);
-            this.txbWarehousingDetailID.TabIndex = 57;
-            // 
-            // txbProductID
-            // 
-            this.txbProductID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProductID.ForeColor = System.Drawing.Color.Black;
-            this.txbProductID.Location = new System.Drawing.Point(1429, 306);
-            this.txbProductID.Margin = new System.Windows.Forms.Padding(2);
-            this.txbProductID.Name = "txbProductID";
-            this.txbProductID.Size = new System.Drawing.Size(220, 31);
-            this.txbProductID.TabIndex = 58;
-            this.txbProductID.TextChanged += new System.EventHandler(this.txbProductID_TextChanged);
-            this.txbProductID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
-            // 
             // txbEmployeeName
             // 
             this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
@@ -188,16 +144,6 @@
             this.txbEmployeeName.ReadOnly = true;
             this.txbEmployeeName.Size = new System.Drawing.Size(220, 31);
             this.txbEmployeeName.TabIndex = 2;
-            // 
-            // txbWarehousingQuantity
-            // 
-            this.txbWarehousingQuantity.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbWarehousingQuantity.ForeColor = System.Drawing.Color.Black;
-            this.txbWarehousingQuantity.Location = new System.Drawing.Point(1429, 389);
-            this.txbWarehousingQuantity.Margin = new System.Windows.Forms.Padding(2);
-            this.txbWarehousingQuantity.Name = "txbWarehousingQuantity";
-            this.txbWarehousingQuantity.Size = new System.Drawing.Size(220, 31);
-            this.txbWarehousingQuantity.TabIndex = 60;
             // 
             // txbHattyuID
             // 
@@ -218,28 +164,6 @@
             this.txbWarehousingID.Name = "txbWarehousingID";
             this.txbWarehousingID.Size = new System.Drawing.Size(220, 31);
             this.txbWarehousingID.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label3.Location = new System.Drawing.Point(1268, 265);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(128, 24);
-            this.label3.TabIndex = 93;
-            this.label3.Text = "入庫詳細ID";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(1336, 392);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 24);
-            this.label1.TabIndex = 94;
-            this.label1.Text = "数量";
             // 
             // label2
             // 
@@ -284,28 +208,6 @@
             this.label6.Size = new System.Drawing.Size(80, 24);
             this.label6.TabIndex = 98;
             this.label6.Text = "入庫ID";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label7.Location = new System.Drawing.Point(1314, 353);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(82, 24);
-            this.label7.TabIndex = 99;
-            this.label7.Text = "商品名";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label8.Location = new System.Drawing.Point(1316, 309);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(80, 24);
-            this.label8.TabIndex = 100;
-            this.label8.Text = "商品ID";
             // 
             // dtpWarehousingDate
             // 
@@ -481,7 +383,7 @@
             this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.txbHidden.Location = new System.Drawing.Point(869, 449);
             this.txbHidden.Name = "txbHidden";
-            this.txbHidden.Size = new System.Drawing.Size(780, 31);
+            this.txbHidden.Size = new System.Drawing.Size(901, 31);
             this.txbHidden.TabIndex = 114;
             this.txbHidden.TabStop = false;
             // 
@@ -494,7 +396,7 @@
             this.cmbView.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbView.Location = new System.Drawing.Point(894, 181);
+            this.cmbView.Location = new System.Drawing.Point(1109, 182);
             this.cmbView.Margin = new System.Windows.Forms.Padding(2);
             this.cmbView.Name = "cmbView";
             this.cmbView.Size = new System.Drawing.Size(360, 43);
@@ -552,55 +454,33 @@
             this.dgvWarehousingDetail.TabStop = false;
             this.dgvWarehousingDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvWarehousingDetail_CellClick);
             // 
-            // rdbDetailRegister
-            // 
-            this.rdbDetailRegister.AutoSize = true;
-            this.rdbDetailRegister.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbDetailRegister.Location = new System.Drawing.Point(184, 182);
-            this.rdbDetailRegister.Name = "rdbDetailRegister";
-            this.rdbDetailRegister.Size = new System.Drawing.Size(173, 39);
-            this.rdbDetailRegister.TabIndex = 121;
-            this.rdbDetailRegister.Text = "詳細登録";
-            this.rdbDetailRegister.UseVisualStyleBackColor = true;
-            // 
-            // btnDetailClear
-            // 
-            this.btnDetailClear.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnDetailClear.Location = new System.Drawing.Point(1288, 167);
-            this.btnDetailClear.Margin = new System.Windows.Forms.Padding(2);
-            this.btnDetailClear.Name = "btnDetailClear";
-            this.btnDetailClear.Size = new System.Drawing.Size(187, 70);
-            this.btnDetailClear.TabIndex = 123;
-            this.btnDetailClear.TabStop = false;
-            this.btnDetailClear.Text = "詳細クリア";
-            this.btnDetailClear.UseVisualStyleBackColor = true;
-            this.btnDetailClear.Click += new System.EventHandler(this.btnDetailClear_Click);
-            // 
             // rdbConfirm
             // 
             this.rdbConfirm.AutoSize = true;
             this.rdbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbConfirm.Location = new System.Drawing.Point(590, 183);
+            this.rdbConfirm.Location = new System.Drawing.Point(376, 182);
             this.rdbConfirm.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbConfirm.Name = "rdbConfirm";
             this.rdbConfirm.Size = new System.Drawing.Size(103, 39);
             this.rdbConfirm.TabIndex = 125;
             this.rdbConfirm.Text = "確定";
             this.rdbConfirm.UseVisualStyleBackColor = true;
-            this.rdbConfirm.CheckedChanged += new System.EventHandler(this.rdbConfirm_CheckedChanged);
+            this.rdbConfirm.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbUpdate
             // 
             this.rdbUpdate.AutoSize = true;
+            this.rdbUpdate.Checked = true;
             this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbUpdate.Location = new System.Drawing.Point(387, 183);
+            this.rdbUpdate.Location = new System.Drawing.Point(54, 182);
             this.rdbUpdate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbUpdate.Name = "rdbUpdate";
             this.rdbUpdate.Size = new System.Drawing.Size(173, 39);
             this.rdbUpdate.TabIndex = 124;
+            this.rdbUpdate.TabStop = true;
             this.rdbUpdate.Text = "表示更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
-            this.rdbUpdate.CheckedChanged += new System.EventHandler(this.rdbUpdate_CheckedChanged);
+            this.rdbUpdate.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // cmbConfirm
             // 
@@ -632,14 +512,14 @@
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(58, 182);
+            this.rdbSearch.Location = new System.Drawing.Point(241, 182);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
             this.rdbSearch.TabIndex = 129;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
-            this.rdbSearch.CheckedChanged += new System.EventHandler(this.rdbSearch_CheckedChanged);
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // lblEmployeeID
             // 
@@ -677,8 +557,6 @@
             this.Controls.Add(this.lblConfirm);
             this.Controls.Add(this.rdbConfirm);
             this.Controls.Add(this.rdbUpdate);
-            this.Controls.Add(this.btnDetailClear);
-            this.Controls.Add(this.rdbDetailRegister);
             this.Controls.Add(this.dgvWarehousingDetail);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.dgvWarehousing);
@@ -698,21 +576,13 @@
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnDone);
             this.Controls.Add(this.dtpWarehousingDate);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.txbWarehousingID);
             this.Controls.Add(this.txbHattyuID);
-            this.Controls.Add(this.txbWarehousingQuantity);
             this.Controls.Add(this.txbEmployeeName);
-            this.Controls.Add(this.txbProductID);
-            this.Controls.Add(this.txbWarehousingDetailID);
-            this.Controls.Add(this.txbProductName);
             this.Controls.Add(this.pnlButuryu);
             this.Name = "F_ButuryuWarehousing";
             this.Text = "F_ButuryuWarehousing";
@@ -732,22 +602,14 @@
         private System.Windows.Forms.Label lblWarehousing;
         private System.Windows.Forms.Panel pnlButuryu;
         private System.Windows.Forms.Button btnReturn;
-        private System.Windows.Forms.TextBox txbProductName;
-        private System.Windows.Forms.TextBox txbWarehousingDetailID;
-        private System.Windows.Forms.TextBox txbProductID;
         private System.Windows.Forms.TextBox txbEmployeeName;
-        private System.Windows.Forms.TextBox txbWarehousingQuantity;
         private System.Windows.Forms.TextBox txbHattyuID;
         private System.Windows.Forms.TextBox txbWarehousingID;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DateTimePicker dtpWarehousingDate;
         private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.Button btnClear;
@@ -767,8 +629,6 @@
         private System.Windows.Forms.DataGridView dgvWarehousing;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DataGridView dgvWarehousingDetail;
-        public System.Windows.Forms.RadioButton rdbDetailRegister;
-        private System.Windows.Forms.Button btnDetailClear;
         private System.Windows.Forms.RadioButton rdbConfirm;
         private System.Windows.Forms.RadioButton rdbUpdate;
         private System.Windows.Forms.ComboBox cmbConfirm;

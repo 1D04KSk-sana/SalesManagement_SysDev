@@ -115,8 +115,9 @@ namespace SalesManagement_SysDev
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
+            dtpSyukkoDate.Checked = false;
 
-            rdbConfirm.Checked = true;
+            rdbHidden.Checked = true;
 
             GetDataGridView();
         }
@@ -1025,6 +1026,36 @@ namespace SalesManagement_SysDev
                 FileName = "https://docs.google.com/document/d/1MfMtaYTJYmbGbq3IKHSwdryVny-aQX0B/edit=true",
                 UseShellExecute = true
             });
+        }
+
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbConfirm.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbHidden.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
         }
     }
 }

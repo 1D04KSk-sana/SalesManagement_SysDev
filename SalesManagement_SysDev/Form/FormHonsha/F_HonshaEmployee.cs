@@ -150,6 +150,7 @@ namespace SalesManagement_SysDev
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
+            dtpEmployeeHireDate.Checked = false;
 
             rdbUpdate.Checked = true;
 
@@ -893,6 +894,27 @@ namespace SalesManagement_SysDev
                 FileName = "https://docs.google.com/document/d/1RWxzdr9jwJ9XMEOzMnPCcXIOtXWPXqC9/edit=true",
                 UseShellExecute = true
             });
+        }
+
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbUpdate.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
         }
     }
 }

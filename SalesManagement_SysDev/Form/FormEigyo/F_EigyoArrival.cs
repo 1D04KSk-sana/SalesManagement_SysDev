@@ -185,9 +185,7 @@ namespace SalesManagement_SysDev
             ClearImput();
             dtpArrivalDate.Checked= false;
 
-            rdbUpdate.Checked = false;
-            rdbConfirm.Checked = false;
-            rdbSearch.Checked = false;
+            rdbUpdate.Checked = true;
 
             GetDataGridView();
         }

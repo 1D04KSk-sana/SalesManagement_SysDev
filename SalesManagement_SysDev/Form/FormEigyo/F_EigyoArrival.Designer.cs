@@ -532,12 +532,14 @@
             // rdbUpdate
             // 
             this.rdbUpdate.AutoSize = true;
+            this.rdbUpdate.Checked = true;
             this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbUpdate.Location = new System.Drawing.Point(51, 185);
             this.rdbUpdate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbUpdate.Name = "rdbUpdate";
             this.rdbUpdate.Size = new System.Drawing.Size(173, 39);
             this.rdbUpdate.TabIndex = 146;
+            this.rdbUpdate.TabStop = true;
             this.rdbUpdate.Text = "表示更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
             this.rdbUpdate.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);

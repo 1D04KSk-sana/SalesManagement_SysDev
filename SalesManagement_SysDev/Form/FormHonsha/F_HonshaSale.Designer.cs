@@ -62,9 +62,9 @@
             this.lblHidden = new System.Windows.Forms.Label();
             this.txbClientID = new System.Windows.Forms.TextBox();
             this.lblClientID = new System.Windows.Forms.Label();
-            this.dtpSaleDate = new SalesManagement_SysDev.MonthPicker();
             this.txbHidden = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.dtpSaleDate = new SalesManagement_SysDev.MonthPicker();
             this.pnlHonsha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSale)).BeginInit();
@@ -428,27 +428,29 @@
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(36, 174);
+            this.rdbSearch.Location = new System.Drawing.Point(310, 190);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
             this.rdbSearch.TabIndex = 2;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
-            this.rdbSearch.CheckedChanged += new System.EventHandler(this.rdbSearch_CheckedChanged);
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbHiddenUpdate
             // 
             this.rdbHiddenUpdate.AutoSize = true;
+            this.rdbHiddenUpdate.Checked = true;
             this.rdbHiddenUpdate.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbHiddenUpdate.Location = new System.Drawing.Point(169, 174);
+            this.rdbHiddenUpdate.Location = new System.Drawing.Point(46, 190);
             this.rdbHiddenUpdate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbHiddenUpdate.Name = "rdbHiddenUpdate";
             this.rdbHiddenUpdate.Size = new System.Drawing.Size(208, 39);
             this.rdbHiddenUpdate.TabIndex = 79;
+            this.rdbHiddenUpdate.TabStop = true;
             this.rdbHiddenUpdate.Text = "非表示更新";
             this.rdbHiddenUpdate.UseVisualStyleBackColor = true;
-            this.rdbHiddenUpdate.CheckedChanged += new System.EventHandler(this.rdbHiddenUpdate_CheckedChanged);
+            this.rdbHiddenUpdate.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // lblHidden
             // 
@@ -484,25 +486,12 @@
             this.lblClientID.TabIndex = 84;
             this.lblClientID.Text = "顧客ID";
             // 
-            // dtpSaleDate
-            // 
-            this.dtpSaleDate.Checked = false;
-            this.dtpSaleDate.CustomFormat = "MMMM yyyy";
-            this.dtpSaleDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.dtpSaleDate.Location = new System.Drawing.Point(1617, 361);
-            this.dtpSaleDate.Margin = new System.Windows.Forms.Padding(2);
-            this.dtpSaleDate.Name = "dtpSaleDate";
-            this.dtpSaleDate.ShowCheckBox = true;
-            this.dtpSaleDate.Size = new System.Drawing.Size(220, 31);
-            this.dtpSaleDate.TabIndex = 81;
-            this.dtpSaleDate.TabStop = false;
-            // 
             // txbHidden
             // 
-            this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.txbHidden.Location = new System.Drawing.Point(975, 436);
             this.txbHidden.Name = "txbHidden";
-            this.txbHidden.Size = new System.Drawing.Size(862, 42);
+            this.txbHidden.Size = new System.Drawing.Size(862, 31);
             this.txbHidden.TabIndex = 145;
             // 
             // label7
@@ -516,11 +505,24 @@
             this.label7.TabIndex = 144;
             this.label7.Text = "非表示理由";
             // 
+            // dtpSaleDate
+            // 
+            this.dtpSaleDate.Checked = false;
+            this.dtpSaleDate.CustomFormat = "MMMM yyyy";
+            this.dtpSaleDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.dtpSaleDate.Location = new System.Drawing.Point(1617, 361);
+            this.dtpSaleDate.Margin = new System.Windows.Forms.Padding(2);
+            this.dtpSaleDate.Name = "dtpSaleDate";
+            this.dtpSaleDate.ShowCheckBox = true;
+            this.dtpSaleDate.Size = new System.Drawing.Size(220, 31);
+            this.dtpSaleDate.TabIndex = 81;
+            this.dtpSaleDate.TabStop = false;
+            // 
             // F_HonshaSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
             this.Controls.Add(this.txbHidden);

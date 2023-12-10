@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.pnlEigyo = new System.Windows.Forms.Panel();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.lblWarehousing = new System.Windows.Forms.Label();
@@ -72,11 +73,10 @@
             this.cmbShipmentHidden = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.pctHint = new System.Windows.Forms.PictureBox();
             this.pnlEigyo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShipmentDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShipment)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlEigyo
@@ -91,6 +91,17 @@
             this.pnlEigyo.Name = "pnlEigyo";
             this.pnlEigyo.Size = new System.Drawing.Size(1920, 150);
             this.pnlEigyo.TabIndex = 134;
+            // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1621, 44);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 177;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
             // 
             // btnClose
             // 
@@ -124,7 +135,7 @@
             this.lblWarehousing.Location = new System.Drawing.Point(729, 44);
             this.lblWarehousing.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWarehousing.Name = "lblWarehousing";
-            this.lblWarehousing.Size = new System.Drawing.Size(418, 64);
+            this.lblWarehousing.Size = new System.Drawing.Size(417, 64);
             this.lblWarehousing.TabIndex = 24;
             this.lblWarehousing.Text = "出荷管理画面";
             // 
@@ -184,12 +195,14 @@
             // rdbUpdate
             // 
             this.rdbUpdate.AutoSize = true;
+            this.rdbUpdate.Checked = true;
             this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbUpdate.Location = new System.Drawing.Point(138, 188);
             this.rdbUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.rdbUpdate.Name = "rdbUpdate";
             this.rdbUpdate.Size = new System.Drawing.Size(103, 39);
             this.rdbUpdate.TabIndex = 138;
+            this.rdbUpdate.TabStop = true;
             this.rdbUpdate.Text = "更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
             // 
@@ -576,17 +589,6 @@
             this.label12.TabIndex = 173;
             this.label12.Text = "非表示理由";
             // 
-            // pctHint
-            // 
-            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
-            this.pctHint.Location = new System.Drawing.Point(1621, 44);
-            this.pctHint.Name = "pctHint";
-            this.pctHint.Size = new System.Drawing.Size(60, 60);
-            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pctHint.TabIndex = 177;
-            this.pctHint.TabStop = false;
-            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
-            // 
             // F_EigyoShipment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -638,9 +640,9 @@
             this.Text = "F_EigyoShipment";
             this.pnlEigyo.ResumeLayout(false);
             this.pnlEigyo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShipmentDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShipment)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

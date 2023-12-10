@@ -61,13 +61,13 @@ namespace SalesManagement_SysDev
             ClearImput();
         }
 
-            ///////////////////////////////
-            //メソッド名：RegEmployee()
-            //引　数   ：顧客情報
-            //戻り値   ：なし
-            //機　能   ：顧客データの登録
-            ///////////////////////////////
-            private void RegistrationEmployee(M_Employee regEmployee)
+        ///////////////////////////////
+        //メソッド名：RegEmployee()
+        //引　数   ：顧客情報
+        //戻り値   ：なし
+        //機　能   ：顧客データの登録
+        ///////////////////////////////
+        private void RegistrationEmployee(M_Employee regEmployee)
         {
             // 顧客情報の登録
             bool flg = EmployeeDataAccess.AddEmployeeData(regEmployee);

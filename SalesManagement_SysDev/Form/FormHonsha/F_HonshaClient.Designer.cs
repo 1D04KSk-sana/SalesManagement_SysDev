@@ -54,6 +54,7 @@
             this.cmbHidden = new System.Windows.Forms.ComboBox();
             this.btnClear = new System.Windows.Forms.Button();
             this.pnlHonsha = new System.Windows.Forms.Panel();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.lblClient = new System.Windows.Forms.Label();
             this.cmbView = new System.Windows.Forms.ComboBox();
@@ -66,7 +67,6 @@
             this.btnPageMin = new System.Windows.Forms.Button();
             this.txbNumPage = new System.Windows.Forms.TextBox();
             this.lblNumPage = new System.Windows.Forms.Label();
-            this.pctHint = new System.Windows.Forms.PictureBox();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             this.pnlHonsha.SuspendLayout();
@@ -106,9 +106,9 @@
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
             this.rdbSearch.TabIndex = 2;
-            this.rdbSearch.TabStop = true;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbUpdate
             // 
@@ -119,13 +119,14 @@
             this.rdbUpdate.Name = "rdbUpdate";
             this.rdbUpdate.Size = new System.Drawing.Size(103, 39);
             this.rdbUpdate.TabIndex = 1;
-            this.rdbUpdate.TabStop = true;
             this.rdbUpdate.Text = "更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
+            this.rdbUpdate.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbRegister
             // 
             this.rdbRegister.AutoSize = true;
+            this.rdbRegister.Checked = true;
             this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 26F);
             this.rdbRegister.Location = new System.Drawing.Point(29, 16);
             this.rdbRegister.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -135,6 +136,7 @@
             this.rdbRegister.TabStop = true;
             this.rdbRegister.Text = "登録";
             this.rdbRegister.UseVisualStyleBackColor = true;
+            this.rdbRegister.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // lblClientID
             // 
@@ -359,6 +361,17 @@
             this.pnlHonsha.Size = new System.Drawing.Size(1920, 150);
             this.pnlHonsha.TabIndex = 22;
             // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1632, 46);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 34;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
@@ -499,17 +512,6 @@
             this.lblNumPage.Size = new System.Drawing.Size(64, 22);
             this.lblNumPage.TabIndex = 32;
             this.lblNumPage.Text = "ページ";
-            // 
-            // pctHint
-            // 
-            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
-            this.pctHint.Location = new System.Drawing.Point(1632, 46);
-            this.pctHint.Name = "pctHint";
-            this.pctHint.Size = new System.Drawing.Size(60, 60);
-            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pctHint.TabIndex = 34;
-            this.pctHint.TabStop = false;
-            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
             // 
             // F_HonshaClient
             // 

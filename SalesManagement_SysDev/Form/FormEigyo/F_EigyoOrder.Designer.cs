@@ -583,9 +583,11 @@
             // 
             // dtpOrderDate
             // 
+            this.dtpOrderDate.Checked = false;
             this.dtpOrderDate.Location = new System.Drawing.Point(437, 259);
             this.dtpOrderDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpOrderDate.Name = "dtpOrderDate";
+            this.dtpOrderDate.ShowCheckBox = true;
             this.dtpOrderDate.Size = new System.Drawing.Size(151, 19);
             this.dtpOrderDate.TabIndex = 71;
             // 

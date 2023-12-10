@@ -141,70 +141,12 @@ namespace SalesManagement_SysDev
                 OpSetTime = DateTime.Now,
             };
         }
-        ///////////////////////////////
-        //メソッド名：GenerateDetailDataAtRegistration()
-        //引　数   ：なし
-        //戻り値   ：入庫詳細登録情報
-        //機　能   ：登録データのセット
-        ///////////////////////////////
-        private T_WarehousingDetail GenerateDetailDataAtRegistration()
-        {
-            M_Product Prodact = prodactDataAccess.GetIDProdactData(int.Parse(txbProductID.Text.Trim()));
-
-            return new T_WarehousingDetail
-            {
-                WaDetailID = int.Parse(txbWarehousingDetailID.Text.Trim()),
-                WaID = int.Parse(txbWarehousingID.Text.Trim()),
-                PrID = int.Parse(txbProductID.Text.Trim()),
-                WaQuantity = int.Parse(txbWarehousingQuantity.Text.Trim()),
-
-            };
-        }
-        private void txbProductID_TextChanged(object sender, EventArgs e)
-        {
-            //nullの確認
-            string stringProdactID = txbProductID.Text.Trim();
-            int intProdactID = 0;
-
-            if (!String.IsNullOrEmpty(stringProdactID))
-            {
-                intProdactID = int.Parse(stringProdactID);
-            }
-
-            //存在確認
-            if (!prodactDataAccess.CheckProdactIDExistence(intProdactID))
-            {
-                txbProductName.Text = "商品IDが存在しません";
-                return;
-            }
-
-            //IDから名前を取り出す
-            var Prodact = listProdact.Single(x => x.PrID == intProdactID);
-
-            txbProductName.Text = Prodact.PrName;
-        }
-
-        private void btnDetailClear_Click(object sender, EventArgs e)
-        {
-            ClearImputDetail();
-        }
-        ///////////////////////////////
-        //メソッド名：ClearImputDetail()
-        //引　数   ：なし
-        //戻り値   ：なし
-        //機　能   ：コントロールのクリア(Detail)
-        ///////////////////////////////
-        private void ClearImputDetail()
-        {
-            txbWarehousingDetailID.Text = string.Empty;
-            txbProductID.Text = string.Empty;
-            txbProductName.Text = string.Empty;
-            txbWarehousingQuantity.Text = string.Empty;
-        }
-
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
+            dtpWarehousingDate.Checked = false;
+
+            rdbUpdate.Checked = true;
 
             GetDataGridView();
         }
@@ -488,9 +430,6 @@ namespace SalesManagement_SysDev
             SelectRowControl();
 
             SetDataDetailGridView(int.Parse(dgvWarehousing[0, dgvWarehousing.CurrentCellAddress.Y].Value.ToString()));
-
-            ClearImputDetail();
-
         }
         ///////////////////////////////
         //メソッド名：SelectRowControl()
@@ -522,32 +461,10 @@ namespace SalesManagement_SysDev
             {
                 return;
             }
-
-            //選択された行に対してのコントロールの変更
-            SelectRowDetailControl();
-        }
-        ///////////////////////////////
-        //メソッド名：SelectRowDetailControl()
-        //引　数   ：なし
-        //戻り値   ：なし
-        //機　能   ：選択された行に対してのコントロールの変更(Detail)
-        ///////////////////////////////
-        private void SelectRowDetailControl()
-        {
-            //データグリッドビューに乗っている情報をGUIに反映
-            txbWarehousingID.Text = dgvWarehousingDetail[0, dgvWarehousingDetail.CurrentCellAddress.Y].Value.ToString();
-            txbWarehousingDetailID.Text = dgvWarehousingDetail[1, dgvWarehousingDetail.CurrentCellAddress.Y].Value.ToString();
-            txbProductID.Text = dictionaryProdact.FirstOrDefault(x => x.Value == dgvWarehousingDetail[2, dgvWarehousingDetail.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
-            txbWarehousingQuantity.Text = dgvWarehousingDetail[3, dgvWarehousingDetail.CurrentCellAddress.Y].Value.ToString();
         }
 
         private void btnDone_Click(object sender, EventArgs e)
         {
-            //詳細登録ラヂオボタンがチェックされているとき
-            if (rdbDetailRegister.Checked)
-            {
-                WarehousingDetailDataRegister();
-            }
 
             //更新ラヂオボタンがチェックされているとき
             if (rdbUpdate.Checked)
@@ -567,133 +484,7 @@ namespace SalesManagement_SysDev
                 WarehousingDataConfirm();
             }
         }
-        ///////////////////////////////
-        //メソッド名：WarehousingDetailDataRegister()
-        //引　数   ：なし
-        //戻り値   ：なし
-        //機　能   ：入庫詳細情報登録の実行
-        ///////////////////////////////
-        private void WarehousingDetailDataRegister()
-        {
-            //入力情報適否
-            if (!GetValidDetailDataAtRegistration())
-            {
-                return;
-            }
 
-            //操作ログデータ取得
-            var regOperationLog = GenerateLogAtRegistration(rdbDetailRegister.Text);
-
-            //操作ログデータの登録（成功 = true,失敗 = false）
-            if (!operationLogAccess.AddOperationLogData(regOperationLog))
-            {
-                return;
-            }
-
-            // 入庫詳細情報作成
-            var regWarehousing = GenerateDetailDataAtRegistration();
-
-            // 入庫詳細情報登録
-            RegistrationWarehousingDetail(regWarehousing);
-        }
-        ///////////////////////////////
-        //メソッド名：GetValidDetailDataAtRegistration()
-        //引　数   ：なし
-        //戻り値   ：true or false
-        //機　能   ：詳細登録入力データの形式チェック
-        //          ：エラーがない場合True
-        //          ：エラーがある場合False
-        ///////////////////////////////
-        private bool GetValidDetailDataAtRegistration()
-        {
-            //入庫詳細IDの適否
-            if (!String.IsNullOrEmpty(txbWarehousingDetailID.Text.Trim()))
-            {
-                //入庫詳細IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbWarehousingDetailID.Text.Trim()))
-                {
-                    MessageBox.Show("入庫詳細IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbWarehousingDetailID.Focus();
-                    return false;
-                }
-                //入庫詳細IDの存在チェック
-                if (warehousingDetailDataAccess.CheckWarehousingDetailIDExistence(int.Parse(txbWarehousingDetailID.Text.Trim())))
-                {
-                    MessageBox.Show("入庫詳細IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbWarehousingDetailID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("入庫詳細IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbWarehousingDetailID.Focus();
-                return false;
-            }
-
-            //入庫IDの適否
-            if (!String.IsNullOrEmpty(txbWarehousingID.Text.Trim()))
-            {
-                //入庫IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbWarehousingID.Text.Trim()))
-                {
-                    MessageBox.Show("入庫IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbWarehousingID.Focus();
-                    return false;
-                }
-                //入庫IDの存在チェック
-                if (!warehousingDataAccess.CheckWarehousingIDExistence(int.Parse(txbWarehousingID.Text.Trim())))
-                {
-                    MessageBox.Show("入庫IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbWarehousingID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("入庫IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbWarehousingID.Focus();
-                return false;
-            }
-
-            return true;
-        }
-        ///////////////////////////////
-        //メソッド名：RegistrationWarehousingDetail()
-        //引　数   ：入庫詳細情報
-        //戻り値   ：なし
-        //機　能   ：入庫詳細データの登録
-        ///////////////////////////////
-        private void RegistrationWarehousingDetail(T_WarehousingDetail regWarehousing)
-        {
-            // 登録確認メッセージ
-            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
-            // 入庫情報の登録
-            bool flg = warehousingDetailDataAccess.AddWarehousingDetailData(regWarehousing);
-
-            //登録成功・失敗メッセージ
-            if (flg == true)
-            {
-                MessageBox.Show("データを登録しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("データの登録に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            // データグリッドビューの表示
-            SetDataDetailGridView(int.Parse(txbWarehousingID.Text.Trim()));
-
-            // 入力エリアのクリア
-            ClearImput();
-            ClearImputDetail();
-        }
         ///////////////////////////////
         //メソッド名：WarehousingDataUpdate()
         //引　数   ：なし
@@ -816,7 +607,6 @@ namespace SalesManagement_SysDev
 
             //テキストボックス等のクリア
             ClearImput();
-            ClearImputDetail();
 
             // データグリッドビューの表示
             GetDataGridView();
@@ -1187,7 +977,6 @@ namespace SalesManagement_SysDev
 
             //テキストボックス等のクリア
             ClearImput();
-            ClearImputDetail();
 
             // データグリッドビューの表示
             GetDataGridView();
@@ -1251,84 +1040,6 @@ namespace SalesManagement_SysDev
             GetDataGridView();
         }
 
-        private void rdbSearch_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdbSearch.Checked)
-            {
-                txbWarehousingDetailID.Enabled = false;
-                txbWarehousingQuantity.Enabled = false;
-                txbProductID.Enabled = false;
-                txbProductName.Enabled = false;
-                txbHidden.Enabled = false;
-                cmbHidden.Enabled = false;
-            }
-            else
-            {
-                txbWarehousingDetailID.Enabled = true;
-                txbWarehousingQuantity.Enabled = true;
-                txbProductID.Enabled = true;
-                txbProductName.Enabled = true;
-                txbHidden.Enabled = true;
-                cmbHidden.Enabled = true;
-            }
-        }
-
-        private void rdbUpdate_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdbUpdate.Checked)
-            {
-                txbEmployeeName.Enabled = false;
-                txbHattyuID.Enabled = false;
-                txbWarehousingDetailID.Enabled = false;
-                txbWarehousingQuantity.Enabled = false;
-                txbProductID.Enabled = false;
-                txbProductName.Enabled = false;
-                cmbConfirm.Enabled = false;
-                dtpWarehousingDate.Enabled = false;
-            }
-            else
-            {
-                txbEmployeeName.Enabled = true;
-                txbHattyuID.Enabled = true;
-                txbWarehousingDetailID.Enabled = true;
-                txbWarehousingQuantity.Enabled = true;
-                txbProductID.Enabled = true;
-                txbProductName.Enabled = true;
-                cmbConfirm.Enabled = true;
-                dtpWarehousingDate.Enabled=true;
-            }
-
-        }
-
-        private void rdbConfirm_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdbConfirm.Checked)
-            {
-                txbEmployeeName.Enabled = false;
-                txbHattyuID.Enabled = false;
-                dtpWarehousingDate.Enabled = false;
-                cmbHidden.Enabled = false;
-                txbHidden.Enabled = false;
-                txbWarehousingDetailID.Enabled = false;
-                txbWarehousingQuantity.Enabled = false;
-                txbProductID.Enabled = false;
-                txbProductName.Enabled = false;
-            }
-            else
-            {
-                txbEmployeeName.Enabled = true;
-                txbHattyuID.Enabled = true;
-                dtpWarehousingDate.Enabled = true;
-                cmbHidden.Enabled = true;
-                txbHidden.Enabled = true;
-                txbWarehousingDetailID.Enabled = true;
-                txbWarehousingQuantity.Enabled = true;
-                txbProductID.Enabled = true;
-                txbProductName.Enabled = true;
-            }
-
-        }
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -1365,6 +1076,52 @@ namespace SalesManagement_SysDev
             var Employee = listEmployee.Single(x => x.EmID == intEmployeeID);
 
             txbEmployeeName.Text = Employee.EmName;
+        }
+
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
+            }
+            else
+            {
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
+            }
+
+            if (rdbConfirm.Checked)
+            {
+                txbEmployeeName.Enabled = false;
+                txbHattyuID.Enabled = false;
+                dtpWarehousingDate.Enabled = false;
+                cmbHidden.Enabled = false;
+                txbHidden.Enabled = false;
+            }
+            else
+            {
+                txbEmployeeName.Enabled = true;
+                txbHattyuID.Enabled = true;
+                dtpWarehousingDate.Enabled = true;
+                cmbHidden.Enabled = true;
+                txbHidden.Enabled = true;
+            }
+
+            if (rdbUpdate.Checked)
+            {
+                txbEmployeeName.Enabled = false;
+                txbHattyuID.Enabled = false;
+                cmbConfirm.Enabled = false;
+                dtpWarehousingDate.Enabled = false;
+            }
+            else
+            {
+                txbEmployeeName.Enabled = true;
+                txbHattyuID.Enabled = true;
+                cmbConfirm.Enabled = true;
+                dtpWarehousingDate.Enabled = true;
+            }
         }
     }
 }

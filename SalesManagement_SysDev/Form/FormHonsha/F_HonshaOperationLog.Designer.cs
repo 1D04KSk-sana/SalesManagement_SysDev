@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.pnlHonsha = new System.Windows.Forms.Panel();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.lblOperationLog = new System.Windows.Forms.Label();
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
@@ -52,10 +53,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txbEmployeeName = new System.Windows.Forms.TextBox();
             this.btnBack = new System.Windows.Forms.Button();
-            this.pctHint = new System.Windows.Forms.PictureBox();
             this.pnlHonsha.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOperationLog)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOperationLog)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHonsha
@@ -70,6 +70,17 @@
             this.pnlHonsha.Name = "pnlHonsha";
             this.pnlHonsha.Size = new System.Drawing.Size(1920, 150);
             this.pnlHonsha.TabIndex = 0;
+            // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1618, 39);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 72;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
             // 
             // lblOperationLog
             // 
@@ -148,6 +159,7 @@
             this.rdbSearch.TabIndex = 6;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // txbEmployeeID
             // 
@@ -356,17 +368,6 @@
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // pctHint
-            // 
-            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
-            this.pctHint.Location = new System.Drawing.Point(1618, 39);
-            this.pctHint.Name = "pctHint";
-            this.pctHint.Size = new System.Drawing.Size(60, 60);
-            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pctHint.TabIndex = 72;
-            this.pctHint.TabStop = false;
-            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
-            // 
             // F_HonshaOperationLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -404,8 +405,8 @@
             this.Load += new System.EventHandler(this.F_HonshaOperationLog_Load);
             this.pnlHonsha.ResumeLayout(false);
             this.pnlHonsha.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOperationLog)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOperationLog)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -112,6 +112,7 @@ namespace SalesManagement_SysDev
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
+            dtpProdactReleaseDate.Checked = false;
 
             rdbRegister.Checked = true;
 
@@ -158,6 +159,35 @@ namespace SalesManagement_SysDev
             ProdactSearchButtonClick(false);
         }
 
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbRegister.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbUpdate.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
 
         ///////////////////////////////
         //メソッド名：ProdactDataSelect()

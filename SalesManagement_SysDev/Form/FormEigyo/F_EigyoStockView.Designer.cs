@@ -69,7 +69,6 @@
             this.txbstocknum.Name = "txbstocknum";
             this.txbstocknum.Size = new System.Drawing.Size(220, 31);
             this.txbstocknum.TabIndex = 2;
-            this.txbstocknum.TextChanged += new System.EventHandler(this.txbstocknum_TextChanged);
             // 
             // txbProductID
             // 
@@ -106,7 +105,6 @@
             this.dgvStockView.TabIndex = 5;
             this.dgvStockView.TabStop = false;
             this.dgvStockView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStockView_CellClick);
-            this.dgvStockView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // btnClose
             // 
@@ -222,7 +220,6 @@
             this.txbPageSize.Size = new System.Drawing.Size(50, 28);
             this.txbPageSize.TabIndex = 67;
             this.txbPageSize.TabStop = false;
-            this.txbPageSize.TextChanged += new System.EventHandler(this.txbPageSize_TextChanged);
             this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblPageSize
@@ -248,7 +245,6 @@
             this.pnlEigyo.Name = "pnlEigyo";
             this.pnlEigyo.Size = new System.Drawing.Size(1920, 150);
             this.pnlEigyo.TabIndex = 69;
-            this.pnlEigyo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlHonsha_Paint);
             // 
             // pctHint
             // 
@@ -272,7 +268,6 @@
             this.lblStockView.Size = new System.Drawing.Size(417, 64);
             this.lblStockView.TabIndex = 23;
             this.lblStockView.Text = "在庫確認画面";
-            this.lblStockView.Click += new System.EventHandler(this.lblOrder_Click);
             // 
             // btnReturn
             // 
@@ -298,7 +293,6 @@
             this.rdbSearch.TabIndex = 70;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
-            this.rdbSearch.CheckedChanged += new System.EventHandler(this.rdbSearch_CheckedChanged);
             // 
             // lblEmployeeID
             // 
@@ -321,7 +315,6 @@
             this.label1.Size = new System.Drawing.Size(82, 24);
             this.label1.TabIndex = 85;
             this.label1.Text = "在庫数";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -333,7 +326,6 @@
             this.label2.Size = new System.Drawing.Size(80, 24);
             this.label2.TabIndex = 86;
             this.label2.Text = "在庫ID";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // btnClear
             // 
@@ -346,6 +338,7 @@
             this.btnClear.TabStop = false;
             this.btnClear.Text = "クリア";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnDone
             // 
@@ -399,7 +392,6 @@
             this.label3.Size = new System.Drawing.Size(82, 24);
             this.label3.TabIndex = 92;
             this.label3.Text = "商品名";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // F_EigyoStockView
             // 

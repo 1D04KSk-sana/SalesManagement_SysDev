@@ -46,35 +46,11 @@ namespace SalesManagement_SysDev
             this.Opacity = 1;
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void pnlHonsha_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void lblOrder_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
         private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
         {
             f_SearchDialog.Close();
@@ -96,9 +72,6 @@ namespace SalesManagement_SysDev
             DictionarySet();
 
             SetFormDataGridView();
-
-
-
 
             //cmbViewを表示に
             cmbView.SelectedIndex = 0;
@@ -472,11 +445,6 @@ namespace SalesManagement_SysDev
             }
         }
 
-        private void rdbSearch_CheckedChanged(object sender, EventArgs e)
-        {
-           
-        }
-
         private void btnReturn_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -524,17 +492,6 @@ namespace SalesManagement_SysDev
             GetDataGridView();
         }
 
-        private void txbPageSize_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private System.Windows.Forms.RadioButton rdbRegister;
-
-        private void txbstocknum_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void txbProdactID_TextChanged(object sender, EventArgs e)
         {
             //nullの確認
@@ -578,11 +535,6 @@ namespace SalesManagement_SysDev
             }
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void dgvStockView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //クリックされたDataGridViewがヘッダーのとき⇒何もしない
@@ -615,6 +567,28 @@ namespace SalesManagement_SysDev
                 FileName = "https://docs.google.com/document/d/1x5e-cyn25BCmNneXa8iYbhvX_WtcsflB/edit=true",
                 UseShellExecute = true
             });
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearImput();
+
+            rdbSearch.Checked = false;
+
+            GetDataGridView();
+        }
+
+        ///////////////////////////////
+        //メソッド名：ClearImput()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：テキストボックスやコンボボックスの中身のクリア
+        ///////////////////////////////
+        private void ClearImput()
+        {
+            txbstockID.Text = string.Empty;
+            txbProductID.Text = string.Empty;
+            txbstocknum.Text = string.Empty;
         }
     }
 }

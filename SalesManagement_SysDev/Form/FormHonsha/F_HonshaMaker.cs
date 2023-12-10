@@ -43,6 +43,7 @@ namespace SalesManagement_SysDev
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
+            
 
             rdbRegister.Checked = true;
 
@@ -170,13 +171,43 @@ namespace SalesManagement_SysDev
                 MakerDataSelect();
             }
         }
-    ///////////////////////////////
-    //メソッド名：SetFormDataGridView()
-    //引　数   ：なし
-    //戻り値   ：なし
-    //機　能   ：データグリッドビューの初期設定
-    ///////////////////////////////
-    private void SetFormDataGridView()
+
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbRegister.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbUpdate.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        ///////////////////////////////
+        //メソッド名：SetFormDataGridView()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：データグリッドビューの初期設定
+        ///////////////////////////////
+        private void SetFormDataGridView()
         {
             //列を自由に設定できるように
             dgvMaker.AutoGenerateColumns = false;

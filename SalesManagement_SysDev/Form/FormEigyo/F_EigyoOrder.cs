@@ -157,6 +157,7 @@ namespace SalesManagement_SysDev
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
+            dtpOrderDate.Checked = false;
 
             rdbRegister.Checked = true;
 
@@ -339,6 +340,54 @@ namespace SalesManagement_SysDev
             f_SearchDialog.Close();
 
             OrderSearchButtonClick(false);
+        }
+
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbRegister.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbDetailRegister.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbSearch.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbUpdate.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbConfirm.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
         }
 
         ///////////////////////////////

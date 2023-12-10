@@ -448,8 +448,40 @@ namespace SalesManagement_SysDev
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
+            dtpSaleDate.Checked = false;
 
-            GetDataGridView();            
+            rdbHiddenUpdate.Checked = false;
+
+            GetDataGridView();
+        }
+
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+                cmbHidden.Enabled = false;
+                txbHidden.Enabled = false;
+            }
+            else
+            {
+                cmbHidden.Enabled = true;
+                txbHidden.Enabled = true;
+            }
+
+            if (rdbHiddenUpdate.Checked)
+            {
+                txbClientName.Enabled = false;
+                cmbSalesOfficeID.Enabled = false;
+                txbChumonID.Enabled = false;
+                dtpSaleDate.Enabled = false;
+            }
+            else
+            {
+                txbClientName.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                txbChumonID.Enabled = true;
+                dtpSaleDate.Enabled = true;
+            }
         }
 
         ///////////////////////////////
@@ -809,24 +841,6 @@ namespace SalesManagement_SysDev
 
         }
 
-        private void rdbHiddenUpdate_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdbHiddenUpdate.Checked)
-            {
-                txbClientName.Enabled = false;
-                cmbSalesOfficeID.Enabled = false;
-                txbChumonID.Enabled = false;
-                dtpSaleDate.Enabled = false;
-            }
-            else
-            {
-                txbClientName.Enabled = true;
-                cmbSalesOfficeID.Enabled = true;
-                txbChumonID.Enabled = true;
-                dtpSaleDate.Enabled = true;
-            }
-        }
-
         private void txbClientID_TextChanged(object sender, EventArgs e)
         {
             //nullの確認
@@ -854,20 +868,6 @@ namespace SalesManagement_SysDev
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-        
-        private void rdbSearch_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdbSearch.Checked)
-            {
-                cmbHidden.Enabled = false;
-                txbHidden.Enabled = false;
-            }
-            else
-            {
-                cmbHidden.Enabled = true;
-                txbHidden.Enabled = true;
-            }
         }
 
         private void pctHint_Click(object sender, EventArgs e)

@@ -237,6 +237,36 @@ namespace SalesManagement_SysDev
             ClientSearchButtonClick(false);
         }
 
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbUpdate.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbRegister.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
         ///////////////////////////////
         //メソッド名：GenerateLogAtRegistration()
         //引　数   ：操作名

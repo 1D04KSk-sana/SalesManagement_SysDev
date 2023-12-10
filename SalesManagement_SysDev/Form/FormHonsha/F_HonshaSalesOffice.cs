@@ -168,6 +168,36 @@ namespace SalesManagement_SysDev
                 SalesOfficeDataSelect();
             }
         }
+
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbRegister.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbUpdate.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
         ///////////////////////////////
         //メソッド名：ClearImput()
         //引　数   ：なし

@@ -51,9 +51,13 @@ namespace SalesManagement_SysDev
         }
         private void btnClear_Click(object sender, EventArgs e)
         {
-            //rdbSearch.Checked = false;
-
             ClearImput();
+            dtpStartDate.Checked = false;
+            dtpEndoDate.Checked = false;
+
+            rdbSearch.Checked = false;
+
+            GetDataGridView();
         }
         private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -103,6 +107,18 @@ namespace SalesManagement_SysDev
             if (rdbSearch.Checked)
             {
                 ClientDataSelect();
+            }
+        }
+
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+
+            }
+            else
+            {
+
             }
         }
         ///////////////////////////////

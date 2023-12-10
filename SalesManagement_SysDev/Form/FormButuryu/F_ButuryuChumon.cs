@@ -1055,6 +1055,8 @@ namespace SalesManagement_SysDev
         {
             ClearImput();
 
+            rdbHidden.Checked = true;
+
             GetDataGridView();
         }
 
@@ -1110,6 +1112,36 @@ namespace SalesManagement_SysDev
         private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbConfirm.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbHidden.Checked)
+            {
+                
+            }
+            else
+            {
+                
+            }
         }
     }
 }
