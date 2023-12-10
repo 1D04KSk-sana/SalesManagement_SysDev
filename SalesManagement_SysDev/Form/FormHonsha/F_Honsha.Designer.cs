@@ -34,7 +34,6 @@
             this.btnFormEmployee = new System.Windows.Forms.Button();
             this.btnFormSale = new System.Windows.Forms.Button();
             this.btnFormProdact = new System.Windows.Forms.Button();
-            this.btnFormSinghUp = new System.Windows.Forms.Button();
             this.btnFormOperationLog = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnFormSalesOffice = new System.Windows.Forms.Button();
@@ -45,7 +44,7 @@
             // btnFormClient
             // 
             this.btnFormClient.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormClient.Location = new System.Drawing.Point(707, 200);
+            this.btnFormClient.Location = new System.Drawing.Point(707, 210);
             this.btnFormClient.Margin = new System.Windows.Forms.Padding(2);
             this.btnFormClient.Name = "btnFormClient";
             this.btnFormClient.Size = new System.Drawing.Size(510, 100);
@@ -83,7 +82,7 @@
             // btnFormEmployee
             // 
             this.btnFormEmployee.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormEmployee.Location = new System.Drawing.Point(707, 500);
+            this.btnFormEmployee.Location = new System.Drawing.Point(707, 567);
             this.btnFormEmployee.Name = "btnFormEmployee";
             this.btnFormEmployee.Size = new System.Drawing.Size(510, 100);
             this.btnFormEmployee.TabIndex = 3;
@@ -95,7 +94,7 @@
             // btnFormSale
             // 
             this.btnFormSale.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormSale.Location = new System.Drawing.Point(707, 355);
+            this.btnFormSale.Location = new System.Drawing.Point(707, 390);
             this.btnFormSale.Name = "btnFormSale";
             this.btnFormSale.Size = new System.Drawing.Size(510, 100);
             this.btnFormSale.TabIndex = 4;
@@ -107,7 +106,7 @@
             // btnFormProdact
             // 
             this.btnFormProdact.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormProdact.Location = new System.Drawing.Point(707, 647);
+            this.btnFormProdact.Location = new System.Drawing.Point(707, 746);
             this.btnFormProdact.Name = "btnFormProdact";
             this.btnFormProdact.Size = new System.Drawing.Size(510, 100);
             this.btnFormProdact.TabIndex = 5;
@@ -116,22 +115,10 @@
             this.btnFormProdact.UseVisualStyleBackColor = true;
             this.btnFormProdact.Click += new System.EventHandler(this.btnFormProdact_Click);
             // 
-            // btnFormSinghUp
-            // 
-            this.btnFormSinghUp.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormSinghUp.Location = new System.Drawing.Point(707, 788);
-            this.btnFormSinghUp.Name = "btnFormSinghUp";
-            this.btnFormSinghUp.Size = new System.Drawing.Size(510, 100);
-            this.btnFormSinghUp.TabIndex = 6;
-            this.btnFormSinghUp.TabStop = false;
-            this.btnFormSinghUp.Text = "新規登録";
-            this.btnFormSinghUp.UseVisualStyleBackColor = true;
-            this.btnFormSinghUp.Click += new System.EventHandler(this.btnFormSinghUp_Click);
-            // 
             // btnFormOperationLog
             // 
             this.btnFormOperationLog.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormOperationLog.Location = new System.Drawing.Point(707, 940);
+            this.btnFormOperationLog.Location = new System.Drawing.Point(707, 917);
             this.btnFormOperationLog.Name = "btnFormOperationLog";
             this.btnFormOperationLog.Size = new System.Drawing.Size(510, 100);
             this.btnFormOperationLog.TabIndex = 7;
@@ -184,7 +171,6 @@
             this.Controls.Add(this.btnFormSalesOffice);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnFormOperationLog);
-            this.Controls.Add(this.btnFormSinghUp);
             this.Controls.Add(this.btnFormProdact);
             this.Controls.Add(this.btnFormSale);
             this.Controls.Add(this.btnFormEmployee);
@@ -207,7 +193,6 @@
         private System.Windows.Forms.Button btnFormEmployee;
         private System.Windows.Forms.Button btnFormSale;
         private System.Windows.Forms.Button btnFormProdact;
-        private System.Windows.Forms.Button btnFormSinghUp;
         private System.Windows.Forms.Button btnFormOperationLog;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnFormSalesOffice;

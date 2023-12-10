@@ -185,6 +185,7 @@
             // dtpStartDate
             // 
             this.dtpStartDate.CalendarFont = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.dtpStartDate.Checked = false;
             this.dtpStartDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.dtpStartDate.Location = new System.Drawing.Point(1128, 313);
             this.dtpStartDate.Margin = new System.Windows.Forms.Padding(2);
@@ -196,6 +197,7 @@
             // 
             // dtpEndoDate
             // 
+            this.dtpEndoDate.Checked = false;
             this.dtpEndoDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.dtpEndoDate.Location = new System.Drawing.Point(1391, 313);
             this.dtpEndoDate.Margin = new System.Windows.Forms.Padding(2);

@@ -48,9 +48,187 @@ namespace SalesManagement_SysDev
 
         private void F_Login_Load(object sender, EventArgs e)
         {
+            FormLoadIvent();
+        }
+
+        private void btnclose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void pctPassEye_Click(object sender, EventArgs e)
+        {
+            if (intPassEye == 0)
+            {
+                txbSinghUpPass.PasswordChar = '*';
+                pctPassEye.Image = Properties.Resources.PassEyeNot;
+
+                intPassEye = 1;
+            }
+            else if (intPassEye == 1)
+            {
+                txbSinghUpPass.PasswordChar = '\0';
+                pctPassEye.Image = Properties.Resources.PassEye;
+
+                intPassEye = 0;
+            }
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            //ログイン入力データの形式チェック
+            if (!GetValidDataAtLogin())
+            {
+                return;
+            }
+
+            if (!CheckIDPass())
+            {
+                return;
+            }
+
+            intEmployeeID = Employee.EmID;
+            intPositionID = Employee.PoID;
+            intSalesOfficeID = Employee.SoID;
+
+            LoginOther();
+
+            if (intPositionID == 1)
+            {
+                F_Honsha f_Honsha = new F_Honsha();
+
+                f_Honsha.Owner = this;
+                f_Honsha.FormClosed += ChildForm_FormClosed;
+                f_Honsha.Show();
+            }
+            if (intPositionID == 2)
+            {
+                F_Eigyo f_Eigyo = new F_Eigyo();
+
+                f_Eigyo.Owner = this;
+                f_Eigyo.FormClosed += ChildForm_FormClosed;
+                f_Eigyo.Show();
+            }
+            if (intPositionID == 3)
+            {
+                F_Buturyu f_Buturyu = new F_Buturyu();
+
+                f_Buturyu.Owner = this;
+                f_Buturyu.FormClosed += ChildForm_FormClosed;
+                f_Buturyu.Show();
+            }
+
+            this.Opacity = 0;
+        }
+
+        private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Opacity = 1;
+
+            FormLoadIvent();
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtLogin()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：ログイン入力データの形式チェック
+        //          ：エラーがない場合True
+        //          ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtLogin()
+        {
+            //社員IDの適否
+            if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
+            {
+                //社員IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbEmployeeID.Text.Trim()))
+                {
+                    MessageBox.Show("社員IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+                //社員IDの存在チェック
+                if (!employeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    //"存在しない社員IDです"と言うわけにもいかないので"ログインに失敗しました"にしてる
+                    MessageBox.Show("パスワード・社員IDが違います", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("社員IDを入力してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbEmployeeID.Focus();
+                return false;
+            }
+
+            //パスワードの適否
+            if (!String.IsNullOrEmpty(txbSinghUpPass.Text.Trim()))
+            {
+                //パスワードの数字チェック
+                if (!dataInputCheck.CheckHalfAlphabetNumeric(txbSinghUpPass.Text.Trim()))
+                {
+                    MessageBox.Show("パスワードは全て英数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSinghUpPass.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("パスワードを入力してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbSinghUpPass.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        ///////////////////////////////
+        //メソッド名：CheckIDPass()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：ログイン入力データの形式チェック
+        //          ：エラーがない場合True
+        //          ：エラーがある場合False
+        ///////////////////////////////
+        private bool CheckIDPass()
+        {
+            List<M_Employee> listEmployee = employeeDataAccess.GetEmployeeDspData();
+
+            try
+            {
+                Employee = listEmployee.Single(x => x.EmID == int.Parse(txbEmployeeID.Text.Trim()));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (Employee.EmPassword != PasswordHash.CreatePasswordHash(txbSinghUpPass.Text.Trim()))
+            {
+                MessageBox.Show("パスワード・社員IDが違います", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+        ///////////////////////////////
+        //メソッド名：FormLoadIvent()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：フォームロード時の動作をまとめたもの
+        ///////////////////////////////
+        private void FormLoadIvent()
+        {
+            txbEmployeeID.Text = "";
+            txbSinghUpPass.Text = "";
+
             var context = new SalesManagement_DevContext();
 
-            if (context.T_LoginSaves.Count() != 0) 
+            if (context.T_LoginSaves.Count() != 0)
             {
                 var LoginSave = loginSaveDataAccess.GetSaveLogData();
 
@@ -1007,168 +1185,6 @@ namespace SalesManagement_SysDev
             }
 
             context.Dispose();
-        }
-
-        private void btnclose_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void pctPassEye_Click(object sender, EventArgs e)
-        {
-            if (intPassEye == 0)
-            {
-                txbSinghUpPass.PasswordChar = '*';
-                pctPassEye.Image = Properties.Resources.PassEyeNot;
-
-                intPassEye = 1;
-            }
-            else if (intPassEye == 1)
-            {
-                txbSinghUpPass.PasswordChar = '\0';
-                pctPassEye.Image = Properties.Resources.PassEye;
-
-                intPassEye = 0;
-            }
-        }
-
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-            //ログイン入力データの形式チェック
-            if (!GetValidDataAtLogin())
-            {
-                return;
-            }
-
-            if (!CheckIDPass())
-            {
-                return;
-            }
-
-            intEmployeeID = Employee.EmID;
-            intPositionID = Employee.PoID;
-            intSalesOfficeID = Employee.SoID;
-
-            LoginOther();
-
-            if (intPositionID == 1)
-            {
-                F_Honsha f_Honsha = new F_Honsha();
-
-                f_Honsha.Owner = this;
-                f_Honsha.FormClosed += ChildForm_FormClosed;
-                f_Honsha.Show();
-            }
-            if (intPositionID == 2)
-            {
-                F_Eigyo f_Eigyo = new F_Eigyo();
-
-                f_Eigyo.Owner = this;
-                f_Eigyo.FormClosed += ChildForm_FormClosed;
-                f_Eigyo.Show();
-            }
-            if (intPositionID == 3)
-            {
-                F_Buturyu f_Buturyu = new F_Buturyu();
-
-                f_Buturyu.Owner = this;
-                f_Buturyu.FormClosed += ChildForm_FormClosed;
-                f_Buturyu.Show();
-            }
-
-            this.Opacity = 0;
-        }
-
-        private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            this.Opacity = 1;
-        }
-
-        ///////////////////////////////
-        //メソッド名：GetValidDataAtLogin()
-        //引　数   ：なし
-        //戻り値   ：true or false
-        //機　能   ：ログイン入力データの形式チェック
-        //          ：エラーがない場合True
-        //          ：エラーがある場合False
-        ///////////////////////////////
-        private bool GetValidDataAtLogin()
-        {
-            //社員IDの適否
-            if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
-            {
-                //社員IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbEmployeeID.Text.Trim()))
-                {
-                    MessageBox.Show("社員IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbEmployeeID.Focus();
-                    return false;
-                }
-                //社員IDの存在チェック
-                if (!employeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
-                {
-                    //"存在しない社員IDです"と言うわけにもいかないので"ログインに失敗しました"にしてる
-                    MessageBox.Show("パスワード・社員IDが違います", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbEmployeeID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("社員IDを入力してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbEmployeeID.Focus();
-                return false;
-            }
-
-            //パスワードの適否
-            if (!String.IsNullOrEmpty(txbSinghUpPass.Text.Trim()))
-            {
-                //パスワードの数字チェック
-                if (!dataInputCheck.CheckHalfAlphabetNumeric(txbSinghUpPass.Text.Trim()))
-                {
-                    MessageBox.Show("パスワードは全て英数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSinghUpPass.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("パスワードを入力してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbSinghUpPass.Focus();
-                return false;
-            }
-
-            return true;
-        }
-
-        ///////////////////////////////
-        //メソッド名：CheckIDPass()
-        //引　数   ：なし
-        //戻り値   ：true or false
-        //機　能   ：ログイン入力データの形式チェック
-        //          ：エラーがない場合True
-        //          ：エラーがある場合False
-        ///////////////////////////////
-        private bool CheckIDPass()
-        {
-            List<M_Employee> listEmployee = employeeDataAccess.GetEmployeeDspData();
-
-            try
-            {
-                Employee = listEmployee.Single(x => x.EmID == int.Parse(txbEmployeeID.Text.Trim()));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            if (Employee.EmPassword != PasswordHash.CreatePasswordHash(txbSinghUpPass.Text.Trim()))
-            {
-                MessageBox.Show("パスワード・社員IDが違います", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            return true;
         }
 
         ///////////////////////////////

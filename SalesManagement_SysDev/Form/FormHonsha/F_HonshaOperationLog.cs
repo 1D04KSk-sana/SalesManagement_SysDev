@@ -50,7 +50,7 @@ namespace SalesManagement_SysDev
         }
         private void btnClear_Click(object sender, EventArgs e)
         {
-            rdbSearch.Checked = false;
+            //rdbSearch.Checked = false;
 
             ClearImput();
         }
@@ -221,21 +221,22 @@ namespace SalesManagement_SysDev
             //操作ログのデータを全取得
             listAllLog = LogDataAccess.GetLogData();
 
-            //表示用の操作ログ作成
-            List<T_OperationLog> listViewLog = new List<T_OperationLog>();
+            ////表示用の操作ログ作成
+            //List<T_OperationLog> listViewLog = new List<T_OperationLog>();
 
-            //検索ラヂオボタンがチェックされているとき
-            if (rdbSearch.Checked)
-            {
-                //表示している（検索結果）のデータをとってくる
-                listViewLog = listLog;
-            }
-            else
-            {
-                //全データをとってくる
-                listViewLog = listAllLog;
-            }
-            return listViewLog;
+            ////検索ラヂオボタンがチェックされているとき
+            //if (rdbSearch.Checked)
+            //{
+            //    //表示している（検索結果）のデータをとってくる
+            //    listViewLog = listLog;
+            //}
+            //else
+            //{
+            //    //全データをとってくる
+            //    listViewLog = listAllLog;
+            //}
+
+            return listAllLog;
         }
         ///////////////////////////////
         //メソッド名：ClearImput()
