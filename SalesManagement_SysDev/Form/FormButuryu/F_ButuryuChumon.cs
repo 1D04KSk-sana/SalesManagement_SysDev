@@ -473,6 +473,8 @@ namespace SalesManagement_SysDev
 
             int intSearchCount = listChumon.Count;
 
+            txbNumPage.Text = "1";
+
             // 顧客抽出結果表示
             GetDataGridView();
 
@@ -1034,8 +1036,6 @@ namespace SalesManagement_SysDev
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
-
-            rdbSearch.Checked = true;
 
             GetDataGridView();
         }

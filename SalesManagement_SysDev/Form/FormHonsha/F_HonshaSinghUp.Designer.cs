@@ -30,6 +30,7 @@
         {
             this.lblSinghup = new System.Windows.Forms.Label();
             this.pnlHonsha = new System.Windows.Forms.Panel();
+            this.btnClose = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.cmbSalesOfficeID = new System.Windows.Forms.ComboBox();
@@ -47,7 +48,6 @@
             this.dtpHireDate = new System.Windows.Forms.DateTimePicker();
             this.txbEmployeeID = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
             this.pnlHonsha.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,16 +56,16 @@
             this.lblSinghup.AutoSize = true;
             this.lblSinghup.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblSinghup.ForeColor = System.Drawing.Color.White;
-            this.lblSinghup.Location = new System.Drawing.Point(760, 28);
+            this.lblSinghup.Location = new System.Drawing.Point(826, 44);
             this.lblSinghup.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSinghup.Name = "lblSinghup";
-            this.lblSinghup.Size = new System.Drawing.Size(288, 64);
+            this.lblSinghup.Size = new System.Drawing.Size(287, 64);
             this.lblSinghup.TabIndex = 23;
             this.lblSinghup.Text = "新規登録";
             // 
             // pnlHonsha
             // 
-            this.pnlHonsha.BackColor = System.Drawing.Color.Lime;
+            this.pnlHonsha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(255)))), ((int)(((byte)(122)))));
             this.pnlHonsha.Controls.Add(this.btnClose);
             this.pnlHonsha.Controls.Add(this.lblSinghup);
             this.pnlHonsha.Controls.Add(this.btnReturn);
@@ -74,6 +74,18 @@
             this.pnlHonsha.Name = "pnlHonsha";
             this.pnlHonsha.Size = new System.Drawing.Size(1920, 150);
             this.pnlHonsha.TabIndex = 54;
+            // 
+            // btnClose
+            // 
+            this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 30F);
+            this.btnClose.Location = new System.Drawing.Point(1674, 38);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(200, 80);
+            this.btnClose.TabIndex = 60;
+            this.btnClose.Text = "閉じる";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnReturn
             // 
@@ -218,6 +230,7 @@
             // 
             // cmbPositionID
             // 
+            this.cmbPositionID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPositionID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbPositionID.ForeColor = System.Drawing.Color.Black;
             this.cmbPositionID.FormattingEnabled = true;
@@ -254,18 +267,6 @@
             this.label1.Size = new System.Drawing.Size(80, 24);
             this.label1.TabIndex = 59;
             this.label1.Text = "社員ID";
-            // 
-            // btnClose
-            // 
-            this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 30F);
-            this.btnClose.Location = new System.Drawing.Point(1674, 38);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(200, 80);
-            this.btnClose.TabIndex = 60;
-            this.btnClose.Text = "閉じる";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // F_HonshaSinghUp
             // 

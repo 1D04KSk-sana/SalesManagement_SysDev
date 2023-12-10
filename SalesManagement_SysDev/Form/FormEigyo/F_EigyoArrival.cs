@@ -848,6 +848,8 @@ namespace SalesManagement_SysDev
 
             int intSearchCount = listArrival.Count;
 
+            txbNumPage.Text = "1";
+
             // 入荷抽出結果表示
             GetDataGridView();
 

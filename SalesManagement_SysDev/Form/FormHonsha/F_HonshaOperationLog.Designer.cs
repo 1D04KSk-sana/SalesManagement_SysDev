@@ -73,10 +73,10 @@
             this.lblOperationLog.AutoSize = true;
             this.lblOperationLog.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblOperationLog.ForeColor = System.Drawing.Color.White;
-            this.lblOperationLog.Location = new System.Drawing.Point(754, 26);
+            this.lblOperationLog.Location = new System.Drawing.Point(739, 39);
             this.lblOperationLog.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOperationLog.Name = "lblOperationLog";
-            this.lblOperationLog.Size = new System.Drawing.Size(385, 64);
+            this.lblOperationLog.Size = new System.Drawing.Size(384, 64);
             this.lblOperationLog.TabIndex = 24;
             this.lblOperationLog.Text = "ログ管理画面";
             // 
@@ -96,7 +96,7 @@
             // btnClose
             // 
             this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClose.Location = new System.Drawing.Point(1748, 20);
+            this.btnClose.Location = new System.Drawing.Point(1733, 33);
             this.btnClose.Margin = new System.Windows.Forms.Padding(2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(160, 70);

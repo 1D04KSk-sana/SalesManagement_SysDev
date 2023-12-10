@@ -348,7 +348,7 @@
             // 
             // pnlHonsha
             // 
-            this.pnlHonsha.BackColor = System.Drawing.Color.Lime;
+            this.pnlHonsha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(255)))), ((int)(((byte)(122)))));
             this.pnlHonsha.Controls.Add(this.lblHonsha);
             this.pnlHonsha.Controls.Add(this.btnClose);
             this.pnlHonsha.Controls.Add(this.btnReturn);
@@ -362,7 +362,7 @@
             this.lblHonsha.AutoSize = true;
             this.lblHonsha.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblHonsha.ForeColor = System.Drawing.Color.White;
-            this.lblHonsha.Location = new System.Drawing.Point(788, 57);
+            this.lblHonsha.Location = new System.Drawing.Point(798, 41);
             this.lblHonsha.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblHonsha.Name = "lblHonsha";
             this.lblHonsha.Size = new System.Drawing.Size(417, 64);

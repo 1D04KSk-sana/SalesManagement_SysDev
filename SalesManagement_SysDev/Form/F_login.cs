@@ -46,45 +46,26 @@ namespace SalesManagement_SysDev
             InitializeComponent();
         }
 
-        private void btn_CleateDabase_Click(object sender, EventArgs e)
+        private void F_Login_Load(object sender, EventArgs e)
         {
-            //データベースの生成を行います．
-            //再度実行する場合には，必ずデータベースの削除をしてから実行してください．
+            var context = new SalesManagement_DevContext();
 
-            SalesManagement_DevContext context = new SalesManagement_DevContext();
-
-            List<M_Position> po = new List<M_Position>();
-
+            if (context.T_LoginSaves.Count() != 0) 
             {
-                po.Add(new M_Position()
-                {
-                    PoName = "管理者",
-                    PoFlag = 0,
-                });
-                po.Add(new M_Position()
-                {
-                    PoName = "営業",
-                    PoFlag = 0,
-                });
-                po.Add(new M_Position()
-                {
-                    PoName = "物流",
-                    PoFlag = 0,
-                });
-                context.M_Positions.AddRange(po);
-                context.SaveChanges();
+                var LoginSave = loginSaveDataAccess.GetSaveLogData();
+
+                txbEmployeeID.Text = LoginSave.SaveEmployeeID.ToString();
+                txbSinghUpPass.Text = PasswordHash.ReversePasswordHash(LoginSave.SaveSinghUpPass);
+
+                chbPassSave.Checked = true;
             }
 
-            context.Dispose();
+            if (context.T_ArrivalDetails.Count() != 0)
+            {
+                return;
+            }
 
-            MessageBox.Show("テーブル作成完了");
-        }
-
-        private void btn_InsertSampleData_Click(object sender, EventArgs e)
-        {
-            SalesManagement_DevContext context = new SalesManagement_DevContext();
-
-            List<M_Position> po = context.M_Positions.OrderBy(x => x.PoID).ToList();
+            List<M_Position> po = new List<M_Position>();
             List<M_Maker> ma = new List<M_Maker>();
             List<M_SalesOffice> so = new List<M_SalesOffice>();
             List<M_Client> cl = new List<M_Client>();
@@ -109,7 +90,25 @@ namespace SalesManagement_SysDev
             List<T_ArrivalDetail> ard = new List<T_ArrivalDetail>();
 
 
-
+            {
+                po.Add(new M_Position()
+                {
+                    PoName = "管理者",
+                    PoFlag = 0,
+                });
+                po.Add(new M_Position()
+                {
+                    PoName = "営業",
+                    PoFlag = 0,
+                });
+                po.Add(new M_Position()
+                {
+                    PoName = "物流",
+                    PoFlag = 0,
+                });
+                context.M_Positions.AddRange(po);
+                context.SaveChanges();
+            }
             {
                 ma.Add(new M_Maker()
                 {
@@ -793,7 +792,7 @@ namespace SalesManagement_SysDev
                     M_Client = cl[1],
                     T_Chumon = ch[0],
                     M_SalesOffice = so[0],
-                    SaDate = new DateTime(2023 , 10 , 27),
+                    SaDate = new DateTime(2023, 10, 27),
                     SaFlag = 0,
                 });
                 sa.Add(new T_Sale()
@@ -1008,21 +1007,6 @@ namespace SalesManagement_SysDev
             }
 
             context.Dispose();
-
-            MessageBox.Show("サンプルデータ登録完了");
-        }
-
-        private void F_Login_Load(object sender, EventArgs e)
-        {
-            var context = new SalesManagement_DevContext();
-
-            if (context.T_LoginSaves.Count() != 0) 
-            {
-                var LoginSave = loginSaveDataAccess.GetSaveLogData();
-
-                txbEmployeeID.Text = LoginSave.SaveEmployeeID.ToString();
-                txbSinghUpPass.Text = PasswordHash.ReversePasswordHash(LoginSave.SaveSinghUpPass);
-            }
         }
 
         private void btnclose_Click(object sender, EventArgs e)

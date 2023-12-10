@@ -54,6 +54,7 @@
             this.cmbHidden = new System.Windows.Forms.ComboBox();
             this.btnClear = new System.Windows.Forms.Button();
             this.pnlHonsha = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.lblClient = new System.Windows.Forms.Label();
             this.cmbView = new System.Windows.Forms.ComboBox();
             this.txbPageSize = new System.Windows.Forms.TextBox();
@@ -65,7 +66,6 @@
             this.btnPageMin = new System.Windows.Forms.Button();
             this.txbNumPage = new System.Windows.Forms.TextBox();
             this.lblNumPage = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             this.pnlHonsha.SuspendLayout();
@@ -346,7 +346,7 @@
             // 
             // pnlHonsha
             // 
-            this.pnlHonsha.BackColor = System.Drawing.Color.Lime;
+            this.pnlHonsha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(255)))), ((int)(((byte)(112)))));
             this.pnlHonsha.Controls.Add(this.button1);
             this.pnlHonsha.Controls.Add(this.lblClient);
             this.pnlHonsha.Controls.Add(this.btnReturn);
@@ -356,6 +356,18 @@
             this.pnlHonsha.Size = new System.Drawing.Size(1920, 150);
             this.pnlHonsha.TabIndex = 22;
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button1.Location = new System.Drawing.Point(1725, 36);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(160, 70);
+            this.button1.TabIndex = 26;
+            this.button1.TabStop = false;
+            this.button1.Text = "閉じる";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // lblClient
             // 
             this.lblClient.AutoSize = true;
@@ -364,7 +376,7 @@
             this.lblClient.Location = new System.Drawing.Point(720, 46);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(418, 64);
+            this.lblClient.Size = new System.Drawing.Size(417, 64);
             this.lblClient.TabIndex = 23;
             this.lblClient.Text = "顧客管理画面";
             // 
@@ -484,18 +496,6 @@
             this.lblNumPage.Size = new System.Drawing.Size(64, 22);
             this.lblNumPage.TabIndex = 32;
             this.lblNumPage.Text = "ページ";
-            // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(1725, 36);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(160, 70);
-            this.button1.TabIndex = 26;
-            this.button1.TabStop = false;
-            this.button1.Text = "閉じる";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // F_HonshaClient
             // 

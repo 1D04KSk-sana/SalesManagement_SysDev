@@ -79,13 +79,13 @@ namespace SalesManagement_SysDev
             this.pnlButuryu.Controls.Add(this.btnReturn);
             this.pnlButuryu.Location = new System.Drawing.Point(1, 3);
             this.pnlButuryu.Name = "pnlButuryu";
-            this.pnlButuryu.Size = new System.Drawing.Size(1920, 125);
+            this.pnlButuryu.Size = new System.Drawing.Size(1920, 150);
             this.pnlButuryu.TabIndex = 0;
             // 
             // pctHint
             // 
             this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
-            this.pctHint.Location = new System.Drawing.Point(1643, 30);
+            this.pctHint.Location = new System.Drawing.Point(1632, 43);
             this.pctHint.Name = "pctHint";
             this.pctHint.Size = new System.Drawing.Size(60, 60);
             this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -109,7 +109,7 @@ namespace SalesManagement_SysDev
             // 
             this.btnClose.BackColor = System.Drawing.Color.White;
             this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClose.Location = new System.Drawing.Point(1748, 24);
+            this.btnClose.Location = new System.Drawing.Point(1737, 37);
             this.btnClose.Margin = new System.Windows.Forms.Padding(2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(160, 70);
@@ -123,7 +123,7 @@ namespace SalesManagement_SysDev
             // 
             this.btnReturn.BackColor = System.Drawing.Color.White;
             this.btnReturn.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnReturn.Location = new System.Drawing.Point(10, 24);
+            this.btnReturn.Location = new System.Drawing.Point(44, 37);
             this.btnReturn.Margin = new System.Windows.Forms.Padding(2);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(160, 70);
@@ -137,7 +137,7 @@ namespace SalesManagement_SysDev
             // 
             this.btnClear.BackColor = System.Drawing.Color.Cyan;
             this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClear.Location = new System.Drawing.Point(1557, 155);
+            this.btnClear.Location = new System.Drawing.Point(1557, 170);
             this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(160, 70);
@@ -231,7 +231,7 @@ namespace SalesManagement_SysDev
             // 
             this.lblClientName.AutoSize = true;
             this.lblClientName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientName.Location = new System.Drawing.Point(769, 350);
+            this.lblClientName.Location = new System.Drawing.Point(756, 350);
             this.lblClientName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(82, 24);
@@ -286,7 +286,7 @@ namespace SalesManagement_SysDev
             // 
             this.btnDone.BackColor = System.Drawing.Color.Red;
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnDone.Location = new System.Drawing.Point(1738, 155);
+            this.btnDone.Location = new System.Drawing.Point(1738, 170);
             this.btnDone.Margin = new System.Windows.Forms.Padding(2);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(160, 70);
@@ -305,7 +305,7 @@ namespace SalesManagement_SysDev
             this.cmbView.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbView.Location = new System.Drawing.Point(1184, 170);
+            this.cmbView.Location = new System.Drawing.Point(1184, 185);
             this.cmbView.Margin = new System.Windows.Forms.Padding(2);
             this.cmbView.Name = "cmbView";
             this.cmbView.Size = new System.Drawing.Size(360, 43);
@@ -429,12 +429,12 @@ namespace SalesManagement_SysDev
             // 
             this.dgvChumon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvChumon.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.dgvChumon.Location = new System.Drawing.Point(15, 545);
+            this.dgvChumon.Location = new System.Drawing.Point(15, 500);
             this.dgvChumon.Margin = new System.Windows.Forms.Padding(2);
             this.dgvChumon.Name = "dgvChumon";
             this.dgvChumon.RowHeadersWidth = 51;
             this.dgvChumon.RowTemplate.Height = 24;
-            this.dgvChumon.Size = new System.Drawing.Size(1190, 480);
+            this.dgvChumon.Size = new System.Drawing.Size(1190, 525);
             this.dgvChumon.TabIndex = 76;
             this.dgvChumon.TabStop = false;
             this.dgvChumon.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChumon_CellClick);
@@ -443,12 +443,12 @@ namespace SalesManagement_SysDev
             // 
             this.dgvChumonDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvChumonDetail.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.dgvChumonDetail.Location = new System.Drawing.Point(1209, 545);
+            this.dgvChumonDetail.Location = new System.Drawing.Point(1209, 500);
             this.dgvChumonDetail.Margin = new System.Windows.Forms.Padding(2);
             this.dgvChumonDetail.Name = "dgvChumonDetail";
             this.dgvChumonDetail.RowHeadersWidth = 51;
             this.dgvChumonDetail.RowTemplate.Height = 24;
-            this.dgvChumonDetail.Size = new System.Drawing.Size(700, 480);
+            this.dgvChumonDetail.Size = new System.Drawing.Size(700, 525);
             this.dgvChumonDetail.TabIndex = 77;
             this.dgvChumonDetail.TabStop = false;
             this.dgvChumonDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChumonDetail_CellClick);
@@ -483,17 +483,17 @@ namespace SalesManagement_SysDev
             // txbHidden
             // 
             this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbHidden.Location = new System.Drawing.Point(307, 502);
+            this.txbHidden.Location = new System.Drawing.Point(865, 430);
             this.txbHidden.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txbHidden.Name = "txbHidden";
-            this.txbHidden.Size = new System.Drawing.Size(815, 31);
+            this.txbHidden.Size = new System.Drawing.Size(711, 31);
             this.txbHidden.TabIndex = 81;
             // 
             // lblClientHidden
             // 
             this.lblClientHidden.AutoSize = true;
             this.lblClientHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.lblClientHidden.Location = new System.Drawing.Point(156, 505);
+            this.lblClientHidden.Location = new System.Drawing.Point(708, 433);
             this.lblClientHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClientHidden.Name = "lblClientHidden";
             this.lblClientHidden.Size = new System.Drawing.Size(130, 24);

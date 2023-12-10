@@ -952,6 +952,8 @@ namespace SalesManagement_SysDev
 
             int intSearchCount = listWarehousing.Count;
 
+            txbNumPage.Text = "1";
+
             // 入庫抽出結果表示
             GetDataGridView();
 

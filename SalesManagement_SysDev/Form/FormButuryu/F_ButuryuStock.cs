@@ -726,5 +726,10 @@ namespace SalesManagement_SysDev
         {
             Application.Exit();
         }
+
+        private void btnPageSize_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
