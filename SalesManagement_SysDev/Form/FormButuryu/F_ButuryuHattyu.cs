@@ -1456,6 +1456,8 @@ namespace SalesManagement_SysDev
 
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+
             //データグリッドビューのデータ取得
             GetDataGridView();
         }
