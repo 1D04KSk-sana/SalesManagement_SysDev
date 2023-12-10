@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SalesManagement_SysDev
 {
@@ -871,6 +870,15 @@ namespace SalesManagement_SysDev
                 cmbHidden.Enabled = true;
                 txbHidden.Enabled = true;
             }
+        }
+
+        private void pctHint_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://docs.google.com/document/d/1-nFWLxjJ3gj2gqEa9VjvKW3R5T7nG_0J/edit=true",
+                UseShellExecute = true
+            });
         }
     }
 }

@@ -72,14 +72,17 @@
             this.cmbShipmentHidden = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.pnlEigyo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShipmentDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShipment)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlEigyo
             // 
             this.pnlEigyo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(181)))), ((int)(((byte)(128)))));
+            this.pnlEigyo.Controls.Add(this.pctHint);
             this.pnlEigyo.Controls.Add(this.btnClose);
             this.pnlEigyo.Controls.Add(this.btnReturn);
             this.pnlEigyo.Controls.Add(this.lblWarehousing);
@@ -573,6 +576,17 @@
             this.label12.TabIndex = 173;
             this.label12.Text = "非表示理由";
             // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1621, 44);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 177;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            // 
             // F_EigyoShipment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -626,6 +640,7 @@
             this.pnlEigyo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShipmentDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShipment)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -677,5 +692,6 @@
         private System.Windows.Forms.ComboBox cmbShipmentHidden;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.PictureBox pctHint;
     }
 }

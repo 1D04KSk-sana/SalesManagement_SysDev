@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -581,6 +582,15 @@ namespace SalesManagement_SysDev
             txbstockID.Text = dgvStockView[0, dgvStockView.CurrentCellAddress.Y].Value.ToString();
             txbProductID.Text =dictionaryProdact.FirstOrDefault(x=>x.Value== dgvStockView[1, dgvStockView.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbstocknum.Text = dgvStockView[2, dgvStockView.CurrentCellAddress.Y].Value.ToString();
+        }
+
+        private void pctHint_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://docs.google.com/document/d/1x5e-cyn25BCmNneXa8iYbhvX_WtcsflB/edit=true",
+                UseShellExecute = true
+            });
         }
     }
 }

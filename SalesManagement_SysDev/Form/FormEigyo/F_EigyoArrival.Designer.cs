@@ -71,9 +71,11 @@
             this.label10 = new System.Windows.Forms.Label();
             this.txbClientName = new System.Windows.Forms.TextBox();
             this.cmbHidden = new System.Windows.Forms.ComboBox();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.pnlEigyo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArrivalDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArrival)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
             // btnClose
@@ -105,6 +107,7 @@
             // pnlEigyo
             // 
             this.pnlEigyo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(181)))), ((int)(((byte)(128)))));
+            this.pnlEigyo.Controls.Add(this.pctHint);
             this.pnlEigyo.Controls.Add(this.btnClose);
             this.pnlEigyo.Controls.Add(this.btnReturn);
             this.pnlEigyo.Controls.Add(this.lblWarehousing);
@@ -122,7 +125,7 @@
             this.lblWarehousing.Location = new System.Drawing.Point(729, 44);
             this.lblWarehousing.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWarehousing.Name = "lblWarehousing";
-            this.lblWarehousing.Size = new System.Drawing.Size(417, 64);
+            this.lblWarehousing.Size = new System.Drawing.Size(418, 64);
             this.lblWarehousing.TabIndex = 24;
             this.lblWarehousing.Text = "入荷管理画面";
             // 
@@ -598,6 +601,17 @@
             this.cmbHidden.TabIndex = 153;
             this.cmbHidden.TabStop = false;
             // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1621, 44);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 154;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            // 
             // F_EigyoArrival
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -651,6 +665,7 @@
             this.pnlEigyo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArrivalDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArrival)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -701,5 +716,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txbClientName;
         private System.Windows.Forms.ComboBox cmbHidden;
+        private System.Windows.Forms.PictureBox pctHint;
     }
 }

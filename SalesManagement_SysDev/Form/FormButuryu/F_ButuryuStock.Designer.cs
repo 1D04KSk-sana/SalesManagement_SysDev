@@ -58,14 +58,17 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.rdbRegister = new System.Windows.Forms.RadioButton();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.pnlButuryu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlButuryu
             // 
             this.pnlButuryu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(136)))), ((int)(((byte)(179)))));
+            this.pnlButuryu.Controls.Add(this.pctHint);
             this.pnlButuryu.Controls.Add(this.btnClose);
             this.pnlButuryu.Controls.Add(this.lblClient);
             this.pnlButuryu.Controls.Add(this.btnReturn);
@@ -278,7 +281,6 @@
             this.btnPageSize.TabStop = false;
             this.btnPageSize.Text = "行数変更";
             this.btnPageSize.UseVisualStyleBackColor = false;
-            this.btnPageSize.Click += new System.EventHandler(this.btnPageSize_Click);
             // 
             // txbPageSize
             // 
@@ -426,6 +428,17 @@
             this.rdbSearch.TabIndex = 28;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
+            //
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1623, 46);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 98;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
             // 
             // F_ButuryuStock
             // 
@@ -470,6 +483,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -507,5 +521,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RadioButton rdbRegister;
         private System.Windows.Forms.RadioButton rdbSearch;
+        private System.Windows.Forms.PictureBox pctHint;
     }
 }

@@ -54,8 +54,10 @@
             this.cmbView = new System.Windows.Forms.ComboBox();
             this.txbProductName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockView)).BeginInit();
             this.pnlEigyo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
             // txbstocknum
@@ -234,6 +236,7 @@
             // pnlEigyo
             // 
             this.pnlEigyo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(181)))), ((int)(((byte)(128)))));
+            this.pnlEigyo.Controls.Add(this.pctHint);
             this.pnlEigyo.Controls.Add(this.lblStockView);
             this.pnlEigyo.Controls.Add(this.btnReturn);
             this.pnlEigyo.Controls.Add(this.btnClose);
@@ -384,6 +387,17 @@
             this.label3.Text = "商品名";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1633, 54);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 93;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            // 
             // F_EigyoStockView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -422,6 +436,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockView)).EndInit();
             this.pnlEigyo.ResumeLayout(false);
             this.pnlEigyo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -454,5 +469,6 @@
         private System.Windows.Forms.ComboBox cmbView;
         private System.Windows.Forms.TextBox txbProductName;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.PictureBox pctHint;
     }
 }
