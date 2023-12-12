@@ -635,15 +635,11 @@ namespace SalesManagement_SysDev
             dgvChumonDetail.Columns.Add("ChDetailID", "注文詳細ID");
             dgvChumonDetail.Columns.Add("PrID", "商品ID");
             dgvChumonDetail.Columns.Add("OrQuantity", "数量");
-            dgvChumonDetail.Columns.Add("OrTotalPrice", "合計金額");
-
 
             dgvChumonDetail.Columns["ChID"].Width = 150;
             dgvChumonDetail.Columns["ChDetailID"].Width = 150;
             dgvChumonDetail.Columns["PrID"].Width = 150;
-            dgvChumonDetail.Columns["OrQuantity"].Width = 100;
-            dgvChumonDetail.Columns["OrTotalPrice"].Width = 150;
-            
+            dgvChumonDetail.Columns["OrQuantity"].Width = 100;            
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvChumonDetail.Columns)

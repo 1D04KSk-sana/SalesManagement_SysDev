@@ -857,6 +857,7 @@ namespace SalesManagement_SysDev
             {
                 ord.Add(new T_OrderDetail()
                 {
+                    OrDetailID = 1,
                     T_Order = or[0],
                     M_Product = pr[2],
                     OrQuantity = 40,
@@ -864,6 +865,7 @@ namespace SalesManagement_SysDev
                 });
                 ord.Add(new T_OrderDetail()
                 {
+                    OrDetailID = 2,
                     T_Order = or[0],
                     M_Product = pr[9],
                     OrQuantity = 30,
@@ -871,6 +873,7 @@ namespace SalesManagement_SysDev
                 });
                 ord.Add(new T_OrderDetail()
                 {
+                    OrDetailID = 1,
                     T_Order = or[1],
                     M_Product = pr[3],
                     OrQuantity = 20,
@@ -878,6 +881,7 @@ namespace SalesManagement_SysDev
                 });
                 ord.Add(new T_OrderDetail()
                 {
+                    OrDetailID = 2,
                     T_Order = or[1],
                     M_Product = pr[4],
                     OrQuantity = 15,
@@ -885,6 +889,7 @@ namespace SalesManagement_SysDev
                 });
                 ord.Add(new T_OrderDetail()
                 {
+                    OrDetailID = 3,
                     T_Order = or[1],
                     M_Product = pr[5],
                     OrQuantity = 15,
@@ -901,16 +906,6 @@ namespace SalesManagement_SysDev
                     M_Client = cl[1],
                     T_Order = or[0],
                     ChDate = new DateTime(2020, 12, 11),
-                    ChStateFlag = 1,
-                    ChFlag = 0,
-                });
-                ch.Add(new T_Chumon()
-                {
-                    M_SalesOffice = so[1],
-                    M_Employee = em[116],
-                    M_Client = cl[2],
-                    T_Order = or[1],
-                    ChDate = new DateTime(2020, 11, 11),
                     ChStateFlag = 1,
                     ChFlag = 0,
                 });
