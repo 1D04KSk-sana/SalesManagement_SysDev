@@ -34,6 +34,7 @@
             this.txbPageSize = new System.Windows.Forms.TextBox();
             this.cmbView = new System.Windows.Forms.ComboBox();
             this.pnlHonsha = new System.Windows.Forms.Panel();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
@@ -61,14 +62,13 @@
             this.lblHidden = new System.Windows.Forms.Label();
             this.txbClientID = new System.Windows.Forms.TextBox();
             this.lblClientID = new System.Windows.Forms.Label();
-            this.dtpSaleDate = new SalesManagement_SysDev.MonthPicker();
             this.txbHidden = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.pctHint = new System.Windows.Forms.PictureBox();
+            this.dtpSaleDate = new SalesManagement_SysDev.MonthPicker();
             this.pnlHonsha.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSaleDetail)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
             // lblClient
@@ -79,7 +79,7 @@
             this.lblClient.Location = new System.Drawing.Point(784, 41);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(418, 64);
+            this.lblClient.Size = new System.Drawing.Size(417, 64);
             this.lblClient.TabIndex = 23;
             this.lblClient.Text = "売上管理画面";
             // 
@@ -116,7 +116,7 @@
             this.txbPageSize.Size = new System.Drawing.Size(50, 28);
             this.txbPageSize.TabIndex = 62;
             this.txbPageSize.TabStop = false;
-            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbPageSize_KeyPress);
+            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // cmbView
             // 
@@ -136,7 +136,7 @@
             // 
             // pnlHonsha
             // 
-            this.pnlHonsha.BackColor = System.Drawing.Color.Lime;
+            this.pnlHonsha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(255)))), ((int)(((byte)(112)))));
             this.pnlHonsha.Controls.Add(this.pctHint);
             this.pnlHonsha.Controls.Add(this.button1);
             this.pnlHonsha.Controls.Add(this.lblClient);
@@ -146,6 +146,17 @@
             this.pnlHonsha.Name = "pnlHonsha";
             this.pnlHonsha.Size = new System.Drawing.Size(1920, 150);
             this.pnlHonsha.TabIndex = 60;
+            // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1639, 45);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 146;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
             // 
             // button1
             // 
@@ -343,7 +354,7 @@
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 77;
             this.txbNumPage.TabStop = false;
-            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbNumPage_KeyPress);
+            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // btnPageMin
             // 
@@ -417,27 +428,29 @@
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(36, 174);
+            this.rdbSearch.Location = new System.Drawing.Point(310, 190);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
             this.rdbSearch.TabIndex = 2;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
-            this.rdbSearch.CheckedChanged += new System.EventHandler(this.rdbSearch_CheckedChanged);
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbHiddenUpdate
             // 
             this.rdbHiddenUpdate.AutoSize = true;
+            this.rdbHiddenUpdate.Checked = true;
             this.rdbHiddenUpdate.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbHiddenUpdate.Location = new System.Drawing.Point(169, 174);
+            this.rdbHiddenUpdate.Location = new System.Drawing.Point(46, 190);
             this.rdbHiddenUpdate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbHiddenUpdate.Name = "rdbHiddenUpdate";
             this.rdbHiddenUpdate.Size = new System.Drawing.Size(208, 39);
             this.rdbHiddenUpdate.TabIndex = 79;
+            this.rdbHiddenUpdate.TabStop = true;
             this.rdbHiddenUpdate.Text = "非表示更新";
             this.rdbHiddenUpdate.UseVisualStyleBackColor = true;
-            this.rdbHiddenUpdate.CheckedChanged += new System.EventHandler(this.rdbHiddenUpdate_CheckedChanged);
+            this.rdbHiddenUpdate.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // lblHidden
             // 
@@ -473,25 +486,12 @@
             this.lblClientID.TabIndex = 84;
             this.lblClientID.Text = "顧客ID";
             // 
-            // dtpSaleDate
-            // 
-            this.dtpSaleDate.Checked = false;
-            this.dtpSaleDate.CustomFormat = "MMMM yyyy";
-            this.dtpSaleDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.dtpSaleDate.Location = new System.Drawing.Point(981, 368);
-            this.dtpSaleDate.Margin = new System.Windows.Forms.Padding(2);
-            this.dtpSaleDate.Name = "dtpSaleDate";
-            this.dtpSaleDate.ShowCheckBox = true;
-            this.dtpSaleDate.Size = new System.Drawing.Size(220, 31);
-            this.dtpSaleDate.TabIndex = 81;
-            this.dtpSaleDate.TabStop = false;
-            // 
             // txbHidden
             // 
-            this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.txbHidden.Location = new System.Drawing.Point(975, 436);
             this.txbHidden.Name = "txbHidden";
-            this.txbHidden.Size = new System.Drawing.Size(862, 42);
+            this.txbHidden.Size = new System.Drawing.Size(862, 31);
             this.txbHidden.TabIndex = 145;
             // 
             // label7
@@ -505,22 +505,24 @@
             this.label7.TabIndex = 144;
             this.label7.Text = "非表示理由";
             // 
-            // pctHint
+            // dtpSaleDate
             // 
-            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
-            this.pctHint.Location = new System.Drawing.Point(1639, 45);
-            this.pctHint.Name = "pctHint";
-            this.pctHint.Size = new System.Drawing.Size(60, 60);
-            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pctHint.TabIndex = 146;
-            this.pctHint.TabStop = false;
-            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            this.dtpSaleDate.Checked = false;
+            this.dtpSaleDate.CustomFormat = "MMMM yyyy";
+            this.dtpSaleDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.dtpSaleDate.Location = new System.Drawing.Point(1617, 361);
+            this.dtpSaleDate.Margin = new System.Windows.Forms.Padding(2);
+            this.dtpSaleDate.Name = "dtpSaleDate";
+            this.dtpSaleDate.ShowCheckBox = true;
+            this.dtpSaleDate.Size = new System.Drawing.Size(220, 31);
+            this.dtpSaleDate.TabIndex = 81;
+            this.dtpSaleDate.TabStop = false;
             // 
             // F_HonshaSale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
             this.Controls.Add(this.txbHidden);
@@ -565,9 +567,9 @@
             this.Load += new System.EventHandler(this.F_HonshaSale_Load);
             this.pnlHonsha.ResumeLayout(false);
             this.pnlHonsha.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSaleDetail)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

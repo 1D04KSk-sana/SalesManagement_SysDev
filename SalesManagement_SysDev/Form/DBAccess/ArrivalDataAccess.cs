@@ -144,6 +144,10 @@ namespace SalesManagement_SysDev
                     query = query.Where(x => x.ArDate.Value == selectArrival.ArDate.Value);
                 }
 
+                if (selectArrival.ArStateFlag != -1)
+                {
+                    query = query.Where(x => x.ArStateFlag == selectArrival.ArStateFlag);
+                }
 
                 listArrival = query.ToList();
                 context.Dispose();
@@ -169,7 +173,7 @@ namespace SalesManagement_SysDev
             {
                 var context = new SalesManagement_DevContext();
 
-                listArrival = context.T_Arrivals.Where(x => x.ArID == selectArrival.ArID || x.EmID == selectArrival.EmID || x.OrID == selectArrival.OrID || x.SoID == selectArrival.SoID || x.ClID == selectArrival.ClID || x.ArDate.Value == selectArrival.ArDate.Value).ToList();
+                listArrival = context.T_Arrivals.Where(x => x.ArID == selectArrival.ArID || x.EmID == selectArrival.EmID || x.OrID == selectArrival.OrID || x.SoID == selectArrival.SoID || x.ClID == selectArrival.ClID || x.ArDate.Value == selectArrival.ArDate.Value || x.ArStateFlag == selectArrival.ArStateFlag).ToList();
 
                 context.Dispose();
             }

@@ -30,6 +30,7 @@ namespace SalesManagement_SysDev
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.lblSalesOffice = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnReturn = new System.Windows.Forms.Button();
@@ -66,11 +67,10 @@ namespace SalesManagement_SysDev
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPageMax = new System.Windows.Forms.Button();
             this.txbSalesOfficeName = new System.Windows.Forms.TextBox();
-            this.pctHint = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesOffice)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -86,6 +86,17 @@ namespace SalesManagement_SysDev
             this.panel1.TabIndex = 0;
             this.panel1.TabStop = true;
             // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1643, 43);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 56;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            // 
             // lblSalesOffice
             // 
             this.lblSalesOffice.AutoSize = true;
@@ -94,7 +105,7 @@ namespace SalesManagement_SysDev
             this.lblSalesOffice.Location = new System.Drawing.Point(702, 49);
             this.lblSalesOffice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSalesOffice.Name = "lblSalesOffice";
-            this.lblSalesOffice.Size = new System.Drawing.Size(483, 64);
+            this.lblSalesOffice.Size = new System.Drawing.Size(482, 64);
             this.lblSalesOffice.TabIndex = 24;
             this.lblSalesOffice.Text = "営業所管理画面";
             // 
@@ -144,9 +155,9 @@ namespace SalesManagement_SysDev
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
             this.rdbSearch.TabIndex = 2;
-            this.rdbSearch.TabStop = true;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbUpdate
             // 
@@ -157,13 +168,14 @@ namespace SalesManagement_SysDev
             this.rdbUpdate.Name = "rdbUpdate";
             this.rdbUpdate.Size = new System.Drawing.Size(103, 39);
             this.rdbUpdate.TabIndex = 1;
-            this.rdbUpdate.TabStop = true;
             this.rdbUpdate.Text = "更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
+            this.rdbUpdate.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbRegister
             // 
             this.rdbRegister.AutoSize = true;
+            this.rdbRegister.Checked = true;
             this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 26F);
             this.rdbRegister.Location = new System.Drawing.Point(29, 16);
             this.rdbRegister.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -173,6 +185,7 @@ namespace SalesManagement_SysDev
             this.rdbRegister.TabStop = true;
             this.rdbRegister.Text = "登録";
             this.rdbRegister.UseVisualStyleBackColor = true;
+            this.rdbRegister.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // cmbView
             // 
@@ -509,17 +522,6 @@ namespace SalesManagement_SysDev
             this.txbSalesOfficeName.TabIndex = 55;
             this.txbSalesOfficeName.TabStop = false;
             // 
-            // pctHint
-            // 
-            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
-            this.pctHint.Location = new System.Drawing.Point(1643, 43);
-            this.pctHint.Name = "pctHint";
-            this.pctHint.Size = new System.Drawing.Size(60, 60);
-            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pctHint.TabIndex = 56;
-            this.pctHint.TabStop = false;
-            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
-            // 
             // F_HonshaSalesOffice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -565,10 +567,10 @@ namespace SalesManagement_SysDev
             this.Load += new System.EventHandler(this.F_HonshaSalesOffice_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.pnlSelect.ResumeLayout(false);
             this.pnlSelect.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSalesOffice)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

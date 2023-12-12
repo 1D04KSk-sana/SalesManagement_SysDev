@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Net;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -87,22 +86,30 @@ namespace SalesManagement_SysDev
         {
             this.Opacity = 1;
         }
-        private void txbNumPage_KeyPress(object sender, KeyPressEventArgs e)
+
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
         {
+            TextBox textBox = sender as TextBox;
+
             //0～9と、バックスペース以外の時は、イベントをキャンセルする
             if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
             {
                 e.Handled = true;
+                return;
             }
 
-        }
-
-        private void txbPageSize_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //0～9と、バックスペース以外の時は、イベントをキャンセルする
-            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            if (e.KeyChar > '0' && '9' > e.KeyChar)
             {
-                e.Handled = true;
+                // テキストボックスに入力されている値を取得
+                string inputText = textBox.Text + e.KeyChar;
+
+                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
+                int parsedValue;
+                if (!int.TryParse(inputText, out parsedValue))
+                {
+                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Handled = true;
+                }
             }
         }
 
@@ -191,8 +198,10 @@ namespace SalesManagement_SysDev
         {
             ClearImput();
             dtpHattyuDate.Checked= false;
-            GetDataGridView();
 
+            rdbRegister.Checked = true;
+
+            GetDataGridView();
         }
         ///////////////////////////////
         //メソッド名：ClearImput()
@@ -1447,6 +1456,8 @@ namespace SalesManagement_SysDev
 
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+
             //データグリッドビューのデータ取得
             GetDataGridView();
         }
@@ -1504,79 +1515,7 @@ namespace SalesManagement_SysDev
 
         }
 
-        private void rdbUpdate_CheckedChanged(object sender, EventArgs e)
-        {
-            if(rdbUpdate.Checked)
-            {
-                cmbMakerName.Enabled = false;
-                txbEmployeeID.Enabled = false;
-                dtpHattyuDate.Enabled = false;
-                txbHattyuDetailID.Enabled = false;
-                txbHattyuQuantity.Enabled = false;
-                txbProductID.Enabled = false;
-                txbProductName.Enabled = false;
-                cmbConfirm.Enabled = false;
-
-            }
-            else
-            {
-                cmbMakerName.Enabled = true;
-                txbEmployeeID.Enabled = true;
-                dtpHattyuDate.Enabled = true;
-                txbHattyuDetailID.Enabled = true;
-                txbHattyuQuantity.Enabled = true;
-                txbProductID.Enabled = true;
-                txbProductName.Enabled = true;
-                cmbConfirm.Enabled=true;
-            }
-        }
-
-        private void rdbRegister_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdbRegister.Checked)
-            {
-                txbHattyuDetailID.Enabled = false;
-                txbHattyuQuantity.Enabled = false;
-                txbProductID.Enabled = false;
-                txbProductName.Enabled = false;
-                txbHidden.Enabled = false;
-                cmbConfirm.Enabled=false;
-            }
-            else
-            {
-                txbHattyuDetailID.Enabled = true;
-                txbHattyuQuantity.Enabled = true;
-                txbProductID.Enabled = true;
-                txbProductName.Enabled = true;
-                cmbConfirm.Enabled= true;
-            }
-
-        }
-
-        private void rdbDetailRegister_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdbDetailRegister.Checked)
-            {
-                cmbMakerName.Enabled = false;
-                txbEmployeeID.Enabled = false;
-                dtpHattyuDate.Enabled = false;
-                cmbHidden.Enabled = false;
-                cmbConfirm.Enabled = false;
-                txbHidden.Enabled=false;
-            }
-            else
-            {
-                cmbMakerName.Enabled = true;
-                txbEmployeeID.Enabled = true;
-                dtpHattyuDate.Enabled = true;
-                cmbHidden.Enabled = true;
-                cmbConfirm.Enabled = true;
-                txbHidden.Enabled = true;
-            }
-
-        }
-
-        private void rdbSearch_CheckedChanged(object sender, EventArgs e)
+        private void RadioButton_Checked(object sender, EventArgs e)
         {
             if (rdbSearch.Checked)
             {
@@ -1585,8 +1524,8 @@ namespace SalesManagement_SysDev
                 txbProductID.Enabled = false;
                 txbProductName.Enabled = false;
                 txbHidden.Enabled = false;
-                cmbConfirm.Enabled=false;
-                cmbHidden .Enabled=false;
+                cmbConfirm.Enabled = false;
+                cmbHidden.Enabled = false;
             }
             else
             {
@@ -1597,19 +1536,15 @@ namespace SalesManagement_SysDev
                 txbHidden.Enabled = true;
                 cmbConfirm.Enabled = true;
                 cmbHidden.Enabled = true;
-
             }
-        }
 
-        private void rdbConfirm_CheckedChanged(object sender, EventArgs e)
-        {
             if (rdbConfirm.Checked)
             {
                 cmbMakerName.Enabled = false;
                 txbEmployeeID.Enabled = false;
                 dtpHattyuDate.Enabled = false;
-                cmbHidden.Enabled=false;
-                txbHidden .Enabled=false;
+                cmbHidden.Enabled = false;
+                txbHidden.Enabled = false;
                 txbHattyuDetailID.Enabled = false;
                 txbHattyuQuantity.Enabled = false;
                 txbProductID.Enabled = false;
@@ -1626,6 +1561,67 @@ namespace SalesManagement_SysDev
                 txbHattyuQuantity.Enabled = true;
                 txbProductID.Enabled = true;
                 txbProductName.Enabled = true;
+            }
+
+            if (rdbDetailRegister.Checked)
+            {
+                cmbMakerName.Enabled = false;
+                txbEmployeeID.Enabled = false;
+                dtpHattyuDate.Enabled = false;
+                cmbHidden.Enabled = false;
+                cmbConfirm.Enabled = false;
+                txbHidden.Enabled = false;
+            }
+            else
+            {
+                cmbMakerName.Enabled = true;
+                txbEmployeeID.Enabled = true;
+                dtpHattyuDate.Enabled = true;
+                cmbHidden.Enabled = true;
+                cmbConfirm.Enabled = true;
+                txbHidden.Enabled = true;
+            }
+
+            if (rdbRegister.Checked)
+            {
+                txbHattyuDetailID.Enabled = false;
+                txbHattyuQuantity.Enabled = false;
+                txbProductID.Enabled = false;
+                txbProductName.Enabled = false;
+                txbHidden.Enabled = false;
+                cmbConfirm.Enabled = false;
+            }
+            else
+            {
+                txbHattyuDetailID.Enabled = true;
+                txbHattyuQuantity.Enabled = true;
+                txbProductID.Enabled = true;
+                txbProductName.Enabled = true;
+                cmbConfirm.Enabled = true;
+            }
+
+            if (rdbUpdate.Checked)
+            {
+                cmbMakerName.Enabled = false;
+                txbEmployeeID.Enabled = false;
+                dtpHattyuDate.Enabled = false;
+                txbHattyuDetailID.Enabled = false;
+                txbHattyuQuantity.Enabled = false;
+                txbProductID.Enabled = false;
+                txbProductName.Enabled = false;
+                cmbConfirm.Enabled = false;
+
+            }
+            else
+            {
+                cmbMakerName.Enabled = true;
+                txbEmployeeID.Enabled = true;
+                dtpHattyuDate.Enabled = true;
+                txbHattyuDetailID.Enabled = true;
+                txbHattyuQuantity.Enabled = true;
+                txbProductID.Enabled = true;
+                txbProductName.Enabled = true;
+                cmbConfirm.Enabled = true;
             }
         }
 

@@ -62,10 +62,27 @@ namespace SalesManagement_SysDev
 
         private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
         {
+            TextBox textBox = sender as TextBox;
+
             //0～9と、バックスペース以外の時は、イベントをキャンセルする
             if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
             {
                 e.Handled = true;
+                return;
+            }
+
+            if (e.KeyChar > '0' && '9' > e.KeyChar)
+            {
+                // テキストボックスに入力されている値を取得
+                string inputText = textBox.Text + e.KeyChar;
+
+                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
+                int parsedValue;
+                if (!int.TryParse(inputText, out parsedValue))
+                {
+                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Handled = true;
+                }
             }
         }
 
@@ -431,8 +448,40 @@ namespace SalesManagement_SysDev
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
+            dtpSaleDate.Checked = false;
 
-            GetDataGridView();            
+            rdbHiddenUpdate.Checked = false;
+
+            GetDataGridView();
+        }
+
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+                cmbHidden.Enabled = false;
+                txbHidden.Enabled = false;
+            }
+            else
+            {
+                cmbHidden.Enabled = true;
+                txbHidden.Enabled = true;
+            }
+
+            if (rdbHiddenUpdate.Checked)
+            {
+                txbClientName.Enabled = false;
+                cmbSalesOfficeID.Enabled = false;
+                txbChumonID.Enabled = false;
+                dtpSaleDate.Enabled = false;
+            }
+            else
+            {
+                txbClientName.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                txbChumonID.Enabled = true;
+                dtpSaleDate.Enabled = true;
+            }
         }
 
         ///////////////////////////////
@@ -596,6 +645,8 @@ namespace SalesManagement_SysDev
 
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+
             //データグリッドビューのデータ取得
             GetDataGridView();
         }
@@ -792,43 +843,6 @@ namespace SalesManagement_SysDev
 
         }
 
-        private void txbNumPage_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //0～9と、バックスペース以外の時は、イベントをキャンセルする
-            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
-            {
-                e.Handled = true;
-            }
-
-        }
-
-        private void txbPageSize_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //0～9と、バックスペース以外の時は、イベントをキャンセルする
-            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void rdbHiddenUpdate_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdbHiddenUpdate.Checked)
-            {
-                txbClientName.Enabled = false;
-                cmbSalesOfficeID.Enabled = false;
-                txbChumonID.Enabled = false;
-                dtpSaleDate.Enabled = false;
-            }
-            else
-            {
-                txbClientName.Enabled = true;
-                cmbSalesOfficeID.Enabled = true;
-                txbChumonID.Enabled = true;
-                dtpSaleDate.Enabled = true;
-            }
-        }
-
         private void txbClientID_TextChanged(object sender, EventArgs e)
         {
             //nullの確認
@@ -856,20 +870,6 @@ namespace SalesManagement_SysDev
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-        
-        private void rdbSearch_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdbSearch.Checked)
-            {
-                cmbHidden.Enabled = false;
-                txbHidden.Enabled = false;
-            }
-            else
-            {
-                cmbHidden.Enabled = true;
-                txbHidden.Enabled = true;
-            }
         }
 
         private void pctHint_Click(object sender, EventArgs e)

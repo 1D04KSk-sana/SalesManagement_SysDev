@@ -43,6 +43,7 @@ namespace SalesManagement_SysDev
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
+            
 
             rdbRegister.Checked = true;
 
@@ -120,14 +121,33 @@ namespace SalesManagement_SysDev
         }
         private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
         {
+            TextBox textBox = sender as TextBox;
+
             //0～9と、バックスペース以外の時は、イベントをキャンセルする
             if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
             {
                 e.Handled = true;
+                return;
+            }
+
+            if (e.KeyChar > '0' && '9' > e.KeyChar)
+            {
+                // テキストボックスに入力されている値を取得
+                string inputText = textBox.Text + e.KeyChar;
+
+                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
+                int parsedValue;
+                if (!int.TryParse(inputText, out parsedValue))
+                {
+                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Handled = true;
+                }
             }
         }
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+
             //データグリッドビューのデータ取得
             GetDataGridView();
         }
@@ -153,13 +173,43 @@ namespace SalesManagement_SysDev
                 MakerDataSelect();
             }
         }
-    ///////////////////////////////
-    //メソッド名：SetFormDataGridView()
-    //引　数   ：なし
-    //戻り値   ：なし
-    //機　能   ：データグリッドビューの初期設定
-    ///////////////////////////////
-    private void SetFormDataGridView()
+
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbRegister.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbUpdate.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        ///////////////////////////////
+        //メソッド名：SetFormDataGridView()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：データグリッドビューの初期設定
+        ///////////////////////////////
+        private void SetFormDataGridView()
         {
             //列を自由に設定できるように
             dgvMaker.AutoGenerateColumns = false;
@@ -904,6 +954,8 @@ namespace SalesManagement_SysDev
             GenerateDataAtSelect(searchFlg);
 
             int intSearchCount = listMaker.Count;
+
+            txbNumPage.Text = "1";
 
             // 顧客抽出結果表示
             GetDataGridView();

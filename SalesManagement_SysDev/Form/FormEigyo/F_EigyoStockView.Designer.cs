@@ -43,6 +43,7 @@
             this.txbPageSize = new System.Windows.Forms.TextBox();
             this.lblPageSize = new System.Windows.Forms.Label();
             this.pnlEigyo = new System.Windows.Forms.Panel();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.lblStockView = new System.Windows.Forms.Label();
             this.btnReturn = new System.Windows.Forms.Button();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
@@ -54,7 +55,6 @@
             this.cmbView = new System.Windows.Forms.ComboBox();
             this.txbProductName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.pctHint = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockView)).BeginInit();
             this.pnlEigyo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
@@ -69,7 +69,6 @@
             this.txbstocknum.Name = "txbstocknum";
             this.txbstocknum.Size = new System.Drawing.Size(220, 31);
             this.txbstocknum.TabIndex = 2;
-            this.txbstocknum.TextChanged += new System.EventHandler(this.txbstocknum_TextChanged);
             // 
             // txbProductID
             // 
@@ -81,6 +80,7 @@
             this.txbProductID.Size = new System.Drawing.Size(220, 31);
             this.txbProductID.TabIndex = 3;
             this.txbProductID.TextChanged += new System.EventHandler(this.txbProdactID_TextChanged);
+            this.txbProductID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // txbstockID
             // 
@@ -105,7 +105,6 @@
             this.dgvStockView.TabIndex = 5;
             this.dgvStockView.TabStop = false;
             this.dgvStockView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStockView_CellClick);
-            this.dgvStockView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // btnClose
             // 
@@ -185,6 +184,7 @@
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 64;
             this.txbNumPage.TabStop = false;
+            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblNumPage
             // 
@@ -220,7 +220,7 @@
             this.txbPageSize.Size = new System.Drawing.Size(50, 28);
             this.txbPageSize.TabIndex = 67;
             this.txbPageSize.TabStop = false;
-            this.txbPageSize.TextChanged += new System.EventHandler(this.txbPageSize_TextChanged);
+            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblPageSize
             // 
@@ -245,7 +245,17 @@
             this.pnlEigyo.Name = "pnlEigyo";
             this.pnlEigyo.Size = new System.Drawing.Size(1920, 150);
             this.pnlEigyo.TabIndex = 69;
-            this.pnlEigyo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlHonsha_Paint);
+            // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1633, 54);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 93;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
             // 
             // lblStockView
             // 
@@ -255,10 +265,9 @@
             this.lblStockView.Location = new System.Drawing.Point(766, 50);
             this.lblStockView.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStockView.Name = "lblStockView";
-            this.lblStockView.Size = new System.Drawing.Size(418, 64);
+            this.lblStockView.Size = new System.Drawing.Size(417, 64);
             this.lblStockView.TabIndex = 23;
             this.lblStockView.Text = "在庫確認画面";
-            this.lblStockView.Click += new System.EventHandler(this.lblOrder_Click);
             // 
             // btnReturn
             // 
@@ -284,7 +293,6 @@
             this.rdbSearch.TabIndex = 70;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
-            this.rdbSearch.CheckedChanged += new System.EventHandler(this.rdbSearch_CheckedChanged);
             // 
             // lblEmployeeID
             // 
@@ -307,7 +315,6 @@
             this.label1.Size = new System.Drawing.Size(82, 24);
             this.label1.TabIndex = 85;
             this.label1.Text = "在庫数";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -319,7 +326,6 @@
             this.label2.Size = new System.Drawing.Size(80, 24);
             this.label2.TabIndex = 86;
             this.label2.Text = "在庫ID";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // btnClear
             // 
@@ -332,6 +338,7 @@
             this.btnClear.TabStop = false;
             this.btnClear.Text = "クリア";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnDone
             // 
@@ -385,18 +392,6 @@
             this.label3.Size = new System.Drawing.Size(82, 24);
             this.label3.TabIndex = 92;
             this.label3.Text = "商品名";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // pctHint
-            // 
-            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
-            this.pctHint.Location = new System.Drawing.Point(1633, 54);
-            this.pctHint.Name = "pctHint";
-            this.pctHint.Size = new System.Drawing.Size(60, 60);
-            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pctHint.TabIndex = 93;
-            this.pctHint.TabStop = false;
-            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
             // 
             // F_EigyoStockView
             // 

@@ -58,16 +58,16 @@
             this.lblSinghup.AutoSize = true;
             this.lblSinghup.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblSinghup.ForeColor = System.Drawing.Color.White;
-            this.lblSinghup.Location = new System.Drawing.Point(758, 38);
+            this.lblSinghup.Location = new System.Drawing.Point(826, 44);
             this.lblSinghup.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSinghup.Name = "lblSinghup";
-            this.lblSinghup.Size = new System.Drawing.Size(288, 64);
+            this.lblSinghup.Size = new System.Drawing.Size(287, 64);
             this.lblSinghup.TabIndex = 23;
             this.lblSinghup.Text = "新規登録";
             // 
             // pnlHonsha
             // 
-            this.pnlHonsha.BackColor = System.Drawing.Color.Lime;
+            this.pnlHonsha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(255)))), ((int)(((byte)(122)))));
             this.pnlHonsha.Controls.Add(this.pctHint);
             this.pnlHonsha.Controls.Add(this.btnClose);
             this.pnlHonsha.Controls.Add(this.lblSinghup);
@@ -81,10 +81,10 @@
             // btnClose
             // 
             this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 30F);
-            this.btnClose.Location = new System.Drawing.Point(1707, 38);
+            this.btnClose.Location = new System.Drawing.Point(1674, 38);
             this.btnClose.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(160, 70);
+            this.btnClose.Size = new System.Drawing.Size(200, 80);
             this.btnClose.TabIndex = 60;
             this.btnClose.Text = "閉じる";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -233,6 +233,7 @@
             // 
             // cmbPositionID
             // 
+            this.cmbPositionID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbPositionID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbPositionID.ForeColor = System.Drawing.Color.Black;
             this.cmbPositionID.FormattingEnabled = true;

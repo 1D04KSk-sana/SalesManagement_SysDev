@@ -26,18 +26,18 @@ namespace SalesManagement_SysDev
         ChumonDataAccess chumonDataAccess = new ChumonDataAccess();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
+        //データベース商品テーブルアクセス用クラスのインスタンス化
+        ProdactDataAccess prodactDataAccess = new ProdactDataAccess();
         //データグリッドビュー用の全出庫データ
         private static List<T_Syukko> listAllSyukko = new List<T_Syukko>();
         //データグリッドビュー用の出庫データ
         private static List<T_Syukko> listsyukko = new List<T_Syukko>();
-        //データグリッドビュー用の出庫データ
-        private static List<T_SyukkoDetail> listsyukkodetail = new List<T_SyukkoDetail>();
         //データグリッドビュー用の全出庫データ
         private static List<T_SyukkoDetail> listAllSyukkoDetail = new List<T_SyukkoDetail>();
-        //データグリッドビュー用の出庫データ
-        private static List<T_Syukko> listsalesoffice = new List<T_Syukko>();
         //データグリッドビュー用の営業所データ
         private static List<M_SalesOffice> listSalesOfficeID = new List<M_SalesOffice>();
+        //データグリッドビュー用の商品データ
+        private static List<M_Product> listProdact = new List<M_Product>();
         //入力形式チェック用クラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
         //フォームを呼び出しする際のインスタンス化
@@ -55,6 +55,8 @@ namespace SalesManagement_SysDev
         private Dictionary<int, string> dictionaryClient;
         //DataGridView用に使用する社員のDictionary
         private Dictionary<int, string> dictionaryEmployee;
+        //DataGridView用に使用する商品のDictionary
+        private Dictionary<int, string> dictionaryProdact;
 
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
@@ -98,6 +100,8 @@ namespace SalesManagement_SysDev
         
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+
             //データグリッドビューのデータ取得
             GetDataGridView();
         }
@@ -115,8 +119,9 @@ namespace SalesManagement_SysDev
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
+            dtpSyukkoDate.Checked = false;
 
-            rdbConfirm.Checked = true;
+            rdbHidden.Checked = true;
 
             GetDataGridView();
         }
@@ -657,8 +662,9 @@ namespace SalesManagement_SysDev
 
             int intSearchCount = listsyukko.Count;
 
-            // 顧客抽出結果表示
             txbNumPage.Text = "1";
+
+            // 顧客抽出結果表示
             GetDataGridView();
 
             MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -700,6 +706,15 @@ namespace SalesManagement_SysDev
             foreach (var item in listClient)
             {
                 dictionaryClient.Add(item.ClID.Value, item.ClName);
+            }
+
+            listProdact = prodactDataAccess.GetProdactDspData();
+
+            dictionaryProdact = new Dictionary<int, string> { };
+
+            foreach (var item in listProdact)
+            {
+                dictionaryProdact.Add(item.PrID, item.PrName);
             }
         }
 
@@ -910,7 +925,7 @@ namespace SalesManagement_SysDev
             //1行ずつdgvClientに挿入
             foreach (var item in listAllSyukkoDetail)
             {
-                dgvSyukkoDetail.Rows.Add(item.SyDetailID, item.SyID, item.PrID, item.SyQuantity);
+                dgvSyukkoDetail.Rows.Add(item.SyDetailID, item.SyID, dictionaryProdact[item.PrID], item.SyQuantity);
             }
 
             //dgvClientをリフレッシュ
@@ -964,10 +979,27 @@ namespace SalesManagement_SysDev
 
         private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
         {
+            TextBox textBox = sender as TextBox;
+
             //0～9と、バックスペース以外の時は、イベントをキャンセルする
             if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
             {
                 e.Handled = true;
+                return;
+            }
+
+            if (e.KeyChar > '0' && '9' > e.KeyChar)
+            {
+                // テキストボックスに入力されている値を取得
+                string inputText = textBox.Text + e.KeyChar;
+
+                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
+                int parsedValue;
+                if (!int.TryParse(inputText, out parsedValue))
+                {
+                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Handled = true;
+                }
             }
         }
 
@@ -1007,6 +1039,36 @@ namespace SalesManagement_SysDev
                 FileName = "https://docs.google.com/document/d/1MfMtaYTJYmbGbq3IKHSwdryVny-aQX0B/edit=true",
                 UseShellExecute = true
             });
+        }
+
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbConfirm.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbHidden.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
         }
     }
 }
