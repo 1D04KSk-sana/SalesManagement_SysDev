@@ -39,12 +39,12 @@
             this.rdbSmallSearch = new System.Windows.Forms.RadioButton();
             this.rdbMajorRegister = new System.Windows.Forms.RadioButton();
             this.rdbSmallUpdate = new System.Windows.Forms.RadioButton();
-            this.txbSmallClassificationName = new System.Windows.Forms.TextBox();
+            this.txbSmallName = new System.Windows.Forms.TextBox();
             this.lblSmallClassificationName = new System.Windows.Forms.Label();
-            this.txbMajorClassificationName = new System.Windows.Forms.TextBox();
-            this.txbSmallClassificationID = new System.Windows.Forms.TextBox();
+            this.txbMajorName = new System.Windows.Forms.TextBox();
+            this.txbSmallID = new System.Windows.Forms.TextBox();
             this.lblMajorClassificationName = new System.Windows.Forms.Label();
-            this.txbMajorClassificationID = new System.Windows.Forms.TextBox();
+            this.txbMajorID = new System.Windows.Forms.TextBox();
             this.lblSmallClassficationID = new System.Windows.Forms.Label();
             this.lblMajorClassificationID = new System.Windows.Forms.Label();
             this.lblHidden = new System.Windows.Forms.Label();
@@ -54,8 +54,8 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.btnDone = new System.Windows.Forms.Button();
             this.cmbView = new System.Windows.Forms.ComboBox();
-            this.dgvMajorClassification = new System.Windows.Forms.DataGridView();
-            this.dgvSmallClassification = new System.Windows.Forms.DataGridView();
+            this.dgvMajor = new System.Windows.Forms.DataGridView();
+            this.dgvSmall = new System.Windows.Forms.DataGridView();
             this.btnPageSize = new System.Windows.Forms.Button();
             this.lblPageSize = new System.Windows.Forms.Label();
             this.txbPageSize = new System.Windows.Forms.TextBox();
@@ -67,8 +67,8 @@
             this.btnPageMax = new System.Windows.Forms.Button();
             this.pnlClassification.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMajorClassification)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSmallClassification)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMajor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSmall)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlClassification
@@ -151,7 +151,6 @@
             this.rdbMajorUpdate.TabIndex = 127;
             this.rdbMajorUpdate.Text = "大分類更新";
             this.rdbMajorUpdate.UseVisualStyleBackColor = true;
-            this.rdbMajorUpdate.CheckedChanged += new System.EventHandler(this.rdbDetailRegister_CheckedChanged);
             // 
             // rdbMajorSearch
             // 
@@ -203,14 +202,14 @@
             this.rdbSmallUpdate.Text = "小分類更新";
             this.rdbSmallUpdate.UseVisualStyleBackColor = true;
             // 
-            // txbSmallClassificationName
+            // txbSmallName
             // 
-            this.txbSmallClassificationName.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbSmallClassificationName.Location = new System.Drawing.Point(998, 353);
-            this.txbSmallClassificationName.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.txbSmallClassificationName.Name = "txbSmallClassificationName";
-            this.txbSmallClassificationName.Size = new System.Drawing.Size(220, 31);
-            this.txbSmallClassificationName.TabIndex = 135;
+            this.txbSmallName.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.txbSmallName.Location = new System.Drawing.Point(998, 353);
+            this.txbSmallName.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txbSmallName.Name = "txbSmallName";
+            this.txbSmallName.Size = new System.Drawing.Size(220, 31);
+            this.txbSmallName.TabIndex = 135;
             // 
             // lblSmallClassificationName
             // 
@@ -223,23 +222,23 @@
             this.lblSmallClassificationName.TabIndex = 134;
             this.lblSmallClassificationName.Text = "小分類名";
             // 
-            // txbMajorClassificationName
+            // txbMajorName
             // 
-            this.txbMajorClassificationName.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbMajorClassificationName.Location = new System.Drawing.Point(194, 353);
-            this.txbMajorClassificationName.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.txbMajorClassificationName.Name = "txbMajorClassificationName";
-            this.txbMajorClassificationName.Size = new System.Drawing.Size(220, 31);
-            this.txbMajorClassificationName.TabIndex = 133;
+            this.txbMajorName.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.txbMajorName.Location = new System.Drawing.Point(194, 353);
+            this.txbMajorName.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txbMajorName.Name = "txbMajorName";
+            this.txbMajorName.Size = new System.Drawing.Size(220, 31);
+            this.txbMajorName.TabIndex = 133;
             // 
-            // txbSmallClassificationID
+            // txbSmallID
             // 
-            this.txbSmallClassificationID.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbSmallClassificationID.Location = new System.Drawing.Point(998, 290);
-            this.txbSmallClassificationID.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.txbSmallClassificationID.Name = "txbSmallClassificationID";
-            this.txbSmallClassificationID.Size = new System.Drawing.Size(220, 31);
-            this.txbSmallClassificationID.TabIndex = 132;
+            this.txbSmallID.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.txbSmallID.Location = new System.Drawing.Point(998, 290);
+            this.txbSmallID.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txbSmallID.Name = "txbSmallID";
+            this.txbSmallID.Size = new System.Drawing.Size(220, 31);
+            this.txbSmallID.TabIndex = 132;
             // 
             // lblMajorClassificationName
             // 
@@ -252,14 +251,14 @@
             this.lblMajorClassificationName.TabIndex = 131;
             this.lblMajorClassificationName.Text = "大分類名";
             // 
-            // txbMajorClassificationID
+            // txbMajorID
             // 
-            this.txbMajorClassificationID.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbMajorClassificationID.Location = new System.Drawing.Point(194, 290);
-            this.txbMajorClassificationID.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.txbMajorClassificationID.Name = "txbMajorClassificationID";
-            this.txbMajorClassificationID.Size = new System.Drawing.Size(220, 31);
-            this.txbMajorClassificationID.TabIndex = 130;
+            this.txbMajorID.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.txbMajorID.Location = new System.Drawing.Point(194, 290);
+            this.txbMajorID.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txbMajorID.Name = "txbMajorID";
+            this.txbMajorID.Size = new System.Drawing.Size(220, 31);
+            this.txbMajorID.TabIndex = 130;
             // 
             // lblSmallClassficationID
             // 
@@ -368,31 +367,31 @@
             this.cmbView.TabIndex = 144;
             this.cmbView.TabStop = false;
             // 
-            // dgvMajorClassification
+            // dgvMajor
             // 
-            this.dgvMajorClassification.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvMajorClassification.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.dgvMajorClassification.Location = new System.Drawing.Point(11, 491);
-            this.dgvMajorClassification.Margin = new System.Windows.Forms.Padding(2);
-            this.dgvMajorClassification.Name = "dgvMajorClassification";
-            this.dgvMajorClassification.RowHeadersWidth = 51;
-            this.dgvMajorClassification.RowTemplate.Height = 24;
-            this.dgvMajorClassification.Size = new System.Drawing.Size(861, 480);
-            this.dgvMajorClassification.TabIndex = 145;
-            this.dgvMajorClassification.TabStop = false;
+            this.dgvMajor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMajor.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.dgvMajor.Location = new System.Drawing.Point(11, 491);
+            this.dgvMajor.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvMajor.Name = "dgvMajor";
+            this.dgvMajor.RowHeadersWidth = 51;
+            this.dgvMajor.RowTemplate.Height = 24;
+            this.dgvMajor.Size = new System.Drawing.Size(861, 480);
+            this.dgvMajor.TabIndex = 145;
+            this.dgvMajor.TabStop = false;
             // 
-            // dgvSmallClassification
+            // dgvSmall
             // 
-            this.dgvSmallClassification.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSmallClassification.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.dgvSmallClassification.Location = new System.Drawing.Point(889, 491);
-            this.dgvSmallClassification.Margin = new System.Windows.Forms.Padding(2);
-            this.dgvSmallClassification.Name = "dgvSmallClassification";
-            this.dgvSmallClassification.RowHeadersWidth = 51;
-            this.dgvSmallClassification.RowTemplate.Height = 24;
-            this.dgvSmallClassification.Size = new System.Drawing.Size(1004, 480);
-            this.dgvSmallClassification.TabIndex = 146;
-            this.dgvSmallClassification.TabStop = false;
+            this.dgvSmall.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSmall.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.dgvSmall.Location = new System.Drawing.Point(889, 491);
+            this.dgvSmall.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvSmall.Name = "dgvSmall";
+            this.dgvSmall.RowHeadersWidth = 51;
+            this.dgvSmall.RowTemplate.Height = 24;
+            this.dgvSmall.Size = new System.Drawing.Size(1004, 480);
+            this.dgvSmall.TabIndex = 146;
+            this.dgvSmall.TabStop = false;
             // 
             // btnPageSize
             // 
@@ -512,8 +511,8 @@
             this.Controls.Add(this.btnPageSize);
             this.Controls.Add(this.lblPageSize);
             this.Controls.Add(this.txbPageSize);
-            this.Controls.Add(this.dgvSmallClassification);
-            this.Controls.Add(this.dgvMajorClassification);
+            this.Controls.Add(this.dgvSmall);
+            this.Controls.Add(this.dgvMajor);
             this.Controls.Add(this.cmbView);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnDone);
@@ -523,12 +522,12 @@
             this.Controls.Add(this.cmbHidden);
             this.Controls.Add(this.lblSmallClassficationID);
             this.Controls.Add(this.lblMajorClassificationID);
-            this.Controls.Add(this.txbSmallClassificationName);
+            this.Controls.Add(this.txbSmallName);
             this.Controls.Add(this.lblSmallClassificationName);
-            this.Controls.Add(this.txbMajorClassificationName);
-            this.Controls.Add(this.txbSmallClassificationID);
+            this.Controls.Add(this.txbMajorName);
+            this.Controls.Add(this.txbSmallID);
             this.Controls.Add(this.lblMajorClassificationName);
-            this.Controls.Add(this.txbMajorClassificationID);
+            this.Controls.Add(this.txbMajorID);
             this.Controls.Add(this.rdbSmallUpdate);
             this.Controls.Add(this.rdbSmallRegister);
             this.Controls.Add(this.rdbMajorUpdate);
@@ -543,8 +542,8 @@
             this.pnlClassification.ResumeLayout(false);
             this.pnlClassification.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvMajorClassification)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSmallClassification)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMajor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSmall)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -563,12 +562,12 @@
         private System.Windows.Forms.RadioButton rdbSmallSearch;
         private System.Windows.Forms.RadioButton rdbMajorRegister;
         private System.Windows.Forms.RadioButton rdbSmallUpdate;
-        private System.Windows.Forms.TextBox txbSmallClassificationName;
+        private System.Windows.Forms.TextBox txbSmallName;
         private System.Windows.Forms.Label lblSmallClassificationName;
-        private System.Windows.Forms.TextBox txbMajorClassificationName;
-        private System.Windows.Forms.TextBox txbSmallClassificationID;
+        private System.Windows.Forms.TextBox txbMajorName;
+        private System.Windows.Forms.TextBox txbSmallID;
         private System.Windows.Forms.Label lblMajorClassificationName;
-        private System.Windows.Forms.TextBox txbMajorClassificationID;
+        private System.Windows.Forms.TextBox txbMajorID;
         private System.Windows.Forms.Label lblSmallClassficationID;
         private System.Windows.Forms.Label lblMajorClassificationID;
         private System.Windows.Forms.Label lblHidden;
@@ -578,8 +577,8 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.ComboBox cmbView;
-        private System.Windows.Forms.DataGridView dgvMajorClassification;
-        private System.Windows.Forms.DataGridView dgvSmallClassification;
+        private System.Windows.Forms.DataGridView dgvMajor;
+        private System.Windows.Forms.DataGridView dgvSmall;
         private System.Windows.Forms.Button btnPageSize;
         private System.Windows.Forms.Label lblPageSize;
         private System.Windows.Forms.TextBox txbPageSize;

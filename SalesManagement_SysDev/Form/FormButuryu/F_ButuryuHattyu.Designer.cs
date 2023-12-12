@@ -43,7 +43,6 @@
             this.txbPageSize = new System.Windows.Forms.TextBox();
             this.cmbView = new System.Windows.Forms.ComboBox();
             this.pnlHonsha = new System.Windows.Forms.Panel();
-            this.pctHint = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblClient = new System.Windows.Forms.Label();
             this.btnReturn = new System.Windows.Forms.Button();
@@ -77,10 +76,11 @@
             this.dtpHattyuDate = new System.Windows.Forms.DateTimePicker();
             this.txbEmployeeName = new System.Windows.Forms.TextBox();
             this.lblEmployeeName = new System.Windows.Forms.Label();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHattyuDetail)).BeginInit();
             this.pnlHonsha.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHattyu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
             // rdbSearch
@@ -279,17 +279,6 @@
             this.pnlHonsha.Size = new System.Drawing.Size(1920, 150);
             this.pnlHonsha.TabIndex = 95;
             // 
-            // pctHint
-            // 
-            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
-            this.pctHint.Location = new System.Drawing.Point(1614, 51);
-            this.pctHint.Name = "pctHint";
-            this.pctHint.Size = new System.Drawing.Size(60, 60);
-            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pctHint.TabIndex = 130;
-            this.pctHint.TabStop = false;
-            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
-            // 
             // btnClose
             // 
             this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
@@ -311,7 +300,7 @@
             this.lblClient.Location = new System.Drawing.Point(780, 47);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(417, 64);
+            this.lblClient.Size = new System.Drawing.Size(418, 64);
             this.lblClient.TabIndex = 23;
             this.lblClient.Text = "発注管理画面";
             // 
@@ -677,6 +666,17 @@
             this.lblEmployeeName.TabIndex = 129;
             this.lblEmployeeName.Text = "社員名";
             // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1614, 51);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 130;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            // 
             // F_ButuryuHattyu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -738,8 +738,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvHattyuDetail)).EndInit();
             this.pnlHonsha.ResumeLayout(false);
             this.pnlHonsha.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHattyu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

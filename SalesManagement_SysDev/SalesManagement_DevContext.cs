@@ -20,7 +20,7 @@ namespace SalesManagement_SysDev
         public DbSet<M_Employee> M_Employees { get; set; }
         
         //大分類
-        public DbSet<M_MajorClassification> M_MajorCassifications { get; set; }
+        public DbSet<M_MajorClassification> M_MajorClassifications { get; set; }
         
         //メーカー
         public DbSet<M_Maker> M_Makers { get; set; }
