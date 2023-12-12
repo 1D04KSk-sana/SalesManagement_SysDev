@@ -105,7 +105,7 @@ namespace SalesManagement_SysDev
             this.lblSalesOffice.Location = new System.Drawing.Point(702, 49);
             this.lblSalesOffice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSalesOffice.Name = "lblSalesOffice";
-            this.lblSalesOffice.Size = new System.Drawing.Size(482, 64);
+            this.lblSalesOffice.Size = new System.Drawing.Size(483, 64);
             this.lblSalesOffice.TabIndex = 24;
             this.lblSalesOffice.Text = "営業所管理画面";
             // 
@@ -415,6 +415,7 @@ namespace SalesManagement_SysDev
             this.btnPageSize.TabStop = false;
             this.btnPageSize.Text = "行数変更";
             this.btnPageSize.UseVisualStyleBackColor = true;
+            this.btnPageSize.Click += new System.EventHandler(this.btnPageSize_Click);
             // 
             // lblPageSize
             // 

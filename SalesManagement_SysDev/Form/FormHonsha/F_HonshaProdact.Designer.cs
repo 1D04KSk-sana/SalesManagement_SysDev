@@ -434,7 +434,7 @@
             this.btnPagesize.Location = new System.Drawing.Point(206, 1024);
             this.btnPagesize.Margin = new System.Windows.Forms.Padding(2);
             this.btnPagesize.Name = "btnPagesize";
-            this.btnPagesize.Size = new System.Drawing.Size(137, 32);
+            this.btnPagesize.Size = new System.Drawing.Size(140, 40);
             this.btnPagesize.TabIndex = 35;
             this.btnPagesize.TabStop = false;
             this.btnPagesize.Text = "行数変更";

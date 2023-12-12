@@ -53,7 +53,7 @@
             // btnFormSyukko
             // 
             this.btnFormSyukko.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormSyukko.Location = new System.Drawing.Point(686, 844);
+            this.btnFormSyukko.Location = new System.Drawing.Point(686, 895);
             this.btnFormSyukko.Name = "btnFormSyukko";
             this.btnFormSyukko.Size = new System.Drawing.Size(510, 100);
             this.btnFormSyukko.TabIndex = 1;
@@ -64,7 +64,7 @@
             // btnFormChumon
             // 
             this.btnFormChumon.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormChumon.Location = new System.Drawing.Point(686, 686);
+            this.btnFormChumon.Location = new System.Drawing.Point(686, 728);
             this.btnFormChumon.Name = "btnFormChumon";
             this.btnFormChumon.Size = new System.Drawing.Size(510, 100);
             this.btnFormChumon.TabIndex = 2;
@@ -75,7 +75,7 @@
             // btnFormWarehousing
             // 
             this.btnFormWarehousing.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormWarehousing.Location = new System.Drawing.Point(686, 372);
+            this.btnFormWarehousing.Location = new System.Drawing.Point(686, 385);
             this.btnFormWarehousing.Name = "btnFormWarehousing";
             this.btnFormWarehousing.Size = new System.Drawing.Size(510, 100);
             this.btnFormWarehousing.TabIndex = 3;
@@ -86,7 +86,7 @@
             // btnFormHattyu
             // 
             this.btnFormHattyu.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormHattyu.Location = new System.Drawing.Point(686, 529);
+            this.btnFormHattyu.Location = new System.Drawing.Point(686, 555);
             this.btnFormHattyu.Name = "btnFormHattyu";
             this.btnFormHattyu.Size = new System.Drawing.Size(510, 100);
             this.btnFormHattyu.TabIndex = 4;
@@ -131,7 +131,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnFormHattyu);
             this.Controls.Add(this.btnFormWarehousing);

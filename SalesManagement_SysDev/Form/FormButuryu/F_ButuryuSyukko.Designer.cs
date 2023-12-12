@@ -121,7 +121,7 @@
             this.lblButuryuSyukko.ForeColor = System.Drawing.Color.White;
             this.lblButuryuSyukko.Location = new System.Drawing.Point(742, 50);
             this.lblButuryuSyukko.Name = "lblButuryuSyukko";
-            this.lblButuryuSyukko.Size = new System.Drawing.Size(417, 64);
+            this.lblButuryuSyukko.Size = new System.Drawing.Size(418, 64);
             this.lblButuryuSyukko.TabIndex = 1;
             this.lblButuryuSyukko.Text = "出庫管理画面";
             // 
@@ -366,6 +366,7 @@
             this.btnPagesize.TabStop = false;
             this.btnPagesize.Text = "行数変更";
             this.btnPagesize.UseVisualStyleBackColor = true;
+            this.btnPagesize.Click += new System.EventHandler(this.btnPagesize_Click);
             // 
             // btnPageMin
             // 

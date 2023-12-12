@@ -1019,5 +1019,11 @@ namespace SalesManagement_SysDev
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvMaker[6, dgvMaker.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvMaker[7, dgvMaker.CurrentCellAddress.Y]?.Value?.ToString();
         }
+
+        private void btnPageSize_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+            GetDataGridView();
+        }
     }
 }

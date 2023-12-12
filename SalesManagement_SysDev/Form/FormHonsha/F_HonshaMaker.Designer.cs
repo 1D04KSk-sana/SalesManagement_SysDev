@@ -91,7 +91,7 @@ namespace SalesManagement_SysDev
             this.lblMaker.Location = new System.Drawing.Point(702, 49);
             this.lblMaker.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMaker.Name = "lblMaker";
-            this.lblMaker.Size = new System.Drawing.Size(485, 64);
+            this.lblMaker.Size = new System.Drawing.Size(486, 64);
             this.lblMaker.TabIndex = 24;
             this.lblMaker.Text = "メーカー管理画面";
             // 
@@ -411,6 +411,7 @@ namespace SalesManagement_SysDev
             this.btnPageSize.TabStop = false;
             this.btnPageSize.Text = "行数変更";
             this.btnPageSize.UseVisualStyleBackColor = true;
+            this.btnPageSize.Click += new System.EventHandler(this.btnPageSize_Click);
             // 
             // lblPageSize
             // 
