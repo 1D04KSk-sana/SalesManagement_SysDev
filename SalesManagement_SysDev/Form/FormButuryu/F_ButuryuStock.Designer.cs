@@ -108,14 +108,14 @@
             this.lblClient.Location = new System.Drawing.Point(700, 46);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(417, 64);
+            this.lblClient.Size = new System.Drawing.Size(418, 64);
             this.lblClient.TabIndex = 23;
             this.lblClient.Text = "在庫管理画面";
             // 
             // btnReturn
             // 
             this.btnReturn.Font = new System.Drawing.Font("MS UI Gothic", 26F);
-            this.btnReturn.Location = new System.Drawing.Point(20, 30);
+            this.btnReturn.Location = new System.Drawing.Point(30, 36);
             this.btnReturn.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(160, 70);

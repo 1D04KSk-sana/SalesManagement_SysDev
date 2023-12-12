@@ -80,7 +80,7 @@
             this.lblWarehousing.Location = new System.Drawing.Point(754, 44);
             this.lblWarehousing.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWarehousing.Name = "lblWarehousing";
-            this.lblWarehousing.Size = new System.Drawing.Size(417, 64);
+            this.lblWarehousing.Size = new System.Drawing.Size(418, 64);
             this.lblWarehousing.TabIndex = 24;
             this.lblWarehousing.Text = "入庫管理画面";
             // 
@@ -584,6 +584,7 @@
             this.Controls.Add(this.txbHattyuID);
             this.Controls.Add(this.txbEmployeeName);
             this.Controls.Add(this.pnlButuryu);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "F_ButuryuWarehousing";
             this.Text = "F_ButuryuWarehousing";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

@@ -83,7 +83,7 @@ namespace SalesManagement_SysDev
             // pctHint
             // 
             this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
-            this.pctHint.Location = new System.Drawing.Point(1656, 34);
+            this.pctHint.Location = new System.Drawing.Point(1656, 47);
             this.pctHint.Name = "pctHint";
             this.pctHint.Size = new System.Drawing.Size(60, 60);
             this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -96,10 +96,10 @@ namespace SalesManagement_SysDev
             this.lblClient.AutoSize = true;
             this.lblClient.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblClient.ForeColor = System.Drawing.Color.White;
-            this.lblClient.Location = new System.Drawing.Point(752, 30);
+            this.lblClient.Location = new System.Drawing.Point(748, 37);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(417, 64);
+            this.lblClient.Size = new System.Drawing.Size(418, 64);
             this.lblClient.TabIndex = 27;
             this.lblClient.Text = "注文管理画面";
             // 
@@ -107,7 +107,7 @@ namespace SalesManagement_SysDev
             // 
             this.btnClose.BackColor = System.Drawing.Color.White;
             this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClose.Location = new System.Drawing.Point(1737, 24);
+            this.btnClose.Location = new System.Drawing.Point(1737, 37);
             this.btnClose.Margin = new System.Windows.Forms.Padding(2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(160, 70);
@@ -121,7 +121,7 @@ namespace SalesManagement_SysDev
             // 
             this.btnReturn.BackColor = System.Drawing.Color.White;
             this.btnReturn.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnReturn.Location = new System.Drawing.Point(14, 24);
+            this.btnReturn.Location = new System.Drawing.Point(27, 31);
             this.btnReturn.Margin = new System.Windows.Forms.Padding(2);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(160, 70);

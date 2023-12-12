@@ -31,5 +31,10 @@ namespace SalesManagement_SysDev
                 UseShellExecute = true
             });
         }
+
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -136,7 +136,7 @@
             this.lblWarehousing.Location = new System.Drawing.Point(729, 44);
             this.lblWarehousing.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWarehousing.Name = "lblWarehousing";
-            this.lblWarehousing.Size = new System.Drawing.Size(417, 64);
+            this.lblWarehousing.Size = new System.Drawing.Size(418, 64);
             this.lblWarehousing.TabIndex = 24;
             this.lblWarehousing.Text = "入荷管理画面";
             // 
@@ -623,7 +623,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(219)))), ((int)(((byte)(193)))));
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.Controls.Add(this.cmbHidden);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txbClientName);
@@ -664,8 +664,10 @@
             this.Controls.Add(this.txbClientID);
             this.Controls.Add(this.txbArrivalID);
             this.Controls.Add(this.pnlEigyo);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "F_EigyoArrival";
             this.Text = "F_EigyoArrival";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.F_EigyoArrival_Load);
             this.pnlEigyo.ResumeLayout(false);
             this.pnlEigyo.PerformLayout();

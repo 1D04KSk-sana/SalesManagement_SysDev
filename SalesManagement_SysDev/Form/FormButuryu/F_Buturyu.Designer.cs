@@ -138,8 +138,10 @@
             this.Controls.Add(this.btnFormChumon);
             this.Controls.Add(this.btnFormSyukko);
             this.Controls.Add(this.btnFormStock);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "F_Buturyu";
             this.Text = "F_Buturyu";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
