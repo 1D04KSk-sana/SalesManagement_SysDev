@@ -28,6 +28,8 @@ namespace SalesManagement_SysDev
         ProdactDataAccess prodactDataAccess = new ProdactDataAccess();
         //データベース受注テーブルアクセス用クラスのインスタンス化
         OrderDataAccess OrderDataAccess = new OrderDataAccess();
+        //データベース受注テーブルアクセス用クラスのインスタンス化
+        ShipmentDetailDataAccess shipmentDetailDataAccess = new ShipmentDetailDataAccess();
 
         //コンボボックス用の顧客データリスト
         private static List<M_Client> listClient = new List<M_Client>();
@@ -41,9 +43,14 @@ namespace SalesManagement_SysDev
         private static List<T_Shipment> listAllShipment = new List<T_Shipment>();
         //データグリッドビュー用の顧客データ
         private static List<T_Shipment> listShipment = new List<T_Shipment>();
+        //データグリッドビュー用の顧客データ
+        private static List<T_ShipmentDetail> listShipmentDetail = new List<T_ShipmentDetail>();
 
         //コンボボックス用の営業所データリスト
         private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
+
+        //フォームを呼び出しする際のインスタンス化
+        private F_SearchDialog f_SearchDialog = new F_SearchDialog();
 
         //DataGridView用に使用する営業所のDictionary
         private Dictionary<int, string> dictionarySalesOffice;
@@ -87,6 +94,12 @@ namespace SalesManagement_SysDev
             {
                 ShipmentDataUpdate();
             }
+
+            //検索ラヂオボタンがチェックされているとき
+            if (rdbSearch.Checked)
+            {
+                ShipmentDataSelect();
+            }
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -113,13 +126,25 @@ namespace SalesManagement_SysDev
             cmbSalesOfficeID.ValueMember = "SoID";
 
             //cmbSalesOfficeIDを未選択に
-            cmbSalesOfficeID.SelectedIndex = -1;
+            cmbSalesOfficeID.SelectedIndex = -1;        
             SetFormDataGridView();
 
             //cmbViewを表示に
             cmbView.SelectedIndex = 0;
         }
-        
+
+
+        private void dgvShipmentDetail_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvShipmentDetail.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            //選択された行に対してのコントロールの変更
+            SelectRowDetailControl();
+        }
         private void dgvShipment_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //クリックされたDataGridViewがヘッダーのとき⇒何もしない
@@ -160,6 +185,11 @@ namespace SalesManagement_SysDev
             GetDataGridView();
         }
 
+        private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Opacity = 1;
+        }
+
         private void btnPageMax_Click(object sender, EventArgs e)
         {
             List<T_Shipment> viewOrder = SetListShipment();
@@ -172,6 +202,197 @@ namespace SalesManagement_SysDev
             txbNumPage.Text = lastPage.ToString();
 
             GetDataGridView();
+        }
+
+        private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            ShipmentSearchButtonClick(true);
+        }
+
+        private void SearchDialog_btnOrSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            ShipmentSearchButtonClick(false);
+        }
+
+        ///////////////////////////////
+        //メソッド名：ShipmentSearchButtonClick()
+        //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：受注情報検索の実行
+        ///////////////////////////////
+        private void ShipmentSearchButtonClick(bool searchFlg)
+        {
+            // 顧客情報抽出
+            GenerateDataAtSelect(searchFlg);
+
+            int intSearchCount = listShipment.Count;
+
+            txbNumPage.Text = "1";
+
+            // 顧客抽出結果表示
+            GetDataGridView();
+
+            MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtSelect()
+        //引　数   ：searchFlg = And検索かOr検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：受注情報の取得
+        ///////////////////////////////
+        private void GenerateDataAtSelect(bool searchFlg)
+        {
+            string strShipmentID = txbShipmentID.Text.Trim();
+            int intShipmentID = 0;
+
+            if (!String.IsNullOrEmpty(strShipmentID))
+            {
+                intShipmentID = int.Parse(strShipmentID);
+            }
+
+            string strClientName = txbClientName.Text.Trim();
+            int intClientName = 0;
+
+            if (!String.IsNullOrEmpty(strClientName))
+            {
+                intClientName = int.Parse(strClientName);
+            }
+
+            string strEmployeeName = txbEmployeeName.Text.Trim();
+            int intEmployeeName = 0;
+
+            if (!String.IsNullOrEmpty(strEmployeeName))
+            {
+                intEmployeeName = int.Parse(strEmployeeName);
+            }
+
+            // 検索条件のセット
+            T_Shipment selectCondition = new T_Shipment()
+            {
+                ShID = intShipmentID,
+                ClID = intClientName,
+                SoID = cmbSalesOfficeID.SelectedIndex + 1,
+                EmID = intEmployeeName,
+            };
+
+            if (searchFlg)
+            {
+                // 顧客データのAnd抽出
+                listShipment = ShipmentDataAccess.GetAndShipmentData(selectCondition);
+            }
+            else
+            {
+                // 顧客データのOr抽出
+                listShipment = ShipmentDataAccess.GetOrShipmentData(selectCondition);
+            }
+        }
+
+        ///////////////////////////////
+        //メソッド名：ShipmentDataSelect()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：受注情報検索の実行
+        ///////////////////////////////
+        private void ShipmentDataSelect()
+        {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtSearch())
+            {
+                return;
+            }
+
+            //検索ダイアログのフォームを作成
+            f_SearchDialog = new F_SearchDialog();
+            //検索ダイアログのフォームのオーナー設定
+            f_SearchDialog.Owner = this;
+
+            //検索ダイアログのフォームのボタンクリックイベントにハンドラを追加
+            f_SearchDialog.btnAndSearchClick += SearchDialog_btnAndSearchClick;
+            f_SearchDialog.btnOrSearchClick += SearchDialog_btnOrSearchClick;
+
+            //検索ダイアログのフォームが閉じたときのイベントを設定
+            f_SearchDialog.FormClosed += ChildForm_FormClosed;
+            //検索ダイアログのフォームの表示
+            f_SearchDialog.Show();
+
+            //顧客登録フォームの透明化
+            this.Opacity = 0;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtSearch()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：検索入力データの形式チェック
+        //         ：エラーがない場合True
+        //         ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtSearch()
+        {
+            //検索条件の存在確認
+            if (String.IsNullOrEmpty(txbShipmentID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbEmployeeName.Text.Trim()) && String.IsNullOrEmpty(txbClientName.Text.Trim()))
+            {
+                MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbOrderID.Focus();
+                return false;
+            }
+
+            //受注IDの適否
+            if (!String.IsNullOrEmpty(txbShipmentID.Text.Trim()))
+            {
+                //受注IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbShipmentID.Text.Trim()))
+                {
+                    MessageBox.Show("出荷IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbOrderID.Focus();
+                    return false;
+                }
+                //受注IDの重複チェック
+                if (!ShipmentDataAccess.CheckShipmentIDExistence(int.Parse(txbShipmentID.Text.Trim())))
+                {
+                    MessageBox.Show("出荷IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbOrderID.Focus();
+                    return false;
+                }
+            }
+
+            //社員IDの適否
+            if (!String.IsNullOrEmpty(txbEmployeeName.Text.Trim()))
+            {
+                //社員IDの重複チェック
+                if (!employeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeName.Text.Trim())))
+                {
+                    MessageBox.Show("社員名が存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeName.Focus();
+                    return false;
+                }
+            }
+
+            // 顧客IDの適否
+            if (!String.IsNullOrEmpty(txbClientName.Text.Trim()))
+            {
+                // 顧客IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbClientName.Text.Trim()))
+                {
+                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientName.Focus();
+                    return false;
+                }
+                //顧客IDの重複チェック
+                if (!clientDataAccess.CheckClientIDExistence(int.Parse(txbClientName.Text.Trim())))
+                {
+                    MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientName.Focus();
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         ///////////////////////////////
@@ -430,13 +651,23 @@ namespace SalesManagement_SysDev
 
             dgvShipment.Columns.Add("ShID", "出荷ID");
             dgvShipment.Columns.Add("ClID", "顧客ID");
-            dgvShipment.Columns.Add("EmID", "社員ID");
-            dgvShipment.Columns.Add("SoID", "営業所ID");
-            dgvShipment.Columns.Add("OrID", "受注ID");
+            dgvShipment.Columns.Add("EmID", "受注会社");
+            dgvShipment.Columns.Add("SoID", "社員名");
+            dgvShipment.Columns.Add("OrID", "営業所名");
             dgvShipment.Columns.Add("ShStateFlag", "受注年月日");
             dgvShipment.Columns.Add("ShFinishDate", "出荷完了年月日");
             dgvShipment.Columns.Add("ShFlag", "出荷管理フラグ");
             dgvShipment.Columns.Add("ShHidden", "非表示理由");
+
+            dgvShipment.Columns["ShID"].Width = 70;
+            dgvShipment.Columns["ClID"].Width = 70;
+            dgvShipment.Columns["EmID"].Width = 125;
+            dgvShipment.Columns["SoID"].Width = 125;
+            dgvShipment.Columns["OrID"].Width = 135;
+            dgvShipment.Columns["ShStateFlag"].Width = 100;
+            dgvShipment.Columns["ShFinishDate"].Width = 220;
+            dgvShipment.Columns["ShFlag"].Width = 100;
+            dgvShipment.Columns["ShHidden"].Width = 153;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvShipment.Columns)
@@ -468,7 +699,7 @@ namespace SalesManagement_SysDev
 
             dgvShipmentDetail.Columns.Add("ShDetailID", "受注ID");
             dgvShipmentDetail.Columns.Add("ShID", "受注詳細ID");
-            dgvShipmentDetail.Columns.Add("PrID", "商品ID");
+            dgvShipmentDetail.Columns.Add("PrID", "商品名");
             dgvShipmentDetail.Columns.Add("ShQuantity", "数量");
 
             //並び替えができないようにする
@@ -618,6 +849,28 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：SetDataDetailGridView()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：詳細データグリッドビューへの表示
+        ///////////////////////////////
+        private void SetDataDetailGridView(int intOrderID)
+        {
+            dgvShipmentDetail.Rows.Clear();
+
+            listShipmentDetail = shipmentDetailDataAccess.GetShipmentDetailIDData(intOrderID);
+
+            //1行ずつdgvClientに挿入
+            foreach (var item in listShipmentDetail)
+            {
+                dgvShipmentDetail.Rows.Add(item.ShID, item.ShDetailID, dictionaryProdact[item.PrID], item.ShQuantity);
+            }
+
+            //dgvClientをリフレッシュ
+            dgvShipmentDetail.Refresh();
+        }
+
+        ///////////////////////////////
         //メソッド名：SelectRowControl()
         //引　数   ：なし
         //戻り値   ：なし
@@ -627,16 +880,13 @@ namespace SalesManagement_SysDev
         {
             //データグリッドビューに乗っている情報をguiに反映
             txbShipmentID.Text = dgvShipment[0, dgvShipment.CurrentCellAddress.Y].Value.ToString();
-            txbClientName.Text = dgvShipment[1, dgvShipment.CurrentCellAddress.Y].Value.ToString();
-
-            //cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvShipment[3, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key - 1;
-            //txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvShipment[2, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
-            //txbOrderManager.Text = dgvShipment[4, dgvShipment.CurrentCellAddress.Y].Value.ToString();
-            //txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvShipment[1, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
-            //dtpOrderDate.Text = dgvShipment[5, dgvShipment.CurrentCellAddress.Y].Value.ToString();
-            //cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvShipment[6, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key;
-            //cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvShipment[7, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key;
-            //txbHidden.Text = dgvShipment[8, dgvShipment.CurrentCellAddress.Y]?.Value?.ToString();
+            txbClientName.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvShipment[1, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            txbEmployeeName.Text = dgvShipment[3, dgvShipment.CurrentCellAddress.Y].Value.ToString();
+            //txbEmployeeName.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvShipment[1, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvShipment[4, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key - 1;
+            dtpShipmentDate.Text = dgvShipment[6, dgvShipment.CurrentCellAddress.Y].Value.ToString();
+            cmbShipmentHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvShipment[7, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key;
+            txbShipmentHidden.Text = dgvShipment[8, dgvShipment.CurrentCellAddress.Y]?.Value?.ToString();
         }
 
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
@@ -645,6 +895,20 @@ namespace SalesManagement_SysDev
             GetDataGridView();
         }
 
-
+        ///////////////////////////////
+        //メソッド名：SelectRowDetailControl()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：選択された行に対してのコントロールの変更(Detail)
+        ///////////////////////////////
+        private void SelectRowDetailControl()
+        {
+            //データグリッドビューに乗っている情報をGUIに反映
+            txbOrderID.Text = dgvShipmentDetail[0, dgvShipmentDetail.CurrentCellAddress.Y].Value.ToString();
+            txbShipmentDetailID.Text = dgvShipmentDetail[1, dgvShipmentDetail.CurrentCellAddress.Y].Value.ToString();
+            txbProductID.Text = dictionaryProdact.FirstOrDefault(x => x.Value == dgvShipment[2, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            txbProductName.Text = dgvShipmentDetail[2, dgvShipmentDetail.CurrentCellAddress.Y].Value.ToString();
+            txbShipmentquantity.Text = dgvShipmentDetail[3, dgvShipmentDetail.CurrentCellAddress.Y].Value.ToString();
+        }
     }
 }

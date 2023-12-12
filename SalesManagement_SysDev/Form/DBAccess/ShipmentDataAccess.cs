@@ -131,5 +131,74 @@ namespace SalesManagement_SysDev
                 return false;
             }
         }
+
+        ///////////////////////////////
+        //メソッド名：GetAndOrderData()
+        //引　数：検索条件
+        //戻り値：条件完全一致受注データ
+        //機　能：条件完全一致受注データの取得
+        ///////////////////////////////
+        public List<T_Shipment> GetAndShipmentData(T_Shipment selectShipment)
+        {
+            List<T_Shipment> listShipment = new List<T_Shipment>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var query = context.T_Shipments.AsQueryable();
+
+                if (selectShipment.ShID != null && selectShipment.ShID != 0)
+                {
+                    query = query.Where(x => x.ShID == selectShipment.ShID);
+                }
+
+                if (selectShipment.OrID != null && selectShipment.OrID != 0)
+                {
+                    query = query.Where(x => x.OrID == selectShipment.OrID);
+                }
+
+                if (selectShipment.EmID != null && selectShipment.EmID != 0)
+                {
+                    query = query.Where(x => x.EmID == selectShipment.EmID);
+                }
+
+                if (selectShipment.ClID != null && selectShipment.ClID != 0)
+                {
+                    query = query.Where(x => x.ClID == selectShipment.ClID);
+                }
+
+                listShipment = query.ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listShipment;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetOrOrderData()
+        //引　数：検索条件
+        //戻り値：条件一部一致受注データ
+        //機　能：条件一部一致受注データの取得
+        ///////////////////////////////
+        public List<T_Shipment> GetOrShipmentData(T_Shipment selectOrder)
+        {
+            List<T_Shipment> listOrder = new List<T_Shipment>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listOrder = context.T_Shipments.Where(x => x.ShID == selectOrder.ShID || x.OrID == selectOrder.OrID || x.EmID == selectOrder.EmID || x.ClID == selectOrder.ClID).ToList();
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listOrder;
+        }
     }
 }

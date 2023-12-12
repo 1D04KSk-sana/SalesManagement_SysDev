@@ -373,6 +373,7 @@
             this.dgvShipmentDetail.Size = new System.Drawing.Size(748, 480);
             this.dgvShipmentDetail.TabIndex = 169;
             this.dgvShipmentDetail.TabStop = false;
+            this.dgvShipmentDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvShipmentDetail_CellClick);
             // 
             // dgvShipment
             // 
