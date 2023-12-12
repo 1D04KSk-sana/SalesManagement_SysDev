@@ -16,5 +16,10 @@ namespace SalesManagement_SysDev
         {
             InitializeComponent();
         }
+
+        private void rdbDetailRegister_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
