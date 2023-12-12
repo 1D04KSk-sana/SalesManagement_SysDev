@@ -550,10 +550,10 @@
             // 
             // txbShipmentHidden
             // 
-            this.txbShipmentHidden.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbShipmentHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.txbShipmentHidden.Location = new System.Drawing.Point(180, 460);
             this.txbShipmentHidden.Name = "txbShipmentHidden";
-            this.txbShipmentHidden.Size = new System.Drawing.Size(1565, 42);
+            this.txbShipmentHidden.Size = new System.Drawing.Size(1565, 31);
             this.txbShipmentHidden.TabIndex = 176;
             // 
             // cmbShipmentHidden

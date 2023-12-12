@@ -26,18 +26,18 @@ namespace SalesManagement_SysDev
         ChumonDataAccess chumonDataAccess = new ChumonDataAccess();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
+        //データベース商品テーブルアクセス用クラスのインスタンス化
+        ProdactDataAccess prodactDataAccess = new ProdactDataAccess();
         //データグリッドビュー用の全出庫データ
         private static List<T_Syukko> listAllSyukko = new List<T_Syukko>();
         //データグリッドビュー用の出庫データ
         private static List<T_Syukko> listsyukko = new List<T_Syukko>();
-        //データグリッドビュー用の出庫データ
-        private static List<T_SyukkoDetail> listsyukkodetail = new List<T_SyukkoDetail>();
         //データグリッドビュー用の全出庫データ
         private static List<T_SyukkoDetail> listAllSyukkoDetail = new List<T_SyukkoDetail>();
-        //データグリッドビュー用の出庫データ
-        private static List<T_Syukko> listsalesoffice = new List<T_Syukko>();
         //データグリッドビュー用の営業所データ
         private static List<M_SalesOffice> listSalesOfficeID = new List<M_SalesOffice>();
+        //データグリッドビュー用の商品データ
+        private static List<M_Product> listProdact = new List<M_Product>();
         //入力形式チェック用クラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
         //フォームを呼び出しする際のインスタンス化
@@ -55,6 +55,8 @@ namespace SalesManagement_SysDev
         private Dictionary<int, string> dictionaryClient;
         //DataGridView用に使用する社員のDictionary
         private Dictionary<int, string> dictionaryEmployee;
+        //DataGridView用に使用する商品のDictionary
+        private Dictionary<int, string> dictionaryProdact;
 
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
@@ -705,6 +707,15 @@ namespace SalesManagement_SysDev
             {
                 dictionaryClient.Add(item.ClID.Value, item.ClName);
             }
+
+            listProdact = prodactDataAccess.GetProdactDspData();
+
+            dictionaryProdact = new Dictionary<int, string> { };
+
+            foreach (var item in listProdact)
+            {
+                dictionaryProdact.Add(item.PrID, item.PrName);
+            }
         }
 
         ///////////////////////////////
@@ -914,7 +925,7 @@ namespace SalesManagement_SysDev
             //1行ずつdgvClientに挿入
             foreach (var item in listAllSyukkoDetail)
             {
-                dgvSyukkoDetail.Rows.Add(item.SyDetailID, item.SyID, item.PrID, item.SyQuantity);
+                dgvSyukkoDetail.Rows.Add(item.SyDetailID, item.SyID, dictionaryProdact[item.PrID], item.SyQuantity);
             }
 
             //dgvClientをリフレッシュ
