@@ -1055,9 +1055,8 @@ namespace SalesManagement_SysDev
                     M_Maker = ma[0],
                     M_Employee = em[310],
                     HaDate = new DateTime(2023, 11, 17),
-                    WaWarehouseFlag = 0,
+                    WaWarehouseFlag = 1,
                     HaFlag = 0,
-
                 });
                 ha.Add(new T_Hattyu()
                 {
@@ -1066,16 +1065,6 @@ namespace SalesManagement_SysDev
                     HaDate = new DateTime(2023, 11, 16),
                     WaWarehouseFlag = 0,
                     HaFlag = 0,
-
-                });
-                ha.Add(new T_Hattyu()
-                {
-                    M_Maker = ma[2],
-                    M_Employee = em[310],
-                    HaDate = new DateTime(2023, 10, 17),
-                    WaWarehouseFlag = 0,
-                    HaFlag = 0,
-
                 });
 
                 context.T_Hattyus.AddRange(ha);
@@ -1094,6 +1083,18 @@ namespace SalesManagement_SysDev
                     M_Product = pr[1],
                     HaQuantity = 30,
                 });
+                had.Add(new T_HattyuDetail()
+                {
+                    T_Hattyu = ha[1],
+                    M_Product = pr[6],
+                    HaQuantity = 50,
+                });
+                had.Add(new T_HattyuDetail()
+                {
+                    T_Hattyu = ha[1],
+                    M_Product = pr[7],
+                    HaQuantity = 30,
+                });
                 context.T_HattyuDetails.AddRange(had);
                 context.SaveChanges();
 
@@ -1106,25 +1107,6 @@ namespace SalesManagement_SysDev
                     WaDate = new DateTime(2023, 11, 16),
                     WaShelfFlag = 1,
                     WaFlag = 0,
-
-                });
-                wh.Add(new T_Warehousing()
-                {
-                    T_Hattyu = ha[1],
-                    M_Employee = em[310],
-                    WaDate = new DateTime(2023, 10, 16),
-                    WaShelfFlag = 1,
-                    WaFlag = 0,
-
-                });
-                wh.Add(new T_Warehousing()
-                {
-                    T_Hattyu = ha[1],
-                    M_Employee = em[116],
-                    WaDate = new DateTime(2023, 11, 1),
-                    WaShelfFlag = 1,
-                    WaFlag = 0,
-
                 });
                 context.T_Warehousings.AddRange(wh);
                 context.SaveChanges();
@@ -1142,12 +1124,6 @@ namespace SalesManagement_SysDev
                     T_Warehousing = wh[0],
                     M_Product = pr[1],
                     WaQuantity = 30,
-                });
-                whd.Add(new T_WarehousingDetail()
-                {
-                    T_Warehousing = wh[1],
-                    M_Product = pr[2],
-                    WaQuantity = 80,
                 });
                 context.T_WarehousingDetails.AddRange(whd);
                 context.SaveChanges();
