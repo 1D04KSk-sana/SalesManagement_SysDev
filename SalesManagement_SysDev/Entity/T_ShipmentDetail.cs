@@ -12,6 +12,8 @@ namespace SalesManagement_SysDev
     class T_ShipmentDetail
     {
         [Key]
+        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ShDetailID { get; set; }     //出荷詳細ID
         public int ShID { get; set; }           //出荷ID
         public int PrID { get; set; }           //商品ID

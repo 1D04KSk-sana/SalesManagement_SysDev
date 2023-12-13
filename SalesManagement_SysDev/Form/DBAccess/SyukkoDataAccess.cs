@@ -104,6 +104,8 @@ namespace SalesManagement_SysDev
                 var Syukko = context.T_Syukkos.Single(x => x.SyID == cfmSyukko.SyID);
 
                 Syukko.SyStateFlag = cfmSyukko.SyStateFlag;
+                Syukko.SyDate = cfmSyukko.SyDate;
+                Syukko.EmID = cfmSyukko.EmID;
 
                 context.SaveChanges();
                 context.Dispose();
