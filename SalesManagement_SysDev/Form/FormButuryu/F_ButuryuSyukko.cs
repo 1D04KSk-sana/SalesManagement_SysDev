@@ -425,7 +425,7 @@ namespace SalesManagement_SysDev
                     return false;
                 }
 
-                T_Syukko syukko = SyukkoDataAccess.GetSyukkoIDOrderData(int.Parse(txbSyukkoID.Text.Trim()));
+                T_Syukko syukko = SyukkoDataAccess.GetIDSyukkoData(int.Parse(txbSyukkoID.Text.Trim()));
 
                 //受注IDの確定チェック
                if (syukko.SyStateFlag == 1)

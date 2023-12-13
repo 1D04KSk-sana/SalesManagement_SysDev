@@ -823,8 +823,32 @@ namespace SalesManagement_SysDev
                 });
                 st.Add(new T_Stock()
                 {
+                    M_Product = pr[6],
+                    StQuantity = 10,
+                    StFlag = 0,
+                });
+                st.Add(new T_Stock()
+                {
+                    M_Product = pr[7],
+                    StQuantity = 10,
+                    StFlag = 0,
+                });
+                st.Add(new T_Stock()
+                {
+                    M_Product = pr[8],
+                    StQuantity = 10,
+                    StFlag = 0,
+                });
+                st.Add(new T_Stock()
+                {
                     M_Product = pr[9],
                     StQuantity = 240,
+                    StFlag = 0,
+                });
+                st.Add(new T_Stock()
+                {
+                    M_Product = pr[10],
+                    StQuantity = 10,
                     StFlag = 0,
                 });
                 context.T_Stocks.AddRange(st);
@@ -916,12 +940,14 @@ namespace SalesManagement_SysDev
             {
                 chd.Add(new T_ChumonDetail()
                 {
+                    ChDetailID = 1,
                     T_Chumon = ch[0],
                     M_Product = pr[2],
                     ChQuantity = 40,
                 });
                 chd.Add(new T_ChumonDetail()
                 {
+                    ChDetailID = 2,
                     T_Chumon = ch[0],
                     M_Product = pr[9],
                     ChQuantity = 30,
@@ -945,12 +971,14 @@ namespace SalesManagement_SysDev
             {
                 syd.Add(new T_SyukkoDetail()
                 {
+                    SyDetailID = 1,
                     T_Syukko = sy[0],
                     M_Product = pr[2],
                     SyQuantity = 40,
                 });
                 syd.Add(new T_SyukkoDetail()
                 {
+                    SyDetailID = 2,
                     T_Syukko = sy[0],
                     M_Product = pr[9],
                     SyQuantity = 30,

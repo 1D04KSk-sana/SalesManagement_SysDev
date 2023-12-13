@@ -1002,14 +1002,6 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            //確定選択の適否
-            if (cmbConfirm.SelectedIndex == -1)
-            {
-                MessageBox.Show("未確定/確定が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                cmbConfirm.Focus();
-                return false;
-            }
-
             return true;
         }
 
@@ -1056,6 +1048,7 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("確定に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            //注文登録
             T_Order Order = orderDataAccess.GetIDOrderData(int.Parse(txbOrderID.Text.Trim()));
 
             T_Chumon Chumon = GenerateChumonAtRegistration(Order);
@@ -1071,6 +1064,7 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("注文管理へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            //注文詳細登録
             List<T_OrderDetail> listOrderDetail = orderDetailDataAccess.GetOrderDetailIDData(int.Parse(txbOrderID.Text.Trim()));
 
             List<bool> flgOrderlist = new List<bool>();
@@ -1307,6 +1301,8 @@ namespace SalesManagement_SysDev
                 ClID = Order.ClID,
                 OrID = Order.OrID,
                 ChDate = DateTime.Now,
+                ChStateFlag = 0,
+                ChFlag = 0,
             };
         }
 

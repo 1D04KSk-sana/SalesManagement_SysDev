@@ -59,31 +59,6 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：GetIDOrderData()
-        //引　数：受注ID
-        //戻り値：受注IDの一致する受注データ
-        //機　能：受注IDの一致する受注データの取得
-        ///////////////////////////////
-        public T_Syukko GetSyukkoIDOrderData(int OrderID)
-        {
-            T_Syukko Order = new T_Syukko { };
-
-            try
-            {
-                var context = new SalesManagement_DevContext();
-                Order = context.T_Syukkos.Single(x => x.OrID == OrderID);
-
-                context.Dispose();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return Order;
-        }
-
-        ///////////////////////////////
         //メソッド名：UpdateOrderData()
         //引　数：updOrder = 出庫データ
         //戻り値：True or False
@@ -297,6 +272,31 @@ namespace SalesManagement_SysDev
             }
 
             return listProdact;
+        }
+
+        ///////////////////////////////
+        //メソッド名：AddSyukkoData()
+        //引　数：regSyukko = 出庫データ
+        //戻り値：True or False
+        //機　能：出庫データの登録
+        //      ：登録成功の場合True
+        //      ：登録失敗の場合False
+        ///////////////////////////////
+        public bool AddSyukkoData(T_Syukko regSyukko)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                context.T_Syukkos.Add(regSyukko);
+                context.SaveChanges();
+                context.Dispose();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
         }
     }
 }

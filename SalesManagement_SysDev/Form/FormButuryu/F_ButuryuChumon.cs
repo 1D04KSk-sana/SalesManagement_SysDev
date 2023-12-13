@@ -15,6 +15,12 @@ namespace SalesManagement_SysDev
     {
         //データベース営業所テーブルアクセス用クラスのインスタンス化
         SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
+        //データベース在庫テーブルアクセス用クラスのインスタンス化
+        StockDataAccess stockDataAccess = new StockDataAccess();
+        //データベース出庫テーブルアクセス用クラスのインスタンス化
+        SyukkoDataAccess syukkoDataAccess = new SyukkoDataAccess();
+        //データベース出庫詳細テーブルアクセス用クラスのインスタンス化
+        SyukkoDetailDataAccess syukkoDetailDataAccess = new SyukkoDetailDataAccess();
         //データベース受注テーブルアクセス用クラスのインスタンス化
         OrderDataAccess orderDataAccess = new OrderDataAccess();
         //データベース発注詳細テーブルアクセス用クラスのインスタンス化
@@ -190,12 +196,34 @@ namespace SalesManagement_SysDev
 
                 T_Chumon chumon = chumonDataAccess.GetIDChumonData(int.Parse(txbChumonID.Text.Trim()));
 
+                //注文IDの非表示チェック
+                if (chumon.ChFlag == 1)
+                {
+                    MessageBox.Show("注文IDは非表示にされています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbChumonID.Focus();
+                    return false;
+                }
                 //受注IDの確定チェック
                 if (chumon.ChStateFlag == 1)
                 {
                     MessageBox.Show("注文IDはすでに確定しています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbChumonID.Focus();
                     return false;
+                }
+
+                //在庫確認
+                List<T_ChumonDetail> listChumonDetail = ChumonDetailDataAccess.GetChumonDetailIDData(chumon.ChID);
+
+                foreach (var item in listChumonDetail)
+                {
+                    T_Stock Stock = stockDataAccess.GetStockProdactIDData(item.PrID);
+
+                    if (item.ChQuantity > Stock.StQuantity)
+                    {
+                        MessageBox.Show(dictionaryProdact[item.PrID] + "の在庫数が足りません\n発注してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txbChumonID.Focus();
+                        return false;
+                    }
                 }
             }
             else
@@ -204,8 +232,6 @@ namespace SalesManagement_SysDev
                 txbChumonID.Focus();
                 return false;
             }
-
-
 
             return true;
         }
@@ -221,7 +247,8 @@ namespace SalesManagement_SysDev
             return new T_Chumon
             {
                 ChID = int.Parse(txbOrderID.Text.Trim()),
-                //  ChStateFlag = cmbConfirm.SelectedIndex,
+                EmID = F_Login.intEmployeeID,
+                ChStateFlag = 1,
             };
         }
         ///////////////////////////////
@@ -397,11 +424,77 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("確定に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            T_Chumon Chumon = chumonDataAccess.GetIDChumonData(int.Parse(txbChumonID.Text.Trim()));
+            //在庫更新
+            List<T_ChumonDetail> listChumonDetail = ChumonDetailDataAccess.GetChumonDetailIDData(cfmChumon.ChID);
 
-            bool flgChumon = chumonDataAccess.AddChumonData(Chumon);
+            List<bool> flgStocklist = new List<bool>();
+            bool flgStock = true;
 
+            foreach (var item in listChumonDetail)
+            {
+                flgStocklist.Add(stockDataAccess.UpdateChumonStockQuantityData(item));
+            }
 
+            foreach (var item in flgStocklist)
+            {
+                if (!item)
+                {
+                    flgStock = false;
+                }
+            }
+
+            if (flgStock)
+            {
+                MessageBox.Show("在庫数を更新しました", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("在庫数の更新に失敗しました", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //出庫登録
+            T_Chumon Chumon = chumonDataAccess.GetIDChumonData(cfmChumon.ChID);
+
+            T_Syukko Syukko = GenerateSyukkoAtRegistration(Chumon);
+
+            bool flgSyukko = syukkoDataAccess.AddSyukkoData(Syukko);
+
+            if (flgSyukko == true)
+            {
+                MessageBox.Show("出庫管理にデータを送信ました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("出庫管理へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //出庫詳細登録
+            List<bool> flgChumonlist = new List<bool>();
+            bool flgChumon = true;
+
+            foreach (var item in listChumonDetail)
+            {
+                T_SyukkoDetail SyukkoDetail = GenerateSyukkoDetailAtRegistration(item);
+
+                flgChumonlist.Add(syukkoDetailDataAccess.AddSyukkoDetailData(SyukkoDetail));
+            }
+
+            foreach (var item in flgChumonlist)
+            {
+                if (!item)
+                {
+                    flgChumon = false;
+                }
+            }
+
+            if (flgChumon)
+            {
+                MessageBox.Show("出庫詳細へデータを送信しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("出庫詳細へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             //テキストボックス等のクリア
             ClearImput();
@@ -409,6 +502,43 @@ namespace SalesManagement_SysDev
             // データグリッドビューの表示
             GetDataGridView();
         }
+
+        ///////////////////////////////
+        //メソッド名：GenerateSyukkoAtRegistration()
+        //引　数   ：注文情報
+        //戻り値   ：出庫登録情報
+        //機　能   ：出庫登録データのセット
+        ///////////////////////////////
+        private T_Syukko GenerateSyukkoAtRegistration(T_Chumon Chumon)
+        {
+            return new T_Syukko
+            {
+                SyID = Chumon.ChID,
+                SoID = Chumon.SoID,
+                ClID = Chumon.ClID,
+                OrID = Chumon.OrID,
+                SyStateFlag = 0,
+                SyFlag = 0
+            };
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateSyukkoDetailAtRegistration()
+        //引　数   ：出庫詳細情報
+        //戻り値   ：出庫詳細登録情報
+        //機　能   ：出庫詳細登録データのセット
+        ///////////////////////////////
+        private T_SyukkoDetail GenerateSyukkoDetailAtRegistration(T_ChumonDetail ChumonDetail)
+        {
+            return new T_SyukkoDetail
+            {
+                SyDetailID = ChumonDetail.ChDetailID,
+                SyID = ChumonDetail.ChID,
+                PrID = ChumonDetail.PrID,
+                SyQuantity = ChumonDetail.ChQuantity
+            };
+        }
+
         ///////////////////////////////
         //メソッド名：ClearImput()
         //引　数   ：なし
@@ -420,12 +550,10 @@ namespace SalesManagement_SysDev
             txbChumonID.Text = string.Empty;
             txbOrderID.Text = string.Empty;
             txbClientID.Text = string.Empty;
+            txbEmployeeID.Text = string.Empty;
             cmbSalesOfficeID.SelectedIndex = -1;
             cmbHidden.SelectedIndex = -1;
-            txbClientName.Text = string.Empty;
-            lblClientHidden.Text = string.Empty;
             txbHidden.Text = string.Empty;
-
         }
 
         ///////////////////////////////
@@ -586,20 +714,22 @@ namespace SalesManagement_SysDev
 
             dgvChumon.Columns.Add("ChID", "注文ID");
             dgvChumon.Columns.Add("SoID", "営業所名");
-            dgvChumon.Columns.Add("ClName", "顧客名");
-             dgvChumon.Columns.Add("OrID", "受注ID");
+            dgvChumon.Columns.Add("OrID", "受注ID");
             dgvChumon.Columns.Add("ChDate", "受注年月日");
-            dgvChumon.Columns.Add("ChFlag", "受注管理フラグ");
-            dgvChumon.Columns.Add("ChStateFlag", "受注情報フラグ");
+            dgvChumon.Columns.Add("ClName", "顧客名");
+            dgvChumon.Columns.Add("EmName", "社員名");
+            dgvChumon.Columns.Add("ChStateFlag", "未確定/確定");
+            dgvChumon.Columns.Add("ChFlag", "表示/非表示");
             dgvChumon.Columns.Add("ChHidden", "非表示理由");
 
             dgvChumon.Columns["ChID"].Width = 100;
             dgvChumon.Columns["SoID"].Width = 150;
-            dgvChumon.Columns["ClName"].Width = 150;
             dgvChumon.Columns["OrID"].Width = 100;
             dgvChumon.Columns["ChDate"].Width = 150;
-            dgvChumon.Columns["ChFlag"].Width = 200;
+            dgvChumon.Columns["ClName"].Width = 150;
+            dgvChumon.Columns["EmName"].Width = 150;
             dgvChumon.Columns["ChStateFlag"].Width = 200;
+            dgvChumon.Columns["ChFlag"].Width = 200;
             dgvChumon.Columns["ChHidden"].Width = 200;
 
 
@@ -672,7 +802,14 @@ namespace SalesManagement_SysDev
             //1行ずつdgvClientに挿入
             foreach (var item in depData)
             {
-                dgvChumon.Rows.Add(item.ChID, dictionarySalesOffice[item.SoID], dictionaryClient[item.ClID],item.OrID,item.ChDate, dictionaryHidden[item.ChFlag], dictionaryConfirm[item.ChStateFlag], item.ChHidden);
+                string strEmployeeName = "";
+
+                if (item.EmID != null)
+                {
+                    strEmployeeName = dictionaryEmployee[item.EmID.Value];
+                }
+
+                dgvChumon.Rows.Add(item.ChID, dictionarySalesOffice[item.SoID], item.OrID,item.ChDate, dictionaryClient[item.ClID], strEmployeeName, dictionaryConfirm[item.ChStateFlag], dictionaryHidden[item.ChFlag], item.ChHidden);
             }
 
             //dgvClientをリフレッシュ
@@ -807,15 +944,13 @@ namespace SalesManagement_SysDev
             //データグリッドビューに乗っている情報をGUIに反映
             txbChumonID.Text = dgvChumon[0, dgvChumon.CurrentCellAddress.Y].Value.ToString();
             cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvChumon[1, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key - 1;
-            txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvChumon[2, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
-            //txbChumonManager.Text = dgvChumon[3, dgvChumon.CurrentCellAddress.Y].Value.ToString();
-            txbOrderID.Text = dgvChumon[3, dgvChumon.CurrentCellAddress.Y].Value.ToString();
-            //  ch4Date.Text = dgvChumon[6, dgvChumon.CurrentCellAddress.Y]?.Value.ToString();
-
-            // dtpChumonDate.Text = dgvChumon[5, dgvChumon.CurrentCellAddress.Y].Value.ToString();
-            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvChumon[4, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key;
-            // cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvChumon[7, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key;
-            //txbHidden.Text = dgvChumon[5, dgvChumon.CurrentCellAddress.Y]?.Value?.ToString();
+            txbOrderID.Text = dgvChumon[2, dgvChumon.CurrentCellAddress.Y].Value.ToString();
+            dtpChumonDate.Text = dgvChumon[3, dgvChumon.CurrentCellAddress.Y].Value.ToString();
+            txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvChumon[4, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvChumon[5, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvChumon[6, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key;
+            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvChumon[7, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key;
+            txbHidden.Text = dgvChumon[8, dgvChumon.CurrentCellAddress.Y]?.Value?.ToString();
         }
 
         ///////////////////////////////
@@ -977,8 +1112,6 @@ namespace SalesManagement_SysDev
                 SelectRowControl();
 
                 SetDataDetailGridView(int.Parse(dgvChumon[0, dgvChumon.CurrentCellAddress.Y].Value.ToString()));
-
-                //  ClearImputDetail();
             }
         }
 
@@ -1140,6 +1273,30 @@ namespace SalesManagement_SysDev
             {
                 
             }
+        }
+
+        private void txbEmployeeID_TextChanged(object sender, EventArgs e)
+        {
+            //nullの確認
+            string stringEmployeeID = txbEmployeeID.Text.Trim();
+            int intEmployeeID = 0;
+
+            if (!String.IsNullOrEmpty(stringEmployeeID))
+            {
+                intEmployeeID = int.Parse(stringEmployeeID);
+            }
+
+            //存在確認
+            if (!employeeDataAccess.CheckEmployeeIDExistence(intEmployeeID))
+            {
+                txbEmployeeName.Text = "社員IDが存在しません";
+                return;
+            }
+
+            //IDから名前を取り出す
+            var Employee = listEmployee.Single(x => x.EmID == intEmployeeID);
+
+            txbEmployeeName.Text = Employee.EmName;
         }
     }
 }
