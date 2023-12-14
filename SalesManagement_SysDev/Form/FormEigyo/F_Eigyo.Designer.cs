@@ -132,16 +132,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(219)))), ((int)(((byte)(193)))));
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.Controls.Add(this.pnlEigyo);
             this.Controls.Add(this.btnFormArrival);
             this.Controls.Add(this.btnFormSyukko);
             this.Controls.Add(this.btnFormOrder);
             this.Controls.Add(this.btnFormStockView);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "F_Eigyo";
             this.Text = "営業画面";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.pnlEigyo.ResumeLayout(false);
             this.ResumeLayout(false);
 

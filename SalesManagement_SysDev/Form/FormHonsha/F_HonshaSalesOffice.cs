@@ -1039,5 +1039,10 @@ namespace SalesManagement_SysDev
                 UseShellExecute = true
             });
         }
+
+        private void btnPageSize_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

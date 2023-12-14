@@ -1144,6 +1144,7 @@ namespace SalesManagement_SysDev
 
         private void btnPagesize_Click(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
             GetDataGridView();
         }
 

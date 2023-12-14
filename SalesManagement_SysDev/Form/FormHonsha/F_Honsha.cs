@@ -118,5 +118,10 @@ namespace SalesManagement_SysDev
         {
             Application.Exit();
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

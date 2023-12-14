@@ -136,6 +136,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1920, 150);
             this.panel1.TabIndex = 8;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // btnFormSalesOffice
             // 
@@ -180,6 +181,7 @@
             this.MaximizeBox = false;
             this.Name = "F_Honsha";
             this.Text = "本社画面";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

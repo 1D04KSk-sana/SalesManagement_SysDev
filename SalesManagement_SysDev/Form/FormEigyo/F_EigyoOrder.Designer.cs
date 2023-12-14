@@ -738,7 +738,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(219)))), ((int)(((byte)(193)))));
-            this.ClientSize = new System.Drawing.Size(922, 640);
+            this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.Controls.Add(this.btnDetailClear);
             this.Controls.Add(this.cmbConfirm);
             this.Controls.Add(this.lblConfirm);
@@ -788,6 +788,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "F_EigyoOrder";
             this.Text = "F_EigyoOrder";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.F_EigyoOrder_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).EndInit();
             this.pnlSelect.ResumeLayout(false);
