@@ -726,6 +726,15 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
             // 顧客情報作成
             var updSalesOffice = GenerateDataAtUpdate();
 
