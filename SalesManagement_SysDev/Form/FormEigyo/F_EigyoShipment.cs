@@ -263,21 +263,12 @@ namespace SalesManagement_SysDev
                 intClientName = int.Parse(strClientName);
             }
 
-            string strEmployeeName = txbEmployeeName.Text.Trim();
-            int intEmployeeName = 0;
-
-            if (!String.IsNullOrEmpty(strEmployeeName))
-            {
-                intEmployeeName = int.Parse(strEmployeeName);
-            }
-
             // 検索条件のセット
             T_Shipment selectCondition = new T_Shipment()
             {
                 ShID = intShipmentID,
                 ClID = intClientName,
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
-                EmID = intEmployeeName,
             };
 
             if (searchFlg)
@@ -357,18 +348,6 @@ namespace SalesManagement_SysDev
                 {
                     MessageBox.Show("出荷IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbOrderID.Focus();
-                    return false;
-                }
-            }
-
-            //社員IDの適否
-            if (!String.IsNullOrEmpty(txbEmployeeName.Text.Trim()))
-            {
-                //社員IDの重複チェック
-                if (!employeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeName.Text.Trim())))
-                {
-                    MessageBox.Show("社員名が存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbEmployeeName.Focus();
                     return false;
                 }
             }
@@ -491,28 +470,6 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：GenerateDataAtRegistration()
-        //引　数   ：なし
-        //戻り値   ：受注登録情報
-        //機　能   ：登録データのセット
-        ///////////////////////////////
-        private T_Shipment GenerateDataAtRegistration()
-        {
-            return new T_Shipment
-            {
-                ShID = int.Parse(txbOrderID.Text.Trim()),
-                ClID = clientDataAccess.GetClientID(txbClientName.Text.Trim()),
-                EmID = F_Login.intEmployeeID,
-                SoID = cmbSalesOfficeID.SelectedIndex + 1,
-                OrID = int.Parse(txbOrderID.Text.Trim()),
-                ShStateFlag = 0,
-                ShFinishDate = dtpShipmentDate.Value,
-                ShFlag = cmbShipmentHidden.SelectedIndex,
-                ShHidden = txbShipmentHidden.Text.Trim(),
-            };
-        }
-
-        ///////////////////////////////
         //メソッド名：GenerateDataAtUpdate()
         //引　数   ：なし
         //戻り値   ：受注更新情報
@@ -558,6 +515,7 @@ namespace SalesManagement_SysDev
 
             //テキストボックス等のクリア
             ClearImput();
+            ClearImputDetail();
 
             // データグリッドビューの表示
             GetDataGridView();
@@ -651,19 +609,19 @@ namespace SalesManagement_SysDev
 
             dgvShipment.Columns.Add("ShID", "出荷ID");
             dgvShipment.Columns.Add("ClID", "顧客ID");
-            dgvShipment.Columns.Add("EmID", "受注会社");
-            dgvShipment.Columns.Add("SoID", "社員名");
-            dgvShipment.Columns.Add("OrID", "営業所名");
-            dgvShipment.Columns.Add("ShStateFlag", "受注年月日");
+            dgvShipment.Columns.Add("EmID", "社員名");
+            dgvShipment.Columns.Add("SoID", "営業所名");
+            dgvShipment.Columns.Add("OrID", "受注ID");
+            dgvShipment.Columns.Add("ShStateFlag", "出荷状態フラグ");
             dgvShipment.Columns.Add("ShFinishDate", "出荷完了年月日");
             dgvShipment.Columns.Add("ShFlag", "出荷管理フラグ");
             dgvShipment.Columns.Add("ShHidden", "非表示理由");
 
             dgvShipment.Columns["ShID"].Width = 70;
-            dgvShipment.Columns["ClID"].Width = 70;
-            dgvShipment.Columns["EmID"].Width = 125;
-            dgvShipment.Columns["SoID"].Width = 125;
-            dgvShipment.Columns["OrID"].Width = 135;
+            dgvShipment.Columns["ClID"].Width = 110;
+            dgvShipment.Columns["EmID"].Width = 130;
+            dgvShipment.Columns["SoID"].Width = 145;
+            dgvShipment.Columns["OrID"].Width = 70;
             dgvShipment.Columns["ShStateFlag"].Width = 100;
             dgvShipment.Columns["ShFinishDate"].Width = 220;
             dgvShipment.Columns["ShFlag"].Width = 100;
@@ -697,7 +655,7 @@ namespace SalesManagement_SysDev
             //ヘッダー位置の指定
             dgvShipmentDetail.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            dgvShipmentDetail.Columns.Add("ShDetailID", "受注ID");
+            dgvShipmentDetail.Columns.Add("ShDetailID", "出荷詳細ID");
             dgvShipmentDetail.Columns.Add("ShID", "受注詳細ID");
             dgvShipmentDetail.Columns.Add("PrID", "商品名");
             dgvShipmentDetail.Columns.Add("ShQuantity", "数量");
@@ -811,8 +769,8 @@ namespace SalesManagement_SysDev
             //1行ずつdgvShipmentに挿入
             foreach (var item in depData)
             {
-                dgvShipment.Rows.Add(item.ShID,item.OrID, dictionaryClient[item.ClID], dictionaryEmployee[item.EmID], 
-                    dictionarySalesOffice[item.SoID], dictionaryConfirm[item.ShStateFlag], item.ShFinishDate, dictionaryHidden[item.ShFlag], item.ShHidden);
+                dgvShipment.Rows.Add(item.ShID, dictionaryClient[item.ClID], dictionaryEmployee[item.EmID], 
+                    dictionarySalesOffice[item.SoID], item.OrID, dictionaryConfirm[item.ShStateFlag], item.ShFinishDate, dictionaryHidden[item.ShFlag], item.ShHidden);
             }
 
             //dgvShipmentをリフレッシュ
@@ -880,10 +838,12 @@ namespace SalesManagement_SysDev
         {
             //データグリッドビューに乗っている情報をguiに反映
             txbShipmentID.Text = dgvShipment[0, dgvShipment.CurrentCellAddress.Y].Value.ToString();
-            txbClientName.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvShipment[1, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
-            txbEmployeeName.Text = dgvShipment[3, dgvShipment.CurrentCellAddress.Y].Value.ToString();
+            txbClientName.Text = dgvShipment[1, dgvShipment.CurrentCellAddress.Y].Value.ToString();
+            //txbClientName.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvShipment[1, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            txbEmployeeName.Text = dgvShipment[2, dgvShipment.CurrentCellAddress.Y].Value.ToString();
             //txbEmployeeName.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvShipment[1, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
-            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvShipment[4, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key - 1;
+            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvShipment[3, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key - 1;
+            txbOrderID.Text = dgvShipment[4, dgvShipment.CurrentCellAddress.Y].Value.ToString();
             dtpShipmentDate.Text = dgvShipment[6, dgvShipment.CurrentCellAddress.Y].Value.ToString();
             cmbShipmentHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvShipment[7, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key;
             txbShipmentHidden.Text = dgvShipment[8, dgvShipment.CurrentCellAddress.Y]?.Value?.ToString();
@@ -896,6 +856,21 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：ClearImputDetail()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：コントロールのクリア(Detail)
+        ///////////////////////////////
+        private void ClearImputDetail()
+        {
+            txbOrderID.Text = string.Empty;
+            txbOrderID.Text = string.Empty;
+            txbShipmentDetailID.Text = string.Empty;
+            txbProductName.Text = string.Empty;
+            txbShipmentquantity.Text = string.Empty;
+        }
+
+        ///////////////////////////////
         //メソッド名：SelectRowDetailControl()
         //引　数   ：なし
         //戻り値   ：なし
@@ -904,7 +879,7 @@ namespace SalesManagement_SysDev
         private void SelectRowDetailControl()
         {
             //データグリッドビューに乗っている情報をGUIに反映
-            txbOrderID.Text = dgvShipmentDetail[0, dgvShipmentDetail.CurrentCellAddress.Y].Value.ToString();
+            //txbOrderID.Text = dgvShipmentDetail[0, dgvShipmentDetail.CurrentCellAddress.Y].Value.ToString();
             txbShipmentDetailID.Text = dgvShipmentDetail[1, dgvShipmentDetail.CurrentCellAddress.Y].Value.ToString();
             txbProductID.Text = dictionaryProdact.FirstOrDefault(x => x.Value == dgvShipment[2, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbProductName.Text = dgvShipmentDetail[2, dgvShipmentDetail.CurrentCellAddress.Y].Value.ToString();

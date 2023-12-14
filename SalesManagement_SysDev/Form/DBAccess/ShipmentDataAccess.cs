@@ -117,8 +117,9 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var Shipment = context.T_Shipments.Single(x => x.ShID == updShipment.ShID);
 
-                updShipment.ShFlag = updShipment.ShFlag;
-                updShipment.ShHidden = updShipment.ShHidden;
+                Shipment.ShFlag = updShipment.ShFlag;
+                Shipment.ShHidden = updShipment.ShHidden;
+                Shipment.SoID = updShipment.SoID;
 
                 context.SaveChanges();
                 context.Dispose();
