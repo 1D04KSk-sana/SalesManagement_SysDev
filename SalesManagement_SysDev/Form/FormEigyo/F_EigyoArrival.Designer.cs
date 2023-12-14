@@ -132,13 +132,13 @@
             // 
             this.lblWarehousing.AutoSize = true;
             this.lblWarehousing.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblWarehousing.ForeColor = System.Drawing.Color.White;
+            this.lblWarehousing.ForeColor = System.Drawing.Color.Black;
             this.lblWarehousing.Location = new System.Drawing.Point(729, 44);
             this.lblWarehousing.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWarehousing.Name = "lblWarehousing";
-            this.lblWarehousing.Size = new System.Drawing.Size(418, 64);
+            this.lblWarehousing.Size = new System.Drawing.Size(288, 64);
             this.lblWarehousing.TabIndex = 24;
-            this.lblWarehousing.Text = "入荷管理画面";
+            this.lblWarehousing.Text = "入荷管理";
             // 
             // txbArrivalID
             // 
@@ -369,7 +369,7 @@
             // 
             // btnDone
             // 
-            this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
+            this.btnDone.BackColor = System.Drawing.Color.White;
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnDone.Location = new System.Drawing.Point(1658, 168);
             this.btnDone.Margin = new System.Windows.Forms.Padding(2);

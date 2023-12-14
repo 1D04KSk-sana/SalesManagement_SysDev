@@ -388,13 +388,13 @@
             // 
             this.lblClient.AutoSize = true;
             this.lblClient.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClient.ForeColor = System.Drawing.Color.White;
-            this.lblClient.Location = new System.Drawing.Point(720, 46);
+            this.lblClient.ForeColor = System.Drawing.Color.Black;
+            this.lblClient.Location = new System.Drawing.Point(816, 46);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(417, 64);
+            this.lblClient.Size = new System.Drawing.Size(288, 64);
             this.lblClient.TabIndex = 23;
-            this.lblClient.Text = "顧客管理画面";
+            this.lblClient.Text = "顧客管理";
             // 
             // cmbView
             // 
