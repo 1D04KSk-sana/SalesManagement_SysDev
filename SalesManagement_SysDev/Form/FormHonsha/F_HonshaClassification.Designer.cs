@@ -109,7 +109,7 @@
             // 
             this.lblClient.AutoSize = true;
             this.lblClient.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClient.ForeColor = System.Drawing.Color.White;
+            this.lblClient.ForeColor = System.Drawing.Color.Black;
             this.lblClient.Location = new System.Drawing.Point(720, 46);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";

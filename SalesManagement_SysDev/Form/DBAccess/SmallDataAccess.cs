@@ -10,7 +10,7 @@ namespace SalesManagement_SysDev
     internal class SmallDataAccess
     {
         ///////////////////////////////
-        //メソッド名：GetSmallClassificationDspData()
+        //メソッド名：GetSmallDspData()
         //引　数   ：なし
         //戻り値   ：表示用小分類名データ
         //機　能   ：表示用小分類名データの取得
@@ -95,6 +95,77 @@ namespace SalesManagement_SysDev
             }
 
             return listSmall;
+        }
+        ///////////////////////////////
+        //メソッド名：CheckMakerIDExistence()
+        //引　数   ：メーカーコード
+        //戻り値   ：True or False
+        //機　能   ：一致するメーカーIDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckSmallIDExistence(int SmallID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                //大分類IDで一致するデータが存在するか
+                flg = context.M_SmallClassifications.Any(x => x.ScID == SmallID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+        ///////////////////////////////
+        //メソッド名：CheckMakerNameExistence()
+        //引　数   ：メーカーコード
+        //戻り値   ：True or False
+        //機　能   ：一致するメーカー名の有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckSmallNameExistence(string SmallName)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                //営業所IDで一致するデータが存在するか
+                flg = context.M_SmallClassifications.Any(x => x.ScName == SmallName);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+        ///////////////////////////////
+        //メソッド名：AddMakerData()
+        //引　数：regMaker = メーカーデータ
+        //戻り値：True or False
+        //機　能：メーカーデータの登録
+        //      ：登録成功の場合True
+        //      ：登録失敗の場合False
+        ///////////////////////////////
+        public bool AddSmallData(M_SmallClassification regSmall)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                context.M_SmallClassifications.Add(regSmall);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
         }
     }
 }

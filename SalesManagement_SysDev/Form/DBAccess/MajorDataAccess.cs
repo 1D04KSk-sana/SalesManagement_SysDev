@@ -96,5 +96,53 @@ namespace SalesManagement_SysDev
 
             return listMajor;
         }
+        ///////////////////////////////
+        //メソッド名：CheckMakerIDExistence()
+        //引　数   ：メーカーコード
+        //戻り値   ：True or False
+        //機　能   ：一致するメーカーIDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckMajorIDExistence(int MajorID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                //大分類IDで一致するデータが存在するか
+                flg = context.M_MajorClassifications.Any(x => x.McID == MajorID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+        ///////////////////////////////
+        //メソッド名：CheckMakerNameExistence()
+        //引　数   ：メーカーコード
+        //戻り値   ：True or False
+        //機　能   ：一致するメーカー名の有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckMajorNameExistence(string MajorName)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                //営業所IDで一致するデータが存在するか
+                flg = context.M_MajorClassifications.Any(x => x.McName == MajorName);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
     }
 }
