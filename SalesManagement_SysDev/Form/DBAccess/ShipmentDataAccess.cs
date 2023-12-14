@@ -19,21 +19,19 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         public bool AddShipmentData(T_Shipment regShipment)
         {
-            try
-            {
+            //try
+            //{
                 var context = new SalesManagement_DevContext();
                 context.T_Shipments.Add(regShipment);
                 context.SaveChanges();
                 context.Dispose();
                 return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return false;
+            //}
         }
-
     }
 }

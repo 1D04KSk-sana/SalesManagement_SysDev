@@ -50,8 +50,6 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.dgvHattyu = new System.Windows.Forms.DataGridView();
             this.lblHattyuDate = new System.Windows.Forms.Label();
-            this.txbHattyuDetailID = new System.Windows.Forms.TextBox();
-            this.lblHattyuDetailID = new System.Windows.Forms.Label();
             this.lblEmployeeID = new System.Windows.Forms.Label();
             this.lblMakerName = new System.Windows.Forms.Label();
             this.txbHattyuID = new System.Windows.Forms.TextBox();
@@ -366,27 +364,6 @@
             this.lblHattyuDate.TabIndex = 91;
             this.lblHattyuDate.Text = "発注年月日";
             // 
-            // txbHattyuDetailID
-            // 
-            this.txbHattyuDetailID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbHattyuDetailID.Location = new System.Drawing.Point(1590, 275);
-            this.txbHattyuDetailID.Margin = new System.Windows.Forms.Padding(2);
-            this.txbHattyuDetailID.Name = "txbHattyuDetailID";
-            this.txbHattyuDetailID.ShortcutsEnabled = false;
-            this.txbHattyuDetailID.Size = new System.Drawing.Size(220, 31);
-            this.txbHattyuDetailID.TabIndex = 87;
-            // 
-            // lblHattyuDetailID
-            // 
-            this.lblHattyuDetailID.AutoSize = true;
-            this.lblHattyuDetailID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblHattyuDetailID.Location = new System.Drawing.Point(1419, 278);
-            this.lblHattyuDetailID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblHattyuDetailID.Name = "lblHattyuDetailID";
-            this.lblHattyuDetailID.Size = new System.Drawing.Size(128, 24);
-            this.lblHattyuDetailID.TabIndex = 89;
-            this.lblHattyuDetailID.Text = "発注詳細ID";
-            // 
             // lblEmployeeID
             // 
             this.lblEmployeeID.AutoSize = true;
@@ -504,7 +481,7 @@
             // txbHattyuQuantity
             // 
             this.txbHattyuQuantity.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbHattyuQuantity.Location = new System.Drawing.Point(1590, 436);
+            this.txbHattyuQuantity.Location = new System.Drawing.Point(1587, 412);
             this.txbHattyuQuantity.Margin = new System.Windows.Forms.Padding(2);
             this.txbHattyuQuantity.Name = "txbHattyuQuantity";
             this.txbHattyuQuantity.ShortcutsEnabled = false;
@@ -515,7 +492,7 @@
             // 
             this.txbProductName.Enabled = false;
             this.txbProductName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProductName.Location = new System.Drawing.Point(1590, 383);
+            this.txbProductName.Location = new System.Drawing.Point(1587, 359);
             this.txbProductName.Margin = new System.Windows.Forms.Padding(2);
             this.txbProductName.Name = "txbProductName";
             this.txbProductName.ReadOnly = true;
@@ -526,7 +503,7 @@
             // txbProductID
             // 
             this.txbProductID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProductID.Location = new System.Drawing.Point(1590, 329);
+            this.txbProductID.Location = new System.Drawing.Point(1587, 305);
             this.txbProductID.Margin = new System.Windows.Forms.Padding(2);
             this.txbProductID.Name = "txbProductID";
             this.txbProductID.ShortcutsEnabled = false;
@@ -539,7 +516,7 @@
             // 
             this.lbltxbHattyuQuentity.AutoSize = true;
             this.lbltxbHattyuQuentity.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lbltxbHattyuQuentity.Location = new System.Drawing.Point(1489, 439);
+            this.lbltxbHattyuQuentity.Location = new System.Drawing.Point(1486, 415);
             this.lbltxbHattyuQuentity.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbltxbHattyuQuentity.Name = "lbltxbHattyuQuentity";
             this.lbltxbHattyuQuentity.Size = new System.Drawing.Size(58, 24);
@@ -550,7 +527,7 @@
             // 
             this.lblProductName.AutoSize = true;
             this.lblProductName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProductName.Location = new System.Drawing.Point(1465, 386);
+            this.lblProductName.Location = new System.Drawing.Point(1462, 362);
             this.lblProductName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProductName.Name = "lblProductName";
             this.lblProductName.Size = new System.Drawing.Size(82, 24);
@@ -561,7 +538,7 @@
             // 
             this.lblProductID.AutoSize = true;
             this.lblProductID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProductID.Location = new System.Drawing.Point(1467, 329);
+            this.lblProductID.Location = new System.Drawing.Point(1464, 305);
             this.lblProductID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProductID.Name = "lblProductID";
             this.lblProductID.Size = new System.Drawing.Size(80, 24);
@@ -722,8 +699,6 @@
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.dgvHattyu);
             this.Controls.Add(this.lblHattyuDate);
-            this.Controls.Add(this.txbHattyuDetailID);
-            this.Controls.Add(this.lblHattyuDetailID);
             this.Controls.Add(this.lblEmployeeID);
             this.Controls.Add(this.lblMakerName);
             this.Controls.Add(this.txbHattyuID);
@@ -767,8 +742,6 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.DataGridView dgvHattyu;
         private System.Windows.Forms.Label lblHattyuDate;
-        private System.Windows.Forms.TextBox txbHattyuDetailID;
-        private System.Windows.Forms.Label lblHattyuDetailID;
         private System.Windows.Forms.Label lblEmployeeID;
         private System.Windows.Forms.Label lblMakerName;
         private System.Windows.Forms.TextBox txbHattyuID;

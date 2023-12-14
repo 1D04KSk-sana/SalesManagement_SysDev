@@ -12,6 +12,8 @@ namespace SalesManagement_SysDev
     class T_HattyuDetail
     {
         [Key]
+        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int HaDetailID { get; set; } //発注詳細ID
         public int HaID { get; set; }       //発注ID
         public int PrID { get; set; }       //商品ID

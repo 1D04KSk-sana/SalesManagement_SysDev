@@ -877,7 +877,7 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1-nFWLxjJ3gj2gqEa9VjvKW3R5T7nG_0J/edit=true",
+                FileName = "https://docs.google.com/document/d/1-nFWLxjJ3gj2gqEa9VjvKW3R5T7nG_0J",
                 UseShellExecute = true
             });
         }

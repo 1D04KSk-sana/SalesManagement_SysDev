@@ -43,7 +43,7 @@
             // 
             // btnFormClient
             // 
-            this.btnFormClient.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormClient.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormClient.Location = new System.Drawing.Point(707, 210);
             this.btnFormClient.Margin = new System.Windows.Forms.Padding(2);
             this.btnFormClient.Name = "btnFormClient";
@@ -81,7 +81,7 @@
             // 
             // btnFormEmployee
             // 
-            this.btnFormEmployee.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormEmployee.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormEmployee.Location = new System.Drawing.Point(707, 567);
             this.btnFormEmployee.Name = "btnFormEmployee";
             this.btnFormEmployee.Size = new System.Drawing.Size(510, 100);
@@ -93,7 +93,7 @@
             // 
             // btnFormSale
             // 
-            this.btnFormSale.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormSale.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormSale.Location = new System.Drawing.Point(707, 390);
             this.btnFormSale.Name = "btnFormSale";
             this.btnFormSale.Size = new System.Drawing.Size(510, 100);
@@ -105,7 +105,7 @@
             // 
             // btnFormProdact
             // 
-            this.btnFormProdact.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormProdact.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormProdact.Location = new System.Drawing.Point(707, 746);
             this.btnFormProdact.Name = "btnFormProdact";
             this.btnFormProdact.Size = new System.Drawing.Size(510, 100);
@@ -117,7 +117,7 @@
             // 
             // btnFormOperationLog
             // 
-            this.btnFormOperationLog.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormOperationLog.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormOperationLog.Location = new System.Drawing.Point(707, 917);
             this.btnFormOperationLog.Name = "btnFormOperationLog";
             this.btnFormOperationLog.Size = new System.Drawing.Size(510, 100);
@@ -140,7 +140,7 @@
             // 
             // btnFormSalesOffice
             // 
-            this.btnFormSalesOffice.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormSalesOffice.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormSalesOffice.Location = new System.Drawing.Point(1288, 940);
             this.btnFormSalesOffice.Name = "btnFormSalesOffice";
             this.btnFormSalesOffice.Size = new System.Drawing.Size(510, 100);
@@ -152,7 +152,7 @@
             // 
             // btnFormMaker
             // 
-            this.btnFormMaker.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormMaker.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormMaker.Location = new System.Drawing.Point(1288, 788);
             this.btnFormMaker.Name = "btnFormMaker";
             this.btnFormMaker.Size = new System.Drawing.Size(510, 100);

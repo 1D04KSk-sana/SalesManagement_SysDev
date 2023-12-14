@@ -224,7 +224,7 @@ namespace SalesManagement_SysDev
                     return false;
                 }
                 //在庫IDの重複チェック
-                if (!stockDataAccess.CheckstockIDExistence(int.Parse(txbstockID.Text.Trim())))
+                if (!stockDataAccess.CheckStockIDExistence(int.Parse(txbstockID.Text.Trim())))
                 {
                     MessageBox.Show("在庫IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbstockID.Focus();
@@ -567,7 +567,7 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1x5e-cyn25BCmNneXa8iYbhvX_WtcsflB/edit=true",
+                FileName = "https://docs.google.com/document/d/1x5e-cyn25BCmNneXa8iYbhvX_WtcsflB",
                 UseShellExecute = true
             });
         }

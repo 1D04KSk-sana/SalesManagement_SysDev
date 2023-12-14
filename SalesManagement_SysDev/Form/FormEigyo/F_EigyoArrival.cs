@@ -289,7 +289,14 @@ namespace SalesManagement_SysDev
             //1行ずつdgvArrivalに挿入
             foreach (var item in depData)
             {
-                dgvArrival.Rows.Add(item.ArID, dictionarySalesOffice[item.SoID], dictionaryEmployee[item.EmID.Value], dictionaryClient[item.ClID],item.OrID, item.ArDate, dictionaryHidden[item.ArFlag], dictionaryConfirm[item.ArStateFlag], item.ArHidden);
+                string strEmployeeName = "";
+
+                if (item.EmID != null)
+                {
+                    strEmployeeName = dictionaryEmployee[item.EmID.Value];
+                }
+
+                dgvArrival.Rows.Add(item.ArID, dictionarySalesOffice[item.SoID], strEmployeeName, dictionaryClient[item.ClID],item.OrID, item.ArDate, dictionaryHidden[item.ArFlag], dictionaryConfirm[item.ArStateFlag], item.ArHidden);
             }
 
             //dgvArrivalをリフレッシュ
@@ -988,7 +995,7 @@ namespace SalesManagement_SysDev
                     txbArrivalID.Focus();
                     return false;
                 }
-                //入庫IDの存在チェック
+                //入荷IDの存在チェック
                 if (!arrivalDataAccess.CheckArrivalIDExistence(int.Parse(txbArrivalID.Text.Trim())))
                 {
                     MessageBox.Show("入荷IDが存在していません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -998,10 +1005,17 @@ namespace SalesManagement_SysDev
 
                 T_Arrival arrival = arrivalDataAccess.GetIDArrivalData(int.Parse(txbArrivalID.Text.Trim()));
 
-                //入庫IDの確定チェック
+                //入荷IDの確定チェック
                 if (arrival.ArStateFlag == 1)
                 {
                     MessageBox.Show("入荷IDはすでに確定しています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbArrivalID.Focus();
+                    return false;
+                }
+                //入荷IDの非表示チェック
+                if (arrival.ArFlag == 1)
+                {
+                    MessageBox.Show("入荷IDは非表示にされています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbArrivalID.Focus();
                     return false;
                 }
@@ -1010,14 +1024,6 @@ namespace SalesManagement_SysDev
             {
                 MessageBox.Show("入荷IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbArrivalID.Focus();
-                return false;
-            }
-
-            //確定選択の適否
-            if (cmbConfirm.SelectedIndex == -1)
-            {
-                MessageBox.Show("未確定/確定が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                cmbConfirm.Focus();
                 return false;
             }
 
@@ -1037,6 +1043,7 @@ namespace SalesManagement_SysDev
                 ArID = int.Parse(txbArrivalID.Text.Trim()),
                 ArStateFlag = 1,
                 EmID = F_Login.intEmployeeID,
+                ArDate = DateTime.Now,
             };
         }
 
@@ -1068,7 +1075,8 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("確定に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            T_Arrival Arrival = arrivalDataAccess.GetIDArrivalData(int.Parse(txbArrivalID.Text.Trim()));
+            //出荷登録
+            T_Arrival Arrival = arrivalDataAccess.GetIDArrivalData(cfmArrival.ArID);
 
             T_Shipment Shipment = GenerateShipmentAtRegistration(Arrival);
 
@@ -1083,7 +1091,8 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("出荷管理へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            List<T_ArrivalDetail> listArrivalDetail = arrivalDetailDataAccess.GetIDArrivalDetailData(int.Parse(txbArrivalID.Text.Trim()));
+            //出荷詳細登録
+            List<T_ArrivalDetail> listArrivalDetail = arrivalDetailDataAccess.GetArrivalDetailIDData(cfmArrival.ArID);
 
             List<bool> flgArrivallist = new List<bool>();
             bool flgArrival = true;
@@ -1131,7 +1140,6 @@ namespace SalesManagement_SysDev
             {
                 ShID = Arrival.ArID,
                 ClID = Arrival.ClID,
-                EmID = F_Login.intEmployeeID,
                 SoID = Arrival.SoID,
                 OrID = Arrival.OrID,
                 ShStateFlag = 0,
@@ -1148,6 +1156,7 @@ namespace SalesManagement_SysDev
         {
             return new T_ShipmentDetail
             {
+                ShDetailID = ArrivalDetail.ArDetailID,
                 ShID = ArrivalDetail.ArID,
                 PrID = ArrivalDetail.PrID,
                 ShQuantity = ArrivalDetail.ArQuantity
@@ -1262,7 +1271,7 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1Z_kheY9JMioOO_-RxazHPBPAvpAiAioE/edit=true",
+                FileName = "https://docs.google.com/document/d/1Z_kheY9JMioOO_-RxazHPBPAvpAiAioE",
                 UseShellExecute = true
             });
         }

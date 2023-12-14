@@ -726,6 +726,15 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
             // 顧客情報作成
             var updSalesOffice = GenerateDataAtUpdate();
 
@@ -1026,7 +1035,7 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1EwgtxiqAgD8eJP7D9e6v9xkQuUIdCJ1H/edit=true",
+                FileName = "https://docs.google.com/document/d/1EwgtxiqAgD8eJP7D9e6v9xkQuUIdCJ1H",
                 UseShellExecute = true
             });
         }

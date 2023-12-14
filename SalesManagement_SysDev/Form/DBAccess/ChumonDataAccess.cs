@@ -183,7 +183,8 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var Chumon = context.T_Chumons.Single(x => x.OrID == cfmChumon.ChID);
 
-                Chumon.ChStateFlag = cfmChumon.ChStateFlag;
+                Chumon.ChStateFlag = 1;
+                Chumon.EmID = cfmChumon.EmID;
 
                 context.SaveChanges();
                 context.Dispose();

@@ -885,6 +885,13 @@ namespace SalesManagement_SysDev
                     txbWarehousingID.Focus();
                     return false;
                 }
+                //入庫IDの非表示チェック
+                if (warehousing.WaFlag == 1)
+                {
+                    MessageBox.Show("入庫IDは非表示にされています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbWarehousingID.Focus();
+                    return false;
+                }
             }
             else
             {
@@ -916,6 +923,7 @@ namespace SalesManagement_SysDev
             {
                 WaID = int.Parse(txbWarehousingID.Text.Trim()),
                 WaShelfFlag = 1,
+                WaDate = DateTime.Now,
                 EmID = F_Login.intEmployeeID
             };
         }
@@ -965,9 +973,7 @@ namespace SalesManagement_SysDev
                     flgStock = false;
                 }
             }
-
-            //T_Stock Stock = GenerateStockAtRegistration(Warehousing);
-
+            
             if (flgStock)
             {
                 MessageBox.Show("在庫数を更新しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1052,7 +1058,7 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1Q0uZtxk67w69u3Lqq8Qs0JZucHhzYclU/edit=true",
+                FileName = "https://docs.google.com/document/d/1Q0uZtxk67w69u3Lqq8Qs0JZucHhzYclU",
                 UseShellExecute = true
             });
         }
