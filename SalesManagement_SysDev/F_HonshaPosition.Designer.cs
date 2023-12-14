@@ -77,6 +77,7 @@
             // 
             // btnClose
             // 
+            this.btnClose.BackColor = System.Drawing.Color.White;
             this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 30F);
             this.btnClose.Location = new System.Drawing.Point(1699, 30);
             this.btnClose.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -84,22 +85,23 @@
             this.btnClose.Size = new System.Drawing.Size(200, 80);
             this.btnClose.TabIndex = 24;
             this.btnClose.Text = "閉じる";
-            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.UseVisualStyleBackColor = false;
             // 
             // lblPosition
             // 
             this.lblPosition.AutoSize = true;
             this.lblPosition.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblPosition.ForeColor = System.Drawing.Color.White;
-            this.lblPosition.Location = new System.Drawing.Point(720, 46);
+            this.lblPosition.ForeColor = System.Drawing.Color.Black;
+            this.lblPosition.Location = new System.Drawing.Point(815, 46);
             this.lblPosition.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPosition.Name = "lblPosition";
-            this.lblPosition.Size = new System.Drawing.Size(417, 64);
+            this.lblPosition.Size = new System.Drawing.Size(287, 64);
             this.lblPosition.TabIndex = 23;
-            this.lblPosition.Text = "役職管理画面";
+            this.lblPosition.Text = "役職管理";
             // 
             // btnReturn
             // 
+            this.btnReturn.BackColor = System.Drawing.Color.White;
             this.btnReturn.Font = new System.Drawing.Font("MS UI Gothic", 30F);
             this.btnReturn.Location = new System.Drawing.Point(20, 30);
             this.btnReturn.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -107,7 +109,7 @@
             this.btnReturn.Size = new System.Drawing.Size(200, 80);
             this.btnReturn.TabIndex = 0;
             this.btnReturn.Text = "戻る";
-            this.btnReturn.UseVisualStyleBackColor = true;
+            this.btnReturn.UseVisualStyleBackColor = false;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
             // pnlSelect
@@ -257,6 +259,7 @@
             // 
             // btnPageSize
             // 
+            this.btnPageSize.BackColor = System.Drawing.Color.White;
             this.btnPageSize.Font = new System.Drawing.Font("MS UI Gothic", 16F);
             this.btnPageSize.Location = new System.Drawing.Point(230, 981);
             this.btnPageSize.Margin = new System.Windows.Forms.Padding(1);
@@ -264,7 +267,7 @@
             this.btnPageSize.Size = new System.Drawing.Size(140, 40);
             this.btnPageSize.TabIndex = 36;
             this.btnPageSize.Text = "行数変更";
-            this.btnPageSize.UseVisualStyleBackColor = true;
+            this.btnPageSize.UseVisualStyleBackColor = false;
             this.btnPageSize.Click += new System.EventHandler(this.btnPageSize_Click);
             // 
             // lblPageSize
@@ -309,6 +312,7 @@
             // 
             // btnPageMin
             // 
+            this.btnPageMin.BackColor = System.Drawing.Color.White;
             this.btnPageMin.Font = new System.Drawing.Font("MS UI Gothic", 16F);
             this.btnPageMin.Location = new System.Drawing.Point(1584, 981);
             this.btnPageMin.Margin = new System.Windows.Forms.Padding(1);
@@ -316,11 +320,12 @@
             this.btnPageMin.Size = new System.Drawing.Size(50, 40);
             this.btnPageMin.TabIndex = 40;
             this.btnPageMin.Text = "|◀";
-            this.btnPageMin.UseVisualStyleBackColor = true;
+            this.btnPageMin.UseVisualStyleBackColor = false;
             this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
             // 
             // btnBack
             // 
+            this.btnBack.BackColor = System.Drawing.Color.White;
             this.btnBack.Font = new System.Drawing.Font("MS UI Gothic", 16F);
             this.btnBack.Location = new System.Drawing.Point(1656, 981);
             this.btnBack.Margin = new System.Windows.Forms.Padding(1);
@@ -328,11 +333,12 @@
             this.btnBack.Size = new System.Drawing.Size(50, 40);
             this.btnBack.TabIndex = 39;
             this.btnBack.Text = "◀";
-            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnNext
             // 
+            this.btnNext.BackColor = System.Drawing.Color.White;
             this.btnNext.Font = new System.Drawing.Font("MS UI Gothic", 16F);
             this.btnNext.Location = new System.Drawing.Point(1723, 981);
             this.btnNext.Margin = new System.Windows.Forms.Padding(1);
@@ -340,11 +346,12 @@
             this.btnNext.Size = new System.Drawing.Size(50, 40);
             this.btnNext.TabIndex = 38;
             this.btnNext.Text = "▶";
-            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.UseVisualStyleBackColor = false;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPageMax
             // 
+            this.btnPageMax.BackColor = System.Drawing.Color.White;
             this.btnPageMax.Font = new System.Drawing.Font("MS UI Gothic", 16F);
             this.btnPageMax.Location = new System.Drawing.Point(1789, 981);
             this.btnPageMax.Margin = new System.Windows.Forms.Padding(1);
@@ -352,11 +359,12 @@
             this.btnPageMax.Size = new System.Drawing.Size(50, 40);
             this.btnPageMax.TabIndex = 37;
             this.btnPageMax.Text = "▶|";
-            this.btnPageMax.UseVisualStyleBackColor = true;
+            this.btnPageMax.UseVisualStyleBackColor = false;
             this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
             // btnClear
             // 
+            this.btnClear.BackColor = System.Drawing.Color.White;
             this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnClear.Location = new System.Drawing.Point(1530, 187);
             this.btnClear.Margin = new System.Windows.Forms.Padding(2);
@@ -365,11 +373,12 @@
             this.btnClear.TabIndex = 96;
             this.btnClear.TabStop = false;
             this.btnClear.Text = "クリア";
-            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.UseVisualStyleBackColor = false;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnDone
             // 
+            this.btnDone.BackColor = System.Drawing.Color.White;
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnDone.Location = new System.Drawing.Point(1723, 187);
             this.btnDone.Margin = new System.Windows.Forms.Padding(2);
@@ -378,11 +387,12 @@
             this.btnDone.TabIndex = 95;
             this.btnDone.TabStop = false;
             this.btnDone.Text = "実行";
-            this.btnDone.UseVisualStyleBackColor = true;
+            this.btnDone.UseVisualStyleBackColor = false;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // cmbView
             // 
+            this.cmbView.BackColor = System.Drawing.Color.White;
             this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 26F);
             this.cmbView.FormattingEnabled = true;
@@ -398,6 +408,7 @@
             // 
             // cmbHidden
             // 
+            this.cmbHidden.BackColor = System.Drawing.Color.White;
             this.cmbHidden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.cmbHidden.FormattingEnabled = true;

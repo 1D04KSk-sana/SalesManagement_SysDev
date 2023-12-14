@@ -362,7 +362,7 @@ namespace SalesManagement_SysDev
             {
                 OpHistoryID = operationLogAccess.OperationLogNum() + 1,
                 EmID = F_Login.intEmployeeID,
-                FormName = "役職管理画面",
+                FormName = "役職管理",
                 OpDone = OperationDone,
                 OpDBID = int.Parse(txbPositionID.Text.Trim()),
                 OpSetTime = DateTime.Now,
