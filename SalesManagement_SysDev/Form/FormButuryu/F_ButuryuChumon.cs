@@ -1235,7 +1235,7 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1yYyPRRkTIaRLV_tuXHSAWTVoa1-09lZ6/edit?usp=drive_web&ouid=103069670281955437168&rtpof=true",
+                FileName = "https://docs.google.com/document/d/1yYyPRRkTIaRLV_tuXHSAWTVoa1-09lZ6",
                 UseShellExecute = true
             });
         }

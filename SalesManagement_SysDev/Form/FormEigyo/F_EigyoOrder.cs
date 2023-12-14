@@ -1331,8 +1331,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private T_OperationLog GenerateLogAtRegistration(string OperationDone)
         {
-
-
             return new T_OperationLog
             {
                 OpHistoryID = operationLogAccess.OperationLogNum() + 1,
@@ -1639,7 +1637,7 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1s22pnDmQUvusUxEj42UxX8d0x1tuiIGY/edit=true",
+                FileName = "https://docs.google.com/document/d/1s22pnDmQUvusUxEj42UxX8d0x1tuiIGY",
                 UseShellExecute = true
             });
         }
