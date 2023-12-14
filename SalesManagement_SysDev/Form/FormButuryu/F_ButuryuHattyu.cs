@@ -402,6 +402,14 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            // 登録確認メッセージ
+            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
             //操作ログデータ取得
             var regOperationLog = GenerateLogAtRegistration(rdbRegister.Text);
 
@@ -523,14 +531,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void RegistrationHattyu(T_Hattyu regHattyu)
         {
-            // 登録確認メッセージ
-            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
             // 発注情報の登録
             bool flg = hattyuDataAccess.AddHattyuData(regHattyu);
 
@@ -562,6 +562,14 @@ namespace SalesManagement_SysDev
         {
             //入力情報適否
             if (!GetValidDetailDataAtRegistration())
+            {
+                return;
+            }
+
+            // 登録確認メッセージ
+            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
             {
                 return;
             }
@@ -693,14 +701,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void RegistrationHattyuDetail(T_HattyuDetail regHattyu)
         {
-            // 登録確認メッセージ
-            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
             // 発注情報の登録
             bool flg = hattyuDetailDataAccess.AddHattyuDetailData(regHattyu);
 
@@ -731,6 +731,14 @@ namespace SalesManagement_SysDev
         {
             //テキストボックス等の入力チェック
             if (!GetValidDataAtUpdate())
+            {
+                return;
+            }
+
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
             {
                 return;
             }
@@ -821,14 +829,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void UpdateHattyu(T_Hattyu updHattyu)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
             // 発注情報の更新
             bool flg = hattyuDataAccess.UpdateHattyuData(updHattyu);
 
@@ -1040,6 +1040,14 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("確定しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
             //操作ログデータ取得
             var regOperationLog = GenerateLogAtRegistration(rdbConfirm.Text);
 
@@ -1142,14 +1150,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void ConfirmHattyu(T_Hattyu cfmHattyu)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("確定しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
             // 発注情報の更新
             bool flg = hattyuDataAccess.ConfirmHattyuData(cfmHattyu);
 

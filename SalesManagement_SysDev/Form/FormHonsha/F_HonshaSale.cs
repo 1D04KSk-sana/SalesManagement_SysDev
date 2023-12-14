@@ -370,7 +370,6 @@ namespace SalesManagement_SysDev
             {
                 SaleDataHiddenUpdate();
             }
-
         }
 
         ///////////////////////////////
@@ -690,6 +689,23 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbHiddenUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
             // 売上情報作成
             var updSale = GenerateDataAtUpdate();
 
@@ -764,23 +780,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void UpdateSale(T_Sale updSale)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
-            //操作ログデータ取得
-            var regOperationLog = GenerateLogAtRegistration(rdbHiddenUpdate.Text);
-
-            //操作ログデータの登録（成功 = true,失敗 = false）
-            if (!operationLogAccess.AddOperationLogData(regOperationLog))
-            {
-                return;
-            }
-
             //  売上情報の更新
             bool flg = saleDataAccess.UpdateSaleData(updSale);
             if (flg == true)

@@ -213,6 +213,14 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            // 登録確認メッセージ
+            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
             //操作ログデータ取得
             var regOperationLog = GenerateLogAtRegistration(rdbRegister.Text);
 
@@ -362,14 +370,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void RegistrationStock(T_Stock regStock)
         {
-            // 登録確認メッセージ
-            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
             // 受注情報の登録
             bool flg = stockDataAccess.AddStockData(regStock);
 
