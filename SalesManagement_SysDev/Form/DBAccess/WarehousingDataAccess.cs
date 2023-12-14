@@ -265,8 +265,7 @@ namespace SalesManagement_SysDev
 
                 Warehousing.WaShelfFlag = cfmWarehousing.WaShelfFlag;
                 Warehousing.EmID = cfmWarehousing.EmID;
-
-
+                Warehousing.WaDate = cfmWarehousing.WaDate;
 
                 context.SaveChanges();
                 context.Dispose();

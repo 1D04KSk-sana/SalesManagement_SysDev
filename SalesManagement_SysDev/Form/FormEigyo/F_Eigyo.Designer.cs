@@ -66,7 +66,7 @@
             // 
             // btnFormStockView
             // 
-            this.btnFormStockView.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormStockView.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormStockView.Location = new System.Drawing.Point(696, 299);
             this.btnFormStockView.Margin = new System.Windows.Forms.Padding(2);
             this.btnFormStockView.Name = "btnFormStockView";
@@ -79,7 +79,7 @@
             // 
             // btnFormOrder
             // 
-            this.btnFormOrder.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormOrder.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormOrder.Location = new System.Drawing.Point(696, 826);
             this.btnFormOrder.Margin = new System.Windows.Forms.Padding(2);
             this.btnFormOrder.Name = "btnFormOrder";
@@ -92,7 +92,7 @@
             // 
             // btnFormSyukko
             // 
-            this.btnFormSyukko.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormSyukko.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormSyukko.Location = new System.Drawing.Point(696, 470);
             this.btnFormSyukko.Margin = new System.Windows.Forms.Padding(2);
             this.btnFormSyukko.Name = "btnFormSyukko";
@@ -105,7 +105,7 @@
             // 
             // btnFormArrival
             // 
-            this.btnFormArrival.Font = new System.Drawing.Font("MS UI Gothic", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormArrival.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormArrival.Location = new System.Drawing.Point(696, 650);
             this.btnFormArrival.Margin = new System.Windows.Forms.Padding(2);
             this.btnFormArrival.Name = "btnFormArrival";

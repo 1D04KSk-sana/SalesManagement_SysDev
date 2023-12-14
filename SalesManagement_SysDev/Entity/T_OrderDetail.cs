@@ -12,6 +12,8 @@ namespace SalesManagement_SysDev
     class T_OrderDetail
     {
         [Key]
+        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int OrDetailID { get; set; }         //受注詳細ID
         public int OrID { get; set; }               //受注ID
         public int PrID { get; set; }               //商品ID
