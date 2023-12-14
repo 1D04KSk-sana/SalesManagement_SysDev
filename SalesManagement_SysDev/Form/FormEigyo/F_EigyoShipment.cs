@@ -677,6 +677,11 @@ namespace SalesManagement_SysDev
             dgvShipmentDetail.Columns.Add("PrID", "商品名");
             dgvShipmentDetail.Columns.Add("ShQuantity", "数量");
 
+            dgvShipmentDetail.Columns["ShDetailID"].Width = 186;
+            dgvShipmentDetail.Columns["ShID"].Width = 186;
+            dgvShipmentDetail.Columns["PrID"].Width = 186;
+            dgvShipmentDetail.Columns["ShQuantity"].Width = 186;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvShipmentDetail.Columns)
             {
