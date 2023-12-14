@@ -92,10 +92,10 @@
             // btnClose
             // 
             this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 30F);
-            this.btnClose.Location = new System.Drawing.Point(1674, 38);
+            this.btnClose.Location = new System.Drawing.Point(1687, 44);
             this.btnClose.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(200, 80);
+            this.btnClose.Size = new System.Drawing.Size(160, 70);
             this.btnClose.TabIndex = 60;
             this.btnClose.Text = "閉じる";
             this.btnClose.UseVisualStyleBackColor = true;
