@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SalesManagement_SysDev
 {
@@ -63,10 +62,27 @@ namespace SalesManagement_SysDev
 
         private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
         {
+            TextBox textBox = sender as TextBox;
+
             //0～9と、バックスペース以外の時は、イベントをキャンセルする
             if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
             {
                 e.Handled = true;
+                return;
+            }
+
+            if (e.KeyChar > '0' && '9' > e.KeyChar)
+            {
+                // テキストボックスに入力されている値を取得
+                string inputText = textBox.Text + e.KeyChar;
+
+                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
+                int parsedValue;
+                if (!int.TryParse(inputText, out parsedValue))
+                {
+                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Handled = true;
+                }
             }
         }
 
@@ -432,8 +448,40 @@ namespace SalesManagement_SysDev
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
+            dtpSaleDate.Checked = false;
 
-            GetDataGridView();            
+            rdbHiddenUpdate.Checked = false;
+
+            GetDataGridView();
+        }
+
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+                cmbHidden.Enabled = false;
+                txbHidden.Enabled = false;
+            }
+            else
+            {
+                cmbHidden.Enabled = true;
+                txbHidden.Enabled = true;
+            }
+
+            if (rdbHiddenUpdate.Checked)
+            {
+                txbClientName.Enabled = false;
+                cmbSalesOfficeID.Enabled = false;
+                txbChumonID.Enabled = false;
+                dtpSaleDate.Enabled = false;
+            }
+            else
+            {
+                txbClientName.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                txbChumonID.Enabled = true;
+                dtpSaleDate.Enabled = true;
+            }
         }
 
         ///////////////////////////////
@@ -452,6 +500,7 @@ namespace SalesManagement_SysDev
             dtpSaleDate.Value= DateTime.Now;
             cmbSalesOfficeID.SelectedIndex = -1;
             cmbHidden.SelectedIndex = -1;
+            txbHidden.Text = string.Empty;
         }
 
 
@@ -591,10 +640,13 @@ namespace SalesManagement_SysDev
             txbChumonID.Text = dgvSale[4, dgvSale.CurrentCellAddress.Y].Value.ToString();
             dtpSaleDate.Text = dgvSale[5, dgvSale.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSale[6, dgvSale.CurrentCellAddress.Y].Value.ToString()).Key;
+            txbHidden.Text = dgvSale[7, dgvSale.CurrentCellAddress.Y]?.Value?.ToString();
         }
 
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+
             //データグリッドビューのデータ取得
             GetDataGridView();
         }
@@ -620,7 +672,7 @@ namespace SalesManagement_SysDev
                 dgvSaleDetail.Rows.Add(item.SaDetailID, item.SaID, item.PrID, item.SaQuantity, item.SaTotalPrice);
             }
 
-            //dgvClientをリフレッシュ
+            //dgvSaleDetailをリフレッシュ
             dgvSaleDetail.Refresh();
 
         }
@@ -701,6 +753,7 @@ namespace SalesManagement_SysDev
             {
                 SaID = int.Parse(txbSaleID.Text.Trim()),
                 SaFlag= cmbHidden.SelectedIndex,
+                SaHidden=txbHidden.Text.Trim(),
             };
         }
         ///////////////////////////////
@@ -748,6 +801,7 @@ namespace SalesManagement_SysDev
 
         private void btnPageSize_Click(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
             GetDataGridView();
         }
 
@@ -790,41 +844,6 @@ namespace SalesManagement_SysDev
 
         }
 
-        private void txbNumPage_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //0～9と、バックスペース以外の時は、イベントをキャンセルする
-            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
-            {
-                e.Handled = true;
-            }
-
-        }
-
-        private void txbPageSize_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //0～9と、バックスペース以外の時は、イベントをキャンセルする
-            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void rdbHiddenUpdate_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdbHiddenUpdate.Checked)
-            {
-                txbClientName.Enabled = false;
-                cmbSalesOfficeID.Enabled = false;
-                txbChumonID.Enabled = false;
-            }
-            else
-            {
-                txbClientName.Enabled = true;
-                cmbSalesOfficeID.Enabled = true;
-                txbChumonID.Enabled = true;
-            }
-        }
-
         private void txbClientID_TextChanged(object sender, EventArgs e)
         {
             //nullの確認
@@ -847,6 +866,20 @@ namespace SalesManagement_SysDev
             var Client = listClient.Single(x => x.ClID == intClientID);
 
             txbClientName.Text = Client.ClName;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void pctHint_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://docs.google.com/document/d/1-nFWLxjJ3gj2gqEa9VjvKW3R5T7nG_0J",
+                UseShellExecute = true
+            });
         }
     }
 }

@@ -43,6 +43,7 @@
             this.txbPageSize = new System.Windows.Forms.TextBox();
             this.lblPageSize = new System.Windows.Forms.Label();
             this.pnlEigyo = new System.Windows.Forms.Panel();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.lblStockView = new System.Windows.Forms.Label();
             this.btnReturn = new System.Windows.Forms.Button();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
@@ -56,6 +57,7 @@
             this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockView)).BeginInit();
             this.pnlEigyo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
             // txbstocknum
@@ -67,7 +69,6 @@
             this.txbstocknum.Name = "txbstocknum";
             this.txbstocknum.Size = new System.Drawing.Size(220, 31);
             this.txbstocknum.TabIndex = 2;
-            this.txbstocknum.TextChanged += new System.EventHandler(this.txbstocknum_TextChanged);
             // 
             // txbProductID
             // 
@@ -79,6 +80,7 @@
             this.txbProductID.Size = new System.Drawing.Size(220, 31);
             this.txbProductID.TabIndex = 3;
             this.txbProductID.TextChanged += new System.EventHandler(this.txbProdactID_TextChanged);
+            this.txbProductID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // txbstockID
             // 
@@ -94,16 +96,15 @@
             // 
             this.dgvStockView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStockView.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.dgvStockView.Location = new System.Drawing.Point(11, 492);
+            this.dgvStockView.Location = new System.Drawing.Point(11, 489);
             this.dgvStockView.Margin = new System.Windows.Forms.Padding(2);
             this.dgvStockView.Name = "dgvStockView";
             this.dgvStockView.RowHeadersWidth = 51;
             this.dgvStockView.RowTemplate.Height = 24;
-            this.dgvStockView.Size = new System.Drawing.Size(1882, 480);
+            this.dgvStockView.Size = new System.Drawing.Size(1882, 525);
             this.dgvStockView.TabIndex = 5;
             this.dgvStockView.TabStop = false;
             this.dgvStockView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStockView_CellClick);
-            this.dgvStockView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // btnClose
             // 
@@ -122,7 +123,7 @@
             // 
             this.btnNext.BackColor = System.Drawing.Color.White;
             this.btnNext.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnNext.Location = new System.Drawing.Point(1777, 990);
+            this.btnNext.Location = new System.Drawing.Point(1787, 1029);
             this.btnNext.Margin = new System.Windows.Forms.Padding(2);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(50, 40);
@@ -136,7 +137,7 @@
             // 
             this.btnPageMax.BackColor = System.Drawing.Color.White;
             this.btnPageMax.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnPageMax.Location = new System.Drawing.Point(1831, 990);
+            this.btnPageMax.Location = new System.Drawing.Point(1841, 1029);
             this.btnPageMax.Margin = new System.Windows.Forms.Padding(2);
             this.btnPageMax.Name = "btnPageMax";
             this.btnPageMax.Size = new System.Drawing.Size(50, 40);
@@ -150,7 +151,7 @@
             // 
             this.btnBack.BackColor = System.Drawing.Color.White;
             this.btnBack.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnBack.Location = new System.Drawing.Point(1723, 990);
+            this.btnBack.Location = new System.Drawing.Point(1733, 1029);
             this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(50, 40);
@@ -164,7 +165,7 @@
             // 
             this.btnPageMin.BackColor = System.Drawing.Color.White;
             this.btnPageMin.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnPageMin.Location = new System.Drawing.Point(1669, 990);
+            this.btnPageMin.Location = new System.Drawing.Point(1679, 1029);
             this.btnPageMin.Margin = new System.Windows.Forms.Padding(2);
             this.btnPageMin.Name = "btnPageMin";
             this.btnPageMin.Size = new System.Drawing.Size(50, 40);
@@ -177,18 +178,19 @@
             // txbNumPage
             // 
             this.txbNumPage.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbNumPage.Location = new System.Drawing.Point(1476, 993);
+            this.txbNumPage.Location = new System.Drawing.Point(1486, 1032);
             this.txbNumPage.Margin = new System.Windows.Forms.Padding(2);
             this.txbNumPage.Name = "txbNumPage";
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 64;
             this.txbNumPage.TabStop = false;
+            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblNumPage
             // 
             this.lblNumPage.AutoSize = true;
             this.lblNumPage.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblNumPage.Location = new System.Drawing.Point(1530, 999);
+            this.lblNumPage.Location = new System.Drawing.Point(1540, 1038);
             this.lblNumPage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNumPage.Name = "lblNumPage";
             this.lblNumPage.Size = new System.Drawing.Size(67, 22);
@@ -199,7 +201,7 @@
             // 
             this.btnPageSize.BackColor = System.Drawing.Color.White;
             this.btnPageSize.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnPageSize.Location = new System.Drawing.Point(260, 990);
+            this.btnPageSize.Location = new System.Drawing.Point(270, 1029);
             this.btnPageSize.Margin = new System.Windows.Forms.Padding(2);
             this.btnPageSize.Name = "btnPageSize";
             this.btnPageSize.Size = new System.Drawing.Size(140, 40);
@@ -212,19 +214,19 @@
             // txbPageSize
             // 
             this.txbPageSize.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbPageSize.Location = new System.Drawing.Point(160, 993);
+            this.txbPageSize.Location = new System.Drawing.Point(170, 1032);
             this.txbPageSize.Margin = new System.Windows.Forms.Padding(2);
             this.txbPageSize.Name = "txbPageSize";
             this.txbPageSize.Size = new System.Drawing.Size(50, 28);
             this.txbPageSize.TabIndex = 67;
             this.txbPageSize.TabStop = false;
-            this.txbPageSize.TextChanged += new System.EventHandler(this.txbPageSize_TextChanged);
+            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblPageSize
             // 
             this.lblPageSize.AutoSize = true;
             this.lblPageSize.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblPageSize.Location = new System.Drawing.Point(31, 996);
+            this.lblPageSize.Location = new System.Drawing.Point(41, 1035);
             this.lblPageSize.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPageSize.Name = "lblPageSize";
             this.lblPageSize.Size = new System.Drawing.Size(114, 21);
@@ -234,6 +236,7 @@
             // pnlEigyo
             // 
             this.pnlEigyo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(181)))), ((int)(((byte)(128)))));
+            this.pnlEigyo.Controls.Add(this.pctHint);
             this.pnlEigyo.Controls.Add(this.lblStockView);
             this.pnlEigyo.Controls.Add(this.btnReturn);
             this.pnlEigyo.Controls.Add(this.btnClose);
@@ -242,7 +245,17 @@
             this.pnlEigyo.Name = "pnlEigyo";
             this.pnlEigyo.Size = new System.Drawing.Size(1920, 150);
             this.pnlEigyo.TabIndex = 69;
-            this.pnlEigyo.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlHonsha_Paint);
+            // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1633, 54);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 93;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
             // 
             // lblStockView
             // 
@@ -255,7 +268,6 @@
             this.lblStockView.Size = new System.Drawing.Size(418, 64);
             this.lblStockView.TabIndex = 23;
             this.lblStockView.Text = "在庫確認画面";
-            this.lblStockView.Click += new System.EventHandler(this.lblOrder_Click);
             // 
             // btnReturn
             // 
@@ -281,7 +293,6 @@
             this.rdbSearch.TabIndex = 70;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
-            this.rdbSearch.CheckedChanged += new System.EventHandler(this.rdbSearch_CheckedChanged);
             // 
             // lblEmployeeID
             // 
@@ -304,7 +315,6 @@
             this.label1.Size = new System.Drawing.Size(82, 24);
             this.label1.TabIndex = 85;
             this.label1.Text = "在庫数";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -316,7 +326,6 @@
             this.label2.Size = new System.Drawing.Size(80, 24);
             this.label2.TabIndex = 86;
             this.label2.Text = "在庫ID";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // btnClear
             // 
@@ -329,6 +338,7 @@
             this.btnClear.TabStop = false;
             this.btnClear.Text = "クリア";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnDone
             // 
@@ -382,14 +392,13 @@
             this.label3.Size = new System.Drawing.Size(82, 24);
             this.label3.TabIndex = 92;
             this.label3.Text = "商品名";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // F_EigyoStockView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(219)))), ((int)(((byte)(193)))));
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txbProductName);
             this.Controls.Add(this.cmbView);
@@ -422,6 +431,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockView)).EndInit();
             this.pnlEigyo.ResumeLayout(false);
             this.pnlEigyo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -454,5 +464,6 @@
         private System.Windows.Forms.ComboBox cmbView;
         private System.Windows.Forms.TextBox txbProductName;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.PictureBox pctHint;
     }
 }

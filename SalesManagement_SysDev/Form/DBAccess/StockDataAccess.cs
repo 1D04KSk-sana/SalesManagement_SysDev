@@ -32,29 +32,6 @@ namespace SalesManagement_SysDev
                 return false;
             }
         }
-        //メソッド名：CheckstockIDExistence()
-        //引　数   ：在庫コード
-        //戻り値   ：True or False
-        //機　能   ：一致する在庫IDの有無を確認
-        //          ：一致データありの場合True
-        //          ：一致データなしの場合False
-        ///////////////////////////////
-        public bool CheckstockIDExistence(int stockID)
-        {
-            bool flg = false;
-            try
-            {
-                var context = new SalesManagement_DevContext();
-                //顧客IDで一致するデータが存在するか
-                flg = context.T_Stocks.Any(x => x.StID == stockID);
-                context.Dispose();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-    return flg;
-        }
 
         ///////////////////////////////
         //メソッド名：GetOrderDspData()
@@ -211,6 +188,7 @@ namespace SalesManagement_SysDev
 
             return listStock;
         }
+
         ///////////////////////////////
         //メソッド名：UpdateStockQuantityData()
         //引　数：updWarehousingDEtail = 入庫詳細データ
@@ -240,5 +218,58 @@ namespace SalesManagement_SysDev
             }
         }
 
+        ///////////////////////////////
+        //メソッド名：UpdateChumonStockQuantityData()
+        //引　数：注文詳細データ
+        //戻り値：True or False
+        //機　能：在庫データの更新
+        //      ：更新成功の場合True
+        //      ：更新失敗の場合False
+        ///////////////////////////////
+        public bool UpdateChumonStockQuantityData(T_ChumonDetail updChumonDetail)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Stock = context.T_Stocks.Single(x => x.PrID == updChumonDetail.PrID);
+
+                Stock.StQuantity = Stock.StQuantity - updChumonDetail.ChQuantity;
+
+                context.SaveChanges();
+                context.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetStockProdactIDData()
+        //引　数：商品ID
+        //戻り値：在庫データ
+        //機　能：商品IDにつながった在庫データの取得
+        ///////////////////////////////
+        public T_Stock GetStockProdactIDData(int prodactID)
+        {
+            T_Stock Stock = new T_Stock();
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                Stock = context.T_Stocks.Single(x => x.PrID == prodactID);
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Stock;
+        }
     }
 }

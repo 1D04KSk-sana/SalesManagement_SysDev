@@ -12,6 +12,8 @@ namespace SalesManagement_SysDev
     class T_SyukkoDetail
     {
         [Key]
+        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SyDetailID { get; set; }     //出庫詳細ID
         public int SyID { get; set; }           //出庫ID
         public int PrID { get; set; }           //商品ID

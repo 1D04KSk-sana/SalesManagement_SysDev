@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -60,13 +61,13 @@ namespace SalesManagement_SysDev
             ClearImput();
         }
 
-            ///////////////////////////////
-            //メソッド名：RegEmployee()
-            //引　数   ：顧客情報
-            //戻り値   ：なし
-            //機　能   ：顧客データの登録
-            ///////////////////////////////
-            private void RegistrationEmployee(M_Employee regEmployee)
+        ///////////////////////////////
+        //メソッド名：RegEmployee()
+        //引　数   ：顧客情報
+        //戻り値   ：なし
+        //機　能   ：顧客データの登録
+        ///////////////////////////////
+        private void RegistrationEmployee(M_Employee regEmployee)
         {
             // 顧客情報の登録
             bool flg = EmployeeDataAccess.AddEmployeeData(regEmployee);
@@ -135,7 +136,7 @@ namespace SalesManagement_SysDev
             {
                 EmID = int.Parse(txbEmployeeID.Text.Trim()),
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
-                EmPassword = txbSinghUpPass.Text.Trim(),
+                EmPassword = PasswordHash.CreatePasswordHash(txbSinghUpPass.Text.Trim()),
                 EmHiredate = dtpHireDate.Value,
                 EmPhone = txbSinghUpPhone.Text.Trim(),
                 PoID = cmbPositionID.SelectedIndex +1,
@@ -288,6 +289,20 @@ namespace SalesManagement_SysDev
         private void btnReturn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void pctHint_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://docs.google.com/document/d/1HEdrDIx3vWK5Z-YM3f-fX5uqfVorDScC/edit=true",
+                UseShellExecute = true
+            });
         }
     }
 }

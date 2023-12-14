@@ -20,24 +20,255 @@ namespace SalesManagement_SysDev
     {
         //入力チェッククラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
+        //パスワードハッシュ化クラスのインスタンス化
+        PasswordHash passwordHash = new PasswordHash();
+        //データベース社員テーブルアクセス用クラスのインスタンス化
+        EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
+        //データベース操作ログテーブルアクセス用クラスのインスタンス化
+        OperationLogDataAccess operationLogDataAccess = new OperationLogDataAccess();
+        //データベースログイン記憶テーブルアクセス用クラスのインスタンス化
+        LoginSaveDataAccess loginSaveDataAccess = new LoginSaveDataAccess();
+
+        M_Employee Employee = new M_Employee();
+
+        private int intPassEye = 1;
 
         //他フォームでも使用できるようにinternal
         //社員ID
         internal static int intEmployeeID = 116;
+        //役職ID
+        internal static int intPositionID = 0;
+        //営業所ID
+        internal static int intSalesOfficeID = 0;
 
         public F_Login()
         {
             InitializeComponent();
         }
 
-        private void btn_CleateDabase_Click(object sender, EventArgs e)
+        private void F_Login_Load(object sender, EventArgs e)
         {
-            //データベースの生成を行います．
-            //再度実行する場合には，必ずデータベースの削除をしてから実行してください．
+            FormLoadIvent();
+        }
 
-            SalesManagement_DevContext context = new SalesManagement_DevContext();
+        private void btnclose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void pctPassEye_Click(object sender, EventArgs e)
+        {
+            if (intPassEye == 0)
+            {
+                txbSinghUpPass.PasswordChar = '*';
+                pctPassEye.Image = Properties.Resources.PassEyeNot;
+
+                intPassEye = 1;
+            }
+            else if (intPassEye == 1)
+            {
+                txbSinghUpPass.PasswordChar = '\0';
+                pctPassEye.Image = Properties.Resources.PassEye;
+
+                intPassEye = 0;
+            }
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            //ログイン入力データの形式チェック
+            if (!GetValidDataAtLogin())
+            {
+                return;
+            }
+
+            if (!CheckIDPass())
+            {
+                return;
+            }
+
+            intEmployeeID = Employee.EmID;
+            intPositionID = Employee.PoID;
+            intSalesOfficeID = Employee.SoID;
+
+            LoginOther();
+
+            if (intPositionID == 1)
+            {
+                F_Honsha f_Honsha = new F_Honsha();
+
+                f_Honsha.Owner = this;
+                f_Honsha.FormClosed += ChildForm_FormClosed;
+                f_Honsha.Show();
+            }
+            if (intPositionID == 2)
+            {
+                F_Eigyo f_Eigyo = new F_Eigyo();
+
+                f_Eigyo.Owner = this;
+                f_Eigyo.FormClosed += ChildForm_FormClosed;
+                f_Eigyo.Show();
+            }
+            if (intPositionID == 3)
+            {
+                F_Buturyu f_Buturyu = new F_Buturyu();
+
+                f_Buturyu.Owner = this;
+                f_Buturyu.FormClosed += ChildForm_FormClosed;
+                f_Buturyu.Show();
+            }
+
+            this.Opacity = 0;
+        }
+
+        private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Opacity = 1;
+
+            FormLoadIvent();
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtLogin()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：ログイン入力データの形式チェック
+        //          ：エラーがない場合True
+        //          ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtLogin()
+        {
+            //社員IDの適否
+            if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
+            {
+                //社員IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbEmployeeID.Text.Trim()))
+                {
+                    MessageBox.Show("社員IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+                //社員IDの存在チェック
+                if (!employeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    //"存在しない社員IDです"と言うわけにもいかないので"ログインに失敗しました"にしてる
+                    MessageBox.Show("パスワード・社員IDが違います", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("社員IDを入力してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbEmployeeID.Focus();
+                return false;
+            }
+
+            //パスワードの適否
+            if (!String.IsNullOrEmpty(txbSinghUpPass.Text.Trim()))
+            {
+                //パスワードの数字チェック
+                if (!dataInputCheck.CheckHalfAlphabetNumeric(txbSinghUpPass.Text.Trim()))
+                {
+                    MessageBox.Show("パスワードは全て英数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSinghUpPass.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("パスワードを入力してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbSinghUpPass.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        ///////////////////////////////
+        //メソッド名：CheckIDPass()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：ログイン入力データの形式チェック
+        //          ：エラーがない場合True
+        //          ：エラーがある場合False
+        ///////////////////////////////
+        private bool CheckIDPass()
+        {
+            List<M_Employee> listEmployee = employeeDataAccess.GetEmployeeDspData();
+
+            try
+            {
+                Employee = listEmployee.Single(x => x.EmID == int.Parse(txbEmployeeID.Text.Trim()));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (Employee.EmPassword != PasswordHash.CreatePasswordHash(txbSinghUpPass.Text.Trim()))
+            {
+                MessageBox.Show("パスワード・社員IDが違います", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+        ///////////////////////////////
+        //メソッド名：FormLoadIvent()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：フォームロード時の動作をまとめたもの
+        ///////////////////////////////
+        private void FormLoadIvent()
+        {
+            txbEmployeeID.Text = "";
+            txbSinghUpPass.Text = "";
+
+            var context = new SalesManagement_DevContext();
+
+            if (context.T_LoginSaves.Count() != 0)
+            {
+                var LoginSave = loginSaveDataAccess.GetSaveLogData();
+
+                txbEmployeeID.Text = LoginSave.SaveEmployeeID.ToString();
+                txbSinghUpPass.Text = PasswordHash.ReversePasswordHash(LoginSave.SaveSinghUpPass);
+
+                chbPassSave.Checked = true;
+            }
+
+            if (context.T_ArrivalDetails.Count() != 0)
+            {
+                return;
+            }
 
             List<M_Position> po = new List<M_Position>();
+            List<M_Maker> ma = new List<M_Maker>();
+            List<M_SalesOffice> so = new List<M_SalesOffice>();
+            List<M_Client> cl = new List<M_Client>();
+            Dictionary<int, M_Employee> em = new Dictionary<int, M_Employee>();
+            List<M_MajorClassification> mc = new List<M_MajorClassification>();
+            List<M_SmallClassification> sc = new List<M_SmallClassification>();
+            List<M_Product> pr = new List<M_Product>();
+            List<T_Sale> sa = new List<T_Sale>();
+            List<T_SaleDetail> sad = new List<T_SaleDetail>();
+            List<T_Order> or = new List<T_Order>();
+            List<T_OrderDetail> ord = new List<T_OrderDetail>();
+            List<T_Chumon> ch = new List<T_Chumon>();
+            List<T_ChumonDetail> chd = new List<T_ChumonDetail>();
+            List<T_SyukkoDetail> syd = new List<T_SyukkoDetail>();
+            List<T_Hattyu> ha = new List<T_Hattyu>();
+            List<T_HattyuDetail> had = new List<T_HattyuDetail>();
+            List<T_Stock> st = new List<T_Stock>();
+            List<T_ShipmentDetail> shd = new List<T_ShipmentDetail>();
+            List<T_Syukko> sy = new List<T_Syukko>();
+            List<T_Warehousing> wh = new List<T_Warehousing>();
+            List<T_WarehousingDetail> whd = new List<T_WarehousingDetail>();
+            List<T_Shipment> sh = new List<T_Shipment>();
+            List<T_Arrival> ar = new List<T_Arrival>();
+            List<T_ArrivalDetail> ard = new List<T_ArrivalDetail>();
+
 
             {
                 po.Add(new M_Position()
@@ -58,42 +289,6 @@ namespace SalesManagement_SysDev
                 context.M_Positions.AddRange(po);
                 context.SaveChanges();
             }
-
-            context.Dispose();
-
-            MessageBox.Show("テーブル作成完了");
-        }
-
-        private void btn_InsertSampleData_Click(object sender, EventArgs e)
-        {
-            SalesManagement_DevContext context = new SalesManagement_DevContext();
-
-            List<M_Position> po = context.M_Positions.OrderBy(x => x.PoID).ToList();
-            List<M_Maker> ma = new List<M_Maker>();
-            List<M_SalesOffice> so = new List<M_SalesOffice>();
-            List<M_Client> cl = new List<M_Client>();
-            Dictionary<int, M_Employee> em = new Dictionary<int, M_Employee>();
-            List<M_MajorClassification> mc = new List<M_MajorClassification>();
-            List<M_SmallClassification> sc = new List<M_SmallClassification>();
-            List<M_Product> pr = new List<M_Product>();
-            List<T_Sale> sa = new List<T_Sale>();
-            List<T_SaleDetail> sad = new List<T_SaleDetail>();
-            List<T_Order> or = new List<T_Order>();
-            List<T_OrderDetail> ord = new List<T_OrderDetail>();
-            List<T_Chumon> ch = new List<T_Chumon>();
-            List<T_ChumonDetail> chd = new List<T_ChumonDetail>();
-            List<T_SyukkoDetail> syd = new List<T_SyukkoDetail>();
-            List<T_Hattyu> ha = new List<T_Hattyu>();
-            List<T_HattyuDetail> had = new List<T_HattyuDetail>();
-            List<T_Stock> st = new List<T_Stock>();
-            List<T_Shipment> sh = new List<T_Shipment>();
-            List<T_ShipmentDetail> shd = new List<T_ShipmentDetail>();
-            List<T_Syukko> sy = new List<T_Syukko>();
-            List<T_Warehousing> wh = new List<T_Warehousing>();
-            List<T_WarehousingDetail> whd = new List<T_WarehousingDetail>();
-
-
-
             {
                 ma.Add(new M_Maker()
                 {
@@ -265,7 +460,7 @@ namespace SalesManagement_SysDev
                         EmID = 116,
                         EmName = "坂口郁美",
                         EmHiredate = new DateTime(1980, 6, 17),
-                        EmPassword = "0116",
+                        EmPassword = PasswordHash.CreatePasswordHash("0116"),
                         EmPhone = "06-6813-5485",
                         M_SalesOffice = so[1],
                         M_Position = po[2],
@@ -278,7 +473,7 @@ namespace SalesManagement_SysDev
                         EmID = 310,
                         EmName = "高谷春男",
                         EmHiredate = new DateTime(1973, 3, 21),
-                        EmPassword = "0310",
+                        EmPassword = PasswordHash.CreatePasswordHash("0310"),
                         EmPhone = "06-6356-8742",
                         M_SalesOffice = so[0],
                         M_Position = po[1],
@@ -291,7 +486,7 @@ namespace SalesManagement_SysDev
                         EmID = 1002,
                         EmName = "日下部俊夫",
                         EmHiredate = new DateTime(1990, 9, 4),
-                        EmPassword = "1002",
+                        EmPassword = PasswordHash.CreatePasswordHash("1002"),
                         EmPhone = "06-6579-0622",
                         M_SalesOffice = so[0],
                         M_Position = po[1],
@@ -304,7 +499,7 @@ namespace SalesManagement_SysDev
                         EmID = 1007,
                         EmName = "岸本芽生",
                         EmHiredate = new DateTime(1997, 2, 4),
-                        EmPassword = "1007",
+                        EmPassword = PasswordHash.CreatePasswordHash("1007"),
                         EmPhone = "075-425-3371",
                         M_SalesOffice = so[2],
                         M_Position = po[1],
@@ -317,7 +512,7 @@ namespace SalesManagement_SysDev
                         EmID = 1111,
                         EmName = "奥村敦彦",
                         EmHiredate = new DateTime(1985, 3, 17),
-                        EmPassword = "999",
+                        EmPassword = PasswordHash.CreatePasswordHash("0999"),
                         EmPhone = "079-145-6121",
                         M_SalesOffice = so[3],
                         M_Position = po[2],
@@ -330,7 +525,7 @@ namespace SalesManagement_SysDev
                         EmID = 1208,
                         EmName = "渋谷秋昴",
                         EmHiredate = new DateTime(1994, 1, 31),
-                        EmPassword = "1208",
+                        EmPassword = PasswordHash.CreatePasswordHash("1208"),
                         EmPhone = "0790-68-8043",
                         M_SalesOffice = so[4],
                         M_Position = po[1],
@@ -343,7 +538,7 @@ namespace SalesManagement_SysDev
                         EmID = 1227,
                         EmName = "生田徳次郎",
                         EmHiredate = new DateTime(1964, 3, 20),
-                        EmPassword = "1227",
+                        EmPassword = PasswordHash.CreatePasswordHash("1227"),
                         EmPhone = "06-3021-1630",
                         M_SalesOffice = so[0],
                         M_Position = po[0],
@@ -630,8 +825,32 @@ namespace SalesManagement_SysDev
                 });
                 st.Add(new T_Stock()
                 {
+                    M_Product = pr[6],
+                    StQuantity = 10,
+                    StFlag = 0,
+                });
+                st.Add(new T_Stock()
+                {
+                    M_Product = pr[7],
+                    StQuantity = 10,
+                    StFlag = 0,
+                });
+                st.Add(new T_Stock()
+                {
+                    M_Product = pr[8],
+                    StQuantity = 10,
+                    StFlag = 0,
+                });
+                st.Add(new T_Stock()
+                {
                     M_Product = pr[9],
                     StQuantity = 240,
+                    StFlag = 0,
+                });
+                st.Add(new T_Stock()
+                {
+                    M_Product = pr[10],
+                    StQuantity = 10,
                     StFlag = 0,
                 });
                 context.T_Stocks.AddRange(st);
@@ -665,6 +884,7 @@ namespace SalesManagement_SysDev
             {
                 ord.Add(new T_OrderDetail()
                 {
+                    OrDetailID = 1,
                     T_Order = or[0],
                     M_Product = pr[2],
                     OrQuantity = 40,
@@ -672,6 +892,7 @@ namespace SalesManagement_SysDev
                 });
                 ord.Add(new T_OrderDetail()
                 {
+                    OrDetailID = 2,
                     T_Order = or[0],
                     M_Product = pr[9],
                     OrQuantity = 30,
@@ -679,6 +900,7 @@ namespace SalesManagement_SysDev
                 });
                 ord.Add(new T_OrderDetail()
                 {
+                    OrDetailID = 1,
                     T_Order = or[1],
                     M_Product = pr[3],
                     OrQuantity = 20,
@@ -686,6 +908,7 @@ namespace SalesManagement_SysDev
                 });
                 ord.Add(new T_OrderDetail()
                 {
+                    OrDetailID = 2,
                     T_Order = or[1],
                     M_Product = pr[4],
                     OrQuantity = 15,
@@ -693,54 +916,13 @@ namespace SalesManagement_SysDev
                 });
                 ord.Add(new T_OrderDetail()
                 {
+                    OrDetailID = 3,
                     T_Order = or[1],
                     M_Product = pr[5],
                     OrQuantity = 15,
                     OrTotalPrice = 2250000,
                 });
                 context.T_OrderDetails.AddRange(ord);
-                context.SaveChanges();
-            }
-
-            {
-                sh.Add(new T_Shipment()
-                {
-                    M_Client = cl[1],
-                    M_Employee = em[116],
-                    M_SalesOffice = so[1],
-                    T_Order = or[1],
-                    ShStateFlag = 0,
-                    ShFinishDate = new DateTime(2020, 11, 19),
-                    ShFlag = 0,
-                });
-                sh.Add(new T_Shipment()
-                {
-                    M_Client = cl[2],
-                    M_Employee = em[116],
-                    M_SalesOffice = so[1],
-                    T_Order = or[1],
-                    ShStateFlag = 0,
-                    ShFinishDate = new DateTime(2020, 11, 23),
-                    ShFlag = 0,
-                });
-                context.T_Shipments.AddRange(sh);
-                context.SaveChanges();
-            }
-
-            {
-                shd.Add(new T_ShipmentDetail()
-                {
-                    T_Shipment = sh[0],
-                    M_Product = pr[0],
-                    ShQuantity = 20,
-                });
-                shd.Add(new T_ShipmentDetail()
-                {
-                    T_Shipment = sh[1],
-                    M_Product = pr[1],
-                    ShQuantity = 30,
-                });
-                context.T_ShipmentDetails.AddRange(shd);
                 context.SaveChanges();
             }
 
@@ -755,16 +937,6 @@ namespace SalesManagement_SysDev
                     ChStateFlag = 1,
                     ChFlag = 0,
                 });
-                ch.Add(new T_Chumon()
-                {
-                    M_SalesOffice = so[1],
-                    M_Employee = em[116],
-                    M_Client = cl[2],
-                    T_Order = or[1],
-                    ChDate = new DateTime(2020, 11, 11),
-                    ChStateFlag = 1,
-                    ChFlag = 0,
-                });
 
                 context.T_Chumons.AddRange(ch);
                 context.SaveChanges();
@@ -772,12 +944,14 @@ namespace SalesManagement_SysDev
             {
                 chd.Add(new T_ChumonDetail()
                 {
+                    ChDetailID = 1,
                     T_Chumon = ch[0],
                     M_Product = pr[2],
                     ChQuantity = 40,
                 });
                 chd.Add(new T_ChumonDetail()
                 {
+                    ChDetailID = 2,
                     T_Chumon = ch[0],
                     M_Product = pr[9],
                     ChQuantity = 30,
@@ -788,11 +962,13 @@ namespace SalesManagement_SysDev
             {
                 sy.Add(new T_Syukko()
                 {
+                    //M_Employee = em[116],
+                    EmID = null,
                     M_Client = cl[1],
-                    M_Employee = em[116],
                     M_SalesOffice = so[0],
                     T_Order = or[0],
-                    SyStateFlag = 0,
+                    SyDate = new DateTime(2020, 12, 11),
+                    SyStateFlag = 1,
                     SyFlag = 0,
                 });
                 context.T_Syukkos.AddRange(sy);
@@ -801,12 +977,14 @@ namespace SalesManagement_SysDev
             {
                 syd.Add(new T_SyukkoDetail()
                 {
+                    SyDetailID = 1,
                     T_Syukko = sy[0],
                     M_Product = pr[2],
                     SyQuantity = 40,
                 });
                 syd.Add(new T_SyukkoDetail()
                 {
+                    SyDetailID = 2,
                     T_Syukko = sy[0],
                     M_Product = pr[9],
                     SyQuantity = 30,
@@ -821,7 +999,7 @@ namespace SalesManagement_SysDev
                     M_Client = cl[1],
                     T_Chumon = ch[0],
                     M_SalesOffice = so[0],
-                    SaDate = new DateTime(2023 , 10 , 27),
+                    SaDate = new DateTime(2023, 10, 27),
                     SaFlag = 0,
                 });
                 sa.Add(new T_Sale()
@@ -880,9 +1058,8 @@ namespace SalesManagement_SysDev
                     M_Maker = ma[0],
                     M_Employee = em[310],
                     HaDate = new DateTime(2023, 11, 17),
-                    WaWarehouseFlag = 0,
+                    WaWarehouseFlag = 1,
                     HaFlag = 0,
-
                 });
                 ha.Add(new T_Hattyu()
                 {
@@ -891,16 +1068,6 @@ namespace SalesManagement_SysDev
                     HaDate = new DateTime(2023, 11, 16),
                     WaWarehouseFlag = 0,
                     HaFlag = 0,
-
-                });
-                ha.Add(new T_Hattyu()
-                {
-                    M_Maker = ma[2],
-                    M_Employee = em[310],
-                    HaDate = new DateTime(2023, 10, 17),
-                    WaWarehouseFlag = 0,
-                    HaFlag = 0,
-
                 });
 
                 context.T_Hattyus.AddRange(ha);
@@ -919,6 +1086,18 @@ namespace SalesManagement_SysDev
                     M_Product = pr[1],
                     HaQuantity = 30,
                 });
+                had.Add(new T_HattyuDetail()
+                {
+                    T_Hattyu = ha[1],
+                    M_Product = pr[6],
+                    HaQuantity = 50,
+                });
+                had.Add(new T_HattyuDetail()
+                {
+                    T_Hattyu = ha[1],
+                    M_Product = pr[7],
+                    HaQuantity = 30,
+                });
                 context.T_HattyuDetails.AddRange(had);
                 context.SaveChanges();
 
@@ -931,25 +1110,6 @@ namespace SalesManagement_SysDev
                     WaDate = new DateTime(2023, 11, 16),
                     WaShelfFlag = 1,
                     WaFlag = 0,
-
-                });
-                wh.Add(new T_Warehousing()
-                {
-                    T_Hattyu = ha[1],
-                    M_Employee = em[310],
-                    WaDate = new DateTime(2023, 10, 16),
-                    WaShelfFlag = 1,
-                    WaFlag = 0,
-
-                });
-                wh.Add(new T_Warehousing()
-                {
-                    T_Hattyu = ha[1],
-                    M_Employee = em[116],
-                    WaDate = new DateTime(2023, 11, 1),
-                    WaShelfFlag = 1,
-                    WaFlag = 0,
-
                 });
                 context.T_Warehousings.AddRange(wh);
                 context.SaveChanges();
@@ -968,103 +1128,145 @@ namespace SalesManagement_SysDev
                     M_Product = pr[1],
                     WaQuantity = 30,
                 });
-                whd.Add(new T_WarehousingDetail()
-                {
-                    T_Warehousing = wh[1],
-                    M_Product = pr[2],
-                    WaQuantity = 80,
-                });
                 context.T_WarehousingDetails.AddRange(whd);
                 context.SaveChanges();
             }
+            {
+                sh.Add(new T_Shipment()
+                {
+                    M_SalesOffice = so[0],
+                    M_Client = cl[1],
+                    T_Order = or[0],
+                    ShFinishDate = new DateTime(2023, 12, 05),
+                    ShStateFlag = 1,
+                    ShFlag = 0,
+                });
+                context.T_Shipments.AddRange(sh);
+                context.SaveChanges();
+            }
+            {
+                ar.Add(new T_Arrival()
+                {
+                    M_SalesOffice = so[0],
+                    M_Employee = em[116],
+                    M_Client = cl[1],
+                    T_Order = or[0],
+                    ArDate = new DateTime(2023, 12, 05),
+                    ArStateFlag = 1,
+                    ArFlag = 0,
+                });
+                context.T_Arrivals.AddRange(ar);
+                context.SaveChanges();
+            }
+            {
+                ard.Add(new T_ArrivalDetail()
+                {
+                    ArDetailID = 1,
+                    T_Arrival = ar[0],
+                    M_Product = pr[1],
+                    ArQuantity = 50,
+                });
+
+                context.T_ArrivalDetails.AddRange(ard);
+                context.SaveChanges();
+            }
+
             context.Dispose();
-
-            MessageBox.Show("サンプルデータ登録完了");
-        }
-
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-            //ログイン入力データの形式チェック
-            //if (!GetValidDataAtLogin())
-            //{
-            //    return;
-            //}
-
-            F_Honsha f_Honsha = new F_Honsha();
-
-            f_Honsha.Owner = this;
-            f_Honsha.FormClosed += ChildForm_FormClosed;
-            f_Honsha.Show();
-
-            F_Eigyo f_Eigyo = new F_Eigyo();
-
-            f_Eigyo.Owner = this;
-            f_Eigyo.FormClosed += ChildForm_FormClosed;
-            f_Eigyo.Show();
-
-            F_Buturyu f_Buturyu = new F_Buturyu();
-
-            f_Buturyu.Owner = this;
-            f_Buturyu.FormClosed += ChildForm_FormClosed;
-            f_Buturyu.Show();
-
-
-            this.Opacity = 0;
-        }
-
-        private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            this.Opacity = 1;
         }
 
         ///////////////////////////////
-        //メソッド名：GetValidDataAtLogin()
+        //メソッド名：GenerateLogAtRegistration()
+        //引　数   ：操作名
+        //戻り値   ：操作ログ登録情報
+        //機　能   ：操作ログ情報登録データのセット
+        ///////////////////////////////
+        private T_OperationLog GenerateLogAtRegistration(string OperationDone)
+        {
+            return new T_OperationLog
+            {
+                OpHistoryID = operationLogDataAccess.OperationLogNum() + 1,
+                EmID = F_Login.intEmployeeID,
+                FormName = "ログイン画面",
+                OpDone = OperationDone,
+                OpDBID = null,
+                OpSetTime = DateTime.Now,
+            };
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateSaveAtRegistration()
+        //引　数   ：なし
+        //戻り値   ：ログイン記憶情報
+        //機　能   ：ログイン記憶情報データのセット
+        ///////////////////////////////
+        private T_LoginSave GenerateSaveAtRegistration()
+        {
+            return new T_LoginSave
+            {
+                SaveId = 1,
+                SaveEmployeeID = intEmployeeID,
+                SaveSinghUpPass = PasswordHash.CreatePasswordHash(txbSinghUpPass.Text.Trim())
+            };
+        }
+
+        ///////////////////////////////
+        //メソッド名：LoginOther()
         //引　数   ：なし
         //戻り値   ：true or false
-        //機　能   ：ログイン入力データの形式チェック
+        //機　能   ：ログイン入力データの保存可否と操作ログの登録
         //          ：エラーがない場合True
         //          ：エラーがある場合False
         ///////////////////////////////
-        private bool GetValidDataAtLogin()
+        private bool LoginOther()
         {
-            //社員IDの適否
-            if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
+            if (chbPassSave.Checked)
             {
-                //社員IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbEmployeeID.Text.Trim()))
+                var context = new SalesManagement_DevContext();
+
+                if (context.T_LoginSaves.Count() == 0)
                 {
-                    MessageBox.Show("社員IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbEmployeeID.Focus();
-                    return false;
+                    var regLoginSave = GenerateSaveAtRegistration();
+
+                    if (!loginSaveDataAccess.AddOperationLogData(regLoginSave))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    var updLoginSave = GenerateSaveAtRegistration();
+
+                    if (!loginSaveDataAccess.UpdateOperationLogData(updLoginSave))
+                    {
+                        return false;
+                    }
                 }
             }
             else
             {
-                MessageBox.Show("社員IDを入力してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbEmployeeID.Focus();
-                return false;
+                var context = new SalesManagement_DevContext();
+
+                if (context.T_LoginSaves.Count() != 0)
+                {
+                    var delLoginSave = loginSaveDataAccess.GetSaveLogData();
+
+                    if (!loginSaveDataAccess.DeleteSaveLogData(delLoginSave))
+                    {
+                        return false;
+                    }
+                }
             }
 
-            //パスワードの適否
-            if (!String.IsNullOrEmpty(txbSinghUpPass.Text.Trim()))
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration("ログイン");
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogDataAccess.AddOperationLogData(regOperationLog))
             {
-                //パスワードの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbSinghUpPass.Text.Trim()))
-                {
-                    MessageBox.Show("パスワードは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSinghUpPass.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("パスワードを入力してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbSinghUpPass.Focus();
                 return false;
             }
 
             return true;
         }
-
     }
 }

@@ -52,11 +52,8 @@ namespace SalesManagement_SysDev
         //発注詳細
         public DbSet<T_HattyuDetail> T_HattyuDetails { get; set; }
 
-        //ログイン履歴（今回は使用しない）
-        public DbSet<T_LoginHistory> T_LoginHistorys { get; set; }
-
-        //操作履歴（今回は使用しない）
-        public DbSet<T_OperationHistory> T_OperationHistorys { get; set; }
+        //ログイン記憶情報
+        public DbSet<T_LoginSave> T_LoginSaves { get; set; }
 
         //操作ログ（オリジナル）
         public DbSet<T_OperationLog> T_OperationLogs { get; set; }
@@ -222,20 +219,6 @@ namespace SalesManagement_SysDev
                     .WillCascadeOnDelete(false);
             }
             {
-                modelBuilder.Entity<T_LoginHistory>()
-                    .HasRequired<M_Employee>(x => x.M_Employee)
-                    .WithMany(x => x.T_LoginHistory)
-                    .HasForeignKey(x => x.EmID)
-                    .WillCascadeOnDelete(false);
-            }
-            {
-                modelBuilder.Entity<T_OperationHistory>()
-                    .HasRequired<M_Employee>(x => x.M_Employee)
-                    .WithMany(x => x.T_OperationHistory)
-                    .HasForeignKey(x => x.EmID)
-                    .WillCascadeOnDelete(false);
-            }
-            {
                 modelBuilder.Entity<T_Order>()
                     .HasRequired<M_SalesOffice>(x => x.M_SalesOffice)
                     .WithMany(x => x.T_Order)
@@ -271,7 +254,7 @@ namespace SalesManagement_SysDev
                     .HasForeignKey(x => x.ClID)
                     .WillCascadeOnDelete(false);
                 modelBuilder.Entity<T_Shipment>()
-                    .HasRequired<M_Employee>(x => x.M_Employee)
+                    .HasOptional<M_Employee>(x => x.M_Employee)
                     .WithMany(x => x.T_Shipment)
                     .HasForeignKey(x => x.EmID)
                     .WillCascadeOnDelete(false);

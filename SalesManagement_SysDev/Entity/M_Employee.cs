@@ -20,8 +20,6 @@ namespace SalesManagement_SysDev
             T_Shipment = new HashSet<T_Shipment>();
             T_Syukko = new HashSet<T_Syukko>();
             T_Warehousing = new HashSet<T_Warehousing>();
-            T_LoginHistory = new HashSet<T_LoginHistory>();
-            T_OperationHistory = new HashSet<T_OperationHistory>();
         }
 
         [Key]
@@ -36,7 +34,7 @@ namespace SalesManagement_SysDev
         [Column(TypeName = "date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime EmHiredate { get; set; }    //入社年月日
-        [MaxLength(10)]
+        //[MaxLength(10)]
         [Required]
         public string EmPassword { get; set; }      //パスワード
         [MaxLength(13)]
@@ -58,7 +56,5 @@ namespace SalesManagement_SysDev
         public virtual ICollection<T_Shipment> T_Shipment { get; set; }
         public virtual ICollection<T_Syukko> T_Syukko { get; set; }
         public virtual ICollection<T_Warehousing> T_Warehousing { get; set; }
-        public virtual ICollection<T_LoginHistory> T_LoginHistory { get; set; }
-        public virtual ICollection<T_OperationHistory> T_OperationHistory { get; set; }
     }
 }

@@ -32,5 +32,29 @@ namespace SalesManagement_SysDev
 
             return listOrderDetail;
         }
+
+        ///////////////////////////////
+        //メソッド名：AddSyukkoDetailData()
+        //引　数：regSyukko = 注文詳細データ
+        //戻り値：True or False
+        //機　能：注文詳細データの登録
+        //      ：登録成功の場合True
+        //      ：登録失敗の場合False
+        ///////////////////////////////
+        public bool AddSyukkoDetailData(T_SyukkoDetail regSyukko)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                context.T_SyukkoDetails.Add(regSyukko);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+        }
     }
 }

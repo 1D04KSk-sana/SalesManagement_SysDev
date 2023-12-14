@@ -12,6 +12,8 @@ namespace SalesManagement_SysDev
     class T_ChumonDetail
     {
         [Key]
+        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ChDetailID { get; set; }     //注文詳細ID
         public int ChID { get; set; }           //注文ID
         public int PrID { get; set; }           //商品ID

@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.pnlButuryu = new System.Windows.Forms.Panel();
+            this.pctHint = new System.Windows.Forms.PictureBox();
+            this.btnClose = new System.Windows.Forms.Button();
             this.lblButuryuSyukko = new System.Windows.Forms.Label();
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
@@ -59,8 +61,6 @@
             this.btnBack = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPageMax = new System.Windows.Forms.Button();
-            this.pnlSelect = new System.Windows.Forms.Panel();
-            this.rdbHidden = new System.Windows.Forms.RadioButton();
             this.rdbConfirm = new System.Windows.Forms.RadioButton();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
@@ -71,8 +71,9 @@
             this.lblClientName = new System.Windows.Forms.Label();
             this.txbClientName = new System.Windows.Forms.TextBox();
             this.txbEmployeeID = new System.Windows.Forms.TextBox();
+            this.rdbHidden = new System.Windows.Forms.RadioButton();
             this.pnlButuryu.SuspendLayout();
-            this.pnlSelect.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSyukko)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSyukkoDetail)).BeginInit();
             this.SuspendLayout();
@@ -80,12 +81,38 @@
             // pnlButuryu
             // 
             this.pnlButuryu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(136)))), ((int)(((byte)(179)))));
+            this.pnlButuryu.Controls.Add(this.pctHint);
+            this.pnlButuryu.Controls.Add(this.btnClose);
             this.pnlButuryu.Controls.Add(this.lblButuryuSyukko);
             this.pnlButuryu.Controls.Add(this.btnReturn);
             this.pnlButuryu.Location = new System.Drawing.Point(0, 0);
             this.pnlButuryu.Name = "pnlButuryu";
             this.pnlButuryu.Size = new System.Drawing.Size(1920, 150);
             this.pnlButuryu.TabIndex = 0;
+            // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1654, 54);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 41;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnClose.Location = new System.Drawing.Point(1742, 44);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(2);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(160, 70);
+            this.btnClose.TabIndex = 64;
+            this.btnClose.TabStop = false;
+            this.btnClose.Text = "閉じる";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // lblButuryuSyukko
             // 
@@ -94,7 +121,7 @@
             this.lblButuryuSyukko.ForeColor = System.Drawing.Color.White;
             this.lblButuryuSyukko.Location = new System.Drawing.Point(742, 50);
             this.lblButuryuSyukko.Name = "lblButuryuSyukko";
-            this.lblButuryuSyukko.Size = new System.Drawing.Size(417, 64);
+            this.lblButuryuSyukko.Size = new System.Drawing.Size(418, 64);
             this.lblButuryuSyukko.TabIndex = 1;
             this.lblButuryuSyukko.Text = "出庫管理画面";
             // 
@@ -124,6 +151,7 @@
             // 
             // btnDone
             // 
+            this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnDone.Location = new System.Drawing.Point(1680, 179);
             this.btnDone.Name = "btnDone";
@@ -131,7 +159,7 @@
             this.btnDone.TabIndex = 2;
             this.btnDone.TabStop = false;
             this.btnDone.Text = "実行";
-            this.btnDone.UseVisualStyleBackColor = true;
+            this.btnDone.UseVisualStyleBackColor = false;
             this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // cmbView
@@ -184,6 +212,8 @@
             this.txbClientID.Name = "txbClientID";
             this.txbClientID.Size = new System.Drawing.Size(220, 31);
             this.txbClientID.TabIndex = 6;
+            this.txbClientID.TextChanged += new System.EventHandler(this.txbClientID_TextChanged);
+            this.txbClientID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblSalesOfficeID
             // 
@@ -256,9 +286,11 @@
             // dtpSyukkoDate
             // 
             this.dtpSyukkoDate.CalendarFont = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.dtpSyukkoDate.Checked = false;
             this.dtpSyukkoDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.dtpSyukkoDate.Location = new System.Drawing.Point(876, 345);
             this.dtpSyukkoDate.Name = "dtpSyukkoDate";
+            this.dtpSyukkoDate.ShowCheckBox = true;
             this.dtpSyukkoDate.Size = new System.Drawing.Size(220, 31);
             this.dtpSyukkoDate.TabIndex = 16;
             this.dtpSyukkoDate.TabStop = false;
@@ -322,6 +354,7 @@
             this.txbPageSize.Name = "txbPageSize";
             this.txbPageSize.Size = new System.Drawing.Size(50, 28);
             this.txbPageSize.TabIndex = 24;
+            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // btnPagesize
             // 
@@ -333,6 +366,7 @@
             this.btnPagesize.TabStop = false;
             this.btnPagesize.Text = "行数変更";
             this.btnPagesize.UseVisualStyleBackColor = true;
+            this.btnPagesize.Click += new System.EventHandler(this.btnPagesize_Click);
             // 
             // btnPageMin
             // 
@@ -353,6 +387,7 @@
             this.txbNumPage.Name = "txbNumPage";
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 27;
+            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblNumPage
             // 
@@ -400,50 +435,29 @@
             this.btnPageMax.UseVisualStyleBackColor = true;
             this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
-            // pnlSelect
-            // 
-            this.pnlSelect.Controls.Add(this.rdbHidden);
-            this.pnlSelect.Controls.Add(this.rdbConfirm);
-            this.pnlSelect.Controls.Add(this.rdbSearch);
-            this.pnlSelect.Location = new System.Drawing.Point(89, 172);
-            this.pnlSelect.Name = "pnlSelect";
-            this.pnlSelect.Size = new System.Drawing.Size(431, 78);
-            this.pnlSelect.TabIndex = 32;
-            // 
-            // rdbHidden
-            // 
-            this.rdbHidden.AutoSize = true;
-            this.rdbHidden.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbHidden.Location = new System.Drawing.Point(284, 24);
-            this.rdbHidden.Name = "rdbHidden";
-            this.rdbHidden.Size = new System.Drawing.Size(138, 39);
-            this.rdbHidden.TabIndex = 2;
-            this.rdbHidden.Text = "非表示";
-            this.rdbHidden.UseVisualStyleBackColor = true;
-            // 
             // rdbConfirm
             // 
             this.rdbConfirm.AutoSize = true;
-            this.rdbConfirm.Checked = true;
             this.rdbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbConfirm.Location = new System.Drawing.Point(22, 22);
+            this.rdbConfirm.Location = new System.Drawing.Point(241, 195);
             this.rdbConfirm.Name = "rdbConfirm";
             this.rdbConfirm.Size = new System.Drawing.Size(103, 39);
             this.rdbConfirm.TabIndex = 1;
-            this.rdbConfirm.TabStop = true;
             this.rdbConfirm.Text = "確定";
             this.rdbConfirm.UseVisualStyleBackColor = true;
+            this.rdbConfirm.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbSearch
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(157, 22);
+            this.rdbSearch.Location = new System.Drawing.Point(380, 195);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
             this.rdbSearch.TabIndex = 0;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // label1
             // 
@@ -464,8 +478,8 @@
             this.cmbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbConfirm.FormattingEnabled = true;
             this.cmbConfirm.Items.AddRange(new object[] {
-            "確定",
-            "未確定"});
+            "未確定",
+            "確定"});
             this.cmbConfirm.Location = new System.Drawing.Point(1246, 275);
             this.cmbConfirm.Name = "cmbConfirm";
             this.cmbConfirm.Size = new System.Drawing.Size(220, 32);
@@ -535,6 +549,22 @@
             this.txbEmployeeID.Name = "txbEmployeeID";
             this.txbEmployeeID.Size = new System.Drawing.Size(220, 31);
             this.txbEmployeeID.TabIndex = 40;
+            this.txbEmployeeID.TextChanged += new System.EventHandler(this.txbEmployeeID_TextChanged);
+            this.txbEmployeeID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
+            // 
+            // rdbHidden
+            // 
+            this.rdbHidden.AutoSize = true;
+            this.rdbHidden.Checked = true;
+            this.rdbHidden.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbHidden.Location = new System.Drawing.Point(72, 195);
+            this.rdbHidden.Name = "rdbHidden";
+            this.rdbHidden.Size = new System.Drawing.Size(138, 39);
+            this.rdbHidden.TabIndex = 2;
+            this.rdbHidden.TabStop = true;
+            this.rdbHidden.Text = "非表示";
+            this.rdbHidden.UseVisualStyleBackColor = true;
+            this.rdbHidden.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // F_ButuryuSyukko
             // 
@@ -543,15 +573,17 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.rdbHidden);
             this.Controls.Add(this.txbEmployeeID);
+            this.Controls.Add(this.rdbConfirm);
             this.Controls.Add(this.lblClientName);
+            this.Controls.Add(this.rdbSearch);
             this.Controls.Add(this.txbClientName);
             this.Controls.Add(this.lblEmployeeID);
             this.Controls.Add(this.dgvSyukkoDetail);
             this.Controls.Add(this.dgvSyukko);
             this.Controls.Add(this.cmbConfirm);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pnlSelect);
             this.Controls.Add(this.btnPageMax);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnBack);
@@ -589,8 +621,7 @@
             this.Load += new System.EventHandler(this.F_ButuryuSyukko_Load);
             this.pnlButuryu.ResumeLayout(false);
             this.pnlButuryu.PerformLayout();
-            this.pnlSelect.ResumeLayout(false);
-            this.pnlSelect.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSyukko)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSyukkoDetail)).EndInit();
             this.ResumeLayout(false);
@@ -631,8 +662,6 @@
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPageMax;
-        private System.Windows.Forms.Panel pnlSelect;
-        private System.Windows.Forms.RadioButton rdbHidden;
         private System.Windows.Forms.RadioButton rdbConfirm;
         private System.Windows.Forms.RadioButton rdbSearch;
         private System.Windows.Forms.Label label1;
@@ -643,5 +672,8 @@
         private System.Windows.Forms.Label lblClientName;
         private System.Windows.Forms.TextBox txbClientName;
         private System.Windows.Forms.TextBox txbEmployeeID;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.PictureBox pctHint;
+        private System.Windows.Forms.RadioButton rdbHidden;
     }
 }
