@@ -435,31 +435,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-            //発注IDの適否
-            if (!String.IsNullOrEmpty(txbHattyuID.Text.Trim()))
-            {
-                //発注IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbHattyuID.Text.Trim()))
-                {
-                    MessageBox.Show("発注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbHattyuID.Focus();
-                    return false;
-                }
-                //発注IDの存在チェック
-                if (hattyuDataAccess.CheckHattyuIDExistence(int.Parse(txbHattyuID.Text.Trim())))
-                {
-                    MessageBox.Show("発注IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbHattyuID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("発注IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbHattyuID.Focus();
-                return false;
-            }
-
             // メーカー名の適否
             if (cmbMakerName.SelectedIndex == -1)
             {
@@ -515,7 +490,6 @@ namespace SalesManagement_SysDev
         {
             return new T_Hattyu
             {
-                HaID = int.Parse(txbHattyuID.Text.Trim()),
                 EmID = F_Login.intEmployeeID,
                 MaID = cmbMakerName.SelectedIndex + 1,
                 HaDate = dtpHattyuDate.Value,

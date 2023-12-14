@@ -490,31 +490,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-            //受注IDの適否
-            if (!String.IsNullOrEmpty(txbOrderID.Text.Trim()))
-            {
-                //受注IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbOrderID.Text.Trim()))
-                {
-                    MessageBox.Show("受注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbOrderID.Focus();
-                    return false;
-                }
-                //受注IDの存在チェック
-                if (orderDataAccess.CheckOrderIDExistence(int.Parse(txbOrderID.Text.Trim())))
-                {
-                    MessageBox.Show("受注IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbOrderID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("受注IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbOrderID.Focus();
-                return false;
-            }
-
             //営業所選択の適否
             if (cmbSalesOfficeID.SelectedIndex == -1)
             {
@@ -580,7 +555,6 @@ namespace SalesManagement_SysDev
         {
             return new T_Order
             {
-                OrID = int.Parse(txbOrderID.Text.Trim()),
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 EmID = F_Login.intEmployeeID,
                 ClID = clientDataAccess.GetClientID(txbClientName.Text.Trim()),
