@@ -261,6 +261,7 @@ namespace SalesManagement_SysDev
             List<T_Hattyu> ha = new List<T_Hattyu>();
             List<T_HattyuDetail> had = new List<T_HattyuDetail>();
             List<T_Stock> st = new List<T_Stock>();
+            List<T_ShipmentDetail> shd = new List<T_ShipmentDetail>();
             List<T_Syukko> sy = new List<T_Syukko>();
             List<T_Warehousing> wh = new List<T_Warehousing>();
             List<T_WarehousingDetail> whd = new List<T_WarehousingDetail>();
@@ -855,6 +856,7 @@ namespace SalesManagement_SysDev
                 context.T_Stocks.AddRange(st);
                 context.SaveChanges();
             }
+
             {
                 or.Add(new T_Order
                 {
@@ -923,6 +925,7 @@ namespace SalesManagement_SysDev
                 context.T_OrderDetails.AddRange(ord);
                 context.SaveChanges();
             }
+
             {
                 ch.Add(new T_Chumon()
                 {

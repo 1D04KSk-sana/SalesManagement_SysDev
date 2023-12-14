@@ -10,6 +10,30 @@ namespace SalesManagement_SysDev
     internal class ShipmentDetailDataAccess
     {
         ///////////////////////////////
+        //メソッド名：GetOrderDetailData()
+        //引　数：なし
+        //戻り値：受注詳細データ
+        //機　能：受注詳細データの全取得
+        ///////////////////////////////
+        public List<T_ShipmentDetail> GetShipmentDetailIDData(int orderID)
+        {
+            List<T_ShipmentDetail> listOrderDetail = new List<T_ShipmentDetail>();
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listOrderDetail = context.T_ShipmentDetails.Where(x => x.ShDetailID == orderID).ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listOrderDetail;
+        }
+
+        //////////////////////////////
         //メソッド名：AddShipmentDetailData()
         //引　数：regShipment = 入荷詳細データ
         //戻り値：True or False
@@ -32,6 +56,5 @@ namespace SalesManagement_SysDev
                 return false;
             }
         }
-
     }
 }
