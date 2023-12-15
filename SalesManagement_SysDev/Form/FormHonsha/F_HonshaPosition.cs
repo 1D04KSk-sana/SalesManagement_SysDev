@@ -84,7 +84,7 @@ namespace SalesManagement_SysDev
             txbPositionID.Text = string.Empty;
             txbPositionName.Text = string.Empty;
             txbHidden.Text = string.Empty;
-            txbPositionListFlag.Text = string.Empty;
+            cmbHidden.SelectedIndex = -1;
         }
 
         private void btnPageMin_Click(object sender, EventArgs e)
@@ -148,6 +148,8 @@ namespace SalesManagement_SysDev
 
         private void btnPageSize_Click(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+            
             GetDataGridView();
         }
 
@@ -377,16 +379,16 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void PositionDataRegister()
         {
-            // 登録確認メッセージ
-            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtRegistration())
             {
                 return;
             }
 
-            //テキストボックス等の入力チェック
-            if (!GetValidDataAtRegistration())
+            // 登録確認メッセージ
+            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
             {
                 return;
             }
@@ -446,7 +448,6 @@ namespace SalesManagement_SysDev
         {
             return new M_Position
             {
-                PoID = int.Parse(txbPositionID.Text.Trim()),
                 PoName = txbPositionName.Text.Trim(),
                 PoFlag = cmbHidden.SelectedIndex,
                 PoHidden = txbHidden.Text.Trim(),
@@ -463,31 +464,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-            // 役職IDの適否
-            if (!String.IsNullOrEmpty(txbPositionID.Text.Trim()))
-            {
-                // 顧客IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbPositionID.Text.Trim()))
-                {
-                    MessageBox.Show("役職IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbPositionID.Focus();
-                    return false;
-                }
-                //顧客IDの重複チェック
-                if (positionDataAccess.CheckPositionIDExistence(int.Parse(txbPositionID.Text.Trim())))
-                {
-                    MessageBox.Show("役職IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbPositionID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("役職IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbPositionID.Focus();
-                return false;
-            }
-
             // 顧客名の適否
             if (!String.IsNullOrEmpty(txbPositionName.Text.Trim()))
             {
@@ -529,6 +505,23 @@ namespace SalesManagement_SysDev
         {
             //テキストボックス等の入力チェック
             if (!GetValidDataAtUpdate())
+            {
+                return;
+            }
+
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
             {
                 return;
             }
@@ -614,7 +607,6 @@ namespace SalesManagement_SysDev
         {
             return new M_Position
             {
-                PoID = int.Parse(txbPositionID.Text.Trim()),
                 PoName = txbPositionName.Text.Trim(),
                 PoHidden = txbHidden.Text.Trim(),
                 PoFlag = cmbHidden.SelectedIndex,
@@ -629,23 +621,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void UpdatePosition(M_Position updPosition)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
-            //操作ログデータ取得
-            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
-
-            //操作ログデータの登録（成功 = true,失敗 = false）
-            if (!operationLogAccess.AddOperationLogData(regOperationLog))
-            {
-                return;
-            }
-
             // 顧客情報の更新
             bool flg = positionDataAccess.UpdatePositionData(updPosition);
             if (flg == true)
@@ -825,6 +800,8 @@ namespace SalesManagement_SysDev
 
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+
             //データグリッドビューのデータ取得
             GetDataGridView();
         }
