@@ -25,6 +25,8 @@ namespace SalesManagement_SysDev
         SaleDetailDataAccess saleDetailDataAccess = new SaleDetailDataAccess();
         //データベース顧客テーブルアクセス用クラスのインスタンス化
         ClientDataAccess clientDataAccess = new ClientDataAccess();
+        //データベース商品テーブルアクセス用クラスのインスタンス化
+        ProdactDataAccess prodactDataAccess = new ProdactDataAccess();
         //データグリッドビュー用の売上データ
         private static List<T_Sale> listSale = new List<T_Sale>();
         //データグリッドビュー用の全売上データ
@@ -33,14 +35,18 @@ namespace SalesManagement_SysDev
         private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
         //フォームを呼び出しする際のインスタンス化
         private F_SearchDialog f_SearchDialog = new F_SearchDialog();
-        //データグリッドビュー用の顧客データ
+        //データグリッドビュー用の売上詳細データ
         private static List<T_SaleDetail> listSaleDetail = new List<T_SaleDetail>();
         //コンボボックス用の顧客データリスト
         private static List<M_Client> listClient = new List<M_Client>();
+        //コンボボックス用の商品データリスト
+        private static List<M_Product> listProdact = new List<M_Product>();
         //DataGridView用に使用する顧客のDictionary
         private Dictionary<int, string> dictionaryClient;
         //DataGridView用に使用す営業所のDictionary
         private Dictionary<int, string> dictionarySalesOffice;
+        //DataGridView用に使用す商品のDictionary
+        private Dictionary<int, string> dictionaryProdact;
 
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
@@ -126,6 +132,14 @@ namespace SalesManagement_SysDev
                 dictionaryClient.Add(item.ClID.Value, item.ClName);
             }
 
+            listProdact = prodactDataAccess.GetProdactDspData();
+
+            dictionaryProdact = new Dictionary<int, string> { };
+
+            foreach (var item in listProdact)
+            {
+                dictionaryProdact.Add(item.PrID, item.PrName);
+            }
         }
 
         ///////////////////////////////
@@ -668,7 +682,7 @@ namespace SalesManagement_SysDev
             //1行ずつdgvSaleに挿入
             foreach (var item in listSaleDetail)
             {
-                dgvSaleDetail.Rows.Add(item.SaDetailID, item.SaID, item.PrID, item.SaQuantity, item.SaTotalPrice);
+                dgvSaleDetail.Rows.Add(item.SaDetailID, item.SaID, dictionaryProdact[item.PrID], item.SaQuantity, item.SaTotalPrice);
             }
 
             //dgvSaleDetailをリフレッシュ
