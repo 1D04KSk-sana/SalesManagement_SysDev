@@ -37,19 +37,34 @@ namespace SalesManagement_SysDev
             { 0, "表示" },
             { 1, "非表示" },
         };
-        //DataGridView用に使用する確定形式のDictionary
-        private Dictionary<int, string> dictionaryConfirm = new Dictionary<int, string>
-        {
-            { 0, "表示" },
-            { 1, "非表示" },
-        };
         public F_HonshaClassification()
         {
             InitializeComponent();
         }
-        private void btnReturn_Click(object sender, EventArgs e)
+        private void dgvMajor_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.Close();
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvMajor.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            //選択された行に対してのコントロールの変更
+            M_SelectRowControl();
+
+            dgvSmall.Rows.Clear();
+
+            listSmall = smallDataAccess.GetSmallIDData(int.Parse(dgvMajor[0, dgvMajor.CurrentCellAddress.Y].Value.ToString()));
+
+            //1行ずつdgvSaleに挿入
+            foreach (var item in listSmall)
+            {
+                dgvSmall.Rows.Add(item.ScID, item.ScName, item.ScFlag, item.ScHidden);
+            }
+
+            //dgvSaleDetailをリフレッシュ
+            dgvSmall.Refresh();
+
         }
         private void btnClear_Click(object sender, EventArgs e)
         {
@@ -60,6 +75,7 @@ namespace SalesManagement_SysDev
 
             GetDataGridView();
         }
+
         private void btnDone_Click(object sender, EventArgs e)
         {
             //大分類登録ラヂオボタンがチェックされているとき
@@ -92,6 +108,137 @@ namespace SalesManagement_SysDev
             {
                 SmallDataSelect();
             }
+        }
+
+        private void btnReturn_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        private void dgvSmall_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvSmall.SelectedCells.Count == 0)
+            {
+                return;
+            }
+            //選択された行に対してのコントロールの変更
+            S_SelectRowControl();
+        }
+        private void F_HonshaClassification_Load(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+            txbPageSize.Text = "3";
+
+            SetFormDataGridView();
+
+            //cmbViewを表示に
+            cmbView.SelectedIndex = 0;
+        }
+        private void btnPageMin_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+
+            GetDataGridView();
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) - 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = (int.Parse(txbNumPage.Text.Trim()) + 1).ToString();
+
+            GetDataGridView();
+        }
+
+        private void btnPageMax_Click(object sender, EventArgs e)
+        {
+            List<M_MajorClassification> viewMajor = SetListMajor();
+            List<M_SmallClassification> viewSmall = SetListSmall();
+
+            //ページ行数を取得
+            int pageSize = int.Parse(txbPageSize.Text.Trim());
+            //最終ページ数を取得（テキストボックスに代入する数字なので-1はしない）
+            int MlastPage = (int)Math.Ceiling(viewMajor.Count / (double)pageSize);
+            int SlastPage = (int)Math.Ceiling(viewSmall.Count / (double)pageSize);
+
+            txbNumPage.Text = MlastPage.ToString();
+            txbNumPage.Text = SlastPage.ToString();
+
+            GetDataGridView();
+        }
+        private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+
+            //データグリッドビューのデータ取得
+            GetDataGridView();
+        }
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            if (e.KeyChar > '0' && '9' > e.KeyChar)
+            {
+                // テキストボックスに入力されている値を取得
+                string inputText = textBox.Text + e.KeyChar;
+
+                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
+                int parsedValue;
+                if (!int.TryParse(inputText, out parsedValue))
+                {
+                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Handled = true;
+                }
+            }
+        }
+        private void M_SearchDialog_btnAndSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            MajorSearchButtonClick(true);
+        }
+        private void M_SearchDialog_btnOrSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            MajorSearchButtonClick(false);
+        }
+        private void S_ChildForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Opacity = 1;
+        }
+        private void S_SearchDialog_btnAndSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            SmallSearchButtonClick(true);
+        }
+        private void S_SearchDialog_btnOrSearchClick(object sender, EventArgs e)
+        {
+            f_SearchDialog.Close();
+
+            SmallSearchButtonClick(false);
+        }
+        private void M_ChildForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Opacity = 1;
         }
         ///////////////////////////////
         //メソッド名：MajorDataRegister()
@@ -162,7 +309,7 @@ namespace SalesManagement_SysDev
             }
 
             // 顧客情報作成
-            var regMaker = GenerateSDataAtRegistration();
+            var regSmall = GenerateSDataAtRegistration();
 
             // 顧客情報登録
             RegistrationSmall(regSmall);
@@ -296,14 +443,14 @@ namespace SalesManagement_SysDev
                 // 大分類名の文字数チェック
                 if (txbMajorName.TextLength > 50)
                 {
-                    MessageBox.Show("メーカー名は50文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("大分類名は50文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbMajorName.Focus();
                     return false;
                 }
                 //大分類名の重複チェック
                 if (majorDataAccess.CheckMajorNameExistence(string.Format(txbMajorName.Text.Trim())))
                 {
-                    MessageBox.Show("メーカー名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("大分類名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbMajorName.Focus();
                     return false;
                 }
@@ -457,10 +604,10 @@ namespace SalesManagement_SysDev
             //表示用の大分類リスト作成
             List<M_MajorClassification> listViewMajor = SetListMajor();
 
-            List<M_SmallClassification> listViewSmall = smallDataAccess.GetSmallData();
+            List<M_SmallClassification> listViewSmall = SetListSmall();
 
             // DataGridViewに表示するデータを指定
-            SetDataGridView(listViewMajor,listViewSmall);
+            SetDataGridView(listViewMajor, listViewSmall);
         }
         ///////////////////////////////
         //メソッド名：SetListMajor()
@@ -543,6 +690,548 @@ namespace SalesManagement_SysDev
             return listViewSmall;
         }
         ///////////////////////////////
+        //メソッド名：MakerDataUpdate()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：メーカー情報更新の実行
+        ///////////////////////////////
+        private void MajorDataUpdate()
+        {
+            //テキストボックス等の入力チェック
+            if (!GetValidMDataAtUpdate())
+            {
+                return;
+            }
+
+            // 顧客情報作成
+            var updMajor = GenerateMDataAtUpdate();
+
+            // 顧客情報更新
+            UpdateMajor(updMajor);
+        }
+        ///////////////////////////////
+        //メソッド名：MakerDataUpdate()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：メーカー情報更新の実行
+        ///////////////////////////////
+        private void SmallDataUpdate()
+        {
+            //テキストボックス等の入力チェック
+            if (!GetValidSDataAtUpdate())
+            {
+                return;
+            }
+
+            // 顧客情報作成
+            var updSmall = GenerateSDataAtUpdate();
+
+            // 顧客情報更新
+            UpdateSmall(updSmall);
+        }
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtUpdate()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：更新入力データの形式チェック
+        //         ：エラーがない場合True
+        //         ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidMDataAtUpdate()
+        {
+            // 大分類IDの適否
+            if (!String.IsNullOrEmpty(txbMajorID.Text.Trim()))
+            {
+                // 大分類IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbMajorID.Text.Trim()))
+                {
+                    MessageBox.Show("大分類IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMajorID.Focus();
+                    return false;
+                }
+                //大分類IDの存在チェック
+                if (!majorDataAccess.CheckMajorIDExistence(int.Parse(txbMajorID.Text.Trim())))
+                {
+                    MessageBox.Show("大分類IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMajorID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("大分類IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbMajorID.Focus();
+                return false;
+            }
+
+            // 大分類名の適否
+            if (!String.IsNullOrEmpty(txbMajorName.Text.Trim()))
+            {
+                // 大分類名の文字数チェック
+                if (txbMajorName.TextLength > 50)
+                {
+                    MessageBox.Show("大分類名は50文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMajorName.Focus();
+                    return false;
+                }
+                //大分類名存在チェック
+                if (!majorDataAccess.CheckMajorNameExistence(txbMajorName.Text.Trim()))
+                {
+                    MessageBox.Show("大分類名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMajorID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("メーカー名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbMajorName.Focus();
+                return false;
+            }
+
+            //表示非表示選択の適否
+            if (cmbHidden.SelectedIndex == -1)
+            {
+                MessageBox.Show("表示非表示が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbHidden.Focus();
+                return false;
+            }
+
+            return true;
+        }
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtUpdate()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：更新入力データの形式チェック
+        //         ：エラーがない場合True
+        //         ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidSDataAtUpdate()
+        {
+            // 小分類IDの適否
+            if (!String.IsNullOrEmpty(txbSmallID.Text.Trim()))
+            {
+                // 小分類IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbSmallID.Text.Trim()))
+                {
+                    MessageBox.Show("小分類IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMajorID.Focus();
+                    return false;
+                }
+                //小分類IDの存在チェック
+                if (!smallDataAccess.CheckSmallIDExistence(int.Parse(txbSmallID.Text.Trim())))
+                {
+                    MessageBox.Show("小分類IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMajorID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("小分類IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbSmallID.Focus();
+                return false;
+            }
+
+            // 小分類名の適否
+            if (!String.IsNullOrEmpty(txbSmallName.Text.Trim()))
+            {
+                // 小分類名の文字数チェック
+                if (txbSmallName.TextLength > 50)
+                {
+                    MessageBox.Show("小分類名は50文字以内です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSmallName.Focus();
+                    return false;
+                }
+                //小分類名存在チェック
+                if (!smallDataAccess.CheckSmallNameExistence(txbSmallName.Text.Trim()))
+                {
+                    MessageBox.Show("小分類名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMajorID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("小分類名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbSmallName.Focus();
+                return false;
+            }
+
+            //表示非表示選択の適否
+            if (cmbHidden.SelectedIndex == -1)
+            {
+                MessageBox.Show("表示非表示が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbHidden.Focus();
+                return false;
+            }
+
+            return true;
+        }
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtUpdate()
+        //引　数   ：なし
+        //戻り値   ：メーカー更新情報
+        //機　能   ：更新データのセット
+        ///////////////////////////////
+        private M_MajorClassification GenerateMDataAtUpdate()
+        {
+            return new M_MajorClassification
+            {
+                McID = int.Parse(txbMajorID.Text.Trim()),
+                McName = string.Format(txbMajorName.Text.Trim()),
+                McFlag = cmbHidden.SelectedIndex,
+                McHidden = txbHidden.Text.Trim(),
+            };
+        }
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtUpdate()
+        //引　数   ：なし
+        //戻り値   ：メーカー更新情報
+        //機　能   ：更新データのセット
+        ///////////////////////////////
+        private M_SmallClassification GenerateSDataAtUpdate()
+        {
+            return new M_SmallClassification
+            {
+                ScID = int.Parse(txbSmallID.Text.Trim()),
+                ScName = string.Format(txbSmallName.Text.Trim()),
+                ScFlag = cmbHidden.SelectedIndex,
+                ScHidden = txbHidden.Text.Trim(),
+            };
+        }
+        ///////////////////////////////
+        //メソッド名：UpdateMaker()
+        //引　数   ：顧客情報
+        //戻り値   ：なし
+        //機　能   ：顧客情報の更新
+        ///////////////////////////////
+        private void UpdateSmall(M_SmallClassification updSmall)
+        {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateSLogAtRegistration(rdbSmallUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
+            // 顧客情報の更新
+            bool flg = smallDataAccess.UpdateSmallData(updSmall);
+            if (flg == true)
+            {
+                MessageBox.Show("更新しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("更新に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //テキストボックス等のクリア
+            ClearImput();
+
+            // データグリッドビューの表示
+            GetDataGridView();
+        }
+        ///////////////////////////////
+        //メソッド名：UpdateMaker()
+        //引　数   ：顧客情報
+        //戻り値   ：なし
+        //機　能   ：顧客情報の更新
+        ///////////////////////////////
+        private void UpdateMajor(M_MajorClassification updMajor)
+        {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateMLogAtRegistration(rdbMajorUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
+            // 顧客情報の更新
+            bool flg = majorDataAccess.UpdateMajorData(updMajor);
+            if (flg == true)
+            {
+                MessageBox.Show("更新しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("更新に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //テキストボックス等のクリア
+            ClearImput();
+
+            // データグリッドビューの表示
+            GetDataGridView();
+        }
+        ///////////////////////////////
+        //メソッド名：MakerDataSelect()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：メーカー情報検索の実行
+        ///////////////////////////////
+        private void MajorDataSelect()
+        {
+            //テキストボックス等の入力チェック
+            if (!GetValidMDataAtSearch())
+            {
+                return;
+            }
+
+            //検索ダイアログのフォームを作成
+            f_SearchDialog = new F_SearchDialog();
+            //検索ダイアログのフォームのオーナー設定
+            f_SearchDialog.Owner = this;
+
+            //検索ダイアログのフォームのボタンクリックイベントにハンドラを追加
+            f_SearchDialog.btnAndSearchClick += M_SearchDialog_btnAndSearchClick;
+            f_SearchDialog.btnOrSearchClick += M_SearchDialog_btnOrSearchClick;
+
+            //検索ダイアログのフォームが閉じたときのイベントを設定
+            f_SearchDialog.FormClosed += M_ChildForm_FormClosed;
+            //検索ダイアログのフォームの表示
+            f_SearchDialog.Show();
+
+            //顧客登録フォームの透明化
+            this.Opacity = 0;
+        }
+        ///////////////////////////////
+        //メソッド名：MakerDataSelect()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：メーカー情報検索の実行
+        ///////////////////////////////
+        private void SmallDataSelect()
+        {
+            //テキストボックス等の入力チェック
+            if (!GetValidSDataAtSearch())
+            {
+                return;
+            }
+
+            //検索ダイアログのフォームを作成
+            f_SearchDialog = new F_SearchDialog();
+            //検索ダイアログのフォームのオーナー設定
+            f_SearchDialog.Owner = this;
+
+            //検索ダイアログのフォームのボタンクリックイベントにハンドラを追加
+            f_SearchDialog.btnAndSearchClick += S_SearchDialog_btnAndSearchClick;
+            f_SearchDialog.btnOrSearchClick += S_SearchDialog_btnOrSearchClick;
+
+            //検索ダイアログのフォームが閉じたときのイベントを設定
+            f_SearchDialog.FormClosed += S_ChildForm_FormClosed;
+            //検索ダイアログのフォームの表示
+            f_SearchDialog.Show();
+
+            //顧客登録フォームの透明化
+            this.Opacity = 0;
+        }
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtSearch()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：検索入力データの形式チェック
+        //         ：エラーがない場合True
+        //         ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidMDataAtSearch()
+        {
+            //検索条件の存在確認
+            if (String.IsNullOrEmpty(txbMajorID.Text.Trim()) && String.IsNullOrEmpty(txbMajorName.Text.Trim()))
+            {
+                MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbMajorID.Focus();
+                return false;
+            }
+
+            // メーカーIDの適否
+            if (!String.IsNullOrEmpty(txbMajorID.Text.Trim()))
+            {
+                // メーカーIDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbMajorID.Text.Trim()))
+                {
+                    MessageBox.Show("大分類IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMajorID.Focus();
+                    return false;
+                }
+                //メーカーIDの重複チェック
+                if (!majorDataAccess.CheckMajorIDExistence(int.Parse(txbMajorID.Text.Trim())))
+                {
+                    MessageBox.Show("大分類IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMajorID.Focus();
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtSearch()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：検索入力データの形式チェック
+        //         ：エラーがない場合True
+        //         ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidSDataAtSearch()
+        {
+            //検索条件の存在確認
+            if (String.IsNullOrEmpty(txbSmallID.Text.Trim()) && String.IsNullOrEmpty(txbSmallName.Text.Trim()))
+            {
+                MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbSmallID.Focus();
+                return false;
+            }
+
+            // メーカーIDの適否
+            if (!String.IsNullOrEmpty(txbSmallID.Text.Trim()))
+            {
+                // メーカーIDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbSmallID.Text.Trim()))
+                {
+                    MessageBox.Show("小分類IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSmallID.Focus();
+                    return false;
+                }
+                //メーカーIDの重複チェック
+                if (!smallDataAccess.CheckSmallIDExistence(int.Parse(txbSmallID.Text.Trim())))
+                {
+                    MessageBox.Show("小分類IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSmallID.Focus();
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        ///////////////////////////////
+        //メソッド名：MakerSearchButtonClick()
+        //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：メーカー情報検索の実行
+        ///////////////////////////////
+        private void MajorSearchButtonClick(bool searchFlg)
+        {
+            // 顧客情報抽出
+            GenerateMDataAtSelect(searchFlg);
+
+            int intSearchCount = listMajor.Count;
+
+            txbNumPage.Text = "1";
+
+            // 顧客抽出結果表示
+            GetDataGridView();
+
+            MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        ///////////////////////////////
+        //メソッド名：MakerSearchButtonClick()
+        //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：メーカー情報検索の実行
+        ///////////////////////////////
+        private void SmallSearchButtonClick(bool searchFlg)
+        {
+            // 顧客情報抽出
+            GenerateSDataAtSelect(searchFlg);
+
+            int intSearchCount = listSmall.Count;
+
+            txbNumPage.Text = "1";
+
+            // 顧客抽出結果表示
+            GetDataGridView();
+
+            MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtSelect()
+        //引　数   ：searchFlg = And検索かOr検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：メーカー情報の取得
+        ///////////////////////////////
+        private void GenerateMDataAtSelect(bool searchFlg)
+        {
+            string strMajorID = txbMajorID.Text.Trim();
+            int intMajorID = 0;
+
+            if (!String.IsNullOrEmpty(strMajorID))
+            {
+                intMajorID = int.Parse(strMajorID);
+            }
+
+            // 検索条件のセット
+            M_MajorClassification selectCondition = new M_MajorClassification()
+            {
+                McID = intMajorID,
+            };
+
+            if (searchFlg)
+            {
+                // 顧客データのAnd抽出
+                listMajor = majorDataAccess.GetAndMajorData(selectCondition);
+            }
+            else
+            {
+                // 顧客データのOr抽出
+                listMajor = majorDataAccess.GetOrMajorData(selectCondition);
+            }
+        }
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtSelect()
+        //引　数   ：searchFlg = And検索かOr検索か判別するためのBool値
+        //戻り値   ：なし
+        //機　能   ：メーカー情報の取得
+        ///////////////////////////////
+        private void GenerateSDataAtSelect(bool searchFlg)
+        {
+            string strSmallID = txbSmallID.Text.Trim();
+            int intSmallID = 0;
+
+            if (!String.IsNullOrEmpty(strSmallID))
+            {
+                intSmallID = int.Parse(strSmallID);
+            }
+
+            // 検索条件のセット
+            M_SmallClassification selectCondition = new M_SmallClassification()
+            {
+                ScID = intSmallID,
+            };
+
+            if (searchFlg)
+            {
+                // 顧客データのAnd抽出
+                listSmall = smallDataAccess.GetAndSmallData(selectCondition);
+            }
+            else
+            {
+                // 顧客データのOr抽出
+                listSmall = smallDataAccess.GetOrSmallData(selectCondition);
+            }
+        }
+        ///////////////////////////////
         //メソッド名：SetDataGridView()
         //引　数   ：なし
         //戻り値   ：なし
@@ -560,21 +1249,19 @@ namespace SalesManagement_SysDev
             //ページ数を取得
             int pageNum = int.Parse(txbNumPage.Text.Trim()) - 1;
             //最終ページ数を取得
-            int lastPage = (int)Math.Ceiling(viewMajor.Count / (double)pageSize) - 1;
+            int MlastPage = (int)Math.Ceiling(viewMajor.Count / (double)pageSize) - 1;
 
             //データからページに必要な部分だけを取り出す
-            var depData = viewMajor.Skip(pageSize * pageNum).Take(pageSize).ToList();
-
+            var MdepData = viewMajor.Skip(pageSize * pageNum).Take(pageSize).ToList();
             //1行ずつdgvMakerに挿入
-            foreach (var item in depData)
+            foreach (var item in MdepData)
             {
                 dgvMajor.Rows.Add(item.McID, item.McName, dictionaryHidden[item.McFlag], item.McHidden);
             }
-
             //dgvMajorをリフレッシュ
             dgvMajor.Refresh();
 
-            if (lastPage == -1 || (lastPage == pageNum && pageNum == 0))
+            if (MlastPage == -1 || (MlastPage == pageNum && pageNum == 0))
             {
                 btnPageMax.Visible = false;
                 btnNext.Visible = false;
@@ -588,7 +1275,7 @@ namespace SalesManagement_SysDev
                 btnPageMin.Visible = false;
                 btnBack.Visible = false;
             }
-            else if (lastPage == pageNum)
+            else if (MlastPage == pageNum)
             {
                 btnPageMax.Visible = false;
                 btnNext.Visible = false;
@@ -603,6 +1290,21 @@ namespace SalesManagement_SysDev
                 btnBack.Visible = true;
 
             }
+    }
+
+        ///////////////////////////////
+        //メソッド名：SelectRowControl()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：選択された行に対してのコントロールの変更
+        ///////////////////////////////
+        private void M_SelectRowControl()
+        {
+            //データグリッドビューに乗っている情報をGUIに反映
+            txbMajorID.Text = dgvMajor[0, dgvMajor.CurrentCellAddress.Y].Value.ToString();
+            txbMajorName.Text = dgvMajor[1, dgvMajor.CurrentCellAddress.Y].Value.ToString();
+            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvMajor[2, dgvMajor.CurrentCellAddress.Y].Value.ToString()).Key;
+            txbHidden.Text = dgvMajor[3, dgvMajor.CurrentCellAddress.Y]?.Value?.ToString();
         }
         ///////////////////////////////
         //メソッド名：SelectRowControl()
@@ -610,16 +1312,12 @@ namespace SalesManagement_SysDev
         //戻り値   ：なし
         //機　能   ：選択された行に対してのコントロールの変更
         ///////////////////////////////
-        private void SelectRowControl()
+        private void S_SelectRowControl()
         {
             //データグリッドビューに乗っている情報をGUIに反映
-            txbMajorID.Text = dgvMajor[0, dgvMajor.CurrentCellAddress.Y].Value.ToString();
-            txbMajorName.Text = dgvMajor[1, dgvMajor.CurrentCellAddress.Y].Value.ToString();
             txbSmallID.Text = dgvSmall[0, dgvSmall.CurrentCellAddress.Y].Value.ToString();
             txbSmallName.Text = dgvSmall[1, dgvSmall.CurrentCellAddress.Y].Value.ToString();
-            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvMajor[2, dgvMajor.CurrentCellAddress.Y].Value.ToString()).Key;
-            txbHidden.Text = dgvMajor[3, dgvMajor.CurrentCellAddress.Y]?.Value?.ToString();
-            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSmall[2, dgvMajor.CurrentCellAddress.Y].Value.ToString()).Key;
+            cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSmall[2, dgvSmall.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvSmall[3, dgvSmall.CurrentCellAddress.Y]?.Value?.ToString();
         }
         ///////////////////////////////
@@ -657,10 +1355,10 @@ namespace SalesManagement_SysDev
             dgvMajor.Columns.Add("McFlag", "管理フラグ");
             dgvMajor.Columns.Add("McHidden", "非表示理由");
 
-            dgvMajor.Columns["McID"].Width = 120;
-            dgvMajor.Columns["McName"].Width = 120;
-            dgvMajor.Columns["McFlag"].Width = 120;
-            dgvMajor.Columns["McHidden"].Width = 120;
+            dgvMajor.Columns["McID"].Width = 225;
+            dgvMajor.Columns["McName"].Width = 225;
+            dgvMajor.Columns["McFlag"].Width = 225;
+            dgvMajor.Columns["McHidden"].Width = 225;
 
 
             //並び替えができないようにする
@@ -696,10 +1394,10 @@ namespace SalesManagement_SysDev
             dgvSmall.Columns.Add("ScFlag", "管理フラグ");
             dgvSmall.Columns.Add("ScHidden", "非表示理由");
 
-            dgvSmall.Columns["ScID"].Width = 120;
-            dgvSmall.Columns["ScName"].Width = 120;
-            dgvSmall.Columns["ScFlag"].Width = 120;
-            dgvSmall.Columns["ScHidden"].Width = 120;
+            dgvSmall.Columns["ScID"].Width = 225;
+            dgvSmall.Columns["ScName"].Width = 225;
+            dgvSmall.Columns["ScFlag"].Width = 225;
+            dgvSmall.Columns["ScHidden"].Width = 225;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvSmall.Columns)

@@ -30,7 +30,7 @@
         {
             this.pnlClassification = new System.Windows.Forms.Panel();
             this.pctHint = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             this.lblClient = new System.Windows.Forms.Label();
             this.btnReturn = new System.Windows.Forms.Button();
             this.rdbSmallRegister = new System.Windows.Forms.RadioButton();
@@ -75,7 +75,7 @@
             // 
             this.pnlClassification.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(255)))), ((int)(((byte)(112)))));
             this.pnlClassification.Controls.Add(this.pctHint);
-            this.pnlClassification.Controls.Add(this.button1);
+            this.pnlClassification.Controls.Add(this.btnClose);
             this.pnlClassification.Controls.Add(this.lblClient);
             this.pnlClassification.Controls.Add(this.btnReturn);
             this.pnlClassification.Location = new System.Drawing.Point(0, 1);
@@ -94,16 +94,17 @@
             this.pctHint.TabIndex = 34;
             this.pctHint.TabStop = false;
             // 
-            // button1
+            // btnClose
             // 
-            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(1725, 36);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(160, 70);
-            this.button1.TabIndex = 26;
-            this.button1.TabStop = false;
-            this.button1.Text = "閉じる";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnClose.Location = new System.Drawing.Point(1725, 36);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(160, 70);
+            this.btnClose.TabIndex = 26;
+            this.btnClose.TabStop = false;
+            this.btnClose.Text = "閉じる";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // lblClient
             // 
@@ -127,6 +128,7 @@
             this.btnReturn.TabIndex = 0;
             this.btnReturn.Text = "戻る";
             this.btnReturn.UseVisualStyleBackColor = true;
+            this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
             // rdbSmallRegister
             // 
@@ -339,6 +341,7 @@
             this.btnClear.TabStop = false;
             this.btnClear.Text = "クリア";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnDone
             // 
@@ -351,6 +354,7 @@
             this.btnDone.TabStop = false;
             this.btnDone.Text = "実行";
             this.btnDone.UseVisualStyleBackColor = true;
+            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // cmbView
             // 
@@ -366,32 +370,36 @@
             this.cmbView.Size = new System.Drawing.Size(360, 43);
             this.cmbView.TabIndex = 144;
             this.cmbView.TabStop = false;
+            this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
             // 
             // dgvMajor
             // 
             this.dgvMajor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMajor.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.dgvMajor.Location = new System.Drawing.Point(11, 491);
+            this.dgvMajor.Location = new System.Drawing.Point(20, 491);
             this.dgvMajor.Margin = new System.Windows.Forms.Padding(2);
             this.dgvMajor.Name = "dgvMajor";
             this.dgvMajor.RowHeadersWidth = 51;
             this.dgvMajor.RowTemplate.Height = 24;
-            this.dgvMajor.Size = new System.Drawing.Size(861, 480);
+            this.dgvMajor.Size = new System.Drawing.Size(900, 480);
+            this.dgvMajor.StandardTab = true;
             this.dgvMajor.TabIndex = 145;
             this.dgvMajor.TabStop = false;
+            this.dgvMajor.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMajor_CellClick);
             // 
             // dgvSmall
             // 
             this.dgvSmall.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSmall.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.dgvSmall.Location = new System.Drawing.Point(889, 491);
+            this.dgvSmall.Location = new System.Drawing.Point(985, 491);
             this.dgvSmall.Margin = new System.Windows.Forms.Padding(2);
             this.dgvSmall.Name = "dgvSmall";
             this.dgvSmall.RowHeadersWidth = 51;
             this.dgvSmall.RowTemplate.Height = 24;
-            this.dgvSmall.Size = new System.Drawing.Size(1004, 480);
+            this.dgvSmall.Size = new System.Drawing.Size(900, 480);
             this.dgvSmall.TabIndex = 146;
             this.dgvSmall.TabStop = false;
+            this.dgvSmall.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSmall_CellClick);
             // 
             // btnPageSize
             // 
@@ -425,6 +433,7 @@
             this.txbPageSize.Size = new System.Drawing.Size(50, 28);
             this.txbPageSize.TabIndex = 147;
             this.txbPageSize.TabStop = false;
+            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblNumPage
             // 
@@ -446,6 +455,7 @@
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 154;
             this.txbNumPage.TabStop = false;
+            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // btnPageMin
             // 
@@ -458,6 +468,7 @@
             this.btnPageMin.TabStop = false;
             this.btnPageMin.Text = "|◀";
             this.btnPageMin.UseVisualStyleBackColor = true;
+            this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
             // 
             // btnBack
             // 
@@ -471,6 +482,7 @@
             this.btnBack.TabStop = false;
             this.btnBack.Text = "◀";
             this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnNext
             // 
@@ -483,6 +495,7 @@
             this.btnNext.TabStop = false;
             this.btnNext.Text = "▶";
             this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPageMax
             // 
@@ -495,6 +508,7 @@
             this.btnPageMax.TabStop = false;
             this.btnPageMax.Text = "▶|";
             this.btnPageMax.UseVisualStyleBackColor = true;
+            this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
             // F_HonshaClassification
             // 
@@ -539,6 +553,7 @@
             this.Name = "F_HonshaClassification";
             this.Text = "F_HonshaClassification";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.F_HonshaClassification_Load);
             this.pnlClassification.ResumeLayout(false);
             this.pnlClassification.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
@@ -553,7 +568,7 @@
 
         private System.Windows.Forms.Panel pnlClassification;
         private System.Windows.Forms.PictureBox pctHint;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lblClient;
         private System.Windows.Forms.Button btnReturn;
         private System.Windows.Forms.RadioButton rdbSmallRegister;

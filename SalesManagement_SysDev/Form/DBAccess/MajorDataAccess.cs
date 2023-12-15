@@ -15,7 +15,7 @@ namespace SalesManagement_SysDev
         //戻り値   ：表示用大分類名データ
         //機　能   ：表示用大分類名データの取得
         ///////////////////////////////
-        public List<M_MajorClassification> GetMajorDspData()
+        public List<M_MajorClassification> GetMajorClassificationDspData()
         {
             List<M_MajorClassification> listMajor = new List<M_MajorClassification>();
             try
@@ -143,6 +143,112 @@ namespace SalesManagement_SysDev
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return flg;
+        }
+        ///////////////////////////////
+        //メソッド名：AddMakerData()
+        //引　数：regMaker = メーカーデータ
+        //戻り値：True or False
+        //機　能：メーカーデータの登録
+        //      ：登録成功の場合True
+        //      ：登録失敗の場合False
+        ///////////////////////////////
+        public bool AddMajorData(M_MajorClassification regMajor)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                context.M_MajorClassifications.Add(regMajor);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+        }
+        ///////////////////////////////
+        //メソッド名：UpdateMakerData()
+        //引　数：updMaker = メーカーデータ
+        //戻り値：True or False
+        //機　能：メーカーデータの更新
+        //      ：更新成功の場合True
+        //      ：更新失敗の場合False
+        ///////////////////////////////
+        public bool UpdateMajorData(M_MajorClassification updMajor)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Major = context.M_MajorClassifications.Single(x => x.McID == updMajor.McID);
+
+                Major.McName = updMajor.McName;
+                Major.McFlag = updMajor.McFlag;
+                Major.McHidden = updMajor.McHidden;
+                Major.McID = updMajor.McID;
+
+                context.SaveChanges();
+                context.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+        ///////////////////////////////
+        //メソッド名：GetAndMakerData()
+        //引　数：検索条件
+        //戻り値：条件完全一致メーカーデータ
+        //機　能：条件完全一致メーカーデータの取得
+        ///////////////////////////////
+        public List<M_MajorClassification> GetAndMajorData(M_MajorClassification selectMajor)
+        {
+            List<M_MajorClassification> listMajor = new List<M_MajorClassification>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var query = context.M_MajorClassifications.AsQueryable();
+
+                if (selectMajor.McID != null && selectMajor.McID != 0)
+                {
+                    query = query.Where(x => x.McID == selectMajor.McID);
+                }
+
+                listMajor = query.ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listMajor;
+        }
+        ///////////////////////////////
+        //メソッド名：GetOrMakerData()
+        //引　数：検索条件
+        //戻り値：条件一部一メーカーデータ
+        //機　能：条件一部一致メーカーデータの取得
+        ///////////////////////////////
+        public List<M_MajorClassification> GetOrMajorData(M_MajorClassification selectMajor)
+        {
+            List<M_MajorClassification> listMajor = new List<M_MajorClassification>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listMajor = context.M_MajorClassifications.Where(x => x.McID == selectMajor.McID ).ToList();
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listMajor;
         }
     }
 }

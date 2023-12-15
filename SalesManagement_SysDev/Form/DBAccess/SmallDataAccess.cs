@@ -15,7 +15,7 @@ namespace SalesManagement_SysDev
         //戻り値   ：表示用小分類名データ
         //機　能   ：表示用小分類名データの取得
         ///////////////////////////////
-        public List<M_SmallClassification> GetSmallDspData()
+        public List<M_SmallClassification> GetSmallClassificationDspData()
         {
             List<M_SmallClassification> listSmall = new List<M_SmallClassification>();
             try
@@ -166,6 +166,112 @@ namespace SalesManagement_SysDev
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
+        }
+        ///////////////////////////////
+        //メソッド名：UpdateMakerData()
+        //引　数：updMaker = メーカーデータ
+        //戻り値：True or False
+        //機　能：メーカーデータの更新
+        //      ：更新成功の場合True
+        //      ：更新失敗の場合False
+        ///////////////////////////////
+        public bool UpdateSmallData(M_SmallClassification updSmall)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Small = context.M_SmallClassifications.Single(x => x.ScID == updSmall.ScID);
+
+                Small.ScName = updSmall.ScName;
+                Small.ScFlag = updSmall.ScFlag;
+                Small.ScHidden = updSmall.ScHidden;
+                Small.ScID = updSmall.ScID;
+
+                context.SaveChanges();
+                context.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+        ///////////////////////////////
+        //メソッド名：GetAndMakerData()
+        //引　数：検索条件
+        //戻り値：条件完全一致メーカーデータ
+        //機　能：条件完全一致メーカーデータの取得
+        ///////////////////////////////
+        public List<M_SmallClassification> GetAndSmallData(M_SmallClassification selectSmall)
+        {
+            List<M_SmallClassification> listSmall = new List<M_SmallClassification>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var query = context.M_SmallClassifications.AsQueryable();
+
+                if (selectSmall.ScID != null && selectSmall.ScID != 0)
+                {
+                    query = query.Where(x => x.ScID == selectSmall.ScID);
+                }
+
+                listSmall = query.ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listSmall;
+        }
+        ///////////////////////////////
+        //メソッド名：GetOrMakerData()
+        //引　数：検索条件
+        //戻り値：条件一部一メーカーデータ
+        //機　能：条件一部一致メーカーデータの取得
+        ///////////////////////////////
+        public List<M_SmallClassification> GetOrSmallData(M_SmallClassification selectSmall)
+        {
+            List<M_SmallClassification> listSmall = new List<M_SmallClassification>();
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listSmall = context.M_SmallClassifications.Where(x => x.ScID == selectSmall.ScID).ToList();
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listSmall;
+        }
+        ///////////////////////////////
+        //メソッド名：GetSaleDetailIDData()
+        //引　数：なし
+        //戻り値：受注詳細データ
+        //機　能：受注詳細データの全取得
+        ///////////////////////////////
+        public List<M_SmallClassification> GetSmallIDData(int SmallID)
+        {
+            List<M_SmallClassification> listSmall = new List<M_SmallClassification>();
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                listSmall = context.M_SmallClassifications.Where(x => x.ScID == SmallID).ToList();
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return listSmall;
         }
     }
 }
