@@ -48,7 +48,6 @@
             this.txbShipmentDetailID = new System.Windows.Forms.TextBox();
             this.txbShipmentID = new System.Windows.Forms.TextBox();
             this.txbOrderID = new System.Windows.Forms.TextBox();
-            this.cmbSalesOfficeID = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txbClientName = new System.Windows.Forms.TextBox();
@@ -73,6 +72,7 @@
             this.cmbShipmentHidden = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.cmbSalesOfficeID = new System.Windows.Forms.ComboBox();
             this.pnlEigyo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShipmentDetail)).BeginInit();
@@ -136,7 +136,7 @@
             this.lblWarehousing.Location = new System.Drawing.Point(824, 40);
             this.lblWarehousing.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWarehousing.Name = "lblWarehousing";
-            this.lblWarehousing.Size = new System.Drawing.Size(288, 64);
+            this.lblWarehousing.Size = new System.Drawing.Size(417, 64);
             this.lblWarehousing.TabIndex = 24;
             this.lblWarehousing.Text = "出荷管理";
             // 
@@ -155,6 +155,7 @@
             this.cmbView.Size = new System.Drawing.Size(360, 43);
             this.cmbView.TabIndex = 137;
             this.cmbView.TabStop = false;
+            this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
             // 
             // btnClear
             // 
@@ -167,6 +168,7 @@
             this.btnClear.TabStop = false;
             this.btnClear.Text = "クリア";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnDone
             // 
@@ -180,6 +182,7 @@
             this.btnDone.TabStop = false;
             this.btnDone.Text = "実行";
             this.btnDone.UseVisualStyleBackColor = false;
+            this.btnDone.Click += new System.EventHandler(this.btnDone_Click);
             // 
             // rdbSearch
             // 
@@ -311,16 +314,6 @@
             this.txbOrderID.Size = new System.Drawing.Size(220, 31);
             this.txbOrderID.TabIndex = 150;
             // 
-            // cmbSalesOfficeID
-            // 
-            this.cmbSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.cmbSalesOfficeID.ForeColor = System.Drawing.Color.Black;
-            this.cmbSalesOfficeID.Location = new System.Drawing.Point(510, 344);
-            this.cmbSalesOfficeID.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbSalesOfficeID.Name = "cmbSalesOfficeID";
-            this.cmbSalesOfficeID.Size = new System.Drawing.Size(220, 31);
-            this.cmbSalesOfficeID.TabIndex = 151;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -395,6 +388,7 @@
             this.dgvShipmentDetail.Size = new System.Drawing.Size(748, 499);
             this.dgvShipmentDetail.TabIndex = 169;
             this.dgvShipmentDetail.TabStop = false;
+            this.dgvShipmentDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvShipmentDetail_CellClick);
             // 
             // dgvShipment
             // 
@@ -408,6 +402,7 @@
             this.dgvShipment.Size = new System.Drawing.Size(1102, 499);
             this.dgvShipment.TabIndex = 168;
             this.dgvShipment.TabStop = false;
+            this.dgvShipment.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvShipment_CellClick);
             // 
             // lblPageSize
             // 
@@ -477,6 +472,7 @@
             this.btnPageMin.TabStop = false;
             this.btnPageMin.Text = "|◀";
             this.btnPageMin.UseVisualStyleBackColor = false;
+            this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
             // 
             // btnBack
             // 
@@ -490,6 +486,7 @@
             this.btnBack.TabStop = false;
             this.btnBack.Text = "◀";
             this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnPageMax
             // 
@@ -503,6 +500,7 @@
             this.btnPageMax.TabStop = false;
             this.btnPageMax.Text = "▶|";
             this.btnPageMax.UseVisualStyleBackColor = false;
+            this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
             // btnNext
             // 
@@ -516,6 +514,7 @@
             this.btnNext.TabStop = false;
             this.btnNext.Text = "▶";
             this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // label2
             // 
@@ -560,9 +559,13 @@
             // 
             // cmbShipmentHidden
             // 
+            this.cmbShipmentHidden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbShipmentHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbShipmentHidden.ForeColor = System.Drawing.Color.Black;
             this.cmbShipmentHidden.FormattingEnabled = true;
+            this.cmbShipmentHidden.Items.AddRange(new object[] {
+            "表示",
+            "非表示"});
             this.cmbShipmentHidden.Location = new System.Drawing.Point(180, 405);
             this.cmbShipmentHidden.Margin = new System.Windows.Forms.Padding(4);
             this.cmbShipmentHidden.Name = "cmbShipmentHidden";
@@ -591,12 +594,25 @@
             this.label12.TabIndex = 173;
             this.label12.Text = "非表示理由";
             // 
+            // cmbSalesOfficeID
+            // 
+            this.cmbSalesOfficeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbSalesOfficeID.ForeColor = System.Drawing.Color.Black;
+            this.cmbSalesOfficeID.FormattingEnabled = true;
+            this.cmbSalesOfficeID.Location = new System.Drawing.Point(510, 343);
+            this.cmbSalesOfficeID.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbSalesOfficeID.Name = "cmbSalesOfficeID";
+            this.cmbSalesOfficeID.Size = new System.Drawing.Size(220, 32);
+            this.cmbSalesOfficeID.TabIndex = 177;
+            // 
             // F_EigyoShipment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(219)))), ((int)(((byte)(193)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.cmbSalesOfficeID);
             this.Controls.Add(this.txbShipmentHidden);
             this.Controls.Add(this.cmbShipmentHidden);
             this.Controls.Add(this.label11);
@@ -621,7 +637,6 @@
             this.Controls.Add(this.txbClientName);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.cmbSalesOfficeID);
             this.Controls.Add(this.txbOrderID);
             this.Controls.Add(this.txbShipmentID);
             this.Controls.Add(this.label8);
@@ -639,9 +654,11 @@
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnDone);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximizeBox = false;
             this.Name = "F_EigyoShipment";
             this.Text = "F_EigyoShipment";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.F_EigyoShipment_Load);
             this.pnlEigyo.ResumeLayout(false);
             this.pnlEigyo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
@@ -673,7 +690,6 @@
         private System.Windows.Forms.TextBox txbShipmentDetailID;
         private System.Windows.Forms.TextBox txbShipmentID;
         private System.Windows.Forms.TextBox txbOrderID;
-        private System.Windows.Forms.TextBox cmbSalesOfficeID;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txbClientName;
@@ -698,6 +714,7 @@
         private System.Windows.Forms.ComboBox cmbShipmentHidden;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox cmbSalesOfficeID;
         private System.Windows.Forms.PictureBox pctHint;
     }
 }
