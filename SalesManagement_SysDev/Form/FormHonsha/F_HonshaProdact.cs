@@ -656,7 +656,6 @@ namespace SalesManagement_SysDev
         {
             return new M_Product
             {
-                PrID = int.Parse(txbProdactID.Text.Trim()),
                 MaID = cmbMakerName.SelectedIndex + 1,
                 PrName = txbProdactName.Text.Trim(),
                 Price = int.Parse(txbProdactPrice.Text.Trim()),
@@ -682,31 +681,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-            // 商品IDの適否
-            if (!String.IsNullOrEmpty(txbProdactID.Text.Trim()))
-            {
-                // 商品IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbProdactID.Text.Trim()))
-                {
-                    MessageBox.Show("商品IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactID.Focus();
-                    return false;
-                }
-                //商品IDの重複チェック
-                if (ProdactDataAccess.CheckProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
-                {
-                    MessageBox.Show("商品IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("商品IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbProdactID.Focus();
-                return false;
-            }
-
             // メーカー名の適否
             if (cmbHidden.SelectedIndex == -1)
             {

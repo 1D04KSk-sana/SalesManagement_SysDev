@@ -221,7 +221,6 @@ namespace SalesManagement_SysDev
                 SalesOffice.SoFAX = updSalesOffice.SoFAX;
                 SalesOffice.SoPhone = updSalesOffice.SoPhone;
                 SalesOffice.SoAddress = updSalesOffice.SoAddress;
-                SalesOffice.SoID = updSalesOffice.SoID;
                 SalesOffice.SoPostal = updSalesOffice.SoPostal;
 
                 context.SaveChanges();

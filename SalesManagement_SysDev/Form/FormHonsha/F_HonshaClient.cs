@@ -366,7 +366,6 @@ namespace SalesManagement_SysDev
         {
             return new M_Client
             {
-                ClID = int.Parse(txbClientID.Text.Trim()),
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 ClName = txbClientName.Text.Trim(),
                 ClAddress = txbClientAddress.Text.Trim(),

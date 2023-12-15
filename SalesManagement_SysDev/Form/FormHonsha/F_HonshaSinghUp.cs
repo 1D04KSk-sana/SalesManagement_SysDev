@@ -162,27 +162,27 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-            // 顧客IDの適否
+            // 社員IDの適否
             if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
             {
-                // 顧客IDの数字チェック
+                // 社員IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbEmployeeID.Text.Trim()))
                 {
-                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("社員IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbEmployeeID.Focus();
                     return false;
                 }
-                //顧客IDの重複チェック
+                //社員IDの重複チェック
                 if (EmployeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
                 {
-                    MessageBox.Show("顧客IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("社員IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbEmployeeID.Focus();
                     return false;
                 }
             }
             else
             {
-                MessageBox.Show("顧客IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("社員IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbEmployeeID.Focus();
                 return false;
             }

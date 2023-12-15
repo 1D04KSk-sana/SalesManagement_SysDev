@@ -318,31 +318,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-            // 営業所IDの適否
-            if (!String.IsNullOrEmpty(txbSalesOfficeID.Text.Trim()))
-            {
-                // 営業所IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbSalesOfficeID.Text.Trim()))
-                {
-                    MessageBox.Show("営業所IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
-                //営業所IDの重複チェック
-                if (salesOfficeDataAccess.CheckSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
-                {
-                    MessageBox.Show("営業所IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("営業所IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbSalesOfficeID.Focus();
-                return false;
-            }
-
             // 営業所名の適否
             if (!String.IsNullOrEmpty(txbSalesOfficeName.Text.Trim()))
             {
@@ -487,7 +462,6 @@ namespace SalesManagement_SysDev
         {
             return new M_SalesOffice
             {
-                SoID = int.Parse(txbSalesOfficeID.Text.Trim()),
                 SoName = string.Format(txbSalesOfficeName.Text.Trim()),
                 SoAddress = txbSalesOfficeAddress.Text.Trim(),
                 SoPhone = txbSalesOfficePhone.Text.Trim(),

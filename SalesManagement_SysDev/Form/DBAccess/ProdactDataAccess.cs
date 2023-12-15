@@ -230,7 +230,6 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var Prodact = context.M_Products.Single(x => x.PrID == updProdact.PrID);
 
-                Prodact.PrID = updProdact.PrID;
                 Prodact.MaID = updProdact.MaID;
                 Prodact.PrName = updProdact.PrName;
                 Prodact.Price = updProdact.Price;

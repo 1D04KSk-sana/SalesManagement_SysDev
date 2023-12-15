@@ -246,30 +246,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-            //在庫IDの適否
-            if (!String.IsNullOrEmpty(txbStockID.Text.Trim()))
-            {
-                //在庫IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbStockID.Text.Trim()))
-                {
-                    MessageBox.Show("在庫IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbStockID.Focus();
-                    return false;
-                }
-                //在庫IDの存在チェック
-                if (stockDataAccess.CheckStockIDExistence(int.Parse(txbStockID.Text.Trim())))
-                {
-                    MessageBox.Show("在庫IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbStockID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("在庫IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbStockID.Focus();
-                return false;
-            }
             //商品IDの適否
             if (!String.IsNullOrEmpty(txbProductID.Text.Trim()))
             {
@@ -527,10 +503,8 @@ namespace SalesManagement_SysDev
             return new T_Stock
             {
                 PrID = int.Parse(txbProductID.Text.Trim()),
-                StID = int.Parse(txbStockID.Text.Trim()),
                 StQuantity = int.Parse(txbStockQuentity.Text.Trim()),
                 StFlag = cmbHidden.SelectedIndex,
-
             };
         }
         ///////////////////////////////

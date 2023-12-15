@@ -210,7 +210,7 @@
             this.txbProdactID.Location = new System.Drawing.Point(146, 282);
             this.txbProdactID.Margin = new System.Windows.Forms.Padding(2);
             this.txbProdactID.Name = "txbProdactID";
-            this.txbProdactID.Size = new System.Drawing.Size(166, 31);
+            this.txbProdactID.Size = new System.Drawing.Size(220, 31);
             this.txbProdactID.TabIndex = 6;
             // 
             // txbProdactName
@@ -219,7 +219,7 @@
             this.txbProdactName.Location = new System.Drawing.Point(553, 279);
             this.txbProdactName.Margin = new System.Windows.Forms.Padding(2);
             this.txbProdactName.Name = "txbProdactName";
-            this.txbProdactName.Size = new System.Drawing.Size(166, 31);
+            this.txbProdactName.Size = new System.Drawing.Size(220, 31);
             this.txbProdactName.TabIndex = 8;
             // 
             // lblProdactName
@@ -261,7 +261,7 @@
             this.txbProdactColor.Location = new System.Drawing.Point(553, 344);
             this.txbProdactColor.Margin = new System.Windows.Forms.Padding(2);
             this.txbProdactColor.Name = "txbProdactColor";
-            this.txbProdactColor.Size = new System.Drawing.Size(166, 31);
+            this.txbProdactColor.Size = new System.Drawing.Size(220, 31);
             this.txbProdactColor.TabIndex = 16;
             // 
             // lblProdactColor
@@ -281,7 +281,7 @@
             this.txbModelNumber.Location = new System.Drawing.Point(146, 347);
             this.txbModelNumber.Margin = new System.Windows.Forms.Padding(2);
             this.txbModelNumber.Name = "txbModelNumber";
-            this.txbModelNumber.Size = new System.Drawing.Size(166, 31);
+            this.txbModelNumber.Size = new System.Drawing.Size(220, 31);
             this.txbModelNumber.TabIndex = 14;
             // 
             // lblModelNumber
@@ -301,7 +301,7 @@
             this.txbProdactPrice.Location = new System.Drawing.Point(897, 344);
             this.txbProdactPrice.Margin = new System.Windows.Forms.Padding(2);
             this.txbProdactPrice.Name = "txbProdactPrice";
-            this.txbProdactPrice.Size = new System.Drawing.Size(166, 31);
+            this.txbProdactPrice.Size = new System.Drawing.Size(220, 31);
             this.txbProdactPrice.TabIndex = 24;
             // 
             // lblProdactPrice
@@ -332,7 +332,7 @@
             this.txbProdactSafetyStock.Location = new System.Drawing.Point(553, 405);
             this.txbProdactSafetyStock.Margin = new System.Windows.Forms.Padding(2);
             this.txbProdactSafetyStock.Name = "txbProdactSafetyStock";
-            this.txbProdactSafetyStock.Size = new System.Drawing.Size(166, 31);
+            this.txbProdactSafetyStock.Size = new System.Drawing.Size(220, 31);
             this.txbProdactSafetyStock.TabIndex = 28;
             // 
             // lblProdactSafetyStock
@@ -368,7 +368,7 @@
             this.cmbHidden.Location = new System.Drawing.Point(1291, 344);
             this.cmbHidden.Margin = new System.Windows.Forms.Padding(2);
             this.cmbHidden.Name = "cmbHidden";
-            this.cmbHidden.Size = new System.Drawing.Size(166, 32);
+            this.cmbHidden.Size = new System.Drawing.Size(220, 32);
             this.cmbHidden.TabIndex = 29;
             // 
             // lblProdactHidden
@@ -388,7 +388,7 @@
             this.tbxProdactHidden.Location = new System.Drawing.Point(1291, 410);
             this.tbxProdactHidden.Margin = new System.Windows.Forms.Padding(2);
             this.tbxProdactHidden.Name = "tbxProdactHidden";
-            this.tbxProdactHidden.Size = new System.Drawing.Size(606, 31);
+            this.tbxProdactHidden.Size = new System.Drawing.Size(572, 31);
             this.tbxProdactHidden.TabIndex = 31;
             // 
             // dgvProdact
@@ -563,7 +563,7 @@
             this.lblProdact.Location = new System.Drawing.Point(778, 44);
             this.lblProdact.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProdact.Name = "lblProdact";
-            this.lblProdact.Size = new System.Drawing.Size(418, 64);
+            this.lblProdact.Size = new System.Drawing.Size(417, 64);
             this.lblProdact.TabIndex = 1;
             this.lblProdact.Text = "商品管理画面";
             // 
@@ -573,7 +573,7 @@
             this.txbProdactJanCode.Location = new System.Drawing.Point(897, 275);
             this.txbProdactJanCode.Margin = new System.Windows.Forms.Padding(2);
             this.txbProdactJanCode.Name = "txbProdactJanCode";
-            this.txbProdactJanCode.Size = new System.Drawing.Size(166, 31);
+            this.txbProdactJanCode.Size = new System.Drawing.Size(220, 31);
             this.txbProdactJanCode.TabIndex = 43;
             // 
             // lblProdactJanCode
@@ -595,7 +595,7 @@
             this.cmbMakerName.Location = new System.Drawing.Point(146, 405);
             this.cmbMakerName.Margin = new System.Windows.Forms.Padding(2);
             this.cmbMakerName.Name = "cmbMakerName";
-            this.cmbMakerName.Size = new System.Drawing.Size(166, 32);
+            this.cmbMakerName.Size = new System.Drawing.Size(220, 32);
             this.cmbMakerName.TabIndex = 45;
             // 
             // cmbMajorID
@@ -611,7 +611,7 @@
             this.cmbMajorID.Location = new System.Drawing.Point(1291, 270);
             this.cmbMajorID.Margin = new System.Windows.Forms.Padding(2);
             this.cmbMajorID.Name = "cmbMajorID";
-            this.cmbMajorID.Size = new System.Drawing.Size(166, 32);
+            this.cmbMajorID.Size = new System.Drawing.Size(220, 32);
             this.cmbMajorID.TabIndex = 46;
             // 
             // cmbSmallID
@@ -622,7 +622,7 @@
             this.cmbSmallID.Location = new System.Drawing.Point(1643, 270);
             this.cmbSmallID.Margin = new System.Windows.Forms.Padding(2);
             this.cmbSmallID.Name = "cmbSmallID";
-            this.cmbSmallID.Size = new System.Drawing.Size(166, 32);
+            this.cmbSmallID.Size = new System.Drawing.Size(220, 32);
             this.cmbSmallID.TabIndex = 47;
             // 
             // dtpProdactReleaseDate
@@ -634,7 +634,7 @@
             this.dtpProdactReleaseDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpProdactReleaseDate.Name = "dtpProdactReleaseDate";
             this.dtpProdactReleaseDate.ShowCheckBox = true;
-            this.dtpProdactReleaseDate.Size = new System.Drawing.Size(187, 31);
+            this.dtpProdactReleaseDate.Size = new System.Drawing.Size(220, 31);
             this.dtpProdactReleaseDate.TabIndex = 48;
             this.dtpProdactReleaseDate.TabStop = false;
             // 

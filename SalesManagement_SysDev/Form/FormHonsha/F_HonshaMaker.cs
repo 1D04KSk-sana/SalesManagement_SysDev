@@ -434,31 +434,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-            // メーカーIDの適否
-            if (!String.IsNullOrEmpty(txbMakerID.Text.Trim()))
-            {
-                // メーカーIDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbMakerID.Text.Trim()))
-                {
-                    MessageBox.Show("メーカーIDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMakerID.Focus();
-                    return false;
-                }
-                //メーカーIDの重複チェック
-                if (makerDataAccess.CheckMakerIDExistence(int.Parse(txbMakerID.Text.Trim())))
-                {
-                    MessageBox.Show("メーカーIDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMakerID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("メーカーIDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbMakerID.Focus();
-                return false;
-            }
-
             // メーカー名の適否
             if (!String.IsNullOrEmpty(txbMakerName.Text.Trim()))
             {
@@ -599,11 +574,9 @@ namespace SalesManagement_SysDev
         //機　能   ：登録データのセット
         ///////////////////////////////
         private M_Maker GenerateDataAtRegistration()
-
         {
             return new M_Maker
             {
-                MaID = int.Parse(txbMakerID.Text.Trim()),
                 MaName = string.Format(txbMakerName.Text.Trim()),
                 MaAddress = txbMakerAddress.Text.Trim(),
                 MaPhone = txbMakerPhone.Text.Trim(),
@@ -855,15 +828,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void UpdateMaker(M_Maker updMaker)
         {
-            //操作ログデータ取得
-            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
-
-            //操作ログデータの登録（成功 = true,失敗 = false）
-            if (!operationLogAccess.AddOperationLogData(regOperationLog))
-            {
-                return;
-            }
-
             // 顧客情報の更新
             bool flg = makerDataAccess.UpdateMakerData(updMaker);
             if (flg == true)

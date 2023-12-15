@@ -607,6 +607,7 @@ namespace SalesManagement_SysDev
         {
             return new M_Position
             {
+                PoID = int.Parse(txbPositionID.Text.Trim()),
                 PoName = txbPositionName.Text.Trim(),
                 PoHidden = txbHidden.Text.Trim(),
                 PoFlag = cmbHidden.SelectedIndex,

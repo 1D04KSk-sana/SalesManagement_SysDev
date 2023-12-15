@@ -189,7 +189,8 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var Sale = context.T_Sales.Single(x => x.SaID == updSale.SaID);
 
-                Sale.SaFlag=updSale.SaFlag;
+                Sale.SaFlag = updSale.SaFlag;
+                Sale.SaHidden = updSale.SaHidden;
                 context.SaveChanges();
                 context.Dispose();
 

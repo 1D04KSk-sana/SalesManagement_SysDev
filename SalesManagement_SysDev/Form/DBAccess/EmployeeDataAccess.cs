@@ -170,7 +170,6 @@ namespace SalesManagement_SysDev
                 Employee.EmHiredate = updEmployee.EmHiredate;
                 Employee.EmHidden = updEmployee.EmHidden;
 
-
                 context.SaveChanges();
                 context.Dispose();
 

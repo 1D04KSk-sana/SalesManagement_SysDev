@@ -119,7 +119,6 @@ namespace SalesManagement_SysDev
 
                 Shipment.ShFlag = updShipment.ShFlag;
                 Shipment.ShHidden = updShipment.ShHidden;
-                Shipment.SoID = updShipment.SoID;
 
                 context.SaveChanges();
                 context.Dispose();
