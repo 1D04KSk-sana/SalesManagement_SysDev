@@ -639,8 +639,6 @@ namespace SalesManagement_SysDev
             GetDataGridView();
         }
 
-
-
         ///////////////////////////////
         //メソッド名：PositionDataSelect()
         //引　数   ：なし
@@ -727,8 +725,6 @@ namespace SalesManagement_SysDev
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvPosition[2, dgvPosition.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvPosition[3, dgvPosition.CurrentCellAddress.Y]?.Value?.ToString();
         }
-
-
 
         ///////////////////////////////
         //メソッド名：GenerateDataAtSelect()
