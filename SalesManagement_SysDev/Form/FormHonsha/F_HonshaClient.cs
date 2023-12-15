@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace SalesManagement_SysDev
 {
     public partial class F_HonshaClient : Form
@@ -76,6 +75,11 @@ namespace SalesManagement_SysDev
             cmbView.SelectedIndex = 0;
         }
 
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
         private void rdoSElect_CheckedChanged(object sender, EventArgs e)
         {
             if (rdbRegister.Checked)
@@ -127,6 +131,7 @@ namespace SalesManagement_SysDev
 
         private void btnPageSize_Click(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
             GetDataGridView();
         }
 
@@ -172,10 +177,27 @@ namespace SalesManagement_SysDev
 
         private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
         {
+            TextBox textBox = sender as TextBox;
+
             //0～9と、バックスペース以外の時は、イベントをキャンセルする
             if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
             {
                 e.Handled = true;
+                return;
+            }
+
+            if (e.KeyChar > '0' && '9' > e.KeyChar)
+            {
+                // テキストボックスに入力されている値を取得
+                string inputText = textBox.Text + e.KeyChar;
+
+                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
+                int parsedValue;
+                if (!int.TryParse(inputText, out parsedValue))
+                {
+                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Handled = true;
+                }
             }
         }
 
@@ -193,6 +215,8 @@ namespace SalesManagement_SysDev
 
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+
             //データグリッドビューのデータ取得
             GetDataGridView();
         }
@@ -214,6 +238,36 @@ namespace SalesManagement_SysDev
             f_SearchDialog.Close();
 
             ClientSearchButtonClick(false);
+        }
+
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbUpdate.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbRegister.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
         }
 
         ///////////////////////////////
@@ -1052,9 +1106,18 @@ namespace SalesManagement_SysDev
             txbClientFAX.Text = string.Empty;
         }
 
-        private void txbPageSize_TextChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
+            Application.Exit();
+        }
 
+        private void pctHint_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://docs.google.com/document/d/1tSBtymj0B82Q-tjiNp3mP2HDdMxDpypI",
+                UseShellExecute = true
+            });
         }
     }
 }

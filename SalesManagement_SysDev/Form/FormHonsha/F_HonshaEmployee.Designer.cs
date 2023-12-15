@@ -52,6 +52,7 @@
             this.lblEmployeeHireDate = new System.Windows.Forms.Label();
             this.dgvEmployee = new System.Windows.Forms.DataGridView();
             this.pnlHonsha = new System.Windows.Forms.Panel();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.lblHonsha = new System.Windows.Forms.Label();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.lblNumPage = new System.Windows.Forms.Label();
@@ -68,6 +69,7 @@
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployee)).BeginInit();
             this.pnlHonsha.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
             // btnReturn
@@ -152,7 +154,7 @@
             this.pnlSelect.Location = new System.Drawing.Point(213, 155);
             this.pnlSelect.Margin = new System.Windows.Forms.Padding(2);
             this.pnlSelect.Name = "pnlSelect";
-            this.pnlSelect.Size = new System.Drawing.Size(215, 69);
+            this.pnlSelect.Size = new System.Drawing.Size(264, 69);
             this.pnlSelect.TabIndex = 29;
             this.pnlSelect.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlSelect_Paint);
             // 
@@ -160,7 +162,7 @@
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(100, 14);
+            this.rdbSearch.Location = new System.Drawing.Point(141, 14);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(109, 41);
@@ -314,9 +316,11 @@
             // 
             // dtpEmployeeHireDate
             // 
+            this.dtpEmployeeHireDate.Checked = false;
             this.dtpEmployeeHireDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.dtpEmployeeHireDate.Location = new System.Drawing.Point(1394, 347);
             this.dtpEmployeeHireDate.Name = "dtpEmployeeHireDate";
+            this.dtpEmployeeHireDate.ShowCheckBox = true;
             this.dtpEmployeeHireDate.Size = new System.Drawing.Size(220, 31);
             this.dtpEmployeeHireDate.TabIndex = 47;
             this.dtpEmployeeHireDate.TabStop = false;
@@ -348,7 +352,8 @@
             // 
             // pnlHonsha
             // 
-            this.pnlHonsha.BackColor = System.Drawing.Color.Lime;
+            this.pnlHonsha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(255)))), ((int)(((byte)(122)))));
+            this.pnlHonsha.Controls.Add(this.pctHint);
             this.pnlHonsha.Controls.Add(this.lblHonsha);
             this.pnlHonsha.Controls.Add(this.btnClose);
             this.pnlHonsha.Controls.Add(this.btnReturn);
@@ -357,12 +362,23 @@
             this.pnlHonsha.Size = new System.Drawing.Size(1920, 150);
             this.pnlHonsha.TabIndex = 51;
             // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1647, 48);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 71;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            // 
             // lblHonsha
             // 
             this.lblHonsha.AutoSize = true;
             this.lblHonsha.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblHonsha.ForeColor = System.Drawing.Color.White;
-            this.lblHonsha.Location = new System.Drawing.Point(788, 57);
+            this.lblHonsha.Location = new System.Drawing.Point(798, 41);
             this.lblHonsha.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblHonsha.Name = "lblHonsha";
             this.lblHonsha.Size = new System.Drawing.Size(417, 64);
@@ -558,6 +574,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployee)).EndInit();
             this.pnlHonsha.ResumeLayout(false);
             this.pnlHonsha.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -601,5 +618,6 @@
         private System.Windows.Forms.TextBox txbPageSize;
         private System.Windows.Forms.ComboBox cmbPositionName;
         private System.Windows.Forms.Button btnSinghUp;
+        private System.Windows.Forms.PictureBox pctHint;
     }
 }

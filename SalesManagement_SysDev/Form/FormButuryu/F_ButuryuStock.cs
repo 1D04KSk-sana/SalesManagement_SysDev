@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -53,6 +54,10 @@ namespace SalesManagement_SysDev
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
+
+            rdbRegister.Checked = true;
+
+            GetDataGridView();
         }
         private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
         {
@@ -103,14 +108,33 @@ namespace SalesManagement_SysDev
         }
         private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
         {
+            TextBox textBox = sender as TextBox;
+
             //0～9と、バックスペース以外の時は、イベントをキャンセルする
             if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
             {
                 e.Handled = true;
+                return;
+            }
+
+            if (e.KeyChar > '0' && '9' > e.KeyChar)
+            {
+                // テキストボックスに入力されている値を取得
+                string inputText = textBox.Text + e.KeyChar;
+
+                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
+                int parsedValue;
+                if (!int.TryParse(inputText, out parsedValue))
+                {
+                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Handled = true;
+                }
             }
         }
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+
             //データグリッドビューのデータ取得
             GetDataGridView();
         }
@@ -153,6 +177,28 @@ namespace SalesManagement_SysDev
                 StockDataSelect();
             }
         }
+
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbRegister.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
         ///////////////////////////////
         //メソッド名：StockDataRegister()
         //引　数   ：なし
@@ -646,7 +692,7 @@ namespace SalesManagement_SysDev
         private void SelectRowControl()
         {
             //データグリッドビューに乗っている情報をGUIに反映
-            txbProductID.Text = (dictionaryProdact.FirstOrDefault(x => x.Value == dgvStock[0, dgvStock.CurrentCellAddress.Y].Value.ToString()).Key ).ToString();
+            txbProductID.Text = (dictionaryProdact.FirstOrDefault(x => x.Value == dgvStock[0, dgvStock.CurrentCellAddress.Y].Value.ToString()).Key).ToString();
             txbStockID.Text = dgvStock[1, dgvStock.CurrentCellAddress.Y].Value.ToString();
             txbStockQuentity.Text = dgvStock[2, dgvStock.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvStock[3, dgvStock.CurrentCellAddress.Y].Value.ToString()).Key;
@@ -720,6 +766,26 @@ namespace SalesManagement_SysDev
             var Prodact = listProduct.Single(x => x.PrID == intProdactID);
 
             txbProdactName.Text = Prodact.PrName;
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void pctHint_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://docs.google.com/document/d/1uhR5cLzstFzykefN7f-r67N1qg6Ox-Vs",
+                UseShellExecute = true
+            });
+         }
+
+        private void btnPageSize_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+            GetDataGridView();
         }
     }
 }

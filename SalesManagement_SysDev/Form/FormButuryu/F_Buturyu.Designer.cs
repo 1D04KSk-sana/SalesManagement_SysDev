@@ -41,7 +41,7 @@
             // 
             // btnFormStock
             // 
-            this.btnFormStock.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormStock.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormStock.Location = new System.Drawing.Point(686, 214);
             this.btnFormStock.Name = "btnFormStock";
             this.btnFormStock.Size = new System.Drawing.Size(510, 100);
@@ -52,7 +52,7 @@
             // 
             // btnFormSyukko
             // 
-            this.btnFormSyukko.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormSyukko.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormSyukko.Location = new System.Drawing.Point(686, 844);
             this.btnFormSyukko.Name = "btnFormSyukko";
             this.btnFormSyukko.Size = new System.Drawing.Size(510, 100);
@@ -63,7 +63,7 @@
             // 
             // btnFormChumon
             // 
-            this.btnFormChumon.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormChumon.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormChumon.Location = new System.Drawing.Point(686, 686);
             this.btnFormChumon.Name = "btnFormChumon";
             this.btnFormChumon.Size = new System.Drawing.Size(510, 100);
@@ -74,7 +74,7 @@
             // 
             // btnFormWarehousing
             // 
-            this.btnFormWarehousing.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormWarehousing.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormWarehousing.Location = new System.Drawing.Point(686, 372);
             this.btnFormWarehousing.Name = "btnFormWarehousing";
             this.btnFormWarehousing.Size = new System.Drawing.Size(510, 100);
@@ -85,7 +85,7 @@
             // 
             // btnFormHattyu
             // 
-            this.btnFormHattyu.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormHattyu.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormHattyu.Location = new System.Drawing.Point(686, 529);
             this.btnFormHattyu.Name = "btnFormHattyu";
             this.btnFormHattyu.Size = new System.Drawing.Size(510, 100);
@@ -103,6 +103,7 @@
             this.btnClose.TabIndex = 5;
             this.btnClose.Text = "閉じる";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnLogOut
             // 
@@ -113,6 +114,7 @@
             this.btnLogOut.TabIndex = 6;
             this.btnLogOut.Text = "ログアウト";
             this.btnLogOut.UseVisualStyleBackColor = true;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
             // panel1
             // 
@@ -129,15 +131,17 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnFormHattyu);
             this.Controls.Add(this.btnFormWarehousing);
             this.Controls.Add(this.btnFormChumon);
             this.Controls.Add(this.btnFormSyukko);
             this.Controls.Add(this.btnFormStock);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "F_Buturyu";
             this.Text = "F_Buturyu";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

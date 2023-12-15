@@ -183,7 +183,8 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var Chumon = context.T_Chumons.Single(x => x.OrID == cfmChumon.ChID);
 
-                Chumon.ChStateFlag = cfmChumon.ChStateFlag;
+                Chumon.ChStateFlag = 1;
+                Chumon.EmID = cfmChumon.EmID;
 
                 context.SaveChanges();
                 context.Dispose();
@@ -220,6 +221,7 @@ namespace SalesManagement_SysDev
                 return false;
             }
         }
+
         ///////////////////////////////
         //メソッド名：UpdateOrderData()
         //引　数：hidChumon = 受注データ
@@ -270,13 +272,10 @@ namespace SalesManagement_SysDev
             {
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
             return listChumon;
         }
-    }
 
-   
-
-   
     }
+}
+
 

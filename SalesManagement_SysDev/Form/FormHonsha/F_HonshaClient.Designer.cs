@@ -54,7 +54,8 @@
             this.cmbHidden = new System.Windows.Forms.ComboBox();
             this.btnClear = new System.Windows.Forms.Button();
             this.pnlHonsha = new System.Windows.Forms.Panel();
-            this.btnClose = new System.Windows.Forms.Button();
+            this.pctHint = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.lblClient = new System.Windows.Forms.Label();
             this.cmbView = new System.Windows.Forms.ComboBox();
             this.txbPageSize = new System.Windows.Forms.TextBox();
@@ -69,6 +70,7 @@
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).BeginInit();
             this.pnlHonsha.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
             // btnReturn
@@ -104,9 +106,9 @@
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
             this.rdbSearch.TabIndex = 2;
-            this.rdbSearch.TabStop = true;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbUpdate
             // 
@@ -117,13 +119,14 @@
             this.rdbUpdate.Name = "rdbUpdate";
             this.rdbUpdate.Size = new System.Drawing.Size(103, 39);
             this.rdbUpdate.TabIndex = 1;
-            this.rdbUpdate.TabStop = true;
             this.rdbUpdate.Text = "更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
+            this.rdbUpdate.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbRegister
             // 
             this.rdbRegister.AutoSize = true;
+            this.rdbRegister.Checked = true;
             this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 26F);
             this.rdbRegister.Location = new System.Drawing.Point(29, 16);
             this.rdbRegister.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -133,6 +136,7 @@
             this.rdbRegister.TabStop = true;
             this.rdbRegister.Text = "登録";
             this.rdbRegister.UseVisualStyleBackColor = true;
+            this.rdbRegister.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // lblClientID
             // 
@@ -346,8 +350,9 @@
             // 
             // pnlHonsha
             // 
-            this.pnlHonsha.BackColor = System.Drawing.Color.Lime;
-            this.pnlHonsha.Controls.Add(this.btnClose);
+            this.pnlHonsha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(255)))), ((int)(((byte)(112)))));
+            this.pnlHonsha.Controls.Add(this.pctHint);
+            this.pnlHonsha.Controls.Add(this.button1);
             this.pnlHonsha.Controls.Add(this.lblClient);
             this.pnlHonsha.Controls.Add(this.btnReturn);
             this.pnlHonsha.Location = new System.Drawing.Point(1, 1);
@@ -356,16 +361,28 @@
             this.pnlHonsha.Size = new System.Drawing.Size(1920, 150);
             this.pnlHonsha.TabIndex = 22;
             // 
-            // btnClose
+            // pctHint
             // 
-            this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 30F);
-            this.btnClose.Location = new System.Drawing.Point(1699, 30);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(200, 80);
-            this.btnClose.TabIndex = 24;
-            this.btnClose.Text = "閉じる";
-            this.btnClose.UseVisualStyleBackColor = true;
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1632, 46);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 34;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button1.Location = new System.Drawing.Point(1725, 36);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(160, 70);
+            this.button1.TabIndex = 26;
+            this.button1.TabStop = false;
+            this.button1.Text = "閉じる";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // lblClient
             // 
@@ -545,6 +562,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvClient)).EndInit();
             this.pnlHonsha.ResumeLayout(false);
             this.pnlHonsha.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -589,6 +607,7 @@
         private System.Windows.Forms.Button btnPageMin;
         private System.Windows.Forms.TextBox txbNumPage;
         private System.Windows.Forms.Label lblNumPage;
-        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox pctHint;
     }
 }

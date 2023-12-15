@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.pnlHonsha = new System.Windows.Forms.Panel();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.lblOperationLog = new System.Windows.Forms.Label();
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
@@ -53,12 +54,14 @@
             this.txbEmployeeName = new System.Windows.Forms.TextBox();
             this.btnBack = new System.Windows.Forms.Button();
             this.pnlHonsha.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOperationLog)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHonsha
             // 
             this.pnlHonsha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(255)))), ((int)(((byte)(112)))));
+            this.pnlHonsha.Controls.Add(this.pctHint);
             this.pnlHonsha.Controls.Add(this.lblOperationLog);
             this.pnlHonsha.Controls.Add(this.btnReturn);
             this.pnlHonsha.Controls.Add(this.btnClose);
@@ -68,15 +71,26 @@
             this.pnlHonsha.Size = new System.Drawing.Size(1920, 150);
             this.pnlHonsha.TabIndex = 0;
             // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1618, 39);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 72;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            // 
             // lblOperationLog
             // 
             this.lblOperationLog.AutoSize = true;
             this.lblOperationLog.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblOperationLog.ForeColor = System.Drawing.Color.White;
-            this.lblOperationLog.Location = new System.Drawing.Point(754, 26);
+            this.lblOperationLog.Location = new System.Drawing.Point(739, 39);
             this.lblOperationLog.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOperationLog.Name = "lblOperationLog";
-            this.lblOperationLog.Size = new System.Drawing.Size(384, 64);
+            this.lblOperationLog.Size = new System.Drawing.Size(385, 64);
             this.lblOperationLog.TabIndex = 24;
             this.lblOperationLog.Text = "ログ管理画面";
             // 
@@ -96,7 +110,7 @@
             // btnClose
             // 
             this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClose.Location = new System.Drawing.Point(1748, 20);
+            this.btnClose.Location = new System.Drawing.Point(1733, 33);
             this.btnClose.Margin = new System.Windows.Forms.Padding(2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(160, 70);
@@ -104,12 +118,13 @@
             this.btnClose.TabStop = false;
             this.btnClose.Text = "閉じる";
             this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnClear
             // 
             this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(172)))), ((int)(((byte)(242)))));
             this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClear.Location = new System.Drawing.Point(1483, 157);
+            this.btnClear.Location = new System.Drawing.Point(1492, 182);
             this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(160, 70);
@@ -123,7 +138,7 @@
             // 
             this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnDone.Location = new System.Drawing.Point(1674, 157);
+            this.btnDone.Location = new System.Drawing.Point(1695, 182);
             this.btnDone.Margin = new System.Windows.Forms.Padding(2);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(160, 70);
@@ -137,13 +152,14 @@
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(172, 173);
+            this.rdbSearch.Location = new System.Drawing.Point(172, 182);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
             this.rdbSearch.TabIndex = 6;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // txbEmployeeID
             // 
@@ -184,6 +200,7 @@
             // dtpStartDate
             // 
             this.dtpStartDate.CalendarFont = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.dtpStartDate.Checked = false;
             this.dtpStartDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.dtpStartDate.Location = new System.Drawing.Point(1128, 313);
             this.dtpStartDate.Margin = new System.Windows.Forms.Padding(2);
@@ -195,6 +212,7 @@
             // 
             // dtpEndoDate
             // 
+            this.dtpEndoDate.Checked = false;
             this.dtpEndoDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.dtpEndoDate.Location = new System.Drawing.Point(1391, 313);
             this.dtpEndoDate.Margin = new System.Windows.Forms.Padding(2);
@@ -239,7 +257,7 @@
             // 
             // btnPageSize
             // 
-            this.btnPageSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
+            this.btnPageSize.BackColor = System.Drawing.Color.White;
             this.btnPageSize.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnPageSize.Location = new System.Drawing.Point(195, 1035);
             this.btnPageSize.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
@@ -387,6 +405,7 @@
             this.Load += new System.EventHandler(this.F_HonshaOperationLog_Load);
             this.pnlHonsha.ResumeLayout(false);
             this.pnlHonsha.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOperationLog)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -419,5 +438,6 @@
         private System.Windows.Forms.TextBox txbEmployeeName;
         private System.Windows.Forms.Label lblOperationLog;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.PictureBox pctHint;
     }
 }
