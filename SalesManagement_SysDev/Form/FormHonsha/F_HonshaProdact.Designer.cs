@@ -66,6 +66,7 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPageMax = new System.Windows.Forms.Button();
             this.pnlProdact = new System.Windows.Forms.Panel();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.lblProdact = new System.Windows.Forms.Label();
             this.txbProdactJanCode = new System.Windows.Forms.TextBox();
@@ -75,7 +76,6 @@
             this.cmbSmallID = new System.Windows.Forms.ComboBox();
             this.dtpProdactReleaseDate = new System.Windows.Forms.DateTimePicker();
             this.lblprodactdspHidden = new System.Windows.Forms.Label();
-            this.pctHint = new System.Windows.Forms.PictureBox();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdact)).BeginInit();
             this.pnlProdact.SuspendLayout();
@@ -86,10 +86,10 @@
             // 
             this.btnReturn.BackColor = System.Drawing.Color.White;
             this.btnReturn.Font = new System.Drawing.Font("MS UI Gothic", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnReturn.Location = new System.Drawing.Point(54, 46);
+            this.btnReturn.Location = new System.Drawing.Point(31, 38);
             this.btnReturn.Margin = new System.Windows.Forms.Padding(2);
             this.btnReturn.Name = "btnReturn";
-            this.btnReturn.Size = new System.Drawing.Size(120, 56);
+            this.btnReturn.Size = new System.Drawing.Size(160, 70);
             this.btnReturn.TabIndex = 0;
             this.btnReturn.TabStop = false;
             this.btnReturn.Text = "戻る";
@@ -100,10 +100,10 @@
             // 
             this.btnClear.BackColor = System.Drawing.Color.White;
             this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClear.Location = new System.Drawing.Point(1599, 170);
+            this.btnClear.Location = new System.Drawing.Point(1522, 172);
             this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(120, 56);
+            this.btnClear.Size = new System.Drawing.Size(160, 70);
             this.btnClear.TabIndex = 1;
             this.btnClear.TabStop = false;
             this.btnClear.Text = "クリア";
@@ -115,10 +115,10 @@
             this.btnDone.BackColor = System.Drawing.Color.White;
             this.btnDone.Cursor = System.Windows.Forms.Cursors.Default;
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnDone.Location = new System.Drawing.Point(1755, 170);
+            this.btnDone.Location = new System.Drawing.Point(1725, 170);
             this.btnDone.Margin = new System.Windows.Forms.Padding(2);
             this.btnDone.Name = "btnDone";
-            this.btnDone.Size = new System.Drawing.Size(120, 56);
+            this.btnDone.Size = new System.Drawing.Size(160, 70);
             this.btnDone.TabIndex = 2;
             this.btnDone.TabStop = false;
             this.btnDone.Text = "実行";
@@ -128,15 +128,15 @@
             // cmbView
             // 
             this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 26F);
             this.cmbView.FormattingEnabled = true;
             this.cmbView.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbView.Location = new System.Drawing.Point(1291, 186);
+            this.cmbView.Location = new System.Drawing.Point(1201, 184);
             this.cmbView.Margin = new System.Windows.Forms.Padding(2);
             this.cmbView.Name = "cmbView";
-            this.cmbView.Size = new System.Drawing.Size(271, 32);
+            this.cmbView.Size = new System.Drawing.Size(271, 43);
             this.cmbView.TabIndex = 3;
             this.cmbView.TabStop = false;
             this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
@@ -149,32 +149,34 @@
             this.pnlSelect.Location = new System.Drawing.Point(55, 170);
             this.pnlSelect.Margin = new System.Windows.Forms.Padding(2);
             this.pnlSelect.Name = "pnlSelect";
-            this.pnlSelect.Size = new System.Drawing.Size(352, 73);
+            this.pnlSelect.Size = new System.Drawing.Size(428, 73);
             this.pnlSelect.TabIndex = 4;
             // 
             // rdbSearch
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(231, 17);
+            this.rdbSearch.Location = new System.Drawing.Point(299, 17);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
             this.rdbSearch.TabIndex = 2;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbUpdate
             // 
             this.rdbUpdate.AutoSize = true;
             this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbUpdate.Location = new System.Drawing.Point(116, 17);
+            this.rdbUpdate.Location = new System.Drawing.Point(154, 17);
             this.rdbUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.rdbUpdate.Name = "rdbUpdate";
             this.rdbUpdate.Size = new System.Drawing.Size(103, 39);
             this.rdbUpdate.TabIndex = 1;
             this.rdbUpdate.Text = "更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
+            this.rdbUpdate.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbRegister
             // 
@@ -189,6 +191,7 @@
             this.rdbRegister.TabStop = true;
             this.rdbRegister.Text = "登録";
             this.rdbRegister.UseVisualStyleBackColor = true;
+            this.rdbRegister.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // lblProdactID
             // 
@@ -431,7 +434,7 @@
             this.btnPagesize.Location = new System.Drawing.Point(206, 1024);
             this.btnPagesize.Margin = new System.Windows.Forms.Padding(2);
             this.btnPagesize.Name = "btnPagesize";
-            this.btnPagesize.Size = new System.Drawing.Size(137, 32);
+            this.btnPagesize.Size = new System.Drawing.Size(140, 40);
             this.btnPagesize.TabIndex = 35;
             this.btnPagesize.TabStop = false;
             this.btnPagesize.Text = "行数変更";
@@ -529,6 +532,17 @@
             this.pnlProdact.Size = new System.Drawing.Size(1920, 150);
             this.pnlProdact.TabIndex = 42;
             // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1621, 42);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 73;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
@@ -545,7 +559,8 @@
             // 
             this.lblProdact.AutoSize = true;
             this.lblProdact.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProdact.Location = new System.Drawing.Point(778, 58);
+            this.lblProdact.ForeColor = System.Drawing.Color.White;
+            this.lblProdact.Location = new System.Drawing.Point(778, 44);
             this.lblProdact.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProdact.Name = "lblProdact";
             this.lblProdact.Size = new System.Drawing.Size(418, 64);
@@ -613,10 +628,12 @@
             // dtpProdactReleaseDate
             // 
             this.dtpProdactReleaseDate.CalendarFont = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.dtpProdactReleaseDate.Checked = false;
             this.dtpProdactReleaseDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.dtpProdactReleaseDate.Location = new System.Drawing.Point(897, 403);
             this.dtpProdactReleaseDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpProdactReleaseDate.Name = "dtpProdactReleaseDate";
+            this.dtpProdactReleaseDate.ShowCheckBox = true;
             this.dtpProdactReleaseDate.Size = new System.Drawing.Size(187, 31);
             this.dtpProdactReleaseDate.TabIndex = 48;
             this.dtpProdactReleaseDate.TabStop = false;
@@ -631,17 +648,6 @@
             this.lblprodactdspHidden.Size = new System.Drawing.Size(142, 24);
             this.lblprodactdspHidden.TabIndex = 49;
             this.lblprodactdspHidden.Text = "表示/非表示";
-            // 
-            // pctHint
-            // 
-            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
-            this.pctHint.Location = new System.Drawing.Point(1621, 42);
-            this.pctHint.Name = "pctHint";
-            this.pctHint.Size = new System.Drawing.Size(60, 60);
-            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pctHint.TabIndex = 73;
-            this.pctHint.TabStop = false;
-            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
             // 
             // F_HonshaProdact
             // 

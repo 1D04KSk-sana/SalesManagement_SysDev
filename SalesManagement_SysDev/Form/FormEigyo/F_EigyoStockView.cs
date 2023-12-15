@@ -46,35 +46,11 @@ namespace SalesManagement_SysDev
             this.Opacity = 1;
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void pnlHonsha_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void lblOrder_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
         private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
         {
             f_SearchDialog.Close();
@@ -97,9 +73,6 @@ namespace SalesManagement_SysDev
 
             SetFormDataGridView();
 
-
-
-
             //cmbViewを表示に
             cmbView.SelectedIndex = 0;
         }
@@ -111,7 +84,31 @@ namespace SalesManagement_SysDev
                 StockDataSelect();
             }
         }
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
 
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            if (e.KeyChar > '0' && '9' > e.KeyChar)
+            {
+                // テキストボックスに入力されている値を取得
+                string inputText = textBox.Text + e.KeyChar;
+
+                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
+                int parsedValue;
+                if (!int.TryParse(inputText, out parsedValue))
+                {
+                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Handled = true;
+                }
+            }
+        }
         ///////////////////////////////
         //メソッド名：SetFormDataGridView()
         //引　数   ：なし
@@ -162,6 +159,8 @@ namespace SalesManagement_SysDev
 
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+
             GetDataGridView();
         }
         ///////////////////////////////
@@ -225,7 +224,7 @@ namespace SalesManagement_SysDev
                     return false;
                 }
                 //在庫IDの重複チェック
-                if (!stockDataAccess.CheckstockIDExistence(int.Parse(txbstockID.Text.Trim())))
+                if (!stockDataAccess.CheckStockIDExistence(int.Parse(txbstockID.Text.Trim())))
                 {
                     MessageBox.Show("在庫IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbstockID.Focus();
@@ -448,11 +447,6 @@ namespace SalesManagement_SysDev
             }
         }
 
-        private void rdbSearch_CheckedChanged(object sender, EventArgs e)
-        {
-           
-        }
-
         private void btnReturn_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -497,18 +491,8 @@ namespace SalesManagement_SysDev
 
         private void btnPageSize_Click(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
             GetDataGridView();
-        }
-
-        private void txbPageSize_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-        private System.Windows.Forms.RadioButton rdbRegister;
-
-        private void txbstocknum_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void txbProdactID_TextChanged(object sender, EventArgs e)
@@ -554,11 +538,6 @@ namespace SalesManagement_SysDev
             }
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void dgvStockView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //クリックされたDataGridViewがヘッダーのとき⇒何もしない
@@ -588,9 +567,31 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1x5e-cyn25BCmNneXa8iYbhvX_WtcsflB/edit=true",
+                FileName = "https://docs.google.com/document/d/1x5e-cyn25BCmNneXa8iYbhvX_WtcsflB",
                 UseShellExecute = true
             });
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ClearImput();
+
+            rdbSearch.Checked = false;
+
+            GetDataGridView();
+        }
+
+        ///////////////////////////////
+        //メソッド名：ClearImput()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：テキストボックスやコンボボックスの中身のクリア
+        ///////////////////////////////
+        private void ClearImput()
+        {
+            txbstockID.Text = string.Empty;
+            txbProductID.Text = string.Empty;
+            txbstocknum.Text = string.Empty;
         }
     }
 }

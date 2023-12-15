@@ -79,21 +79,29 @@ namespace SalesManagement_SysDev
             { 0, "未確定" },
             { 1, "確定" },
         };
-        private void txbNumPage_KeyPress(object sender, KeyPressEventArgs e)
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
         {
+            TextBox textBox = sender as TextBox;
+
             //0～9と、バックスペース以外の時は、イベントをキャンセルする
             if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
             {
                 e.Handled = true;
+                return;
             }
 
-        }
-        private void txbPageSize_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //0～9と、バックスペース以外の時は、イベントをキャンセルする
-            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            if (e.KeyChar > '0' && '9' > e.KeyChar)
             {
-                e.Handled = true;
+                // テキストボックスに入力されている値を取得
+                string inputText = textBox.Text + e.KeyChar;
+
+                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
+                int parsedValue;
+                if (!int.TryParse(inputText, out parsedValue))
+                {
+                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Handled = true;
+                }
             }
         }
         private void btnReturn_Click(object sender, EventArgs e)
@@ -168,6 +176,8 @@ namespace SalesManagement_SysDev
         }
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+
             //データグリッドビューのデータ取得
             GetDataGridView();
         }
@@ -176,6 +186,9 @@ namespace SalesManagement_SysDev
         {
             ClearImput();
             dtpArrivalDate.Checked= false;
+
+            rdbUpdate.Checked = true;
+
             GetDataGridView();
         }
         ///////////////////////////////
@@ -276,7 +289,14 @@ namespace SalesManagement_SysDev
             //1行ずつdgvArrivalに挿入
             foreach (var item in depData)
             {
-                dgvArrival.Rows.Add(item.ArID, dictionarySalesOffice[item.SoID], dictionaryEmployee[item.EmID.Value], dictionaryClient[item.ClID],item.OrID, item.ArDate, dictionaryHidden[item.ArFlag], dictionaryConfirm[item.ArStateFlag], item.ArHidden);
+                string strEmployeeName = "";
+
+                if (item.EmID != null)
+                {
+                    strEmployeeName = dictionaryEmployee[item.EmID.Value];
+                }
+
+                dgvArrival.Rows.Add(item.ArID, dictionarySalesOffice[item.SoID], strEmployeeName, dictionaryClient[item.ClID],item.OrID, item.ArDate, dictionaryHidden[item.ArFlag], dictionaryConfirm[item.ArStateFlag], item.ArHidden);
             }
 
             //dgvArrivalをリフレッシュ
@@ -315,10 +335,10 @@ namespace SalesManagement_SysDev
 
         private void F_EigyoArrival_Load(object sender, EventArgs e)
         {
-                txbNumPage.Text = "1";
-                txbPageSize.Text = "3";
+            txbNumPage.Text = "1";
+            txbPageSize.Text = "3";
 
-                DictionarySet();
+            DictionarySet();
             //取得したデータをコンボボックスに挿入
             cmbSalesOfficeID.DataSource = listSalesOffice;
             //表示する名前をSoNameに指定
@@ -331,9 +351,8 @@ namespace SalesManagement_SysDev
 
             SetFormDataGridView();
 
-                //cmbViewを表示に
-                cmbView.SelectedIndex = 0;
-
+            //cmbViewを表示に
+            cmbView.SelectedIndex = 0;
         }
         ///////////////////////////////
         //メソッド名：SetFormDataGridView()
@@ -751,7 +770,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbArrivalID.Text.Trim()) && String.IsNullOrEmpty(txbEmployeeID.Text.Trim()) && String.IsNullOrEmpty(txbClientID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbOrderID.Text.Trim()) && dtpArrivalDate.Checked == false)
+            if (String.IsNullOrEmpty(txbArrivalID.Text.Trim()) && String.IsNullOrEmpty(txbEmployeeID.Text.Trim()) && String.IsNullOrEmpty(txbClientID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbOrderID.Text.Trim()) && dtpArrivalDate.Checked == false && cmbConfirm.SelectedIndex == -1)
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbArrivalID.Focus();
@@ -849,6 +868,8 @@ namespace SalesManagement_SysDev
 
             int intSearchCount = listArrival.Count;
 
+            txbNumPage.Text = "1";
+
             // 入荷抽出結果表示
             GetDataGridView();
 
@@ -900,6 +921,7 @@ namespace SalesManagement_SysDev
             {
                 dateSale = dtpArrivalDate.Value.Date;
             }
+
             // 検索条件のセット
             T_Arrival selectCondition = new T_Arrival()
             {
@@ -909,6 +931,7 @@ namespace SalesManagement_SysDev
                 OrID = intOrderID,
                 EmID = intEmployeeID,
                 ArDate = dateSale,
+                ArStateFlag = cmbConfirm.SelectedIndex
             };
 
             if (searchFlg)
@@ -972,7 +995,7 @@ namespace SalesManagement_SysDev
                     txbArrivalID.Focus();
                     return false;
                 }
-                //入庫IDの存在チェック
+                //入荷IDの存在チェック
                 if (!arrivalDataAccess.CheckArrivalIDExistence(int.Parse(txbArrivalID.Text.Trim())))
                 {
                     MessageBox.Show("入荷IDが存在していません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -982,10 +1005,17 @@ namespace SalesManagement_SysDev
 
                 T_Arrival arrival = arrivalDataAccess.GetIDArrivalData(int.Parse(txbArrivalID.Text.Trim()));
 
-                //入庫IDの確定チェック
+                //入荷IDの確定チェック
                 if (arrival.ArStateFlag == 1)
                 {
                     MessageBox.Show("入荷IDはすでに確定しています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbArrivalID.Focus();
+                    return false;
+                }
+                //入荷IDの非表示チェック
+                if (arrival.ArFlag == 1)
+                {
+                    MessageBox.Show("入荷IDは非表示にされています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbArrivalID.Focus();
                     return false;
                 }
@@ -994,14 +1024,6 @@ namespace SalesManagement_SysDev
             {
                 MessageBox.Show("入荷IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbArrivalID.Focus();
-                return false;
-            }
-
-            //確定選択の適否
-            if (cmbConfirm.SelectedIndex == -1)
-            {
-                MessageBox.Show("未確定/確定が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                cmbConfirm.Focus();
                 return false;
             }
 
@@ -1021,6 +1043,7 @@ namespace SalesManagement_SysDev
                 ArID = int.Parse(txbArrivalID.Text.Trim()),
                 ArStateFlag = 1,
                 EmID = F_Login.intEmployeeID,
+                ArDate = DateTime.Now,
             };
         }
 
@@ -1052,7 +1075,8 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("確定に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            T_Arrival Arrival = arrivalDataAccess.GetIDArrivalData(int.Parse(txbArrivalID.Text.Trim()));
+            //出荷登録
+            T_Arrival Arrival = arrivalDataAccess.GetIDArrivalData(cfmArrival.ArID);
 
             T_Shipment Shipment = GenerateShipmentAtRegistration(Arrival);
 
@@ -1067,7 +1091,8 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("出荷管理へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            List<T_ArrivalDetail> listArrivalDetail = arrivalDetailDataAccess.GetIDArrivalDetailData(int.Parse(txbArrivalID.Text.Trim()));
+            //出荷詳細登録
+            List<T_ArrivalDetail> listArrivalDetail = arrivalDetailDataAccess.GetArrivalDetailIDData(cfmArrival.ArID);
 
             List<bool> flgArrivallist = new List<bool>();
             bool flgArrival = true;
@@ -1115,7 +1140,6 @@ namespace SalesManagement_SysDev
             {
                 ShID = Arrival.ArID,
                 ClID = Arrival.ClID,
-                EmID = F_Login.intEmployeeID,
                 SoID = Arrival.SoID,
                 OrID = Arrival.OrID,
                 ShStateFlag = 0,
@@ -1132,13 +1156,14 @@ namespace SalesManagement_SysDev
         {
             return new T_ShipmentDetail
             {
+                ShDetailID = ArrivalDetail.ArDetailID,
                 ShID = ArrivalDetail.ArID,
                 PrID = ArrivalDetail.PrID,
                 ShQuantity = ArrivalDetail.ArQuantity
             };
         }
 
-        private void rdbSearch_CheckedChanged(object sender, EventArgs e)
+        private void RadioButton_Checked(object sender, EventArgs e)
         {
             if (rdbSearch.Checked)
             {
@@ -1152,10 +1177,7 @@ namespace SalesManagement_SysDev
                 cmbHidden.Enabled = true;
                 cmbConfirm.Enabled = true;
             }
-        }
 
-        private void rdbUpdate_CheckedChanged(object sender, EventArgs e)
-        {
             if (rdbUpdate.Checked)
             {
                 txbArrivalID.Enabled = false;
@@ -1169,17 +1191,14 @@ namespace SalesManagement_SysDev
             else
             {
                 txbArrivalID.Enabled = true;
-                txbClientID.Enabled= true;
+                txbClientID.Enabled = true;
                 txbEmployeeID.Enabled = true;
                 txbOrderID.Enabled = true;
                 cmbConfirm.Enabled = true;
                 cmbSalesOfficeID.Enabled = true;
                 dtpArrivalDate.Enabled = true;
             }
-        }
 
-        private void rdbConfirm_CheckedChanged(object sender, EventArgs e)
-        {
             if (rdbConfirm.Checked)
             {
                 txbClientID.Enabled = false;
@@ -1197,7 +1216,7 @@ namespace SalesManagement_SysDev
                 txbOrderID.Enabled = true;
                 cmbSalesOfficeID.Enabled = true;
                 dtpArrivalDate.Enabled = true;
-                txbHidden.Enabled=true;
+                txbHidden.Enabled = true;
                 cmbHidden.Enabled = true;
             }
         }
@@ -1239,6 +1258,7 @@ namespace SalesManagement_SysDev
 
         private void btnPageSize_Click(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
             GetDataGridView();
         }
 
@@ -1251,7 +1271,7 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1Z_kheY9JMioOO_-RxazHPBPAvpAiAioE/edit=true",
+                FileName = "https://docs.google.com/document/d/1Z_kheY9JMioOO_-RxazHPBPAvpAiAioE",
                 UseShellExecute = true
             });
         }

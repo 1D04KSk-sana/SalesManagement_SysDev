@@ -43,9 +43,7 @@
             this.dgvOrder = new System.Windows.Forms.DataGridView();
             this.txbHidden = new System.Windows.Forms.TextBox();
             this.lblClientHidden = new System.Windows.Forms.Label();
-            this.lblOrderDetailID = new System.Windows.Forms.Label();
             this.cmbSalesOfficeID = new System.Windows.Forms.ComboBox();
-            this.txbOrderDetailID = new System.Windows.Forms.TextBox();
             this.lblSalesOfficeID = new System.Windows.Forms.Label();
             this.txbClientName = new System.Windows.Forms.TextBox();
             this.lblClientName = new System.Windows.Forms.Label();
@@ -59,6 +57,7 @@
             this.rdbRegister = new System.Windows.Forms.RadioButton();
             this.btnDone = new System.Windows.Forms.Button();
             this.pnlHonsha = new System.Windows.Forms.Panel();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.lblOrder = new System.Windows.Forms.Label();
             this.btnReturn = new System.Windows.Forms.Button();
@@ -83,12 +82,11 @@
             this.lblConfirm = new System.Windows.Forms.Label();
             this.cmbConfirm = new System.Windows.Forms.ComboBox();
             this.btnDetailClear = new System.Windows.Forms.Button();
-            this.pctHint = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).BeginInit();
             this.pnlSelect.SuspendLayout();
             this.pnlHonsha.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNumPage
@@ -111,6 +109,7 @@
             this.txbNumPage.Size = new System.Drawing.Size(46, 22);
             this.txbNumPage.TabIndex = 62;
             this.txbNumPage.TabStop = false;
+            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // btnPageMin
             // 
@@ -282,17 +281,6 @@
             this.lblClientHidden.TabIndex = 48;
             this.lblClientHidden.Text = "非表示理由";
             // 
-            // lblOrderDetailID
-            // 
-            this.lblOrderDetailID.AutoSize = true;
-            this.lblOrderDetailID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblOrderDetailID.Location = new System.Drawing.Point(676, 154);
-            this.lblOrderDetailID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblOrderDetailID.Name = "lblOrderDetailID";
-            this.lblOrderDetailID.Size = new System.Drawing.Size(81, 15);
-            this.lblOrderDetailID.TabIndex = 41;
-            this.lblOrderDetailID.Text = "受注詳細ID";
-            // 
             // cmbSalesOfficeID
             // 
             this.cmbSalesOfficeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -303,15 +291,6 @@
             this.cmbSalesOfficeID.Name = "cmbSalesOfficeID";
             this.cmbSalesOfficeID.Size = new System.Drawing.Size(151, 22);
             this.cmbSalesOfficeID.TabIndex = 40;
-            // 
-            // txbOrderDetailID
-            // 
-            this.txbOrderDetailID.Font = new System.Drawing.Font("MS UI Gothic", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbOrderDetailID.Location = new System.Drawing.Point(760, 151);
-            this.txbOrderDetailID.Margin = new System.Windows.Forms.Padding(2);
-            this.txbOrderDetailID.Name = "txbOrderDetailID";
-            this.txbOrderDetailID.Size = new System.Drawing.Size(151, 22);
-            this.txbOrderDetailID.TabIndex = 39;
             // 
             // lblSalesOfficeID
             // 
@@ -390,6 +369,7 @@
             this.rdbUpdate.TabIndex = 5;
             this.rdbUpdate.Text = "非表示更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
+            this.rdbUpdate.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbConfirm
             // 
@@ -402,6 +382,7 @@
             this.rdbConfirm.TabIndex = 4;
             this.rdbConfirm.Text = "確定";
             this.rdbConfirm.UseVisualStyleBackColor = true;
+            this.rdbConfirm.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbDetailRegister
             // 
@@ -414,6 +395,7 @@
             this.rdbDetailRegister.TabIndex = 3;
             this.rdbDetailRegister.Text = "詳細登録";
             this.rdbDetailRegister.UseVisualStyleBackColor = true;
+            this.rdbDetailRegister.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbSearch
             // 
@@ -426,6 +408,7 @@
             this.rdbSearch.TabIndex = 2;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbRegister
             // 
@@ -440,6 +423,7 @@
             this.rdbRegister.TabStop = true;
             this.rdbRegister.Text = "登録";
             this.rdbRegister.UseVisualStyleBackColor = true;
+            this.rdbRegister.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // btnDone
             // 
@@ -466,6 +450,17 @@
             this.pnlHonsha.Name = "pnlHonsha";
             this.pnlHonsha.Size = new System.Drawing.Size(922, 72);
             this.pnlHonsha.TabIndex = 64;
+            // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(667, 9);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 88;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
             // 
             // button1
             // 
@@ -571,9 +566,11 @@
             // 
             // dtpOrderDate
             // 
+            this.dtpOrderDate.Checked = false;
             this.dtpOrderDate.Location = new System.Drawing.Point(437, 259);
             this.dtpOrderDate.Margin = new System.Windows.Forms.Padding(2);
             this.dtpOrderDate.Name = "dtpOrderDate";
+            this.dtpOrderDate.ShowCheckBox = true;
             this.dtpOrderDate.Size = new System.Drawing.Size(151, 19);
             this.dtpOrderDate.TabIndex = 71;
             // 
@@ -736,23 +733,12 @@
             this.btnDetailClear.UseVisualStyleBackColor = true;
             this.btnDetailClear.Click += new System.EventHandler(this.btnDetailClear_Click);
             // 
-            // pctHint
-            // 
-            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
-            this.pctHint.Location = new System.Drawing.Point(667, 9);
-            this.pctHint.Name = "pctHint";
-            this.pctHint.Size = new System.Drawing.Size(60, 60);
-            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pctHint.TabIndex = 88;
-            this.pctHint.TabStop = false;
-            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
-            // 
             // F_EigyoOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(219)))), ((int)(((byte)(193)))));
-            this.ClientSize = new System.Drawing.Size(922, 640);
+            this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.Controls.Add(this.btnDetailClear);
             this.Controls.Add(this.cmbConfirm);
             this.Controls.Add(this.lblConfirm);
@@ -790,9 +776,7 @@
             this.Controls.Add(this.dgvOrder);
             this.Controls.Add(this.txbHidden);
             this.Controls.Add(this.lblClientHidden);
-            this.Controls.Add(this.lblOrderDetailID);
             this.Controls.Add(this.cmbSalesOfficeID);
-            this.Controls.Add(this.txbOrderDetailID);
             this.Controls.Add(this.lblSalesOfficeID);
             this.Controls.Add(this.txbClientName);
             this.Controls.Add(this.lblClientName);
@@ -804,14 +788,15 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "F_EigyoOrder";
             this.Text = "F_EigyoOrder";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.F_EigyoOrder_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).EndInit();
             this.pnlSelect.ResumeLayout(false);
             this.pnlSelect.PerformLayout();
             this.pnlHonsha.ResumeLayout(false);
             this.pnlHonsha.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -834,9 +819,7 @@
         private System.Windows.Forms.DataGridView dgvOrder;
         private System.Windows.Forms.TextBox txbHidden;
         private System.Windows.Forms.Label lblClientHidden;
-        private System.Windows.Forms.Label lblOrderDetailID;
         private System.Windows.Forms.ComboBox cmbSalesOfficeID;
-        private System.Windows.Forms.TextBox txbOrderDetailID;
         private System.Windows.Forms.Label lblSalesOfficeID;
         private System.Windows.Forms.TextBox txbClientName;
         private System.Windows.Forms.Label lblClientName;

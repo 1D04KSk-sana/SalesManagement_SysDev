@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btn_CleateDabase = new System.Windows.Forms.Button();
-            this.btn_InsertSampleData = new System.Windows.Forms.Button();
             this.btnLogin = new System.Windows.Forms.Button();
             this.txbEmployeeID = new System.Windows.Forms.TextBox();
             this.txbSinghUpPass = new System.Windows.Forms.TextBox();
@@ -43,30 +41,6 @@
             this.pnlLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctPassEye)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btn_CleateDabase
-            // 
-            this.btn_CleateDabase.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btn_CleateDabase.Location = new System.Drawing.Point(1607, 802);
-            this.btn_CleateDabase.Name = "btn_CleateDabase";
-            this.btn_CleateDabase.Size = new System.Drawing.Size(212, 84);
-            this.btn_CleateDabase.TabIndex = 0;
-            this.btn_CleateDabase.TabStop = false;
-            this.btn_CleateDabase.Text = "データベース生成";
-            this.btn_CleateDabase.UseVisualStyleBackColor = true;
-            this.btn_CleateDabase.Click += new System.EventHandler(this.btn_CleateDabase_Click);
-            // 
-            // btn_InsertSampleData
-            // 
-            this.btn_InsertSampleData.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btn_InsertSampleData.Location = new System.Drawing.Point(1607, 915);
-            this.btn_InsertSampleData.Name = "btn_InsertSampleData";
-            this.btn_InsertSampleData.Size = new System.Drawing.Size(212, 84);
-            this.btn_InsertSampleData.TabIndex = 0;
-            this.btn_InsertSampleData.TabStop = false;
-            this.btn_InsertSampleData.Text = "サンプルデータ登録";
-            this.btn_InsertSampleData.UseVisualStyleBackColor = true;
-            this.btn_InsertSampleData.Click += new System.EventHandler(this.btn_InsertSampleData_Click);
             // 
             // btnLogin
             // 
@@ -124,7 +98,7 @@
             // 
             // pnlLogin
             // 
-            this.pnlLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(255)))), ((int)(((byte)(242)))));
+            this.pnlLogin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(129)))), ((int)(((byte)(255)))), ((int)(((byte)(247)))));
             this.pnlLogin.Controls.Add(this.btnclose);
             this.pnlLogin.Controls.Add(this.lblProdact);
             this.pnlLogin.Location = new System.Drawing.Point(1, 0);
@@ -153,7 +127,7 @@
             this.lblProdact.Location = new System.Drawing.Point(801, 42);
             this.lblProdact.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProdact.Name = "lblProdact";
-            this.lblProdact.Size = new System.Drawing.Size(350, 64);
+            this.lblProdact.Size = new System.Drawing.Size(351, 64);
             this.lblProdact.TabIndex = 1;
             this.lblProdact.Text = "ログイン画面";
             // 
@@ -176,6 +150,7 @@
             this.chbPassSave.Name = "chbPassSave";
             this.chbPassSave.Size = new System.Drawing.Size(278, 24);
             this.chbPassSave.TabIndex = 45;
+            this.chbPassSave.TabStop = false;
             this.chbPassSave.Text = "社員IDとパスワードを記憶する";
             this.chbPassSave.UseVisualStyleBackColor = true;
             // 
@@ -184,7 +159,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(250)))), ((int)(((byte)(237)))));
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.Controls.Add(this.chbPassSave);
             this.Controls.Add(this.pctPassEye);
             this.Controls.Add(this.pnlLogin);
@@ -193,8 +168,6 @@
             this.Controls.Add(this.txbSinghUpPass);
             this.Controls.Add(this.txbEmployeeID);
             this.Controls.Add(this.btnLogin);
-            this.Controls.Add(this.btn_InsertSampleData);
-            this.Controls.Add(this.btn_CleateDabase);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "F_Login";
@@ -210,9 +183,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btn_CleateDabase;
-        private System.Windows.Forms.Button btn_InsertSampleData;
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.TextBox txbEmployeeID;
         private System.Windows.Forms.TextBox txbSinghUpPass;

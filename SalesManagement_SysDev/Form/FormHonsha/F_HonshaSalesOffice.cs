@@ -79,15 +79,34 @@ namespace SalesManagement_SysDev
         }
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+
             //データグリッドビューのデータ取得
             GetDataGridView();
         }
         private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
         {
+            TextBox textBox = sender as TextBox;
+
             //0～9と、バックスペース以外の時は、イベントをキャンセルする
             if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
             {
                 e.Handled = true;
+                return;
+            }
+
+            if (e.KeyChar > '0' && '9' > e.KeyChar)
+            {
+                // テキストボックスに入力されている値を取得
+                string inputText = textBox.Text + e.KeyChar;
+
+                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
+                int parsedValue;
+                if (!int.TryParse(inputText, out parsedValue))
+                {
+                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Handled = true;
+                }
             }
         }
         private void btnPageMin_Click(object sender, EventArgs e)
@@ -149,6 +168,36 @@ namespace SalesManagement_SysDev
             if (rdbSearch.Checked)
             {
                 SalesOfficeDataSelect();
+            }
+        }
+
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbRegister.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbUpdate.Checked)
+            {
+
+            }
+            else
+            {
+
             }
         }
         ///////////////////////////////
@@ -617,6 +666,8 @@ namespace SalesManagement_SysDev
 
             int intSearchCount = listSalesOffice.Count;
 
+            txbNumPage.Text = "1";
+
             // 顧客抽出結果表示
             GetDataGridView();
 
@@ -671,6 +722,15 @@ namespace SalesManagement_SysDev
         {
             //テキストボックス等の入力チェック
             if (!GetValidDataAtUpdate())
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
             {
                 return;
             }
@@ -975,9 +1035,14 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1EwgtxiqAgD8eJP7D9e6v9xkQuUIdCJ1H/edit=true",
+                FileName = "https://docs.google.com/document/d/1EwgtxiqAgD8eJP7D9e6v9xkQuUIdCJ1H",
                 UseShellExecute = true
             });
+        }
+
+        private void btnPageSize_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

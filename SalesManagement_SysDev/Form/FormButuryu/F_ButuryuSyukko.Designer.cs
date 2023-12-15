@@ -61,8 +61,6 @@
             this.btnBack = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPageMax = new System.Windows.Forms.Button();
-            this.pnlSelect = new System.Windows.Forms.Panel();
-            this.rdbHidden = new System.Windows.Forms.RadioButton();
             this.rdbConfirm = new System.Windows.Forms.RadioButton();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
@@ -73,9 +71,9 @@
             this.lblClientName = new System.Windows.Forms.Label();
             this.txbClientName = new System.Windows.Forms.TextBox();
             this.txbEmployeeID = new System.Windows.Forms.TextBox();
+            this.rdbHidden = new System.Windows.Forms.RadioButton();
             this.pnlButuryu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
-            this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSyukko)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSyukkoDetail)).BeginInit();
             this.SuspendLayout();
@@ -215,6 +213,7 @@
             this.txbClientID.Size = new System.Drawing.Size(220, 31);
             this.txbClientID.TabIndex = 6;
             this.txbClientID.TextChanged += new System.EventHandler(this.txbClientID_TextChanged);
+            this.txbClientID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblSalesOfficeID
             // 
@@ -287,9 +286,11 @@
             // dtpSyukkoDate
             // 
             this.dtpSyukkoDate.CalendarFont = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.dtpSyukkoDate.Checked = false;
             this.dtpSyukkoDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.dtpSyukkoDate.Location = new System.Drawing.Point(876, 345);
             this.dtpSyukkoDate.Name = "dtpSyukkoDate";
+            this.dtpSyukkoDate.ShowCheckBox = true;
             this.dtpSyukkoDate.Size = new System.Drawing.Size(220, 31);
             this.dtpSyukkoDate.TabIndex = 16;
             this.dtpSyukkoDate.TabStop = false;
@@ -365,6 +366,7 @@
             this.btnPagesize.TabStop = false;
             this.btnPagesize.Text = "行数変更";
             this.btnPagesize.UseVisualStyleBackColor = true;
+            this.btnPagesize.Click += new System.EventHandler(this.btnPagesize_Click);
             // 
             // btnPageMin
             // 
@@ -385,6 +387,7 @@
             this.txbNumPage.Name = "txbNumPage";
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 27;
+            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblNumPage
             // 
@@ -432,50 +435,29 @@
             this.btnPageMax.UseVisualStyleBackColor = true;
             this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
-            // pnlSelect
-            // 
-            this.pnlSelect.Controls.Add(this.rdbHidden);
-            this.pnlSelect.Controls.Add(this.rdbConfirm);
-            this.pnlSelect.Controls.Add(this.rdbSearch);
-            this.pnlSelect.Location = new System.Drawing.Point(89, 172);
-            this.pnlSelect.Name = "pnlSelect";
-            this.pnlSelect.Size = new System.Drawing.Size(431, 78);
-            this.pnlSelect.TabIndex = 32;
-            // 
-            // rdbHidden
-            // 
-            this.rdbHidden.AutoSize = true;
-            this.rdbHidden.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbHidden.Location = new System.Drawing.Point(284, 24);
-            this.rdbHidden.Name = "rdbHidden";
-            this.rdbHidden.Size = new System.Drawing.Size(138, 39);
-            this.rdbHidden.TabIndex = 2;
-            this.rdbHidden.Text = "非表示";
-            this.rdbHidden.UseVisualStyleBackColor = true;
-            // 
             // rdbConfirm
             // 
             this.rdbConfirm.AutoSize = true;
-            this.rdbConfirm.Checked = true;
             this.rdbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbConfirm.Location = new System.Drawing.Point(22, 22);
+            this.rdbConfirm.Location = new System.Drawing.Point(241, 195);
             this.rdbConfirm.Name = "rdbConfirm";
             this.rdbConfirm.Size = new System.Drawing.Size(103, 39);
             this.rdbConfirm.TabIndex = 1;
-            this.rdbConfirm.TabStop = true;
             this.rdbConfirm.Text = "確定";
             this.rdbConfirm.UseVisualStyleBackColor = true;
+            this.rdbConfirm.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbSearch
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(157, 22);
+            this.rdbSearch.Location = new System.Drawing.Point(380, 195);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
             this.rdbSearch.TabIndex = 0;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // label1
             // 
@@ -568,6 +550,21 @@
             this.txbEmployeeID.Size = new System.Drawing.Size(220, 31);
             this.txbEmployeeID.TabIndex = 40;
             this.txbEmployeeID.TextChanged += new System.EventHandler(this.txbEmployeeID_TextChanged);
+            this.txbEmployeeID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
+            // 
+            // rdbHidden
+            // 
+            this.rdbHidden.AutoSize = true;
+            this.rdbHidden.Checked = true;
+            this.rdbHidden.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbHidden.Location = new System.Drawing.Point(72, 195);
+            this.rdbHidden.Name = "rdbHidden";
+            this.rdbHidden.Size = new System.Drawing.Size(138, 39);
+            this.rdbHidden.TabIndex = 2;
+            this.rdbHidden.TabStop = true;
+            this.rdbHidden.Text = "非表示";
+            this.rdbHidden.UseVisualStyleBackColor = true;
+            this.rdbHidden.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // F_ButuryuSyukko
             // 
@@ -576,15 +573,17 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.rdbHidden);
             this.Controls.Add(this.txbEmployeeID);
+            this.Controls.Add(this.rdbConfirm);
             this.Controls.Add(this.lblClientName);
+            this.Controls.Add(this.rdbSearch);
             this.Controls.Add(this.txbClientName);
             this.Controls.Add(this.lblEmployeeID);
             this.Controls.Add(this.dgvSyukkoDetail);
             this.Controls.Add(this.dgvSyukko);
             this.Controls.Add(this.cmbConfirm);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pnlSelect);
             this.Controls.Add(this.btnPageMax);
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.btnBack);
@@ -623,8 +622,6 @@
             this.pnlButuryu.ResumeLayout(false);
             this.pnlButuryu.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
-            this.pnlSelect.ResumeLayout(false);
-            this.pnlSelect.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSyukko)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSyukkoDetail)).EndInit();
             this.ResumeLayout(false);
@@ -665,8 +662,6 @@
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPageMax;
-        private System.Windows.Forms.Panel pnlSelect;
-        private System.Windows.Forms.RadioButton rdbHidden;
         private System.Windows.Forms.RadioButton rdbConfirm;
         private System.Windows.Forms.RadioButton rdbSearch;
         private System.Windows.Forms.Label label1;
@@ -679,5 +674,6 @@
         private System.Windows.Forms.TextBox txbEmployeeID;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.PictureBox pctHint;
+        private System.Windows.Forms.RadioButton rdbHidden;
     }
 }

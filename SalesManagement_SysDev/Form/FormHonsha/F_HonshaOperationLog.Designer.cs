@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.pnlHonsha = new System.Windows.Forms.Panel();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.lblOperationLog = new System.Windows.Forms.Label();
             this.btnReturn = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
@@ -52,10 +53,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txbEmployeeName = new System.Windows.Forms.TextBox();
             this.btnBack = new System.Windows.Forms.Button();
-            this.pctHint = new System.Windows.Forms.PictureBox();
             this.pnlHonsha.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOperationLog)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOperationLog)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHonsha
@@ -71,12 +71,23 @@
             this.pnlHonsha.Size = new System.Drawing.Size(1920, 150);
             this.pnlHonsha.TabIndex = 0;
             // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1618, 39);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 72;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            // 
             // lblOperationLog
             // 
             this.lblOperationLog.AutoSize = true;
             this.lblOperationLog.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblOperationLog.ForeColor = System.Drawing.Color.White;
-            this.lblOperationLog.Location = new System.Drawing.Point(754, 39);
+            this.lblOperationLog.Location = new System.Drawing.Point(739, 39);
             this.lblOperationLog.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOperationLog.Name = "lblOperationLog";
             this.lblOperationLog.Size = new System.Drawing.Size(385, 64);
@@ -99,7 +110,7 @@
             // btnClose
             // 
             this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClose.Location = new System.Drawing.Point(1715, 33);
+            this.btnClose.Location = new System.Drawing.Point(1733, 33);
             this.btnClose.Margin = new System.Windows.Forms.Padding(2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(160, 70);
@@ -148,6 +159,7 @@
             this.rdbSearch.TabIndex = 6;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // txbEmployeeID
             // 
@@ -188,6 +200,7 @@
             // dtpStartDate
             // 
             this.dtpStartDate.CalendarFont = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.dtpStartDate.Checked = false;
             this.dtpStartDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.dtpStartDate.Location = new System.Drawing.Point(1128, 313);
             this.dtpStartDate.Margin = new System.Windows.Forms.Padding(2);
@@ -199,6 +212,7 @@
             // 
             // dtpEndoDate
             // 
+            this.dtpEndoDate.Checked = false;
             this.dtpEndoDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.dtpEndoDate.Location = new System.Drawing.Point(1391, 313);
             this.dtpEndoDate.Margin = new System.Windows.Forms.Padding(2);
@@ -243,7 +257,7 @@
             // 
             // btnPageSize
             // 
-            this.btnPageSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
+            this.btnPageSize.BackColor = System.Drawing.Color.White;
             this.btnPageSize.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnPageSize.Location = new System.Drawing.Point(195, 1035);
             this.btnPageSize.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
@@ -354,17 +368,6 @@
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // pctHint
-            // 
-            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
-            this.pctHint.Location = new System.Drawing.Point(1618, 39);
-            this.pctHint.Name = "pctHint";
-            this.pctHint.Size = new System.Drawing.Size(60, 60);
-            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pctHint.TabIndex = 72;
-            this.pctHint.TabStop = false;
-            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
-            // 
             // F_HonshaOperationLog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -402,8 +405,8 @@
             this.Load += new System.EventHandler(this.F_HonshaOperationLog_Load);
             this.pnlHonsha.ResumeLayout(false);
             this.pnlHonsha.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOperationLog)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOperationLog)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

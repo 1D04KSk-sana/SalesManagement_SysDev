@@ -112,6 +112,7 @@ namespace SalesManagement_SysDev
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
+            dtpProdactReleaseDate.Checked = false;
 
             rdbRegister.Checked = true;
 
@@ -158,6 +159,35 @@ namespace SalesManagement_SysDev
             ProdactSearchButtonClick(false);
         }
 
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbRegister.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbUpdate.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
 
         ///////////////////////////////
         //メソッド名：ProdactDataSelect()
@@ -1011,6 +1041,8 @@ namespace SalesManagement_SysDev
 
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+
             //データグリッドビューのデータ取得
             GetDataGridView();
         }
@@ -1112,6 +1144,7 @@ namespace SalesManagement_SysDev
 
         private void btnPagesize_Click(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
             GetDataGridView();
         }
 
@@ -1152,10 +1185,27 @@ namespace SalesManagement_SysDev
 
         private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
         {
+            TextBox textBox = sender as TextBox;
+
             //0～9と、バックスペース以外の時は、イベントをキャンセルする
             if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
             {
                 e.Handled = true;
+                return;
+            }
+
+            if (e.KeyChar > '0' && '9' > e.KeyChar)
+            {
+                // テキストボックスに入力されている値を取得
+                string inputText = textBox.Text + e.KeyChar;
+
+                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
+                int parsedValue;
+                if (!int.TryParse(inputText, out parsedValue))
+                {
+                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Handled = true;
+                }
             }
         }
 
@@ -1168,7 +1218,7 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1ZgVVTTy5Qd2OHCWsk43F0fwvHmdQC4br/edit=true",
+                FileName = "https://docs.google.com/document/d/1ZgVVTTy5Qd2OHCWsk43F0fwvHmdQC4br",
                 UseShellExecute = true
             });
         }

@@ -86,22 +86,30 @@ namespace SalesManagement_SysDev
         {
             this.Opacity = 1;
         }
-        private void txbNumPage_KeyPress(object sender, KeyPressEventArgs e)
+
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
         {
+            TextBox textBox = sender as TextBox;
+
             //0～9と、バックスペース以外の時は、イベントをキャンセルする
             if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
             {
                 e.Handled = true;
+                return;
             }
 
-        }
-
-        private void txbPageSize_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //0～9と、バックスペース以外の時は、イベントをキャンセルする
-            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            if (e.KeyChar > '0' && '9' > e.KeyChar)
             {
-                e.Handled = true;
+                // テキストボックスに入力されている値を取得
+                string inputText = textBox.Text + e.KeyChar;
+
+                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
+                int parsedValue;
+                if (!int.TryParse(inputText, out parsedValue))
+                {
+                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Handled = true;
+                }
             }
         }
 
@@ -190,8 +198,10 @@ namespace SalesManagement_SysDev
         {
             ClearImput();
             dtpHattyuDate.Checked= false;
-            GetDataGridView();
 
+            rdbRegister.Checked = true;
+
+            GetDataGridView();
         }
         ///////////////////////////////
         //メソッド名：ClearImput()
@@ -213,20 +223,19 @@ namespace SalesManagement_SysDev
         {
             ClearImputDetail();
         }
-            ///////////////////////////////
-            //メソッド名：ClearImputDetail()
-            //引　数   ：なし
-            //戻り値   ：なし
-            //機　能   ：コントロールのクリア(Detail)
-            ///////////////////////////////
-            private void ClearImputDetail()
+
+        ///////////////////////////////
+        //メソッド名：ClearImputDetail()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：コントロールのクリア(Detail)
+        ///////////////////////////////
+        private void ClearImputDetail()
         {
-            txbHattyuDetailID.Text = string.Empty;
             txbProductID.Text = string.Empty;
             txbProductName.Text = string.Empty;
             txbHattyuQuantity.Text = string.Empty;
         }
-
 
         ///////////////////////////////
         //メソッド名：GetDataGridView()
@@ -582,31 +591,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDetailDataAtRegistration()
         {
-            //発注詳細IDの適否
-            if (!String.IsNullOrEmpty(txbHattyuDetailID.Text.Trim()))
-            {
-                //発注詳細IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbHattyuDetailID.Text.Trim()))
-                {
-                    MessageBox.Show("発注詳細IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbHattyuDetailID.Focus();
-                    return false;
-                }
-                //発注詳細IDの存在チェック
-                if (hattyuDetailDataAccess.CheckHattyuDetailIDExistence(int.Parse(txbHattyuDetailID.Text.Trim())))
-                {
-                    MessageBox.Show("発注詳細IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbHattyuDetailID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("発注詳細IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbHattyuDetailID.Focus();
-                return false;
-            }
-
             //発注IDの適否
             if (!String.IsNullOrEmpty(txbHattyuID.Text.Trim()))
             {
@@ -632,6 +616,49 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
+            //商品IDの適否
+            if (!String.IsNullOrEmpty(txbProductID.Text.Trim()))
+            {
+                //商品IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbProductID.Text.Trim()))
+                {
+                    MessageBox.Show("商品IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProductID.Focus();
+                    return false;
+                }
+                //商品IDの存在チェック
+                if (!prodactDataAccess.CheckProdactIDExistence(int.Parse(txbProductID.Text.Trim())))
+                {
+                    MessageBox.Show("商品IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProductID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("商品IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbProductID.Focus();
+                return false;
+            }
+
+            //発注量の適否
+            if (!String.IsNullOrEmpty(txbHattyuQuantity.Text.Trim()))
+            {
+                //発注量の数字チェック
+                if (!dataInputCheck.CheckNumeric(txbHattyuQuantity.Text.Trim()))
+                {
+                    MessageBox.Show("発注量は全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbHattyuQuantity.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("発注量が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbHattyuQuantity.Focus();
+                return false;
+            }
+
             return true;
         }
 
@@ -645,13 +672,16 @@ namespace SalesManagement_SysDev
         {
             M_Product Prodact = prodactDataAccess.GetIDProdactData(int.Parse(txbProductID.Text.Trim()));
 
+            List<T_HattyuDetail> listIDHattyuDetail = hattyuDetailDataAccess.GetHattyuDetailIDData(int.Parse(txbHattyuID.Text.Trim()));
+
+            int intHattyuIDCount = listIDHattyuDetail.Count();
+
             return new T_HattyuDetail
             {
-                HaDetailID = int.Parse(txbHattyuDetailID.Text.Trim()),
+                HaDetailID = intHattyuIDCount + 1,
                 HaID = int.Parse(txbHattyuID.Text.Trim()),
                 PrID = int.Parse(txbProductID.Text.Trim()),
                 HaQuantity = int.Parse(txbHattyuQuantity.Text.Trim()),
-
             };
         }
 
@@ -1056,6 +1086,13 @@ namespace SalesManagement_SysDev
 
                 T_Hattyu hattyu = hattyuDataAccess.GetIDHattyuData(int.Parse(txbHattyuID.Text.Trim()));
 
+                //発注IDの非表示チェック
+                if (hattyu.HaFlag == 1)
+                {
+                    MessageBox.Show("発注IDは非表示にされています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbHattyuID.Focus();
+                    return false;
+                }
                 //発注IDの確定チェック
                 if (hattyu.WaWarehouseFlag == 1)
                 {
@@ -1271,7 +1308,6 @@ namespace SalesManagement_SysDev
         {
             //データグリッドビューに乗っている情報をGUIに反映
             txbHattyuID.Text = dgvHattyuDetail[0, dgvHattyuDetail.CurrentCellAddress.Y].Value.ToString();
-            txbHattyuDetailID.Text = dgvHattyuDetail[1, dgvHattyuDetail.CurrentCellAddress.Y].Value.ToString();
             txbProductID.Text = dictionaryProdact.FirstOrDefault(x => x.Value == dgvHattyuDetail[2, dgvHattyuDetail.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbHattyuQuantity.Text = dgvHattyuDetail[3, dgvHattyuDetail.CurrentCellAddress.Y].Value.ToString();
         }
@@ -1446,12 +1482,15 @@ namespace SalesManagement_SysDev
 
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+
             //データグリッドビューのデータ取得
             GetDataGridView();
         }
 
         private void btnPageSize_Click(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
             GetDataGridView();
         }
 
@@ -1503,57 +1542,50 @@ namespace SalesManagement_SysDev
 
         }
 
-        private void rdbUpdate_CheckedChanged(object sender, EventArgs e)
+        private void RadioButton_Checked(object sender, EventArgs e)
         {
-            if(rdbUpdate.Checked)
+            if (rdbSearch.Checked)
+            {
+                txbHattyuQuantity.Enabled = false;
+                txbProductID.Enabled = false;
+                txbProductName.Enabled = false;
+                txbHidden.Enabled = false;
+                cmbConfirm.Enabled = false;
+                cmbHidden.Enabled = false;
+            }
+            else
+            {
+                txbHattyuQuantity.Enabled = true;
+                txbProductID.Enabled = true;
+                txbProductName.Enabled = true;
+                txbHidden.Enabled = true;
+                cmbConfirm.Enabled = true;
+                cmbHidden.Enabled = true;
+            }
+
+            if (rdbConfirm.Checked)
             {
                 cmbMakerName.Enabled = false;
                 txbEmployeeID.Enabled = false;
                 dtpHattyuDate.Enabled = false;
-                txbHattyuDetailID.Enabled = false;
+                cmbHidden.Enabled = false;
+                txbHidden.Enabled = false;
                 txbHattyuQuantity.Enabled = false;
                 txbProductID.Enabled = false;
                 txbProductName.Enabled = false;
-                cmbConfirm.Enabled = false;
-
             }
             else
             {
                 cmbMakerName.Enabled = true;
                 txbEmployeeID.Enabled = true;
                 dtpHattyuDate.Enabled = true;
-                txbHattyuDetailID.Enabled = true;
+                cmbHidden.Enabled = true;
+                txbHidden.Enabled = true;
                 txbHattyuQuantity.Enabled = true;
                 txbProductID.Enabled = true;
                 txbProductName.Enabled = true;
-                cmbConfirm.Enabled=true;
-            }
-        }
-
-        private void rdbRegister_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdbRegister.Checked)
-            {
-                txbHattyuDetailID.Enabled = false;
-                txbHattyuQuantity.Enabled = false;
-                txbProductID.Enabled = false;
-                txbProductName.Enabled = false;
-                txbHidden.Enabled = false;
-                cmbConfirm.Enabled=false;
-            }
-            else
-            {
-                txbHattyuDetailID.Enabled = true;
-                txbHattyuQuantity.Enabled = true;
-                txbProductID.Enabled = true;
-                txbProductName.Enabled = true;
-                cmbConfirm.Enabled= true;
             }
 
-        }
-
-        private void rdbDetailRegister_CheckedChanged(object sender, EventArgs e)
-        {
             if (rdbDetailRegister.Checked)
             {
                 cmbMakerName.Enabled = false;
@@ -1561,7 +1593,7 @@ namespace SalesManagement_SysDev
                 dtpHattyuDate.Enabled = false;
                 cmbHidden.Enabled = false;
                 cmbConfirm.Enabled = false;
-                txbHidden.Enabled=false;
+                txbHidden.Enabled = false;
             }
             else
             {
@@ -1573,58 +1605,42 @@ namespace SalesManagement_SysDev
                 txbHidden.Enabled = true;
             }
 
-        }
-
-        private void rdbSearch_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdbSearch.Checked)
+            if (rdbRegister.Checked)
             {
-                txbHattyuDetailID.Enabled = false;
                 txbHattyuQuantity.Enabled = false;
                 txbProductID.Enabled = false;
                 txbProductName.Enabled = false;
                 txbHidden.Enabled = false;
-                cmbConfirm.Enabled=false;
-                cmbHidden .Enabled=false;
+                cmbConfirm.Enabled = false;
             }
             else
             {
-                txbHattyuDetailID.Enabled = true;
                 txbHattyuQuantity.Enabled = true;
                 txbProductID.Enabled = true;
                 txbProductName.Enabled = true;
-                txbHidden.Enabled = true;
                 cmbConfirm.Enabled = true;
-                cmbHidden.Enabled = true;
-
             }
-        }
 
-        private void rdbConfirm_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rdbConfirm.Checked)
+            if (rdbUpdate.Checked)
             {
                 cmbMakerName.Enabled = false;
                 txbEmployeeID.Enabled = false;
                 dtpHattyuDate.Enabled = false;
-                cmbHidden.Enabled=false;
-                txbHidden .Enabled=false;
-                txbHattyuDetailID.Enabled = false;
                 txbHattyuQuantity.Enabled = false;
                 txbProductID.Enabled = false;
                 txbProductName.Enabled = false;
+                cmbConfirm.Enabled = false;
+
             }
             else
             {
                 cmbMakerName.Enabled = true;
                 txbEmployeeID.Enabled = true;
                 dtpHattyuDate.Enabled = true;
-                cmbHidden.Enabled = true;
-                txbHidden.Enabled = true;
-                txbHattyuDetailID.Enabled = true;
                 txbHattyuQuantity.Enabled = true;
                 txbProductID.Enabled = true;
                 txbProductName.Enabled = true;
+                cmbConfirm.Enabled = true;
             }
         }
 
@@ -1637,7 +1653,7 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1ek0yP4S7QgqV0NlQk6M91KyCYdRDb5GE/edit=true",
+                FileName = "https://docs.google.com/document/d/1ek0yP4S7QgqV0NlQk6M91KyCYdRDb5GE",
                 UseShellExecute = true
             });
         }
