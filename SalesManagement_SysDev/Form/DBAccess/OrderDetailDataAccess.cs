@@ -11,9 +11,9 @@ namespace SalesManagement_SysDev
     {
         ///////////////////////////////
         //メソッド名：GetOrderDetailData()
-        //引　数：なし
+        //引　数：受注ID
         //戻り値：受注詳細データ
-        //機　能：受注詳細データの全取得
+        //機　能：受注IDの一致する受注詳細データの取得
         ///////////////////////////////
         public List<T_OrderDetail> GetOrderDetailIDData(int orderID)
         {

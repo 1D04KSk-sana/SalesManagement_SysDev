@@ -1101,18 +1101,16 @@ namespace SalesManagement_SysDev
 
         private void dgvChumon_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvChumon.SelectedCells.Count == 0)
             {
-                //クリックされたDataGridViewがヘッダーのとき⇒何もしない
-                if (dgvChumon.SelectedCells.Count == 0)
-                {
-                    return;
-                }
-
-                //選択された行に対してのコントロールの変更
-                SelectRowControl();
-
-                SetDataDetailGridView(int.Parse(dgvChumon[0, dgvChumon.CurrentCellAddress.Y].Value.ToString()));
+                return;
             }
+
+            //選択された行に対してのコントロールの変更
+            SelectRowControl();
+
+            SetDataDetailGridView(int.Parse(dgvChumon[0, dgvChumon.CurrentCellAddress.Y].Value.ToString()));
         }
 
         private void dgvChumonDetail_CellClick(object sender, DataGridViewCellEventArgs e)

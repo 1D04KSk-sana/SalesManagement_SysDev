@@ -1029,6 +1029,13 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SelectRowControl()
         {
+            var syukkoDate = dgvSyukko[5, dgvSyukko.CurrentCellAddress.Y].Value;
+
+            if (syukkoDate != null)
+            {
+                dtpSyukkoDate.Text = syukkoDate.ToString();
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbSyukkoID.Text = dgvSyukko[0, dgvSyukko.CurrentCellAddress.Y].Value.ToString();
             txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvSyukko[1, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
@@ -1038,8 +1045,6 @@ namespace SalesManagement_SysDev
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSyukko[7, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvSyukko[8, dgvSyukko.CurrentCellAddress.Y]?.Value?.ToString();
             cmbConfirm.SelectedIndex = dictionaryFlag.FirstOrDefault(x => x.Value == dgvSyukko[6, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key;
-
-
         }
 
         private void txbEmployeeID_TextChanged(object sender, EventArgs e)

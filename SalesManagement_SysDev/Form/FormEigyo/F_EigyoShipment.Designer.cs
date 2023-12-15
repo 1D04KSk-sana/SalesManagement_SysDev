@@ -38,18 +38,10 @@
             this.btnDone = new System.Windows.Forms.Button();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.rdbUpdate = new System.Windows.Forms.RadioButton();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txbProductID = new System.Windows.Forms.TextBox();
-            this.txbShipmentquantity = new System.Windows.Forms.TextBox();
-            this.txbProductName = new System.Windows.Forms.TextBox();
-            this.txbShipmentDetailID = new System.Windows.Forms.TextBox();
             this.txbShipmentID = new System.Windows.Forms.TextBox();
             this.txbOrderID = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblEmployeeName = new System.Windows.Forms.Label();
             this.txbClientName = new System.Windows.Forms.TextBox();
             this.txbEmployeeName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -66,13 +58,20 @@
             this.btnPageMax = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lblClientName = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.txbShipmentHidden = new System.Windows.Forms.TextBox();
             this.cmbShipmentHidden = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.cmbSalesOfficeID = new System.Windows.Forms.ComboBox();
+            this.lblClientID = new System.Windows.Forms.Label();
+            this.txbClientID = new System.Windows.Forms.TextBox();
+            this.lblEmployeeID = new System.Windows.Forms.Label();
+            this.txbEmployeeID = new System.Windows.Forms.TextBox();
+            this.rdbConfirm = new System.Windows.Forms.RadioButton();
+            this.cmbConfirm = new System.Windows.Forms.ComboBox();
+            this.lblConfirm = new System.Windows.Forms.Label();
             this.pnlEigyo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShipmentDetail)).BeginInit();
@@ -188,117 +187,34 @@
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(255, 188);
+            this.rdbSearch.Location = new System.Drawing.Point(357, 188);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
             this.rdbSearch.TabIndex = 139;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbUpdate
             // 
             this.rdbUpdate.AutoSize = true;
             this.rdbUpdate.Checked = true;
             this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbUpdate.Location = new System.Drawing.Point(138, 188);
+            this.rdbUpdate.Location = new System.Drawing.Point(35, 188);
             this.rdbUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.rdbUpdate.Name = "rdbUpdate";
             this.rdbUpdate.Size = new System.Drawing.Size(103, 39);
             this.rdbUpdate.TabIndex = 138;
-            this.rdbUpdate.TabStop = true;
             this.rdbUpdate.Text = "更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label8.Location = new System.Drawing.Point(1231, 347);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(80, 24);
-            this.label8.TabIndex = 147;
-            this.label8.Text = "商品ID";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label7.Location = new System.Drawing.Point(1577, 279);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(82, 24);
-            this.label7.TabIndex = 146;
-            this.label7.Text = "商品名";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(1601, 347);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 24);
-            this.label1.TabIndex = 145;
-            this.label1.Text = "数量";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label3.Location = new System.Drawing.Point(1183, 279);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(128, 24);
-            this.label3.TabIndex = 144;
-            this.label3.Text = "入庫詳細ID";
-            // 
-            // txbProductID
-            // 
-            this.txbProductID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProductID.ForeColor = System.Drawing.Color.Black;
-            this.txbProductID.Location = new System.Drawing.Point(1324, 344);
-            this.txbProductID.Margin = new System.Windows.Forms.Padding(2);
-            this.txbProductID.Name = "txbProductID";
-            this.txbProductID.Size = new System.Drawing.Size(220, 31);
-            this.txbProductID.TabIndex = 143;
-            // 
-            // txbShipmentquantity
-            // 
-            this.txbShipmentquantity.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbShipmentquantity.ForeColor = System.Drawing.Color.Black;
-            this.txbShipmentquantity.Location = new System.Drawing.Point(1663, 344);
-            this.txbShipmentquantity.Margin = new System.Windows.Forms.Padding(2);
-            this.txbShipmentquantity.Name = "txbShipmentquantity";
-            this.txbShipmentquantity.Size = new System.Drawing.Size(220, 31);
-            this.txbShipmentquantity.TabIndex = 142;
-            // 
-            // txbProductName
-            // 
-            this.txbProductName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProductName.ForeColor = System.Drawing.Color.Black;
-            this.txbProductName.Location = new System.Drawing.Point(1663, 276);
-            this.txbProductName.Margin = new System.Windows.Forms.Padding(2);
-            this.txbProductName.Name = "txbProductName";
-            this.txbProductName.Size = new System.Drawing.Size(220, 31);
-            this.txbProductName.TabIndex = 141;
-            // 
-            // txbShipmentDetailID
-            // 
-            this.txbShipmentDetailID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbShipmentDetailID.ForeColor = System.Drawing.Color.Black;
-            this.txbShipmentDetailID.Location = new System.Drawing.Point(1324, 276);
-            this.txbShipmentDetailID.Margin = new System.Windows.Forms.Padding(2);
-            this.txbShipmentDetailID.Name = "txbShipmentDetailID";
-            this.txbShipmentDetailID.Size = new System.Drawing.Size(220, 31);
-            this.txbShipmentDetailID.TabIndex = 140;
+            this.rdbUpdate.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // txbShipmentID
             // 
             this.txbShipmentID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbShipmentID.ForeColor = System.Drawing.Color.Black;
-            this.txbShipmentID.Location = new System.Drawing.Point(138, 276);
+            this.txbShipmentID.Location = new System.Drawing.Point(262, 278);
             this.txbShipmentID.Margin = new System.Windows.Forms.Padding(2);
             this.txbShipmentID.Name = "txbShipmentID";
             this.txbShipmentID.Size = new System.Drawing.Size(220, 31);
@@ -308,7 +224,7 @@
             // 
             this.txbOrderID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbOrderID.ForeColor = System.Drawing.Color.Black;
-            this.txbOrderID.Location = new System.Drawing.Point(937, 276);
+            this.txbOrderID.Location = new System.Drawing.Point(669, 277);
             this.txbOrderID.Margin = new System.Windows.Forms.Padding(2);
             this.txbOrderID.Name = "txbOrderID";
             this.txbOrderID.Size = new System.Drawing.Size(220, 31);
@@ -318,31 +234,32 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label4.Location = new System.Drawing.Point(400, 347);
+            this.label4.Location = new System.Drawing.Point(973, 281);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(106, 24);
             this.label4.TabIndex = 153;
             this.label4.Text = "営業所名";
             // 
-            // label5
+            // lblEmployeeName
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label5.Location = new System.Drawing.Point(410, 279);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(82, 24);
-            this.label5.TabIndex = 154;
-            this.label5.Text = "社員名";
+            this.lblEmployeeName.AutoSize = true;
+            this.lblEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblEmployeeName.Location = new System.Drawing.Point(1432, 361);
+            this.lblEmployeeName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblEmployeeName.Name = "lblEmployeeName";
+            this.lblEmployeeName.Size = new System.Drawing.Size(82, 24);
+            this.lblEmployeeName.TabIndex = 154;
+            this.lblEmployeeName.Text = "社員名";
             // 
             // txbClientName
             // 
             this.txbClientName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbClientName.ForeColor = System.Drawing.Color.Black;
-            this.txbClientName.Location = new System.Drawing.Point(138, 343);
+            this.txbClientName.Location = new System.Drawing.Point(669, 359);
             this.txbClientName.Margin = new System.Windows.Forms.Padding(2);
             this.txbClientName.Name = "txbClientName";
+            this.txbClientName.ReadOnly = true;
             this.txbClientName.Size = new System.Drawing.Size(220, 31);
             this.txbClientName.TabIndex = 155;
             // 
@@ -350,9 +267,10 @@
             // 
             this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbEmployeeName.ForeColor = System.Drawing.Color.Black;
-            this.txbEmployeeName.Location = new System.Drawing.Point(510, 276);
+            this.txbEmployeeName.Location = new System.Drawing.Point(1532, 358);
             this.txbEmployeeName.Margin = new System.Windows.Forms.Padding(2);
             this.txbEmployeeName.Name = "txbEmployeeName";
+            this.txbEmployeeName.ReadOnly = true;
             this.txbEmployeeName.Size = new System.Drawing.Size(220, 31);
             this.txbEmployeeName.TabIndex = 156;
             // 
@@ -360,7 +278,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label6.Location = new System.Drawing.Point(753, 346);
+            this.label6.Location = new System.Drawing.Point(1348, 281);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(178, 24);
@@ -369,10 +287,12 @@
             // 
             // dtpShipmentDate
             // 
+            this.dtpShipmentDate.Checked = false;
             this.dtpShipmentDate.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.dtpShipmentDate.Location = new System.Drawing.Point(937, 341);
+            this.dtpShipmentDate.Location = new System.Drawing.Point(1532, 278);
             this.dtpShipmentDate.Margin = new System.Windows.Forms.Padding(4);
             this.dtpShipmentDate.Name = "dtpShipmentDate";
+            this.dtpShipmentDate.ShowCheckBox = true;
             this.dtpShipmentDate.Size = new System.Drawing.Size(220, 29);
             this.dtpShipmentDate.TabIndex = 157;
             // 
@@ -388,7 +308,6 @@
             this.dgvShipmentDetail.Size = new System.Drawing.Size(748, 499);
             this.dgvShipmentDetail.TabIndex = 169;
             this.dgvShipmentDetail.TabStop = false;
-            this.dgvShipmentDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvShipmentDetail_CellClick);
             // 
             // dgvShipment
             // 
@@ -424,6 +343,7 @@
             this.txbPageSize.Size = new System.Drawing.Size(50, 28);
             this.txbPageSize.TabIndex = 166;
             this.txbPageSize.TabStop = false;
+            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // btnPageSize
             // 
@@ -459,6 +379,7 @@
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 163;
             this.txbNumPage.TabStop = false;
+            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // btnPageMin
             // 
@@ -520,29 +441,29 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(851, 279);
+            this.label2.Location = new System.Drawing.Point(583, 280);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(80, 24);
             this.label2.TabIndex = 170;
             this.label2.Text = "受注ID";
             // 
-            // label9
+            // lblClientName
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label9.Location = new System.Drawing.Point(37, 347);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(82, 24);
-            this.label9.TabIndex = 171;
-            this.label9.Text = "顧客名";
+            this.lblClientName.AutoSize = true;
+            this.lblClientName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblClientName.Location = new System.Drawing.Point(581, 364);
+            this.lblClientName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblClientName.Name = "lblClientName";
+            this.lblClientName.Size = new System.Drawing.Size(82, 24);
+            this.lblClientName.TabIndex = 171;
+            this.lblClientName.Text = "顧客名";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label10.Location = new System.Drawing.Point(39, 279);
+            this.label10.Location = new System.Drawing.Point(163, 281);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(80, 24);
@@ -552,9 +473,9 @@
             // txbShipmentHidden
             // 
             this.txbShipmentHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbShipmentHidden.Location = new System.Drawing.Point(180, 460);
+            this.txbShipmentHidden.Location = new System.Drawing.Point(1083, 440);
             this.txbShipmentHidden.Name = "txbShipmentHidden";
-            this.txbShipmentHidden.Size = new System.Drawing.Size(1565, 31);
+            this.txbShipmentHidden.Size = new System.Drawing.Size(669, 31);
             this.txbShipmentHidden.TabIndex = 176;
             // 
             // cmbShipmentHidden
@@ -566,7 +487,7 @@
             this.cmbShipmentHidden.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbShipmentHidden.Location = new System.Drawing.Point(180, 405);
+            this.cmbShipmentHidden.Location = new System.Drawing.Point(669, 440);
             this.cmbShipmentHidden.Margin = new System.Windows.Forms.Padding(4);
             this.cmbShipmentHidden.Name = "cmbShipmentHidden";
             this.cmbShipmentHidden.Size = new System.Drawing.Size(220, 32);
@@ -576,7 +497,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label11.Location = new System.Drawing.Point(39, 405);
+            this.label11.Location = new System.Drawing.Point(506, 444);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(142, 24);
@@ -587,7 +508,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label12.Location = new System.Drawing.Point(39, 460);
+            this.label12.Location = new System.Drawing.Point(932, 443);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(130, 24);
@@ -600,11 +521,96 @@
             this.cmbSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSalesOfficeID.ForeColor = System.Drawing.Color.Black;
             this.cmbSalesOfficeID.FormattingEnabled = true;
-            this.cmbSalesOfficeID.Location = new System.Drawing.Point(510, 343);
+            this.cmbSalesOfficeID.Location = new System.Drawing.Point(1083, 277);
             this.cmbSalesOfficeID.Margin = new System.Windows.Forms.Padding(4);
             this.cmbSalesOfficeID.Name = "cmbSalesOfficeID";
             this.cmbSalesOfficeID.Size = new System.Drawing.Size(220, 32);
             this.cmbSalesOfficeID.TabIndex = 177;
+            // 
+            // lblClientID
+            // 
+            this.lblClientID.AutoSize = true;
+            this.lblClientID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblClientID.Location = new System.Drawing.Point(161, 363);
+            this.lblClientID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblClientID.Name = "lblClientID";
+            this.lblClientID.Size = new System.Drawing.Size(80, 24);
+            this.lblClientID.TabIndex = 179;
+            this.lblClientID.Text = "顧客ID";
+            // 
+            // txbClientID
+            // 
+            this.txbClientID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbClientID.ForeColor = System.Drawing.Color.Black;
+            this.txbClientID.Location = new System.Drawing.Point(262, 359);
+            this.txbClientID.Margin = new System.Windows.Forms.Padding(2);
+            this.txbClientID.Name = "txbClientID";
+            this.txbClientID.Size = new System.Drawing.Size(220, 31);
+            this.txbClientID.TabIndex = 178;
+            this.txbClientID.TextChanged += new System.EventHandler(this.txbClientID_TextChanged);
+            this.txbClientID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
+            // 
+            // lblEmployeeID
+            // 
+            this.lblEmployeeID.AutoSize = true;
+            this.lblEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblEmployeeID.Location = new System.Drawing.Point(982, 364);
+            this.lblEmployeeID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblEmployeeID.Name = "lblEmployeeID";
+            this.lblEmployeeID.Size = new System.Drawing.Size(80, 24);
+            this.lblEmployeeID.TabIndex = 181;
+            this.lblEmployeeID.Text = "社員ID";
+            // 
+            // txbEmployeeID
+            // 
+            this.txbEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbEmployeeID.ForeColor = System.Drawing.Color.Black;
+            this.txbEmployeeID.Location = new System.Drawing.Point(1083, 360);
+            this.txbEmployeeID.Margin = new System.Windows.Forms.Padding(2);
+            this.txbEmployeeID.Name = "txbEmployeeID";
+            this.txbEmployeeID.Size = new System.Drawing.Size(220, 31);
+            this.txbEmployeeID.TabIndex = 180;
+            this.txbEmployeeID.TextChanged += new System.EventHandler(this.txbEmployeeID_TextChanged);
+            this.txbEmployeeID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
+            // 
+            // rdbConfirm
+            // 
+            this.rdbConfirm.AutoSize = true;
+            this.rdbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbConfirm.Location = new System.Drawing.Point(195, 188);
+            this.rdbConfirm.Margin = new System.Windows.Forms.Padding(2);
+            this.rdbConfirm.Name = "rdbConfirm";
+            this.rdbConfirm.Size = new System.Drawing.Size(103, 39);
+            this.rdbConfirm.TabIndex = 182;
+            this.rdbConfirm.Text = "確定";
+            this.rdbConfirm.UseVisualStyleBackColor = true;
+            this.rdbConfirm.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
+            // 
+            // cmbConfirm
+            // 
+            this.cmbConfirm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbConfirm.ForeColor = System.Drawing.Color.Black;
+            this.cmbConfirm.FormattingEnabled = true;
+            this.cmbConfirm.Items.AddRange(new object[] {
+            "未確定",
+            "確定"});
+            this.cmbConfirm.Location = new System.Drawing.Point(262, 440);
+            this.cmbConfirm.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbConfirm.Name = "cmbConfirm";
+            this.cmbConfirm.Size = new System.Drawing.Size(220, 32);
+            this.cmbConfirm.TabIndex = 184;
+            // 
+            // lblConfirm
+            // 
+            this.lblConfirm.AutoSize = true;
+            this.lblConfirm.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblConfirm.Location = new System.Drawing.Point(99, 444);
+            this.lblConfirm.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblConfirm.Name = "lblConfirm";
+            this.lblConfirm.Size = new System.Drawing.Size(142, 24);
+            this.lblConfirm.TabIndex = 183;
+            this.lblConfirm.Text = "未確定/確定";
             // 
             // F_EigyoShipment
             // 
@@ -612,13 +618,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(219)))), ((int)(((byte)(193)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.cmbConfirm);
+            this.Controls.Add(this.lblConfirm);
+            this.Controls.Add(this.rdbConfirm);
+            this.Controls.Add(this.lblEmployeeID);
+            this.Controls.Add(this.txbEmployeeID);
+            this.Controls.Add(this.lblClientID);
+            this.Controls.Add(this.txbClientID);
             this.Controls.Add(this.cmbSalesOfficeID);
             this.Controls.Add(this.txbShipmentHidden);
             this.Controls.Add(this.cmbShipmentHidden);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.lblClientName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dgvShipmentDetail);
             this.Controls.Add(this.dgvShipment);
@@ -635,18 +648,10 @@
             this.Controls.Add(this.dtpShipmentDate);
             this.Controls.Add(this.txbEmployeeName);
             this.Controls.Add(this.txbClientName);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lblEmployeeName);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txbOrderID);
             this.Controls.Add(this.txbShipmentID);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.txbProductID);
-            this.Controls.Add(this.txbShipmentquantity);
-            this.Controls.Add(this.txbProductName);
-            this.Controls.Add(this.txbShipmentDetailID);
             this.Controls.Add(this.rdbSearch);
             this.Controls.Add(this.rdbUpdate);
             this.Controls.Add(this.pnlEigyo);
@@ -680,18 +685,10 @@
         private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.RadioButton rdbSearch;
         private System.Windows.Forms.RadioButton rdbUpdate;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txbProductID;
-        private System.Windows.Forms.TextBox txbShipmentquantity;
-        private System.Windows.Forms.TextBox txbProductName;
-        private System.Windows.Forms.TextBox txbShipmentDetailID;
         private System.Windows.Forms.TextBox txbShipmentID;
         private System.Windows.Forms.TextBox txbOrderID;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblEmployeeName;
         private System.Windows.Forms.TextBox txbClientName;
         private System.Windows.Forms.TextBox txbEmployeeName;
         private System.Windows.Forms.Label label6;
@@ -708,7 +705,7 @@
         private System.Windows.Forms.Button btnPageMax;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblClientName;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txbShipmentHidden;
         private System.Windows.Forms.ComboBox cmbShipmentHidden;
@@ -716,5 +713,12 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cmbSalesOfficeID;
         private System.Windows.Forms.PictureBox pctHint;
+        private System.Windows.Forms.Label lblClientID;
+        private System.Windows.Forms.TextBox txbClientID;
+        private System.Windows.Forms.Label lblEmployeeID;
+        private System.Windows.Forms.TextBox txbEmployeeID;
+        private System.Windows.Forms.RadioButton rdbConfirm;
+        private System.Windows.Forms.ComboBox cmbConfirm;
+        private System.Windows.Forms.Label lblConfirm;
     }
 }

@@ -201,7 +201,29 @@ namespace SalesManagement_SysDev
                 return false;
             }
         }
-
+        ///////////////////////////////
+        //メソッド名：AddSaleData()
+        //引　数：売上データ
+        //戻り値：True or False
+        //機　能：売上データの登録
+        //      ：登録成功の場合True
+        //      ：登録失敗の場合False
+        ///////////////////////////////
+        public bool AddSaleData(T_Sale regSale)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                context.T_Sales.Add(regSale);
+                context.SaveChanges();
+                context.Dispose();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+        }
     }
-
 }

@@ -201,6 +201,7 @@ namespace SalesManagement_SysDev
 
             return listOrder;
         }
+
         ///////////////////////////////
         //メソッド名：AddShipmentData()
         //引　数：regShipment = 入荷データ
@@ -223,6 +224,62 @@ namespace SalesManagement_SysDev
             {
                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                return false;
+            }
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetIDShipmentData()
+        //引　数：出荷ID
+        //戻り値：出荷IDの一致する出荷データ
+        //機　能：出荷IDの一致する出荷データの取得
+        ///////////////////////////////
+        public T_Shipment GetIDShipmentData(int shipmentID)
+        {
+            T_Shipment Shipment = new T_Shipment { };
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                Shipment = context.T_Shipments.Single(x => x.ShID == shipmentID);
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Shipment;
+        }
+
+        ///////////////////////////////
+        //メソッド名：ConfirmShipmentData()
+        //引　数：出荷データ
+        //戻り値：True or False
+        //機　能：出荷データの確定
+        //      ：確定成功の場合True
+        //      ：確定失敗の場合False
+        ///////////////////////////////
+        public bool ConfirmShipmentData(T_Shipment cfmShipment)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Shipment = context.T_Shipments.Single(x => x.ShID == cfmShipment.ShID);
+
+                Shipment.ShStateFlag = cfmShipment.ShStateFlag;
+                Shipment.ShFinishDate = cfmShipment.ShFinishDate;
+                Shipment.EmID = cfmShipment.EmID;
+
+                context.SaveChanges();
+                context.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
     }

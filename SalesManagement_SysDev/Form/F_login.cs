@@ -1002,24 +1002,6 @@ namespace SalesManagement_SysDev
                     SaDate = new DateTime(2023, 10, 27),
                     SaFlag = 0,
                 });
-                sa.Add(new T_Sale()
-                {
-                    M_Employee = em[116],
-                    M_Client = cl[2],
-                    T_Chumon = ch[0],
-                    M_SalesOffice = so[1],
-                    SaDate = new DateTime(2023, 10, 31),
-                    SaFlag = 0,
-                });
-                sa.Add(new T_Sale()
-                {
-                    M_Employee = em[116],
-                    M_Client = cl[3],
-                    T_Chumon = ch[0],
-                    M_SalesOffice = so[2],
-                    SaDate = new DateTime(2023, 10, 31),
-                    SaFlag = 0,
-                });
 
                 context.T_Sales.AddRange(sa);
                 context.SaveChanges();
@@ -1027,30 +1009,15 @@ namespace SalesManagement_SysDev
             {
                 sad.Add(new T_SaleDetail()
                 {
+                    SaDetailID = 1,
                     M_Product = pr[0],
                     T_Sale = sa[0],
                     SaQuantity = 1,
                     SaTotalPrice = 100000,
                 });
-                sad.Add(new T_SaleDetail()
-                {
-                    M_Product = pr[1],
-                    T_Sale = sa[1],
-                    SaQuantity = 3,
-                    SaTotalPrice = 50000,
-                });
-                sad.Add(new T_SaleDetail()
-                {
-                    M_Product = pr[2],
-                    T_Sale = sa[2],
-                    SaQuantity = 5,
-                    SaTotalPrice = 600000,
-                });
 
                 context.T_SaleDetails.AddRange(sad);
                 context.SaveChanges();
-
-
             }
             {
                 ha.Add(new T_Hattyu()
