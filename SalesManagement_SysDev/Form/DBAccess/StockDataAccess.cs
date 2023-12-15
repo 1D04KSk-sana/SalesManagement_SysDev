@@ -136,21 +136,18 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.T_Stocks.AsQueryable();
 
-                if (selectStock.StID != null && selectStock.StID != 0)
+                if (selectStock.StID != 0)
                 {
                     query = query.Where(x => x.StID == selectStock.StID);
                 }
 
-                if (selectStock.PrID != null && selectStock.PrID != 0)
+                if (selectStock.PrID != 0)
                 {
                     query = query.Where(x => x.PrID == selectStock.PrID);
                 }
 
-                if (selectStock.StID != null && selectStock.StID != 0)
-                {
-                    query = query.Where(x => x.StID == selectStock.StID);
-                }
-                if (selectStock.StQuantity != null && selectStock.StQuantity != 0)
+                
+                if (selectStock.StQuantity != 0)
                 {
                     query = query.Where(x => x.StQuantity == selectStock.StQuantity);
                 }

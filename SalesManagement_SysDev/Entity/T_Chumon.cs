@@ -27,7 +27,7 @@ namespace SalesManagement_SysDev
         [DataType(DataType.Date)]
         [Column(TypeName = "date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
-        public DateTime ChDate { get; set; }        //注文年月日
+        public DateTime? ChDate { get; set; }        //注文年月日
         public int ChStateFlag { get; set; }        //注文状態フラグ
         public int ChFlag { get; set; }	            //注文管理フラグ
         public string ChHidden { get; set; }	    //非表示理由	

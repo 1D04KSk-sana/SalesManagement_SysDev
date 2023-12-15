@@ -158,7 +158,7 @@ namespace SalesManagement_SysDev
         private void ClearImput()
         {
             txbStockID.Text = string.Empty;
-            txbStockQuentity.Text = string.Empty;
+            txbStockQuantity.Text = string.Empty;
             txbProductID.Text = string.Empty;
             txbProdactName.Text = string.Empty;
             cmbHidden.SelectedIndex = -1;
@@ -280,20 +280,20 @@ namespace SalesManagement_SysDev
                 return false;
             }
             //在庫数の適否
-            if (!String.IsNullOrEmpty(txbStockQuentity.Text.Trim()))
+            if (!String.IsNullOrEmpty(txbStockQuantity.Text.Trim()))
             {
                 //在庫数の数字チェック
-                if (!dataInputCheck.CheckNumeric(txbStockQuentity.Text.Trim()))
+                if (!dataInputCheck.CheckNumeric(txbStockQuantity.Text.Trim()))
                 {
                     MessageBox.Show("在庫数は全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbStockQuentity.Focus();
+                    txbStockQuantity.Focus();
                     return false;
                 }
             }
             else
             {
                 MessageBox.Show("在庫数が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbStockQuentity.Focus();
+                txbStockQuantity.Focus();
                 return false;
             }
             //表示選択の適否
@@ -401,7 +401,7 @@ namespace SalesManagement_SysDev
             txbStockID.Text = string.Empty;
             txbProductID.Text = string.Empty;
             txbProdactName.Text = string.Empty;
-            txbStockQuentity.Text = string.Empty;
+            txbStockQuantity.Text = string.Empty;
         }
         ///////////////////////////////
         //メソッド名：GetDataGridView()
@@ -528,7 +528,7 @@ namespace SalesManagement_SysDev
             {
                 PrID = int.Parse(txbProductID.Text.Trim()),
                 StID = int.Parse(txbStockID.Text.Trim()),
-                StQuantity = int.Parse(txbStockQuentity.Text.Trim()),
+                StQuantity = int.Parse(txbStockQuantity.Text.Trim()),
                 StFlag = cmbHidden.SelectedIndex,
 
             };
@@ -575,11 +575,13 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbStockID.Text.Trim()))
+            if (String.IsNullOrEmpty(txbStockID.Text.Trim())&& String.IsNullOrEmpty(txbProductID.Text.Trim()) && String.IsNullOrEmpty(txbStockQuantity.Text.Trim()))
             {
-                MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbStockID.Focus();
-                return false;
+                {
+                    MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //txbStockID.Focus();
+                    return false;
+                }
             }
 
             //在庫IDの適否
@@ -665,11 +667,19 @@ namespace SalesManagement_SysDev
                 intProdactID = int.Parse(strProductID);
             }
 
+            string strStockQuantity = txbStockQuantity.Text.Trim();
+            int intStockQuantity = 0;
+
+            if (!String.IsNullOrEmpty(strStockQuantity))
+            {
+                intStockQuantity = int.Parse(strStockQuantity);
+            }
             // 検索条件のセット
             T_Stock selectStock = new T_Stock()
             {
                 PrID = intProdactID,
                 StID = intStockID,
+                StQuantity = intStockQuantity,
             };
 
             if (searchFlg)
@@ -694,7 +704,7 @@ namespace SalesManagement_SysDev
             //データグリッドビューに乗っている情報をGUIに反映
             txbProductID.Text = (dictionaryProdact.FirstOrDefault(x => x.Value == dgvStock[0, dgvStock.CurrentCellAddress.Y].Value.ToString()).Key).ToString();
             txbStockID.Text = dgvStock[1, dgvStock.CurrentCellAddress.Y].Value.ToString();
-            txbStockQuentity.Text = dgvStock[2, dgvStock.CurrentCellAddress.Y].Value.ToString();
+            txbStockQuantity.Text = dgvStock[2, dgvStock.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvStock[3, dgvStock.CurrentCellAddress.Y].Value.ToString()).Key;
         }
         ///////////////////////////////

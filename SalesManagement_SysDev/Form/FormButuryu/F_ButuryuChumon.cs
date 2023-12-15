@@ -603,7 +603,7 @@ namespace SalesManagement_SysDev
 
             txbNumPage.Text = "1";
 
-            // 顧客抽出結果表示
+            // 受注抽出結果表示
             GetDataGridView();
 
             MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -644,7 +644,22 @@ namespace SalesManagement_SysDev
                 intClientID = int.Parse(strClientID);
             }
 
-          
+            string strEmployeeID = txbEmployeeID.Text.Trim();
+            int intEmployeeID = 0;
+
+            if (!String.IsNullOrEmpty(strEmployeeID))
+            {
+                intEmployeeID = int.Parse(strEmployeeID);
+            }
+
+            DateTime? dateChumon = null;
+
+            if (dtpChumonDate.Checked)
+            {
+                dateChumon = dtpChumonDate.Value.Date;
+            }
+
+
 
             // 検索条件のセット
             T_Chumon selectCondition = new T_Chumon()
@@ -653,6 +668,8 @@ namespace SalesManagement_SysDev
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 ClID = intClientID,
                 OrID = intOrderID, 
+                EmID = intEmployeeID,
+                ChDate = dateChumon,
             
             };
 
@@ -715,7 +732,7 @@ namespace SalesManagement_SysDev
             dgvChumon.Columns.Add("ChID", "注文ID");
             dgvChumon.Columns.Add("SoID", "営業所名");
             dgvChumon.Columns.Add("OrID", "受注ID");
-            dgvChumon.Columns.Add("ChDate", "受注年月日");
+            dgvChumon.Columns.Add("ChDate", "注文年月日");
             dgvChumon.Columns.Add("ClName", "顧客名");
             dgvChumon.Columns.Add("EmName", "社員名");
             dgvChumon.Columns.Add("ChStateFlag", "未確定/確定");
@@ -769,7 +786,7 @@ namespace SalesManagement_SysDev
             dgvChumonDetail.Columns["ChID"].Width = 150;
             dgvChumonDetail.Columns["ChDetailID"].Width = 150;
             dgvChumonDetail.Columns["PrID"].Width = 150;
-            dgvChumonDetail.Columns["OrQuantity"].Width = 100;            
+            dgvChumonDetail.Columns["OrQuantity"].Width = 300;            
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvChumonDetail.Columns)
@@ -788,6 +805,7 @@ namespace SalesManagement_SysDev
         {
             //中身を消去
             dgvChumon.Rows.Clear();
+            dgvChumonDetail.Rows.Clear();
 
             //ページ行数を取得
             int pageSize = int.Parse(txbPageSize.Text.Trim());
@@ -1000,7 +1018,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbChumonID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1  && String.IsNullOrEmpty(txbClientID.Text.Trim())&& String.IsNullOrEmpty(txbOrderID.Text.Trim()))
+            if (String.IsNullOrEmpty(txbChumonID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1  && String.IsNullOrEmpty(txbClientID.Text.Trim())&& String.IsNullOrEmpty(txbOrderID.Text.Trim())&& dtpChumonDate.Checked==false)
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbChumonID.Focus();
@@ -1047,20 +1065,22 @@ namespace SalesManagement_SysDev
             // 顧客IDの適否
             if (!String.IsNullOrEmpty(txbClientID.Text.Trim()))
             {
-                // 顧客IDの文字数チェック
-                if (txbClientID.TextLength >= 50)
+                // 顧客IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbClientID.Text.Trim()))
                 {
-                    MessageBox.Show("顧客名は50文字です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+                //注文IDの重複チェック
+                if (!clientDataAccess.CheckClientIDExistence(int.Parse(txbClientID.Text.Trim())))
+                {
+                    MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbClientID.Focus();
                     return false;
                 }
             }
-            else
-            {
-                MessageBox.Show("顧客名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbClientID.Focus();
-                return false;
-            }
+           
 
             
 
@@ -1171,7 +1191,7 @@ namespace SalesManagement_SysDev
             //存在確認
             if (!clientDataAccess.CheckClientIDExistence(intClientID))
             {
-                txbClientName.Text = "社員IDが存在しません";
+                txbClientName.Text = "顧客IDが存在しません";
                 return;
             }
 

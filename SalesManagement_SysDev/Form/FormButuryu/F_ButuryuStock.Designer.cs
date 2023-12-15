@@ -42,7 +42,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.txbStockQuentity = new System.Windows.Forms.TextBox();
+            this.txbStockQuantity = new System.Windows.Forms.TextBox();
             this.txbProdactName = new System.Windows.Forms.TextBox();
             this.cmbHidden = new System.Windows.Forms.ComboBox();
             this.dgvStock = new System.Windows.Forms.DataGridView();
@@ -108,7 +108,7 @@
             this.lblClient.Location = new System.Drawing.Point(700, 46);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(418, 64);
+            this.lblClient.Size = new System.Drawing.Size(417, 64);
             this.lblClient.TabIndex = 23;
             this.lblClient.Text = "在庫管理画面";
             // 
@@ -230,15 +230,15 @@
             this.label4.TabIndex = 82;
             this.label4.Text = "表示/非表示";
             // 
-            // txbStockQuentity
+            // txbStockQuantity
             // 
-            this.txbStockQuentity.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbStockQuentity.Location = new System.Drawing.Point(793, 331);
-            this.txbStockQuentity.Margin = new System.Windows.Forms.Padding(2);
-            this.txbStockQuentity.MaxLength = 4;
-            this.txbStockQuentity.Name = "txbStockQuentity";
-            this.txbStockQuentity.Size = new System.Drawing.Size(220, 31);
-            this.txbStockQuentity.TabIndex = 83;
+            this.txbStockQuantity.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.txbStockQuantity.Location = new System.Drawing.Point(793, 331);
+            this.txbStockQuantity.Margin = new System.Windows.Forms.Padding(2);
+            this.txbStockQuantity.MaxLength = 4;
+            this.txbStockQuantity.Name = "txbStockQuantity";
+            this.txbStockQuantity.Size = new System.Drawing.Size(220, 31);
+            this.txbStockQuantity.TabIndex = 83;
             // 
             // txbProdactName
             // 
@@ -455,7 +455,7 @@
             this.Controls.Add(this.dgvStock);
             this.Controls.Add(this.cmbHidden);
             this.Controls.Add(this.txbProdactName);
-            this.Controls.Add(this.txbStockQuentity);
+            this.Controls.Add(this.txbStockQuantity);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -496,7 +496,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txbStockQuentity;
+        private System.Windows.Forms.TextBox txbStockQuantity;
         private System.Windows.Forms.TextBox txbProdactName;
         private System.Windows.Forms.ComboBox cmbHidden;
         private System.Windows.Forms.DataGridView dgvStock;

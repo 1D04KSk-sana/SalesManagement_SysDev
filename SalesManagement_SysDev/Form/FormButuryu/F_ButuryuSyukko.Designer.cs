@@ -45,7 +45,7 @@
             this.lblEmployeeName = new System.Windows.Forms.Label();
             this.txbEmployeeName = new System.Windows.Forms.TextBox();
             this.lblChumonID = new System.Windows.Forms.Label();
-            this.txbChumonID = new System.Windows.Forms.TextBox();
+            this.txbOrderID = new System.Windows.Forms.TextBox();
             this.lblSyukkoDate = new System.Windows.Forms.Label();
             this.dtpSyukkoDate = new System.Windows.Forms.DateTimePicker();
             this.cmbHidden = new System.Windows.Forms.ComboBox();
@@ -121,7 +121,7 @@
             this.lblButuryuSyukko.ForeColor = System.Drawing.Color.White;
             this.lblButuryuSyukko.Location = new System.Drawing.Point(742, 50);
             this.lblButuryuSyukko.Name = "lblButuryuSyukko";
-            this.lblButuryuSyukko.Size = new System.Drawing.Size(418, 64);
+            this.lblButuryuSyukko.Size = new System.Drawing.Size(417, 64);
             this.lblButuryuSyukko.TabIndex = 1;
             this.lblButuryuSyukko.Text = "出庫管理画面";
             // 
@@ -265,13 +265,13 @@
             this.lblChumonID.TabIndex = 14;
             this.lblChumonID.Text = "受注ID";
             // 
-            // txbChumonID
+            // txbOrderID
             // 
-            this.txbChumonID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbChumonID.Location = new System.Drawing.Point(514, 278);
-            this.txbChumonID.Name = "txbChumonID";
-            this.txbChumonID.Size = new System.Drawing.Size(220, 31);
-            this.txbChumonID.TabIndex = 13;
+            this.txbOrderID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbOrderID.Location = new System.Drawing.Point(514, 278);
+            this.txbOrderID.Name = "txbOrderID";
+            this.txbOrderID.Size = new System.Drawing.Size(220, 31);
+            this.txbOrderID.TabIndex = 13;
             // 
             // lblSyukkoDate
             // 
@@ -600,7 +600,7 @@
             this.Controls.Add(this.dtpSyukkoDate);
             this.Controls.Add(this.lblSyukkoDate);
             this.Controls.Add(this.lblChumonID);
-            this.Controls.Add(this.txbChumonID);
+            this.Controls.Add(this.txbOrderID);
             this.Controls.Add(this.lblEmployeeName);
             this.Controls.Add(this.txbEmployeeName);
             this.Controls.Add(this.cmbSalesOfficeID);
@@ -646,7 +646,7 @@
         private System.Windows.Forms.Label lblEmployeeName;
         private System.Windows.Forms.TextBox txbEmployeeName;
         private System.Windows.Forms.Label lblChumonID;
-        private System.Windows.Forms.TextBox txbChumonID;
+        private System.Windows.Forms.TextBox txbOrderID;
         private System.Windows.Forms.Label lblSyukkoDate;
         private System.Windows.Forms.DateTimePicker dtpSyukkoDate;
         private System.Windows.Forms.ComboBox cmbHidden;
