@@ -96,33 +96,6 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：DeleteClientData()
-        //引　数：delClient = 顧客データ
-        //戻り値：True or False
-        //機　能：顧客データの削除
-        //      ：削除成功の場合True
-        //      ：削除失敗の場合False
-        ///////////////////////////////
-        //public bool DeleteClientData(M_Client delClient)
-        //{
-        //    try
-        //    {
-        //        var context = new SalesManagement_DevContext();
-        //        var client = context.M_Clients.Single(x => x.ClID == delClient.ClID);
-        //        context.M_Clients.Remove(client);
-        //        context.SaveChanges();
-        //        context.Dispose();
-
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        return false;
-        //    }
-        //}
-
-        ///////////////////////////////
         //メソッド名：GetClientData()
         //引　数：なし
         //戻り値：顧客データ
@@ -228,12 +201,12 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.M_Clients.AsQueryable();
 
-                if (selectClient.ClID != null && selectClient.ClID != 0)
+                if (selectClient.ClPhone != null && selectClient.ClID != 0)
                 {
                     query = query.Where(x => x.ClID == selectClient.ClID);
                 }
 
-                if (selectClient.SoID != null && selectClient.SoID != 0)
+                if (selectClient.SoID != 0)
                 {
                     query = query.Where(x => x.SoID == selectClient.SoID);
                 }

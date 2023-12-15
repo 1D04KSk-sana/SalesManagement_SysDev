@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 namespace SalesManagement_SysDev
 {
     public partial class F_HonshaClient : Form
@@ -28,6 +29,8 @@ namespace SalesManagement_SysDev
         private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
         //フォームを呼び出しする際のインスタンス化
         private F_SearchDialog f_SearchDialog = new F_SearchDialog();
+        //DataGridView用に使用す営業所のDictionary
+        private Dictionary<int, string> dictionarySalesOffice;
 
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
@@ -36,17 +39,26 @@ namespace SalesManagement_SysDev
             { 1, "非表示" },
         };
 
-        //DataGridView用に使用す営業所のDictionary
-        private Dictionary<int?, string> dictionarySalesOffice = new Dictionary<int?, string>
+        ///////////////////////////////
+        //メソッド名：DictionarySet()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：Dictionaryのセット
+        ///////////////////////////////
+        private void DictionarySet()
         {
-            { 1, "北大阪営業所" },
-            { 2, "兵庫営業所" },
-            { 3, "鹿営業所"},
-            { 4, "京都営業所"},
-            { 5, "和歌山営業所"}
-        };
+            //営業所のデータを取得
+            listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
 
- 
+            dictionarySalesOffice = new Dictionary<int, string> { };
+
+            foreach (var item in listSalesOffice)
+            {
+                dictionarySalesOffice.Add(item.SoID, item.SoName);
+            }
+
+        }
+
         public F_HonshaClient()
         {
             InitializeComponent();
@@ -58,6 +70,7 @@ namespace SalesManagement_SysDev
             txbPageSize.Text = "3";
 
             SetFormDataGridView();
+            DictionarySet();
 
             //営業所のデータを取得
             listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
@@ -73,11 +86,6 @@ namespace SalesManagement_SysDev
 
             //cmbViewを表示に
             cmbView.SelectedIndex = 0;
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void rdoSElect_CheckedChanged(object sender, EventArgs e)
@@ -175,7 +183,7 @@ namespace SalesManagement_SysDev
             GetDataGridView();
         }
 
-        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
+        private void txbPageSizeID_KeyPress(object sender, KeyPressEventArgs e)
         {
             TextBox textBox = sender as TextBox;
 
@@ -199,6 +207,16 @@ namespace SalesManagement_SysDev
                     e.Handled = true;
                 }
             }
+        }
+
+        private void txbNumPage_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+
         }
 
         private void dgvRecordEditing_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -887,14 +905,14 @@ namespace SalesManagement_SysDev
                 // 顧客IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbClientID.Text.Trim()))
                 {
-                    MessageBox.Show("商品IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbClientID.Focus();
                     return false;
                 }
                 //顧客IDの重複チェック
                 if (!clientDataAccess.CheckClientIDExistence(int.Parse(txbClientID.Text.Trim())))
                 {
-                    MessageBox.Show("商品IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbClientID.Focus();
                     return false;
                 }
@@ -913,7 +931,7 @@ namespace SalesManagement_SysDev
         {
             //データグリッドビューに乗っている情報をGUIに反映
             txbClientID.Text = dgvClient[0, dgvClient.CurrentCellAddress.Y].Value.ToString();
-            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvClient[1, dgvClient.CurrentCellAddress.Y].Value.ToString()).Key.Value - 1;
+            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvClient[1, dgvClient.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbClientName.Text = dgvClient[2, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientAddress.Text = dgvClient[3, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientPhone.Text = dgvClient[4, dgvClient.CurrentCellAddress.Y].Value.ToString();
@@ -962,6 +980,17 @@ namespace SalesManagement_SysDev
             dgvClient.Columns.Add("ClFAX", "FAX");
             dgvClient.Columns.Add("ClFlag", "顧客管理フラグ");
             dgvClient.Columns.Add("ClHidden", "非表示理由");
+
+            dgvClient.Columns["ClID"].Width = 120;
+            dgvClient.Columns["SoID"].Width = 200;
+            dgvClient.Columns["ClName"].Width = 160;
+            dgvClient.Columns["ClAddress"].Width = 400;
+            dgvClient.Columns["ClPhone"].Width = 180;
+            dgvClient.Columns["ClPostal"].Width = 150;
+            dgvClient.Columns["ClFAX"].Width = 180;
+            dgvClient.Columns["ClFlag"].Width = 170;
+            dgvClient.Columns["ClHidden"].Width = 337;
+
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvClient.Columns)
@@ -1106,7 +1135,7 @@ namespace SalesManagement_SysDev
             txbClientFAX.Text = string.Empty;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
@@ -1119,5 +1148,6 @@ namespace SalesManagement_SysDev
                 UseShellExecute = true
             });
         }
+
     }
 }
