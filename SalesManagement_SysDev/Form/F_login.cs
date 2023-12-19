@@ -798,67 +798,56 @@ namespace SalesManagement_SysDev
                 {
                     M_Product = pr[0],
                     StQuantity = 100,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[1],
                     StQuantity = 120,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[2],
                     StQuantity = 199,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[3],
                     StQuantity = 50,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[4],
                     StQuantity = 60,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[5],
                     StQuantity = 32,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[6],
                     StQuantity = 10,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[7],
                     StQuantity = 10,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[8],
                     StQuantity = 10,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[9],
                     StQuantity = 240,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[10],
                     StQuantity = 10,
-                    StFlag = 0,
                 });
                 context.T_Stocks.AddRange(st);
                 context.SaveChanges();

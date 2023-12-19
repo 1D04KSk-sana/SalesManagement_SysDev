@@ -34,47 +34,32 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：GetOrderDspData()
-        //引　数：なし
-        //戻り値：管理Flgが表示の受注データ
-        //機　能：管理Flgが表示の受注データの全取得
+        //メソッド名：UpdateStockData()
+        //引　数：regStock = 在庫データ
+        //戻り値：True or False
+        //機　能：在庫データの更新
+        //      ：更新成功の場合True
+        //      ：更新失敗の場合False
         ///////////////////////////////
-        public List<T_Stock> GetStockDspData(List<T_Stock> dspStock)
+        public bool UpdateStockData(T_Stock regStock)
         {
-            List<T_Stock> listStock = new List<T_Stock>();
-
             try
             {
-                listStock = dspStock.Where(x => x.StFlag == 0).ToList();
+                var context = new SalesManagement_DevContext();
+                var Stock = context.T_Stocks.Single(x => x.PrID == regStock.PrID);
+
+                Stock.StQuantity = regStock.StQuantity;
+
+                context.SaveChanges();
+                return true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
             }
-
-            return listStock;
         }
-        ///////////////////////////////
-        //メソッド名：GetStockNotDspData()
-        //引　数：なし
-        //戻り値：管理Flgが非表示の受注データ
-        //機　能：管理Flgが非表示の受注データの全取得
-        ///////////////////////////////
-        public List<T_Stock> GetStockNotDspData(List<T_Stock> dspStock)
-        {
-            List<T_Stock> listStock = new List<T_Stock>();
 
-            try
-            {
-                listStock = dspStock.Where(x => x.StFlag == 1).ToList();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return listStock;
-        }
         ///////////////////////////////
         //メソッド名：GetOrderData()
         //引　数：なし
@@ -138,10 +123,8 @@ namespace SalesManagement_SysDev
             {
                 var context = new SalesManagement_DevContext();
 
-                List<T_Stock> listStock = context.T_Stocks.Where(x => x.StFlag == 0).ToList();
-
                 //部署CDで一致するデータが存在するか
-                flg = listStock.Any(x => x.PrID == ProdactID);
+                flg = context.T_Stocks.Any(x => x.PrID == ProdactID);
                 context.Dispose();
             }
             catch (Exception ex)
@@ -165,23 +148,14 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.T_Stocks.AsQueryable();
 
-                if (selectStock.StID != null && selectStock.StID != 0)
-                {
-                    query = query.Where(x => x.StID == selectStock.StID);
-                }
-
-                if (selectStock.PrID != null && selectStock.PrID != 0)
+                if (selectStock.PrID != 0)
                 {
                     query = query.Where(x => x.PrID == selectStock.PrID);
                 }
 
-                if (selectStock.StID != null && selectStock.StID != 0)
+                if (selectStock.StQuantity != 0)
                 {
-                    query = query.Where(x => x.StID == selectStock.StID);
-                }
-                if (selectStock.StQuantity != null && selectStock.StQuantity != 0)
-                {
-                    query = query.Where(x => x.StQuantity == selectStock.StQuantity);
+                    query = query.Where(x => x.StQuantity >= selectStock.StQuantity);
                 }
 
                 listStock = query.ToList();
@@ -206,7 +180,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listStock = context.T_Stocks.Where(x => x.StID == selectStock.StID || x.PrID == selectStock.PrID || x.StQuantity == selectStock.StQuantity).ToList();
+                listStock = context.T_Stocks.Where(x => x.PrID == selectStock.PrID || x.StQuantity >= selectStock.StQuantity).ToList();
 
                 context.Dispose();
             }

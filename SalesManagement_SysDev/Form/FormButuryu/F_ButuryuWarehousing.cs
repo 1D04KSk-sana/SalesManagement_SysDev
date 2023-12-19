@@ -467,7 +467,6 @@ namespace SalesManagement_SysDev
 
         private void btnDone_Click(object sender, EventArgs e)
         {
-
             //更新ラヂオボタンがチェックされているとき
             if (rdbUpdate.Checked)
             {
@@ -956,6 +955,7 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("確定に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            //在庫追加
             List<T_WarehousingDetail> WarehousingDetail = warehousingDetailDataAccess.GetIDWarehousingDetailData(int.Parse(txbWarehousingID.Text.Trim()));
 
             List<bool> flgStocklist = new List<bool>();
@@ -988,22 +988,6 @@ namespace SalesManagement_SysDev
 
             // データグリッドビューの表示
             GetDataGridView();
-        }
-        ///////////////////////////////
-        //メソッド名：GenerateStockAtRegistration()
-        //引　数   ：在庫情報
-        //戻り値   ：在庫登録情報
-        //機　能   ：在庫登録データのセット
-        ///////////////////////////////
-        private T_Stock GenerateStockAtRegistration(T_Warehousing Warehousing)
-        {
-            return new T_Stock
-            {
-                StID = Warehousing.HaID,
-                PrID = Warehousing.HaID,
-                StQuantity = Warehousing.HaID,
-                StFlag = 0,
-            };
         }
 
         private void btnPageMax_Click(object sender, EventArgs e)

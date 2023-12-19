@@ -1136,6 +1136,7 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("確定に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            //入庫登録
             T_Hattyu Hattyu = hattyuDataAccess.GetIDHattyuData(int.Parse(txbHattyuID.Text.Trim()));
 
             T_Warehousing Warehousing = GenerateWarehousingAtRegistration(Hattyu);
@@ -1151,6 +1152,7 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("入庫管理へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            //入庫詳細
             List<T_HattyuDetail> listHattyuDetail = hattyuDetailDataAccess.GetIDHattyuDetailData(int.Parse(txbHattyuID.Text.Trim()));
 
             List<bool> flgHattyulist = new List<bool>();
