@@ -371,7 +371,7 @@ namespace SalesManagement_SysDev
                 //商品IDの重複チェック
                 if (!ProdactDataAccess.CheckProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
                 {
-                    MessageBox.Show("商品IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("商品IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbProdactID.Focus();
                     return false;
                 }

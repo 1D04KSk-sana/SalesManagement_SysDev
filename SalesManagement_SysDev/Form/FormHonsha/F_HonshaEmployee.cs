@@ -500,6 +500,13 @@ namespace SalesManagement_SysDev
                     txbEmployeeID.Focus();
                     return false;
                 }
+                //社員IDの存在チェック
+                if (!employeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    MessageBox.Show("社員IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
             }
             else
             {

@@ -743,7 +743,7 @@ namespace SalesManagement_SysDev
                 //売上IDの存在チェック
                 if (!saleDataAccess.CheckSaleIDExistence(int.Parse(txbSaleID.Text.Trim())))
                 {
-                    MessageBox.Show("売上IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("売上IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSaleID.Focus();
                     return false;
                 }

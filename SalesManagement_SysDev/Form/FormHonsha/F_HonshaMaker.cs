@@ -680,7 +680,7 @@ namespace SalesManagement_SysDev
                 //メーカーIDの存在チェック
                 if (!makerDataAccess.CheckMakerIDExistence(int.Parse(txbMakerID.Text.Trim())))
                 {
-                    MessageBox.Show("メーカーIDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("メーカーIDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbMakerID.Focus();
                     return false;
                 }
@@ -803,6 +803,10 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("表示非表示が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbHidden.Focus();
                 return false;
+            }
+            else if (cmbHidden.SelectedIndex == 1)
+            {
+
             }
 
             return true;

@@ -555,7 +555,7 @@ namespace SalesManagement_SysDev
                 //役職IDの存在チェック
                 if (!positionDataAccess.CheckPositionIDExistence(int.Parse(txbPositionID.Text.Trim())))
                 {
-                    MessageBox.Show("役職IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("役職IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbPositionID.Focus();
                     return false;
                 }

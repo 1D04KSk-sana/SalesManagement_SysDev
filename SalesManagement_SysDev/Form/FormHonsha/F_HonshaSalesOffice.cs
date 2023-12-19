@@ -746,7 +746,7 @@ namespace SalesManagement_SysDev
                 //営業所IDの存在チェック
                 if (!salesOfficeDataAccess.CheckSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
                 {
-                    MessageBox.Show("営業所IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("営業所IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSalesOfficeID.Focus();
                     return false;
                 }

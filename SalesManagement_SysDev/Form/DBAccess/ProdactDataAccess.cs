@@ -35,6 +35,31 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：CheckProdactMakerIDExistence()
+        //引　数   ：メーカーID
+        //戻り値   ：True or False
+        //機　能   ：一致するメーカーIDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckProdactMakerIDExistence(int MakerID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                //商品IDで一致するデータが存在するか
+                flg = context.M_Products.Any(x => x.MaID == MakerID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
         //メソッド名：GetProdactDspData()
         //引　数：なし
         //戻り値：管理Flgが表示の商品データ
