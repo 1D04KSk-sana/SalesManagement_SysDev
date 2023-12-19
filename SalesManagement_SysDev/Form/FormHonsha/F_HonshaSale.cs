@@ -459,6 +459,8 @@ namespace SalesManagement_SysDev
 
             rdbHiddenUpdate.Checked = false;
 
+            txbNumPage.Text = "1";
+
             GetDataGridView();
         }
 

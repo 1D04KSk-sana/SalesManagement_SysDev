@@ -127,6 +127,8 @@ namespace SalesManagement_SysDev
 
             rdbHidden.Checked = true;
 
+            txbNumPage.Text = "1";
+
             GetDataGridView();
         }
 

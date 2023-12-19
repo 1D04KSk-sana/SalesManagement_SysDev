@@ -164,6 +164,8 @@ namespace SalesManagement_SysDev
 
             rdbRegister.Checked = true;
 
+            txbNumPage.Text = "1";
+
             GetDataGridView();
         }
 

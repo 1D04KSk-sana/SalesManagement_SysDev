@@ -189,6 +189,8 @@ namespace SalesManagement_SysDev
 
             rdbUpdate.Checked = true;
 
+            txbNumPage.Text = "1";
+
             GetDataGridView();
         }
         ///////////////////////////////

@@ -48,8 +48,9 @@ namespace SalesManagement_SysDev
         {
             ClearImput();
             
-
             rdbRegister.Checked = true;
+
+            txbNumPage.Text = "1";
 
             GetDataGridView();
         }

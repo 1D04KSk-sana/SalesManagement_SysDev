@@ -52,6 +52,7 @@
             this.btnDone = new System.Windows.Forms.Button();
             this.txbProductName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.rdbHattyuten = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockView)).BeginInit();
             this.pnlEigyo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
@@ -273,7 +274,7 @@
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(138, 209);
+            this.rdbSearch.Location = new System.Drawing.Point(307, 211);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
@@ -352,12 +353,25 @@
             this.label3.TabIndex = 92;
             this.label3.Text = "商品名";
             // 
+            // rdbHattyuten
+            // 
+            this.rdbHattyuten.AutoSize = true;
+            this.rdbHattyuten.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbHattyuten.Location = new System.Drawing.Point(61, 210);
+            this.rdbHattyuten.Margin = new System.Windows.Forms.Padding(2);
+            this.rdbHattyuten.Name = "rdbHattyuten";
+            this.rdbHattyuten.Size = new System.Drawing.Size(208, 39);
+            this.rdbHattyuten.TabIndex = 99;
+            this.rdbHattyuten.Text = "発注点検索";
+            this.rdbHattyuten.UseVisualStyleBackColor = true;
+            // 
             // F_EigyoStockView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(219)))), ((int)(((byte)(193)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.rdbHattyuten);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txbProductName);
             this.Controls.Add(this.btnDone);
@@ -418,5 +432,6 @@
         private System.Windows.Forms.TextBox txbProductName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pctHint;
+        private System.Windows.Forms.RadioButton rdbHattyuten;
     }
 }

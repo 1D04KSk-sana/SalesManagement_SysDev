@@ -53,6 +53,7 @@
             this.txbNumPage = new System.Windows.Forms.TextBox();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.rdbUpdate = new System.Windows.Forms.RadioButton();
+            this.rdbHattyuten = new System.Windows.Forms.RadioButton();
             this.pnlButuryu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).BeginInit();
@@ -345,7 +346,7 @@
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(192, 197);
+            this.rdbSearch.Location = new System.Drawing.Point(468, 197);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
@@ -369,6 +370,19 @@
             this.rdbUpdate.UseVisualStyleBackColor = true;
             this.rdbUpdate.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
+            // rdbHattyuten
+            // 
+            this.rdbHattyuten.AutoSize = true;
+            this.rdbHattyuten.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbHattyuten.Location = new System.Drawing.Point(205, 197);
+            this.rdbHattyuten.Margin = new System.Windows.Forms.Padding(2);
+            this.rdbHattyuten.Name = "rdbHattyuten";
+            this.rdbHattyuten.Size = new System.Drawing.Size(208, 39);
+            this.rdbHattyuten.TabIndex = 98;
+            this.rdbHattyuten.Text = "発注点検索";
+            this.rdbHattyuten.UseVisualStyleBackColor = true;
+            this.rdbHattyuten.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
+            // 
             // F_ButuryuStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -376,6 +390,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.rdbHattyuten);
             this.Controls.Add(this.rdbUpdate);
             this.Controls.Add(this.rdbSearch);
             this.Controls.Add(this.btnBack);
@@ -439,5 +454,6 @@
         private System.Windows.Forms.RadioButton rdbSearch;
         private System.Windows.Forms.PictureBox pctHint;
         private System.Windows.Forms.RadioButton rdbUpdate;
+        private System.Windows.Forms.RadioButton rdbHattyuten;
     }
 }

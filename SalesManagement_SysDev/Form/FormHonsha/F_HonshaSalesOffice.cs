@@ -75,6 +75,8 @@ namespace SalesManagement_SysDev
 
             rdbRegister.Checked = true;
 
+            txbNumPage.Text = "1";
+
             GetDataGridView();
         }
         private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)

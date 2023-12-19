@@ -57,6 +57,8 @@ namespace SalesManagement_SysDev
 
             rdbSearch.Checked = false;
 
+            txbNumPage.Text = "1";
+
             GetDataGridView();
         }
         private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)

@@ -57,6 +57,8 @@ namespace SalesManagement_SysDev
 
             rdbUpdate.Checked = true;
 
+            txbNumPage.Text = "1";
+
             GetDataGridView();
         }
         private void SearchDialog_btnAndSearchClick(object sender, EventArgs e)
@@ -168,6 +170,12 @@ namespace SalesManagement_SysDev
             {
                 StockDataSelect();
             }
+
+            //発注点検索ラヂオボタンがチェックされているとき
+            if (rdbHattyuten.Checked)
+            {
+                StockDataHattyuten();
+            }
         }
 
         private void RadioButton_Checked(object sender, EventArgs e)
@@ -178,6 +186,11 @@ namespace SalesManagement_SysDev
             }
 
             if (rdbUpdate.Checked)
+            {
+
+            }
+
+            if (rdbHattyuten.Checked)
             {
 
             }
@@ -257,7 +270,7 @@ namespace SalesManagement_SysDev
             List<T_Stock> listViewStock = new List<T_Stock>();
 
             //検索ラヂオボタンがチェックされているとき
-            if (rdbSearch.Checked)
+            if (rdbSearch.Checked || rdbHattyuten.Checked)
             {
                 //表示している（検索結果）のデータをとってくる
                 listViewStock = listStock;
@@ -464,6 +477,31 @@ namespace SalesManagement_SysDev
             ClearImput();
 
             // データグリッドビューの表示
+            GetDataGridView();
+        }
+
+        ///////////////////////////////
+        //メソッド名：StockDataHattyuten()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：在庫情報更新の実行
+        ///////////////////////////////
+        private void StockDataHattyuten()
+        {
+            listAllStock = stockDataAccess.GetStockData();
+
+            listStock = new List<T_Stock> { };
+
+            foreach (var item in listAllStock)
+            {
+                M_Product Prodact = prodactDataAccess.GetIDProdactData(item.PrID);
+
+                if (item.StQuantity <= Prodact.PrSafetyStock)
+                {
+                    listStock.Add(item);
+                }
+            }
+
             GetDataGridView();
         }
 
