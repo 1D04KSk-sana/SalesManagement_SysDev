@@ -542,6 +542,31 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtUpdate()
         {
+            // 役職IDの適否
+            if (!String.IsNullOrEmpty(txbPositionID.Text.Trim()))
+            {
+                // 役職IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbPositionID.Text.Trim()))
+                {
+                    MessageBox.Show("役職IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbPositionID.Focus();
+                    return false;
+                }
+                //役職IDの存在チェック
+                if (!positionDataAccess.CheckPositionIDExistence(int.Parse(txbPositionID.Text.Trim())))
+                {
+                    MessageBox.Show("役職IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbPositionID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("役職IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbPositionID.Focus();
+                return false;
+            }
+
             // 役職名の適否
             if (!String.IsNullOrEmpty(txbPositionName.Text.Trim()))
             {
