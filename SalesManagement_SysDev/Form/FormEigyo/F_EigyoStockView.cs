@@ -206,28 +206,28 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbstockID.Text.Trim()) && String.IsNullOrEmpty(txbstockID.Text.Trim()))
+            if (String.IsNullOrEmpty(txbStockID.Text.Trim()) && String.IsNullOrEmpty(txbProductID.Text.Trim()) && String.IsNullOrEmpty(txbStockQuantity.Text.Trim()))
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbstockID.Focus();
+                txbStockID.Focus();
                 return false;
             }
 
             // 在庫IDの適否
-            if (!String.IsNullOrEmpty(txbstockID.Text.Trim()))
+            if (!String.IsNullOrEmpty(txbStockID.Text.Trim()))
             {
                 // 在庫IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbstockID.Text.Trim()))
+                if (!dataInputCheck.CheckNumeric(txbStockID.Text.Trim()))
                 {
                     MessageBox.Show("在庫IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbstockID.Focus();
+                    txbStockID.Focus();
                     return false;
                 }
                 //在庫IDの重複チェック
-                if (!stockDataAccess.CheckStockIDExistence(int.Parse(txbstockID.Text.Trim())))
+                if (!stockDataAccess.CheckStockIDExistence(int.Parse(txbStockID.Text.Trim())))
                 {
                     MessageBox.Show("在庫IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbstockID.Focus();
+                    txbStockID.Focus();
                     return false;
                 }
             }
@@ -250,13 +250,13 @@ namespace SalesManagement_SysDev
                 }
             }
             // 在庫数の適否
-            if (!String.IsNullOrEmpty(txbstocknum.Text.Trim()))
+            if (!String.IsNullOrEmpty(txbStockQuantity.Text.Trim()))
             {
                 // 在庫数の数字チェック
-                if (!dataInputCheck.CheckNumeric(txbstocknum.Text.Trim()))
+                if (!dataInputCheck.CheckNumeric(txbStockQuantity.Text.Trim()))
                 {
                     MessageBox.Show("在庫数は全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbstocknum.Focus();
+                    txbStockQuantity.Focus();
                     return false;
                 }
             }
@@ -400,7 +400,7 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void GenerateDataAtSelect(bool searchFlg)
         {
-            string strStockID = txbstockID.Text.Trim();
+            string strStockID = txbStockID.Text.Trim();
             int intStockID = 0;
 
             if (!String.IsNullOrEmpty(strStockID))
@@ -414,25 +414,20 @@ namespace SalesManagement_SysDev
             {
                 intProdactID = int.Parse(strProdactID);
             }
-            string strtocknum = txbstocknum.Text.Trim();
-            int intstocknum = 0;
+            string strStockQuantity = txbStockQuantity.Text.Trim();
+            int intStockQuantity = 0;
 
-            if (!String.IsNullOrEmpty(strtocknum))
+            if (!String.IsNullOrEmpty(strStockQuantity))
             {
-                intstocknum = int.Parse(strtocknum);
+                intStockQuantity = int.Parse(strStockQuantity);
             }
 
             // 検索条件のセット
             T_Stock selectCondition = new T_Stock()
             {
                 StID = intStockID,
-                //ClName = txbClientName.Text.Trim()
-                //SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 PrID = intProdactID,
-                StQuantity = intstocknum,
-                //ClAddress= txbClientAddress.Text.Trim(),
-                //ClFAX=txbClientFax.Text.Trim(),
-                //ClHidden=txbHidden.Text.Trim()
+                StQuantity = intStockQuantity,
             };
 
             if (searchFlg)
@@ -558,9 +553,9 @@ namespace SalesManagement_SysDev
         private void SelectRowControl()
         {
             //データグリッドビューに乗っている情報をGUIに反映
-            txbstockID.Text = dgvStockView[0, dgvStockView.CurrentCellAddress.Y].Value.ToString();
+            txbStockID.Text = dgvStockView[0, dgvStockView.CurrentCellAddress.Y].Value.ToString();
             txbProductID.Text =dictionaryProdact.FirstOrDefault(x=>x.Value== dgvStockView[1, dgvStockView.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
-            txbstocknum.Text = dgvStockView[2, dgvStockView.CurrentCellAddress.Y].Value.ToString();
+            txbStockQuantity.Text = dgvStockView[2, dgvStockView.CurrentCellAddress.Y].Value.ToString();
         }
 
         private void pctHint_Click(object sender, EventArgs e)
@@ -589,9 +584,9 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void ClearImput()
         {
-            txbstockID.Text = string.Empty;
+            txbStockID.Text = string.Empty;
             txbProductID.Text = string.Empty;
-            txbstocknum.Text = string.Empty;
+            txbStockQuantity.Text = string.Empty;
         }
     }
 }

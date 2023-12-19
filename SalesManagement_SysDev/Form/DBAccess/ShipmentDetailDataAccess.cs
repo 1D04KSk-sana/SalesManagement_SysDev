@@ -10,19 +10,19 @@ namespace SalesManagement_SysDev
     internal class ShipmentDetailDataAccess
     {
         ///////////////////////////////
-        //メソッド名：GetOrderDetailData()
+        //メソッド名：GetShipmentDetailData()
         //引　数：なし
         //戻り値：受注詳細データ
         //機　能：受注詳細データの全取得
         ///////////////////////////////
-        public List<T_ShipmentDetail> GetShipmentDetailIDData(int orderID)
+        public List<T_ShipmentDetail> GetShipmentDetailIDData(int ShipmentID)
         {
-            List<T_ShipmentDetail> listOrderDetail = new List<T_ShipmentDetail>();
+            List<T_ShipmentDetail> listShipmentDetail = new List<T_ShipmentDetail>();
 
             try
             {
                 var context = new SalesManagement_DevContext();
-                listOrderDetail = context.T_ShipmentDetails.Where(x => x.ShDetailID == orderID).ToList();
+                listShipmentDetail = context.T_ShipmentDetails.Where(x => x.ShDetailID == ShipmentID).ToList();
                 context.Dispose();
             }
             catch (Exception ex)
@@ -30,7 +30,7 @@ namespace SalesManagement_SysDev
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            return listOrderDetail;
+            return listShipmentDetail;
         }
 
         //////////////////////////////

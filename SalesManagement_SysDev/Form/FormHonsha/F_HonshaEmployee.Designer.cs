@@ -66,6 +66,7 @@
             this.txbPageSize = new System.Windows.Forms.TextBox();
             this.cmbPositionName = new System.Windows.Forms.ComboBox();
             this.btnSinghUp = new System.Windows.Forms.Button();
+            this.lblHidden = new System.Windows.Forms.Label();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployee)).BeginInit();
             this.pnlHonsha.SuspendLayout();
@@ -205,14 +206,14 @@
             this.txbHidden.Location = new System.Drawing.Point(857, 427);
             this.txbHidden.Margin = new System.Windows.Forms.Padding(2);
             this.txbHidden.Name = "txbHidden";
-            this.txbHidden.Size = new System.Drawing.Size(624, 31);
+            this.txbHidden.Size = new System.Drawing.Size(757, 31);
             this.txbHidden.TabIndex = 45;
             // 
             // lblEmployeeHidden
             // 
             this.lblEmployeeHidden.AutoSize = true;
             this.lblEmployeeHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblEmployeeHidden.Location = new System.Drawing.Point(690, 430);
+            this.lblEmployeeHidden.Location = new System.Drawing.Point(716, 430);
             this.lblEmployeeHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEmployeeHidden.Name = "lblEmployeeHidden";
             this.lblEmployeeHidden.Size = new System.Drawing.Size(130, 24);
@@ -524,6 +525,17 @@
             this.btnSinghUp.UseVisualStyleBackColor = false;
             this.btnSinghUp.Click += new System.EventHandler(this.btnSinghUp_Click);
             // 
+            // lblHidden
+            // 
+            this.lblHidden.AutoSize = true;
+            this.lblHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblHidden.Location = new System.Drawing.Point(147, 430);
+            this.lblHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblHidden.Name = "lblHidden";
+            this.lblHidden.Size = new System.Drawing.Size(142, 24);
+            this.lblHidden.TabIndex = 126;
+            this.lblHidden.Text = "表示/非表示";
+            // 
             // F_HonshaEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -531,6 +543,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.lblHidden);
             this.Controls.Add(this.btnSinghUp);
             this.Controls.Add(this.cmbPositionName);
             this.Controls.Add(this.lblNumPage);
@@ -619,5 +632,6 @@
         private System.Windows.Forms.ComboBox cmbPositionName;
         private System.Windows.Forms.Button btnSinghUp;
         private System.Windows.Forms.PictureBox pctHint;
+        private System.Windows.Forms.Label lblHidden;
     }
 }

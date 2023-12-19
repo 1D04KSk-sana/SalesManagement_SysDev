@@ -64,20 +64,20 @@ namespace SalesManagement_SysDev
         //戻り値：管理Flgが表示の受注データ
         //機　能：管理Flgが表示の受注データの全取得
         ///////////////////////////////
-        public List<T_Shipment> GetShipmentDspData(List<T_Shipment> dspOrder)
+        public List<T_Shipment> GetShipmentDspData(List<T_Shipment> dspShipment)
         {
-            List<T_Shipment> listOrder = new List<T_Shipment>();
+            List<T_Shipment> listShipment = new List<T_Shipment>();
 
             try
             {
-                listOrder = dspOrder.Where(x => x.ShFlag == 0).ToList();
+                listShipment = dspShipment.Where(x => x.ShFlag == 0).ToList();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            return listOrder;
+            return listShipment;
         }
 
         ///////////////////////////////
@@ -86,25 +86,25 @@ namespace SalesManagement_SysDev
         //戻り値：管理Flgが非表示の受注データ
         //機　能：管理Flgが非表示の受注データの全取得
         ///////////////////////////////
-        public List<T_Shipment> GetShipmentNotDspData(List<T_Shipment> dspOrder)
+        public List<T_Shipment> GetShipmentNotDspData(List<T_Shipment> dspShipment)
         {
-            List<T_Shipment> listOrder = new List<T_Shipment>();
+            List<T_Shipment> listShipment = new List<T_Shipment>();
 
             try
             {
-                listOrder = dspOrder.Where(x => x.ShFlag == 1).ToList();
+                listShipment = dspShipment.Where(x => x.ShFlag == 1).ToList();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            return listOrder;
+            return listShipment;
         }
 
         ///////////////////////////////
-        //メソッド名：UpdateOrderData()
-        //引　数：updOrder = 受注データ
+        //メソッド名：UpdateShipmentData()
+        //引　数：updShipment = 受注データ
         //戻り値：True or False
         //機　能：受注データの更新
         //      ：更新成功の場合True
@@ -134,7 +134,7 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：GetAndOrderData()
+        //メソッド名：GetAndShipmentData()
         //引　数：検索条件
         //戻り値：条件完全一致受注データ
         //機　能：条件完全一致受注データの取得
@@ -147,24 +147,28 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.T_Shipments.AsQueryable();
 
-                if (selectShipment.ShID != null && selectShipment.ShID != 0)
+                if (selectShipment.ShID != 0)
                 {
                     query = query.Where(x => x.ShID == selectShipment.ShID);
                 }
 
-                if (selectShipment.OrID != null && selectShipment.OrID != 0)
+                if ( selectShipment.OrID != 0)
                 {
                     query = query.Where(x => x.OrID == selectShipment.OrID);
                 }
 
-                if (selectShipment.EmID != null && selectShipment.EmID != 0)
+                if (selectShipment.EmID != 0)
                 {
                     query = query.Where(x => x.EmID == selectShipment.EmID);
                 }
 
-                if (selectShipment.ClID != null && selectShipment.ClID != 0)
+                if (selectShipment.ClID != 0)
                 {
                     query = query.Where(x => x.ClID == selectShipment.ClID);
+                }
+                if (selectShipment.ShFinishDate != null)
+                {
+                    query = query.Where(x => x.ShFinishDate.Value == selectShipment.ShFinishDate.Value);
                 }
 
                 listShipment = query.ToList();
@@ -179,18 +183,18 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：GetOrOrderData()
+        //メソッド名：GetOrShipmentData()
         //引　数：検索条件
         //戻り値：条件一部一致受注データ
         //機　能：条件一部一致受注データの取得
         ///////////////////////////////
-        public List<T_Shipment> GetOrShipmentData(T_Shipment selectOrder)
+        public List<T_Shipment> GetOrShipmentData(T_Shipment selectShipment)
         {
-            List<T_Shipment> listOrder = new List<T_Shipment>();
+            List<T_Shipment> listShipment = new List<T_Shipment>();
             try
             {
                 var context = new SalesManagement_DevContext();
-                listOrder = context.T_Shipments.Where(x => x.ShID == selectOrder.ShID || x.OrID == selectOrder.OrID || x.EmID == selectOrder.EmID || x.ClID == selectOrder.ClID).ToList();
+                listShipment = context.T_Shipments.Where(x => x.ShID == selectShipment.ShID || x.OrID == selectShipment.OrID || x.EmID == selectShipment.EmID || x.ClID == selectShipment.ClID || x.ShFinishDate.Value == selectShipment.ShFinishDate.Value).ToList();
 
                 context.Dispose();
             }
@@ -199,7 +203,7 @@ namespace SalesManagement_SysDev
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            return listOrder;
+            return listShipment;
         }
         ///////////////////////////////
         //メソッド名：AddShipmentData()

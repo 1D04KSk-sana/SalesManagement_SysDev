@@ -991,12 +991,8 @@ namespace SalesManagement_SysDev
             M_Maker selectCondition = new M_Maker()
             {
                 MaID = intMakerID,
-                //SoName = txbSalesOfficeName.Text.Trim()
+                MaName= txbMakerName.Text.Trim(),
                 MaPhone = txbMakerPhone.Text.Trim(),
-                //SoPostal= txbSalesOfficePostal.Text.Trim(),
-                //SoAddress= txbSalesOfficeAddress.Text.Trim(),
-                //SoFAX=txbSalesOfficeFax.Text.Trim(),
-                //SoHidden=txbHidden.Text.Trim()
             };
 
             if (searchFlg)
