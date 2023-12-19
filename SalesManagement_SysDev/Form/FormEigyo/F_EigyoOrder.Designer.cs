@@ -478,13 +478,13 @@
             // 
             this.lblOrder.AutoSize = true;
             this.lblOrder.Font = new System.Drawing.Font("MS UI Gothic", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblOrder.ForeColor = System.Drawing.Color.White;
+            this.lblOrder.ForeColor = System.Drawing.Color.Black;
             this.lblOrder.Location = new System.Drawing.Point(352, 17);
             this.lblOrder.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOrder.Name = "lblOrder";
-            this.lblOrder.Size = new System.Drawing.Size(231, 35);
+            this.lblOrder.Size = new System.Drawing.Size(159, 35);
             this.lblOrder.TabIndex = 23;
-            this.lblOrder.Text = "受注管理画面";
+            this.lblOrder.Text = "受注管理";
             // 
             // btnReturn
             // 

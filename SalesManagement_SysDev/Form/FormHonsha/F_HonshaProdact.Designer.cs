@@ -559,13 +559,13 @@
             // 
             this.lblProdact.AutoSize = true;
             this.lblProdact.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProdact.ForeColor = System.Drawing.Color.White;
-            this.lblProdact.Location = new System.Drawing.Point(778, 44);
+            this.lblProdact.ForeColor = System.Drawing.Color.Black;
+            this.lblProdact.Location = new System.Drawing.Point(812, 44);
             this.lblProdact.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProdact.Name = "lblProdact";
-            this.lblProdact.Size = new System.Drawing.Size(418, 64);
+            this.lblProdact.Size = new System.Drawing.Size(288, 64);
             this.lblProdact.TabIndex = 1;
-            this.lblProdact.Text = "商品管理画面";
+            this.lblProdact.Text = "商品管理";
             // 
             // txbProdactJanCode
             // 
