@@ -1171,12 +1171,6 @@ namespace SalesManagement_SysDev
                 cmbHidden.Enabled = false;
                 cmbConfirm.Enabled = false;
             }
-            else
-            {
-                txbHidden.Enabled = true;
-                cmbHidden.Enabled = true;
-                cmbConfirm.Enabled = true;
-            }
 
             if (rdbUpdate.Checked)
             {
@@ -1188,16 +1182,6 @@ namespace SalesManagement_SysDev
                 cmbSalesOfficeID.Enabled = false;
                 dtpArrivalDate.Enabled = false;
             }
-            else
-            {
-                txbArrivalID.Enabled = true;
-                txbClientID.Enabled = true;
-                txbEmployeeID.Enabled = true;
-                txbOrderID.Enabled = true;
-                cmbConfirm.Enabled = true;
-                cmbSalesOfficeID.Enabled = true;
-                dtpArrivalDate.Enabled = true;
-            }
 
             if (rdbConfirm.Checked)
             {
@@ -1208,16 +1192,6 @@ namespace SalesManagement_SysDev
                 dtpArrivalDate.Enabled = false;
                 txbHidden.Enabled = false;
                 cmbHidden.Enabled = false;
-            }
-            else
-            {
-                txbClientID.Enabled = true;
-                txbEmployeeID.Enabled = true;
-                txbOrderID.Enabled = true;
-                cmbSalesOfficeID.Enabled = true;
-                dtpArrivalDate.Enabled = true;
-                txbHidden.Enabled = true;
-                cmbHidden.Enabled = true;
             }
         }
 

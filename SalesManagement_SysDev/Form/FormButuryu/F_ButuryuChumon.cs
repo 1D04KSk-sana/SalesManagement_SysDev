@@ -1257,25 +1257,13 @@ namespace SalesManagement_SysDev
             {
 
             }
-            else
-            {
-
-            }
 
             if (rdbConfirm.Checked)
             {
 
             }
-            else
-            {
-
-            }
 
             if (rdbHidden.Checked)
-            {
-                
-            }
-            else
             {
                 
             }

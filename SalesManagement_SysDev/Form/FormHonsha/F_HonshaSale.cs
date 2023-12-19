@@ -469,11 +469,6 @@ namespace SalesManagement_SysDev
                 cmbHidden.Enabled = false;
                 txbHidden.Enabled = false;
             }
-            else
-            {
-                cmbHidden.Enabled = true;
-                txbHidden.Enabled = true;
-            }
 
             if (rdbHiddenUpdate.Checked)
             {
@@ -481,13 +476,6 @@ namespace SalesManagement_SysDev
                 cmbSalesOfficeID.Enabled = false;
                 txbChumonID.Enabled = false;
                 dtpSaleDate.Enabled = false;
-            }
-            else
-            {
-                txbClientName.Enabled = true;
-                cmbSalesOfficeID.Enabled = true;
-                txbChumonID.Enabled = true;
-                dtpSaleDate.Enabled = true;
             }
         }
 

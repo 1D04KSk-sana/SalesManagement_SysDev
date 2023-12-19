@@ -1200,25 +1200,13 @@ namespace SalesManagement_SysDev
             {
 
             }
-            else
-            {
-
-            }
 
             if (rdbUpdate.Checked)
             {
 
             }
-            else
-            {
-
-            }
 
             if (rdbConfirm.Checked)
-            {
-
-            }
-            else
             {
 
             }

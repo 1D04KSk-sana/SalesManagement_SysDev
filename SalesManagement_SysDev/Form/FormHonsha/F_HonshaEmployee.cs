@@ -1000,16 +1000,8 @@ namespace SalesManagement_SysDev
             {
 
             }
-            else
-            {
-
-            }
 
             if (rdbUpdate.Checked)
-            {
-
-            }
-            else
             {
 
             }

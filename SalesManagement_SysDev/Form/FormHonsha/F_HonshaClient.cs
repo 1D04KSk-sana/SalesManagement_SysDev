@@ -276,25 +276,13 @@ namespace SalesManagement_SysDev
             {
 
             }
-            else
-            {
-
-            }
 
             if (rdbUpdate.Checked)
             {
 
             }
-            else
-            {
-
-            }
 
             if (rdbRegister.Checked)
-            {
-
-            }
-            else
             {
 
             }

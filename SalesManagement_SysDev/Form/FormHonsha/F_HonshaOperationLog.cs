@@ -110,17 +110,6 @@ namespace SalesManagement_SysDev
             }
         }
 
-        private void RadioButton_Checked(object sender, EventArgs e)
-        {
-            if (rdbSearch.Checked)
-            {
-
-            }
-            else
-            {
-
-            }
-        }
         ///////////////////////////////
         //メソッド名：SetFormDataGridView()
         //引　数   ：なし

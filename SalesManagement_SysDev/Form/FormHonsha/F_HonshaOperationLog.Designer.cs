@@ -159,7 +159,6 @@
             this.rdbSearch.TabIndex = 6;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
-            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // txbEmployeeID
             // 

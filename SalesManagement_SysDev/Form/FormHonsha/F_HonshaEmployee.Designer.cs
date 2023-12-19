@@ -169,6 +169,7 @@
             this.rdbSearch.TabIndex = 0;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbUpdate
             // 
@@ -183,6 +184,7 @@
             this.rdbUpdate.TabStop = true;
             this.rdbUpdate.Text = "更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
+            this.rdbUpdate.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // cmbHidden
             // 
@@ -381,7 +383,7 @@
             this.lblHonsha.Location = new System.Drawing.Point(832, 38);
             this.lblHonsha.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblHonsha.Name = "lblHonsha";
-            this.lblHonsha.Size = new System.Drawing.Size(288, 64);
+            this.lblHonsha.Size = new System.Drawing.Size(287, 64);
             this.lblHonsha.TabIndex = 26;
             this.lblHonsha.Text = "社員管理";
             // 
