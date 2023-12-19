@@ -56,13 +56,13 @@ namespace SalesManagement_SysDev
 
             listSmall = smallDataAccess.GetSmallIDData(int.Parse(dgvMajor[0, dgvMajor.CurrentCellAddress.Y].Value.ToString()));
 
-            //1行ずつdgvSaleに挿入
+            //1行ずつdgvSmallに挿入
             foreach (var item in listSmall)
             {
                 dgvSmall.Rows.Add(item.ScID, item.ScName, item.ScFlag, item.ScHidden);
             }
 
-            //dgvSaleDetailをリフレッシュ
+            //dgvSmallをリフレッシュ
             dgvSmall.Refresh();
 
         }
@@ -278,10 +278,10 @@ namespace SalesManagement_SysDev
             RegistrationMajor(regMaker);
         }
         ///////////////////////////////
-        //メソッド名：MajorDataRegister()
+        //メソッド名：SmallDataRegister()
         //引　数   ：なし
         //戻り値   ：なし
-        //機　能   ：大分類情報登録の実行
+        //機　能   ：小分類情報登録の実行
         ///////////////////////////////
         private void SmallDataRegister()
         {
@@ -315,10 +315,10 @@ namespace SalesManagement_SysDev
             RegistrationSmall(regSmall);
         }
         ///////////////////////////////
-        //メソッド名：RegistrationMaker()
+        //メソッド名：RegistrationMajor()
         //引　数   ：メーカー情報
         //戻り値   ：なし
-        //機　能   ：メーカーデータの登録
+        //機　能   ：大分類データの登録
         ///////////////////////////////
         private void RegistrationMajor(M_MajorClassification regMajor)
         {
@@ -342,10 +342,10 @@ namespace SalesManagement_SysDev
             GetDataGridView();
         }
         ///////////////////////////////
-        //メソッド名：RegistrationMaker()
+        //メソッド名：RegistrationSmall()
         //引　数   ：メーカー情報
         //戻り値   ：なし
-        //機　能   ：メーカーデータの登録
+        //機　能   ：小分類データの登録
         ///////////////////////////////
         private void RegistrationSmall(M_SmallClassification regSmall)
         {
@@ -617,10 +617,10 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private List<M_MajorClassification> SetListMajor()
         {
-            //顧客のデータを全取得
+            //大分類のデータを全取得
             listAllMajor = majorDataAccess.GetMajorData();
 
-            //表示用の顧客リスト作成
+            //表示用の大分類リスト作成
             List<M_MajorClassification> listViewMajor = new List<M_MajorClassification>();
 
             //検索ラヂオボタンがチェックされているとき
@@ -638,29 +638,29 @@ namespace SalesManagement_SysDev
             //一覧表示cmbViewが表示を選択されているとき
             if (cmbView.SelectedIndex == 0)
             {
-                // 管理Flgが表示の部署データの取得
+                // 管理Flgが表示の大分類データの取得
                 listViewMajor = majorDataAccess.GetMajorDspData(listViewMajor);
             }
             else
             {
-                // 管理Flgが非表示の部署データの取得
+                // 管理Flgが非表示の大分類データの取得
                 listViewMajor = majorDataAccess.GetMajorNotDspData(listViewMajor);
             }
 
             return listViewMajor;
         }
         ///////////////////////////////
-        //メソッド名：SetListMajor()
+        //メソッド名：SetListSmall()
         //引　数   ：なし
-        //戻り値   ：表示用大分類データ
-        //機　能   ：表示用大分類データの準備
+        //戻り値   ：表示用小分類データ
+        //機　能   ：表示用小分類データの準備
         ///////////////////////////////
         private List<M_SmallClassification> SetListSmall()
         {
-            //顧客のデータを全取得
+            //小分類のデータを全取得
             listAllSmall = smallDataAccess.GetSmallData();
 
-            //表示用の顧客リスト作成
+            //表示用の小分類リスト作成
             List<M_SmallClassification> listViewSmall = new List<M_SmallClassification>();
 
             //検索ラヂオボタンがチェックされているとき
@@ -678,22 +678,22 @@ namespace SalesManagement_SysDev
             //一覧表示cmbViewが表示を選択されているとき
             if (cmbView.SelectedIndex == 0)
             {
-                // 管理Flgが表示の部署データの取得
+                // 管理Flgが表示の小分類データの取得
                 listViewSmall = smallDataAccess.GetSmallDspData(listViewSmall);
             }
             else
             {
-                // 管理Flgが非表示の部署データの取得
+                // 管理Flgが非表示の小分類データの取得
                 listViewSmall = smallDataAccess.GetSmallNotDspData(listViewSmall);
             }
 
             return listViewSmall;
         }
         ///////////////////////////////
-        //メソッド名：MakerDataUpdate()
+        //メソッド名：MajorDataUpdate()
         //引　数   ：なし
         //戻り値   ：なし
-        //機　能   ：メーカー情報更新の実行
+        //機　能   ：大分類情報更新の実行
         ///////////////////////////////
         private void MajorDataUpdate()
         {
@@ -703,17 +703,17 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 顧客情報作成
+            // 大分類情報作成
             var updMajor = GenerateMDataAtUpdate();
 
-            // 顧客情報更新
+            // 大分類情報更新
             UpdateMajor(updMajor);
         }
         ///////////////////////////////
-        //メソッド名：MakerDataUpdate()
+        //メソッド名：SmallDataUpdate()
         //引　数   ：なし
         //戻り値   ：なし
-        //機　能   ：メーカー情報更新の実行
+        //機　能   ：小分類情報更新の実行
         ///////////////////////////////
         private void SmallDataUpdate()
         {
@@ -723,14 +723,14 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 顧客情報作成
+            // 小分類情報作成
             var updSmall = GenerateSDataAtUpdate();
 
-            // 顧客情報更新
+            // 小分類情報更新
             UpdateSmall(updSmall);
         }
         ///////////////////////////////
-        //メソッド名：GetValidDataAtUpdate()
+        //メソッド名：GetValidMDataAtUpdate()
         //引　数   ：なし
         //戻り値   ：true or false
         //機　能   ：更新入力データの形式チェック
@@ -784,7 +784,7 @@ namespace SalesManagement_SysDev
             }
             else
             {
-                MessageBox.Show("メーカー名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("大分類名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbMajorName.Focus();
                 return false;
             }
@@ -800,7 +800,7 @@ namespace SalesManagement_SysDev
             return true;
         }
         ///////////////////////////////
-        //メソッド名：GetValidDataAtUpdate()
+        //メソッド名：GetValidSDataAtUpdate()
         //引　数   ：なし
         //戻り値   ：true or false
         //機　能   ：更新入力データの形式チェック
@@ -870,9 +870,9 @@ namespace SalesManagement_SysDev
             return true;
         }
         ///////////////////////////////
-        //メソッド名：GenerateDataAtUpdate()
+        //メソッド名：GenerateMDataAtUpdate()
         //引　数   ：なし
-        //戻り値   ：メーカー更新情報
+        //戻り値   ：大分類更新情報
         //機　能   ：更新データのセット
         ///////////////////////////////
         private M_MajorClassification GenerateMDataAtUpdate()
@@ -886,9 +886,9 @@ namespace SalesManagement_SysDev
             };
         }
         ///////////////////////////////
-        //メソッド名：GenerateDataAtUpdate()
+        //メソッド名：GeneratSeDataAtUpdate()
         //引　数   ：なし
-        //戻り値   ：メーカー更新情報
+        //戻り値   ：小分類更新情報
         //機　能   ：更新データのセット
         ///////////////////////////////
         private M_SmallClassification GenerateSDataAtUpdate()
@@ -902,10 +902,10 @@ namespace SalesManagement_SysDev
             };
         }
         ///////////////////////////////
-        //メソッド名：UpdateMaker()
-        //引　数   ：顧客情報
+        //メソッド名：UpdateSmall()
+        //引　数   ：小分類情報
         //戻り値   ：なし
-        //機　能   ：顧客情報の更新
+        //機　能   ：小分類情報の更新
         ///////////////////////////////
         private void UpdateSmall(M_SmallClassification updSmall)
         {
@@ -944,10 +944,10 @@ namespace SalesManagement_SysDev
             GetDataGridView();
         }
         ///////////////////////////////
-        //メソッド名：UpdateMaker()
-        //引　数   ：顧客情報
+        //メソッド名：UpdateMajor()
+        //引　数   ：大分類情報
         //戻り値   ：なし
-        //機　能   ：顧客情報の更新
+        //機　能   ：大分類情報の更新
         ///////////////////////////////
         private void UpdateMajor(M_MajorClassification updMajor)
         {
@@ -968,7 +968,7 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 顧客情報の更新
+            // 大分類情報の更新
             bool flg = majorDataAccess.UpdateMajorData(updMajor);
             if (flg == true)
             {
@@ -986,10 +986,10 @@ namespace SalesManagement_SysDev
             GetDataGridView();
         }
         ///////////////////////////////
-        //メソッド名：MakerDataSelect()
+        //メソッド名：MajorDataSelect()
         //引　数   ：なし
         //戻り値   ：なし
-        //機　能   ：メーカー情報検索の実行
+        //機　能   ：大分類情報検索の実行
         ///////////////////////////////
         private void MajorDataSelect()
         {
@@ -1017,10 +1017,10 @@ namespace SalesManagement_SysDev
             this.Opacity = 0;
         }
         ///////////////////////////////
-        //メソッド名：MakerDataSelect()
+        //メソッド名：SmallDataSelect()
         //引　数   ：なし
         //戻り値   ：なし
-        //機　能   ：メーカー情報検索の実行
+        //機　能   ：小分類情報検索の実行
         ///////////////////////////////
         private void SmallDataSelect()
         {
@@ -1065,17 +1065,17 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            // メーカーIDの適否
+            // 大分類IDの適否
             if (!String.IsNullOrEmpty(txbMajorID.Text.Trim()))
             {
-                // メーカーIDの数字チェック
+                // 大分類IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbMajorID.Text.Trim()))
                 {
                     MessageBox.Show("大分類IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbMajorID.Focus();
                     return false;
                 }
-                //メーカーIDの重複チェック
+                //大分類IDの重複チェック
                 if (!majorDataAccess.CheckMajorIDExistence(int.Parse(txbMajorID.Text.Trim())))
                 {
                     MessageBox.Show("大分類IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1087,7 +1087,7 @@ namespace SalesManagement_SysDev
             return true;
         }
         ///////////////////////////////
-        //メソッド名：GetValidDataAtSearch()
+        //メソッド名：GetValidSDataAtSearch()
         //引　数   ：なし
         //戻り値   ：true or false
         //機　能   ：検索入力データの形式チェック
@@ -1104,17 +1104,17 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            // メーカーIDの適否
+            // 小分類IDの適否
             if (!String.IsNullOrEmpty(txbSmallID.Text.Trim()))
             {
-                // メーカーIDの数字チェック
+                // 小分類IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbSmallID.Text.Trim()))
                 {
                     MessageBox.Show("小分類IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSmallID.Focus();
                     return false;
                 }
-                //メーカーIDの重複チェック
+                //小分類IDの重複チェック
                 if (!smallDataAccess.CheckSmallIDExistence(int.Parse(txbSmallID.Text.Trim())))
                 {
                     MessageBox.Show("小分類IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1126,50 +1126,50 @@ namespace SalesManagement_SysDev
             return true;
         }
         ///////////////////////////////
-        //メソッド名：MakerSearchButtonClick()
+        //メソッド名：MajorSearchButtonClick()
         //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
         //戻り値   ：なし
-        //機　能   ：メーカー情報検索の実行
+        //機　能   ：大分類情報検索の実行
         ///////////////////////////////
         private void MajorSearchButtonClick(bool searchFlg)
         {
-            // 顧客情報抽出
+            // 大分類情報抽出
             GenerateMDataAtSelect(searchFlg);
 
             int intSearchCount = listMajor.Count;
 
             txbNumPage.Text = "1";
 
-            // 顧客抽出結果表示
+            // 大分類抽出結果表示
             GetDataGridView();
 
             MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         ///////////////////////////////
-        //メソッド名：MakerSearchButtonClick()
+        //メソッド名：SmallSearchButtonClick()
         //引　数   ：searchFlg = AND検索かOR検索か判別するためのBool値
         //戻り値   ：なし
-        //機　能   ：メーカー情報検索の実行
+        //機　能   ：小分類情報検索の実行
         ///////////////////////////////
         private void SmallSearchButtonClick(bool searchFlg)
         {
-            // 顧客情報抽出
+            // 小分類情報抽出
             GenerateSDataAtSelect(searchFlg);
 
             int intSearchCount = listSmall.Count;
 
             txbNumPage.Text = "1";
 
-            // 顧客抽出結果表示
+            // 小分類抽出結果表示
             GetDataGridView();
 
             MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         ///////////////////////////////
-        //メソッド名：GenerateDataAtSelect()
+        //メソッド名：GenerateMDataAtSelect()
         //引　数   ：searchFlg = And検索かOr検索か判別するためのBool値
         //戻り値   ：なし
-        //機　能   ：メーカー情報の取得
+        //機　能   ：大分類情報の取得
         ///////////////////////////////
         private void GenerateMDataAtSelect(bool searchFlg)
         {
@@ -1189,20 +1189,20 @@ namespace SalesManagement_SysDev
 
             if (searchFlg)
             {
-                // 顧客データのAnd抽出
+                // 大分類データのAnd抽出
                 listMajor = majorDataAccess.GetAndMajorData(selectCondition);
             }
             else
             {
-                // 顧客データのOr抽出
+                // 大分類データのOr抽出
                 listMajor = majorDataAccess.GetOrMajorData(selectCondition);
             }
         }
         ///////////////////////////////
-        //メソッド名：GenerateDataAtSelect()
+        //メソッド名：GenerateSDataAtSelect()
         //引　数   ：searchFlg = And検索かOr検索か判別するためのBool値
         //戻り値   ：なし
-        //機　能   ：メーカー情報の取得
+        //機　能   ：小分類情報の取得
         ///////////////////////////////
         private void GenerateSDataAtSelect(bool searchFlg)
         {
@@ -1222,12 +1222,12 @@ namespace SalesManagement_SysDev
 
             if (searchFlg)
             {
-                // 顧客データのAnd抽出
+                // 小分類データのAnd抽出
                 listSmall = smallDataAccess.GetAndSmallData(selectCondition);
             }
             else
             {
-                // 顧客データのOr抽出
+                // 小分類データのOr抽出
                 listSmall = smallDataAccess.GetOrSmallData(selectCondition);
             }
         }
@@ -1253,7 +1253,7 @@ namespace SalesManagement_SysDev
 
             //データからページに必要な部分だけを取り出す
             var MdepData = viewMajor.Skip(pageSize * pageNum).Take(pageSize).ToList();
-            //1行ずつdgvMakerに挿入
+            //1行ずつdgvMajorに挿入
             foreach (var item in MdepData)
             {
                 dgvMajor.Rows.Add(item.McID, item.McName, dictionaryHidden[item.McFlag], item.McHidden);
@@ -1293,7 +1293,7 @@ namespace SalesManagement_SysDev
     }
 
         ///////////////////////////////
-        //メソッド名：SelectRowControl()
+        //メソッド名：M_SelectRowControl()
         //引　数   ：なし
         //戻り値   ：なし
         //機　能   ：選択された行に対してのコントロールの変更
@@ -1307,7 +1307,7 @@ namespace SalesManagement_SysDev
             txbHidden.Text = dgvMajor[3, dgvMajor.CurrentCellAddress.Y]?.Value?.ToString();
         }
         ///////////////////////////////
-        //メソッド名：SelectRowControl()
+        //メソッド名：S_SelectRowControl()
         //引　数   ：なし
         //戻り値   ：なし
         //機　能   ：選択された行に対してのコントロールの変更
