@@ -36,6 +36,34 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：CheckClientSalesOfficeIDExistence()
+        //引　数   ：営業所ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する営業所IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckClientSalesOfficeIDExistence(int SalesOfficeID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<M_Client> listClient = context.M_Clients.Where(x => x.ClFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listClient.Any(x => x.SoID == SalesOfficeID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
         //メソッド名：AddClientData()
         //引　数：regClient = 顧客データ
         //戻り値：True or False

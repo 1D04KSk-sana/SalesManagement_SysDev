@@ -17,6 +17,10 @@ namespace SalesManagement_SysDev
         MakerDataAccess makerDataAccess = new MakerDataAccess();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
+        //データベース商品テーブルアクセス用クラスのインスタンス化
+        ProdactDataAccess prodactDataAccess = new ProdactDataAccess();
+        //データベース発注テーブルアクセス用クラスのインスタンス化
+        HattyuDataAccess hattyuDataAccess = new HattyuDataAccess();
         //入力形式チェック用クラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
         //データグリッドビュー用の全メーカーデータ
@@ -806,7 +810,20 @@ namespace SalesManagement_SysDev
             }
             else if (cmbHidden.SelectedIndex == 1)
             {
-
+                //商品テーブルにおけるメーカーIDの存在チェック
+                if (prodactDataAccess.CheckProdactMakerIDExistence(int.Parse(txbMakerID.Text.Trim())))
+                {
+                    MessageBox.Show("指定されたメーカーIDが商品テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMakerID.Focus();
+                    return false;
+                }
+                //発注テーブルにおけるメーカーIDの存在チェック
+                if (hattyuDataAccess.CheckHattyuMakerIDExistence(int.Parse(txbMakerID.Text.Trim())))
+                {
+                    MessageBox.Show("指定されたメーカーIDが発注テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMakerID.Focus();
+                    return false;
+                }
             }
 
             return true;

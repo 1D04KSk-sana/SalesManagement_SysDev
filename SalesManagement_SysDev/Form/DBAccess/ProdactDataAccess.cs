@@ -38,7 +38,7 @@ namespace SalesManagement_SysDev
         //メソッド名：CheckProdactMakerIDExistence()
         //引　数   ：メーカーID
         //戻り値   ：True or False
-        //機　能   ：一致するメーカーIDの有無を確認
+        //機　能   ：表示flg=0の中で一致するメーカーIDの有無を確認
         //          ：一致データありの場合True
         //          ：一致データなしの場合False
         ///////////////////////////////
@@ -48,8 +48,11 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
+
+                List<M_Product> listProdact = context.M_Products.Where(x => x.PrFlag == 0).ToList();
+
                 //商品IDで一致するデータが存在するか
-                flg = context.M_Products.Any(x => x.MaID == MakerID);
+                flg = listProdact.Any(x => x.MaID == MakerID);
                 context.Dispose();
             }
             catch (Exception ex)

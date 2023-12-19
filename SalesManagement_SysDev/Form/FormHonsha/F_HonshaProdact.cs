@@ -21,6 +21,24 @@ namespace SalesManagement_SysDev
         MajorDataAccess MajorDataAccess = new MajorDataAccess();
         //データベース小分類テーブルアクセス用クラスのインスタンス化
         SmallDataAccess SmallDataAccess = new SmallDataAccess();
+        //データベース在庫テーブルアクセス用クラスのインスタンス化
+        StockDataAccess stockDataAccess = new StockDataAccess();
+        //データベース受注詳細テーブルアクセス用クラスのインスタンス化
+        OrderDetailDataAccess orderDetailDataAccess = new OrderDetailDataAccess();
+        //データベース注文詳細テーブルアクセス用クラスのインスタンス化
+        ChumonDetailDataAccess chumonDetailDataAccess = new ChumonDetailDataAccess();
+        //データベース出庫詳細テーブルアクセス用クラスのインスタンス化
+        SyukkoDetailDataAccess syukkoDetailDataAccess = new SyukkoDetailDataAccess();
+        //データベース入荷詳細テーブルアクセス用クラスのインスタンス化
+        ArrivalDetailDataAccess arrivalDetailDataAccess = new ArrivalDetailDataAccess();
+        //データベース出荷詳細テーブルアクセス用クラスのインスタンス化
+        ShipmentDetailDataAccess shipmentDetailDataAccess = new ShipmentDetailDataAccess();
+        //データベース発注詳細テーブルアクセス用クラスのインスタンス化
+        HattyuDetailDataAccess hattyuDetailDataAccess = new HattyuDetailDataAccess();
+        //データベース入庫詳細テーブルアクセス用クラスのインスタンス化
+        WarehousingDetailDataAccess warehousingDetailDataAccess = new WarehousingDetailDataAccess();
+        //データベース売上詳細テーブルアクセス用クラスのインスタンス化
+        SaleDetailDataAccess saleDetailDataAccess = new SaleDetailDataAccess();
         //データグリッドビュー用の全商品データ
         private static List<M_Product> listAllProdact = new List<M_Product>();
         //データグリッドビュー用の大分類データ
@@ -445,14 +463,6 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            // 小分類IDの適否
-            if (cmbMajorID.SelectedIndex == -1)
-            {
-                MessageBox.Show("小分類IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                cmbMajorID.Focus();
-                return false;
-            }
-
             // 型番の適否
             if (!String.IsNullOrEmpty(txbModelNumber.Text.Trim()))
             {
@@ -489,6 +499,21 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
+            // 大分類IDの適否
+            if (cmbMajorID.SelectedIndex == -1)
+            {
+                MessageBox.Show("大分類IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbProdactName.Focus();
+                return false;
+            }
+
+            // 小分類IDの適否
+            if (cmbMajorID.SelectedIndex == -1)
+            {
+                MessageBox.Show("小分類IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbMajorID.Focus();
+                return false;
+            }
 
             //表示非表示選択の適否
             if (cmbHidden.SelectedIndex == -1)
@@ -497,14 +522,73 @@ namespace SalesManagement_SysDev
                 cmbHidden.Focus();
                 return false;
             }
-
-            // 大分類IDの適否
-            if (cmbMajorID.SelectedIndex == -1)
+            else if (cmbHidden.SelectedIndex == 1)
             {
-                MessageBox.Show("大分類IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbProdactName.Focus();
-                return false;
+                //在庫テーブルにおける商品IDの存在チェック
+                if (stockDataAccess.CheckStockProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された商品IDが在庫テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactID.Focus();
+                    return false;
+                }
+                //受注詳細テーブルにおける商品IDの存在チェック
+                if (orderDetailDataAccess.CheckOrderDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された商品IDが受注詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactID.Focus();
+                    return false;
+                }
+                //注文詳細テーブルにおける商品IDの存在チェック
+                if (chumonDetailDataAccess.CheckChumonDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された商品IDが注文詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactID.Focus();
+                    return false;
+                }
+                //出庫詳細テーブルにおける商品IDの存在チェック
+                if (syukkoDetailDataAccess.CheckSyukkoDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された商品IDが出庫詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactID.Focus();
+                    return false;
+                }
+                //入荷詳細テーブルにおける商品IDの存在チェック
+                if (arrivalDetailDataAccess.CheckArrivalDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された商品IDが入荷詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactID.Focus();
+                    return false;
+                }
+                //出荷詳細テーブルにおける商品IDの存在チェック
+                if (shipmentDetailDataAccess.CheckShipmentDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された商品IDが出荷詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactID.Focus();
+                    return false;
+                }
+                //発注詳細テーブルにおける商品IDの存在チェック
+                if (hattyuDetailDataAccess.CheckHattyuDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された商品IDが発注詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactID.Focus();
+                    return false;
+                }
+                //入庫詳細テーブルにおける商品IDの存在チェック
+                if (warehousingDetailDataAccess.CheckWarehousingDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された商品IDが入庫詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactID.Focus();
+                    return false;
+                }
+                //売上詳細テーブルにおける商品IDの存在チェック
+                if (saleDetailDataAccess.CheckSaleDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された商品IDが売上詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactID.Focus();
+                    return false;
+                }
             }
+
             return true;
         }
 

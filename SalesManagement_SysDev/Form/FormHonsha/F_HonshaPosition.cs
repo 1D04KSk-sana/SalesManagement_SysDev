@@ -16,6 +16,8 @@ namespace SalesManagement_SysDev
         private static List<M_Position> listPosition = new List<M_Position>();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
+        //データベース社員テーブルアクセス用クラスのインスタンス化
+        EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
         //入力形式チェック用クラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
         //データグリッドビュー用の全役職データ
@@ -591,6 +593,16 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("表示選択が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbHidden.Focus();
                 return false;
+            }
+            else if (cmbHidden.SelectedIndex == 1)
+            {
+                //社員テーブルにおける役職IDの存在チェック
+                if (employeeDataAccess.CheckEmployeePositonIDExistence(int.Parse(txbPositionID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された役職IDが社員テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbPositionID.Focus();
+                    return false;
+                }
             }
 
             return true;

@@ -99,10 +99,10 @@ namespace SalesManagement_SysDev
             return listStock;
         }
         ///////////////////////////////
-        //メソッド名：CheckOrderIDExistence()
-        //引　数   ：受注コード
+        //メソッド名：CheckStockIDExistence()
+        //引　数   ：在庫コード
         //戻り値   ：True or False
-        //機　能   ：一致する受注IDの有無を確認
+        //機　能   ：一致する在庫IDの有無を確認
         //          ：一致データありの場合True
         //          ：一致データなしの場合False
         ///////////////////////////////
@@ -122,6 +122,35 @@ namespace SalesManagement_SysDev
             }
             return flg;
         }
+
+        ///////////////////////////////
+        //メソッド名：CheckStockProdactIDExistence()
+        //引　数   ：商品ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する商品IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckStockProdactIDExistence(int ProdactID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<T_Stock> listStock = context.T_Stocks.Where(x => x.StFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listStock.Any(x => x.PrID == ProdactID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
         ///////////////////////////////
         //メソッド名：GetAndOrderData()
         //引　数：検索条件

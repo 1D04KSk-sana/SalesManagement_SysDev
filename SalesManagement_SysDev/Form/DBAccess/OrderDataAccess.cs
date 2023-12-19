@@ -35,6 +35,90 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：CheckOrderSalesOfficeIDExistence()
+        //引　数   ：営業所ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する営業所IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckOrderSalesOfficeIDExistence(int SalesOfficeID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<T_Order> listOrder = context.T_Orders.Where(x => x.OrFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listOrder.Any(x => x.SoID == SalesOfficeID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
+        //メソッド名：CheckOrderEmployeeIDExistence()
+        //引　数   ：社員ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する社員IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckOrderEmployeeIDExistence(int EmployeeID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<T_Order> listOrder = context.T_Orders.Where(x => x.OrFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listOrder.Any(x => x.EmID == EmployeeID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
+        //メソッド名：CheckOrderClientIDExistence()
+        //引　数   ：顧客ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する顧客IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckOrderClientIDExistence(int ClientID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<T_Order> listClient = context.T_Orders.Where(x => x.OrFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listClient.Any(x => x.ClID == ClientID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
         //メソッド名：GetOrderData()
         //引　数：なし
         //戻り値：受注データ
