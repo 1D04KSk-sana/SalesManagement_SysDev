@@ -633,8 +633,8 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            // 登録確認メッセージ
+            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
             if (result == DialogResult.Cancel)
             {
@@ -701,6 +701,22 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("データの登録に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            //在庫登録
+            M_Product Prodact = ProdactDataAccess.GetProdactIDName(regProdact.PrName);
+
+            T_Stock Stock = GenerateProdactAtRegistration(Prodact);
+
+            bool flgStock = stockDataAccess.AddStockData(Stock);
+
+            if (flgStock == true)
+            {
+                MessageBox.Show("在庫管理にデータを送信ました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("在庫管理へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             // 入力エリアのクリア
             ClearImput();
 
@@ -727,6 +743,21 @@ namespace SalesManagement_SysDev
                 OpDone = OperationDone,
                 OpDBID = logOperatin.PrID,
                 OpSetTime = DateTime.Now,
+            };
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateChumonAtRegistration()
+        //引　数   ：商品情報
+        //戻り値   ：在庫登録情報
+        //機　能   ：在庫登録データのセット
+        ///////////////////////////////
+        private T_Stock GenerateProdactAtRegistration(M_Product Prodact)
+        {
+            return new T_Stock
+            {
+                PrID = Prodact.PrID,
+                StQuantity = 0,
             };
         }
 

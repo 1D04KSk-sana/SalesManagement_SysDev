@@ -109,28 +109,28 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：GetProdactID()
+        //メソッド名：GetProdactIDName()
         //引　数   ：商品名
-        //戻り値   ：商品ID
-        //機　能   ：一致する商品名を取り出して、IDを取得
+        //戻り値   ：商品データ
+        //機　能   ：一致する商品名を取り出して、商品データを取得
         ///////////////////////////////
-        public int GetProdactID(string prodactName)
+        public M_Product GetProdactIDName(string prodactName)
         {
-            int prodactID = 0;
+            M_Product Prodact = new M_Product { };
 
             try
             {
                 var context = new SalesManagement_DevContext();
-                var Prodact = context.M_Products.Single(x => x.PrName == prodactName);
+                Prodact = context.M_Products.Single(x => x.PrName == prodactName);
 
-                prodactID = Prodact.PrID;
+                context.Dispose();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            return prodactID;
+            return Prodact;
         }
 
         ///////////////////////////////
