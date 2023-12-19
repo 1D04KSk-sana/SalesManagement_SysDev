@@ -87,21 +87,21 @@ namespace SalesManagement_SysDev
             // 
             this.lblMaker.AutoSize = true;
             this.lblMaker.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblMaker.ForeColor = System.Drawing.Color.White;
-            this.lblMaker.Location = new System.Drawing.Point(702, 49);
+            this.lblMaker.ForeColor = System.Drawing.Color.Black;
+            this.lblMaker.Location = new System.Drawing.Point(778, 33);
             this.lblMaker.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMaker.Name = "lblMaker";
-            this.lblMaker.Size = new System.Drawing.Size(486, 64);
+            this.lblMaker.Size = new System.Drawing.Size(356, 64);
             this.lblMaker.TabIndex = 24;
-            this.lblMaker.Text = "メーカー管理画面";
+            this.lblMaker.Text = "メーカー管理";
             // 
             // btnClose
             // 
             this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 30F);
-            this.btnClose.Location = new System.Drawing.Point(1682, 33);
+            this.btnClose.Location = new System.Drawing.Point(1713, 33);
             this.btnClose.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(200, 80);
+            this.btnClose.Size = new System.Drawing.Size(160, 70);
             this.btnClose.TabIndex = 25;
             this.btnClose.Text = "閉じる";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -110,10 +110,10 @@ namespace SalesManagement_SysDev
             // btnReturn
             // 
             this.btnReturn.Font = new System.Drawing.Font("MS UI Gothic", 30F);
-            this.btnReturn.Location = new System.Drawing.Point(40, 33);
+            this.btnReturn.Location = new System.Drawing.Point(40, 39);
             this.btnReturn.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnReturn.Name = "btnReturn";
-            this.btnReturn.Size = new System.Drawing.Size(200, 80);
+            this.btnReturn.Size = new System.Drawing.Size(160, 70);
             this.btnReturn.TabIndex = 1;
             this.btnReturn.Text = "戻る";
             this.btnReturn.UseCompatibleTextRendering = true;

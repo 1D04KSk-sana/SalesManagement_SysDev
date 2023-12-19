@@ -1241,6 +1241,13 @@ namespace SalesManagement_SysDev
         
         private void btnClose_Click(object sender, EventArgs e)
         {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("本当に閉じますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
             Application.Exit();
         }
 
@@ -1296,6 +1303,11 @@ namespace SalesManagement_SysDev
             var Employee = listEmployee.Single(x => x.EmID == intEmployeeID);
 
             txbEmployeeName.Text = Employee.EmName;
+        }
+
+        private void lblClient_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -261,13 +261,13 @@
             // 
             this.lblStockView.AutoSize = true;
             this.lblStockView.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblStockView.ForeColor = System.Drawing.Color.White;
-            this.lblStockView.Location = new System.Drawing.Point(766, 50);
+            this.lblStockView.ForeColor = System.Drawing.Color.Black;
+            this.lblStockView.Location = new System.Drawing.Point(826, 44);
             this.lblStockView.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblStockView.Name = "lblStockView";
-            this.lblStockView.Size = new System.Drawing.Size(418, 64);
+            this.lblStockView.Size = new System.Drawing.Size(288, 64);
             this.lblStockView.TabIndex = 23;
-            this.lblStockView.Text = "在庫確認画面";
+            this.lblStockView.Text = "在庫確認";
             // 
             // btnReturn
             // 
@@ -342,7 +342,7 @@
             // 
             // btnDone
             // 
-            this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
+            this.btnDone.BackColor = System.Drawing.Color.White;
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnDone.Location = new System.Drawing.Point(1667, 194);
             this.btnDone.Margin = new System.Windows.Forms.Padding(2);

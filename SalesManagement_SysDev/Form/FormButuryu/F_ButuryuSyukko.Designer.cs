@@ -118,12 +118,12 @@
             // 
             this.lblButuryuSyukko.AutoSize = true;
             this.lblButuryuSyukko.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblButuryuSyukko.ForeColor = System.Drawing.Color.White;
-            this.lblButuryuSyukko.Location = new System.Drawing.Point(742, 50);
+            this.lblButuryuSyukko.ForeColor = System.Drawing.Color.Black;
+            this.lblButuryuSyukko.Location = new System.Drawing.Point(818, 44);
             this.lblButuryuSyukko.Name = "lblButuryuSyukko";
-            this.lblButuryuSyukko.Size = new System.Drawing.Size(418, 64);
+            this.lblButuryuSyukko.Size = new System.Drawing.Size(288, 64);
             this.lblButuryuSyukko.TabIndex = 1;
-            this.lblButuryuSyukko.Text = "出庫管理画面";
+            this.lblButuryuSyukko.Text = "出庫管理";
             // 
             // btnReturn
             // 
@@ -151,7 +151,7 @@
             // 
             // btnDone
             // 
-            this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
+            this.btnDone.BackColor = System.Drawing.Color.White;
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnDone.Location = new System.Drawing.Point(1680, 179);
             this.btnDone.Name = "btnDone";

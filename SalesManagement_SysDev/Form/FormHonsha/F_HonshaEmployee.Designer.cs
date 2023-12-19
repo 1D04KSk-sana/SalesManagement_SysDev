@@ -102,9 +102,9 @@
             // 
             // btnClear
             // 
-            this.btnClear.BackColor = System.Drawing.Color.Cyan;
+            this.btnClear.BackColor = System.Drawing.Color.White;
             this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClear.Location = new System.Drawing.Point(1573, 173);
+            this.btnClear.Location = new System.Drawing.Point(1560, 174);
             this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(160, 70);
@@ -116,7 +116,7 @@
             // 
             // btnDone
             // 
-            this.btnDone.BackColor = System.Drawing.Color.Red;
+            this.btnDone.BackColor = System.Drawing.Color.White;
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnDone.Location = new System.Drawing.Point(1737, 174);
             this.btnDone.Margin = new System.Windows.Forms.Padding(2);
@@ -137,7 +137,7 @@
             this.cmbView.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbView.Location = new System.Drawing.Point(1196, 188);
+            this.cmbView.Location = new System.Drawing.Point(1159, 189);
             this.cmbView.Margin = new System.Windows.Forms.Padding(2);
             this.cmbView.Name = "cmbView";
             this.cmbView.Size = new System.Drawing.Size(360, 43);
@@ -377,13 +377,13 @@
             // 
             this.lblHonsha.AutoSize = true;
             this.lblHonsha.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblHonsha.ForeColor = System.Drawing.Color.White;
-            this.lblHonsha.Location = new System.Drawing.Point(798, 41);
+            this.lblHonsha.ForeColor = System.Drawing.Color.Black;
+            this.lblHonsha.Location = new System.Drawing.Point(832, 38);
             this.lblHonsha.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblHonsha.Name = "lblHonsha";
-            this.lblHonsha.Size = new System.Drawing.Size(417, 64);
+            this.lblHonsha.Size = new System.Drawing.Size(288, 64);
             this.lblHonsha.TabIndex = 26;
-            this.lblHonsha.Text = "社員管理画面";
+            this.lblHonsha.Text = "社員管理";
             // 
             // lblNumPage
             // 

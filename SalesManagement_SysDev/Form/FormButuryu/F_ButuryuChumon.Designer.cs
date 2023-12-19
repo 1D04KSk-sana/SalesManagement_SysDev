@@ -103,13 +103,14 @@ namespace SalesManagement_SysDev
             // 
             this.lblClient.AutoSize = true;
             this.lblClient.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClient.ForeColor = System.Drawing.Color.White;
-            this.lblClient.Location = new System.Drawing.Point(748, 37);
+            this.lblClient.ForeColor = System.Drawing.Color.Black;
+            this.lblClient.Location = new System.Drawing.Point(823, 37);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(418, 64);
+            this.lblClient.Size = new System.Drawing.Size(288, 64);
             this.lblClient.TabIndex = 27;
-            this.lblClient.Text = "注文管理画面";
+            this.lblClient.Text = "注文管理";
+            this.lblClient.Click += new System.EventHandler(this.lblClient_Click);
             // 
             // btnClose
             // 
@@ -141,7 +142,7 @@ namespace SalesManagement_SysDev
             // 
             // btnClear
             // 
-            this.btnClear.BackColor = System.Drawing.Color.Cyan;
+            this.btnClear.BackColor = System.Drawing.Color.White;
             this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnClear.Location = new System.Drawing.Point(1557, 170);
             this.btnClear.Margin = new System.Windows.Forms.Padding(2);
@@ -281,7 +282,7 @@ namespace SalesManagement_SysDev
             // 
             // btnDone
             // 
-            this.btnDone.BackColor = System.Drawing.Color.Red;
+            this.btnDone.BackColor = System.Drawing.Color.White;
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnDone.Location = new System.Drawing.Point(1738, 170);
             this.btnDone.Margin = new System.Windows.Forms.Padding(2);
