@@ -444,7 +444,6 @@ namespace SalesManagement_SysDev
         //機　能   ：登録データのセット
         ///////////////////////////////
         private M_Position GenerateDataAtRegistration()
-
         {
             return new M_Position
             {
@@ -543,31 +542,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtUpdate()
         {
-            // 役職IDの適否
-            if (!String.IsNullOrEmpty(txbPositionID.Text.Trim()))
-            {
-                // 顧客IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbPositionID.Text.Trim()))
-                {
-                    MessageBox.Show("役職IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbPositionID.Focus();
-                    return false;
-                }
-                //顧客IDの存在チェック
-                if (!positionDataAccess.CheckPositionIDExistence(int.Parse(txbPositionID.Text.Trim())))
-                {
-                    MessageBox.Show("役職IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbPositionID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("役職IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbPositionID.Focus();
-                return false;
-            }
-
             // 役職名の適否
             if (!String.IsNullOrEmpty(txbPositionName.Text.Trim()))
             {
@@ -801,6 +775,62 @@ namespace SalesManagement_SysDev
 
             //データグリッドビューのデータ取得
             GetDataGridView();
+        }
+
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            if (e.KeyChar > '0' && '9' > e.KeyChar)
+            {
+                // テキストボックスに入力されている値を取得
+                string inputText = textBox.Text + e.KeyChar;
+
+                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
+                int parsedValue;
+                if (!int.TryParse(inputText, out parsedValue))
+                {
+                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbRegister.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
+
+            if (rdbUpdate.Checked)
+            {
+
+            }
+            else
+            {
+
+            }
         }
     }
 }
