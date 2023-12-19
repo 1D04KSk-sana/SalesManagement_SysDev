@@ -48,19 +48,13 @@ namespace SalesManagement_SysDev
         //DataGridView用に使用す商品のDictionary
         private Dictionary<int, string> dictionaryProdact;
 
+
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
         {
             { 0, "表示" },
             { 1, "非表示" },
         };
-        //DataGridView用に使用する確定形式のDictionary
-        private Dictionary<int, string> dictionaryConfirm = new Dictionary<int, string>
-        {
-            { 0, "未確定" },
-            { 1, "確定" },
-        };
-
         public F_HonshaSale()
         {
             InitializeComponent();
