@@ -61,10 +61,10 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：GetOrderData()
+        //メソッド名：GetStockData()
         //引　数：なし
-        //戻り値：受注データ
-        //機　能：受注データの全取得
+        //戻り値：在庫データ
+        //機　能：在庫データの全取得
         ///////////////////////////////
         public List<T_Stock> GetStockData()
         {
@@ -83,6 +83,7 @@ namespace SalesManagement_SysDev
 
             return listStock;
         }
+
         ///////////////////////////////
         //メソッド名：CheckStockIDExistence()
         //引　数   ：在庫コード

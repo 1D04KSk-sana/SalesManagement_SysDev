@@ -59,12 +59,6 @@
             this.lblPageSize = new System.Windows.Forms.Label();
             this.txbPageSize = new System.Windows.Forms.TextBox();
             this.btnPagesize = new System.Windows.Forms.Button();
-            this.lblNumPage = new System.Windows.Forms.Label();
-            this.txbNumPage = new System.Windows.Forms.TextBox();
-            this.btnPageMin = new System.Windows.Forms.Button();
-            this.btnBack = new System.Windows.Forms.Button();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.btnPageMax = new System.Windows.Forms.Button();
             this.pnlProdact = new System.Windows.Forms.Panel();
             this.pctHint = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -76,6 +70,12 @@
             this.cmbSmallID = new System.Windows.Forms.ComboBox();
             this.dtpProdactReleaseDate = new System.Windows.Forms.DateTimePicker();
             this.lblprodactdspHidden = new System.Windows.Forms.Label();
+            this.lblNumPage = new System.Windows.Forms.Label();
+            this.txbNumPage = new System.Windows.Forms.TextBox();
+            this.btnPageMin = new System.Windows.Forms.Button();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.btnPageMax = new System.Windows.Forms.Button();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProdact)).BeginInit();
             this.pnlProdact.SuspendLayout();
@@ -441,84 +441,6 @@
             this.btnPagesize.UseVisualStyleBackColor = false;
             this.btnPagesize.Click += new System.EventHandler(this.btnPagesize_Click);
             // 
-            // lblNumPage
-            // 
-            this.lblNumPage.AutoSize = true;
-            this.lblNumPage.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblNumPage.Location = new System.Drawing.Point(1585, 1034);
-            this.lblNumPage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblNumPage.Name = "lblNumPage";
-            this.lblNumPage.Size = new System.Drawing.Size(67, 22);
-            this.lblNumPage.TabIndex = 36;
-            this.lblNumPage.Text = "ページ";
-            // 
-            // txbNumPage
-            // 
-            this.txbNumPage.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbNumPage.Location = new System.Drawing.Point(1551, 1027);
-            this.txbNumPage.Margin = new System.Windows.Forms.Padding(2);
-            this.txbNumPage.Name = "txbNumPage";
-            this.txbNumPage.Size = new System.Drawing.Size(30, 29);
-            this.txbNumPage.TabIndex = 37;
-            this.txbNumPage.TabStop = false;
-            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
-            // 
-            // btnPageMin
-            // 
-            this.btnPageMin.BackColor = System.Drawing.Color.White;
-            this.btnPageMin.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnPageMin.Location = new System.Drawing.Point(1681, 1024);
-            this.btnPageMin.Margin = new System.Windows.Forms.Padding(2);
-            this.btnPageMin.Name = "btnPageMin";
-            this.btnPageMin.Size = new System.Drawing.Size(38, 32);
-            this.btnPageMin.TabIndex = 38;
-            this.btnPageMin.TabStop = false;
-            this.btnPageMin.Text = "|◀";
-            this.btnPageMin.UseVisualStyleBackColor = false;
-            this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
-            // 
-            // btnBack
-            // 
-            this.btnBack.BackColor = System.Drawing.Color.White;
-            this.btnBack.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnBack.Location = new System.Drawing.Point(1737, 1024);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(2);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(38, 32);
-            this.btnBack.TabIndex = 39;
-            this.btnBack.TabStop = false;
-            this.btnBack.Text = "◀";
-            this.btnBack.UseVisualStyleBackColor = false;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
-            // btnNext
-            // 
-            this.btnNext.BackColor = System.Drawing.Color.White;
-            this.btnNext.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnNext.Location = new System.Drawing.Point(1804, 1024);
-            this.btnNext.Margin = new System.Windows.Forms.Padding(2);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(38, 32);
-            this.btnNext.TabIndex = 40;
-            this.btnNext.TabStop = false;
-            this.btnNext.Text = "▶";
-            this.btnNext.UseVisualStyleBackColor = false;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // btnPageMax
-            // 
-            this.btnPageMax.BackColor = System.Drawing.Color.White;
-            this.btnPageMax.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnPageMax.Location = new System.Drawing.Point(1859, 1024);
-            this.btnPageMax.Margin = new System.Windows.Forms.Padding(2);
-            this.btnPageMax.Name = "btnPageMax";
-            this.btnPageMax.Size = new System.Drawing.Size(38, 32);
-            this.btnPageMax.TabIndex = 41;
-            this.btnPageMax.TabStop = false;
-            this.btnPageMax.Text = "▶|";
-            this.btnPageMax.UseVisualStyleBackColor = false;
-            this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
-            // 
             // pnlProdact
             // 
             this.pnlProdact.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(255)))), ((int)(((byte)(112)))));
@@ -563,7 +485,7 @@
             this.lblProdact.Location = new System.Drawing.Point(812, 44);
             this.lblProdact.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProdact.Name = "lblProdact";
-            this.lblProdact.Size = new System.Drawing.Size(288, 64);
+            this.lblProdact.Size = new System.Drawing.Size(287, 64);
             this.lblProdact.TabIndex = 1;
             this.lblProdact.Text = "商品管理";
             // 
@@ -649,6 +571,80 @@
             this.lblprodactdspHidden.TabIndex = 49;
             this.lblprodactdspHidden.Text = "表示/非表示";
             // 
+            // lblNumPage
+            // 
+            this.lblNumPage.AutoSize = true;
+            this.lblNumPage.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblNumPage.Location = new System.Drawing.Point(1605, 1031);
+            this.lblNumPage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblNumPage.Name = "lblNumPage";
+            this.lblNumPage.Size = new System.Drawing.Size(61, 21);
+            this.lblNumPage.TabIndex = 112;
+            this.lblNumPage.Text = "ページ";
+            // 
+            // txbNumPage
+            // 
+            this.txbNumPage.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbNumPage.Location = new System.Drawing.Point(1537, 1028);
+            this.txbNumPage.Margin = new System.Windows.Forms.Padding(2);
+            this.txbNumPage.Name = "txbNumPage";
+            this.txbNumPage.Size = new System.Drawing.Size(50, 28);
+            this.txbNumPage.TabIndex = 111;
+            this.txbNumPage.TabStop = false;
+            // 
+            // btnPageMin
+            // 
+            this.btnPageMin.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnPageMin.Location = new System.Drawing.Point(1692, 1021);
+            this.btnPageMin.Margin = new System.Windows.Forms.Padding(2);
+            this.btnPageMin.Name = "btnPageMin";
+            this.btnPageMin.Size = new System.Drawing.Size(50, 40);
+            this.btnPageMin.TabIndex = 110;
+            this.btnPageMin.TabStop = false;
+            this.btnPageMin.Text = "|◀";
+            this.btnPageMin.UseVisualStyleBackColor = true;
+            this.btnPageMin.Click += new System.EventHandler(this.btnPageMin_Click);
+            // 
+            // btnBack
+            // 
+            this.btnBack.BackColor = System.Drawing.Color.White;
+            this.btnBack.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnBack.Location = new System.Drawing.Point(1746, 1021);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(2);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(50, 40);
+            this.btnBack.TabIndex = 109;
+            this.btnBack.TabStop = false;
+            this.btnBack.Text = "◀";
+            this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnNext.Location = new System.Drawing.Point(1800, 1021);
+            this.btnNext.Margin = new System.Windows.Forms.Padding(2);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(50, 40);
+            this.btnNext.TabIndex = 108;
+            this.btnNext.TabStop = false;
+            this.btnNext.Text = "▶";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // btnPageMax
+            // 
+            this.btnPageMax.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnPageMax.Location = new System.Drawing.Point(1854, 1021);
+            this.btnPageMax.Margin = new System.Windows.Forms.Padding(2);
+            this.btnPageMax.Name = "btnPageMax";
+            this.btnPageMax.Size = new System.Drawing.Size(50, 40);
+            this.btnPageMax.TabIndex = 107;
+            this.btnPageMax.TabStop = false;
+            this.btnPageMax.Text = "▶|";
+            this.btnPageMax.UseVisualStyleBackColor = true;
+            this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
+            // 
             // F_HonshaProdact
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -656,6 +652,12 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.lblNumPage);
+            this.Controls.Add(this.txbNumPage);
+            this.Controls.Add(this.btnPageMin);
+            this.Controls.Add(this.btnBack);
+            this.Controls.Add(this.btnNext);
+            this.Controls.Add(this.btnPageMax);
             this.Controls.Add(this.lblprodactdspHidden);
             this.Controls.Add(this.dtpProdactReleaseDate);
             this.Controls.Add(this.cmbSmallID);
@@ -667,12 +669,6 @@
             this.Controls.Add(this.txbProdactJanCode);
             this.Controls.Add(this.cmbView);
             this.Controls.Add(this.pnlProdact);
-            this.Controls.Add(this.btnPageMax);
-            this.Controls.Add(this.btnNext);
-            this.Controls.Add(this.btnBack);
-            this.Controls.Add(this.btnPageMin);
-            this.Controls.Add(this.txbNumPage);
-            this.Controls.Add(this.lblNumPage);
             this.Controls.Add(this.btnPagesize);
             this.Controls.Add(this.txbPageSize);
             this.Controls.Add(this.lblPageSize);
@@ -748,12 +744,6 @@
         private System.Windows.Forms.Label lblPageSize;
         private System.Windows.Forms.TextBox txbPageSize;
         private System.Windows.Forms.Button btnPagesize;
-        private System.Windows.Forms.Label lblNumPage;
-        private System.Windows.Forms.TextBox txbNumPage;
-        private System.Windows.Forms.Button btnPageMin;
-        private System.Windows.Forms.Button btnBack;
-        private System.Windows.Forms.Button btnNext;
-        private System.Windows.Forms.Button btnPageMax;
         private System.Windows.Forms.Panel pnlProdact;
         private System.Windows.Forms.Label lblProdact;
         private System.Windows.Forms.TextBox txbProdactJanCode;
@@ -765,5 +755,11 @@
         private System.Windows.Forms.Label lblprodactdspHidden;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pctHint;
+        private System.Windows.Forms.Label lblNumPage;
+        private System.Windows.Forms.TextBox txbNumPage;
+        private System.Windows.Forms.Button btnPageMin;
+        private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.Button btnPageMax;
     }
 }

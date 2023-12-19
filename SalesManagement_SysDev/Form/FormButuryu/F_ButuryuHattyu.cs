@@ -15,6 +15,8 @@ namespace SalesManagement_SysDev
     {
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
+        //データベース在庫テーブルアクセス用クラスのインスタンス化
+        StockDataAccess stockDataAccess = new StockDataAccess();
         //入力形式チェック用クラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
         //データベース売上テーブルアクセス用クラスのインスタンス化
@@ -247,7 +249,6 @@ namespace SalesManagement_SysDev
         {
             //表示用の発注リスト作成
             List<T_Hattyu> listViewHattyu = SetListHattyu();
-
 
             // DataGridViewに表示するデータを指定
             SetDataGridView(listViewHattyu);
@@ -1307,6 +1308,31 @@ namespace SalesManagement_SysDev
 
             SetFormDataGridView();
 
+            List<T_Stock> listStock = stockDataAccess.GetStockData();
+
+            List<T_Stock> listStockHattyuten = new List<T_Stock> { };
+
+            foreach (var item in listStock)
+            {
+                M_Product Prodact = prodactDataAccess.GetIDProdactData(item.PrID);
+                
+                if (item.StQuantity <= Prodact.PrSafetyStock)
+                {
+                    listStockHattyuten.Add(item);
+                }
+            }
+
+            //1行ずつdgvStockに挿入
+            foreach (var item in listStockHattyuten)
+            {
+                M_Product Prodact = prodactDataAccess.GetIDProdactData(item.PrID);
+
+                dgvStock.Rows.Add(item.PrID, dictionaryProdact[item.PrID], item.StQuantity, Prodact.PrSafetyStock);
+            }
+
+            //dgvStockをリフレッシュ
+            dgvStock.Refresh();
+
             //cmbViewを表示に
             cmbView.SelectedIndex = 0;
         }
@@ -1318,7 +1344,7 @@ namespace SalesManagement_SysDev
         //機　能   ：データグリッドビューの初期設定
         ///////////////////////////////
         private void SetFormDataGridView()
-            {
+        {
             //列を自由に設定できるように
             dgvHattyu.AutoGenerateColumns = false;
             //行単位で選択するようにする
@@ -1356,8 +1382,6 @@ namespace SalesManagement_SysDev
             dgvHattyu.Columns["HaFlag"].Width = 170;
             dgvHattyu.Columns["WaWarehouseFlag"].Width = 160;
             dgvHattyu.Columns["HaHidden"].Width = 267;
-
-
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvHattyu.Columns)
@@ -1404,10 +1428,47 @@ namespace SalesManagement_SysDev
                 dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
 
+            //列を自由に設定できるように
+            dgvStock.AutoGenerateColumns = false;
+            //行単位で選択するようにする
+            dgvStock.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //行と列の高さを変更できないように
+            dgvStock.AllowUserToResizeColumns = false;
+            dgvStock.AllowUserToResizeRows = false;
+            //セルの複数行選択をオフに
+            dgvStock.MultiSelect = false;
+            //セルの編集ができないように
+            dgvStock.ReadOnly = true;
+            //ユーザーが新しい行を追加できないようにする
+            dgvStock.AllowUserToAddRows = false;
+
+            //左端の項目列を削除
+            dgvStock.RowHeadersVisible = false;
+            //行の自動追加をオフ
+            dgvStock.AllowUserToAddRows = false;
+
+            //ヘッダー位置の指定
+            dgvStock.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dgvStock.Columns.Add("PrID", "商品ID");
+            dgvStock.Columns.Add("PrName", "商品名");
+            dgvStock.Columns.Add("StQuantity", "在庫数");
+            dgvStock.Columns.Add("PrSafetyStock", "安全在庫数");
+
+            dgvStock.Columns["PrID"].Width = 157;
+            dgvStock.Columns["PrName"].Width = 174;
+            dgvStock.Columns["StQuantity"].Width = 174;
+            dgvStock.Columns["PrSafetyStock"].Width = 175;
+
+            //並び替えができないようにする
+            foreach (DataGridViewColumn dataColumn in dgvStock.Columns)
+            {
+                dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
 
-            private void txbProductID_TextChanged(object sender, EventArgs e)
-            {
+        private void txbProductID_TextChanged(object sender, EventArgs e)
+        {
             //nullの確認
             string stringProdactID = txbProductID.Text.Trim();
             int intProdactID = 0;
@@ -1427,8 +1488,8 @@ namespace SalesManagement_SysDev
             //IDから名前を取り出す
             var Prodact = listProdact.Single(x => x.PrID == intProdactID);
 
-            txbProductName.Text = Prodact.PrName;     
-       　　 }
+            txbProductName.Text = Prodact.PrName;
+        }
 
         private void txbEmployeeID_TextChanged(object sender, EventArgs e)
         {
@@ -1454,7 +1515,6 @@ namespace SalesManagement_SysDev
             txbEmployeeName.Text = Employee.EmName;
 
         }
-
 
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {

@@ -75,10 +75,12 @@
             this.dtpHattyuDate = new System.Windows.Forms.DateTimePicker();
             this.txbEmployeeName = new System.Windows.Forms.TextBox();
             this.lblEmployeeName = new System.Windows.Forms.Label();
+            this.dgvStock = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHattyuDetail)).BeginInit();
             this.pnlHonsha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHattyu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).BeginInit();
             this.SuspendLayout();
             // 
             // rdbSearch
@@ -203,12 +205,12 @@
             // 
             this.dgvHattyuDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvHattyuDetail.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.dgvHattyuDetail.Location = new System.Drawing.Point(1193, 523);
+            this.dgvHattyuDetail.Location = new System.Drawing.Point(1193, 746);
             this.dgvHattyuDetail.Margin = new System.Windows.Forms.Padding(2);
             this.dgvHattyuDetail.Name = "dgvHattyuDetail";
             this.dgvHattyuDetail.RowHeadersWidth = 51;
             this.dgvHattyuDetail.RowTemplate.Height = 24;
-            this.dgvHattyuDetail.Size = new System.Drawing.Size(700, 502);
+            this.dgvHattyuDetail.Size = new System.Drawing.Size(700, 279);
             this.dgvHattyuDetail.TabIndex = 100;
             this.dgvHattyuDetail.TabStop = false;
             this.dgvHattyuDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHattyuDetail_CellClick_1);
@@ -309,7 +311,7 @@
             this.lblClient.Location = new System.Drawing.Point(809, 47);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(417, 64);
+            this.lblClient.Size = new System.Drawing.Size(287, 64);
             this.lblClient.TabIndex = 23;
             this.lblClient.Text = "発注管理";
             // 
@@ -622,6 +624,7 @@
             // 
             // dtpHattyuDate
             // 
+            this.dtpHattyuDate.Checked = false;
             this.dtpHattyuDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.dtpHattyuDate.Location = new System.Drawing.Point(639, 349);
             this.dtpHattyuDate.Margin = new System.Windows.Forms.Padding(2);
@@ -654,6 +657,19 @@
             this.lblEmployeeName.TabIndex = 129;
             this.lblEmployeeName.Text = "社員名";
             // 
+            // dgvStock
+            // 
+            this.dgvStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStock.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.dgvStock.Location = new System.Drawing.Point(1193, 523);
+            this.dgvStock.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvStock.Name = "dgvStock";
+            this.dgvStock.RowHeadersWidth = 51;
+            this.dgvStock.RowTemplate.Height = 24;
+            this.dgvStock.Size = new System.Drawing.Size(700, 219);
+            this.dgvStock.TabIndex = 130;
+            this.dgvStock.TabStop = false;
+            // 
             // F_ButuryuHattyu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -661,6 +677,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.dgvStock);
             this.Controls.Add(this.txbEmployeeName);
             this.Controls.Add(this.lblEmployeeName);
             this.Controls.Add(this.dtpHattyuDate);
@@ -715,6 +732,7 @@
             this.pnlHonsha.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHattyu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -769,5 +787,6 @@
         private System.Windows.Forms.TextBox txbEmployeeName;
         private System.Windows.Forms.Label lblEmployeeName;
         private System.Windows.Forms.PictureBox pctHint;
+        private System.Windows.Forms.DataGridView dgvStock;
     }
 }
