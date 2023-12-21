@@ -698,16 +698,21 @@ namespace SalesManagement_SysDev
             {
                 intEmployeeID = int.Parse(strEmployeeID);
             }
+            DateTime? dateEmployee = null;
+
+            if (dtpEmployeeHireDate.Checked)
+            {
+                dateEmployee = dtpEmployeeHireDate.Value.Date;
+            }
 
             // 検索条件のセット
             M_Employee selectCondition = new M_Employee()
             {
                 EmID = intEmployeeID,
-               EmName = txbEmployeeName.Text.Trim(),
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 EmPhone = txbEmployeePhone.Text.Trim(),
                 PoID = cmbPositionName.SelectedIndex + 1,
-                EmHiredate= dtpEmployeeHireDate.Value,
+                EmHiredate= dateEmployee,
             };
 
             if (searchFlg)
@@ -755,7 +760,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbEmployeeID.Text.Trim()) && cmbPositionName.SelectedIndex == -1 && cmbSalesOfficeID.SelectedIndex == -1 &&  String.IsNullOrEmpty(txbEmployeePhone.Text.Trim())&&dtpEmployeeHireDate.Value==null)
+            if (String.IsNullOrEmpty(txbEmployeeID.Text.Trim()) && cmbPositionName.SelectedIndex == -1 && cmbSalesOfficeID.SelectedIndex == -1 &&  String.IsNullOrEmpty(txbEmployeePhone.Text.Trim())&&dtpEmployeeHireDate.Checked==false)
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbEmployeeID.Focus();

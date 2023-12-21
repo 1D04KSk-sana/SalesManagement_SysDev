@@ -235,7 +235,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbProductID.Text.Trim()) && String.IsNullOrEmpty(txbstocknum.Text.Trim()))
+            if (String.IsNullOrEmpty(txbProductID.Text.Trim()) && String.IsNullOrEmpty(txbStockQuantity.Text.Trim()))
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbProductID.Focus();
@@ -262,20 +262,20 @@ namespace SalesManagement_SysDev
             }
 
             //在庫数の適否
-            if (!String.IsNullOrEmpty(txbstocknum.Text.Trim()))
+            if (!String.IsNullOrEmpty(txbStockQuantity.Text.Trim()))
             {
                 // 在庫数の数字チェック
-                if (!dataInputCheck.CheckNumeric(txbstocknum.Text.Trim()))
+                if (!dataInputCheck.CheckNumeric(txbStockQuantity.Text.Trim()))
                 {
                     MessageBox.Show("在庫数は全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbstocknum.Focus();
+                    txbStockQuantity.Focus();
                     return false;
                 }
             }
             else
             {
                 MessageBox.Show("在庫数が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbstocknum.Focus();
+                txbStockQuantity.Focus();
                 return false;
             }
 
@@ -416,7 +416,7 @@ namespace SalesManagement_SysDev
                 intProdactID = int.Parse(strProductID);
             }
 
-            string strStockQuentity = txbstocknum.Text.Trim();
+            string strStockQuentity = txbStockQuantity.Text.Trim();
             int intStockQuentity = 0;
 
             if (!String.IsNullOrEmpty(strStockQuentity))
@@ -554,7 +554,7 @@ namespace SalesManagement_SysDev
         private void SelectRowControl()
         {
             txbProductID.Text = dgvStockView[0, dgvStockView.CurrentCellAddress.Y].Value.ToString();
-            txbstocknum.Text = dgvStockView[2, dgvStockView.CurrentCellAddress.Y].Value.ToString();
+            txbStockQuantity.Text = dgvStockView[2, dgvStockView.CurrentCellAddress.Y].Value.ToString();
         }
 
         private void pctHint_Click(object sender, EventArgs e)
@@ -600,7 +600,7 @@ namespace SalesManagement_SysDev
         private void ClearImput()
         {
             txbProductID.Text = string.Empty;
-            txbstocknum.Text = string.Empty;
+            txbStockQuantity.Text = string.Empty;
         }
     }
 }

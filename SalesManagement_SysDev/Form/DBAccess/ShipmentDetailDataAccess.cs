@@ -35,30 +35,6 @@ namespace SalesManagement_SysDev
             return flg;
         }
 
-        ///////////////////////////////
-        //メソッド名：GetShipmentDetailIDData()
-        //引　数：出荷ID
-        //戻り値：出荷詳細データ
-        //機　能：出荷詳細データの全取得
-        ///////////////////////////////
-        public List<T_ShipmentDetail> GetShipmentDetailIDData(int shipmentID)
-        {
-            List<T_ShipmentDetail> listShipmentDetail = new List<T_ShipmentDetail>();
-
-            try
-            {
-                var context = new SalesManagement_DevContext();
-                listShipmentDetail = context.T_ShipmentDetails.Where(x => x.ShID == shipmentID).ToList();
-                context.Dispose();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return listShipmentDetail;
-        }
-
         //////////////////////////////
         //メソッド名：AddShipmentDetailData()
         //引　数：regShipment = 出荷詳細データ

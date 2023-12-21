@@ -673,7 +673,7 @@ namespace SalesManagement_SysDev
             M_SalesOffice selectCondition = new M_SalesOffice()
             {
                 SoID = intSalesOfficeID,
-                //SoName = txbSalesOfficeName.Text.Trim()
+                SoName = txbSalesOfficeName.Text.Trim(),
                 SoPhone = txbSalesOfficePhone.Text.Trim(),
                 //SoPostal= txbSalesOfficePostal.Text.Trim(),
                 //SoAddress= txbSalesOfficeAddress.Text.Trim(),

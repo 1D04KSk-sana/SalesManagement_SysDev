@@ -215,9 +215,13 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.M_Makers.AsQueryable();
 
-                if (selectMaker.MaID != null && selectMaker.MaID != 0)
+                if (selectMaker.MaID != 0)
                 {
                     query = query.Where(x => x.MaID == selectMaker.MaID);
+                }
+                if (selectMaker.MaName != null && selectMaker.MaName != "")
+                {
+                    query = query.Where(x => x.MaName == selectMaker.MaName);
                 }
 
                 if (selectMaker.MaPhone != null && selectMaker.MaPhone != "")
@@ -247,7 +251,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listMaker = context.M_Makers.Where(x => x.MaID == selectMaker.MaID || x.MaPhone == selectMaker.MaPhone).ToList();
+                listMaker = context.M_Makers.Where(x => x.MaID == selectMaker.MaID || x.MaName == selectMaker.MaName || x.MaPhone == selectMaker.MaPhone).ToList();
 
                 context.Dispose();
             }

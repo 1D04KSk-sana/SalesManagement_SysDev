@@ -308,24 +308,28 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.T_Orders.AsQueryable();
 
-                if (selectOrder.OrID != null && selectOrder.OrID != 0)
+                if (selectOrder.OrID != 0)
                 {
                     query = query.Where(x => x.OrID == selectOrder.OrID);
                 }
 
-                if (selectOrder.SoID != null && selectOrder.SoID != 0)
+                if (selectOrder.SoID != 0)
                 {
                     query = query.Where(x => x.SoID == selectOrder.SoID);
                 }
 
-                if (selectOrder.EmID != null && selectOrder.EmID != 0)
+                if (selectOrder.EmID != 0)
                 {
                     query = query.Where(x => x.EmID == selectOrder.EmID);
                 }
 
-                if (selectOrder.ClID != null && selectOrder.ClID != 0)
+                if (selectOrder.ClID != 0)
                 {
                     query = query.Where(x => x.ClID == selectOrder.ClID);
+                }
+                if (selectOrder.OrDate != null)
+                {
+                    query = query.Where(x => x.OrDate.Value == selectOrder.OrDate.Value);
                 }
 
                 listOrder = query.ToList();
@@ -351,7 +355,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listOrder = context.T_Orders.Where(x => x.OrID == selectOrder.OrID || x.SoID == selectOrder.SoID || x.EmID == selectOrder.EmID || x.ClID == selectOrder.ClID).ToList();
+                listOrder = context.T_Orders.Where(x => x.OrID == selectOrder.OrID || x.SoID == selectOrder.SoID || x.EmID == selectOrder.EmID || x.ClID == selectOrder.ClID || x.OrDate.Value == selectOrder.OrDate.Value).ToList();
 
                 context.Dispose();
             }

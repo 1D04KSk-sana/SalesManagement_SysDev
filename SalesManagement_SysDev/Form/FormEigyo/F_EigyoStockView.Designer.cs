@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txbstocknum = new System.Windows.Forms.TextBox();
+            this.txbStockQuantity = new System.Windows.Forms.TextBox();
             this.txbProductID = new System.Windows.Forms.TextBox();
             this.dgvStockView = new System.Windows.Forms.DataGridView();
             this.btnClose = new System.Windows.Forms.Button();
@@ -58,15 +58,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
-            // txbstocknum
+            // txbStockQuantity
             // 
-            this.txbstocknum.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbstocknum.ForeColor = System.Drawing.Color.Black;
-            this.txbstocknum.Location = new System.Drawing.Point(1084, 338);
-            this.txbstocknum.Margin = new System.Windows.Forms.Padding(2);
-            this.txbstocknum.Name = "txbstocknum";
-            this.txbstocknum.Size = new System.Drawing.Size(220, 31);
-            this.txbstocknum.TabIndex = 2;
+            this.txbStockQuantity.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbStockQuantity.ForeColor = System.Drawing.Color.Black;
+            this.txbStockQuantity.Location = new System.Drawing.Point(1084, 338);
+            this.txbStockQuantity.Margin = new System.Windows.Forms.Padding(2);
+            this.txbStockQuantity.Name = "txbStockQuantity";
+            this.txbStockQuantity.Size = new System.Drawing.Size(220, 31);
+            this.txbStockQuantity.TabIndex = 2;
             // 
             // txbProductID
             // 
@@ -391,7 +391,7 @@
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.dgvStockView);
             this.Controls.Add(this.txbProductID);
-            this.Controls.Add(this.txbstocknum);
+            this.Controls.Add(this.txbStockQuantity);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "F_EigyoStockView";
@@ -408,7 +408,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.TextBox txbstocknum;
+        private System.Windows.Forms.TextBox txbStockQuantity;
         private System.Windows.Forms.TextBox txbProductID;
         private System.Windows.Forms.DataGridView dgvStockView;
         private System.Windows.Forms.Button btnClose;

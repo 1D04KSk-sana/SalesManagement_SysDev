@@ -187,9 +187,9 @@
             this.lblSalesOfficeID.Location = new System.Drawing.Point(1006, 290);
             this.lblSalesOfficeID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSalesOfficeID.Name = "lblSalesOfficeID";
-            this.lblSalesOfficeID.Size = new System.Drawing.Size(104, 24);
+            this.lblSalesOfficeID.Size = new System.Drawing.Size(106, 24);
             this.lblSalesOfficeID.TabIndex = 6;
-            this.lblSalesOfficeID.Text = "営業所ID";
+            this.lblSalesOfficeID.Text = "営業所名";
             // 
             // txbClientPhone
             // 

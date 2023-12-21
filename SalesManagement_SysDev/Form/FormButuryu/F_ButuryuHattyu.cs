@@ -307,6 +307,7 @@ namespace SalesManagement_SysDev
         {
             //中身を消去
             dgvHattyu.Rows.Clear();
+            dgvHattyuDetail.Rows.Clear();  
 
             //ページ行数を取得
             int pageSize = int.Parse(txbPageSize.Text.Trim());

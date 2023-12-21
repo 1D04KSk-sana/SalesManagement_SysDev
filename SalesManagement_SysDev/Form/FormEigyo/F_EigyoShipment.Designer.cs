@@ -135,7 +135,7 @@
             this.lblWarehousing.Location = new System.Drawing.Point(824, 40);
             this.lblWarehousing.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWarehousing.Name = "lblWarehousing";
-            this.lblWarehousing.Size = new System.Drawing.Size(417, 64);
+            this.lblWarehousing.Size = new System.Drawing.Size(287, 64);
             this.lblWarehousing.TabIndex = 24;
             this.lblWarehousing.Text = "出荷管理";
             // 
@@ -206,6 +206,7 @@
             this.rdbUpdate.Name = "rdbUpdate";
             this.rdbUpdate.Size = new System.Drawing.Size(103, 39);
             this.rdbUpdate.TabIndex = 138;
+            this.rdbUpdate.TabStop = true;
             this.rdbUpdate.Text = "更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
             this.rdbUpdate.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
@@ -283,7 +284,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(178, 24);
             this.label6.TabIndex = 158;
-            this.label6.Text = "出荷管理年月日";
+            this.label6.Text = "出荷完了年月日";
             // 
             // dtpShipmentDate
             // 
@@ -570,7 +571,7 @@
             this.txbEmployeeID.Name = "txbEmployeeID";
             this.txbEmployeeID.Size = new System.Drawing.Size(220, 31);
             this.txbEmployeeID.TabIndex = 180;
-            this.txbEmployeeID.TextChanged += new System.EventHandler(this.txbEmployeeID_TextChanged);
+            this.txbEmployeeID.TextChanged += new System.EventHandler(this.txbEmployeeID_TextChanged_1);
             this.txbEmployeeID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // rdbConfirm

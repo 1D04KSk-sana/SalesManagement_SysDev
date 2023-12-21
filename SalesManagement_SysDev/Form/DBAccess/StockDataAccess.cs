@@ -149,6 +149,11 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.T_Stocks.AsQueryable();
 
+                if (selectStock.StID != 0)
+                {
+                    query = query.Where(x => x.StID == selectStock.StID);
+                }
+
                 if (selectStock.PrID != 0)
                 {
                     query = query.Where(x => x.PrID == selectStock.PrID);
@@ -156,7 +161,7 @@ namespace SalesManagement_SysDev
 
                 if (selectStock.StQuantity != 0)
                 {
-                    query = query.Where(x => x.StQuantity >= selectStock.StQuantity);
+                    query = query.Where(x => x.StQuantity == selectStock.StQuantity);
                 }
 
                 listStock = query.ToList();

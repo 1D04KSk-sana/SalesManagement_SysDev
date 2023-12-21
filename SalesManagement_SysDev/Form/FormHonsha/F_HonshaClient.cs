@@ -885,13 +885,8 @@ namespace SalesManagement_SysDev
             M_Client selectCondition = new M_Client()
             {
                 ClID =intClientID,
-                //ClName = txbClientName.Text.Trim()
                 SoID= cmbSalesOfficeID.SelectedIndex + 1,
                 ClPhone = txbClientPhone.Text.Trim(),
-                //ClPostal= txbClientPostal.Text.Trim(),
-                //ClAddress= txbClientAddress.Text.Trim(),
-                //ClFAX=txbClientFax.Text.Trim(),
-                //ClHidden=txbHidden.Text.Trim()
             };
 
             if (searchFlg)

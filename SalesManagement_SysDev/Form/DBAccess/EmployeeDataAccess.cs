@@ -253,12 +253,12 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.M_Employees.AsQueryable();
 
-                if (selectEmployee.EmID != null && selectEmployee.EmID != 0)
+                if (selectEmployee.EmID != 0)
                 {
                     query = query.Where(x => x.EmID == selectEmployee.EmID);
                 }
 
-                if (selectEmployee.SoID != null && selectEmployee.SoID != 0)
+                if (selectEmployee.SoID != 0)
                 {
                     query = query.Where(x => x.SoID == selectEmployee.SoID);
                 }
@@ -269,9 +269,13 @@ namespace SalesManagement_SysDev
 
                 }
 
-                if (selectEmployee.PoID != null && selectEmployee.PoID != 0)
+                if (selectEmployee.PoID != 0)
                 {
                     query = query.Where(x => x.PoID == selectEmployee.PoID);
+                }
+                if (selectEmployee.EmHiredate != null)
+                {
+                    query = query.Where(x => x.EmHiredate.Value == selectEmployee.EmHiredate.Value);
                 }
 
                 listEmployee = query.ToList();
@@ -298,7 +302,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listEmployee = context.M_Employees.Where(x => x.EmID == selectEmployee.EmID || x.SoID == selectEmployee.SoID || x.EmPhone == selectEmployee.EmPhone || x.PoID == selectEmployee.PoID).ToList();
+                listEmployee = context.M_Employees.Where(x => x.EmID == selectEmployee.EmID || x.SoID == selectEmployee.SoID || x.EmPhone == selectEmployee.EmPhone || x.PoID == selectEmployee.PoID || x.EmHiredate.Value == selectEmployee.EmHiredate.Value).ToList();
 
                 context.Dispose();
             }
