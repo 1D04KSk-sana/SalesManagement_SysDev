@@ -50,8 +50,8 @@
             this.txbOrderID = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.txbClientName = new System.Windows.Forms.TextBox();
-            this.txbEmployeeName = new System.Windows.Forms.TextBox();
+            this.txbClientID = new System.Windows.Forms.TextBox();
+            this.txbEmployeeID = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.dtpShipmentDate = new System.Windows.Forms.DateTimePicker();
             this.dgvShipmentDetail = new System.Windows.Forms.DataGridView();
@@ -73,6 +73,10 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.cmbSalesOfficeID = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txbEmployeeName = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txbClientName = new System.Windows.Forms.TextBox();
             this.pnlEigyo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShipmentDetail)).BeginInit();
@@ -214,7 +218,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label8.Location = new System.Drawing.Point(1231, 347);
+            this.label8.Location = new System.Drawing.Point(1468, 351);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(80, 24);
@@ -225,7 +229,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label7.Location = new System.Drawing.Point(1577, 279);
+            this.label7.Location = new System.Drawing.Point(1475, 404);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(82, 24);
@@ -236,7 +240,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(1601, 347);
+            this.label1.Location = new System.Drawing.Point(1490, 460);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 24);
@@ -247,18 +251,18 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label3.Location = new System.Drawing.Point(1183, 279);
+            this.label3.Location = new System.Drawing.Point(1420, 297);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(128, 24);
             this.label3.TabIndex = 144;
-            this.label3.Text = "入庫詳細ID";
+            this.label3.Text = "出荷詳細ID";
             // 
             // txbProductID
             // 
             this.txbProductID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbProductID.ForeColor = System.Drawing.Color.Black;
-            this.txbProductID.Location = new System.Drawing.Point(1324, 344);
+            this.txbProductID.Location = new System.Drawing.Point(1561, 347);
             this.txbProductID.Margin = new System.Windows.Forms.Padding(2);
             this.txbProductID.Name = "txbProductID";
             this.txbProductID.Size = new System.Drawing.Size(220, 31);
@@ -268,7 +272,7 @@
             // 
             this.txbShipmentquantity.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbShipmentquantity.ForeColor = System.Drawing.Color.Black;
-            this.txbShipmentquantity.Location = new System.Drawing.Point(1663, 344);
+            this.txbShipmentquantity.Location = new System.Drawing.Point(1561, 457);
             this.txbShipmentquantity.Margin = new System.Windows.Forms.Padding(2);
             this.txbShipmentquantity.Name = "txbShipmentquantity";
             this.txbShipmentquantity.Size = new System.Drawing.Size(220, 31);
@@ -278,7 +282,7 @@
             // 
             this.txbProductName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbProductName.ForeColor = System.Drawing.Color.Black;
-            this.txbProductName.Location = new System.Drawing.Point(1663, 276);
+            this.txbProductName.Location = new System.Drawing.Point(1561, 401);
             this.txbProductName.Margin = new System.Windows.Forms.Padding(2);
             this.txbProductName.Name = "txbProductName";
             this.txbProductName.Size = new System.Drawing.Size(220, 31);
@@ -288,7 +292,7 @@
             // 
             this.txbShipmentDetailID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbShipmentDetailID.ForeColor = System.Drawing.Color.Black;
-            this.txbShipmentDetailID.Location = new System.Drawing.Point(1324, 276);
+            this.txbShipmentDetailID.Location = new System.Drawing.Point(1561, 294);
             this.txbShipmentDetailID.Margin = new System.Windows.Forms.Padding(2);
             this.txbShipmentDetailID.Name = "txbShipmentDetailID";
             this.txbShipmentDetailID.Size = new System.Drawing.Size(220, 31);
@@ -298,7 +302,7 @@
             // 
             this.txbShipmentID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbShipmentID.ForeColor = System.Drawing.Color.Black;
-            this.txbShipmentID.Location = new System.Drawing.Point(138, 276);
+            this.txbShipmentID.Location = new System.Drawing.Point(197, 277);
             this.txbShipmentID.Margin = new System.Windows.Forms.Padding(2);
             this.txbShipmentID.Name = "txbShipmentID";
             this.txbShipmentID.Size = new System.Drawing.Size(220, 31);
@@ -308,7 +312,7 @@
             // 
             this.txbOrderID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbOrderID.ForeColor = System.Drawing.Color.Black;
-            this.txbOrderID.Location = new System.Drawing.Point(937, 276);
+            this.txbOrderID.Location = new System.Drawing.Point(1119, 277);
             this.txbOrderID.Margin = new System.Windows.Forms.Padding(2);
             this.txbOrderID.Name = "txbOrderID";
             this.txbOrderID.Size = new System.Drawing.Size(220, 31);
@@ -318,7 +322,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label4.Location = new System.Drawing.Point(400, 347);
+            this.label4.Location = new System.Drawing.Point(489, 281);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(106, 24);
@@ -329,50 +333,54 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label5.Location = new System.Drawing.Point(410, 279);
+            this.label5.Location = new System.Drawing.Point(513, 342);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(82, 24);
             this.label5.TabIndex = 154;
             this.label5.Text = "社員名";
             // 
-            // txbClientName
+            // txbClientID
             // 
-            this.txbClientName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientName.ForeColor = System.Drawing.Color.Black;
-            this.txbClientName.Location = new System.Drawing.Point(138, 343);
-            this.txbClientName.Margin = new System.Windows.Forms.Padding(2);
-            this.txbClientName.Name = "txbClientName";
-            this.txbClientName.Size = new System.Drawing.Size(220, 31);
-            this.txbClientName.TabIndex = 155;
+            this.txbClientID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbClientID.ForeColor = System.Drawing.Color.Black;
+            this.txbClientID.Location = new System.Drawing.Point(197, 397);
+            this.txbClientID.Margin = new System.Windows.Forms.Padding(2);
+            this.txbClientID.Name = "txbClientID";
+            this.txbClientID.Size = new System.Drawing.Size(220, 31);
+            this.txbClientID.TabIndex = 155;
+            this.txbClientID.TextChanged += new System.EventHandler(this.txbClientID_TextChanged);
             // 
-            // txbEmployeeName
+            // txbEmployeeID
             // 
-            this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbEmployeeName.ForeColor = System.Drawing.Color.Black;
-            this.txbEmployeeName.Location = new System.Drawing.Point(510, 276);
-            this.txbEmployeeName.Margin = new System.Windows.Forms.Padding(2);
-            this.txbEmployeeName.Name = "txbEmployeeName";
-            this.txbEmployeeName.Size = new System.Drawing.Size(220, 31);
-            this.txbEmployeeName.TabIndex = 156;
+            this.txbEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbEmployeeID.ForeColor = System.Drawing.Color.Black;
+            this.txbEmployeeID.Location = new System.Drawing.Point(197, 339);
+            this.txbEmployeeID.Margin = new System.Windows.Forms.Padding(2);
+            this.txbEmployeeID.Name = "txbEmployeeID";
+            this.txbEmployeeID.Size = new System.Drawing.Size(220, 31);
+            this.txbEmployeeID.TabIndex = 156;
+            this.txbEmployeeID.TextChanged += new System.EventHandler(this.txbEmployeeID_TextChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label6.Location = new System.Drawing.Point(753, 346);
+            this.label6.Location = new System.Drawing.Point(904, 342);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(178, 24);
             this.label6.TabIndex = 158;
-            this.label6.Text = "出荷管理年月日";
+            this.label6.Text = "出荷完了年月日";
             // 
             // dtpShipmentDate
             // 
+            this.dtpShipmentDate.Checked = false;
             this.dtpShipmentDate.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.dtpShipmentDate.Location = new System.Drawing.Point(937, 341);
+            this.dtpShipmentDate.Location = new System.Drawing.Point(1119, 341);
             this.dtpShipmentDate.Margin = new System.Windows.Forms.Padding(4);
             this.dtpShipmentDate.Name = "dtpShipmentDate";
+            this.dtpShipmentDate.ShowCheckBox = true;
             this.dtpShipmentDate.Size = new System.Drawing.Size(220, 29);
             this.dtpShipmentDate.TabIndex = 157;
             // 
@@ -520,7 +528,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(851, 279);
+            this.label2.Location = new System.Drawing.Point(988, 280);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(80, 24);
@@ -531,7 +539,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label9.Location = new System.Drawing.Point(37, 347);
+            this.label9.Location = new System.Drawing.Point(513, 400);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(82, 24);
@@ -542,7 +550,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label10.Location = new System.Drawing.Point(39, 279);
+            this.label10.Location = new System.Drawing.Point(90, 281);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(80, 24);
@@ -552,9 +560,9 @@
             // txbShipmentHidden
             // 
             this.txbShipmentHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbShipmentHidden.Location = new System.Drawing.Point(180, 460);
+            this.txbShipmentHidden.Location = new System.Drawing.Point(626, 452);
             this.txbShipmentHidden.Name = "txbShipmentHidden";
-            this.txbShipmentHidden.Size = new System.Drawing.Size(1565, 31);
+            this.txbShipmentHidden.Size = new System.Drawing.Size(721, 31);
             this.txbShipmentHidden.TabIndex = 176;
             // 
             // cmbShipmentHidden
@@ -566,7 +574,7 @@
             this.cmbShipmentHidden.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbShipmentHidden.Location = new System.Drawing.Point(180, 405);
+            this.cmbShipmentHidden.Location = new System.Drawing.Point(197, 452);
             this.cmbShipmentHidden.Margin = new System.Windows.Forms.Padding(4);
             this.cmbShipmentHidden.Name = "cmbShipmentHidden";
             this.cmbShipmentHidden.Size = new System.Drawing.Size(220, 32);
@@ -576,7 +584,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label11.Location = new System.Drawing.Point(39, 405);
+            this.label11.Location = new System.Drawing.Point(28, 455);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(142, 24);
@@ -587,7 +595,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label12.Location = new System.Drawing.Point(39, 460);
+            this.label12.Location = new System.Drawing.Point(465, 455);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(130, 24);
@@ -600,11 +608,55 @@
             this.cmbSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSalesOfficeID.ForeColor = System.Drawing.Color.Black;
             this.cmbSalesOfficeID.FormattingEnabled = true;
-            this.cmbSalesOfficeID.Location = new System.Drawing.Point(510, 343);
+            this.cmbSalesOfficeID.Location = new System.Drawing.Point(626, 276);
             this.cmbSalesOfficeID.Margin = new System.Windows.Forms.Padding(4);
             this.cmbSalesOfficeID.Name = "cmbSalesOfficeID";
             this.cmbSalesOfficeID.Size = new System.Drawing.Size(220, 32);
             this.cmbSalesOfficeID.TabIndex = 177;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label13.Location = new System.Drawing.Point(90, 342);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(80, 24);
+            this.label13.TabIndex = 178;
+            this.label13.Text = "社員ID";
+            // 
+            // txbEmployeeName
+            // 
+            this.txbEmployeeName.Enabled = false;
+            this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbEmployeeName.ForeColor = System.Drawing.Color.Black;
+            this.txbEmployeeName.Location = new System.Drawing.Point(626, 339);
+            this.txbEmployeeName.Margin = new System.Windows.Forms.Padding(2);
+            this.txbEmployeeName.Name = "txbEmployeeName";
+            this.txbEmployeeName.Size = new System.Drawing.Size(220, 31);
+            this.txbEmployeeName.TabIndex = 179;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label14.Location = new System.Drawing.Point(90, 401);
+            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(80, 24);
+            this.label14.TabIndex = 181;
+            this.label14.Text = "顧客ID";
+            // 
+            // txbClientName
+            // 
+            this.txbClientName.Enabled = false;
+            this.txbClientName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbClientName.ForeColor = System.Drawing.Color.Black;
+            this.txbClientName.Location = new System.Drawing.Point(626, 397);
+            this.txbClientName.Margin = new System.Windows.Forms.Padding(2);
+            this.txbClientName.Name = "txbClientName";
+            this.txbClientName.Size = new System.Drawing.Size(220, 31);
+            this.txbClientName.TabIndex = 180;
             // 
             // F_EigyoShipment
             // 
@@ -612,6 +664,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(219)))), ((int)(((byte)(193)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.txbClientName);
+            this.Controls.Add(this.txbEmployeeName);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.cmbSalesOfficeID);
             this.Controls.Add(this.txbShipmentHidden);
             this.Controls.Add(this.cmbShipmentHidden);
@@ -633,8 +689,8 @@
             this.Controls.Add(this.btnNext);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.dtpShipmentDate);
-            this.Controls.Add(this.txbEmployeeName);
-            this.Controls.Add(this.txbClientName);
+            this.Controls.Add(this.txbEmployeeID);
+            this.Controls.Add(this.txbClientID);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txbOrderID);
@@ -692,8 +748,8 @@
         private System.Windows.Forms.TextBox txbOrderID;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txbClientName;
-        private System.Windows.Forms.TextBox txbEmployeeName;
+        private System.Windows.Forms.TextBox txbClientID;
+        private System.Windows.Forms.TextBox txbEmployeeID;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DateTimePicker dtpShipmentDate;
         private System.Windows.Forms.DataGridView dgvShipmentDetail;
@@ -716,5 +772,9 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox cmbSalesOfficeID;
         private System.Windows.Forms.PictureBox pctHint;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txbEmployeeName;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txbClientName;
     }
 }

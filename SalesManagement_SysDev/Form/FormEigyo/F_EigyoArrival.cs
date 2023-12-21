@@ -275,6 +275,7 @@ namespace SalesManagement_SysDev
         {
             //中身を消去
             dgvArrival.Rows.Clear();
+            dgvArrivalDetail.Rows.Clear();
 
             //ページ行数を取得
             int pageSize = int.Parse(txbPageSize.Text.Trim());
@@ -693,7 +694,7 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 発注情報の更新
+            // 入荷情報の更新
             bool flg = arrivalDataAccess.UpdateArrivalData(updArrival);
 
             if (flg == true)
@@ -777,17 +778,17 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            //入庫IDの適否
+            //入荷IDの適否
             if (!String.IsNullOrEmpty(txbArrivalID.Text.Trim()))
             {
-                //入庫IDの数字チェック
+                //入荷IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbArrivalID.Text.Trim()))
                 {
                     MessageBox.Show("入荷IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbArrivalID.Focus();
                     return false;
                 }
-                //入庫IDの重複チェック
+                //入荷IDの重複チェック
                 if (!arrivalDataAccess.CheckArrivalIDExistence(int.Parse(txbArrivalID.Text.Trim())))
                 {
                     MessageBox.Show("入荷IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -915,11 +916,11 @@ namespace SalesManagement_SysDev
                 intClientID = int.Parse(strClientID);
             }
 
-            DateTime? dateSale = null;
+            DateTime? dateArrival = null;
 
             if (dtpArrivalDate.Checked)
             {
-                dateSale = dtpArrivalDate.Value.Date;
+                dateArrival = dtpArrivalDate.Value.Date;
             }
 
             // 検索条件のセット
@@ -930,18 +931,18 @@ namespace SalesManagement_SysDev
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 OrID = intOrderID,
                 EmID = intEmployeeID,
-                ArDate = dateSale,
+                ArDate = dateArrival,
                 ArStateFlag = cmbConfirm.SelectedIndex
             };
 
             if (searchFlg)
             {
-                // 発注データのAnd抽出
+                // 入荷データのAnd抽出
                 listArrival = arrivalDataAccess.GetAndArrivalData(selectCondition);
             }
             else
             {
-                // 発注データのOr抽出
+                // 入荷データのOr抽出
                 listArrival = arrivalDataAccess.GetOrArrivalData(selectCondition);
             }
         }

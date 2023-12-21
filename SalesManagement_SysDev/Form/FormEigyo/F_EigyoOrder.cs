@@ -1146,7 +1146,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbOrderID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbEmployeeID.Text.Trim()) && String.IsNullOrEmpty(txbClientID.Text.Trim()))
+            if (String.IsNullOrEmpty(txbOrderID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbEmployeeID.Text.Trim()) && String.IsNullOrEmpty(txbClientID.Text.Trim())&& dtpOrderDate.Checked==false)
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbOrderID.Focus();
@@ -1221,14 +1221,14 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void OrderSearchButtonClick(bool searchFlg)
         {
-            // 顧客情報抽出
+            // 受注情報抽出
             GenerateDataAtSelect(searchFlg);
 
             int intSearchCount = listOrder.Count;
 
             txbNumPage.Text = "1";
 
-            // 顧客抽出結果表示
+            // 受注抽出結果表示
             GetDataGridView();
 
             MessageBox.Show("検索結果：" + intSearchCount + "件", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1266,6 +1266,13 @@ namespace SalesManagement_SysDev
                 intClientID = int.Parse(strClientID);
             }
 
+            DateTime? dateOrder = null;
+
+            if (dtpOrderDate.Checked)
+            {
+                dateOrder = dtpOrderDate.Value.Date;
+            }
+
             // 検索条件のセット
             T_Order selectCondition = new T_Order()
             {
@@ -1273,16 +1280,18 @@ namespace SalesManagement_SysDev
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 EmID = intEmployeeID,
                 ClID = intClientID,
+                OrDate = dateOrder,
+
             };
 
             if (searchFlg)
             {
-                // 顧客データのAnd抽出
+                // 受注データのAnd抽出
                 listOrder = orderDataAccess.GetAndOrderData(selectCondition);
             }
             else
             {
-                // 顧客データのOr抽出
+                // 受注データのOr抽出
                 listOrder = orderDataAccess.GetOrOrderData(selectCondition);
             }
         }
@@ -1490,7 +1499,7 @@ namespace SalesManagement_SysDev
         {
             //中身を消去
             dgvOrder.Rows.Clear();
-
+            dgvOrderDetail.Rows.Clear();
             //ページ行数を取得
             int pageSize = int.Parse(txbPageSize.Text.Trim());
             //ページ数を取得
