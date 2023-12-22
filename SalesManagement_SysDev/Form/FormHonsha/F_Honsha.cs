@@ -92,45 +92,48 @@ namespace SalesManagement_SysDev
 
             this.Opacity = 0;
         }
-        private void btnFormSalesOffice_Click(object sender, EventArgs e)
-        {
-            F_HonshaSalesOffice F_HonshaSalesOffice = new F_HonshaSalesOffice();
-
-            F_HonshaSalesOffice.Owner = this;
-            F_HonshaSalesOffice.FormClosed += ChildForm_FormClosed;
-            F_HonshaSalesOffice.Show();
-
-            this.Opacity = 0;
-        }
-
-        private void btnFormMaker_Click(object sender, EventArgs e)
-        {
-            F_HonshaMaker F_HonshaMaker = new F_HonshaMaker();
-
-            F_HonshaMaker.Owner = this;
-            F_HonshaMaker.FormClosed += ChildForm_FormClosed;
-            F_HonshaMaker.Show();
-
-            this.Opacity = 0;
-        }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("本当に閉じますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
             Application.Exit();
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void btnFormMaster_Click(object sender, EventArgs e)
         {
+            F_HonshaMaster F_HonshaMaster = new F_HonshaMaster();
 
+            F_HonshaMaster.Owner = this;
+            F_HonshaMaster.FormClosed += ChildForm_FormClosed;
+            F_HonshaMaster.Show();
+
+            this.Opacity = 0;
         }
 
-        private void btnPsition_Click(object sender, EventArgs e)
+        private void btnButuryu_Click(object sender, EventArgs e)
         {
-            F_HonshaPosition F_HonshaPosition = new F_HonshaPosition();
+            F_Buturyu f_Buturyu = new F_Buturyu();
 
-            F_HonshaPosition.Owner = this;
-            F_HonshaPosition.FormClosed += ChildForm_FormClosed;
-            F_HonshaPosition.Show();
+            f_Buturyu.Owner = this;
+            f_Buturyu.FormClosed += ChildForm_FormClosed;
+            f_Buturyu.Show();
+
+            this.Opacity = 0;
+        }
+
+        private void btnFormEigyo_Click(object sender, EventArgs e)
+        {
+            F_Eigyo f_Eigyo = new F_Eigyo();
+
+            f_Eigyo.Owner = this;
+            f_Eigyo.FormClosed += ChildForm_FormClosed;
+            f_Eigyo.Show();
 
             this.Opacity = 0;
         }
