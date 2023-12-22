@@ -599,7 +599,7 @@ namespace SalesManagement_SysDev
             dgvSale.Refresh();
 
 
-            if (pageNum == 0 && lastPage == pageNum)
+            if (lastPage == -1 || (lastPage == pageNum && pageNum == 0))
             {
                 btnPageMax.Visible = false;
                 btnNext.Visible = false;

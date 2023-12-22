@@ -149,6 +149,7 @@
             this.txbArrivalID.Name = "txbArrivalID";
             this.txbArrivalID.Size = new System.Drawing.Size(220, 31);
             this.txbArrivalID.TabIndex = 1;
+            this.txbArrivalID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // txbClientID
             // 
@@ -171,6 +172,7 @@
             this.txbOrderID.Name = "txbOrderID";
             this.txbOrderID.Size = new System.Drawing.Size(220, 31);
             this.txbOrderID.TabIndex = 5;
+            this.txbOrderID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // txbEmployeeID
             // 

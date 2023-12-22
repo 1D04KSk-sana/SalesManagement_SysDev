@@ -872,24 +872,24 @@ namespace SalesManagement_SysDev
             dgvShipment.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             dgvShipment.Columns.Add("ShID", "出荷ID");
+            dgvShipment.Columns.Add("SoID", "営業所名");
             dgvShipment.Columns.Add("ClID", "顧客ID");
             dgvShipment.Columns.Add("EmID", "社員名");
-            dgvShipment.Columns.Add("SoID", "営業所名");
             dgvShipment.Columns.Add("OrID", "受注ID");
-            dgvShipment.Columns.Add("ShStateFlag", "出荷状態フラグ");
             dgvShipment.Columns.Add("ShFinishDate", "出荷完了年月日");
+            dgvShipment.Columns.Add("ShStateFlag", "出荷状態フラグ");
             dgvShipment.Columns.Add("ShFlag", "出荷管理フラグ");
             dgvShipment.Columns.Add("ShHidden", "非表示理由");
 
-            dgvShipment.Columns["ShID"].Width = 70;
-            dgvShipment.Columns["ClID"].Width = 110;
-            dgvShipment.Columns["EmID"].Width = 130;
-            dgvShipment.Columns["SoID"].Width = 145;
-            dgvShipment.Columns["OrID"].Width = 70;
-            dgvShipment.Columns["ShStateFlag"].Width = 100;
-            dgvShipment.Columns["ShFinishDate"].Width = 220;
-            dgvShipment.Columns["ShFlag"].Width = 100;
-            dgvShipment.Columns["ShHidden"].Width = 153;
+            dgvShipment.Columns["ShID"].Width = 102;
+            dgvShipment.Columns["SoID"].Width = 172;
+            dgvShipment.Columns["EmID"].Width = 140;
+            dgvShipment.Columns["ClID"].Width = 152;
+            dgvShipment.Columns["OrID"].Width = 100;
+            dgvShipment.Columns["ShFinishDate"].Width = 160;
+            dgvShipment.Columns["ShStateFlag"].Width = 170;
+            dgvShipment.Columns["ShFlag"].Width = 171;
+            dgvShipment.Columns["ShHidden"].Width = 265;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvShipment.Columns)
@@ -924,10 +924,10 @@ namespace SalesManagement_SysDev
             dgvShipmentDetail.Columns.Add("PrID", "商品名");
             dgvShipmentDetail.Columns.Add("ShQuantity", "数量");
 
-            dgvShipmentDetail.Columns["ShDetailID"].Width = 186;
-            dgvShipmentDetail.Columns["ShID"].Width = 186;
-            dgvShipmentDetail.Columns["PrID"].Width = 186;
-            dgvShipmentDetail.Columns["ShQuantity"].Width = 186;
+            dgvShipmentDetail.Columns["ShDetailID"].Width = 174;
+            dgvShipmentDetail.Columns["ShID"].Width = 174;
+            dgvShipmentDetail.Columns["PrID"].Width = 174;
+            dgvShipmentDetail.Columns["ShQuantity"].Width = 175;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvShipmentDetail.Columns)
@@ -1045,7 +1045,7 @@ namespace SalesManagement_SysDev
                     strEmployeeName = dictionaryEmployee[item.EmID.Value];
                 }
 
-                dgvShipment.Rows.Add(item.ShID, dictionaryClient[item.ClID], strEmployeeName,dictionarySalesOffice[item.SoID], item.OrID, dictionaryConfirm[item.ShStateFlag], item.ShFinishDate, dictionaryHidden[item.ShFlag], item.ShHidden);
+                dgvShipment.Rows.Add(item.ShID, dictionarySalesOffice[item.SoID], dictionaryClient[item.ClID], strEmployeeName, item.OrID, item.ShFinishDate, dictionaryConfirm[item.ShStateFlag], dictionaryHidden[item.ShFlag], item.ShHidden);
             }
 
             //dgvShipmentをリフレッシュ
@@ -1111,21 +1111,22 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SelectRowControl()
         {
-            var ShipmentDate = dgvShipment[6, dgvShipment.CurrentCellAddress.Y].Value;
+            var shipmentDate = dgvShipment[5, dgvShipment.CurrentCellAddress.Y].Value;
 
-            if (ShipmentDate != null)
+            if (shipmentDate != null)
             {
-                dtpShipmentDate.Text = ShipmentDate.ToString();
+                dtpShipmentDate.Text = shipmentDate.ToString();
             }
 
             //データグリッドビューに乗っている情報をguiに反映
             txbShipmentID.Text = dgvShipment[0, dgvShipment.CurrentCellAddress.Y].Value.ToString();
-            txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvShipment[1, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
-            txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvShipment[2, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
-            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvShipment[3, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key - 1;
+            txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvShipment[2, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvShipment[3, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvShipment[1, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbOrderID.Text = dgvShipment[4, dgvShipment.CurrentCellAddress.Y].Value.ToString();
+            cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvShipment[7, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key;
             cmbShipmentHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvShipment[6, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key;
-            txbShipmentHidden.Text = dgvShipment[7, dgvShipment.CurrentCellAddress.Y]?.Value?.ToString();
+            txbShipmentHidden.Text = dgvShipment[8, dgvShipment.CurrentCellAddress.Y]?.Value?.ToString();
         }
 
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)

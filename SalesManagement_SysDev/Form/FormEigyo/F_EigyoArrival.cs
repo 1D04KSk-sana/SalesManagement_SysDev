@@ -306,7 +306,7 @@ namespace SalesManagement_SysDev
             dgvArrival.Refresh();
 
 
-            if (pageNum == 0 && lastPage == pageNum)
+            if (lastPage == -1 || (lastPage == pageNum && pageNum == 0))
             {
                 btnPageMax.Visible = false;
                 btnNext.Visible = false;
@@ -398,8 +398,8 @@ namespace SalesManagement_SysDev
             dgvArrival.Columns.Add("ArHidden", "非表示理由");
 
             dgvArrival.Columns["ArID"].Width = 112;
-            dgvArrival.Columns["SoID"].Width = 162;
-            dgvArrival.Columns["EmID"].Width = 150;
+            dgvArrival.Columns["SoID"].Width = 172;
+            dgvArrival.Columns["EmID"].Width = 140;
             dgvArrival.Columns["ClID"].Width = 152;
             dgvArrival.Columns["OrID"].Width = 100;
             dgvArrival.Columns["ArDate"].Width = 160;
