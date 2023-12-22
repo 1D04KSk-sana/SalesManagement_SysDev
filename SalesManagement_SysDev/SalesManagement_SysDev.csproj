@@ -200,10 +200,10 @@
     <Compile Include="Form\F_Load.Designer.cs">
       <DependentUpon>F_Load.cs</DependentUpon>
     </Compile>
-    <Compile Include="F_HonshaClassification.cs">
+    <Compile Include="Form\FormHonsha\F_HonshaClassification.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="F_HonshaClassification.Designer.cs">
+    <Compile Include="Form\FormHonsha\F_HonshaClassification.Designer.cs">
       <DependentUpon>F_HonshaClassification.cs</DependentUpon>
     </Compile>
     <Compile Include="Form\FormHonsha\F_HonshaMaster.cs">
@@ -292,6 +292,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\FormEigyo\F_EigyoShipment.resx">
       <DependentUpon>F_EigyoShipment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\FormHonsha\F_HonshaClassification.resx">
+      <DependentUpon>F_HonshaClassification.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\FormHonsha\F_HonshaMaker.resx">
       <DependentUpon>F_HonshaMaker.cs</DependentUpon>
