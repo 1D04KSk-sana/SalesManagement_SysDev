@@ -181,10 +181,10 @@
     <Compile Include="Form\FormButuryu\F_ButuryuChumon.Designer.cs">
       <DependentUpon>F_ButuryuChumon.cs</DependentUpon>
     </Compile>
-    <Compile Include="F_HonshaPosition.cs">
+    <Compile Include="Form\FormHonsha\F_HonshaPosition.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="F_HonshaPosition.Designer.cs">
+    <Compile Include="Form\FormHonsha\F_HonshaPosition.Designer.cs">
       <DependentUpon>F_HonshaPosition.cs</DependentUpon>
     </Compile>
     <Compile Include="Form\FormHonsha\F_HonshaSalesOffice.cs">
@@ -338,7 +338,7 @@
     <EmbeddedResource Include="Form\F_SearchDialog.resx">
       <DependentUpon>F_SearchDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="F_HonshaPosition.resx">
+    <EmbeddedResource Include="Form\FormHonsha\F_HonshaPosition.resx">
       <DependentUpon>F_HonshaPosition.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

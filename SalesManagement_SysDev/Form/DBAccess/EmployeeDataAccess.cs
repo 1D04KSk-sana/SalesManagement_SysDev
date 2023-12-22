@@ -35,6 +35,63 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：CheckEmployeePositonIDExistence()
+        //引　数   ：役職ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する役職IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckEmployeePositonIDExistence(int PositionID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<M_Employee> listEmployee = context.M_Employees.Where(x => x.EmFlag == 0).ToList();
+
+
+                //部署CDで一致するデータが存在するか
+                flg = listEmployee.Any(x => x.PoID == PositionID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
+        //メソッド名：CheckEmployeeSalesOfficeIDExistence()
+        //引　数   ：営業所ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する営業所IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckEmployeeSalesOfficeIDExistence(int SalesOfficeID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<M_Employee> listEmployee = context.M_Employees.Where(x => x.EmFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listEmployee.Any(x => x.SoID == SalesOfficeID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
         //メソッド名：GetEmployeeData()
         //引　数：なし
         //戻り値：顧客データ
@@ -169,7 +226,6 @@ namespace SalesManagement_SysDev
                 Employee.SoID = updEmployee.SoID;
                 Employee.EmHiredate = updEmployee.EmHiredate;
                 Employee.EmHidden = updEmployee.EmHidden;
-
 
                 context.SaveChanges();
                 context.Dispose();

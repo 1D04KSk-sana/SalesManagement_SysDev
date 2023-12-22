@@ -17,6 +17,10 @@ namespace SalesManagement_SysDev
         MakerDataAccess makerDataAccess = new MakerDataAccess();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
+        //データベース商品テーブルアクセス用クラスのインスタンス化
+        ProdactDataAccess prodactDataAccess = new ProdactDataAccess();
+        //データベース発注テーブルアクセス用クラスのインスタンス化
+        HattyuDataAccess hattyuDataAccess = new HattyuDataAccess();
         //入力形式チェック用クラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
         //データグリッドビュー用の全メーカーデータ
@@ -44,8 +48,9 @@ namespace SalesManagement_SysDev
         {
             ClearImput();
             
-
             rdbRegister.Checked = true;
+
+            txbNumPage.Text = "1";
 
             GetDataGridView();
         }
@@ -187,25 +192,13 @@ namespace SalesManagement_SysDev
             {
 
             }
-            else
-            {
-
-            }
 
             if (rdbRegister.Checked)
             {
 
             }
-            else
-            {
-
-            }
 
             if (rdbUpdate.Checked)
-            {
-
-            }
-            else
             {
 
             }
@@ -402,16 +395,16 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void MakerDataRegister()
         {
-            // 登録確認メッセージ
-            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtRegistration())
             {
                 return;
             }
 
-            //テキストボックス等の入力チェック
-            if (!GetValidDataAtRegistration())
+            // 登録確認メッセージ
+            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
             {
                 return;
             }
@@ -441,31 +434,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-            // メーカーIDの適否
-            if (!String.IsNullOrEmpty(txbMakerID.Text.Trim()))
-            {
-                // メーカーIDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbMakerID.Text.Trim()))
-                {
-                    MessageBox.Show("メーカーIDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMakerID.Focus();
-                    return false;
-                }
-                //メーカーIDの重複チェック
-                if (makerDataAccess.CheckMakerIDExistence(int.Parse(txbMakerID.Text.Trim())))
-                {
-                    MessageBox.Show("メーカーIDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMakerID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("メーカーIDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbMakerID.Focus();
-                return false;
-            }
-
             // メーカー名の適否
             if (!String.IsNullOrEmpty(txbMakerName.Text.Trim()))
             {
@@ -606,11 +574,9 @@ namespace SalesManagement_SysDev
         //機　能   ：登録データのセット
         ///////////////////////////////
         private M_Maker GenerateDataAtRegistration()
-
         {
             return new M_Maker
             {
-                MaID = int.Parse(txbMakerID.Text.Trim()),
                 MaName = string.Format(txbMakerName.Text.Trim()),
                 MaAddress = txbMakerAddress.Text.Trim(),
                 MaPhone = txbMakerPhone.Text.Trim(),
@@ -661,6 +627,14 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
             //操作ログデータ取得
             var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
 
@@ -699,7 +673,7 @@ namespace SalesManagement_SysDev
                 //メーカーIDの存在チェック
                 if (!makerDataAccess.CheckMakerIDExistence(int.Parse(txbMakerID.Text.Trim())))
                 {
-                    MessageBox.Show("メーカーIDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("メーカーIDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbMakerID.Focus();
                     return false;
                 }
@@ -823,6 +797,23 @@ namespace SalesManagement_SysDev
                 cmbHidden.Focus();
                 return false;
             }
+            else if (cmbHidden.SelectedIndex == 1)
+            {
+                //商品テーブルにおけるメーカーIDの存在チェック
+                if (prodactDataAccess.CheckProdactMakerIDExistence(int.Parse(txbMakerID.Text.Trim())))
+                {
+                    MessageBox.Show("指定されたメーカーIDが商品テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMakerID.Focus();
+                    return false;
+                }
+                //発注テーブルにおけるメーカーIDの存在チェック
+                if (hattyuDataAccess.CheckHattyuMakerIDExistence(int.Parse(txbMakerID.Text.Trim())))
+                {
+                    MessageBox.Show("指定されたメーカーIDが発注テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbMakerID.Focus();
+                    return false;
+                }
+            }
 
             return true;
         }
@@ -854,23 +845,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void UpdateMaker(M_Maker updMaker)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
-            //操作ログデータ取得
-            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
-
-            //操作ログデータの登録（成功 = true,失敗 = false）
-            if (!operationLogAccess.AddOperationLogData(regOperationLog))
-            {
-                return;
-            }
-
             // 顧客情報の更新
             bool flg = makerDataAccess.UpdateMakerData(updMaker);
             if (flg == true)

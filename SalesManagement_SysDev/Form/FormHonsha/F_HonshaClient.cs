@@ -17,6 +17,18 @@ namespace SalesManagement_SysDev
         ClientDataAccess clientDataAccess = new ClientDataAccess();
         //データベース営業所テーブルアクセス用クラスのインスタンス化
         SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
+        //データベース受注テーブルアクセス用クラスのインスタンス化
+        OrderDataAccess orderDataAccess = new OrderDataAccess();
+        //データベース注文テーブルアクセス用クラスのインスタンス化
+        ChumonDataAccess chumonDataAccess = new ChumonDataAccess();
+        //データベース出庫テーブルアクセス用クラスのインスタンス化
+        SyukkoDataAccess syukkoDataAccess = new SyukkoDataAccess();
+        //データベース入荷テーブルアクセス用クラスのインスタンス化
+        ArrivalDataAccess arrivalDataAccess = new ArrivalDataAccess();
+        //データベース出荷テーブルアクセス用クラスのインスタンス化
+        ShipmentDataAccess shipmentDataAccess = new ShipmentDataAccess();
+        //データベース売上テーブルアクセス用クラスのインスタンス化
+        SaleDataAccess saleDataAccess = new SaleDataAccess();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
         //入力形式チェック用クラスのインスタンス化
@@ -112,6 +124,8 @@ namespace SalesManagement_SysDev
             ClearImput();
 
             rdbRegister.Checked = true;
+
+            txbNumPage.Text = "1";
 
             GetDataGridView();
         }
@@ -264,25 +278,13 @@ namespace SalesManagement_SysDev
             {
 
             }
-            else
-            {
-
-            }
 
             if (rdbUpdate.Checked)
             {
 
             }
-            else
-            {
-
-            }
 
             if (rdbRegister.Checked)
-            {
-
-            }
-            else
             {
 
             }
@@ -315,16 +317,16 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void ClientDataRegister()
         {
-            // 登録確認メッセージ
-            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtRegistration())
             {
                 return;
             }
 
-            //テキストボックス等の入力チェック
-            if (!GetValidDataAtRegistration())
+            // 登録確認メッセージ
+            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
             {
                 return;
             }
@@ -384,7 +386,6 @@ namespace SalesManagement_SysDev
         {
             return new M_Client
             {
-                ClID = int.Parse(txbClientID.Text.Trim()),
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 ClName = txbClientName.Text.Trim(),
                 ClAddress = txbClientAddress.Text.Trim(),
@@ -562,6 +563,23 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
             // 顧客情報作成
             var updClient = GenerateDataAtUpdate();
 
@@ -599,23 +617,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void UpdateClient(M_Client updClient)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
-            //操作ログデータ取得
-            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
-
-            //操作ログデータの登録（成功 = true,失敗 = false）
-            if (!operationLogAccess.AddOperationLogData(regOperationLog))
-            {
-                return;
-            }
-
             // 顧客情報の更新
             bool flg = clientDataAccess.UpdateClientData(updClient);
             if (flg == true)
@@ -657,7 +658,7 @@ namespace SalesManagement_SysDev
                 //顧客IDの存在チェック
                 if (!clientDataAccess.CheckClientIDExistence(int.Parse(txbClientID.Text.Trim())))
                 {
-                    MessageBox.Show("顧客IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbClientID.Focus();
                     return false;
                 }
@@ -781,6 +782,51 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("表示選択が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbHidden.Focus();
                 return false;
+            }
+            else if (cmbHidden.SelectedIndex == 1)
+            {
+                //受注テーブルにおける顧客IDの存在チェック
+                if (orderDataAccess.CheckOrderClientIDExistence(int.Parse(txbClientID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された顧客IDが受注テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+                //注文テーブルにおける顧客IDの存在チェック
+                if (chumonDataAccess.CheckChumonClientIDExistence(int.Parse(txbClientID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された顧客IDが注文テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+                //出庫テーブルにおける顧客IDの存在チェック
+                if (syukkoDataAccess.CheckSyukkoClientIDExistence(int.Parse(txbClientID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された顧客IDが出庫テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+                //入荷テーブルにおける顧客IDの存在チェック
+                if (arrivalDataAccess.CheckArrivalClientIDExistence(int.Parse(txbClientID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された顧客IDが入荷テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+                //出荷テーブルにおける顧客IDの存在チェック
+                if (shipmentDataAccess.CheckShipmentClientIDExistence(int.Parse(txbClientID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された顧客IDが出荷テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+                //売上テーブルにおける顧客IDの存在チェック
+                if (saleDataAccess.CheckSaleClientIDExistence(int.Parse(txbClientID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された顧客IDが売上テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
             }
 
             return true;

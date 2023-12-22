@@ -35,6 +35,90 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：CheckShipmenttSalesOfficeIDExistence()
+        //引　数   ：営業所ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する営業所IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckShipmenttSalesOfficeIDExistence(int SalesOfficeID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<T_Shipment> listShipment = context.T_Shipments.Where(x => x.ShFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listShipment.Any(x => x.SoID == SalesOfficeID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
+        //メソッド名：CheckShipmentEmployeeIDExistence()
+        //引　数   ：社員ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する社員IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckShipmentEmployeeIDExistence(int EmployeeID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<T_Shipment> listShipment = context.T_Shipments.Where(x => x.ShFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listShipment.Any(x => x.EmID == EmployeeID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
+        //メソッド名：CheckShipmentClientIDExistence()
+        //引　数   ：顧客ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する顧客IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckShipmentClientIDExistence(int ClientID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<T_Shipment> listShipment = context.T_Shipments.Where(x => x.ShFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listShipment.Any(x => x.ClID == ClientID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
         //メソッド名：GetShipmentData()
         //引　数：なし
         //戻り値：受注データ
@@ -119,7 +203,6 @@ namespace SalesManagement_SysDev
 
                 Shipment.ShFlag = updShipment.ShFlag;
                 Shipment.ShHidden = updShipment.ShHidden;
-                Shipment.SoID = updShipment.SoID;
 
                 context.SaveChanges();
                 context.Dispose();
@@ -205,6 +288,7 @@ namespace SalesManagement_SysDev
 
             return listShipment;
         }
+
         ///////////////////////////////
         //メソッド名：AddShipmentData()
         //引　数：regShipment = 入荷データ
@@ -227,6 +311,62 @@ namespace SalesManagement_SysDev
             {
                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                return false;
+            }
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetIDShipmentData()
+        //引　数：出荷ID
+        //戻り値：出荷IDの一致する出荷データ
+        //機　能：出荷IDの一致する出荷データの取得
+        ///////////////////////////////
+        public T_Shipment GetIDShipmentData(int shipmentID)
+        {
+            T_Shipment Shipment = new T_Shipment { };
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                Shipment = context.T_Shipments.Single(x => x.ShID == shipmentID);
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Shipment;
+        }
+
+        ///////////////////////////////
+        //メソッド名：ConfirmShipmentData()
+        //引　数：出荷データ
+        //戻り値：True or False
+        //機　能：出荷データの確定
+        //      ：確定成功の場合True
+        //      ：確定失敗の場合False
+        ///////////////////////////////
+        public bool ConfirmShipmentData(T_Shipment cfmShipment)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Shipment = context.T_Shipments.Single(x => x.ShID == cfmShipment.ShID);
+
+                Shipment.ShStateFlag = cfmShipment.ShStateFlag;
+                Shipment.ShFinishDate = cfmShipment.ShFinishDate;
+                Shipment.EmID = cfmShipment.EmID;
+
+                context.SaveChanges();
+                context.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
     }

@@ -16,6 +16,8 @@ namespace SalesManagement_SysDev
         private static List<M_Position> listPosition = new List<M_Position>();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
+        //データベース社員テーブルアクセス用クラスのインスタンス化
+        EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
         //入力形式チェック用クラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
         //データグリッドビュー用の全役職データ
@@ -49,6 +51,8 @@ namespace SalesManagement_SysDev
             ClearImput();
 
             rdbRegister.Checked = true;
+
+            txbNumPage.Text = "1";
 
             GetDataGridView();
         }
@@ -84,7 +88,7 @@ namespace SalesManagement_SysDev
             txbPositionID.Text = string.Empty;
             txbPositionName.Text = string.Empty;
             txbHidden.Text = string.Empty;
-            txbPositionListFlag.Text = string.Empty;
+            cmbHidden.SelectedIndex = -1;
         }
 
         private void btnPageMin_Click(object sender, EventArgs e)
@@ -148,6 +152,8 @@ namespace SalesManagement_SysDev
 
         private void btnPageSize_Click(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+            
             GetDataGridView();
         }
 
@@ -377,16 +383,16 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void PositionDataRegister()
         {
-            // 登録確認メッセージ
-            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtRegistration())
             {
                 return;
             }
 
-            //テキストボックス等の入力チェック
-            if (!GetValidDataAtRegistration())
+            // 登録確認メッセージ
+            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
             {
                 return;
             }
@@ -442,11 +448,9 @@ namespace SalesManagement_SysDev
         //機　能   ：登録データのセット
         ///////////////////////////////
         private M_Position GenerateDataAtRegistration()
-
         {
             return new M_Position
             {
-                PoID = int.Parse(txbPositionID.Text.Trim()),
                 PoName = txbPositionName.Text.Trim(),
                 PoFlag = cmbHidden.SelectedIndex,
                 PoHidden = txbHidden.Text.Trim(),
@@ -463,31 +467,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-            // 役職IDの適否
-            if (!String.IsNullOrEmpty(txbPositionID.Text.Trim()))
-            {
-                // 顧客IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbPositionID.Text.Trim()))
-                {
-                    MessageBox.Show("役職IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbPositionID.Focus();
-                    return false;
-                }
-                //顧客IDの重複チェック
-                if (positionDataAccess.CheckPositionIDExistence(int.Parse(txbPositionID.Text.Trim())))
-                {
-                    MessageBox.Show("役職IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbPositionID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("役職IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbPositionID.Focus();
-                return false;
-            }
-
             // 顧客名の適否
             if (!String.IsNullOrEmpty(txbPositionName.Text.Trim()))
             {
@@ -533,6 +512,23 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
             // 役職情報作成
             var updPosition = GenerateDataAtUpdate();
 
@@ -553,17 +549,17 @@ namespace SalesManagement_SysDev
             // 役職IDの適否
             if (!String.IsNullOrEmpty(txbPositionID.Text.Trim()))
             {
-                // 顧客IDの数字チェック
+                // 役職IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbPositionID.Text.Trim()))
                 {
                     MessageBox.Show("役職IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbPositionID.Focus();
                     return false;
                 }
-                //顧客IDの存在チェック
+                //役職IDの存在チェック
                 if (!positionDataAccess.CheckPositionIDExistence(int.Parse(txbPositionID.Text.Trim())))
                 {
-                    MessageBox.Show("役職IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("役職IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbPositionID.Focus();
                     return false;
                 }
@@ -600,6 +596,16 @@ namespace SalesManagement_SysDev
                 cmbHidden.Focus();
                 return false;
             }
+            else if (cmbHidden.SelectedIndex == 1)
+            {
+                //社員テーブルにおける役職IDの存在チェック
+                if (employeeDataAccess.CheckEmployeePositonIDExistence(int.Parse(txbPositionID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された役職IDが社員テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbPositionID.Focus();
+                    return false;
+                }
+            }
 
             return true;
         }
@@ -629,23 +635,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void UpdatePosition(M_Position updPosition)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
-            //操作ログデータ取得
-            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
-
-            //操作ログデータの登録（成功 = true,失敗 = false）
-            if (!operationLogAccess.AddOperationLogData(regOperationLog))
-            {
-                return;
-            }
-
             // 顧客情報の更新
             bool flg = positionDataAccess.UpdatePositionData(updPosition);
             if (flg == true)
@@ -663,8 +652,6 @@ namespace SalesManagement_SysDev
             // データグリッドビューの表示
             GetDataGridView();
         }
-
-
 
         ///////////////////////////////
         //メソッド名：PositionDataSelect()
@@ -753,8 +740,6 @@ namespace SalesManagement_SysDev
             txbHidden.Text = dgvPosition[3, dgvPosition.CurrentCellAddress.Y]?.Value?.ToString();
         }
 
-
-
         ///////////////////////////////
         //メソッド名：GenerateDataAtSelect()
         //引　数   ：searchFlg = And検索かOr検索か判別するためのBool値
@@ -825,8 +810,54 @@ namespace SalesManagement_SysDev
 
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+
             //データグリッドビューのデータ取得
             GetDataGridView();
+        }
+
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            if (e.KeyChar > '0' && '9' > e.KeyChar)
+            {
+                // テキストボックスに入力されている値を取得
+                string inputText = textBox.Text + e.KeyChar;
+
+                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
+                int parsedValue;
+                if (!int.TryParse(inputText, out parsedValue))
+                {
+                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+
+            }
+
+            if (rdbRegister.Checked)
+            {
+
+            }
+
+            if (rdbUpdate.Checked)
+            {
+
+            }
         }
     }
 }

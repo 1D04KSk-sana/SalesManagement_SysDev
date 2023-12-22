@@ -148,6 +148,8 @@ namespace SalesManagement_SysDev
 
             rdbUpdate.Checked = true;
 
+            txbNumPage.Text = "1";
+
             GetDataGridView();
         }
         ///////////////////////////////
@@ -467,7 +469,6 @@ namespace SalesManagement_SysDev
 
         private void btnDone_Click(object sender, EventArgs e)
         {
-
             //更新ラヂオボタンがチェックされているとき
             if (rdbUpdate.Checked)
             {
@@ -497,6 +498,14 @@ namespace SalesManagement_SysDev
         {
             //テキストボックス等の入力チェック
             if (!GetValidDataAtUpdate())
+            {
+                return;
+            }
+
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
             {
                 return;
             }
@@ -587,14 +596,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void UpdateWarehousing(T_Warehousing updWarehousing)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
             // 入庫情報の更新
             bool flg = warehousingDataAccess.UpdateWarehousingData(updWarehousing);
 
@@ -832,6 +833,14 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("確定しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
             //操作ログデータ取得
             var regOperationLog = GenerateLogAtRegistration(rdbConfirm.Text);
 
@@ -936,14 +945,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void ConfirmWarehousing(T_Warehousing cfmWarehousing)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("確定しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
             // 入庫情報の更新
             bool flg = warehousingDataAccess.ConfirmWarehousingData(cfmWarehousing);
 
@@ -956,6 +957,7 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("確定に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            //在庫追加
             List<T_WarehousingDetail> WarehousingDetail = warehousingDetailDataAccess.GetIDWarehousingDetailData(int.Parse(txbWarehousingID.Text.Trim()));
 
             List<bool> flgStocklist = new List<bool>();
@@ -988,22 +990,6 @@ namespace SalesManagement_SysDev
 
             // データグリッドビューの表示
             GetDataGridView();
-        }
-        ///////////////////////////////
-        //メソッド名：GenerateStockAtRegistration()
-        //引　数   ：在庫情報
-        //戻り値   ：在庫登録情報
-        //機　能   ：在庫登録データのセット
-        ///////////////////////////////
-        private T_Stock GenerateStockAtRegistration(T_Warehousing Warehousing)
-        {
-            return new T_Stock
-            {
-                StID = Warehousing.HaID,
-                PrID = Warehousing.HaID,
-                StQuantity = Warehousing.HaID,
-                StFlag = 0,
-            };
         }
 
         private void btnPageMax_Click(object sender, EventArgs e)
@@ -1101,11 +1087,6 @@ namespace SalesManagement_SysDev
                 txbHidden.Enabled = false;
                 cmbHidden.Enabled = false;
             }
-            else
-            {
-                txbHidden.Enabled = true;
-                cmbHidden.Enabled = true;
-            }
 
             if (rdbConfirm.Checked)
             {
@@ -1115,14 +1096,6 @@ namespace SalesManagement_SysDev
                 cmbHidden.Enabled = false;
                 txbHidden.Enabled = false;
             }
-            else
-            {
-                txbEmployeeName.Enabled = true;
-                txbHattyuID.Enabled = true;
-                dtpWarehousingDate.Enabled = true;
-                cmbHidden.Enabled = true;
-                txbHidden.Enabled = true;
-            }
 
             if (rdbUpdate.Checked)
             {
@@ -1130,13 +1103,6 @@ namespace SalesManagement_SysDev
                 txbHattyuID.Enabled = false;
                 cmbConfirm.Enabled = false;
                 dtpWarehousingDate.Enabled = false;
-            }
-            else
-            {
-                txbEmployeeName.Enabled = true;
-                txbHattyuID.Enabled = true;
-                cmbConfirm.Enabled = true;
-                dtpWarehousingDate.Enabled = true;
             }
         }
     }

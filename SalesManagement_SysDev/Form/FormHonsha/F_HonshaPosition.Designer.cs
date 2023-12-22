@@ -32,16 +32,10 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.lblPosition = new System.Windows.Forms.Label();
             this.btnReturn = new System.Windows.Forms.Button();
-            this.pnlSelect = new System.Windows.Forms.Panel();
-            this.rdbSearch = new System.Windows.Forms.RadioButton();
-            this.rdbUpdate = new System.Windows.Forms.RadioButton();
-            this.rdbRegister = new System.Windows.Forms.RadioButton();
             this.txbPositionID = new System.Windows.Forms.TextBox();
             this.lblPositionID = new System.Windows.Forms.Label();
             this.txbPositionName = new System.Windows.Forms.TextBox();
             this.PositionName = new System.Windows.Forms.Label();
-            this.txbPositionListFlag = new System.Windows.Forms.TextBox();
-            this.lblPositionListFlag = new System.Windows.Forms.Label();
             this.txbHidden = new System.Windows.Forms.TextBox();
             this.lblClientHidden = new System.Windows.Forms.Label();
             this.dgvPosition = new System.Windows.Forms.DataGridView();
@@ -58,21 +52,24 @@
             this.btnDone = new System.Windows.Forms.Button();
             this.cmbView = new System.Windows.Forms.ComboBox();
             this.cmbHidden = new System.Windows.Forms.ComboBox();
+            this.lblHidden = new System.Windows.Forms.Label();
+            this.rdbSearch = new System.Windows.Forms.RadioButton();
+            this.rdbUpdate = new System.Windows.Forms.RadioButton();
+            this.rdbRegister = new System.Windows.Forms.RadioButton();
             this.pnlHonsha.SuspendLayout();
-            this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPosition)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHonsha
             // 
-            this.pnlHonsha.BackColor = System.Drawing.Color.Lime;
+            this.pnlHonsha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(255)))), ((int)(((byte)(112)))));
             this.pnlHonsha.Controls.Add(this.btnClose);
             this.pnlHonsha.Controls.Add(this.lblPosition);
             this.pnlHonsha.Controls.Add(this.btnReturn);
             this.pnlHonsha.Location = new System.Drawing.Point(-8, -2);
             this.pnlHonsha.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.pnlHonsha.Name = "pnlHonsha";
-            this.pnlHonsha.Size = new System.Drawing.Size(1920, 150);
+            this.pnlHonsha.Size = new System.Drawing.Size(1927, 150);
             this.pnlHonsha.TabIndex = 23;
             // 
             // btnClose
@@ -112,61 +109,10 @@
             this.btnReturn.UseVisualStyleBackColor = false;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
-            // pnlSelect
-            // 
-            this.pnlSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.pnlSelect.Controls.Add(this.rdbSearch);
-            this.pnlSelect.Controls.Add(this.rdbUpdate);
-            this.pnlSelect.Controls.Add(this.rdbRegister);
-            this.pnlSelect.Location = new System.Drawing.Point(12, 187);
-            this.pnlSelect.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.pnlSelect.Name = "pnlSelect";
-            this.pnlSelect.Size = new System.Drawing.Size(577, 74);
-            this.pnlSelect.TabIndex = 24;
-            // 
-            // rdbSearch
-            // 
-            this.rdbSearch.AutoSize = true;
-            this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26F);
-            this.rdbSearch.Location = new System.Drawing.Point(424, 16);
-            this.rdbSearch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.rdbSearch.Name = "rdbSearch";
-            this.rdbSearch.Size = new System.Drawing.Size(103, 39);
-            this.rdbSearch.TabIndex = 2;
-            this.rdbSearch.TabStop = true;
-            this.rdbSearch.Text = "検索";
-            this.rdbSearch.UseVisualStyleBackColor = true;
-            // 
-            // rdbUpdate
-            // 
-            this.rdbUpdate.AutoSize = true;
-            this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 26F);
-            this.rdbUpdate.Location = new System.Drawing.Point(218, 16);
-            this.rdbUpdate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.rdbUpdate.Name = "rdbUpdate";
-            this.rdbUpdate.Size = new System.Drawing.Size(103, 39);
-            this.rdbUpdate.TabIndex = 1;
-            this.rdbUpdate.TabStop = true;
-            this.rdbUpdate.Text = "更新";
-            this.rdbUpdate.UseVisualStyleBackColor = true;
-            // 
-            // rdbRegister
-            // 
-            this.rdbRegister.AutoSize = true;
-            this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 26F);
-            this.rdbRegister.Location = new System.Drawing.Point(29, 16);
-            this.rdbRegister.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.rdbRegister.Name = "rdbRegister";
-            this.rdbRegister.Size = new System.Drawing.Size(103, 39);
-            this.rdbRegister.TabIndex = 0;
-            this.rdbRegister.TabStop = true;
-            this.rdbRegister.Text = "登録";
-            this.rdbRegister.UseVisualStyleBackColor = true;
-            // 
             // txbPositionID
             // 
             this.txbPositionID.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbPositionID.Location = new System.Drawing.Point(280, 311);
+            this.txbPositionID.Location = new System.Drawing.Point(279, 297);
             this.txbPositionID.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txbPositionID.Name = "txbPositionID";
             this.txbPositionID.Size = new System.Drawing.Size(220, 31);
@@ -176,7 +122,7 @@
             // 
             this.lblPositionID.AutoSize = true;
             this.lblPositionID.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.lblPositionID.Location = new System.Drawing.Point(172, 315);
+            this.lblPositionID.Location = new System.Drawing.Point(171, 301);
             this.lblPositionID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPositionID.Name = "lblPositionID";
             this.lblPositionID.Size = new System.Drawing.Size(80, 24);
@@ -186,7 +132,7 @@
             // txbPositionName
             // 
             this.txbPositionName.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbPositionName.Location = new System.Drawing.Point(819, 311);
+            this.txbPositionName.Location = new System.Drawing.Point(818, 297);
             this.txbPositionName.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txbPositionName.Name = "txbPositionName";
             this.txbPositionName.Size = new System.Drawing.Size(220, 31);
@@ -196,47 +142,27 @@
             // 
             this.PositionName.AutoSize = true;
             this.PositionName.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.PositionName.Location = new System.Drawing.Point(692, 314);
+            this.PositionName.Location = new System.Drawing.Point(691, 300);
             this.PositionName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.PositionName.Name = "PositionName";
             this.PositionName.Size = new System.Drawing.Size(82, 24);
             this.PositionName.TabIndex = 27;
             this.PositionName.Text = "役職名";
             // 
-            // txbPositionListFlag
-            // 
-            this.txbPositionListFlag.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbPositionListFlag.Location = new System.Drawing.Point(1357, 311);
-            this.txbPositionListFlag.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.txbPositionListFlag.Name = "txbPositionListFlag";
-            this.txbPositionListFlag.Size = new System.Drawing.Size(220, 31);
-            this.txbPositionListFlag.TabIndex = 30;
-            // 
-            // lblPositionListFlag
-            // 
-            this.lblPositionListFlag.AutoSize = true;
-            this.lblPositionListFlag.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.lblPositionListFlag.Location = new System.Drawing.Point(1192, 314);
-            this.lblPositionListFlag.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblPositionListFlag.Name = "lblPositionListFlag";
-            this.lblPositionListFlag.Size = new System.Drawing.Size(157, 24);
-            this.lblPositionListFlag.TabIndex = 29;
-            this.lblPositionListFlag.Text = "役職管理フラグ";
-            // 
             // txbHidden
             // 
             this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbHidden.Location = new System.Drawing.Point(501, 388);
+            this.txbHidden.Location = new System.Drawing.Point(818, 374);
             this.txbHidden.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txbHidden.Name = "txbHidden";
-            this.txbHidden.Size = new System.Drawing.Size(1076, 31);
+            this.txbHidden.Size = new System.Drawing.Size(758, 31);
             this.txbHidden.TabIndex = 32;
             // 
             // lblClientHidden
             // 
             this.lblClientHidden.AutoSize = true;
             this.lblClientHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.lblClientHidden.Location = new System.Drawing.Point(350, 391);
+            this.lblClientHidden.Location = new System.Drawing.Point(643, 377);
             this.lblClientHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClientHidden.Name = "lblClientHidden";
             this.lblClientHidden.Size = new System.Drawing.Size(130, 24);
@@ -252,7 +178,7 @@
             this.dgvPosition.Name = "dgvPosition";
             this.dgvPosition.RowHeadersWidth = 51;
             this.dgvPosition.RowTemplate.Height = 24;
-            this.dgvPosition.Size = new System.Drawing.Size(1880, 495);
+            this.dgvPosition.Size = new System.Drawing.Size(1898, 542);
             this.dgvPosition.TabIndex = 33;
             this.dgvPosition.TabStop = false;
             this.dgvPosition.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPosition_CellClick);
@@ -261,7 +187,7 @@
             // 
             this.btnPageSize.BackColor = System.Drawing.Color.White;
             this.btnPageSize.Font = new System.Drawing.Font("MS UI Gothic", 16F);
-            this.btnPageSize.Location = new System.Drawing.Point(230, 981);
+            this.btnPageSize.Location = new System.Drawing.Point(227, 1018);
             this.btnPageSize.Margin = new System.Windows.Forms.Padding(1);
             this.btnPageSize.Name = "btnPageSize";
             this.btnPageSize.Size = new System.Drawing.Size(140, 40);
@@ -274,7 +200,7 @@
             // 
             this.lblPageSize.AutoSize = true;
             this.lblPageSize.Font = new System.Drawing.Font("MS UI Gothic", 16F);
-            this.lblPageSize.Location = new System.Drawing.Point(28, 991);
+            this.lblPageSize.Location = new System.Drawing.Point(25, 1028);
             this.lblPageSize.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPageSize.Name = "lblPageSize";
             this.lblPageSize.Size = new System.Drawing.Size(119, 22);
@@ -284,17 +210,18 @@
             // txbPageSize
             // 
             this.txbPageSize.Font = new System.Drawing.Font("MS UI Gothic", 16F);
-            this.txbPageSize.Location = new System.Drawing.Point(159, 988);
+            this.txbPageSize.Location = new System.Drawing.Point(156, 1025);
             this.txbPageSize.Margin = new System.Windows.Forms.Padding(1);
             this.txbPageSize.Name = "txbPageSize";
             this.txbPageSize.Size = new System.Drawing.Size(50, 29);
             this.txbPageSize.TabIndex = 34;
+            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblNumPage
             // 
             this.lblNumPage.AutoSize = true;
             this.lblNumPage.Font = new System.Drawing.Font("MS UI Gothic", 16F);
-            this.lblNumPage.Location = new System.Drawing.Point(1496, 989);
+            this.lblNumPage.Location = new System.Drawing.Point(1552, 1026);
             this.lblNumPage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNumPage.Name = "lblNumPage";
             this.lblNumPage.Size = new System.Drawing.Size(64, 22);
@@ -304,17 +231,18 @@
             // txbNumPage
             // 
             this.txbNumPage.Font = new System.Drawing.Font("MS UI Gothic", 16F);
-            this.txbNumPage.Location = new System.Drawing.Point(1431, 988);
+            this.txbNumPage.Location = new System.Drawing.Point(1487, 1025);
             this.txbNumPage.Margin = new System.Windows.Forms.Padding(1);
             this.txbNumPage.Name = "txbNumPage";
             this.txbNumPage.Size = new System.Drawing.Size(50, 29);
             this.txbNumPage.TabIndex = 41;
+            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // btnPageMin
             // 
             this.btnPageMin.BackColor = System.Drawing.Color.White;
             this.btnPageMin.Font = new System.Drawing.Font("MS UI Gothic", 16F);
-            this.btnPageMin.Location = new System.Drawing.Point(1584, 981);
+            this.btnPageMin.Location = new System.Drawing.Point(1640, 1018);
             this.btnPageMin.Margin = new System.Windows.Forms.Padding(1);
             this.btnPageMin.Name = "btnPageMin";
             this.btnPageMin.Size = new System.Drawing.Size(50, 40);
@@ -327,7 +255,7 @@
             // 
             this.btnBack.BackColor = System.Drawing.Color.White;
             this.btnBack.Font = new System.Drawing.Font("MS UI Gothic", 16F);
-            this.btnBack.Location = new System.Drawing.Point(1656, 981);
+            this.btnBack.Location = new System.Drawing.Point(1712, 1018);
             this.btnBack.Margin = new System.Windows.Forms.Padding(1);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(50, 40);
@@ -340,7 +268,7 @@
             // 
             this.btnNext.BackColor = System.Drawing.Color.White;
             this.btnNext.Font = new System.Drawing.Font("MS UI Gothic", 16F);
-            this.btnNext.Location = new System.Drawing.Point(1723, 981);
+            this.btnNext.Location = new System.Drawing.Point(1779, 1018);
             this.btnNext.Margin = new System.Windows.Forms.Padding(1);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(50, 40);
@@ -353,7 +281,7 @@
             // 
             this.btnPageMax.BackColor = System.Drawing.Color.White;
             this.btnPageMax.Font = new System.Drawing.Font("MS UI Gothic", 16F);
-            this.btnPageMax.Location = new System.Drawing.Point(1789, 981);
+            this.btnPageMax.Location = new System.Drawing.Point(1845, 1018);
             this.btnPageMax.Margin = new System.Windows.Forms.Padding(1);
             this.btnPageMax.Name = "btnPageMax";
             this.btnPageMax.Size = new System.Drawing.Size(50, 40);
@@ -415,18 +343,75 @@
             this.cmbHidden.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbHidden.Location = new System.Drawing.Point(61, 388);
+            this.cmbHidden.Location = new System.Drawing.Point(279, 373);
             this.cmbHidden.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cmbHidden.Name = "cmbHidden";
             this.cmbHidden.Size = new System.Drawing.Size(220, 32);
             this.cmbHidden.TabIndex = 98;
             // 
+            // lblHidden
+            // 
+            this.lblHidden.AutoSize = true;
+            this.lblHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.lblHidden.Location = new System.Drawing.Point(121, 377);
+            this.lblHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblHidden.Name = "lblHidden";
+            this.lblHidden.Size = new System.Drawing.Size(142, 24);
+            this.lblHidden.TabIndex = 99;
+            this.lblHidden.Text = "表示/非表示";
+            // 
+            // rdbSearch
+            // 
+            this.rdbSearch.AutoSize = true;
+            this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26F);
+            this.rdbSearch.Location = new System.Drawing.Point(436, 203);
+            this.rdbSearch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.rdbSearch.Name = "rdbSearch";
+            this.rdbSearch.Size = new System.Drawing.Size(103, 39);
+            this.rdbSearch.TabIndex = 102;
+            this.rdbSearch.TabStop = true;
+            this.rdbSearch.Text = "検索";
+            this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
+            // 
+            // rdbUpdate
+            // 
+            this.rdbUpdate.AutoSize = true;
+            this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 26F);
+            this.rdbUpdate.Location = new System.Drawing.Point(230, 203);
+            this.rdbUpdate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.rdbUpdate.Name = "rdbUpdate";
+            this.rdbUpdate.Size = new System.Drawing.Size(103, 39);
+            this.rdbUpdate.TabIndex = 101;
+            this.rdbUpdate.TabStop = true;
+            this.rdbUpdate.Text = "更新";
+            this.rdbUpdate.UseVisualStyleBackColor = true;
+            this.rdbUpdate.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
+            // 
+            // rdbRegister
+            // 
+            this.rdbRegister.AutoSize = true;
+            this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 26F);
+            this.rdbRegister.Location = new System.Drawing.Point(41, 203);
+            this.rdbRegister.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.rdbRegister.Name = "rdbRegister";
+            this.rdbRegister.Size = new System.Drawing.Size(103, 39);
+            this.rdbRegister.TabIndex = 100;
+            this.rdbRegister.TabStop = true;
+            this.rdbRegister.Text = "登録";
+            this.rdbRegister.UseVisualStyleBackColor = true;
+            this.rdbRegister.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
+            // 
             // F_HonshaPosition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
+            this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.rdbSearch);
+            this.Controls.Add(this.rdbUpdate);
+            this.Controls.Add(this.rdbRegister);
+            this.Controls.Add(this.lblHidden);
             this.Controls.Add(this.cmbHidden);
             this.Controls.Add(this.cmbView);
             this.Controls.Add(this.btnClear);
@@ -443,21 +428,17 @@
             this.Controls.Add(this.dgvPosition);
             this.Controls.Add(this.txbHidden);
             this.Controls.Add(this.lblClientHidden);
-            this.Controls.Add(this.txbPositionListFlag);
-            this.Controls.Add(this.lblPositionListFlag);
             this.Controls.Add(this.txbPositionName);
             this.Controls.Add(this.PositionName);
             this.Controls.Add(this.txbPositionID);
             this.Controls.Add(this.lblPositionID);
-            this.Controls.Add(this.pnlSelect);
             this.Controls.Add(this.pnlHonsha);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "F_HonshaPosition";
             this.Text = "F_HonshaPosition";
             this.Load += new System.EventHandler(this.F_HonshaPosition_Load);
             this.pnlHonsha.ResumeLayout(false);
             this.pnlHonsha.PerformLayout();
-            this.pnlSelect.ResumeLayout(false);
-            this.pnlSelect.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPosition)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -470,16 +451,10 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lblPosition;
         private System.Windows.Forms.Button btnReturn;
-        private System.Windows.Forms.Panel pnlSelect;
-        private System.Windows.Forms.RadioButton rdbSearch;
-        private System.Windows.Forms.RadioButton rdbUpdate;
-        private System.Windows.Forms.RadioButton rdbRegister;
         private System.Windows.Forms.TextBox txbPositionID;
         private System.Windows.Forms.Label lblPositionID;
         private System.Windows.Forms.TextBox txbPositionName;
         private System.Windows.Forms.Label PositionName;
-        private System.Windows.Forms.TextBox txbPositionListFlag;
-        private System.Windows.Forms.Label lblPositionListFlag;
         private System.Windows.Forms.TextBox txbHidden;
         private System.Windows.Forms.Label lblClientHidden;
         private System.Windows.Forms.DataGridView dgvPosition;
@@ -496,5 +471,9 @@
         private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.ComboBox cmbView;
         private System.Windows.Forms.ComboBox cmbHidden;
+        private System.Windows.Forms.Label lblHidden;
+        private System.Windows.Forms.RadioButton rdbSearch;
+        private System.Windows.Forms.RadioButton rdbUpdate;
+        private System.Windows.Forms.RadioButton rdbRegister;
     }
 }

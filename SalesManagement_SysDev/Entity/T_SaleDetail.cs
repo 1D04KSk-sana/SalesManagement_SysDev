@@ -12,6 +12,8 @@ namespace SalesManagement_SysDev
     class T_SaleDetail
     {
         [Key]
+        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SaDetailID { get; set; }         //売上明細ID
         public int SaID { get; set; }               //売上ID
         public int PrID { get; set; }               //商品ID

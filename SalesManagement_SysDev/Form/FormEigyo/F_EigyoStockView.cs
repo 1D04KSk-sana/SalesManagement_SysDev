@@ -79,9 +79,7 @@ namespace SalesManagement_SysDev
             DictionarySet();
 
             SetFormDataGridView();
-
-            //cmbViewを表示に
-            cmbView.SelectedIndex = 0;
+            GetDataGridView();
         }
         private void btnDone_Click(object sender, EventArgs e)
         {
@@ -89,6 +87,12 @@ namespace SalesManagement_SysDev
             if (rdbSearch.Checked)
             {
                 StockDataSelect();
+            }
+
+            //発注点検索ラヂオボタンがチェックされているとき
+            if (rdbHattyuten.Checked)
+            {
+                StockDataHattyuten();
             }
         }
         private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
@@ -146,16 +150,15 @@ namespace SalesManagement_SysDev
             //ヘッダー位置の指定
             dgvStockView.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            dgvStockView.Columns.Add("StID", "在庫ID");
             dgvStockView.Columns.Add("PrID", "商品ID");
+            dgvStockView.Columns.Add("PrName", "商品名");
             dgvStockView.Columns.Add("StQuantity", "在庫数");
-            dgvStockView.Columns.Add("StFlags", "在庫管理フラグ");
+            dgvStockView.Columns.Add("PrSafetyStock", "安全在庫数");
 
-            dgvStockView.Columns["StID"].Width = 92;
-            dgvStockView.Columns["PrID"].Width = 130;
-            dgvStockView.Columns["StQuantity"].Width = 145;
-            dgvStockView.Columns["StFlags"].Width = 120;
-
+            dgvStockView.Columns["PrID"].Width = 475;
+            dgvStockView.Columns["PrName"].Width = 475;
+            dgvStockView.Columns["StQuantity"].Width = 475;
+            dgvStockView.Columns["PrSafetyStock"].Width = 475;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvStockView.Columns)
@@ -164,12 +167,31 @@ namespace SalesManagement_SysDev
             }
         }
 
-        private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
+        ///////////////////////////////
+        //メソッド名：StockDataHattyuten()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：在庫情報更新の実行
+        ///////////////////////////////
+        private void StockDataHattyuten()
         {
-            txbNumPage.Text = "1";
+            listAllStock = stockDataAccess.GetStockData();
+
+            listStock = new List<T_Stock> { };
+
+            foreach (var item in listAllStock)
+            {
+                M_Product Prodact = prodactDataAccess.GetIDProdactData(item.PrID);
+
+                if (item.StQuantity <= Prodact.PrSafetyStock)
+                {
+                    listStock.Add(item);
+                }
+            }
 
             GetDataGridView();
         }
+
         ///////////////////////////////
         //メソッド名：StockDataSelect()
         //引　数   ：なし
@@ -213,35 +235,17 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbStockID.Text.Trim()) && String.IsNullOrEmpty(txbProductID.Text.Trim()) && String.IsNullOrEmpty(txbStockQuantity.Text.Trim()))
+            if (String.IsNullOrEmpty(txbProductID.Text.Trim()) && String.IsNullOrEmpty(txbStockQuantity.Text.Trim()))
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbStockID.Focus();
+                txbProductID.Focus();
                 return false;
             }
 
-            // 在庫IDの適否
-            if (!String.IsNullOrEmpty(txbStockID.Text.Trim()))
-            {
-                // 在庫IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbStockID.Text.Trim()))
-                {
-                    MessageBox.Show("在庫IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbStockID.Focus();
-                    return false;
-                }
-                //在庫IDの重複チェック
-                if (!stockDataAccess.CheckStockIDExistence(int.Parse(txbStockID.Text.Trim())))
-                {
-                    MessageBox.Show("在庫IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbStockID.Focus();
-                    return false;
-                }
-            }
-            // 商品IDの適否
+            //商品IDの適否
             if (!String.IsNullOrEmpty(txbProductID.Text.Trim()))
             {
-                // 商品IDの数字チェック
+                //商品IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbProductID.Text.Trim()))
                 {
                     MessageBox.Show("商品IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -256,7 +260,8 @@ namespace SalesManagement_SysDev
                     return false;
                 }
             }
-            // 在庫数の適否
+
+            //在庫数の適否
             if (!String.IsNullOrEmpty(txbStockQuantity.Text.Trim()))
             {
                 // 在庫数の数字チェック
@@ -266,6 +271,12 @@ namespace SalesManagement_SysDev
                     txbStockQuantity.Focus();
                     return false;
                 }
+            }
+            else
+            {
+                MessageBox.Show("在庫数が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbStockQuantity.Focus();
+                return false;
             }
 
             return true;
@@ -295,7 +306,9 @@ namespace SalesManagement_SysDev
             //1行ずつdgvStockに挿入
             foreach (var item in depData)
             {
-                dgvStockView.Rows.Add(item.StID, dictionaryProdact[item.PrID], item.StQuantity,dictionaryHidden[item.StFlag]);
+                M_Product Prodact = prodactDataAccess.GetIDProdactData(item.PrID);
+
+                dgvStockView.Rows.Add(item.PrID, dictionaryProdact[item.PrID], item.StQuantity, Prodact.PrSafetyStock);
             }
 
             //dgvClientをリフレッシュ
@@ -342,7 +355,7 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         //メソッド名：SetListStock()
         //引　数   ：なし
-        //戻り値   ：表示用在庫ｓデータ
+        //戻り値   ：表示用在庫データ
         //機　能   ：表示用在庫データの準備
         ///////////////////////////////
         private List<T_Stock> SetListStock()
@@ -354,7 +367,7 @@ namespace SalesManagement_SysDev
             List<T_Stock> listViewStock = new List<T_Stock>();
 
             //検索ラヂオボタンがチェックされているとき
-            if (rdbSearch.Checked)
+            if (rdbSearch.Checked || rdbHattyuten.Checked)
             {
                 //表示している（検索結果）のデータをとってくる
                 listViewStock = listStock;
@@ -363,18 +376,6 @@ namespace SalesManagement_SysDev
             {
                 //全データをとってくる
                 listViewStock = listAllStock;
-            }
-
-            //一覧表示cmbViewが表示を選択されているとき
-            if (cmbView.SelectedIndex == 0)
-            {
-                // 管理Flgが表示の在庫データの取得
-                listViewStock = stockDataAccess.GetStockDspData(listViewStock);
-            }
-            else
-            {
-                // 管理Flgが非表示の在庫データの取得
-                listViewStock = stockDataAccess.GetStockNotDspData(listViewStock);
             }
 
             return listViewStock;
@@ -407,45 +408,38 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void GenerateDataAtSelect(bool searchFlg)
         {
-            string strStockID = txbStockID.Text.Trim();
-            int intStockID = 0;
-
-            if (!String.IsNullOrEmpty(strStockID))
-            {
-                intStockID = int.Parse(strStockID);
-            }
-            string strProdactID = txbProductID.Text.Trim();
+            string strProductID = txbProductID.Text.Trim();
             int intProdactID = 0;
 
-            if (!String.IsNullOrEmpty(strProdactID))
+            if (!String.IsNullOrEmpty(strProductID))
             {
-                intProdactID = int.Parse(strProdactID);
+                intProdactID = int.Parse(strProductID);
             }
-            string strStockQuantity = txbStockQuantity.Text.Trim();
-            int intStockQuantity = 0;
 
-            if (!String.IsNullOrEmpty(strStockQuantity))
+            string strStockQuentity = txbStockQuantity.Text.Trim();
+            int intStockQuentity = 0;
+
+            if (!String.IsNullOrEmpty(strStockQuentity))
             {
-                intStockQuantity = int.Parse(strStockQuantity);
+                intStockQuentity = int.Parse(strStockQuentity);
             }
 
             // 検索条件のセット
-            T_Stock selectCondition = new T_Stock()
+            T_Stock selectStock = new T_Stock()
             {
-                StID = intStockID,
                 PrID = intProdactID,
-                StQuantity = intStockQuantity,
+                StQuantity = intStockQuentity,
             };
 
             if (searchFlg)
             {
-                // 在庫データのAnd抽出
-                listStock = stockDataAccess.GetAndStockData(selectCondition);
+                // 顧客データのAnd抽出
+                listStock = stockDataAccess.GetAndStockData(selectStock);
             }
             else
             {
-                // 在庫データのOr抽出
-                listStock = stockDataAccess.GetOrStockData(selectCondition);
+                // 顧客データのOr抽出
+                listStock = stockDataAccess.GetOrStockData(selectStock);
             }
         }
 
@@ -559,9 +553,7 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SelectRowControl()
         {
-            //データグリッドビューに乗っている情報をGUIに反映
-            txbStockID.Text = dgvStockView[0, dgvStockView.CurrentCellAddress.Y].Value.ToString();
-            txbProductID.Text =dictionaryProdact.FirstOrDefault(x=>x.Value== dgvStockView[1, dgvStockView.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            txbProductID.Text = dgvStockView[0, dgvStockView.CurrentCellAddress.Y].Value.ToString();
             txbStockQuantity.Text = dgvStockView[2, dgvStockView.CurrentCellAddress.Y].Value.ToString();
         }
 
@@ -579,8 +571,24 @@ namespace SalesManagement_SysDev
             ClearImput();
 
             rdbSearch.Checked = false;
+            rdbHattyuten.Checked = false;
+
+            txbNumPage.Text = "1";
 
             GetDataGridView();
+        }
+
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+
+            }
+
+            if (rdbHattyuten.Checked)
+            {
+
+            }
         }
 
         ///////////////////////////////
@@ -591,7 +599,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void ClearImput()
         {
-            txbStockID.Text = string.Empty;
             txbProductID.Text = string.Empty;
             txbStockQuantity.Text = string.Empty;
         }

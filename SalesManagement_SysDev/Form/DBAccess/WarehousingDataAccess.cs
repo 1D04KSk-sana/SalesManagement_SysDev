@@ -127,6 +127,34 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：CheckWarehousingEmployeeIDExistence()
+        //引　数   ：社員ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する社員IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckWarehousingEmployeeIDExistence(int EmployeeID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<T_Warehousing> listWarehousing = context.T_Warehousings.Where(x => x.WaFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listWarehousing.Any(x => x.EmID == EmployeeID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
         //メソッド名：GetAndWarehousingData()
         //引　数：検索条件
         //戻り値：条件完全一致発注データ

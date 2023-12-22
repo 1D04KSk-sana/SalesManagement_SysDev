@@ -188,7 +188,6 @@ namespace SalesManagement_SysDev
                 Maker.MaFAX = updMaker.MaFAX;
                 Maker.MaPhone = updMaker.MaPhone;
                 Maker.MaAddress = updMaker.MaAddress;
-                Maker.MaID = updMaker.MaID;
                 Maker.MaPostal = updMaker.MaPostal;
 
                 context.SaveChanges();

@@ -798,67 +798,56 @@ namespace SalesManagement_SysDev
                 {
                     M_Product = pr[0],
                     StQuantity = 100,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[1],
                     StQuantity = 120,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[2],
                     StQuantity = 199,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[3],
                     StQuantity = 50,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[4],
                     StQuantity = 60,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[5],
                     StQuantity = 32,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[6],
                     StQuantity = 10,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[7],
                     StQuantity = 10,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[8],
                     StQuantity = 10,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[9],
                     StQuantity = 240,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[10],
                     StQuantity = 10,
-                    StFlag = 0,
                 });
                 context.T_Stocks.AddRange(st);
                 context.SaveChanges();
@@ -1009,24 +998,6 @@ namespace SalesManagement_SysDev
                     SaDate = new DateTime(2023, 10, 27),
                     SaFlag = 0,
                 });
-                sa.Add(new T_Sale()
-                {
-                    M_Employee = em[116],
-                    M_Client = cl[2],
-                    T_Chumon = ch[0],
-                    M_SalesOffice = so[1],
-                    SaDate = new DateTime(2023, 10, 31),
-                    SaFlag = 0,
-                });
-                sa.Add(new T_Sale()
-                {
-                    M_Employee = em[116],
-                    M_Client = cl[3],
-                    T_Chumon = ch[0],
-                    M_SalesOffice = so[2],
-                    SaDate = new DateTime(2023, 10, 31),
-                    SaFlag = 0,
-                });
 
                 context.T_Sales.AddRange(sa);
                 context.SaveChanges();
@@ -1034,30 +1005,15 @@ namespace SalesManagement_SysDev
             {
                 sad.Add(new T_SaleDetail()
                 {
+                    SaDetailID = 1,
                     M_Product = pr[0],
                     T_Sale = sa[0],
                     SaQuantity = 1,
                     SaTotalPrice = 100000,
                 });
-                sad.Add(new T_SaleDetail()
-                {
-                    M_Product = pr[1],
-                    T_Sale = sa[1],
-                    SaQuantity = 3,
-                    SaTotalPrice = 50000,
-                });
-                sad.Add(new T_SaleDetail()
-                {
-                    M_Product = pr[2],
-                    T_Sale = sa[2],
-                    SaQuantity = 5,
-                    SaTotalPrice = 600000,
-                });
 
                 context.T_SaleDetails.AddRange(sad);
                 context.SaveChanges();
-
-
             }
             {
                 ha.Add(new T_Hattyu()

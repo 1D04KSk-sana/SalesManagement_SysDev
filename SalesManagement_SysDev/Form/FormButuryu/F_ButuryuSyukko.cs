@@ -127,6 +127,8 @@ namespace SalesManagement_SysDev
 
             rdbHidden.Checked = true;
 
+            txbNumPage.Text = "1";
+
             GetDataGridView();
         }
 
@@ -194,6 +196,14 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
             //操作ログデータ取得
             var regOperationLog = GenerateLogAtRegistration(rdbHidden.Text);
 
@@ -234,14 +244,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void UpdateSyukko(T_Syukko updSyukko)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
             // 受注情報の更新
             bool flg = SyukkoDataAccess.UpdateSyukkoData(updSyukko);
 
@@ -321,6 +323,14 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("確定しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
             //操作ログデータ取得
             var regOperationLog = GenerateLogAtRegistration(rdbConfirm.Text);
 
@@ -362,14 +372,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void ConfirmSyukko(T_Syukko cfmSyukko)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("確定しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
             // 出庫情報の更新
             bool flg = SyukkoDataAccess.ConfirmSyukkoData(cfmSyukko);
 
@@ -1029,6 +1031,13 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SelectRowControl()
         {
+            var syukkoDate = dgvSyukko[5, dgvSyukko.CurrentCellAddress.Y].Value;
+
+            if (syukkoDate != null)
+            {
+                dtpSyukkoDate.Text = syukkoDate.ToString();
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbSyukkoID.Text = dgvSyukko[0, dgvSyukko.CurrentCellAddress.Y].Value.ToString();
             txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvSyukko[1, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
@@ -1038,8 +1047,6 @@ namespace SalesManagement_SysDev
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSyukko[7, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvSyukko[8, dgvSyukko.CurrentCellAddress.Y]?.Value?.ToString();
             cmbConfirm.SelectedIndex = dictionaryFlag.FirstOrDefault(x => x.Value == dgvSyukko[6, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key;
-
-
         }
 
         private void txbEmployeeID_TextChanged(object sender, EventArgs e)
@@ -1143,25 +1150,13 @@ namespace SalesManagement_SysDev
             {
 
             }
-            else
-            {
-
-            }
 
             if (rdbConfirm.Checked)
             {
 
             }
-            else
-            {
-
-            }
 
             if (rdbHidden.Checked)
-            {
-
-            }
-            else
             {
 
             }

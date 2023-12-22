@@ -33,6 +33,10 @@ namespace SalesManagement_SysDev
         OrderDataAccess OrderDataAccess = new OrderDataAccess();
         //データベース受注テーブルアクセス用クラスのインスタンス化
         ShipmentDetailDataAccess shipmentDetailDataAccess = new ShipmentDetailDataAccess();
+        //データベース売上テーブルアクセス用クラスのインスタンス化
+        SaleDataAccess saleDataAccess = new SaleDataAccess();
+        //データベース売上詳細テーブルアクセス用クラスのインスタンス化
+        SaleDetailDataAccess saleDetailDataAccess = new SaleDetailDataAccess();
 
         //コンボボックス用の顧客データリスト
         private static List<M_Client> listClient = new List<M_Client>();
@@ -122,14 +126,23 @@ namespace SalesManagement_SysDev
             {
                 ShipmentDataSelect();
             }
+
+            //確定ラヂオボタンがチェックされているとき
+            if (rdbConfirm.Checked)
+            {
+                ShipmentDataConfirm();
+            }
         }
 
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearImput();
+            dtpShipmentDate.Checked = false;
 
             rdbUpdate.Checked = true;
-            dtpShipmentDate.Enabled = false;
+
+            txbNumPage.Text = "1";
+
             GetDataGridView();
         }
            
@@ -155,18 +168,6 @@ namespace SalesManagement_SysDev
             cmbView.SelectedIndex = 0;
         }
 
-
-        private void dgvShipmentDetail_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
-            if (dgvShipmentDetail.SelectedCells.Count == 0)
-            {
-                return;
-            }
-
-            //選択された行に対してのコントロールの変更
-            SelectRowDetailControl();
-        }
         private void dgvShipment_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //クリックされたDataGridViewがヘッダーのとき⇒何もしない
@@ -437,6 +438,14 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
             //操作ログデータ取得
             var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
 
@@ -511,7 +520,7 @@ namespace SalesManagement_SysDev
             {
                 OpHistoryID = operationLogAccess.OperationLogNum() + 1,
                 EmID = F_Login.intEmployeeID,
-                FormName = "受注管理画面",
+                FormName = "出荷管理画面",
                 OpDone = OperationDone,
                 OpDBID = int.Parse(txbShipmentID.Text.Trim()),
                 OpSetTime = DateTime.Now,
@@ -542,15 +551,7 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void UpdateShipment(T_Shipment updShipment)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
-            // 出荷情報の更新
+            // 受注情報の更新
             bool flg = ShipmentDataAccess.UpdateShipmentData(updShipment);
 
             if (flg == true)
@@ -567,6 +568,231 @@ namespace SalesManagement_SysDev
 
             // データグリッドビューの表示
             GetDataGridView();
+        }
+
+        ///////////////////////////////
+        //メソッド名：ShipmentDataConfirm()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：出荷情報確定の実行
+        ///////////////////////////////
+        private void ShipmentDataConfirm()
+        {
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtConfirm())
+            {
+                return;
+            }
+
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("確定しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbConfirm.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
+            // 受注情報作成
+            var cmfShipment = GenerateDataAtConfirm();
+
+            // 受注情報更新
+            ConfirmShipment(cmfShipment);
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetValidDataAtConfirm()
+        //引　数   ：なし
+        //戻り値   ：true or false
+        //機　能   ：確定入力データの形式チェック
+        //          ：エラーがない場合True
+        //          ：エラーがある場合False
+        ///////////////////////////////
+        private bool GetValidDataAtConfirm()
+        {
+            //受注IDの適否
+            if (!String.IsNullOrEmpty(txbShipmentID.Text.Trim()))
+            {
+                // 受注IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbShipmentID.Text.Trim()))
+                {
+                    MessageBox.Show("出荷IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbShipmentID.Focus();
+                    return false;
+                }
+                //受注IDの存在チェック
+                if (!ShipmentDataAccess.CheckShipmentIDExistence(int.Parse(txbShipmentID.Text.Trim())))
+                {
+                    MessageBox.Show("出荷IDが存在していません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbShipmentID.Focus();
+                    return false;
+                }
+
+                T_Shipment shipment = ShipmentDataAccess.GetIDShipmentData(int.Parse(txbOrderID.Text.Trim()));
+
+                //受注IDの確定チェック
+                if (shipment.ShStateFlag == 1)
+                {
+                    MessageBox.Show("出荷IDはすでに確定しています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbShipmentID.Focus();
+                    return false;
+                }
+                //受注IDの非表示チェック
+                if (shipment.ShFlag == 1)
+                {
+                    MessageBox.Show("出荷IDは非表示にされています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbShipmentID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("出荷IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbShipmentID.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateDataAtConfirm()
+        //引　数   ：なし
+        //戻り値   ：出荷確定情報
+        //機　能   ：確定データのセット
+        ///////////////////////////////
+        private T_Shipment GenerateDataAtConfirm()
+        {
+            return new T_Shipment
+            {
+                ShID = int.Parse(txbShipmentID.Text.Trim()),
+                ShStateFlag = 1,
+                EmID = F_Login.intEmployeeID,
+                ShFinishDate = DateTime.Now,
+            };
+        }
+
+        ///////////////////////////////
+        //メソッド名：ConfirmShipment()
+        //引　数   ：出荷情報
+        //戻り値   ：なし
+        //機　能   ：出荷情報の確定
+        ///////////////////////////////
+        private void ConfirmShipment(T_Shipment cfmShipment)
+        {
+            // 受注情報の更新
+            bool flg = ShipmentDataAccess.ConfirmShipmentData(cfmShipment);
+
+            if (flg == true)
+            {
+                MessageBox.Show("確定しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("確定に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //注文登録
+            T_Shipment Shipment = ShipmentDataAccess.GetIDShipmentData(cfmShipment.ShID);
+
+            T_Sale Sale = GenerateSaleAtRegistration(Shipment);
+
+            bool flgSale = saleDataAccess.AddSaleData(Sale);
+
+            if (flgSale == true)
+            {
+                MessageBox.Show("売上管理にデータを送信ました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("売上管理へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //注文詳細登録
+            List<T_ShipmentDetail> listShipmentDetail = shipmentDetailDataAccess.GetIDShipmentDetailData(cfmShipment.ShID);
+
+            List<bool> flgShipmentlist = new List<bool>();
+            bool flgShipment = true;
+
+            foreach (var item in listShipmentDetail)
+            {
+                T_SaleDetail SaleDetail = GenerateSaleDetailAtRegistration(item);
+
+                flgShipmentlist.Add(saleDetailDataAccess.AddSaleDetailData(SaleDetail));
+            }
+
+            foreach (var item in flgShipmentlist)
+            {
+                if (!item)
+                {
+                    flgShipment = false;
+                }
+            }
+
+            if (flgShipment)
+            {
+                MessageBox.Show("売上詳細へデータを送信しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("売上詳細へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //テキストボックス等のクリア
+            ClearImput();
+
+            // データグリッドビューの表示
+            GetDataGridView();
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateSaleAtRegistration()
+        //引　数   ：売上情報
+        //戻り値   ：売上登録情報
+        //機　能   ：売上登録データのセット
+        ///////////////////////////////
+        private T_Sale GenerateSaleAtRegistration(T_Shipment Shipment)
+        {
+            return new T_Sale
+            {
+                SaID = Shipment.ShID,
+                ChID = Shipment.OrID,
+                SoID = Shipment.SoID,
+                ClID = Shipment.ClID,
+                EmID = F_Login.intEmployeeID,
+                SaDate = DateTime.Now,
+                SaFlag = 0,
+            };
+        }
+
+        ///////////////////////////////
+        //メソッド名：GenerateSaleDetailAtRegistration()
+        //引　数   ：売上詳細情報
+        //戻り値   ：売上詳細登録情報
+        //機　能   ：売上詳細登録データのセット
+        ///////////////////////////////
+        private T_SaleDetail GenerateSaleDetailAtRegistration(T_ShipmentDetail ShipmentDetail)
+        {
+            M_Product Prodact = prodactDataAccess.GetIDProdactData(ShipmentDetail.PrID);
+
+            int intProdactPrice = Prodact.Price;
+
+            return new T_SaleDetail
+            {
+                SaDetailID = ShipmentDetail.ShDetailID,
+                SaID = ShipmentDetail.ShID,
+                PrID = ShipmentDetail.PrID,
+                SaQuantity = ShipmentDetail.ShQuantity,
+                SaTotalPrice = ShipmentDetail.ShQuantity * intProdactPrice
+            };
         }
 
         ///////////////////////////////
@@ -720,15 +946,14 @@ namespace SalesManagement_SysDev
         {
             txbShipmentID.Text = string.Empty;
             txbEmployeeID.Text = string.Empty;
+            txbEmployeeName.Text = string.Empty;
             txbOrderID.Text = string.Empty;
-            txbShipmentDetailID.Text = string.Empty;
-            txbProductName.Text = string.Empty;
             txbClientID.Text = string.Empty;
-            txbProductID.Text = string.Empty;
-            txbShipmentquantity.Text = string.Empty;
+            txbClientName.Text = string.Empty;
             txbShipmentHidden.Text = string.Empty;
             cmbSalesOfficeID.SelectedIndex = -1;
             cmbShipmentHidden.SelectedIndex = -1;
+            cmbConfirm.SelectedIndex = -1;
             dtpShipmentDate.Value = DateTime.Now;
         }
 
@@ -859,7 +1084,7 @@ namespace SalesManagement_SysDev
         {
             dgvShipmentDetail.Rows.Clear();
 
-            listShipmentDetail = shipmentDetailDataAccess.GetShipmentDetailIDData(intShipmentID);
+            listShipmentDetail = shipmentDetailDataAccess.GetIDShipmentDetailData(intShipmentID);
 
             //1行ずつdgvClientに挿入
             foreach (var item in listShipmentDetail)
@@ -879,6 +1104,13 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SelectRowControl()
         {
+            var ShipmentDate = dgvShipment[6, dgvShipment.CurrentCellAddress.Y].Value;
+
+            if (ShipmentDate != null)
+            {
+                dtpShipmentDate.Text = ShipmentDate.ToString();
+            }
+
             //データグリッドビューに乗っている情報をguiに反映
             txbShipmentID.Text = dgvShipment[0, dgvShipment.CurrentCellAddress.Y].Value.ToString();
             txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvShipment[1, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
@@ -892,22 +1124,60 @@ namespace SalesManagement_SysDev
 
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
+
             //データグリッドビューのデータ取得
             GetDataGridView();
         }
 
-        ///////////////////////////////
-        //メソッド名：SelectRowDetailControl()
-        //引　数   ：なし
-        //戻り値   ：なし
-        //機　能   ：選択された行に対してのコントロールの変更(Detail)
-        ///////////////////////////////
-        private void SelectRowDetailControl()
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //データグリッドビューに乗っている情報をGUIに反映
-            txbShipmentDetailID.Text = dgvShipmentDetail[0, dgvShipmentDetail.CurrentCellAddress.Y].Value.ToString();
-            txbProductID.Text = dictionaryProdact.FirstOrDefault(x => x.Value == dgvShipment[1, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
-            txbShipmentquantity.Text = dgvShipmentDetail[2, dgvShipmentDetail.CurrentCellAddress.Y].Value.ToString();
+            TextBox textBox = sender as TextBox;
+
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            if (e.KeyChar > '0' && '9' > e.KeyChar)
+            {
+                // テキストボックスに入力されている値を取得
+                string inputText = textBox.Text + e.KeyChar;
+
+                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
+                int parsedValue;
+                if (!int.TryParse(inputText, out parsedValue))
+                {
+                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void txbEmployeeID_TextChanged(object sender, EventArgs e)
+        {
+            //nullの確認
+            string stringEmployeeID = txbEmployeeID.Text.Trim();
+            int intEmployeeID = 0;
+
+            if (!String.IsNullOrEmpty(stringEmployeeID))
+            {
+                intEmployeeID = int.Parse(stringEmployeeID);
+            }
+
+            //存在確認
+            if (!employeeDataAccess.CheckEmployeeIDExistence(intEmployeeID))
+            {
+                txbEmployeeName.Text = "社員IDが存在しません";
+                return;
+            }
+
+            //IDから名前を取り出す
+            var Employee = listEmployee.Single(x => x.EmID == intEmployeeID);
+
+            txbEmployeeName.Text = Employee.EmName;
         }
 
         private void txbClientID_TextChanged(object sender, EventArgs e)
@@ -934,7 +1204,25 @@ namespace SalesManagement_SysDev
             txbClientName.Text = Client.ClName;
         }
 
-        private void txbEmployeeID_TextChanged(object sender, EventArgs e)
+        private void RadioButton_Checked(object sender, EventArgs e)
+        {
+            if (rdbSearch.Checked)
+            {
+
+            }
+
+            if (rdbUpdate.Checked)
+            {
+
+            }
+
+            if (rdbConfirm.Checked)
+            {
+
+            }
+        }
+        
+        private void txbEmployeeID_TextChanged_1(object sender, EventArgs e)
         {
             //nullの確認
             string stringEmployeeID = txbEmployeeID.Text.Trim();

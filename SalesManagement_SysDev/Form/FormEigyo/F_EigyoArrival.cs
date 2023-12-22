@@ -189,6 +189,8 @@ namespace SalesManagement_SysDev
 
             rdbUpdate.Checked = true;
 
+            txbNumPage.Text = "1";
+
             GetDataGridView();
         }
         ///////////////////////////////
@@ -600,6 +602,14 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
             //操作ログデータ取得
             var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
 
@@ -639,7 +649,7 @@ namespace SalesManagement_SysDev
                 //入荷IDの存在チェック
                 if (!arrivalDataAccess.CheckArrivalIDExistence(int.Parse(txbArrivalID.Text.Trim())))
                 {
-                    MessageBox.Show("入荷IDが存在していません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("入荷IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbArrivalID.Focus();
                     return false;
                 }
@@ -686,15 +696,7 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void UpdateArrival(T_Arrival updArrival)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
-            // 入荷情報の更新
+            // 発注情報の更新
             bool flg = arrivalDataAccess.UpdateArrivalData(updArrival);
 
             if (flg == true)
@@ -960,6 +962,14 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("確定しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
             //操作ログデータ取得
             var regOperationLog = GenerateLogAtRegistration(rdbConfirm.Text);
 
@@ -1056,14 +1066,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void ConfirmArrival(T_Arrival cfmArrival)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("確定しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
             // 発注情報の更新
             bool flg = arrivalDataAccess.ConfirmArrivalData(cfmArrival);
 
@@ -1172,12 +1174,6 @@ namespace SalesManagement_SysDev
                 cmbHidden.Enabled = false;
                 cmbConfirm.Enabled = false;
             }
-            else
-            {
-                txbHidden.Enabled = true;
-                cmbHidden.Enabled = true;
-                cmbConfirm.Enabled = true;
-            }
 
             if (rdbUpdate.Checked)
             {
@@ -1189,16 +1185,6 @@ namespace SalesManagement_SysDev
                 cmbSalesOfficeID.Enabled = false;
                 dtpArrivalDate.Enabled = false;
             }
-            else
-            {
-                txbArrivalID.Enabled = true;
-                txbClientID.Enabled = true;
-                txbEmployeeID.Enabled = true;
-                txbOrderID.Enabled = true;
-                cmbConfirm.Enabled = true;
-                cmbSalesOfficeID.Enabled = true;
-                dtpArrivalDate.Enabled = true;
-            }
 
             if (rdbConfirm.Checked)
             {
@@ -1209,16 +1195,6 @@ namespace SalesManagement_SysDev
                 dtpArrivalDate.Enabled = false;
                 txbHidden.Enabled = false;
                 cmbHidden.Enabled = false;
-            }
-            else
-            {
-                txbClientID.Enabled = true;
-                txbEmployeeID.Enabled = true;
-                txbOrderID.Enabled = true;
-                cmbSalesOfficeID.Enabled = true;
-                dtpArrivalDate.Enabled = true;
-                txbHidden.Enabled = true;
-                cmbHidden.Enabled = true;
             }
         }
 

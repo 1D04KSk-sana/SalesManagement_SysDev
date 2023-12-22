@@ -35,6 +35,34 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：CheckProdactMakerIDExistence()
+        //引　数   ：メーカーID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致するメーカーIDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckProdactMakerIDExistence(int MakerID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<M_Product> listProdact = context.M_Products.Where(x => x.PrFlag == 0).ToList();
+
+                //商品IDで一致するデータが存在するか
+                flg = listProdact.Any(x => x.MaID == MakerID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
         //メソッド名：GetProdactDspData()
         //引　数：なし
         //戻り値：管理Flgが表示の商品データ
@@ -81,28 +109,28 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：GetProdactID()
+        //メソッド名：GetProdactIDName()
         //引　数   ：商品名
-        //戻り値   ：商品ID
-        //機　能   ：一致する商品名を取り出して、IDを取得
+        //戻り値   ：商品データ
+        //機　能   ：一致する商品名を取り出して、商品データを取得
         ///////////////////////////////
-        public int GetProdactID(string prodactName)
+        public M_Product GetProdactIDName(string prodactName)
         {
-            int prodactID = 0;
+            M_Product Prodact = new M_Product { };
 
             try
             {
                 var context = new SalesManagement_DevContext();
-                var Prodact = context.M_Products.Single(x => x.PrName == prodactName);
+                Prodact = context.M_Products.Single(x => x.PrName == prodactName);
 
-                prodactID = Prodact.PrID;
+                context.Dispose();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            return prodactID;
+            return Prodact;
         }
 
         ///////////////////////////////
@@ -230,7 +258,6 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var Prodact = context.M_Products.Single(x => x.PrID == updProdact.PrID);
 
-                Prodact.PrID = updProdact.PrID;
                 Prodact.MaID = updProdact.MaID;
                 Prodact.PrName = updProdact.PrName;
                 Prodact.Price = updProdact.Price;

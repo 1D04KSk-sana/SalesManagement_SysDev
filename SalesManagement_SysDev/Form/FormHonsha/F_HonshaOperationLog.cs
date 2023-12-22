@@ -57,6 +57,8 @@ namespace SalesManagement_SysDev
 
             rdbSearch.Checked = false;
 
+            txbNumPage.Text = "1";
+
             GetDataGridView();
         }
         private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -110,17 +112,6 @@ namespace SalesManagement_SysDev
             }
         }
 
-        private void RadioButton_Checked(object sender, EventArgs e)
-        {
-            if (rdbSearch.Checked)
-            {
-
-            }
-            else
-            {
-
-            }
-        }
         ///////////////////////////////
         //メソッド名：SetFormDataGridView()
         //引　数   ：なし

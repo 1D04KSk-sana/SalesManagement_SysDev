@@ -164,6 +164,8 @@ namespace SalesManagement_SysDev
 
             rdbRegister.Checked = true;
 
+            txbNumPage.Text = "1";
+
             GetDataGridView();
         }
 
@@ -353,16 +355,8 @@ namespace SalesManagement_SysDev
             {
 
             }
-            else
-            {
-
-            }
 
             if (rdbDetailRegister.Checked)
-            {
-
-            }
-            else
             {
 
             }
@@ -371,25 +365,13 @@ namespace SalesManagement_SysDev
             {
 
             }
-            else
-            {
-
-            }
 
             if (rdbUpdate.Checked)
             {
 
             }
-            else
-            {
-
-            }
 
             if (rdbConfirm.Checked)
-            {
-
-            }
-            else
             {
 
             }
@@ -456,6 +438,14 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            // 登録確認メッセージ
+            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
             //操作ログデータ取得
             var regOperationLog = GenerateLogAtRegistration(rdbRegister.Text);
             
@@ -482,31 +472,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-            //受注IDの適否
-            if (!String.IsNullOrEmpty(txbOrderID.Text.Trim()))
-            {
-                //受注IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbOrderID.Text.Trim()))
-                {
-                    MessageBox.Show("受注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbOrderID.Focus();
-                    return false;
-                }
-                //受注IDの存在チェック
-                if (orderDataAccess.CheckOrderIDExistence(int.Parse(txbOrderID.Text.Trim())))
-                {
-                    MessageBox.Show("受注IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbOrderID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("受注IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbOrderID.Focus();
-                return false;
-            }
-
             //営業所選択の適否
             if (cmbSalesOfficeID.SelectedIndex == -1)
             {
@@ -572,7 +537,6 @@ namespace SalesManagement_SysDev
         {
             return new T_Order
             {
-                OrID = int.Parse(txbOrderID.Text.Trim()),
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 EmID = F_Login.intEmployeeID,
                 ClID = clientDataAccess.GetClientID(txbClientName.Text.Trim()),
@@ -592,14 +556,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void RegistrationOrder(T_Order regOrder)
         {
-            // 登録確認メッセージ
-            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
             // 受注情報の登録
             bool flg = orderDataAccess.AddOrderData(regOrder);
 
@@ -631,6 +587,14 @@ namespace SalesManagement_SysDev
         {
             //入力情報適否
             if (!GetValidDetailDataAtRegistration())
+            {
+                return;
+            }
+
+            // 登録確認メッセージ
+            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
             {
                 return;
             }
@@ -764,14 +728,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void RegistrationOrderDetail(T_OrderDetail regOrder)
         {
-            // 登録確認メッセージ
-            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
             // 受注情報の登録
             bool flg = orderDetailDataAccess.AddOrderDetailData(regOrder);
 
@@ -803,6 +759,14 @@ namespace SalesManagement_SysDev
         {
             //テキストボックス等の入力チェック
             if (!GetValidDataAtUpdate())
+            {
+                return;
+            }
+
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
             {
                 return;
             }
@@ -893,14 +857,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void UpdateOrder(T_Order updOrder)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
             // 受注情報の更新
             bool flg = orderDataAccess.UpdateOrderData(updOrder);
 
@@ -931,6 +887,14 @@ namespace SalesManagement_SysDev
         {
             //テキストボックス等の入力チェック
             if (!GetValidDataAtConfirm())
+            {
+                return;
+            }
+
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("確定しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
             {
                 return;
             }
@@ -1029,14 +993,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void ConfirmOrder(T_Order cfmOrder)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("確定しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
             // 受注情報の更新
             bool flg = orderDataAccess.ConfirmOrderData(cfmOrder);
 
