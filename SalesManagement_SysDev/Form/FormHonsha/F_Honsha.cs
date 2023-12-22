@@ -113,8 +113,17 @@ namespace SalesManagement_SysDev
 
             this.Opacity = 0;
         }
+        private void btnFormClassification_Click(object sender, EventArgs e)
+        {
+            F_HonshaClassification F_HonshaClassification = new F_HonshaClassification();
 
-        private void btnClose_Click(object sender, EventArgs e)
+            F_HonshaClassification.Owner = this;
+            F_HonshaClassification.FormClosed += ChildForm_FormClosed;
+            F_HonshaClassification.Show();
+
+            this.Opacity = 0;
+        }
+    private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
