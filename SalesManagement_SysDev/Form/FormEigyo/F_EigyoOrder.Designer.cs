@@ -49,7 +49,6 @@
             this.lblClientName = new System.Windows.Forms.Label();
             this.txbOrderID = new System.Windows.Forms.TextBox();
             this.lblOrderID = new System.Windows.Forms.Label();
-            this.pnlSelect = new System.Windows.Forms.Panel();
             this.rdbUpdate = new System.Windows.Forms.RadioButton();
             this.rdbConfirm = new System.Windows.Forms.RadioButton();
             this.rdbDetailRegister = new System.Windows.Forms.RadioButton();
@@ -83,7 +82,6 @@
             this.cmbConfirm = new System.Windows.Forms.ComboBox();
             this.btnDetailClear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).BeginInit();
-            this.pnlSelect.SuspendLayout();
             this.pnlHonsha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).BeginInit();
@@ -207,15 +205,15 @@
             // 
             this.cmbView.BackColor = System.Drawing.Color.White;
             this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 26F);
             this.cmbView.FormattingEnabled = true;
             this.cmbView.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbView.Location = new System.Drawing.Point(1054, 184);
+            this.cmbView.Location = new System.Drawing.Point(984, 184);
             this.cmbView.Margin = new System.Windows.Forms.Padding(2);
             this.cmbView.Name = "cmbView";
-            this.cmbView.Size = new System.Drawing.Size(220, 32);
+            this.cmbView.Size = new System.Drawing.Size(290, 43);
             this.cmbView.TabIndex = 54;
             this.cmbView.TabStop = false;
             this.cmbView.SelectedIndexChanged += new System.EventHandler(this.cmbView_SelectedIndexChanged);
@@ -223,7 +221,7 @@
             // btnClear
             // 
             this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClear.Location = new System.Drawing.Point(1306, 184);
+            this.btnClear.Location = new System.Drawing.Point(1329, 173);
             this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(160, 70);
@@ -348,22 +346,11 @@
             this.lblOrderID.TabIndex = 34;
             this.lblOrderID.Text = "受注ID";
             // 
-            // pnlSelect
-            // 
-            this.pnlSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(219)))), ((int)(((byte)(193)))));
-            this.pnlSelect.Controls.Add(this.rdbUpdate);
-            this.pnlSelect.Location = new System.Drawing.Point(40, 171);
-            this.pnlSelect.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlSelect.Name = "pnlSelect";
-            this.pnlSelect.Size = new System.Drawing.Size(712, 39);
-            this.pnlSelect.TabIndex = 33;
-            this.pnlSelect.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlSelect_Paint);
-            // 
             // rdbUpdate
             // 
             this.rdbUpdate.AutoSize = true;
             this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbUpdate.Location = new System.Drawing.Point(287, 2);
+            this.rdbUpdate.Location = new System.Drawing.Point(329, 185);
             this.rdbUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.rdbUpdate.Name = "rdbUpdate";
             this.rdbUpdate.Size = new System.Drawing.Size(208, 39);
@@ -376,7 +363,7 @@
             // 
             this.rdbConfirm.AutoSize = true;
             this.rdbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbConfirm.Location = new System.Drawing.Point(539, 171);
+            this.rdbConfirm.Location = new System.Drawing.Point(541, 185);
             this.rdbConfirm.Margin = new System.Windows.Forms.Padding(2);
             this.rdbConfirm.Name = "rdbConfirm";
             this.rdbConfirm.Size = new System.Drawing.Size(103, 39);
@@ -389,7 +376,7 @@
             // 
             this.rdbDetailRegister.AutoSize = true;
             this.rdbDetailRegister.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbDetailRegister.Location = new System.Drawing.Point(150, 171);
+            this.rdbDetailRegister.Location = new System.Drawing.Point(152, 185);
             this.rdbDetailRegister.Margin = new System.Windows.Forms.Padding(2);
             this.rdbDetailRegister.Name = "rdbDetailRegister";
             this.rdbDetailRegister.Size = new System.Drawing.Size(173, 39);
@@ -402,7 +389,7 @@
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(646, 171);
+            this.rdbSearch.Location = new System.Drawing.Point(648, 185);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
@@ -416,7 +403,7 @@
             this.rdbRegister.AutoSize = true;
             this.rdbRegister.Checked = true;
             this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbRegister.Location = new System.Drawing.Point(43, 171);
+            this.rdbRegister.Location = new System.Drawing.Point(45, 185);
             this.rdbRegister.Margin = new System.Windows.Forms.Padding(2);
             this.rdbRegister.Name = "rdbRegister";
             this.rdbRegister.Size = new System.Drawing.Size(103, 39);
@@ -429,7 +416,7 @@
             // btnDone
             // 
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnDone.Location = new System.Drawing.Point(1698, 184);
+            this.btnDone.Location = new System.Drawing.Point(1721, 173);
             this.btnDone.Margin = new System.Windows.Forms.Padding(2);
             this.btnDone.Name = "btnDone";
             this.btnDone.Size = new System.Drawing.Size(160, 70);
@@ -483,7 +470,7 @@
             this.lblOrder.Location = new System.Drawing.Point(854, 42);
             this.lblOrder.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOrder.Name = "lblOrder";
-            this.lblOrder.Size = new System.Drawing.Size(288, 64);
+            this.lblOrder.Size = new System.Drawing.Size(287, 64);
             this.lblOrder.TabIndex = 23;
             this.lblOrder.Text = "受注管理";
             this.lblOrder.Click += new System.EventHandler(this.lblOrder_Click);
@@ -735,7 +722,7 @@
             // btnDetailClear
             // 
             this.btnDetailClear.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnDetailClear.Location = new System.Drawing.Point(1487, 184);
+            this.btnDetailClear.Location = new System.Drawing.Point(1510, 173);
             this.btnDetailClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnDetailClear.Name = "btnDetailClear";
             this.btnDetailClear.Size = new System.Drawing.Size(187, 70);
@@ -751,6 +738,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(219)))), ((int)(((byte)(193)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.rdbUpdate);
             this.Controls.Add(this.rdbConfirm);
             this.Controls.Add(this.btnDetailClear);
             this.Controls.Add(this.rdbDetailRegister);
@@ -798,7 +786,6 @@
             this.Controls.Add(this.lblClientName);
             this.Controls.Add(this.txbOrderID);
             this.Controls.Add(this.lblOrderID);
-            this.Controls.Add(this.pnlSelect);
             this.Controls.Add(this.btnDone);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -807,8 +794,6 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.F_EigyoOrder_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).EndInit();
-            this.pnlSelect.ResumeLayout(false);
-            this.pnlSelect.PerformLayout();
             this.pnlHonsha.ResumeLayout(false);
             this.pnlHonsha.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
@@ -841,7 +826,6 @@
         private System.Windows.Forms.Label lblClientName;
         private System.Windows.Forms.TextBox txbOrderID;
         private System.Windows.Forms.Label lblOrderID;
-        private System.Windows.Forms.Panel pnlSelect;
         private System.Windows.Forms.RadioButton rdbSearch;
         private System.Windows.Forms.RadioButton rdbRegister;
         private System.Windows.Forms.Button btnDone;
