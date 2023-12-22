@@ -39,6 +39,7 @@
             this.btnPsition = new System.Windows.Forms.Button();
             this.btnFormSalesOffice = new System.Windows.Forms.Button();
             this.btnFormMaker = new System.Windows.Forms.Button();
+            this.btnFormClassification = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -174,6 +175,18 @@
             this.btnPsition.Text = "役職管理画面";
             this.btnPsition.UseVisualStyleBackColor = true;
             this.btnPsition.Click += new System.EventHandler(this.btnPsition_Click);
+            //
+            // btnFormClassification
+            // 
+            this.btnFormClassification.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormClassification.Location = new System.Drawing.Point(1288, 646);
+            this.btnFormClassification.Name = "btnFormClassification";
+            this.btnFormClassification.Size = new System.Drawing.Size(510, 100);
+            this.btnFormClassification.TabIndex = 11;
+            this.btnFormClassification.TabStop = false;
+            this.btnFormClassification.Text = "分類管理画面";
+            this.btnFormClassification.UseVisualStyleBackColor = true;
+            this.btnFormClassification.Click += new System.EventHandler(this.btnFormClassification_Click);
             // 
             // F_Honsha
             // 
@@ -182,6 +195,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.Controls.Add(this.btnPsition);
+            this.Controls.Add(this.btnFormClassification);
             this.Controls.Add(this.btnFormMaker);
             this.Controls.Add(this.btnFormSalesOffice);
             this.Controls.Add(this.panel1);
@@ -214,5 +228,6 @@
         private System.Windows.Forms.Button btnPsition;
         private System.Windows.Forms.Button btnFormSalesOffice;
         private System.Windows.Forms.Button btnFormMaker;
+        private System.Windows.Forms.Button btnFormClassification;
     }
 }
