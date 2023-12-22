@@ -846,17 +846,27 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
-
+                txbPositionID.Enabled = true;
+                txbPositionName.Enabled = true;
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
             }
 
             if (rdbRegister.Checked)
             {
-
+                txbPositionID.Enabled = true;
+                txbPositionName.Enabled = true;
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
             }
+
 
             if (rdbUpdate.Checked)
             {
-
+                txbPositionID.Enabled = true;
+                txbPositionName.Enabled = true;
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
             }
         }
     }

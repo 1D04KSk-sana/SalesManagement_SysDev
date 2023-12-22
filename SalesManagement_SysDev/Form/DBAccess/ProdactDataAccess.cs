@@ -147,20 +147,25 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.M_Products.AsQueryable();
 
-                if (selectProdact.PrID != null && selectProdact.PrID != 0)
+                if (selectProdact.PrID != 0)
                 {
                     query = query.Where(x => x.PrID == selectProdact.PrID);
                 }
 
-                if (selectProdact.McID != null && selectProdact.McID != 0)
+                if (selectProdact.McID != 0)
                 {
                     query = query.Where(x => x.McID == selectProdact.McID);
                 }
 
-                if (selectProdact.MaID != null && selectProdact.MaID != 0)
+                if (selectProdact.MaID != 0)
                 {
                     query = query.Where(x => x.MaID == selectProdact.MaID);
                 }
+                if (selectProdact.ScID != 0)
+                {
+                    query = query.Where(x => x.ScID == selectProdact.ScID);
+                }
+
 
                 listProdact = query.ToList();
                 context.Dispose();
@@ -185,7 +190,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listProdact = context.M_Products.Where(x => x.PrID == selectProdact.PrID || x.McID == selectProdact.McID || x.MaID == selectProdact.MaID).ToList();
+                listProdact = context.M_Products.Where(x => x.PrID == selectProdact.PrID || x.McID == selectProdact.McID || x.ScID == selectProdact.ScID || x.MaID == selectProdact.MaID).ToList();
 
                 context.Dispose();
             }

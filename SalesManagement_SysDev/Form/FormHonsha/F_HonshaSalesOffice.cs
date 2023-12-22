@@ -193,17 +193,20 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
-
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
+                txbSalesOfficeFAX.Enabled = false;
+                txbSalesOfficePostal.Enabled = false;
+                txbSalesOfficeAddress.Enabled = false;
+                txbSalesOfficeName.Enabled = false;
             }
-
             if (rdbRegister.Checked)
             {
-
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
             }
-
             if (rdbUpdate.Checked)
             {
-
             }
         }
         ///////////////////////////////

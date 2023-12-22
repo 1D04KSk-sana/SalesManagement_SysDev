@@ -468,16 +468,23 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
+                txbChumonID.Enabled = true;
+                txbClientID.Enabled = true;
+                txbSaleID.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                dtpSaleDate.Enabled = true;
                 cmbHidden.Enabled = false;
                 txbHidden.Enabled = false;
             }
-
             if (rdbHiddenUpdate.Checked)
             {
-                txbClientName.Enabled = false;
-                cmbSalesOfficeID.Enabled = false;
                 txbChumonID.Enabled = false;
+                txbClientID.Enabled = false;
+                txbSaleID.Enabled = true;
+                cmbSalesOfficeID.Enabled = false;
                 dtpSaleDate.Enabled = false;
+                cmbHidden.Enabled = false;
+                txbHidden.Enabled = false;
             }
         }
 
@@ -592,7 +599,7 @@ namespace SalesManagement_SysDev
             dgvSale.Refresh();
 
 
-            if (pageNum == 0 && lastPage == pageNum)
+            if (lastPage == -1 || (lastPage == pageNum && pageNum == 0))
             {
                 btnPageMax.Visible = false;
                 btnNext.Visible = false;

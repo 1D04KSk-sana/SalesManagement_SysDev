@@ -306,7 +306,7 @@ namespace SalesManagement_SysDev
             dgvArrival.Refresh();
 
 
-            if (pageNum == 0 && lastPage == pageNum)
+            if (lastPage == -1 || (lastPage == pageNum && pageNum == 0))
             {
                 btnPageMax.Visible = false;
                 btnNext.Visible = false;
@@ -398,8 +398,8 @@ namespace SalesManagement_SysDev
             dgvArrival.Columns.Add("ArHidden", "非表示理由");
 
             dgvArrival.Columns["ArID"].Width = 112;
-            dgvArrival.Columns["SoID"].Width = 162;
-            dgvArrival.Columns["EmID"].Width = 150;
+            dgvArrival.Columns["SoID"].Width = 172;
+            dgvArrival.Columns["EmID"].Width = 140;
             dgvArrival.Columns["ClID"].Width = 152;
             dgvArrival.Columns["OrID"].Width = 100;
             dgvArrival.Columns["ArDate"].Width = 160;
@@ -1170,14 +1170,23 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
+                cmbSalesOfficeID.Enabled = true;
+                txbArrivalID.Enabled = true;
+                dtpArrivalDate.Enabled = true;
+                txbClientID.Enabled = true;
+                txbEmployeeID.Enabled = true;
+                txbOrderID.Enabled = true;
+
                 txbHidden.Enabled = false;
                 cmbHidden.Enabled = false;
                 cmbConfirm.Enabled = false;
             }
-
             if (rdbUpdate.Checked)
             {
-                txbArrivalID.Enabled = false;
+                txbArrivalID.Enabled = true;
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
+
                 txbClientID.Enabled = false;
                 txbEmployeeID.Enabled = false;
                 txbOrderID.Enabled = false;
@@ -1188,6 +1197,9 @@ namespace SalesManagement_SysDev
 
             if (rdbConfirm.Checked)
             {
+                txbArrivalID.Enabled = true;
+                cmbConfirm.Enabled = true;
+
                 txbClientID.Enabled = false;
                 txbEmployeeID.Enabled = false;
                 txbOrderID.Enabled = false;

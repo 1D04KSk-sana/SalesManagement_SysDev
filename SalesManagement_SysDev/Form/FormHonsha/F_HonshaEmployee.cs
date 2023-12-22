@@ -1005,13 +1005,29 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
+                txbEmployeeID.Enabled = true;
+                txbEmployeePhone.Enabled = true;
+                txbEmployeePhone.Enabled=true;
+                cmbSalesOfficeID.Enabled = true;
+                cmbPositionName.Enabled = true;
 
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
+                txbEmployeeName.Enabled = false;
             }
 
             if (rdbUpdate.Checked)
             {
-
+                txbEmployeeID.Enabled = true;
+                txbEmployeePhone.Enabled = true;
+                txbEmployeePhone.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                cmbPositionName.Enabled = true;
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
+                txbEmployeeName.Enabled = true;
             }
+
         }
     }
 }

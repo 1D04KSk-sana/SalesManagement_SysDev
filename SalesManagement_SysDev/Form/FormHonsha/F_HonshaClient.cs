@@ -276,17 +276,42 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
-
+                txbClientID.Enabled = true;
+                txbClientPhone.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
+                txbClientName.Enabled = false;
+                txbClientAddress.Enabled=false;
+                txbClientFAX.Enabled = false;
+                txbClientPostal.Enabled = false;
             }
 
             if (rdbUpdate.Checked)
             {
-
+                txbClientID.Enabled = true;
+                txbClientPhone.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
+                txbClientName.Enabled = true;
+                txbClientAddress.Enabled = true;
+                txbClientFAX.Enabled = true;
+                txbClientPostal.Enabled = true;
             }
 
             if (rdbRegister.Checked)
             {
-
+                txbClientID.Enabled = true;
+                txbClientPhone.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
+                txbClientName.Enabled = true;
+                txbClientAddress.Enabled = true;
+                txbClientFAX.Enabled = true;
+                txbClientPostal.Enabled = true;
             }
         }
 

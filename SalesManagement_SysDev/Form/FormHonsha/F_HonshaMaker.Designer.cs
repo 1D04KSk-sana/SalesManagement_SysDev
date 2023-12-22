@@ -91,7 +91,7 @@ namespace SalesManagement_SysDev
             this.lblMaker.Location = new System.Drawing.Point(778, 33);
             this.lblMaker.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMaker.Name = "lblMaker";
-            this.lblMaker.Size = new System.Drawing.Size(356, 64);
+            this.lblMaker.Size = new System.Drawing.Size(355, 64);
             this.lblMaker.TabIndex = 24;
             this.lblMaker.Text = "メーカー管理";
             // 
@@ -217,7 +217,7 @@ namespace SalesManagement_SysDev
             // txbMakerName
             // 
             this.txbMakerName.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbMakerName.Location = new System.Drawing.Point(685, 289);
+            this.txbMakerName.Location = new System.Drawing.Point(711, 289);
             this.txbMakerName.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txbMakerName.Name = "txbMakerName";
             this.txbMakerName.Size = new System.Drawing.Size(220, 31);
@@ -338,7 +338,7 @@ namespace SalesManagement_SysDev
             // 
             this.lblCilentPhone.AutoSize = true;
             this.lblCilentPhone.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.lblCilentPhone.Location = new System.Drawing.Point(977, 292);
+            this.lblCilentPhone.Location = new System.Drawing.Point(1007, 292);
             this.lblCilentPhone.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCilentPhone.Name = "lblCilentPhone";
             this.lblCilentPhone.Size = new System.Drawing.Size(106, 24);
@@ -348,7 +348,7 @@ namespace SalesManagement_SysDev
             // txbMakerPhone
             // 
             this.txbMakerPhone.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbMakerPhone.Location = new System.Drawing.Point(1111, 289);
+            this.txbMakerPhone.Location = new System.Drawing.Point(1144, 289);
             this.txbMakerPhone.Margin = new System.Windows.Forms.Padding(1);
             this.txbMakerPhone.Name = "txbMakerPhone";
             this.txbMakerPhone.Size = new System.Drawing.Size(220, 31);

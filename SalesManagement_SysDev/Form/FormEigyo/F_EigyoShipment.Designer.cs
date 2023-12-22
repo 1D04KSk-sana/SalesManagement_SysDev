@@ -220,22 +220,24 @@
             this.txbShipmentID.Name = "txbShipmentID";
             this.txbShipmentID.Size = new System.Drawing.Size(220, 31);
             this.txbShipmentID.TabIndex = 148;
+            this.txbShipmentID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // txbOrderID
             // 
             this.txbOrderID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbOrderID.ForeColor = System.Drawing.Color.Black;
-            this.txbOrderID.Location = new System.Drawing.Point(669, 277);
+            this.txbOrderID.Location = new System.Drawing.Point(1083, 357);
             this.txbOrderID.Margin = new System.Windows.Forms.Padding(2);
             this.txbOrderID.Name = "txbOrderID";
             this.txbOrderID.Size = new System.Drawing.Size(220, 31);
             this.txbOrderID.TabIndex = 150;
+            this.txbOrderID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label4.Location = new System.Drawing.Point(973, 281);
+            this.label4.Location = new System.Drawing.Point(557, 281);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(106, 24);
@@ -246,7 +248,7 @@
             // 
             this.lblEmployeeName.AutoSize = true;
             this.lblEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblEmployeeName.Location = new System.Drawing.Point(1432, 361);
+            this.lblEmployeeName.Location = new System.Drawing.Point(1432, 280);
             this.lblEmployeeName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEmployeeName.Name = "lblEmployeeName";
             this.lblEmployeeName.Size = new System.Drawing.Size(82, 24);
@@ -268,7 +270,7 @@
             // 
             this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbEmployeeName.ForeColor = System.Drawing.Color.Black;
-            this.txbEmployeeName.Location = new System.Drawing.Point(1532, 358);
+            this.txbEmployeeName.Location = new System.Drawing.Point(1532, 277);
             this.txbEmployeeName.Margin = new System.Windows.Forms.Padding(2);
             this.txbEmployeeName.Name = "txbEmployeeName";
             this.txbEmployeeName.ReadOnly = true;
@@ -279,7 +281,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label6.Location = new System.Drawing.Point(1348, 281);
+            this.label6.Location = new System.Drawing.Point(1348, 362);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(178, 24);
@@ -290,7 +292,7 @@
             // 
             this.dtpShipmentDate.Checked = false;
             this.dtpShipmentDate.Font = new System.Drawing.Font("MS UI Gothic", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.dtpShipmentDate.Location = new System.Drawing.Point(1532, 278);
+            this.dtpShipmentDate.Location = new System.Drawing.Point(1532, 359);
             this.dtpShipmentDate.Margin = new System.Windows.Forms.Padding(4);
             this.dtpShipmentDate.Name = "dtpShipmentDate";
             this.dtpShipmentDate.ShowCheckBox = true;
@@ -301,12 +303,12 @@
             // 
             this.dgvShipmentDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvShipmentDetail.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.dgvShipmentDetail.Location = new System.Drawing.Point(1135, 514);
+            this.dgvShipmentDetail.Location = new System.Drawing.Point(1198, 514);
             this.dgvShipmentDetail.Margin = new System.Windows.Forms.Padding(2);
             this.dgvShipmentDetail.Name = "dgvShipmentDetail";
             this.dgvShipmentDetail.RowHeadersWidth = 51;
             this.dgvShipmentDetail.RowTemplate.Height = 24;
-            this.dgvShipmentDetail.Size = new System.Drawing.Size(748, 499);
+            this.dgvShipmentDetail.Size = new System.Drawing.Size(700, 501);
             this.dgvShipmentDetail.TabIndex = 169;
             this.dgvShipmentDetail.TabStop = false;
             // 
@@ -319,7 +321,7 @@
             this.dgvShipment.Name = "dgvShipment";
             this.dgvShipment.RowHeadersWidth = 51;
             this.dgvShipment.RowTemplate.Height = 24;
-            this.dgvShipment.Size = new System.Drawing.Size(1102, 499);
+            this.dgvShipment.Size = new System.Drawing.Size(1170, 500);
             this.dgvShipment.TabIndex = 168;
             this.dgvShipment.TabStop = false;
             this.dgvShipment.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvShipment_CellClick);
@@ -442,7 +444,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(583, 280);
+            this.label2.Location = new System.Drawing.Point(997, 362);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(80, 24);
@@ -522,7 +524,7 @@
             this.cmbSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSalesOfficeID.ForeColor = System.Drawing.Color.Black;
             this.cmbSalesOfficeID.FormattingEnabled = true;
-            this.cmbSalesOfficeID.Location = new System.Drawing.Point(1083, 277);
+            this.cmbSalesOfficeID.Location = new System.Drawing.Point(669, 277);
             this.cmbSalesOfficeID.Margin = new System.Windows.Forms.Padding(4);
             this.cmbSalesOfficeID.Name = "cmbSalesOfficeID";
             this.cmbSalesOfficeID.Size = new System.Drawing.Size(220, 32);
@@ -555,7 +557,7 @@
             // 
             this.lblEmployeeID.AutoSize = true;
             this.lblEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblEmployeeID.Location = new System.Drawing.Point(982, 364);
+            this.lblEmployeeID.Location = new System.Drawing.Point(982, 280);
             this.lblEmployeeID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEmployeeID.Name = "lblEmployeeID";
             this.lblEmployeeID.Size = new System.Drawing.Size(80, 24);
@@ -566,7 +568,7 @@
             // 
             this.txbEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbEmployeeID.ForeColor = System.Drawing.Color.Black;
-            this.txbEmployeeID.Location = new System.Drawing.Point(1083, 360);
+            this.txbEmployeeID.Location = new System.Drawing.Point(1083, 278);
             this.txbEmployeeID.Margin = new System.Windows.Forms.Padding(2);
             this.txbEmployeeID.Name = "txbEmployeeID";
             this.txbEmployeeID.Size = new System.Drawing.Size(220, 31);
