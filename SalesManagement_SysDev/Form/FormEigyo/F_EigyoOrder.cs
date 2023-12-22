@@ -1102,7 +1102,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbOrderID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbEmployeeID.Text.Trim()) && String.IsNullOrEmpty(txbClientID.Text.Trim())&& dtpOrderDate.Checked==false)
+            if (String.IsNullOrEmpty(txbOrderID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbEmployeeID.Text.Trim()) && String.IsNullOrEmpty(txbClientID.Text.Trim())&& dtpOrderDate.Checked==false && cmbConfirm.SelectedIndex == -1)
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbOrderID.Focus();
@@ -1237,7 +1237,7 @@ namespace SalesManagement_SysDev
                 EmID = intEmployeeID,
                 ClID = intClientID,
                 OrDate = dateOrder,
-
+                OrStateFlag = cmbConfirm.SelectedIndex
             };
 
             if (searchFlg)

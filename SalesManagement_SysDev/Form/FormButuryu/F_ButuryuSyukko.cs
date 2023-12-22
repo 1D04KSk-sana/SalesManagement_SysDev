@@ -14,6 +14,8 @@ namespace SalesManagement_SysDev
     {
         //データベース出庫テーブルアクセス用クラスのインスタンス化
         SyukkoDataAccess SyukkoDataAccess = new SyukkoDataAccess();
+        //データベース受注テーブルアクセス用クラスのインスタンス化
+        OrderDataAccess orderDataAccess = new OrderDataAccess();
         //データベース入荷テーブルアクセス用クラスのインスタンス化
         ArrivalDataAccess arrivalDataAccess = new ArrivalDataAccess();
         //データベース入荷詳細テーブルアクセス用クラスのインスタンス化
@@ -591,7 +593,7 @@ namespace SalesManagement_SysDev
         {
             //検索の部分で受注IDに出庫IDを入れているので修正してほしい 
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbSyukkoID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbChumonID.Text.Trim()))
+            if (String.IsNullOrEmpty(txbSyukkoID.Text.Trim()) && cmbSalesOfficeID.SelectedIndex == -1 && String.IsNullOrEmpty(txbOrderID.Text.Trim()) && String.IsNullOrEmpty(txbClientID.Text.Trim()) && String.IsNullOrEmpty(txbEmployeeID.Text.Trim()) && dtpSyukkoDate.Checked == false && cmbConfirm.SelectedIndex == -1)
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbSyukkoID.Focus();
@@ -599,20 +601,76 @@ namespace SalesManagement_SysDev
             }
 
             // 顧客IDの適否
-            if (!String.IsNullOrEmpty(txbChumonID.Text.Trim()))
+            if (!String.IsNullOrEmpty(txbOrderID.Text.Trim()))
             {
                 // 顧客IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbChumonID.Text.Trim()))
+                if (!dataInputCheck.CheckNumeric(txbOrderID.Text.Trim()))
                 {
-                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbChumonID.Focus();
+                    MessageBox.Show("受注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbOrderID.Focus();
                     return false;
                 }
                 //顧客IDの重複チェック
-                if (!chumonDataAccess.CheckChumonIDExistence(int.Parse(txbChumonID.Text.Trim())))
+                if (!orderDataAccess.CheckOrderIDExistence(int.Parse(txbOrderID.Text.Trim())))
+                {
+                    MessageBox.Show("受注IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbOrderID.Focus();
+                    return false;
+                }
+            }
+
+            // 顧客IDの適否
+            if (!String.IsNullOrEmpty(txbSyukkoID.Text.Trim()))
+            {
+                // 顧客IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbSyukkoID.Text.Trim()))
+                {
+                    MessageBox.Show("出庫IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSyukkoID.Focus();
+                    return false;
+                }
+                //顧客IDの重複チェック
+                if (!SyukkoDataAccess.CheckSyukkoIDExistence(int.Parse(txbSyukkoID.Text.Trim())))
+                {
+                    MessageBox.Show("出庫IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSyukkoID.Focus();
+                    return false;
+                }
+            }
+
+            // 顧客IDの適否
+            if (!String.IsNullOrEmpty(txbClientID.Text.Trim()))
+            {
+                // 顧客IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbClientID.Text.Trim()))
+                {
+                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+                //注文IDの重複チェック
+                if (!clientDataAccess.CheckClientIDExistence(int.Parse(txbClientID.Text.Trim())))
                 {
                     MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbChumonID.Focus();
+                    txbClientID.Focus();
+                    return false;
+                }
+            }
+            // 社員IDの適否
+            if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
+            {
+                // 社員IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbEmployeeID.Text.Trim()))
+                {
+                    MessageBox.Show("社員IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+                //社員IDの重複チェック
+                if (!employeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    MessageBox.Show("社員IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
                     return false;
                 }
             }
@@ -632,7 +690,7 @@ namespace SalesManagement_SysDev
             txbClientID.Text = string.Empty;
             cmbSalesOfficeID.SelectedIndex = -1;
             txbEmployeeName.Text = string.Empty;
-            txbChumonID.Text = string.Empty;
+            txbOrderID.Text = string.Empty;
             cmbHidden.SelectedIndex = -1;
             txbHidden.Text = string.Empty;
             txbEmployeeID.Text = string.Empty;
@@ -712,12 +770,46 @@ namespace SalesManagement_SysDev
                 intSyukkoID = int.Parse(strSyukkoID);
             }
 
+            string strOrderID = txbOrderID.Text.Trim();
+            int intOrderID = 0;
+
+            if (!String.IsNullOrEmpty(strOrderID))
+            {
+                intOrderID = int.Parse(strOrderID);
+            }
+
+            string strClientID = txbClientID.Text.Trim();
+            int intClientID = 0;
+
+            if (!String.IsNullOrEmpty(strClientID))
+            {
+                intClientID = int.Parse(strClientID);
+            }
+
+            string strEmployeeID = txbEmployeeID.Text.Trim();
+            int intEmployeeID = 0;
+
+            if (!String.IsNullOrEmpty(strEmployeeID))
+            {
+                intEmployeeID = int.Parse(strEmployeeID);
+            }
+            DateTime? dateSyukko = null;
+
+            if (dtpSyukkoDate.Checked)
+            {
+                dateSyukko = dtpSyukkoDate.Value.Date;
+            }
             // 検索条件のセット
             T_Syukko selectCondition = new T_Syukko()
             {
                 SyID = intSyukkoID,
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
-                OrID = intSyukkoID
+                OrID = intOrderID,
+                ClID = intClientID,
+                EmID = intEmployeeID,
+                SyDate = dateSyukko,
+                SyStateFlag = cmbConfirm.SelectedIndex
+
                 //テキストボックス = txbxxxxxx.Text.Trim()
             };
 
@@ -1043,7 +1135,7 @@ namespace SalesManagement_SysDev
             txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvSyukko[1, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvSyukko[3, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvSyukko[2, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
-            txbChumonID.Text = dgvSyukko[4, dgvSyukko.CurrentCellAddress.Y].Value.ToString();
+            txbOrderID.Text = dgvSyukko[4, dgvSyukko.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSyukko[7, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvSyukko[8, dgvSyukko.CurrentCellAddress.Y]?.Value?.ToString();
             cmbConfirm.SelectedIndex = dictionaryFlag.FirstOrDefault(x => x.Value == dgvSyukko[6, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key;

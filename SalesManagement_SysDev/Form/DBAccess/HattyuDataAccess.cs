@@ -191,6 +191,10 @@ namespace SalesManagement_SysDev
                     query = query.Where(x => x.HaDate.Value == selectHattyu.HaDate.Value);
                 }
 
+                if (selectHattyu.WaWarehouseFlag != -1)
+                {
+                    query = query.Where(x => x.WaWarehouseFlag == selectHattyu.WaWarehouseFlag);
+                }
 
                 listHattyu = query.ToList();
                 context.Dispose();
@@ -215,7 +219,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listHattyu = context.T_Hattyus.Where(x => x.HaID == selectHattyu.HaID || x.EmID == selectHattyu.EmID || x.MaID == selectHattyu.MaID || x.HaDate.Value == selectHattyu.HaDate.Value).ToList();
+                listHattyu = context.T_Hattyus.Where(x => x.HaID == selectHattyu.HaID || x.EmID == selectHattyu.EmID || x.MaID == selectHattyu.MaID || x.HaDate.Value == selectHattyu.HaDate.Value || x.WaWarehouseFlag == selectHattyu.WaWarehouseFlag).ToList();
 
                 context.Dispose();
             }
