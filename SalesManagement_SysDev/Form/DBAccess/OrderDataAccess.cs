@@ -327,9 +327,15 @@ namespace SalesManagement_SysDev
                 {
                     query = query.Where(x => x.ClID == selectOrder.ClID);
                 }
+
                 if (selectOrder.OrDate != null)
                 {
                     query = query.Where(x => x.OrDate.Value == selectOrder.OrDate.Value);
+                }
+
+                if (selectOrder.OrStateFlag != -1)
+                {
+                    query = query.Where(x => x.OrStateFlag == selectOrder.OrStateFlag);
                 }
 
                 listOrder = query.ToList();
@@ -355,7 +361,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listOrder = context.T_Orders.Where(x => x.OrID == selectOrder.OrID || x.SoID == selectOrder.SoID || x.EmID == selectOrder.EmID || x.ClID == selectOrder.ClID || x.OrDate.Value == selectOrder.OrDate.Value).ToList();
+                listOrder = context.T_Orders.Where(x => x.OrID == selectOrder.OrID || x.SoID == selectOrder.SoID || x.EmID == selectOrder.EmID || x.ClID == selectOrder.ClID || x.OrDate.Value == selectOrder.OrDate.Value || x.OrStateFlag == selectOrder.OrStateFlag).ToList();
 
                 context.Dispose();
             }

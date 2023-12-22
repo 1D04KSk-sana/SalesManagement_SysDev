@@ -242,19 +242,39 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.T_Syukkos.AsQueryable();
 
-                if (selectSyukko.SyID != null && selectSyukko.SyID != 0)
+                if ( selectSyukko.SyID != 0)
                 {
                     query = query.Where(x => x.SyID == selectSyukko.SyID);
                 }
 
-                if (selectSyukko.SoID != null && selectSyukko.SoID != 0)
+                if (selectSyukko.SoID != 0)
                 {
                     query = query.Where(x => x.SoID == selectSyukko.SoID);
                 }
 
-                if (selectSyukko.OrID != null && selectSyukko.OrID != 0)
+                if (selectSyukko.OrID != 0)
                 {
                     query = query.Where(x => x.OrID == selectSyukko.OrID);
+                }
+
+                if (selectSyukko.ClID != 0)
+                {
+                    query = query.Where(x => x.ClID == selectSyukko.ClID);
+                }
+
+                if (selectSyukko.EmID != 0)
+                {
+                    query = query.Where(x => x.EmID == selectSyukko.EmID);
+                }
+
+                if (selectSyukko.SyDate != null)
+                {
+                    query = query.Where(x => x.SyDate.Value == selectSyukko.SyDate.Value);
+                }
+
+                if (selectSyukko.SyStateFlag != -1)
+                {
+                    query = query.Where(x => x.SyStateFlag == selectSyukko.SyStateFlag);
                 }
 
                 listSyukko = query.ToList();
@@ -274,13 +294,13 @@ namespace SalesManagement_SysDev
         //戻り値：条件一部一致商品データ
         //機　能：条件一部一致商品データの取得
         ///////////////////////////////
-        public List<T_Syukko> GetOrSyukkoData(T_Syukko selectProdact)
+        public List<T_Syukko> GetOrSyukkoData(T_Syukko selectSyukko)
         {
             List<T_Syukko> listProdact = new List<T_Syukko>();
             try
             {
                 var context = new SalesManagement_DevContext();
-                listProdact = context.T_Syukkos.Where(x => x.SyID == selectProdact.SyID || x.SoID == selectProdact.SoID || x.OrID == selectProdact.OrID).ToList();
+                listProdact = context.T_Syukkos.Where(x => x.SyID == selectSyukko.SyID || x.SoID == selectSyukko.SoID || x.OrID == selectSyukko.OrID || x.ClID == selectSyukko.ClID || x.EmID == selectSyukko.EmID || x.SyDate.Value == selectSyukko.SyDate || x.SyStateFlag == selectSyukko.SyStateFlag).ToList();
 
                 context.Dispose();
             }

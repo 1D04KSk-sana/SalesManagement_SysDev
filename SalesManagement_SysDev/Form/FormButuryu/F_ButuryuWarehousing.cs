@@ -673,7 +673,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbWarehousingID.Text.Trim()) && String.IsNullOrEmpty(txbEmployeeName.Text.Trim()) && String.IsNullOrEmpty(txbHattyuID.Text.Trim())&& dtpWarehousingDate.Checked == false )
+            if (String.IsNullOrEmpty(txbWarehousingID.Text.Trim()) && String.IsNullOrEmpty(txbEmployeeName.Text.Trim()) && String.IsNullOrEmpty(txbHattyuID.Text.Trim())&& dtpWarehousingDate.Checked == false && cmbConfirm.SelectedIndex == -1)
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbWarehousingID.Focus();
@@ -806,6 +806,7 @@ namespace SalesManagement_SysDev
                 HaID = intHattyuID,
                 EmID = intEmployeeID,
                 WaDate = dateSale,
+                WaShelfFlag = cmbConfirm.SelectedIndex
             };
 
             if (searchFlg)

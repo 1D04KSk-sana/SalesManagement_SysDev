@@ -199,24 +199,34 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.T_Chumons.AsQueryable();
 
-                if (selectChumon.OrID != null && selectChumon.OrID != 0)
+                if (selectChumon.OrID != 0)
                 {
                     query = query.Where(x => x.OrID == selectChumon.OrID);
                 }
 
-                if (selectChumon.SoID != null && selectChumon.SoID != 0)
+                if (selectChumon.SoID != 0)
                 {
                     query = query.Where(x => x.SoID == selectChumon.SoID);
                 }
 
-                if (selectChumon.ChID != null && selectChumon.ChID != 0)
+                if ( selectChumon.ChID != 0)
                 {
                     query = query.Where(x => x.ChID == selectChumon.ChID);
                 }
 
-                if (selectChumon.ClID != null && selectChumon.ClID != 0)
+                if ( selectChumon.ClID != 0)
                 {
                     query = query.Where(x => x.ClID == selectChumon.ClID);
+                }
+
+                if (selectChumon.ChDate != null)
+                {
+                    query = query.Where(x => x.ChDate.Value == selectChumon.ChDate.Value);
+                }
+
+                if (selectChumon.ChStateFlag != -1)
+                {
+                    query = query.Where(x => x.ChStateFlag == selectChumon.ChStateFlag);
                 }
 
                 listChumon = query.ToList();
@@ -349,7 +359,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listChumon = context.T_Chumons.Where(x => x.OrID == selectChumon.OrID || x.SoID == selectChumon.SoID || x.ChID == selectChumon.ChID || x.ClID == selectChumon.ClID).ToList();
+                listChumon = context.T_Chumons.Where(x => x.OrID == selectChumon.OrID || x.SoID == selectChumon.SoID || x.ChID == selectChumon.ChID || x.ClID == selectChumon.ClID|| x.ChDate.Value == selectChumon.ChDate.Value || x.ChStateFlag == selectChumon.ChStateFlag).ToList();
 
                 context.Dispose();
             }

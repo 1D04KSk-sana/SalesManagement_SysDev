@@ -249,9 +249,15 @@ namespace SalesManagement_SysDev
                 {
                     query = query.Where(x => x.ClID == selectShipment.ClID);
                 }
+
                 if (selectShipment.ShFinishDate != null)
                 {
                     query = query.Where(x => x.ShFinishDate.Value == selectShipment.ShFinishDate.Value);
+                }
+
+                if (selectShipment.ShStateFlag != -1)
+                {
+                    query = query.Where(x => x.ShStateFlag == selectShipment.ShStateFlag);
                 }
 
                 listShipment = query.ToList();
@@ -277,7 +283,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listShipment = context.T_Shipments.Where(x => x.ShID == selectShipment.ShID || x.OrID == selectShipment.OrID || x.EmID == selectShipment.EmID || x.ClID == selectShipment.ClID || x.ShFinishDate.Value == selectShipment.ShFinishDate.Value).ToList();
+                listShipment = context.T_Shipments.Where(x => x.ShID == selectShipment.ShID || x.OrID == selectShipment.OrID || x.EmID == selectShipment.EmID || x.ClID == selectShipment.ClID || x.ShFinishDate.Value == selectShipment.ShFinishDate.Value || x.ShStateFlag == selectShipment.ShStateFlag).ToList();
 
                 context.Dispose();
             }

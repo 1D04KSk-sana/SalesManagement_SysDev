@@ -182,9 +182,15 @@ namespace SalesManagement_SysDev
                 {
                     query = query.Where(x => x.EmID == selectWarehousing.EmID);
                 }
+
                 if (selectWarehousing.WaDate != null)
                 {
                     query = query.Where(x => x.WaDate.Value == selectWarehousing.WaDate.Value);
+                }
+
+                if (selectWarehousing.WaShelfFlag != -1)
+                {
+                    query = query.Where(x => x.WaShelfFlag == selectWarehousing.WaShelfFlag);
                 }
 
 
@@ -212,7 +218,7 @@ namespace SalesManagement_SysDev
             {
                 var context = new SalesManagement_DevContext();
 
-                listWarehousing = context.T_Warehousings.Where(x => x.WaID == selectWarehousing.WaID || x.EmID == selectWarehousing.EmID || x.HaID == selectWarehousing.HaID || x.WaDate.Value == selectWarehousing.WaDate.Value).ToList();
+                listWarehousing = context.T_Warehousings.Where(x => x.WaID == selectWarehousing.WaID || x.EmID == selectWarehousing.EmID || x.HaID == selectWarehousing.HaID || x.WaDate.Value == selectWarehousing.WaDate.Value || x.WaShelfFlag == selectWarehousing.WaShelfFlag).ToList();
 
                 context.Dispose();
 
