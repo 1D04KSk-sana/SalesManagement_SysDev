@@ -420,6 +420,24 @@ namespace SalesManagement_SysDev
                     return false;
                 }
             }
+            //社員IDの適否
+            if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
+            {
+                //社員IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbEmployeeID.Text.Trim()))
+                {
+                    MessageBox.Show("社員IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+                //社員IDの重複チェック
+                if (!employeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    MessageBox.Show("社員IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+            }
 
             return true;
         }
