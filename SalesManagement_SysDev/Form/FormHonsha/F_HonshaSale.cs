@@ -468,16 +468,23 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
+                txbChumonID.Enabled = true;
+                txbClientID.Enabled = true;
+                txbSaleID.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                dtpSaleDate.Enabled = true;
                 cmbHidden.Enabled = false;
                 txbHidden.Enabled = false;
             }
-
             if (rdbHiddenUpdate.Checked)
             {
-                txbClientName.Enabled = false;
-                cmbSalesOfficeID.Enabled = false;
                 txbChumonID.Enabled = false;
+                txbClientID.Enabled = false;
+                txbSaleID.Enabled = true;
+                cmbSalesOfficeID.Enabled = false;
                 dtpSaleDate.Enabled = false;
+                cmbHidden.Enabled = false;
+                txbHidden.Enabled = false;
             }
         }
 

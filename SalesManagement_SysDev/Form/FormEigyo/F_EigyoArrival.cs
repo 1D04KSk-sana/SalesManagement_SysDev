@@ -1170,14 +1170,23 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
+                cmbSalesOfficeID.Enabled = true;
+                txbArrivalID.Enabled = true;
+                dtpArrivalDate.Enabled = true;
+                txbClientID.Enabled = true;
+                txbEmployeeID.Enabled = true;
+                txbOrderID.Enabled = true;
+
                 txbHidden.Enabled = false;
                 cmbHidden.Enabled = false;
                 cmbConfirm.Enabled = false;
             }
-
             if (rdbUpdate.Checked)
             {
-                txbArrivalID.Enabled = false;
+                txbArrivalID.Enabled = true;
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
+
                 txbClientID.Enabled = false;
                 txbEmployeeID.Enabled = false;
                 txbOrderID.Enabled = false;
@@ -1188,6 +1197,9 @@ namespace SalesManagement_SysDev
 
             if (rdbConfirm.Checked)
             {
+                txbArrivalID.Enabled = true;
+                cmbConfirm.Enabled = true;
+
                 txbClientID.Enabled = false;
                 txbEmployeeID.Enabled = false;
                 txbOrderID.Enabled = false;

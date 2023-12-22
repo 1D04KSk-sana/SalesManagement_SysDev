@@ -1038,7 +1038,14 @@ namespace SalesManagement_SysDev
             //1行ずつdgvShipmentに挿入
             foreach (var item in depData)
             {
-                dgvShipment.Rows.Add(item.ShID, dictionaryClient[item.ClID], dictionaryEmployee[item.EmID.Value],dictionarySalesOffice[item.SoID], item.OrID, dictionaryConfirm[item.ShStateFlag], item.ShFinishDate, dictionaryHidden[item.ShFlag], item.ShHidden);
+                string strEmployeeName = "";
+
+                if (item.EmID != null)
+                {
+                    strEmployeeName = dictionaryEmployee[item.EmID.Value];
+                }
+
+                dgvShipment.Rows.Add(item.ShID, dictionaryClient[item.ClID], strEmployeeName,dictionarySalesOffice[item.SoID], item.OrID, dictionaryConfirm[item.ShStateFlag], item.ShFinishDate, dictionaryHidden[item.ShFlag], item.ShHidden);
             }
 
             //dgvShipmentをリフレッシュ
@@ -1117,7 +1124,6 @@ namespace SalesManagement_SysDev
             txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvShipment[2, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvShipment[3, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbOrderID.Text = dgvShipment[4, dgvShipment.CurrentCellAddress.Y].Value.ToString();
-            dtpShipmentDate.Text = dgvShipment[5, dgvShipment.CurrentCellAddress.Y].Value.ToString();
             cmbShipmentHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvShipment[6, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key;
             txbShipmentHidden.Text = dgvShipment[7, dgvShipment.CurrentCellAddress.Y]?.Value?.ToString();
         }
@@ -1208,20 +1214,48 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
+                txbShipmentID.Enabled = true;
+                txbClientID.Enabled = true;
+                txbEmployeeID.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                txbOrderID.Enabled = true;
+                dtpShipmentDate.Enabled = true;
 
+                cmbConfirm.Enabled = false;
+                txbShipmentHidden.Enabled = false;
+                cmbShipmentHidden.Enabled = false;
             }
 
             if (rdbUpdate.Checked)
             {
+                txbOrderID.Enabled = true;
+                txbShipmentHidden.Enabled = true;
+                cmbShipmentHidden.Enabled = true;
 
+                txbClientID.Enabled = false;
+                txbEmployeeID.Enabled = false;
+                txbOrderID.Enabled = false;
+                cmbConfirm.Enabled = false;
+                cmbSalesOfficeID.Enabled = false;
+                dtpShipmentDate.Enabled = false;
             }
 
             if (rdbConfirm.Checked)
             {
+                txbOrderID.Enabled |= true;
+                cmbConfirm.Enabled |= true;
 
+                txbClientID.Enabled = false;
+                txbEmployeeID.Enabled = false;
+                txbOrderID.Enabled = false;
+                cmbSalesOfficeID.Enabled = false;
+                dtpShipmentDate.Enabled = false;
+                txbShipmentHidden.Enabled = false;
+                cmbShipmentHidden.Enabled = false;
             }
+
         }
-        
+
         private void txbEmployeeID_TextChanged_1(object sender, EventArgs e)
         {
             //nullの確認

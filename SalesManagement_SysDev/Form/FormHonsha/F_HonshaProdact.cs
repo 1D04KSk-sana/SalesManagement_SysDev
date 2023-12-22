@@ -183,17 +183,51 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
+                txbProdactID.Enabled = true;
+                cmbMajorID.Enabled = true;
+                cmbSmallID.Enabled = true;
+                cmbMakerName.Enabled = true;
 
+                txbProdactColor.Enabled = false;
+                txbProdactHidden.Enabled = false;
+                cmbHidden.Enabled = false;
+                txbModelNumber.Enabled = false;
+                txbProdactJanCode.Enabled = false;
+                txbProdactPrice.Enabled = false;
+                txbProdactSafetyStock.Enabled = false;
+                txbProdactName.Enabled = false;
+                
             }
 
             if (rdbRegister.Checked)
             {
-
+                txbProdactID.Enabled = true;
+                cmbMajorID.Enabled = true;
+                cmbSmallID.Enabled = true;
+                cmbMakerName.Enabled = true;
+                txbProdactColor.Enabled = true;
+                txbProdactHidden.Enabled = true;
+                cmbHidden.Enabled = true;
+                txbModelNumber.Enabled = true;
+                txbProdactJanCode.Enabled = true;
+                txbProdactPrice.Enabled = true;
+                txbProdactSafetyStock.Enabled = true;
+                txbProdactName.Enabled = true;
             }
-
             if (rdbUpdate.Checked)
             {
-
+                txbProdactID.Enabled = true;
+                cmbMajorID.Enabled = true;
+                cmbSmallID.Enabled = true;
+                cmbMakerName.Enabled = true;
+                txbProdactColor.Enabled = true;
+                txbProdactHidden.Enabled = true;
+                cmbHidden.Enabled = true;
+                txbModelNumber.Enabled = true;
+                txbProdactJanCode.Enabled = true;
+                txbProdactPrice.Enabled = true;
+                txbProdactSafetyStock.Enabled = true;
+                txbProdactName.Enabled = true;
             }
         }
 
@@ -289,7 +323,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbProdactID.Text.Trim()) && cmbMajorID.SelectedIndex == -1 && cmbMakerName.SelectedIndex == -1)
+            if (String.IsNullOrEmpty(txbProdactID.Text.Trim()) && cmbMajorID.SelectedIndex == -1 && cmbMakerName.SelectedIndex == -1 && cmbSmallID.SelectedIndex == -1)
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbProdactID.Focus();
@@ -604,7 +638,7 @@ namespace SalesManagement_SysDev
                 PrModelNumber = txbModelNumber.Text.Trim(),
                 PrColor = txbProdactColor.Text.Trim(),
                 PrFlag = cmbHidden.SelectedIndex,
-                PrHidden = tbxProdactHidden.Text.Trim(),
+                PrHidden = txbProdactHidden.Text.Trim(),
                 PrReleaseDate = dtpProdactReleaseDate.Value,
             };
         }
@@ -771,7 +805,7 @@ namespace SalesManagement_SysDev
                 PrModelNumber = txbModelNumber.Text.Trim(),
                 PrColor = txbProdactColor.Text.Trim(),
                 PrFlag = cmbHidden.SelectedIndex,
-                PrHidden = tbxProdactHidden.Text.Trim(),
+                PrHidden = txbProdactHidden.Text.Trim(),
                 PrReleaseDate = DateTime.Now,
             };
         }
@@ -1160,7 +1194,7 @@ namespace SalesManagement_SysDev
             dtpProdactReleaseDate.Text = dgvProdact[11, dgvProdact.CurrentCellAddress.Y].Value.ToString();
             txbProdactJanCode.Text = dgvProdact[4, dgvProdact.CurrentCellAddress.Y]?.Value?.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvProdact[10, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key;
-            tbxProdactHidden.Text = dgvProdact[12, dgvProdact.CurrentCellAddress.Y]?.Value?.ToString();
+            txbProdactHidden.Text = dgvProdact[12, dgvProdact.CurrentCellAddress.Y]?.Value?.ToString();
         }
 
         ///////////////////////////////
@@ -1184,6 +1218,7 @@ namespace SalesManagement_SysDev
             {
                 PrID = intProdactID,
                 McID = cmbMajorID.SelectedIndex + 1,
+                ScID = cmbSmallID.SelectedIndex + 1,
                 MaID = cmbMakerName.SelectedIndex + 1,
                 //テキストボックス = txbxxxxxx.Text.Trim()
             };

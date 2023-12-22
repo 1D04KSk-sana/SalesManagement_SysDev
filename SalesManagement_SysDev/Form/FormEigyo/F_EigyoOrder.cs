@@ -353,27 +353,82 @@ namespace SalesManagement_SysDev
         {
             if (rdbRegister.Checked)
             {
+                txbOrderID.Enabled = true;
+                txbEmployeeID.Enabled = true;
+                txbClientID.Enabled = true;
+                txbOrderManager.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                dtpOrderDate.Enabled = true;
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
 
+                cmbConfirm.Enabled = false;
+                txbProductID.Enabled = false;
+                txbOrderQuantity.Enabled = false;
             }
 
             if (rdbDetailRegister.Checked)
             {
+                txbOrderID.Enabled = true;
+                txbProductID.Enabled = true;
+                txbOrderQuantity.Enabled = true;
 
+                txbEmployeeID.Enabled = false;
+                txbClientID.Enabled = false;
+                txbOrderManager.Enabled = false;
+                txbHidden.Enabled=false;
+                cmbHidden.Enabled=false;
+                cmbSalesOfficeID.Enabled=false;
+                cmbConfirm.Enabled=false;
+                dtpOrderDate.Enabled=false;
             }
 
             if (rdbSearch.Checked)
             {
+                txbOrderID.Enabled = true;
+                txbEmployeeID.Enabled = true;
+                txbClientID.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                dtpOrderDate.Enabled = true;
 
+                txbHidden.Enabled = false;
+                cmbConfirm.Enabled = false;
+                cmbHidden.Enabled = false;
+                txbProductID.Enabled = false;
+                txbOrderQuantity.Enabled = false;
+                txbOrderManager.Enabled = false;
             }
 
             if (rdbUpdate.Checked)
             {
+                txbOrderID.Enabled = true;
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
 
+                txbEmployeeID.Enabled = false;
+                txbClientID.Enabled = false;
+                txbOrderManager.Enabled = false;
+                cmbSalesOfficeID.Enabled = false;
+                cmbConfirm.Enabled = false;
+                dtpOrderDate.Enabled = false;
+                txbProductID.Enabled = false;
+                txbOrderQuantity.Enabled = false;
             }
 
             if (rdbConfirm.Checked)
             {
+                cmbConfirm.Enabled = true;
+                txbOrderID.Enabled = true;
 
+                txbEmployeeID.Enabled = false;
+                txbClientID.Enabled = false;
+                txbOrderManager.Enabled = false;
+                cmbSalesOfficeID.Enabled = false;
+                dtpOrderDate.Enabled = false;
+                txbProductID.Enabled = false;
+                txbOrderQuantity.Enabled = false;
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
             }
         }
 
