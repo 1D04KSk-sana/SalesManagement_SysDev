@@ -314,12 +314,12 @@ namespace SalesManagement_SysDev
             //dgvClientをリフレッシュ
             dgvStockView.Refresh();
 
-            if (lastPage == pageNum)
+            if (lastPage == -1 || (lastPage == pageNum && pageNum == 0))
             {
                 btnPageMax.Visible = false;
                 btnNext.Visible = false;
-                btnPageMin.Visible = true;
-                btnBack.Visible = true;
+                btnPageMin.Visible = false;
+                btnBack.Visible = false;
             }
             else if (pageNum == 0)
             {
@@ -327,6 +327,13 @@ namespace SalesManagement_SysDev
                 btnNext.Visible = true;
                 btnPageMin.Visible = false;
                 btnBack.Visible = false;
+            }
+            else if (lastPage == pageNum)
+            {
+                btnPageMax.Visible = false;
+                btnNext.Visible = false;
+                btnPageMin.Visible = true;
+                btnBack.Visible = true;
             }
             else
             {

@@ -114,7 +114,7 @@
             this.lblClient.Location = new System.Drawing.Point(720, 46);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(418, 64);
+            this.lblClient.Size = new System.Drawing.Size(417, 64);
             this.lblClient.TabIndex = 23;
             this.lblClient.Text = "分類管理画面";
             // 
@@ -241,6 +241,7 @@
             this.txbSmallID.Name = "txbSmallID";
             this.txbSmallID.Size = new System.Drawing.Size(220, 31);
             this.txbSmallID.TabIndex = 132;
+            this.txbSmallID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblMajorClassificationName
             // 
@@ -261,6 +262,7 @@
             this.txbMajorID.Name = "txbMajorID";
             this.txbMajorID.Size = new System.Drawing.Size(220, 31);
             this.txbMajorID.TabIndex = 130;
+            this.txbMajorID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblSmallClassficationID
             // 
@@ -514,7 +516,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(1904, 1041);
             this.Controls.Add(this.lblNumPage);
             this.Controls.Add(this.txbNumPage);

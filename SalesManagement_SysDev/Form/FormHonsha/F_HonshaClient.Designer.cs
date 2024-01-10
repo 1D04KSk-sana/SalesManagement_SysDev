@@ -159,6 +159,7 @@
             this.txbClientID.Name = "txbClientID";
             this.txbClientID.Size = new System.Drawing.Size(220, 31);
             this.txbClientID.TabIndex = 3;
+            this.txbClientID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblClientName
             // 
@@ -394,7 +395,7 @@
             this.lblClient.Location = new System.Drawing.Point(816, 46);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(288, 64);
+            this.lblClient.Size = new System.Drawing.Size(287, 64);
             this.lblClient.TabIndex = 23;
             this.lblClient.Text = "顧客管理";
             // 
@@ -421,7 +422,7 @@
             this.txbPageSize.Name = "txbPageSize";
             this.txbPageSize.Size = new System.Drawing.Size(50, 29);
             this.txbPageSize.TabIndex = 24;
-            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbPageSizeID_KeyPress);
+            this.txbPageSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblPageSize
             // 
@@ -502,7 +503,7 @@
             this.txbNumPage.Name = "txbNumPage";
             this.txbNumPage.Size = new System.Drawing.Size(50, 29);
             this.txbNumPage.TabIndex = 31;
-            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbNumPage_KeyPress);
+            this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblNumPage
             // 

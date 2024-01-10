@@ -79,7 +79,7 @@
             this.lblClient.Location = new System.Drawing.Point(820, 41);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(288, 64);
+            this.lblClient.Size = new System.Drawing.Size(287, 64);
             this.lblClient.TabIndex = 23;
             this.lblClient.Text = "売上管理";
             // 
@@ -230,6 +230,7 @@
             this.txbChumonID.ShortcutsEnabled = false;
             this.txbChumonID.Size = new System.Drawing.Size(220, 31);
             this.txbChumonID.TabIndex = 49;
+            this.txbChumonID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblChumonID
             // 
@@ -296,6 +297,7 @@
             this.txbSaleID.ShortcutsEnabled = false;
             this.txbSaleID.Size = new System.Drawing.Size(220, 31);
             this.txbSaleID.TabIndex = 41;
+            this.txbSaleID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblSaleID
             // 

@@ -105,7 +105,7 @@ namespace SalesManagement_SysDev
             this.lblSalesOffice.Location = new System.Drawing.Point(778, 45);
             this.lblSalesOffice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSalesOffice.Name = "lblSalesOffice";
-            this.lblSalesOffice.Size = new System.Drawing.Size(353, 64);
+            this.lblSalesOffice.Size = new System.Drawing.Size(352, 64);
             this.lblSalesOffice.TabIndex = 24;
             this.lblSalesOffice.Text = "営業所管理";
             // 
@@ -357,6 +357,7 @@ namespace SalesManagement_SysDev
             this.txbSalesOfficeID.Size = new System.Drawing.Size(220, 31);
             this.txbSalesOfficeID.TabIndex = 28;
             this.txbSalesOfficeID.TabStop = false;
+            this.txbSalesOfficeID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblClientID
             // 

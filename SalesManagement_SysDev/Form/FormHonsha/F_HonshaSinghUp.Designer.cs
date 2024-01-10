@@ -61,7 +61,7 @@
             this.lblSinghup.Location = new System.Drawing.Point(811, 44);
             this.lblSinghup.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSinghup.Name = "lblSinghup";
-            this.lblSinghup.Size = new System.Drawing.Size(288, 64);
+            this.lblSinghup.Size = new System.Drawing.Size(287, 64);
             this.lblSinghup.TabIndex = 23;
             this.lblSinghup.Text = "新規登録";
             // 
@@ -270,6 +270,7 @@
             this.txbEmployeeID.Name = "txbEmployeeID";
             this.txbEmployeeID.Size = new System.Drawing.Size(220, 31);
             this.txbEmployeeID.TabIndex = 58;
+            this.txbEmployeeID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // label1
             // 

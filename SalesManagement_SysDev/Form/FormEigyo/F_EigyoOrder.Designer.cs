@@ -286,7 +286,7 @@
             this.cmbSalesOfficeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSalesOfficeID.FormattingEnabled = true;
-            this.cmbSalesOfficeID.Location = new System.Drawing.Point(666, 327);
+            this.cmbSalesOfficeID.Location = new System.Drawing.Point(195, 383);
             this.cmbSalesOfficeID.Margin = new System.Windows.Forms.Padding(2);
             this.cmbSalesOfficeID.Name = "cmbSalesOfficeID";
             this.cmbSalesOfficeID.Size = new System.Drawing.Size(220, 32);
@@ -296,7 +296,7 @@
             // 
             this.lblSalesOfficeID.AutoSize = true;
             this.lblSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblSalesOfficeID.Location = new System.Drawing.Point(541, 333);
+            this.lblSalesOfficeID.Location = new System.Drawing.Point(70, 389);
             this.lblSalesOfficeID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSalesOfficeID.Name = "lblSalesOfficeID";
             this.lblSalesOfficeID.Size = new System.Drawing.Size(106, 24);
@@ -334,6 +334,7 @@
             this.txbOrderID.Name = "txbOrderID";
             this.txbOrderID.Size = new System.Drawing.Size(220, 31);
             this.txbOrderID.TabIndex = 35;
+            this.txbOrderID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblOrderID
             // 
@@ -506,7 +507,7 @@
             // 
             this.txbOrderManager.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbOrderManager.ForeColor = System.Drawing.Color.Black;
-            this.txbOrderManager.Location = new System.Drawing.Point(666, 274);
+            this.txbOrderManager.Location = new System.Drawing.Point(195, 330);
             this.txbOrderManager.Margin = new System.Windows.Forms.Padding(2);
             this.txbOrderManager.Name = "txbOrderManager";
             this.txbOrderManager.Size = new System.Drawing.Size(220, 31);
@@ -516,7 +517,7 @@
             // 
             this.lblOrderManager.AutoSize = true;
             this.lblOrderManager.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblOrderManager.Location = new System.Drawing.Point(493, 278);
+            this.lblOrderManager.Location = new System.Drawing.Point(22, 334);
             this.lblOrderManager.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOrderManager.Name = "lblOrderManager";
             this.lblOrderManager.Size = new System.Drawing.Size(154, 24);
@@ -651,7 +652,7 @@
             // 
             this.txbClientID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbClientID.ForeColor = System.Drawing.Color.Black;
-            this.txbClientID.Location = new System.Drawing.Point(195, 389);
+            this.txbClientID.Location = new System.Drawing.Point(663, 337);
             this.txbClientID.Margin = new System.Windows.Forms.Padding(2);
             this.txbClientID.Name = "txbClientID";
             this.txbClientID.Size = new System.Drawing.Size(220, 31);
@@ -663,7 +664,7 @@
             // 
             this.lblEmployeeID.AutoSize = true;
             this.lblEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblEmployeeID.Location = new System.Drawing.Point(90, 330);
+            this.lblEmployeeID.Location = new System.Drawing.Point(558, 278);
             this.lblEmployeeID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEmployeeID.Name = "lblEmployeeID";
             this.lblEmployeeID.Size = new System.Drawing.Size(80, 24);
@@ -674,7 +675,7 @@
             // 
             this.txbEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbEmployeeID.ForeColor = System.Drawing.Color.Black;
-            this.txbEmployeeID.Location = new System.Drawing.Point(195, 326);
+            this.txbEmployeeID.Location = new System.Drawing.Point(663, 274);
             this.txbEmployeeID.Margin = new System.Windows.Forms.Padding(2);
             this.txbEmployeeID.Name = "txbEmployeeID";
             this.txbEmployeeID.Size = new System.Drawing.Size(220, 31);
@@ -686,7 +687,7 @@
             // 
             this.lblClientID.AutoSize = true;
             this.lblClientID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientID.Location = new System.Drawing.Point(90, 392);
+            this.lblClientID.Location = new System.Drawing.Point(558, 340);
             this.lblClientID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClientID.Name = "lblClientID";
             this.lblClientID.Size = new System.Drawing.Size(80, 24);
@@ -742,8 +743,12 @@
             this.Controls.Add(this.rdbConfirm);
             this.Controls.Add(this.btnDetailClear);
             this.Controls.Add(this.rdbDetailRegister);
+            this.Controls.Add(this.txbOrderManager);
+            this.Controls.Add(this.lblSalesOfficeID);
             this.Controls.Add(this.cmbConfirm);
+            this.Controls.Add(this.cmbSalesOfficeID);
             this.Controls.Add(this.rdbSearch);
+            this.Controls.Add(this.lblOrderManager);
             this.Controls.Add(this.lblConfirm);
             this.Controls.Add(this.rdbRegister);
             this.Controls.Add(this.txbClientID);
@@ -761,8 +766,6 @@
             this.Controls.Add(this.lblOrderDate);
             this.Controls.Add(this.txbEmployeeName);
             this.Controls.Add(this.lblEmployeeName);
-            this.Controls.Add(this.txbOrderManager);
-            this.Controls.Add(this.lblOrderManager);
             this.Controls.Add(this.dgvOrderDetail);
             this.Controls.Add(this.pnlHonsha);
             this.Controls.Add(this.lblNumPage);
@@ -780,8 +783,6 @@
             this.Controls.Add(this.dgvOrder);
             this.Controls.Add(this.txbHidden);
             this.Controls.Add(this.lblClientHidden);
-            this.Controls.Add(this.cmbSalesOfficeID);
-            this.Controls.Add(this.lblSalesOfficeID);
             this.Controls.Add(this.txbClientName);
             this.Controls.Add(this.lblClientName);
             this.Controls.Add(this.txbOrderID);
