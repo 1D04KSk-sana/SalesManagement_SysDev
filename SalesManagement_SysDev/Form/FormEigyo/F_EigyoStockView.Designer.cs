@@ -281,6 +281,7 @@
             this.rdbSearch.TabIndex = 70;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // lblEmployeeID
             // 
@@ -364,6 +365,7 @@
             this.rdbHattyuten.TabIndex = 99;
             this.rdbHattyuten.Text = "発注点検索";
             this.rdbHattyuten.UseVisualStyleBackColor = true;
+            this.rdbHattyuten.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // F_EigyoStockView
             // 

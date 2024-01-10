@@ -54,7 +54,7 @@
             this.lblProdactReleaseDate = new System.Windows.Forms.Label();
             this.cmbHidden = new System.Windows.Forms.ComboBox();
             this.lblProdactHidden = new System.Windows.Forms.Label();
-            this.tbxProdactHidden = new System.Windows.Forms.TextBox();
+            this.txbProdactHidden = new System.Windows.Forms.TextBox();
             this.dgvProdact = new System.Windows.Forms.DataGridView();
             this.lblPageSize = new System.Windows.Forms.Label();
             this.txbPageSize = new System.Windows.Forms.TextBox();
@@ -382,14 +382,14 @@
             this.lblProdactHidden.TabIndex = 30;
             this.lblProdactHidden.Text = "非表示理由";
             // 
-            // tbxProdactHidden
+            // txbProdactHidden
             // 
-            this.tbxProdactHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.tbxProdactHidden.Location = new System.Drawing.Point(1291, 410);
-            this.tbxProdactHidden.Margin = new System.Windows.Forms.Padding(2);
-            this.tbxProdactHidden.Name = "tbxProdactHidden";
-            this.tbxProdactHidden.Size = new System.Drawing.Size(572, 31);
-            this.tbxProdactHidden.TabIndex = 31;
+            this.txbProdactHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbProdactHidden.Location = new System.Drawing.Point(1291, 410);
+            this.txbProdactHidden.Margin = new System.Windows.Forms.Padding(2);
+            this.txbProdactHidden.Name = "txbProdactHidden";
+            this.txbProdactHidden.Size = new System.Drawing.Size(572, 31);
+            this.txbProdactHidden.TabIndex = 31;
             // 
             // dgvProdact
             // 
@@ -673,7 +673,7 @@
             this.Controls.Add(this.txbPageSize);
             this.Controls.Add(this.lblPageSize);
             this.Controls.Add(this.dgvProdact);
-            this.Controls.Add(this.tbxProdactHidden);
+            this.Controls.Add(this.txbProdactHidden);
             this.Controls.Add(this.lblProdactHidden);
             this.Controls.Add(this.cmbHidden);
             this.Controls.Add(this.txbProdactSafetyStock);
@@ -739,7 +739,7 @@
         private System.Windows.Forms.Label lblProdactReleaseDate;
         private System.Windows.Forms.ComboBox cmbHidden;
         private System.Windows.Forms.Label lblProdactHidden;
-        private System.Windows.Forms.TextBox tbxProdactHidden;
+        private System.Windows.Forms.TextBox txbProdactHidden;
         private System.Windows.Forms.DataGridView dgvProdact;
         private System.Windows.Forms.Label lblPageSize;
         private System.Windows.Forms.TextBox txbPageSize;

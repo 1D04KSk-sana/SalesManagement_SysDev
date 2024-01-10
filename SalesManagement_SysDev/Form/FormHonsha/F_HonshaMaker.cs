@@ -190,17 +190,38 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
+                txbMakerID.Enabled = true;
+                txbMakerPhone.Enabled = true;
 
+                txbMakerName.Enabled = false;
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
+                txbMakerFAX.Enabled = false;
+                txbMakerPostal.Enabled = false;
+                txbMakerAddress.Enabled = false;
             }
-
             if (rdbRegister.Checked)
             {
-
+                txbMakerID.Enabled = true;
+                txbMakerPhone.Enabled = true;
+                txbMakerName.Enabled = true;
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
+                txbMakerFAX.Enabled = true;
+                txbMakerPostal.Enabled = true;
+                txbMakerAddress.Enabled = true;
             }
 
             if (rdbUpdate.Checked)
             {
-
+                txbMakerID.Enabled = true;
+                txbMakerPhone.Enabled = true;
+                txbMakerName.Enabled = true;
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
+                txbMakerFAX.Enabled = true;
+                txbMakerPostal.Enabled = true;
+                txbMakerAddress.Enabled = true;
             }
         }
         ///////////////////////////////
@@ -904,7 +925,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbMakerID.Text.Trim()) && String.IsNullOrEmpty(txbMakerName.Text.Trim()) && String.IsNullOrEmpty(txbMakerPhone.Text.Trim()))
+            if (String.IsNullOrEmpty(txbMakerID.Text.Trim())&& String.IsNullOrEmpty(txbMakerPhone.Text.Trim()))
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbMakerID.Focus();
@@ -972,7 +993,6 @@ namespace SalesManagement_SysDev
             M_Maker selectCondition = new M_Maker()
             {
                 MaID = intMakerID,
-                MaName= txbMakerName.Text.Trim(),
                 MaPhone = txbMakerPhone.Text.Trim(),
             };
 
@@ -1011,5 +1031,6 @@ namespace SalesManagement_SysDev
             txbNumPage.Text = "1";
             GetDataGridView();
         }
+
     }
 }
