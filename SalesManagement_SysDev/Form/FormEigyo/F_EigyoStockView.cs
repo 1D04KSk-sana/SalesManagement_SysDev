@@ -582,12 +582,15 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
+                txbProductID.Enabled = true;
+                txbStockQuantity.Enabled = true;
 
             }
 
             if (rdbHattyuten.Checked)
             {
-
+                txbProductID.Enabled = false;
+                txbStockQuantity.Enabled = false;
             }
         }
 
@@ -602,5 +605,6 @@ namespace SalesManagement_SysDev
             txbProductID.Text = string.Empty;
             txbStockQuantity.Text = string.Empty;
         }
+
     }
 }
