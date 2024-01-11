@@ -93,17 +93,17 @@ namespace SalesManagement_SysDev
             {
                 MajorDataSelect();
             }
-            //大分類登録ラヂオボタンがチェックされているとき
+            //小分類登録ラヂオボタンがチェックされているとき
             if (rdbSmallRegister.Checked)
             {
                 SmallDataRegister();
             }
-            //大分類更新ラヂオボタンがチェックされているとき
+            //小分類更新ラヂオボタンがチェックされているとき
             if (rdbSmallUpdate.Checked)
             {
                 SmallDataUpdate();
             }
-            //大分類検索ラヂオボタンがチェックされているとき
+            //小分類検索ラヂオボタンがチェックされているとき
             if (rdbSmallSearch.Checked)
             {
                 SmallDataSelect();
@@ -473,7 +473,7 @@ namespace SalesManagement_SysDev
             return true;
         }
         ///////////////////////////////
-        //メソッド名：GetValidMDataAtRegistration()
+        //メソッド名：GetValidSDataAtRegistration()
         //引　数   ：なし
         //戻り値   ：true or false
         //機　能   ：登録入力データの形式チェック
@@ -489,14 +489,14 @@ namespace SalesManagement_SysDev
                 if (!dataInputCheck.CheckNumeric(txbSmallID.Text.Trim()))
                 {
                     MessageBox.Show("小分類IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMajorID.Focus();
+                    txbSmallID.Focus();
                     return false;
                 }
                 //小分類IDの重複チェック
                 if (smallDataAccess.CheckSmallIDExistence(int.Parse(txbSmallID.Text.Trim())))
                 {
                     MessageBox.Show("小分類IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMajorID.Focus();
+                    txbSmallID.Focus();
                     return false;
                 }
             }
@@ -521,7 +521,7 @@ namespace SalesManagement_SysDev
                 if (smallDataAccess.CheckSmallNameExistence(string.Format(txbSmallName.Text.Trim())))
                 {
                     MessageBox.Show("小分類名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMajorName.Focus();
+                    txbSmallName.Focus();
                     return false;
                 }
             }
@@ -775,10 +775,10 @@ namespace SalesManagement_SysDev
                     return false;
                 }
                 //大分類名存在チェック
-                if (!majorDataAccess.CheckMajorNameExistence(txbMajorName.Text.Trim()))
+                if (majorDataAccess.CheckMajorNameExistence(string.Format(txbMajorName.Text.Trim())))
                 {
                     MessageBox.Show("大分類名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMajorID.Focus();
+                    txbMajorName.Focus();
                     return false;
                 }
             }
@@ -816,14 +816,14 @@ namespace SalesManagement_SysDev
                 if (!dataInputCheck.CheckNumeric(txbSmallID.Text.Trim()))
                 {
                     MessageBox.Show("小分類IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMajorID.Focus();
+                    txbSmallID.Focus();
                     return false;
                 }
                 //小分類IDの存在チェック
                 if (!smallDataAccess.CheckSmallIDExistence(int.Parse(txbSmallID.Text.Trim())))
                 {
                     MessageBox.Show("小分類IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMajorID.Focus();
+                    txbSmallID.Focus();
                     return false;
                 }
             }
@@ -845,10 +845,10 @@ namespace SalesManagement_SysDev
                     return false;
                 }
                 //小分類名存在チェック
-                if (!smallDataAccess.CheckSmallNameExistence(txbSmallName.Text.Trim()))
+                if (smallDataAccess.CheckSmallNameExistence(string.Format(txbSmallName.Text.Trim())))
                 {
                     MessageBox.Show("小分類名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMajorID.Focus();
+                    txbSmallName.Focus();
                     return false;
                 }
             }
@@ -886,7 +886,7 @@ namespace SalesManagement_SysDev
             };
         }
         ///////////////////////////////
-        //メソッド名：GeneratSeDataAtUpdate()
+        //メソッド名：GeneratSDataAtUpdate()
         //引　数   ：なし
         //戻り値   ：小分類更新情報
         //機　能   ：更新データのセット
