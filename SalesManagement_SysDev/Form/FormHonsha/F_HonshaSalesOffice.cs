@@ -778,9 +778,9 @@ namespace SalesManagement_SysDev
                     return false;
                 }
                 //営業所名存在チェック
-                if (!salesOfficeDataAccess.CheckSalesOfficeNameExistence(txbSalesOfficeName.Text.Trim()))
+                if (salesOfficeDataAccess.CheckSalesOfficeNameExistence(txbSalesOfficeName.Text.Trim()))
                 {
-                    MessageBox.Show("メーカー名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("営業所名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSalesOfficeID.Focus();
                     return false;
                 }

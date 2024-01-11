@@ -717,7 +717,7 @@ namespace SalesManagement_SysDev
                     return false;
                 }
                 //メーカー名存在チェック
-                if (!makerDataAccess.CheckMakerNameExistence(txbMakerName.Text.Trim()))
+                if (makerDataAccess.CheckMakerNameExistence(txbMakerName.Text.Trim()))
                 {
                     MessageBox.Show("メーカー名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbMakerID.Focus();
