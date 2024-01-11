@@ -22,7 +22,23 @@ namespace SalesManagement_SysDev
         //データベース社員テーブルアクセス用クラスのインスタンス化
         EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
         //データベース役所テーブルアクセス用クラスのインスタンス化
-        PositionDataAccess PositionDataAccess = new PositionDataAccess();
+        PositionDataAccess positionDataAccess = new PositionDataAccess();
+        //データベース受注テーブルアクセス用クラスのインスタンス化
+        OrderDataAccess orderDataAccess = new OrderDataAccess();
+        //データベース注文テーブルアクセス用クラスのインスタンス化
+        ChumonDataAccess chumonDataAccess = new ChumonDataAccess();
+        //データベース出庫テーブルアクセス用クラスのインスタンス化
+        SyukkoDataAccess syukkoDataAccess = new SyukkoDataAccess();
+        //データベース入荷テーブルアクセス用クラスのインスタンス化
+        ArrivalDataAccess arrivalDataAccess = new ArrivalDataAccess();
+        //データベース出荷テーブルアクセス用クラスのインスタンス化
+        ShipmentDataAccess shipmentDataAccess = new ShipmentDataAccess();
+        //データベース発注テーブルアクセス用クラスのインスタンス化
+        HattyuDataAccess hattyuDataAccess = new HattyuDataAccess();
+        //データベース入庫テーブルアクセス用クラスのインスタンス化
+        WarehousingDataAccess warehousingDataAccess = new WarehousingDataAccess();
+        //データベース売上テーブルアクセス用クラスのインスタンス化
+        SaleDataAccess saleDataAccess = new SaleDataAccess();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
         //入力形式チェック用クラスのインスタンス化
@@ -104,7 +120,7 @@ namespace SalesManagement_SysDev
             cmbSalesOfficeID.SelectedIndex = -1;
 
             //役職のデータを取得
-            listPosition = PositionDataAccess.GetPositionDspData();
+            listPosition = positionDataAccess.GetPositionDspData();
             //取得したデータをコンボボックスに挿入
             cmbPositionName.DataSource = listPosition;
             //表示する名前をPoNameに指定
@@ -153,6 +169,8 @@ namespace SalesManagement_SysDev
             dtpEmployeeHireDate.Checked = false;
 
             rdbUpdate.Checked = true;
+
+            txbNumPage.Text = "1";
 
             GetDataGridView();
         }
@@ -229,6 +247,7 @@ namespace SalesManagement_SysDev
 
         private void btnPageSize_Click(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
             GetDataGridView();
         }
 
@@ -284,7 +303,7 @@ namespace SalesManagement_SysDev
             }
 
             //役職のデータを取得
-            listPosition = PositionDataAccess.GetPositionDspData();
+            listPosition = positionDataAccess.GetPositionDspData();
 
             dictionaryPositionname = new Dictionary<int, string> { };
 
@@ -345,23 +364,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void UpdateEmployee(M_Employee updEmployee)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
-            //操作ログデータ取得
-            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
-
-            //操作ログデータの登録（成功 = true,失敗 = false）
-            if (!operationLogAccess.AddOperationLogData(regOperationLog))
-            {
-                return;
-            }
-
             // 社員情報の更新
             bool flg = EmployeeDataAccess.UpdateEmployeeData(updEmployee);
             if (flg == true)
@@ -453,6 +455,23 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
             // 社員情報作成
             var updEmployee = GenerateDataAtUpdate();
 
@@ -488,7 +507,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtUpdate()
         {
-
             // 社員IDの適否
             if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
             {
@@ -496,6 +514,13 @@ namespace SalesManagement_SysDev
                 if (!dataInputCheck.CheckNumeric(txbEmployeeID.Text.Trim()))
                 {
                     MessageBox.Show("社員IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+                //社員IDの存在チェック
+                if (!employeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    MessageBox.Show("社員IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbEmployeeID.Focus();
                     return false;
                 }
@@ -566,6 +591,72 @@ namespace SalesManagement_SysDev
                 cmbHidden.Focus();
                 return false;
             }
+            else if (cmbHidden.SelectedIndex == 1)
+            {
+                //受注テーブルにおける社員IDの存在チェック
+                if (orderDataAccess.CheckOrderEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された社員IDが受注テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+                //注文テーブルにおける社員IDの存在チェック
+                if (chumonDataAccess.CheckChumonEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された社員IDが注文テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+                //出庫テーブルにおける社員IDの存在チェック
+                if (syukkoDataAccess.CheckSyukkoEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された社員IDが出庫テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+                //入荷テーブルにおける社員IDの存在チェック
+                if (arrivalDataAccess.CheckArrivalEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された社員IDが入荷テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+                //出荷テーブルにおける社員IDの存在チェック
+                if (shipmentDataAccess.CheckShipmentEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された社員IDが出荷テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+                //発注テーブルにおける社員IDの存在チェック
+                if (hattyuDataAccess.CheckHattyuEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された社員IDが発注テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+                //入庫テーブルにおける社員IDの存在チェック
+                if (warehousingDataAccess.CheckWarehousingEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された社員IDが入庫テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+                //売上テーブルにおける社員IDの存在チェック
+                if (saleDataAccess.CheckSaleEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された社員IDが売上テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+                //操作ログテーブルにおける社員IDの存在チェック
+                if (operationLogAccess.CheckOperationLogEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された社員IDが操作ログテーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeID.Focus();
+                    return false;
+                }
+            }
 
             return true;
         }
@@ -607,16 +698,21 @@ namespace SalesManagement_SysDev
             {
                 intEmployeeID = int.Parse(strEmployeeID);
             }
+            DateTime? dateEmployee = null;
+
+            if (dtpEmployeeHireDate.Checked)
+            {
+                dateEmployee = dtpEmployeeHireDate.Value.Date;
+            }
 
             // 検索条件のセット
             M_Employee selectCondition = new M_Employee()
             {
                 EmID = intEmployeeID,
-               EmName = txbEmployeeName.Text.Trim(),
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 EmPhone = txbEmployeePhone.Text.Trim(),
                 PoID = cmbPositionName.SelectedIndex + 1,
-                EmHiredate= dtpEmployeeHireDate.Value,
+                EmHiredate= dateEmployee,
             };
 
             if (searchFlg)
@@ -664,7 +760,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbEmployeeID.Text.Trim()) && cmbPositionName.SelectedIndex == -1 && cmbSalesOfficeID.SelectedIndex == -1 &&  String.IsNullOrEmpty(txbEmployeePhone.Text.Trim())&&dtpEmployeeHireDate.Value==null)
+            if (String.IsNullOrEmpty(txbEmployeeID.Text.Trim()) && cmbPositionName.SelectedIndex == -1 && cmbSalesOfficeID.SelectedIndex == -1 &&  String.IsNullOrEmpty(txbEmployeePhone.Text.Trim())&&dtpEmployeeHireDate.Checked==false)
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbEmployeeID.Focus();
@@ -886,6 +982,13 @@ namespace SalesManagement_SysDev
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("本当に閉じますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
             Application.Exit();
         }
 
@@ -893,7 +996,7 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1RWxzdr9jwJ9XMEOzMnPCcXIOtXWPXqC9/edit=true",
+                FileName = "https://docs.google.com/document/d/1RWxzdr9jwJ9XMEOzMnPCcXIOtXWPXqC9",
                 UseShellExecute = true
             });
         }
@@ -902,21 +1005,29 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
+                txbEmployeeID.Enabled = true;
+                txbEmployeePhone.Enabled = true;
+                txbEmployeePhone.Enabled=true;
+                cmbSalesOfficeID.Enabled = true;
+                cmbPositionName.Enabled = true;
 
-            }
-            else
-            {
-
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
+                txbEmployeeName.Enabled = false;
             }
 
             if (rdbUpdate.Checked)
             {
-
+                txbEmployeeID.Enabled = true;
+                txbEmployeePhone.Enabled = true;
+                txbEmployeePhone.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                cmbPositionName.Enabled = true;
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
+                txbEmployeeName.Enabled = true;
             }
-            else
-            {
 
-            }
         }
     }
 }

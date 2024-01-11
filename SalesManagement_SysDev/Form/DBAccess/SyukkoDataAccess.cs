@@ -59,28 +59,87 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：GetIDOrderData()
-        //引　数：受注ID
-        //戻り値：受注IDの一致する受注データ
-        //機　能：受注IDの一致する受注データの取得
+        //メソッド名：CheckSyukkoSalesOfficeIDExistence()
+        //引　数   ：営業所ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する営業所IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
         ///////////////////////////////
-        public T_Syukko GetSyukkoIDOrderData(int OrderID)
+        public bool CheckSyukkoSalesOfficeIDExistence(int SalesOfficeID)
         {
-            T_Syukko Order = new T_Syukko { };
-
+            bool flg = false;
             try
             {
                 var context = new SalesManagement_DevContext();
-                Order = context.T_Syukkos.Single(x => x.OrID == OrderID);
 
+                List<T_Syukko> listSyukko = context.T_Syukkos.Where(x => x.SyFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listSyukko.Any(x => x.SoID == SalesOfficeID);
                 context.Dispose();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            return flg;
+        }
 
-            return Order;
+        ///////////////////////////////
+        //メソッド名：CheckSyukkoEmployeeIDExistence()
+        //引　数   ：社員ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する社員IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckSyukkoEmployeeIDExistence(int EmployeeID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<T_Syukko> listSyukko = context.T_Syukkos.Where(x => x.SyFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listSyukko.Any(x => x.EmID == EmployeeID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
+        //メソッド名：CheckSyukkoClientIDExistence()
+        //引　数   ：顧客ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する顧客IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckSyukkoClientIDExistence(int ClientID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<T_Syukko> listSyukko = context.T_Syukkos.Where(x => x.SyFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listSyukko.Any(x => x.ClID == ClientID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
         }
 
         ///////////////////////////////
@@ -129,6 +188,8 @@ namespace SalesManagement_SysDev
                 var Syukko = context.T_Syukkos.Single(x => x.SyID == cfmSyukko.SyID);
 
                 Syukko.SyStateFlag = cfmSyukko.SyStateFlag;
+                Syukko.SyDate = cfmSyukko.SyDate;
+                Syukko.EmID = cfmSyukko.EmID;
 
                 context.SaveChanges();
                 context.Dispose();
@@ -181,19 +242,39 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.T_Syukkos.AsQueryable();
 
-                if (selectSyukko.SyID != null && selectSyukko.SyID != 0)
+                if ( selectSyukko.SyID != 0)
                 {
                     query = query.Where(x => x.SyID == selectSyukko.SyID);
                 }
 
-                if (selectSyukko.SoID != null && selectSyukko.SoID != 0)
+                if (selectSyukko.SoID != 0)
                 {
                     query = query.Where(x => x.SoID == selectSyukko.SoID);
                 }
 
-                if (selectSyukko.OrID != null && selectSyukko.OrID != 0)
+                if (selectSyukko.OrID != 0)
                 {
                     query = query.Where(x => x.OrID == selectSyukko.OrID);
+                }
+
+                if (selectSyukko.ClID != 0)
+                {
+                    query = query.Where(x => x.ClID == selectSyukko.ClID);
+                }
+
+                if (selectSyukko.EmID != 0)
+                {
+                    query = query.Where(x => x.EmID == selectSyukko.EmID);
+                }
+
+                if (selectSyukko.SyDate != null)
+                {
+                    query = query.Where(x => x.SyDate.Value == selectSyukko.SyDate.Value);
+                }
+
+                if (selectSyukko.SyStateFlag != -1)
+                {
+                    query = query.Where(x => x.SyStateFlag == selectSyukko.SyStateFlag);
                 }
 
                 listSyukko = query.ToList();
@@ -213,13 +294,13 @@ namespace SalesManagement_SysDev
         //戻り値：条件一部一致商品データ
         //機　能：条件一部一致商品データの取得
         ///////////////////////////////
-        public List<T_Syukko> GetOrSyukkoData(T_Syukko selectProdact)
+        public List<T_Syukko> GetOrSyukkoData(T_Syukko selectSyukko)
         {
             List<T_Syukko> listProdact = new List<T_Syukko>();
             try
             {
                 var context = new SalesManagement_DevContext();
-                listProdact = context.T_Syukkos.Where(x => x.SyID == selectProdact.SyID || x.SoID == selectProdact.SoID || x.OrID == selectProdact.OrID).ToList();
+                listProdact = context.T_Syukkos.Where(x => x.SyID == selectSyukko.SyID || x.SoID == selectSyukko.SoID || x.OrID == selectSyukko.OrID || x.ClID == selectSyukko.ClID || x.EmID == selectSyukko.EmID || x.SyDate.Value == selectSyukko.SyDate || x.SyStateFlag == selectSyukko.SyStateFlag).ToList();
 
                 context.Dispose();
             }
@@ -297,6 +378,31 @@ namespace SalesManagement_SysDev
             }
 
             return listProdact;
+        }
+
+        ///////////////////////////////
+        //メソッド名：AddSyukkoData()
+        //引　数：regSyukko = 出庫データ
+        //戻り値：True or False
+        //機　能：出庫データの登録
+        //      ：登録成功の場合True
+        //      ：登録失敗の場合False
+        ///////////////////////////////
+        public bool AddSyukkoData(T_Syukko regSyukko)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                context.T_Syukkos.Add(regSyukko);
+                context.SaveChanges();
+                context.Dispose();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
         }
     }
 }

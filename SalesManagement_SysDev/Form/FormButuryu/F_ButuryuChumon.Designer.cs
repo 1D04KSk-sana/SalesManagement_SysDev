@@ -62,6 +62,14 @@ namespace SalesManagement_SysDev
             this.lblClientHidden = new System.Windows.Forms.Label();
             this.txbClientID = new System.Windows.Forms.TextBox();
             this.lblClientID = new System.Windows.Forms.Label();
+            this.txbEmployeeID = new System.Windows.Forms.TextBox();
+            this.lblEmployeeID = new System.Windows.Forms.Label();
+            this.txbEmployeeName = new System.Windows.Forms.TextBox();
+            this.lblEmployeeName = new System.Windows.Forms.Label();
+            this.dtpChumonDate = new System.Windows.Forms.DateTimePicker();
+            this.lblChumonDate = new System.Windows.Forms.Label();
+            this.cmbConfirm = new System.Windows.Forms.ComboBox();
+            this.lblConfirm = new System.Windows.Forms.Label();
             this.pnlButuryu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChumon)).BeginInit();
@@ -83,7 +91,7 @@ namespace SalesManagement_SysDev
             // pctHint
             // 
             this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
-            this.pctHint.Location = new System.Drawing.Point(1656, 34);
+            this.pctHint.Location = new System.Drawing.Point(1656, 47);
             this.pctHint.Name = "pctHint";
             this.pctHint.Size = new System.Drawing.Size(60, 60);
             this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -95,19 +103,20 @@ namespace SalesManagement_SysDev
             // 
             this.lblClient.AutoSize = true;
             this.lblClient.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClient.ForeColor = System.Drawing.Color.White;
-            this.lblClient.Location = new System.Drawing.Point(752, 30);
+            this.lblClient.ForeColor = System.Drawing.Color.Black;
+            this.lblClient.Location = new System.Drawing.Point(823, 37);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(417, 64);
+            this.lblClient.Size = new System.Drawing.Size(288, 64);
             this.lblClient.TabIndex = 27;
-            this.lblClient.Text = "注文管理画面";
+            this.lblClient.Text = "注文管理";
+            this.lblClient.Click += new System.EventHandler(this.lblClient_Click);
             // 
             // btnClose
             // 
             this.btnClose.BackColor = System.Drawing.Color.White;
             this.btnClose.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClose.Location = new System.Drawing.Point(1737, 24);
+            this.btnClose.Location = new System.Drawing.Point(1737, 37);
             this.btnClose.Margin = new System.Windows.Forms.Padding(2);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(160, 70);
@@ -121,7 +130,7 @@ namespace SalesManagement_SysDev
             // 
             this.btnReturn.BackColor = System.Drawing.Color.White;
             this.btnReturn.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnReturn.Location = new System.Drawing.Point(14, 24);
+            this.btnReturn.Location = new System.Drawing.Point(27, 31);
             this.btnReturn.Margin = new System.Windows.Forms.Padding(2);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(160, 70);
@@ -133,7 +142,7 @@ namespace SalesManagement_SysDev
             // 
             // btnClear
             // 
-            this.btnClear.BackColor = System.Drawing.Color.Cyan;
+            this.btnClear.BackColor = System.Drawing.Color.White;
             this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnClear.Location = new System.Drawing.Point(1557, 170);
             this.btnClear.Margin = new System.Windows.Forms.Padding(2);
@@ -189,7 +198,7 @@ namespace SalesManagement_SysDev
             // txbChumonID
             // 
             this.txbChumonID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbChumonID.Location = new System.Drawing.Point(302, 277);
+            this.txbChumonID.Location = new System.Drawing.Point(210, 277);
             this.txbChumonID.Margin = new System.Windows.Forms.Padding(2);
             this.txbChumonID.Name = "txbChumonID";
             this.txbChumonID.Size = new System.Drawing.Size(220, 31);
@@ -199,7 +208,7 @@ namespace SalesManagement_SysDev
             // 
             this.lblChumonID.AutoSize = true;
             this.lblChumonID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblChumonID.Location = new System.Drawing.Point(206, 280);
+            this.lblChumonID.Location = new System.Drawing.Point(114, 280);
             this.lblChumonID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblChumonID.Name = "lblChumonID";
             this.lblChumonID.Size = new System.Drawing.Size(80, 24);
@@ -209,7 +218,7 @@ namespace SalesManagement_SysDev
             // txbClientName
             // 
             this.txbClientName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientName.Location = new System.Drawing.Point(865, 347);
+            this.txbClientName.Location = new System.Drawing.Point(640, 347);
             this.txbClientName.Margin = new System.Windows.Forms.Padding(2);
             this.txbClientName.Name = "txbClientName";
             this.txbClientName.ReadOnly = true;
@@ -220,7 +229,7 @@ namespace SalesManagement_SysDev
             // 
             this.lblClientName.AutoSize = true;
             this.lblClientName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientName.Location = new System.Drawing.Point(756, 350);
+            this.lblClientName.Location = new System.Drawing.Point(531, 350);
             this.lblClientName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClientName.Name = "lblClientName";
             this.lblClientName.Size = new System.Drawing.Size(82, 24);
@@ -231,7 +240,7 @@ namespace SalesManagement_SysDev
             // 
             this.lblSalesOfficeID.AutoSize = true;
             this.lblSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblSalesOfficeID.Location = new System.Drawing.Point(732, 277);
+            this.lblSalesOfficeID.Location = new System.Drawing.Point(507, 277);
             this.lblSalesOfficeID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSalesOfficeID.Name = "lblSalesOfficeID";
             this.lblSalesOfficeID.Size = new System.Drawing.Size(106, 24);
@@ -244,7 +253,7 @@ namespace SalesManagement_SysDev
             this.cmbSalesOfficeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSalesOfficeID.FormattingEnabled = true;
-            this.cmbSalesOfficeID.Location = new System.Drawing.Point(865, 274);
+            this.cmbSalesOfficeID.Location = new System.Drawing.Point(640, 274);
             this.cmbSalesOfficeID.Margin = new System.Windows.Forms.Padding(2);
             this.cmbSalesOfficeID.Name = "cmbSalesOfficeID";
             this.cmbSalesOfficeID.Size = new System.Drawing.Size(220, 32);
@@ -254,7 +263,7 @@ namespace SalesManagement_SysDev
             // txbOrderID
             // 
             this.txbOrderID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbOrderID.Location = new System.Drawing.Point(1356, 277);
+            this.txbOrderID.Location = new System.Drawing.Point(1067, 277);
             this.txbOrderID.Margin = new System.Windows.Forms.Padding(2);
             this.txbOrderID.Name = "txbOrderID";
             this.txbOrderID.Size = new System.Drawing.Size(220, 31);
@@ -264,7 +273,7 @@ namespace SalesManagement_SysDev
             // 
             this.lblOrderID.AutoSize = true;
             this.lblOrderID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblOrderID.Location = new System.Drawing.Point(1258, 280);
+            this.lblOrderID.Location = new System.Drawing.Point(969, 280);
             this.lblOrderID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOrderID.Name = "lblOrderID";
             this.lblOrderID.Size = new System.Drawing.Size(80, 24);
@@ -273,7 +282,7 @@ namespace SalesManagement_SysDev
             // 
             // btnDone
             // 
-            this.btnDone.BackColor = System.Drawing.Color.Red;
+            this.btnDone.BackColor = System.Drawing.Color.White;
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnDone.Location = new System.Drawing.Point(1738, 170);
             this.btnDone.Margin = new System.Windows.Forms.Padding(2);
@@ -446,7 +455,7 @@ namespace SalesManagement_SysDev
             // 
             this.lblHidden.AutoSize = true;
             this.lblHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblHidden.Location = new System.Drawing.Point(146, 440);
+            this.lblHidden.Location = new System.Drawing.Point(471, 427);
             this.lblHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblHidden.Name = "lblHidden";
             this.lblHidden.Size = new System.Drawing.Size(142, 24);
@@ -462,7 +471,7 @@ namespace SalesManagement_SysDev
             this.cmbHidden.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbHidden.Location = new System.Drawing.Point(302, 430);
+            this.cmbHidden.Location = new System.Drawing.Point(640, 424);
             this.cmbHidden.Margin = new System.Windows.Forms.Padding(2);
             this.cmbHidden.Name = "cmbHidden";
             this.cmbHidden.Size = new System.Drawing.Size(220, 32);
@@ -472,17 +481,17 @@ namespace SalesManagement_SysDev
             // txbHidden
             // 
             this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbHidden.Location = new System.Drawing.Point(865, 430);
+            this.txbHidden.Location = new System.Drawing.Point(1067, 424);
             this.txbHidden.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txbHidden.Name = "txbHidden";
-            this.txbHidden.Size = new System.Drawing.Size(711, 31);
+            this.txbHidden.Size = new System.Drawing.Size(650, 31);
             this.txbHidden.TabIndex = 81;
             // 
             // lblClientHidden
             // 
             this.lblClientHidden.AutoSize = true;
             this.lblClientHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.lblClientHidden.Location = new System.Drawing.Point(708, 433);
+            this.lblClientHidden.Location = new System.Drawing.Point(919, 427);
             this.lblClientHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClientHidden.Name = "lblClientHidden";
             this.lblClientHidden.Size = new System.Drawing.Size(130, 24);
@@ -492,7 +501,7 @@ namespace SalesManagement_SysDev
             // txbClientID
             // 
             this.txbClientID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbClientID.Location = new System.Drawing.Point(302, 350);
+            this.txbClientID.Location = new System.Drawing.Point(210, 350);
             this.txbClientID.Margin = new System.Windows.Forms.Padding(2);
             this.txbClientID.Name = "txbClientID";
             this.txbClientID.Size = new System.Drawing.Size(220, 31);
@@ -504,18 +513,119 @@ namespace SalesManagement_SysDev
             // 
             this.lblClientID.AutoSize = true;
             this.lblClientID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClientID.Location = new System.Drawing.Point(206, 353);
+            this.lblClientID.Location = new System.Drawing.Point(114, 353);
             this.lblClientID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClientID.Name = "lblClientID";
             this.lblClientID.Size = new System.Drawing.Size(80, 24);
             this.lblClientID.TabIndex = 82;
             this.lblClientID.Text = "顧客ID";
             // 
+            // txbEmployeeID
+            // 
+            this.txbEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbEmployeeID.Location = new System.Drawing.Point(1067, 347);
+            this.txbEmployeeID.Margin = new System.Windows.Forms.Padding(2);
+            this.txbEmployeeID.Name = "txbEmployeeID";
+            this.txbEmployeeID.Size = new System.Drawing.Size(220, 31);
+            this.txbEmployeeID.TabIndex = 87;
+            this.txbEmployeeID.TextChanged += new System.EventHandler(this.txbEmployeeID_TextChanged);
+            this.txbEmployeeID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
+            // 
+            // lblEmployeeID
+            // 
+            this.lblEmployeeID.AutoSize = true;
+            this.lblEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblEmployeeID.Location = new System.Drawing.Point(971, 350);
+            this.lblEmployeeID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblEmployeeID.Name = "lblEmployeeID";
+            this.lblEmployeeID.Size = new System.Drawing.Size(80, 24);
+            this.lblEmployeeID.TabIndex = 86;
+            this.lblEmployeeID.Text = "社員ID";
+            // 
+            // txbEmployeeName
+            // 
+            this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbEmployeeName.Location = new System.Drawing.Point(1497, 344);
+            this.txbEmployeeName.Margin = new System.Windows.Forms.Padding(2);
+            this.txbEmployeeName.Name = "txbEmployeeName";
+            this.txbEmployeeName.ReadOnly = true;
+            this.txbEmployeeName.Size = new System.Drawing.Size(220, 31);
+            this.txbEmployeeName.TabIndex = 85;
+            // 
+            // lblEmployeeName
+            // 
+            this.lblEmployeeName.AutoSize = true;
+            this.lblEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblEmployeeName.Location = new System.Drawing.Point(1388, 347);
+            this.lblEmployeeName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblEmployeeName.Name = "lblEmployeeName";
+            this.lblEmployeeName.Size = new System.Drawing.Size(82, 24);
+            this.lblEmployeeName.TabIndex = 84;
+            this.lblEmployeeName.Text = "社員名";
+            // 
+            // dtpChumonDate
+            // 
+            this.dtpChumonDate.Checked = false;
+            this.dtpChumonDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.dtpChumonDate.Location = new System.Drawing.Point(1497, 272);
+            this.dtpChumonDate.Margin = new System.Windows.Forms.Padding(2);
+            this.dtpChumonDate.Name = "dtpChumonDate";
+            this.dtpChumonDate.ShowCheckBox = true;
+            this.dtpChumonDate.Size = new System.Drawing.Size(220, 31);
+            this.dtpChumonDate.TabIndex = 129;
+            this.dtpChumonDate.TabStop = false;
+            // 
+            // lblChumonDate
+            // 
+            this.lblChumonDate.AutoSize = true;
+            this.lblChumonDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblChumonDate.Location = new System.Drawing.Point(1340, 277);
+            this.lblChumonDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblChumonDate.Name = "lblChumonDate";
+            this.lblChumonDate.Size = new System.Drawing.Size(130, 24);
+            this.lblChumonDate.TabIndex = 128;
+            this.lblChumonDate.Text = "注文年月日";
+            // 
+            // cmbConfirm
+            // 
+            this.cmbConfirm.BackColor = System.Drawing.Color.White;
+            this.cmbConfirm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbConfirm.FormattingEnabled = true;
+            this.cmbConfirm.Items.AddRange(new object[] {
+            "未確定",
+            "確定"});
+            this.cmbConfirm.Location = new System.Drawing.Point(210, 424);
+            this.cmbConfirm.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbConfirm.Name = "cmbConfirm";
+            this.cmbConfirm.Size = new System.Drawing.Size(220, 32);
+            this.cmbConfirm.TabIndex = 131;
+            this.cmbConfirm.TabStop = false;
+            // 
+            // lblConfirm
+            // 
+            this.lblConfirm.AutoSize = true;
+            this.lblConfirm.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblConfirm.Location = new System.Drawing.Point(41, 427);
+            this.lblConfirm.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblConfirm.Name = "lblConfirm";
+            this.lblConfirm.Size = new System.Drawing.Size(142, 24);
+            this.lblConfirm.TabIndex = 130;
+            this.lblConfirm.Text = "未確定/確定";
+            // 
             // F_ButuryuChumon
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.cmbConfirm);
+            this.Controls.Add(this.lblConfirm);
+            this.Controls.Add(this.dtpChumonDate);
+            this.Controls.Add(this.lblChumonDate);
+            this.Controls.Add(this.txbEmployeeID);
+            this.Controls.Add(this.lblEmployeeID);
+            this.Controls.Add(this.txbEmployeeName);
+            this.Controls.Add(this.lblEmployeeName);
             this.Controls.Add(this.rdbSearch);
             this.Controls.Add(this.txbClientID);
             this.Controls.Add(this.rdbConfirm);
@@ -601,5 +711,13 @@ namespace SalesManagement_SysDev
         private TextBox txbClientID;
         private Label lblClientID;
         private PictureBox pctHint;
+        private TextBox txbEmployeeID;
+        private Label lblEmployeeID;
+        private TextBox txbEmployeeName;
+        private Label lblEmployeeName;
+        private DateTimePicker dtpChumonDate;
+        private Label lblChumonDate;
+        private ComboBox cmbConfirm;
+        private Label lblConfirm;
     }
 }

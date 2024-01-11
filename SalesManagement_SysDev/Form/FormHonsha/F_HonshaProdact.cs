@@ -21,6 +21,24 @@ namespace SalesManagement_SysDev
         MajorDataAccess MajorDataAccess = new MajorDataAccess();
         //データベース小分類テーブルアクセス用クラスのインスタンス化
         SmallDataAccess SmallDataAccess = new SmallDataAccess();
+        //データベース在庫テーブルアクセス用クラスのインスタンス化
+        StockDataAccess stockDataAccess = new StockDataAccess();
+        //データベース受注詳細テーブルアクセス用クラスのインスタンス化
+        OrderDetailDataAccess orderDetailDataAccess = new OrderDetailDataAccess();
+        //データベース注文詳細テーブルアクセス用クラスのインスタンス化
+        ChumonDetailDataAccess chumonDetailDataAccess = new ChumonDetailDataAccess();
+        //データベース出庫詳細テーブルアクセス用クラスのインスタンス化
+        SyukkoDetailDataAccess syukkoDetailDataAccess = new SyukkoDetailDataAccess();
+        //データベース入荷詳細テーブルアクセス用クラスのインスタンス化
+        ArrivalDetailDataAccess arrivalDetailDataAccess = new ArrivalDetailDataAccess();
+        //データベース出荷詳細テーブルアクセス用クラスのインスタンス化
+        ShipmentDetailDataAccess shipmentDetailDataAccess = new ShipmentDetailDataAccess();
+        //データベース発注詳細テーブルアクセス用クラスのインスタンス化
+        HattyuDetailDataAccess hattyuDetailDataAccess = new HattyuDetailDataAccess();
+        //データベース入庫詳細テーブルアクセス用クラスのインスタンス化
+        WarehousingDetailDataAccess warehousingDetailDataAccess = new WarehousingDetailDataAccess();
+        //データベース売上詳細テーブルアクセス用クラスのインスタンス化
+        SaleDetailDataAccess saleDetailDataAccess = new SaleDetailDataAccess();
         //データグリッドビュー用の全商品データ
         private static List<M_Product> listAllProdact = new List<M_Product>();
         //データグリッドビュー用の大分類データ
@@ -116,6 +134,8 @@ namespace SalesManagement_SysDev
 
             rdbRegister.Checked = true;
 
+            txbNumPage.Text = "1";
+
             GetDataGridView();
         }
         
@@ -163,29 +183,51 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
+                txbProdactID.Enabled = true;
+                cmbMajorID.Enabled = true;
+                cmbSmallID.Enabled = true;
+                cmbMakerName.Enabled = true;
 
-            }
-            else
-            {
-
+                txbProdactColor.Enabled = false;
+                txbProdactHidden.Enabled = false;
+                cmbHidden.Enabled = false;
+                txbModelNumber.Enabled = false;
+                txbProdactJanCode.Enabled = false;
+                txbProdactPrice.Enabled = false;
+                txbProdactSafetyStock.Enabled = false;
+                txbProdactName.Enabled = false;
+                
             }
 
             if (rdbRegister.Checked)
             {
-
+                txbProdactID.Enabled = true;
+                cmbMajorID.Enabled = true;
+                cmbSmallID.Enabled = true;
+                cmbMakerName.Enabled = true;
+                txbProdactColor.Enabled = true;
+                txbProdactHidden.Enabled = true;
+                cmbHidden.Enabled = true;
+                txbModelNumber.Enabled = true;
+                txbProdactJanCode.Enabled = true;
+                txbProdactPrice.Enabled = true;
+                txbProdactSafetyStock.Enabled = true;
+                txbProdactName.Enabled = true;
             }
-            else
-            {
-
-            }
-
             if (rdbUpdate.Checked)
             {
-
-            }
-            else
-            {
-
+                txbProdactID.Enabled = true;
+                cmbMajorID.Enabled = true;
+                cmbSmallID.Enabled = true;
+                cmbMakerName.Enabled = true;
+                txbProdactColor.Enabled = true;
+                txbProdactHidden.Enabled = true;
+                cmbHidden.Enabled = true;
+                txbModelNumber.Enabled = true;
+                txbProdactJanCode.Enabled = true;
+                txbProdactPrice.Enabled = true;
+                txbProdactSafetyStock.Enabled = true;
+                txbProdactName.Enabled = true;
             }
         }
 
@@ -281,7 +323,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbProdactID.Text.Trim()) && cmbMajorID.SelectedIndex == -1 && cmbMakerName.SelectedIndex == -1)
+            if (String.IsNullOrEmpty(txbProdactID.Text.Trim()) && cmbMajorID.SelectedIndex == -1 && cmbMakerName.SelectedIndex == -1 && cmbSmallID.SelectedIndex == -1)
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbProdactID.Focus();
@@ -324,6 +366,23 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
             // 商品情報作成
             var updProdact = GenerateDataAtUpdate();
 
@@ -354,7 +413,7 @@ namespace SalesManagement_SysDev
                 //商品IDの重複チェック
                 if (!ProdactDataAccess.CheckProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
                 {
-                    MessageBox.Show("商品IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("商品IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbProdactID.Focus();
                     return false;
                 }
@@ -428,14 +487,6 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            // 小分類IDの適否
-            if (cmbMajorID.SelectedIndex == -1)
-            {
-                MessageBox.Show("小分類IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                cmbMajorID.Focus();
-                return false;
-            }
-
             // 型番の適否
             if (!String.IsNullOrEmpty(txbModelNumber.Text.Trim()))
             {
@@ -472,6 +523,21 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
+            // 大分類IDの適否
+            if (cmbMajorID.SelectedIndex == -1)
+            {
+                MessageBox.Show("大分類IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbProdactName.Focus();
+                return false;
+            }
+
+            // 小分類IDの適否
+            if (cmbMajorID.SelectedIndex == -1)
+            {
+                MessageBox.Show("小分類IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbMajorID.Focus();
+                return false;
+            }
 
             //表示非表示選択の適否
             if (cmbHidden.SelectedIndex == -1)
@@ -480,14 +546,73 @@ namespace SalesManagement_SysDev
                 cmbHidden.Focus();
                 return false;
             }
-
-            // 大分類IDの適否
-            if (cmbMajorID.SelectedIndex == -1)
+            else if (cmbHidden.SelectedIndex == 1)
             {
-                MessageBox.Show("大分類IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbProdactName.Focus();
-                return false;
+                //在庫テーブルにおける商品IDの存在チェック
+                if (stockDataAccess.CheckStockProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された商品IDが在庫テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactID.Focus();
+                    return false;
+                }
+                //受注詳細テーブルにおける商品IDの存在チェック
+                if (orderDetailDataAccess.CheckOrderDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された商品IDが受注詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactID.Focus();
+                    return false;
+                }
+                //注文詳細テーブルにおける商品IDの存在チェック
+                if (chumonDetailDataAccess.CheckChumonDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された商品IDが注文詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactID.Focus();
+                    return false;
+                }
+                //出庫詳細テーブルにおける商品IDの存在チェック
+                if (syukkoDetailDataAccess.CheckSyukkoDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された商品IDが出庫詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactID.Focus();
+                    return false;
+                }
+                //入荷詳細テーブルにおける商品IDの存在チェック
+                if (arrivalDetailDataAccess.CheckArrivalDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された商品IDが入荷詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactID.Focus();
+                    return false;
+                }
+                //出荷詳細テーブルにおける商品IDの存在チェック
+                if (shipmentDetailDataAccess.CheckShipmentDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された商品IDが出荷詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactID.Focus();
+                    return false;
+                }
+                //発注詳細テーブルにおける商品IDの存在チェック
+                if (hattyuDetailDataAccess.CheckHattyuDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された商品IDが発注詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactID.Focus();
+                    return false;
+                }
+                //入庫詳細テーブルにおける商品IDの存在チェック
+                if (warehousingDetailDataAccess.CheckWarehousingDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された商品IDが入庫詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactID.Focus();
+                    return false;
+                }
+                //売上詳細テーブルにおける商品IDの存在チェック
+                if (saleDetailDataAccess.CheckSaleDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された商品IDが売上詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactID.Focus();
+                    return false;
+                }
             }
+
             return true;
         }
 
@@ -513,7 +638,7 @@ namespace SalesManagement_SysDev
                 PrModelNumber = txbModelNumber.Text.Trim(),
                 PrColor = txbProdactColor.Text.Trim(),
                 PrFlag = cmbHidden.SelectedIndex,
-                PrHidden = tbxProdactHidden.Text.Trim(),
+                PrHidden = txbProdactHidden.Text.Trim(),
                 PrReleaseDate = dtpProdactReleaseDate.Value,
             };
         }
@@ -528,6 +653,14 @@ namespace SalesManagement_SysDev
         {
             //テキストボックス等の入力チェック
             if (!GetValidDataAtRegistration())
+            {
+                return;
+            }
+
+            // 登録確認メッセージ
+            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
             {
                 return;
             }
@@ -556,23 +689,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void UpdateProdact(M_Product updProdact)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
-            //操作ログデータ取得
-            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
-
-            //操作ログデータの登録（成功 = true,失敗 = false）
-            if (!operationLogAccess.AddOperationLogData(regOperationLog))
-            {
-                return;
-            }
-
             // 商品情報の更新
             bool flg = ProdactDataAccess.UpdateProdactData(updProdact);
             if (flg == true)
@@ -596,14 +712,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void RegistrationProdact(M_Product regProdact)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
             // 商品情報の登録
             bool flg = ProdactDataAccess.AddProdactData(regProdact);
 
@@ -615,6 +723,22 @@ namespace SalesManagement_SysDev
             else
             {
                 MessageBox.Show("データの登録に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            //在庫登録
+            M_Product Prodact = ProdactDataAccess.GetProdactIDName(regProdact.PrName);
+
+            T_Stock Stock = GenerateProdactAtRegistration(Prodact);
+
+            bool flgStock = stockDataAccess.AddStockData(Stock);
+
+            if (flgStock == true)
+            {
+                MessageBox.Show("在庫管理にデータを送信ました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("在庫管理へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             // 入力エリアのクリア
@@ -647,6 +771,21 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：GenerateChumonAtRegistration()
+        //引　数   ：商品情報
+        //戻り値   ：在庫登録情報
+        //機　能   ：在庫登録データのセット
+        ///////////////////////////////
+        private T_Stock GenerateProdactAtRegistration(M_Product Prodact)
+        {
+            return new T_Stock
+            {
+                PrID = Prodact.PrID,
+                StQuantity = 0,
+            };
+        }
+
+        ///////////////////////////////
         //メソッド名：GenerateDataAtRegistration()
         //引　数   ：なし
         //戻り値   ：商品登録情報
@@ -656,7 +795,6 @@ namespace SalesManagement_SysDev
         {
             return new M_Product
             {
-                PrID = int.Parse(txbProdactID.Text.Trim()),
                 MaID = cmbMakerName.SelectedIndex + 1,
                 PrName = txbProdactName.Text.Trim(),
                 Price = int.Parse(txbProdactPrice.Text.Trim()),
@@ -667,7 +805,7 @@ namespace SalesManagement_SysDev
                 PrModelNumber = txbModelNumber.Text.Trim(),
                 PrColor = txbProdactColor.Text.Trim(),
                 PrFlag = cmbHidden.SelectedIndex,
-                PrHidden = tbxProdactHidden.Text.Trim(),
+                PrHidden = txbProdactHidden.Text.Trim(),
                 PrReleaseDate = DateTime.Now,
             };
         }
@@ -682,31 +820,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-            // 商品IDの適否
-            if (!String.IsNullOrEmpty(txbProdactID.Text.Trim()))
-            {
-                // 商品IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbProdactID.Text.Trim()))
-                {
-                    MessageBox.Show("商品IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactID.Focus();
-                    return false;
-                }
-                //商品IDの重複チェック
-                if (ProdactDataAccess.CheckProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
-                {
-                    MessageBox.Show("商品IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("商品IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbProdactID.Focus();
-                return false;
-            }
-
             // メーカー名の適否
             if (cmbHidden.SelectedIndex == -1)
             {
@@ -1081,7 +1194,7 @@ namespace SalesManagement_SysDev
             dtpProdactReleaseDate.Text = dgvProdact[11, dgvProdact.CurrentCellAddress.Y].Value.ToString();
             txbProdactJanCode.Text = dgvProdact[4, dgvProdact.CurrentCellAddress.Y]?.Value?.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvProdact[10, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key;
-            tbxProdactHidden.Text = dgvProdact[12, dgvProdact.CurrentCellAddress.Y]?.Value?.ToString();
+            txbProdactHidden.Text = dgvProdact[12, dgvProdact.CurrentCellAddress.Y]?.Value?.ToString();
         }
 
         ///////////////////////////////
@@ -1105,6 +1218,7 @@ namespace SalesManagement_SysDev
             {
                 PrID = intProdactID,
                 McID = cmbMajorID.SelectedIndex + 1,
+                ScID = cmbSmallID.SelectedIndex + 1,
                 MaID = cmbMakerName.SelectedIndex + 1,
                 //テキストボックス = txbxxxxxx.Text.Trim()
             };
@@ -1144,6 +1258,7 @@ namespace SalesManagement_SysDev
 
         private void btnPagesize_Click(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
             GetDataGridView();
         }
 
@@ -1210,6 +1325,13 @@ namespace SalesManagement_SysDev
 
         private void button1_Click(object sender, EventArgs e)
         {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("本当に閉じますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
             Application.Exit();
         }
 
@@ -1217,7 +1339,7 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1ZgVVTTy5Qd2OHCWsk43F0fwvHmdQC4br/edit=true",
+                FileName = "https://docs.google.com/document/d/1ZgVVTTy5Qd2OHCWsk43F0fwvHmdQC4br",
                 UseShellExecute = true
             });
         }

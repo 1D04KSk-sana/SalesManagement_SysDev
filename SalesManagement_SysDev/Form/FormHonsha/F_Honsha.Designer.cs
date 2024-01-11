@@ -36,6 +36,7 @@
             this.btnFormProdact = new System.Windows.Forms.Button();
             this.btnFormOperationLog = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnPsition = new System.Windows.Forms.Button();
             this.btnFormSalesOffice = new System.Windows.Forms.Button();
             this.btnFormMaker = new System.Windows.Forms.Button();
             this.btnFormClassification = new System.Windows.Forms.Button();
@@ -44,7 +45,7 @@
             // 
             // btnFormClient
             // 
-            this.btnFormClient.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormClient.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormClient.Location = new System.Drawing.Point(707, 210);
             this.btnFormClient.Margin = new System.Windows.Forms.Padding(2);
             this.btnFormClient.Name = "btnFormClient";
@@ -82,7 +83,7 @@
             // 
             // btnFormEmployee
             // 
-            this.btnFormEmployee.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormEmployee.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormEmployee.Location = new System.Drawing.Point(707, 567);
             this.btnFormEmployee.Name = "btnFormEmployee";
             this.btnFormEmployee.Size = new System.Drawing.Size(510, 100);
@@ -94,7 +95,7 @@
             // 
             // btnFormSale
             // 
-            this.btnFormSale.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormSale.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormSale.Location = new System.Drawing.Point(707, 390);
             this.btnFormSale.Name = "btnFormSale";
             this.btnFormSale.Size = new System.Drawing.Size(510, 100);
@@ -106,7 +107,7 @@
             // 
             // btnFormProdact
             // 
-            this.btnFormProdact.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormProdact.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormProdact.Location = new System.Drawing.Point(707, 746);
             this.btnFormProdact.Name = "btnFormProdact";
             this.btnFormProdact.Size = new System.Drawing.Size(510, 100);
@@ -118,7 +119,7 @@
             // 
             // btnFormOperationLog
             // 
-            this.btnFormOperationLog.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormOperationLog.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormOperationLog.Location = new System.Drawing.Point(707, 917);
             this.btnFormOperationLog.Name = "btnFormOperationLog";
             this.btnFormOperationLog.Size = new System.Drawing.Size(510, 100);
@@ -137,10 +138,11 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1920, 150);
             this.panel1.TabIndex = 8;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // btnFormSalesOffice
             // 
-            this.btnFormSalesOffice.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormSalesOffice.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormSalesOffice.Location = new System.Drawing.Point(1288, 940);
             this.btnFormSalesOffice.Name = "btnFormSalesOffice";
             this.btnFormSalesOffice.Size = new System.Drawing.Size(510, 100);
@@ -152,7 +154,7 @@
             // 
             // btnFormMaker
             // 
-            this.btnFormMaker.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnFormMaker.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.btnFormMaker.Location = new System.Drawing.Point(1288, 788);
             this.btnFormMaker.Name = "btnFormMaker";
             this.btnFormMaker.Size = new System.Drawing.Size(510, 100);
@@ -162,6 +164,18 @@
             this.btnFormMaker.UseVisualStyleBackColor = true;
             this.btnFormMaker.Click += new System.EventHandler(this.btnFormMaker_Click);
             // 
+            // btnPsition
+            // 
+            this.btnPsition.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnPsition.Location = new System.Drawing.Point(1369, 647);
+            this.btnPsition.Name = "btnPsition";
+            this.btnPsition.Size = new System.Drawing.Size(510, 100);
+            this.btnPsition.TabIndex = 9;
+            this.btnPsition.TabStop = false;
+            this.btnPsition.Text = "役職管理画面";
+            this.btnPsition.UseVisualStyleBackColor = true;
+            this.btnPsition.Click += new System.EventHandler(this.btnPsition_Click);
+            //
             // btnFormClassification
             // 
             this.btnFormClassification.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
@@ -180,6 +194,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.btnPsition);
             this.Controls.Add(this.btnFormClassification);
             this.Controls.Add(this.btnFormMaker);
             this.Controls.Add(this.btnFormSalesOffice);
@@ -194,6 +209,7 @@
             this.MaximizeBox = false;
             this.Name = "F_Honsha";
             this.Text = "本社画面";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -209,6 +225,7 @@
         private System.Windows.Forms.Button btnFormProdact;
         private System.Windows.Forms.Button btnFormOperationLog;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnPsition;
         private System.Windows.Forms.Button btnFormSalesOffice;
         private System.Windows.Forms.Button btnFormMaker;
         private System.Windows.Forms.Button btnFormClassification;

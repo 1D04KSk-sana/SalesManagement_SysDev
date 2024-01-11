@@ -17,6 +17,22 @@ namespace SalesManagement_SysDev
         SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
+        //データベース顧客テーブルアクセス用クラスのインスタンス化
+        ClientDataAccess clientDataAccess = new ClientDataAccess();
+        //データベース社員テーブルアクセス用クラスのインスタンス化
+        EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
+        //データベース受注テーブルアクセス用クラスのインスタンス化
+        OrderDataAccess orderDataAccess = new OrderDataAccess();
+        //データベース注文テーブルアクセス用クラスのインスタンス化
+        ChumonDataAccess chumonDataAccess = new ChumonDataAccess();
+        //データベース出庫テーブルアクセス用クラスのインスタンス化
+        SyukkoDataAccess syukkoDataAccess = new SyukkoDataAccess();
+        //データベース入荷テーブルアクセス用クラスのインスタンス化
+        ArrivalDataAccess arrivalDataAccess = new ArrivalDataAccess();
+        //データベース出荷テーブルアクセス用クラスのインスタンス化
+        ShipmentDataAccess shipmentDataAccess = new ShipmentDataAccess();
+        //データベース売上テーブルアクセス用クラスのインスタンス化
+        SaleDataAccess saleDataAccess = new SaleDataAccess();
         //入力形式チェック用クラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
         //データグリッドビュー用の全顧客データ
@@ -58,6 +74,8 @@ namespace SalesManagement_SysDev
             ClearImput();
 
             rdbRegister.Checked = true;
+
+            txbNumPage.Text = "1";
 
             GetDataGridView();
         }
@@ -175,29 +193,20 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
-
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
+                txbSalesOfficeFAX.Enabled = false;
+                txbSalesOfficePostal.Enabled = false;
+                txbSalesOfficeAddress.Enabled = false;
+                txbSalesOfficeName.Enabled = false;
             }
-            else
-            {
-
-            }
-
             if (rdbRegister.Checked)
             {
-
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
             }
-            else
-            {
-
-            }
-
             if (rdbUpdate.Checked)
             {
-
-            }
-            else
-            {
-
             }
         }
         ///////////////////////////////
@@ -279,16 +288,16 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SalesOfficeDataRegister()
         {
-            // 登録確認メッセージ
-            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtRegistration())
             {
                 return;
             }
 
-            //テキストボックス等の入力チェック
-            if (!GetValidDataAtRegistration())
+            // 登録確認メッセージ
+            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
             {
                 return;
             }
@@ -318,31 +327,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-            // 営業所IDの適否
-            if (!String.IsNullOrEmpty(txbSalesOfficeID.Text.Trim()))
-            {
-                // 営業所IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbSalesOfficeID.Text.Trim()))
-                {
-                    MessageBox.Show("営業所IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
-                //営業所IDの重複チェック
-                if (salesOfficeDataAccess.CheckSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
-                {
-                    MessageBox.Show("営業所IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("営業所IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbSalesOfficeID.Focus();
-                return false;
-            }
-
             // 営業所名の適否
             if (!String.IsNullOrEmpty(txbSalesOfficeName.Text.Trim()))
             {
@@ -487,7 +471,6 @@ namespace SalesManagement_SysDev
         {
             return new M_SalesOffice
             {
-                SoID = int.Parse(txbSalesOfficeID.Text.Trim()),
                 SoName = string.Format(txbSalesOfficeName.Text.Trim()),
                 SoAddress = txbSalesOfficeAddress.Text.Trim(),
                 SoPhone = txbSalesOfficePhone.Text.Trim(),
@@ -693,7 +676,7 @@ namespace SalesManagement_SysDev
             M_SalesOffice selectCondition = new M_SalesOffice()
             {
                 SoID = intSalesOfficeID,
-                //SoName = txbSalesOfficeName.Text.Trim()
+                SoName = txbSalesOfficeName.Text.Trim(),
                 SoPhone = txbSalesOfficePhone.Text.Trim(),
                 //SoPostal= txbSalesOfficePostal.Text.Trim(),
                 //SoAddress= txbSalesOfficeAddress.Text.Trim(),
@@ -722,6 +705,23 @@ namespace SalesManagement_SysDev
         {
             //テキストボックス等の入力チェック
             if (!GetValidDataAtUpdate())
+            {
+                return;
+            }
+
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
             {
                 return;
             }
@@ -755,7 +755,7 @@ namespace SalesManagement_SysDev
                 //営業所IDの存在チェック
                 if (!salesOfficeDataAccess.CheckSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
                 {
-                    MessageBox.Show("営業所IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("営業所IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSalesOfficeID.Focus();
                     return false;
                 }
@@ -879,6 +879,65 @@ namespace SalesManagement_SysDev
                 cmbHidden.Focus();
                 return false;
             }
+            else if (cmbHidden.SelectedIndex == 1)
+            {
+                //顧客テーブルにおける営業所IDの存在チェック
+                if (clientDataAccess.CheckClientSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された営業所IDが顧客テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSalesOfficeID.Focus();
+                    return false;
+                }
+                //社員テーブルにおける営業所IDの存在チェック
+                if (employeeDataAccess.CheckEmployeeSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された営業所IDが社員テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSalesOfficeID.Focus();
+                    return false;
+                }
+                //受注テーブルにおける営業所IDの存在チェック
+                if (orderDataAccess.CheckOrderSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された営業所IDが受注テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSalesOfficeID.Focus();
+                    return false;
+                }
+                //注文テーブルにおける営業所IDの存在チェック
+                if (chumonDataAccess.CheckChumonSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された営業所IDが注文テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSalesOfficeID.Focus();
+                    return false;
+                }
+                //出庫テーブルにおける営業所IDの存在チェック
+                if (syukkoDataAccess.CheckSyukkoSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された営業所IDが出庫テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSalesOfficeID.Focus();
+                    return false;
+                }
+                //入荷テーブルにおける営業所IDの存在チェック
+                if (arrivalDataAccess.CheckArrivalSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された営業所IDが入荷テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSalesOfficeID.Focus();
+                    return false;
+                }
+                //出荷テーブルにおける営業所IDの存在チェック
+                if (shipmentDataAccess.CheckShipmenttSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された営業所IDが出荷テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSalesOfficeID.Focus();
+                    return false;
+                }
+                //売上テーブルにおける営業所IDの存在チェック
+                if (saleDataAccess.CheckSaleSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された営業所IDが売上テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbSalesOfficeID.Focus();
+                    return false;
+                }
+            }
 
             return true;
         }
@@ -910,23 +969,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void UpdateSalesOffice(M_SalesOffice updSalesOffice)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
-            //操作ログデータ取得
-            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
-
-            //操作ログデータの登録（成功 = true,失敗 = false）
-            if (!operationLogAccess.AddOperationLogData(regOperationLog))
-            {
-                return;
-            }
-
             // 顧客情報の更新
             bool flg = salesOfficeDataAccess.UpdateSalesOfficeData(updSalesOffice);
             if (flg == true)
@@ -1019,6 +1061,13 @@ namespace SalesManagement_SysDev
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("本当に閉じますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
             Application.Exit();
         }
 
@@ -1026,9 +1075,14 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1EwgtxiqAgD8eJP7D9e6v9xkQuUIdCJ1H/edit=true",
+                FileName = "https://docs.google.com/document/d/1EwgtxiqAgD8eJP7D9e6v9xkQuUIdCJ1H",
                 UseShellExecute = true
             });
+        }
+
+        private void btnPageSize_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

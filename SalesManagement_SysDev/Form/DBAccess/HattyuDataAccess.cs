@@ -35,6 +35,62 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：CheckHattyuMakerIDExistence()
+        //引　数   ：メーカーID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致するメーカーIDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckHattyuMakerIDExistence(int MakerID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<T_Hattyu> listHattyu = context.T_Hattyus.Where(x => x.HaFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listHattyu.Any(x => x.MaID == MakerID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
+        //メソッド名：CheckHattyuEmployeeIDExistence()
+        //引　数   ：社員ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する社員IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckHattyuEmployeeIDExistence(int EmployeeID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<T_Hattyu> listHattyu = context.T_Hattyus.Where(x => x.HaFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listHattyu.Any(x => x.EmID == EmployeeID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
         //メソッド名：GetHattyuData()
         //引　数：なし
         //戻り値：発注データ
@@ -135,6 +191,10 @@ namespace SalesManagement_SysDev
                     query = query.Where(x => x.HaDate.Value == selectHattyu.HaDate.Value);
                 }
 
+                if (selectHattyu.WaWarehouseFlag != -1)
+                {
+                    query = query.Where(x => x.WaWarehouseFlag == selectHattyu.WaWarehouseFlag);
+                }
 
                 listHattyu = query.ToList();
                 context.Dispose();
@@ -159,7 +219,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listHattyu = context.T_Hattyus.Where(x => x.HaID == selectHattyu.HaID || x.EmID == selectHattyu.EmID || x.MaID == selectHattyu.MaID || x.HaDate.Value == selectHattyu.HaDate.Value).ToList();
+                listHattyu = context.T_Hattyus.Where(x => x.HaID == selectHattyu.HaID || x.EmID == selectHattyu.EmID || x.MaID == selectHattyu.MaID || x.HaDate.Value == selectHattyu.HaDate.Value || x.WaWarehouseFlag == selectHattyu.WaWarehouseFlag).ToList();
 
                 context.Dispose();
             }

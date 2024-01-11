@@ -15,6 +15,8 @@ namespace SalesManagement_SysDev
     {
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
+        //データベース在庫テーブルアクセス用クラスのインスタンス化
+        StockDataAccess stockDataAccess = new StockDataAccess();
         //入力形式チェック用クラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
         //データベース売上テーブルアクセス用クラスのインスタンス化
@@ -201,6 +203,8 @@ namespace SalesManagement_SysDev
 
             rdbRegister.Checked = true;
 
+            txbNumPage.Text = "1";
+
             GetDataGridView();
         }
         ///////////////////////////////
@@ -223,20 +227,19 @@ namespace SalesManagement_SysDev
         {
             ClearImputDetail();
         }
-            ///////////////////////////////
-            //メソッド名：ClearImputDetail()
-            //引　数   ：なし
-            //戻り値   ：なし
-            //機　能   ：コントロールのクリア(Detail)
-            ///////////////////////////////
-            private void ClearImputDetail()
+
+        ///////////////////////////////
+        //メソッド名：ClearImputDetail()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：コントロールのクリア(Detail)
+        ///////////////////////////////
+        private void ClearImputDetail()
         {
-            txbHattyuDetailID.Text = string.Empty;
             txbProductID.Text = string.Empty;
             txbProductName.Text = string.Empty;
             txbHattyuQuantity.Text = string.Empty;
         }
-
 
         ///////////////////////////////
         //メソッド名：GetDataGridView()
@@ -248,7 +251,6 @@ namespace SalesManagement_SysDev
         {
             //表示用の発注リスト作成
             List<T_Hattyu> listViewHattyu = SetListHattyu();
-
 
             // DataGridViewに表示するデータを指定
             SetDataGridView(listViewHattyu);
@@ -305,6 +307,7 @@ namespace SalesManagement_SysDev
         {
             //中身を消去
             dgvHattyu.Rows.Clear();
+            dgvHattyuDetail.Rows.Clear();  
 
             //ページ行数を取得
             int pageSize = int.Parse(txbPageSize.Text.Trim());
@@ -403,6 +406,14 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            // 登録確認メッセージ
+            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
             //操作ログデータ取得
             var regOperationLog = GenerateLogAtRegistration(rdbRegister.Text);
 
@@ -428,31 +439,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-            //発注IDの適否
-            if (!String.IsNullOrEmpty(txbHattyuID.Text.Trim()))
-            {
-                //発注IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbHattyuID.Text.Trim()))
-                {
-                    MessageBox.Show("発注IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbHattyuID.Focus();
-                    return false;
-                }
-                //発注IDの存在チェック
-                if (hattyuDataAccess.CheckHattyuIDExistence(int.Parse(txbHattyuID.Text.Trim())))
-                {
-                    MessageBox.Show("発注IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbHattyuID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("発注IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbHattyuID.Focus();
-                return false;
-            }
-
             // メーカー名の適否
             if (cmbMakerName.SelectedIndex == -1)
             {
@@ -508,7 +494,6 @@ namespace SalesManagement_SysDev
         {
             return new T_Hattyu
             {
-                HaID = int.Parse(txbHattyuID.Text.Trim()),
                 EmID = F_Login.intEmployeeID,
                 MaID = cmbMakerName.SelectedIndex + 1,
                 HaDate = dtpHattyuDate.Value,
@@ -524,14 +509,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void RegistrationHattyu(T_Hattyu regHattyu)
         {
-            // 登録確認メッセージ
-            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
             // 発注情報の登録
             bool flg = hattyuDataAccess.AddHattyuData(regHattyu);
 
@@ -567,6 +544,14 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            // 登録確認メッセージ
+            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
             //操作ログデータ取得
             var regOperationLog = GenerateLogAtRegistration(rdbDetailRegister.Text);
 
@@ -592,31 +577,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDetailDataAtRegistration()
         {
-            //発注詳細IDの適否
-            if (!String.IsNullOrEmpty(txbHattyuDetailID.Text.Trim()))
-            {
-                //発注詳細IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbHattyuDetailID.Text.Trim()))
-                {
-                    MessageBox.Show("発注詳細IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbHattyuDetailID.Focus();
-                    return false;
-                }
-                //発注詳細IDの存在チェック
-                if (hattyuDetailDataAccess.CheckHattyuDetailIDExistence(int.Parse(txbHattyuDetailID.Text.Trim())))
-                {
-                    MessageBox.Show("発注詳細IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbHattyuDetailID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("発注詳細IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbHattyuDetailID.Focus();
-                return false;
-            }
-
             //発注IDの適否
             if (!String.IsNullOrEmpty(txbHattyuID.Text.Trim()))
             {
@@ -642,6 +602,49 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
+            //商品IDの適否
+            if (!String.IsNullOrEmpty(txbProductID.Text.Trim()))
+            {
+                //商品IDの数字チェック
+                if (!dataInputCheck.CheckNumeric(txbProductID.Text.Trim()))
+                {
+                    MessageBox.Show("商品IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProductID.Focus();
+                    return false;
+                }
+                //商品IDの存在チェック
+                if (!prodactDataAccess.CheckProdactIDExistence(int.Parse(txbProductID.Text.Trim())))
+                {
+                    MessageBox.Show("商品IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProductID.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("商品IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbProductID.Focus();
+                return false;
+            }
+
+            //発注量の適否
+            if (!String.IsNullOrEmpty(txbHattyuQuantity.Text.Trim()))
+            {
+                //発注量の数字チェック
+                if (!dataInputCheck.CheckNumeric(txbHattyuQuantity.Text.Trim()))
+                {
+                    MessageBox.Show("発注量は全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbHattyuQuantity.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                MessageBox.Show("発注量が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbHattyuQuantity.Focus();
+                return false;
+            }
+
             return true;
         }
 
@@ -655,13 +658,16 @@ namespace SalesManagement_SysDev
         {
             M_Product Prodact = prodactDataAccess.GetIDProdactData(int.Parse(txbProductID.Text.Trim()));
 
+            List<T_HattyuDetail> listIDHattyuDetail = hattyuDetailDataAccess.GetHattyuDetailIDData(int.Parse(txbHattyuID.Text.Trim()));
+
+            int intHattyuIDCount = listIDHattyuDetail.Count();
+
             return new T_HattyuDetail
             {
-                HaDetailID = int.Parse(txbHattyuDetailID.Text.Trim()),
+                HaDetailID = intHattyuIDCount + 1,
                 HaID = int.Parse(txbHattyuID.Text.Trim()),
                 PrID = int.Parse(txbProductID.Text.Trim()),
                 HaQuantity = int.Parse(txbHattyuQuantity.Text.Trim()),
-
             };
         }
 
@@ -673,14 +679,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void RegistrationHattyuDetail(T_HattyuDetail regHattyu)
         {
-            // 登録確認メッセージ
-            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
             // 発注情報の登録
             bool flg = hattyuDetailDataAccess.AddHattyuDetailData(regHattyu);
 
@@ -711,6 +709,14 @@ namespace SalesManagement_SysDev
         {
             //テキストボックス等の入力チェック
             if (!GetValidDataAtUpdate())
+            {
+                return;
+            }
+
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
             {
                 return;
             }
@@ -801,14 +807,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void UpdateHattyu(T_Hattyu updHattyu)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
             // 発注情報の更新
             bool flg = hattyuDataAccess.UpdateHattyuData(updHattyu);
 
@@ -885,7 +883,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbHattyuID.Text.Trim()) && cmbMakerName.SelectedIndex == -1 && String.IsNullOrEmpty(txbEmployeeID.Text.Trim())&&dtpHattyuDate.Checked==false)
+            if (String.IsNullOrEmpty(txbHattyuID.Text.Trim()) && cmbMakerName.SelectedIndex == -1 && String.IsNullOrEmpty(txbEmployeeID.Text.Trim())&&dtpHattyuDate.Checked==false && cmbConfirm.SelectedIndex == -1)
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbHattyuID.Focus();
@@ -992,6 +990,7 @@ namespace SalesManagement_SysDev
                 MaID = cmbMakerName.SelectedIndex + 1,
                 EmID = intEmployeeID,
                 HaDate = dateSale,
+                WaWarehouseFlag = cmbConfirm.SelectedIndex
             };
 
             if (searchFlg)
@@ -1016,6 +1015,14 @@ namespace SalesManagement_SysDev
         {
             //テキストボックス等の入力チェック
             if (!GetValidDataAtConfirm())
+            {
+                return;
+            }
+
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("確定しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
             {
                 return;
             }
@@ -1066,6 +1073,13 @@ namespace SalesManagement_SysDev
 
                 T_Hattyu hattyu = hattyuDataAccess.GetIDHattyuData(int.Parse(txbHattyuID.Text.Trim()));
 
+                //発注IDの非表示チェック
+                if (hattyu.HaFlag == 1)
+                {
+                    MessageBox.Show("発注IDは非表示にされています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbHattyuID.Focus();
+                    return false;
+                }
                 //発注IDの確定チェック
                 if (hattyu.WaWarehouseFlag == 1)
                 {
@@ -1115,14 +1129,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void ConfirmHattyu(T_Hattyu cfmHattyu)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("確定しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
             // 発注情報の更新
             bool flg = hattyuDataAccess.ConfirmHattyuData(cfmHattyu);
 
@@ -1135,6 +1141,7 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("確定に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            //入庫登録
             T_Hattyu Hattyu = hattyuDataAccess.GetIDHattyuData(int.Parse(txbHattyuID.Text.Trim()));
 
             T_Warehousing Warehousing = GenerateWarehousingAtRegistration(Hattyu);
@@ -1150,6 +1157,7 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("入庫管理へのデータ送信に失敗しました。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+            //入庫詳細
             List<T_HattyuDetail> listHattyuDetail = hattyuDetailDataAccess.GetIDHattyuDetailData(int.Parse(txbHattyuID.Text.Trim()));
 
             List<bool> flgHattyulist = new List<bool>();
@@ -1281,7 +1289,6 @@ namespace SalesManagement_SysDev
         {
             //データグリッドビューに乗っている情報をGUIに反映
             txbHattyuID.Text = dgvHattyuDetail[0, dgvHattyuDetail.CurrentCellAddress.Y].Value.ToString();
-            txbHattyuDetailID.Text = dgvHattyuDetail[1, dgvHattyuDetail.CurrentCellAddress.Y].Value.ToString();
             txbProductID.Text = dictionaryProdact.FirstOrDefault(x => x.Value == dgvHattyuDetail[2, dgvHattyuDetail.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbHattyuQuantity.Text = dgvHattyuDetail[3, dgvHattyuDetail.CurrentCellAddress.Y].Value.ToString();
         }
@@ -1305,6 +1312,31 @@ namespace SalesManagement_SysDev
 
             SetFormDataGridView();
 
+            List<T_Stock> listStock = stockDataAccess.GetStockData();
+
+            List<T_Stock> listStockHattyuten = new List<T_Stock> { };
+
+            foreach (var item in listStock)
+            {
+                M_Product Prodact = prodactDataAccess.GetIDProdactData(item.PrID);
+                
+                if (item.StQuantity <= Prodact.PrSafetyStock)
+                {
+                    listStockHattyuten.Add(item);
+                }
+            }
+
+            //1行ずつdgvStockに挿入
+            foreach (var item in listStockHattyuten)
+            {
+                M_Product Prodact = prodactDataAccess.GetIDProdactData(item.PrID);
+
+                dgvStock.Rows.Add(item.PrID, dictionaryProdact[item.PrID], item.StQuantity, Prodact.PrSafetyStock);
+            }
+
+            //dgvStockをリフレッシュ
+            dgvStock.Refresh();
+
             //cmbViewを表示に
             cmbView.SelectedIndex = 0;
         }
@@ -1316,7 +1348,7 @@ namespace SalesManagement_SysDev
         //機　能   ：データグリッドビューの初期設定
         ///////////////////////////////
         private void SetFormDataGridView()
-            {
+        {
             //列を自由に設定できるように
             dgvHattyu.AutoGenerateColumns = false;
             //行単位で選択するようにする
@@ -1354,8 +1386,6 @@ namespace SalesManagement_SysDev
             dgvHattyu.Columns["HaFlag"].Width = 170;
             dgvHattyu.Columns["WaWarehouseFlag"].Width = 160;
             dgvHattyu.Columns["HaHidden"].Width = 267;
-
-
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvHattyu.Columns)
@@ -1402,10 +1432,47 @@ namespace SalesManagement_SysDev
                 dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
 
+            //列を自由に設定できるように
+            dgvStock.AutoGenerateColumns = false;
+            //行単位で選択するようにする
+            dgvStock.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            //行と列の高さを変更できないように
+            dgvStock.AllowUserToResizeColumns = false;
+            dgvStock.AllowUserToResizeRows = false;
+            //セルの複数行選択をオフに
+            dgvStock.MultiSelect = false;
+            //セルの編集ができないように
+            dgvStock.ReadOnly = true;
+            //ユーザーが新しい行を追加できないようにする
+            dgvStock.AllowUserToAddRows = false;
+
+            //左端の項目列を削除
+            dgvStock.RowHeadersVisible = false;
+            //行の自動追加をオフ
+            dgvStock.AllowUserToAddRows = false;
+
+            //ヘッダー位置の指定
+            dgvStock.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dgvStock.Columns.Add("PrID", "商品ID");
+            dgvStock.Columns.Add("PrName", "商品名");
+            dgvStock.Columns.Add("StQuantity", "在庫数");
+            dgvStock.Columns.Add("PrSafetyStock", "安全在庫数");
+
+            dgvStock.Columns["PrID"].Width = 157;
+            dgvStock.Columns["PrName"].Width = 174;
+            dgvStock.Columns["StQuantity"].Width = 174;
+            dgvStock.Columns["PrSafetyStock"].Width = 175;
+
+            //並び替えができないようにする
+            foreach (DataGridViewColumn dataColumn in dgvStock.Columns)
+            {
+                dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
         }
 
-            private void txbProductID_TextChanged(object sender, EventArgs e)
-            {
+        private void txbProductID_TextChanged(object sender, EventArgs e)
+        {
             //nullの確認
             string stringProdactID = txbProductID.Text.Trim();
             int intProdactID = 0;
@@ -1425,8 +1492,8 @@ namespace SalesManagement_SysDev
             //IDから名前を取り出す
             var Prodact = listProdact.Single(x => x.PrID == intProdactID);
 
-            txbProductName.Text = Prodact.PrName;     
-       　　 }
+            txbProductName.Text = Prodact.PrName;
+        }
 
         private void txbEmployeeID_TextChanged(object sender, EventArgs e)
         {
@@ -1453,7 +1520,6 @@ namespace SalesManagement_SysDev
 
         }
 
-
         private void cmbView_SelectedIndexChanged(object sender, EventArgs e)
         {
             txbNumPage.Text = "1";
@@ -1464,6 +1530,7 @@ namespace SalesManagement_SysDev
 
         private void btnPageSize_Click(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
             GetDataGridView();
         }
 
@@ -1519,23 +1586,12 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
-                txbHattyuDetailID.Enabled = false;
                 txbHattyuQuantity.Enabled = false;
                 txbProductID.Enabled = false;
                 txbProductName.Enabled = false;
                 txbHidden.Enabled = false;
                 cmbConfirm.Enabled = false;
                 cmbHidden.Enabled = false;
-            }
-            else
-            {
-                txbHattyuDetailID.Enabled = true;
-                txbHattyuQuantity.Enabled = true;
-                txbProductID.Enabled = true;
-                txbProductName.Enabled = true;
-                txbHidden.Enabled = true;
-                cmbConfirm.Enabled = true;
-                cmbHidden.Enabled = true;
             }
 
             if (rdbConfirm.Checked)
@@ -1545,22 +1601,9 @@ namespace SalesManagement_SysDev
                 dtpHattyuDate.Enabled = false;
                 cmbHidden.Enabled = false;
                 txbHidden.Enabled = false;
-                txbHattyuDetailID.Enabled = false;
                 txbHattyuQuantity.Enabled = false;
                 txbProductID.Enabled = false;
                 txbProductName.Enabled = false;
-            }
-            else
-            {
-                cmbMakerName.Enabled = true;
-                txbEmployeeID.Enabled = true;
-                dtpHattyuDate.Enabled = true;
-                cmbHidden.Enabled = true;
-                txbHidden.Enabled = true;
-                txbHattyuDetailID.Enabled = true;
-                txbHattyuQuantity.Enabled = true;
-                txbProductID.Enabled = true;
-                txbProductName.Enabled = true;
             }
 
             if (rdbDetailRegister.Checked)
@@ -1572,32 +1615,14 @@ namespace SalesManagement_SysDev
                 cmbConfirm.Enabled = false;
                 txbHidden.Enabled = false;
             }
-            else
-            {
-                cmbMakerName.Enabled = true;
-                txbEmployeeID.Enabled = true;
-                dtpHattyuDate.Enabled = true;
-                cmbHidden.Enabled = true;
-                cmbConfirm.Enabled = true;
-                txbHidden.Enabled = true;
-            }
 
             if (rdbRegister.Checked)
             {
-                txbHattyuDetailID.Enabled = false;
                 txbHattyuQuantity.Enabled = false;
                 txbProductID.Enabled = false;
                 txbProductName.Enabled = false;
                 txbHidden.Enabled = false;
                 cmbConfirm.Enabled = false;
-            }
-            else
-            {
-                txbHattyuDetailID.Enabled = true;
-                txbHattyuQuantity.Enabled = true;
-                txbProductID.Enabled = true;
-                txbProductName.Enabled = true;
-                cmbConfirm.Enabled = true;
             }
 
             if (rdbUpdate.Checked)
@@ -1605,28 +1630,22 @@ namespace SalesManagement_SysDev
                 cmbMakerName.Enabled = false;
                 txbEmployeeID.Enabled = false;
                 dtpHattyuDate.Enabled = false;
-                txbHattyuDetailID.Enabled = false;
                 txbHattyuQuantity.Enabled = false;
                 txbProductID.Enabled = false;
                 txbProductName.Enabled = false;
                 cmbConfirm.Enabled = false;
-
-            }
-            else
-            {
-                cmbMakerName.Enabled = true;
-                txbEmployeeID.Enabled = true;
-                dtpHattyuDate.Enabled = true;
-                txbHattyuDetailID.Enabled = true;
-                txbHattyuQuantity.Enabled = true;
-                txbProductID.Enabled = true;
-                txbProductName.Enabled = true;
-                cmbConfirm.Enabled = true;
             }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("本当に閉じますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
             Application.Exit();
         }
 
@@ -1634,7 +1653,7 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1ek0yP4S7QgqV0NlQk6M91KyCYdRDb5GE/edit=true",
+                FileName = "https://docs.google.com/document/d/1ek0yP4S7QgqV0NlQk6M91KyCYdRDb5GE",
                 UseShellExecute = true
             });
         }

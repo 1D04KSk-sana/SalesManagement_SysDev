@@ -53,6 +53,13 @@ namespace SalesManagement_SysDev
 
         private void btnclose_Click(object sender, EventArgs e)
         {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("本当に閉じますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
             Application.Exit();
         }
 
@@ -261,9 +268,11 @@ namespace SalesManagement_SysDev
             List<T_Hattyu> ha = new List<T_Hattyu>();
             List<T_HattyuDetail> had = new List<T_HattyuDetail>();
             List<T_Stock> st = new List<T_Stock>();
+            List<T_ShipmentDetail> shd = new List<T_ShipmentDetail>();
             List<T_Syukko> sy = new List<T_Syukko>();
             List<T_Warehousing> wh = new List<T_Warehousing>();
             List<T_WarehousingDetail> whd = new List<T_WarehousingDetail>();
+            List<T_Shipment> sh = new List<T_Shipment>();
             List<T_Arrival> ar = new List<T_Arrival>();
             List<T_ArrivalDetail> ard = new List<T_ArrivalDetail>();
 
@@ -789,47 +798,61 @@ namespace SalesManagement_SysDev
                 {
                     M_Product = pr[0],
                     StQuantity = 100,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[1],
                     StQuantity = 120,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[2],
                     StQuantity = 199,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[3],
                     StQuantity = 50,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[4],
                     StQuantity = 60,
-                    StFlag = 0,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[5],
                     StQuantity = 32,
-                    StFlag = 0,
+                });
+                st.Add(new T_Stock()
+                {
+                    M_Product = pr[6],
+                    StQuantity = 10,
+                });
+                st.Add(new T_Stock()
+                {
+                    M_Product = pr[7],
+                    StQuantity = 10,
+                });
+                st.Add(new T_Stock()
+                {
+                    M_Product = pr[8],
+                    StQuantity = 10,
                 });
                 st.Add(new T_Stock()
                 {
                     M_Product = pr[9],
                     StQuantity = 240,
-                    StFlag = 0,
+                });
+                st.Add(new T_Stock()
+                {
+                    M_Product = pr[10],
+                    StQuantity = 10,
                 });
                 context.T_Stocks.AddRange(st);
                 context.SaveChanges();
             }
+
             {
                 or.Add(new T_Order
                 {
@@ -857,6 +880,7 @@ namespace SalesManagement_SysDev
             {
                 ord.Add(new T_OrderDetail()
                 {
+                    OrDetailID = 1,
                     T_Order = or[0],
                     M_Product = pr[2],
                     OrQuantity = 40,
@@ -864,6 +888,7 @@ namespace SalesManagement_SysDev
                 });
                 ord.Add(new T_OrderDetail()
                 {
+                    OrDetailID = 2,
                     T_Order = or[0],
                     M_Product = pr[9],
                     OrQuantity = 30,
@@ -871,6 +896,7 @@ namespace SalesManagement_SysDev
                 });
                 ord.Add(new T_OrderDetail()
                 {
+                    OrDetailID = 1,
                     T_Order = or[1],
                     M_Product = pr[3],
                     OrQuantity = 20,
@@ -878,6 +904,7 @@ namespace SalesManagement_SysDev
                 });
                 ord.Add(new T_OrderDetail()
                 {
+                    OrDetailID = 2,
                     T_Order = or[1],
                     M_Product = pr[4],
                     OrQuantity = 15,
@@ -885,6 +912,7 @@ namespace SalesManagement_SysDev
                 });
                 ord.Add(new T_OrderDetail()
                 {
+                    OrDetailID = 3,
                     T_Order = or[1],
                     M_Product = pr[5],
                     OrQuantity = 15,
@@ -893,6 +921,7 @@ namespace SalesManagement_SysDev
                 context.T_OrderDetails.AddRange(ord);
                 context.SaveChanges();
             }
+
             {
                 ch.Add(new T_Chumon()
                 {
@@ -904,16 +933,6 @@ namespace SalesManagement_SysDev
                     ChStateFlag = 1,
                     ChFlag = 0,
                 });
-                ch.Add(new T_Chumon()
-                {
-                    M_SalesOffice = so[1],
-                    M_Employee = em[116],
-                    M_Client = cl[2],
-                    T_Order = or[1],
-                    ChDate = new DateTime(2020, 11, 11),
-                    ChStateFlag = 1,
-                    ChFlag = 0,
-                });
 
                 context.T_Chumons.AddRange(ch);
                 context.SaveChanges();
@@ -921,12 +940,14 @@ namespace SalesManagement_SysDev
             {
                 chd.Add(new T_ChumonDetail()
                 {
+                    ChDetailID = 1,
                     T_Chumon = ch[0],
                     M_Product = pr[2],
                     ChQuantity = 40,
                 });
                 chd.Add(new T_ChumonDetail()
                 {
+                    ChDetailID = 2,
                     T_Chumon = ch[0],
                     M_Product = pr[9],
                     ChQuantity = 30,
@@ -937,11 +958,13 @@ namespace SalesManagement_SysDev
             {
                 sy.Add(new T_Syukko()
                 {
+                    //M_Employee = em[116],
+                    EmID = null,
                     M_Client = cl[1],
-                    M_Employee = em[116],
                     M_SalesOffice = so[0],
                     T_Order = or[0],
-                    SyStateFlag = 0,
+                    SyDate = new DateTime(2020, 12, 11),
+                    SyStateFlag = 1,
                     SyFlag = 0,
                 });
                 context.T_Syukkos.AddRange(sy);
@@ -950,12 +973,14 @@ namespace SalesManagement_SysDev
             {
                 syd.Add(new T_SyukkoDetail()
                 {
+                    SyDetailID = 1,
                     T_Syukko = sy[0],
                     M_Product = pr[2],
                     SyQuantity = 40,
                 });
                 syd.Add(new T_SyukkoDetail()
                 {
+                    SyDetailID = 2,
                     T_Syukko = sy[0],
                     M_Product = pr[9],
                     SyQuantity = 30,
@@ -973,24 +998,6 @@ namespace SalesManagement_SysDev
                     SaDate = new DateTime(2023, 10, 27),
                     SaFlag = 0,
                 });
-                sa.Add(new T_Sale()
-                {
-                    M_Employee = em[116],
-                    M_Client = cl[2],
-                    T_Chumon = ch[0],
-                    M_SalesOffice = so[1],
-                    SaDate = new DateTime(2023, 10, 31),
-                    SaFlag = 0,
-                });
-                sa.Add(new T_Sale()
-                {
-                    M_Employee = em[116],
-                    M_Client = cl[3],
-                    T_Chumon = ch[0],
-                    M_SalesOffice = so[2],
-                    SaDate = new DateTime(2023, 10, 31),
-                    SaFlag = 0,
-                });
 
                 context.T_Sales.AddRange(sa);
                 context.SaveChanges();
@@ -998,30 +1005,15 @@ namespace SalesManagement_SysDev
             {
                 sad.Add(new T_SaleDetail()
                 {
+                    SaDetailID = 1,
                     M_Product = pr[0],
                     T_Sale = sa[0],
                     SaQuantity = 1,
                     SaTotalPrice = 100000,
                 });
-                sad.Add(new T_SaleDetail()
-                {
-                    M_Product = pr[1],
-                    T_Sale = sa[1],
-                    SaQuantity = 3,
-                    SaTotalPrice = 50000,
-                });
-                sad.Add(new T_SaleDetail()
-                {
-                    M_Product = pr[2],
-                    T_Sale = sa[2],
-                    SaQuantity = 5,
-                    SaTotalPrice = 600000,
-                });
 
                 context.T_SaleDetails.AddRange(sad);
                 context.SaveChanges();
-
-
             }
             {
                 ha.Add(new T_Hattyu()
@@ -1029,9 +1021,8 @@ namespace SalesManagement_SysDev
                     M_Maker = ma[0],
                     M_Employee = em[310],
                     HaDate = new DateTime(2023, 11, 17),
-                    WaWarehouseFlag = 0,
+                    WaWarehouseFlag = 1,
                     HaFlag = 0,
-
                 });
                 ha.Add(new T_Hattyu()
                 {
@@ -1040,16 +1031,6 @@ namespace SalesManagement_SysDev
                     HaDate = new DateTime(2023, 11, 16),
                     WaWarehouseFlag = 0,
                     HaFlag = 0,
-
-                });
-                ha.Add(new T_Hattyu()
-                {
-                    M_Maker = ma[2],
-                    M_Employee = em[310],
-                    HaDate = new DateTime(2023, 10, 17),
-                    WaWarehouseFlag = 0,
-                    HaFlag = 0,
-
                 });
 
                 context.T_Hattyus.AddRange(ha);
@@ -1068,6 +1049,18 @@ namespace SalesManagement_SysDev
                     M_Product = pr[1],
                     HaQuantity = 30,
                 });
+                had.Add(new T_HattyuDetail()
+                {
+                    T_Hattyu = ha[1],
+                    M_Product = pr[6],
+                    HaQuantity = 50,
+                });
+                had.Add(new T_HattyuDetail()
+                {
+                    T_Hattyu = ha[1],
+                    M_Product = pr[7],
+                    HaQuantity = 30,
+                });
                 context.T_HattyuDetails.AddRange(had);
                 context.SaveChanges();
 
@@ -1080,25 +1073,6 @@ namespace SalesManagement_SysDev
                     WaDate = new DateTime(2023, 11, 16),
                     WaShelfFlag = 1,
                     WaFlag = 0,
-
-                });
-                wh.Add(new T_Warehousing()
-                {
-                    T_Hattyu = ha[1],
-                    M_Employee = em[310],
-                    WaDate = new DateTime(2023, 10, 16),
-                    WaShelfFlag = 1,
-                    WaFlag = 0,
-
-                });
-                wh.Add(new T_Warehousing()
-                {
-                    T_Hattyu = ha[1],
-                    M_Employee = em[116],
-                    WaDate = new DateTime(2023, 11, 1),
-                    WaShelfFlag = 1,
-                    WaFlag = 0,
-
                 });
                 context.T_Warehousings.AddRange(wh);
                 context.SaveChanges();
@@ -1117,13 +1091,20 @@ namespace SalesManagement_SysDev
                     M_Product = pr[1],
                     WaQuantity = 30,
                 });
-                whd.Add(new T_WarehousingDetail()
-                {
-                    T_Warehousing = wh[1],
-                    M_Product = pr[2],
-                    WaQuantity = 80,
-                });
                 context.T_WarehousingDetails.AddRange(whd);
+                context.SaveChanges();
+            }
+            {
+                sh.Add(new T_Shipment()
+                {
+                    M_SalesOffice = so[0],
+                    M_Client = cl[1],
+                    T_Order = or[0],
+                    ShFinishDate = new DateTime(2023, 12, 05),
+                    ShStateFlag = 1,
+                    ShFlag = 0,
+                });
+                context.T_Shipments.AddRange(sh);
                 context.SaveChanges();
             }
             {
@@ -1137,47 +1118,16 @@ namespace SalesManagement_SysDev
                     ArStateFlag = 1,
                     ArFlag = 0,
                 });
-                ar.Add(new T_Arrival()
-                {
-                    M_SalesOffice = so[1],
-                    M_Employee = em[310],
-                    M_Client = cl[2],
-                    T_Order = or[1],
-                    ArDate = new DateTime(2023, 11, 05),
-                    ArStateFlag = 1,
-                    ArFlag = 0,
-                });
-                ar.Add(new T_Arrival()
-                {
-                    M_SalesOffice = so[2],
-                    M_Employee = em[1002],
-                    M_Client = cl[3],
-                    T_Order = or[1],
-                    ArDate = new DateTime(2023, 1, 05),
-                    ArStateFlag = 0,
-                    ArFlag = 0,
-                });
                 context.T_Arrivals.AddRange(ar);
                 context.SaveChanges();
             }
             {
                 ard.Add(new T_ArrivalDetail()
                 {
+                    ArDetailID = 1,
                     T_Arrival = ar[0],
                     M_Product = pr[1],
                     ArQuantity = 50,
-                });
-                ard.Add(new T_ArrivalDetail()
-                {
-                    T_Arrival = ar[1],
-                    M_Product = pr[3],
-                    ArQuantity = 30,
-                });
-                ard.Add(new T_ArrivalDetail()
-                {
-                    T_Arrival = ar[0],
-                    M_Product = pr[2],
-                    ArQuantity = 80,
                 });
 
                 context.T_ArrivalDetails.AddRange(ard);

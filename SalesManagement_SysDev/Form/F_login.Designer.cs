@@ -124,12 +124,12 @@
             // 
             this.lblProdact.AutoSize = true;
             this.lblProdact.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProdact.Location = new System.Drawing.Point(801, 42);
+            this.lblProdact.Location = new System.Drawing.Point(843, 45);
             this.lblProdact.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProdact.Name = "lblProdact";
-            this.lblProdact.Size = new System.Drawing.Size(350, 64);
+            this.lblProdact.Size = new System.Drawing.Size(221, 64);
             this.lblProdact.TabIndex = 1;
-            this.lblProdact.Text = "ログイン画面";
+            this.lblProdact.Text = "ログイン";
             // 
             // pctPassEye
             // 
@@ -159,7 +159,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(203)))), ((int)(((byte)(250)))), ((int)(((byte)(237)))));
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.Controls.Add(this.chbPassSave);
             this.Controls.Add(this.pctPassEye);
             this.Controls.Add(this.pnlLogin);

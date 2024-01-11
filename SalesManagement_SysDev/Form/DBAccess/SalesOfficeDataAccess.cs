@@ -149,7 +149,7 @@ namespace SalesManagement_SysDev
         //戻り値：条件完全一致営業所データ
         //機　能：条件完全一致営業所データの取得
         ///////////////////////////////
-        public List<M_SalesOffice> GetAndSalesOfficeData(M_SalesOffice selectClient)
+        public List<M_SalesOffice> GetAndSalesOfficeData(M_SalesOffice selectSalesOffice)
         {
             List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
             try
@@ -157,14 +157,18 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.M_SalesOffices.AsQueryable();
 
-                if (selectClient.SoID != null && selectClient.SoID != 0)
+                if (selectSalesOffice.SoID != 0)
                 {
-                    query = query.Where(x => x.SoID == selectClient.SoID);
+                    query = query.Where(x => x.SoID == selectSalesOffice.SoID);
+                }
+                if (selectSalesOffice.SoName != null && selectSalesOffice.SoName != "")
+                {
+                    query = query.Where(x => x.SoName == selectSalesOffice.SoName);
                 }
 
-                if (selectClient.SoPhone != null && selectClient.SoPhone != "")
+                if (selectSalesOffice.SoPhone != null && selectSalesOffice.SoPhone != "")
                 {
-                    query = query.Where(x => x.SoPhone == selectClient.SoPhone);
+                    query = query.Where(x => x.SoPhone == selectSalesOffice.SoPhone);
                 }
 
                 listSalesOffice = query.ToList();
@@ -189,7 +193,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listSalesOffice = context.M_SalesOffices.Where(x =>  x.SoID == selectSalesOffice.SoID || x.SoPhone == selectSalesOffice.SoPhone).ToList();
+                listSalesOffice = context.M_SalesOffices.Where(x =>  x.SoID == selectSalesOffice.SoID || x.SoName == selectSalesOffice.SoName || x.SoPhone == selectSalesOffice.SoPhone).ToList();
 
                 context.Dispose();
             }
@@ -221,7 +225,6 @@ namespace SalesManagement_SysDev
                 SalesOffice.SoFAX = updSalesOffice.SoFAX;
                 SalesOffice.SoPhone = updSalesOffice.SoPhone;
                 SalesOffice.SoAddress = updSalesOffice.SoAddress;
-                SalesOffice.SoID = updSalesOffice.SoID;
                 SalesOffice.SoPostal = updSalesOffice.SoPostal;
 
                 context.SaveChanges();

@@ -66,6 +66,7 @@
             this.txbPageSize = new System.Windows.Forms.TextBox();
             this.cmbPositionName = new System.Windows.Forms.ComboBox();
             this.btnSinghUp = new System.Windows.Forms.Button();
+            this.lblHidden = new System.Windows.Forms.Label();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmployee)).BeginInit();
             this.pnlHonsha.SuspendLayout();
@@ -102,9 +103,9 @@
             // 
             // btnClear
             // 
-            this.btnClear.BackColor = System.Drawing.Color.Cyan;
+            this.btnClear.BackColor = System.Drawing.Color.White;
             this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnClear.Location = new System.Drawing.Point(1573, 173);
+            this.btnClear.Location = new System.Drawing.Point(1560, 174);
             this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(160, 70);
@@ -116,7 +117,7 @@
             // 
             // btnDone
             // 
-            this.btnDone.BackColor = System.Drawing.Color.Red;
+            this.btnDone.BackColor = System.Drawing.Color.White;
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnDone.Location = new System.Drawing.Point(1737, 174);
             this.btnDone.Margin = new System.Windows.Forms.Padding(2);
@@ -137,7 +138,7 @@
             this.cmbView.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbView.Location = new System.Drawing.Point(1196, 188);
+            this.cmbView.Location = new System.Drawing.Point(1159, 189);
             this.cmbView.Margin = new System.Windows.Forms.Padding(2);
             this.cmbView.Name = "cmbView";
             this.cmbView.Size = new System.Drawing.Size(360, 43);
@@ -169,6 +170,7 @@
             this.rdbSearch.TabIndex = 0;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
+            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // rdbUpdate
             // 
@@ -183,6 +185,7 @@
             this.rdbUpdate.TabStop = true;
             this.rdbUpdate.Text = "更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
+            this.rdbUpdate.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // cmbHidden
             // 
@@ -205,14 +208,14 @@
             this.txbHidden.Location = new System.Drawing.Point(857, 427);
             this.txbHidden.Margin = new System.Windows.Forms.Padding(2);
             this.txbHidden.Name = "txbHidden";
-            this.txbHidden.Size = new System.Drawing.Size(624, 31);
+            this.txbHidden.Size = new System.Drawing.Size(757, 31);
             this.txbHidden.TabIndex = 45;
             // 
             // lblEmployeeHidden
             // 
             this.lblEmployeeHidden.AutoSize = true;
             this.lblEmployeeHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblEmployeeHidden.Location = new System.Drawing.Point(690, 430);
+            this.lblEmployeeHidden.Location = new System.Drawing.Point(716, 430);
             this.lblEmployeeHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblEmployeeHidden.Name = "lblEmployeeHidden";
             this.lblEmployeeHidden.Size = new System.Drawing.Size(130, 24);
@@ -377,13 +380,13 @@
             // 
             this.lblHonsha.AutoSize = true;
             this.lblHonsha.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblHonsha.ForeColor = System.Drawing.Color.White;
-            this.lblHonsha.Location = new System.Drawing.Point(798, 41);
+            this.lblHonsha.ForeColor = System.Drawing.Color.Black;
+            this.lblHonsha.Location = new System.Drawing.Point(832, 38);
             this.lblHonsha.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblHonsha.Name = "lblHonsha";
-            this.lblHonsha.Size = new System.Drawing.Size(417, 64);
+            this.lblHonsha.Size = new System.Drawing.Size(287, 64);
             this.lblHonsha.TabIndex = 26;
-            this.lblHonsha.Text = "社員管理画面";
+            this.lblHonsha.Text = "社員管理";
             // 
             // lblNumPage
             // 
@@ -524,6 +527,17 @@
             this.btnSinghUp.UseVisualStyleBackColor = false;
             this.btnSinghUp.Click += new System.EventHandler(this.btnSinghUp_Click);
             // 
+            // lblHidden
+            // 
+            this.lblHidden.AutoSize = true;
+            this.lblHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblHidden.Location = new System.Drawing.Point(147, 430);
+            this.lblHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblHidden.Name = "lblHidden";
+            this.lblHidden.Size = new System.Drawing.Size(142, 24);
+            this.lblHidden.TabIndex = 126;
+            this.lblHidden.Text = "表示/非表示";
+            // 
             // F_HonshaEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -531,6 +545,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.lblHidden);
             this.Controls.Add(this.btnSinghUp);
             this.Controls.Add(this.cmbPositionName);
             this.Controls.Add(this.lblNumPage);
@@ -619,5 +634,6 @@
         private System.Windows.Forms.ComboBox cmbPositionName;
         private System.Windows.Forms.Button btnSinghUp;
         private System.Windows.Forms.PictureBox pctHint;
+        private System.Windows.Forms.Label lblHidden;
     }
 }

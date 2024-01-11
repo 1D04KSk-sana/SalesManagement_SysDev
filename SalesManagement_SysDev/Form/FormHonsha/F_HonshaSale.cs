@@ -25,6 +25,8 @@ namespace SalesManagement_SysDev
         SaleDetailDataAccess saleDetailDataAccess = new SaleDetailDataAccess();
         //データベース顧客テーブルアクセス用クラスのインスタンス化
         ClientDataAccess clientDataAccess = new ClientDataAccess();
+        //データベース商品テーブルアクセス用クラスのインスタンス化
+        ProdactDataAccess prodactDataAccess = new ProdactDataAccess();
         //データグリッドビュー用の売上データ
         private static List<T_Sale> listSale = new List<T_Sale>();
         //データグリッドビュー用の全売上データ
@@ -33,14 +35,19 @@ namespace SalesManagement_SysDev
         private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
         //フォームを呼び出しする際のインスタンス化
         private F_SearchDialog f_SearchDialog = new F_SearchDialog();
-        //データグリッドビュー用の顧客データ
+        //データグリッドビュー用の売上詳細データ
         private static List<T_SaleDetail> listSaleDetail = new List<T_SaleDetail>();
         //コンボボックス用の顧客データリスト
         private static List<M_Client> listClient = new List<M_Client>();
+        //コンボボックス用の商品データリスト
+        private static List<M_Product> listProdact = new List<M_Product>();
         //DataGridView用に使用する顧客のDictionary
         private Dictionary<int, string> dictionaryClient;
         //DataGridView用に使用す営業所のDictionary
         private Dictionary<int, string> dictionarySalesOffice;
+        //DataGridView用に使用す商品のDictionary
+        private Dictionary<int, string> dictionaryProdact;
+
 
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
@@ -48,13 +55,6 @@ namespace SalesManagement_SysDev
             { 0, "表示" },
             { 1, "非表示" },
         };
-        //DataGridView用に使用する確定形式のDictionary
-        private Dictionary<int, string> dictionaryConfirm = new Dictionary<int, string>
-        {
-            { 0, "未確定" },
-            { 1, "確定" },
-        };
-
         public F_HonshaSale()
         {
             InitializeComponent();
@@ -126,6 +126,14 @@ namespace SalesManagement_SysDev
                 dictionaryClient.Add(item.ClID.Value, item.ClName);
             }
 
+            listProdact = prodactDataAccess.GetProdactDspData();
+
+            dictionaryProdact = new Dictionary<int, string> { };
+
+            foreach (var item in listProdact)
+            {
+                dictionaryProdact.Add(item.PrID, item.PrName);
+            }
         }
 
         ///////////////////////////////
@@ -370,7 +378,6 @@ namespace SalesManagement_SysDev
             {
                 SaleDataHiddenUpdate();
             }
-
         }
 
         ///////////////////////////////
@@ -452,6 +459,8 @@ namespace SalesManagement_SysDev
 
             rdbHiddenUpdate.Checked = false;
 
+            txbNumPage.Text = "1";
+
             GetDataGridView();
         }
 
@@ -459,28 +468,23 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
+                txbChumonID.Enabled = true;
+                txbClientID.Enabled = true;
+                txbSaleID.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                dtpSaleDate.Enabled = true;
                 cmbHidden.Enabled = false;
                 txbHidden.Enabled = false;
             }
-            else
-            {
-                cmbHidden.Enabled = true;
-                txbHidden.Enabled = true;
-            }
-
             if (rdbHiddenUpdate.Checked)
             {
-                txbClientName.Enabled = false;
-                cmbSalesOfficeID.Enabled = false;
                 txbChumonID.Enabled = false;
+                txbClientID.Enabled = false;
+                txbSaleID.Enabled = true;
+                cmbSalesOfficeID.Enabled = false;
                 dtpSaleDate.Enabled = false;
-            }
-            else
-            {
-                txbClientName.Enabled = true;
-                cmbSalesOfficeID.Enabled = true;
-                txbChumonID.Enabled = true;
-                dtpSaleDate.Enabled = true;
+                cmbHidden.Enabled = false;
+                txbHidden.Enabled = false;
             }
         }
 
@@ -595,7 +599,7 @@ namespace SalesManagement_SysDev
             dgvSale.Refresh();
 
 
-            if (pageNum == 0 && lastPage == pageNum)
+            if (lastPage == -1 || (lastPage == pageNum && pageNum == 0))
             {
                 btnPageMax.Visible = false;
                 btnNext.Visible = false;
@@ -669,7 +673,7 @@ namespace SalesManagement_SysDev
             //1行ずつdgvSaleに挿入
             foreach (var item in listSaleDetail)
             {
-                dgvSaleDetail.Rows.Add(item.SaDetailID, item.SaID, item.PrID, item.SaQuantity, item.SaTotalPrice);
+                dgvSaleDetail.Rows.Add(item.SaDetailID, item.SaID, dictionaryProdact[item.PrID], item.SaQuantity, item.SaTotalPrice);
             }
 
             //dgvSaleDetailをリフレッシュ
@@ -686,6 +690,23 @@ namespace SalesManagement_SysDev
         {
             //テキストボックス等の入力チェック
             if (!GetValidDataAtUpdate())
+            {
+                return;
+            }
+
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbHiddenUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
             {
                 return;
             }
@@ -719,7 +740,7 @@ namespace SalesManagement_SysDev
                 //売上IDの存在チェック
                 if (!saleDataAccess.CheckSaleIDExistence(int.Parse(txbSaleID.Text.Trim())))
                 {
-                    MessageBox.Show("売上IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("売上IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbSaleID.Focus();
                     return false;
                 }
@@ -764,23 +785,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void UpdateSale(T_Sale updSale)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
-            //操作ログデータ取得
-            var regOperationLog = GenerateLogAtRegistration(rdbHiddenUpdate.Text);
-
-            //操作ログデータの登録（成功 = true,失敗 = false）
-            if (!operationLogAccess.AddOperationLogData(regOperationLog))
-            {
-                return;
-            }
-
             //  売上情報の更新
             bool flg = saleDataAccess.UpdateSaleData(updSale);
             if (flg == true)
@@ -801,6 +805,7 @@ namespace SalesManagement_SysDev
 
         private void btnPageSize_Click(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
             GetDataGridView();
         }
 
@@ -869,6 +874,13 @@ namespace SalesManagement_SysDev
 
         private void button1_Click(object sender, EventArgs e)
         {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("本当に閉じますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
             Application.Exit();
         }
 
@@ -876,7 +888,7 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1-nFWLxjJ3gj2gqEa9VjvKW3R5T7nG_0J/edit=true",
+                FileName = "https://docs.google.com/document/d/1-nFWLxjJ3gj2gqEa9VjvKW3R5T7nG_0J",
                 UseShellExecute = true
             });
         }

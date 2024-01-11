@@ -49,8 +49,6 @@
             this.btnClear = new System.Windows.Forms.Button();
             this.dgvHattyu = new System.Windows.Forms.DataGridView();
             this.lblHattyuDate = new System.Windows.Forms.Label();
-            this.txbHattyuDetailID = new System.Windows.Forms.TextBox();
-            this.lblHattyuDetailID = new System.Windows.Forms.Label();
             this.lblEmployeeID = new System.Windows.Forms.Label();
             this.lblMakerName = new System.Windows.Forms.Label();
             this.txbHattyuID = new System.Windows.Forms.TextBox();
@@ -76,10 +74,12 @@
             this.dtpHattyuDate = new System.Windows.Forms.DateTimePicker();
             this.txbEmployeeName = new System.Windows.Forms.TextBox();
             this.lblEmployeeName = new System.Windows.Forms.Label();
+            this.dgvStock = new System.Windows.Forms.DataGridView();
             this.pctHint = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHattyuDetail)).BeginInit();
             this.pnlHonsha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHattyu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
@@ -130,7 +130,7 @@
             // 
             this.lblNumPage.AutoSize = true;
             this.lblNumPage.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblNumPage.Location = new System.Drawing.Point(880, 1022);
+            this.lblNumPage.Location = new System.Drawing.Point(880, 1039);
             this.lblNumPage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNumPage.Name = "lblNumPage";
             this.lblNumPage.Size = new System.Drawing.Size(61, 21);
@@ -140,7 +140,7 @@
             // txbNumPage
             // 
             this.txbNumPage.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbNumPage.Location = new System.Drawing.Point(812, 1019);
+            this.txbNumPage.Location = new System.Drawing.Point(812, 1036);
             this.txbNumPage.Margin = new System.Windows.Forms.Padding(2);
             this.txbNumPage.Name = "txbNumPage";
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
@@ -151,7 +151,7 @@
             // btnPageMin
             // 
             this.btnPageMin.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnPageMin.Location = new System.Drawing.Point(967, 1012);
+            this.btnPageMin.Location = new System.Drawing.Point(967, 1029);
             this.btnPageMin.Margin = new System.Windows.Forms.Padding(2);
             this.btnPageMin.Name = "btnPageMin";
             this.btnPageMin.Size = new System.Drawing.Size(50, 40);
@@ -165,7 +165,7 @@
             // 
             this.btnBack.BackColor = System.Drawing.Color.White;
             this.btnBack.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnBack.Location = new System.Drawing.Point(1021, 1012);
+            this.btnBack.Location = new System.Drawing.Point(1021, 1029);
             this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(50, 40);
@@ -178,7 +178,7 @@
             // btnNext
             // 
             this.btnNext.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnNext.Location = new System.Drawing.Point(1075, 1012);
+            this.btnNext.Location = new System.Drawing.Point(1075, 1029);
             this.btnNext.Margin = new System.Windows.Forms.Padding(2);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(50, 40);
@@ -191,7 +191,7 @@
             // btnPageMax
             // 
             this.btnPageMax.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnPageMax.Location = new System.Drawing.Point(1129, 1012);
+            this.btnPageMax.Location = new System.Drawing.Point(1129, 1029);
             this.btnPageMax.Margin = new System.Windows.Forms.Padding(2);
             this.btnPageMax.Name = "btnPageMax";
             this.btnPageMax.Size = new System.Drawing.Size(50, 40);
@@ -205,12 +205,12 @@
             // 
             this.dgvHattyuDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvHattyuDetail.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.dgvHattyuDetail.Location = new System.Drawing.Point(1193, 523);
+            this.dgvHattyuDetail.Location = new System.Drawing.Point(1193, 746);
             this.dgvHattyuDetail.Margin = new System.Windows.Forms.Padding(2);
             this.dgvHattyuDetail.Name = "dgvHattyuDetail";
             this.dgvHattyuDetail.RowHeadersWidth = 51;
             this.dgvHattyuDetail.RowTemplate.Height = 24;
-            this.dgvHattyuDetail.Size = new System.Drawing.Size(700, 480);
+            this.dgvHattyuDetail.Size = new System.Drawing.Size(700, 279);
             this.dgvHattyuDetail.TabIndex = 100;
             this.dgvHattyuDetail.TabStop = false;
             this.dgvHattyuDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHattyuDetail_CellClick_1);
@@ -218,7 +218,7 @@
             // btnPageSize
             // 
             this.btnPageSize.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnPageSize.Location = new System.Drawing.Point(287, 1015);
+            this.btnPageSize.Location = new System.Drawing.Point(287, 1032);
             this.btnPageSize.Margin = new System.Windows.Forms.Padding(2);
             this.btnPageSize.Name = "btnPageSize";
             this.btnPageSize.Size = new System.Drawing.Size(140, 40);
@@ -232,7 +232,7 @@
             // 
             this.lblPageSize.AutoSize = true;
             this.lblPageSize.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblPageSize.Location = new System.Drawing.Point(24, 1025);
+            this.lblPageSize.Location = new System.Drawing.Point(24, 1042);
             this.lblPageSize.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPageSize.Name = "lblPageSize";
             this.lblPageSize.Size = new System.Drawing.Size(114, 21);
@@ -242,7 +242,7 @@
             // txbPageSize
             // 
             this.txbPageSize.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbPageSize.Location = new System.Drawing.Point(186, 1019);
+            this.txbPageSize.Location = new System.Drawing.Point(186, 1036);
             this.txbPageSize.Margin = new System.Windows.Forms.Padding(2);
             this.txbPageSize.Name = "txbPageSize";
             this.txbPageSize.Size = new System.Drawing.Size(50, 28);
@@ -296,18 +296,18 @@
             // 
             this.lblClient.AutoSize = true;
             this.lblClient.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblClient.ForeColor = System.Drawing.Color.White;
-            this.lblClient.Location = new System.Drawing.Point(780, 47);
+            this.lblClient.ForeColor = System.Drawing.Color.Black;
+            this.lblClient.Location = new System.Drawing.Point(809, 47);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(418, 64);
+            this.lblClient.Size = new System.Drawing.Size(287, 64);
             this.lblClient.TabIndex = 23;
-            this.lblClient.Text = "発注管理画面";
+            this.lblClient.Text = "発注管理";
             // 
             // btnReturn
             // 
             this.btnReturn.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnReturn.Location = new System.Drawing.Point(56, 47);
+            this.btnReturn.Location = new System.Drawing.Point(45, 47);
             this.btnReturn.Margin = new System.Windows.Forms.Padding(2);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(160, 70);
@@ -339,7 +339,7 @@
             this.dgvHattyu.Name = "dgvHattyu";
             this.dgvHattyu.RowHeadersWidth = 51;
             this.dgvHattyu.RowTemplate.Height = 24;
-            this.dgvHattyu.Size = new System.Drawing.Size(1170, 480);
+            this.dgvHattyu.Size = new System.Drawing.Size(1170, 502);
             this.dgvHattyu.TabIndex = 92;
             this.dgvHattyu.TabStop = false;
             this.dgvHattyu.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvHattyu_CellClick);
@@ -354,27 +354,6 @@
             this.lblHattyuDate.Size = new System.Drawing.Size(130, 24);
             this.lblHattyuDate.TabIndex = 91;
             this.lblHattyuDate.Text = "発注年月日";
-            // 
-            // txbHattyuDetailID
-            // 
-            this.txbHattyuDetailID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbHattyuDetailID.Location = new System.Drawing.Point(1590, 275);
-            this.txbHattyuDetailID.Margin = new System.Windows.Forms.Padding(2);
-            this.txbHattyuDetailID.Name = "txbHattyuDetailID";
-            this.txbHattyuDetailID.ShortcutsEnabled = false;
-            this.txbHattyuDetailID.Size = new System.Drawing.Size(220, 31);
-            this.txbHattyuDetailID.TabIndex = 87;
-            // 
-            // lblHattyuDetailID
-            // 
-            this.lblHattyuDetailID.AutoSize = true;
-            this.lblHattyuDetailID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblHattyuDetailID.Location = new System.Drawing.Point(1419, 278);
-            this.lblHattyuDetailID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblHattyuDetailID.Name = "lblHattyuDetailID";
-            this.lblHattyuDetailID.Size = new System.Drawing.Size(128, 24);
-            this.lblHattyuDetailID.TabIndex = 89;
-            this.lblHattyuDetailID.Text = "発注詳細ID";
             // 
             // lblEmployeeID
             // 
@@ -493,7 +472,7 @@
             // txbHattyuQuantity
             // 
             this.txbHattyuQuantity.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbHattyuQuantity.Location = new System.Drawing.Point(1590, 436);
+            this.txbHattyuQuantity.Location = new System.Drawing.Point(1587, 412);
             this.txbHattyuQuantity.Margin = new System.Windows.Forms.Padding(2);
             this.txbHattyuQuantity.Name = "txbHattyuQuantity";
             this.txbHattyuQuantity.ShortcutsEnabled = false;
@@ -504,7 +483,7 @@
             // 
             this.txbProductName.Enabled = false;
             this.txbProductName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProductName.Location = new System.Drawing.Point(1590, 383);
+            this.txbProductName.Location = new System.Drawing.Point(1587, 359);
             this.txbProductName.Margin = new System.Windows.Forms.Padding(2);
             this.txbProductName.Name = "txbProductName";
             this.txbProductName.ReadOnly = true;
@@ -515,7 +494,7 @@
             // txbProductID
             // 
             this.txbProductID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProductID.Location = new System.Drawing.Point(1590, 329);
+            this.txbProductID.Location = new System.Drawing.Point(1587, 305);
             this.txbProductID.Margin = new System.Windows.Forms.Padding(2);
             this.txbProductID.Name = "txbProductID";
             this.txbProductID.ShortcutsEnabled = false;
@@ -528,7 +507,7 @@
             // 
             this.lbltxbHattyuQuentity.AutoSize = true;
             this.lbltxbHattyuQuentity.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lbltxbHattyuQuentity.Location = new System.Drawing.Point(1489, 439);
+            this.lbltxbHattyuQuentity.Location = new System.Drawing.Point(1486, 415);
             this.lbltxbHattyuQuentity.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbltxbHattyuQuentity.Name = "lbltxbHattyuQuentity";
             this.lbltxbHattyuQuentity.Size = new System.Drawing.Size(58, 24);
@@ -539,7 +518,7 @@
             // 
             this.lblProductName.AutoSize = true;
             this.lblProductName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProductName.Location = new System.Drawing.Point(1465, 386);
+            this.lblProductName.Location = new System.Drawing.Point(1462, 362);
             this.lblProductName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProductName.Name = "lblProductName";
             this.lblProductName.Size = new System.Drawing.Size(82, 24);
@@ -550,7 +529,7 @@
             // 
             this.lblProductID.AutoSize = true;
             this.lblProductID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProductID.Location = new System.Drawing.Point(1467, 329);
+            this.lblProductID.Location = new System.Drawing.Point(1464, 305);
             this.lblProductID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProductID.Name = "lblProductID";
             this.lblProductID.Size = new System.Drawing.Size(80, 24);
@@ -634,6 +613,7 @@
             // 
             // dtpHattyuDate
             // 
+            this.dtpHattyuDate.Checked = false;
             this.dtpHattyuDate.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.dtpHattyuDate.Location = new System.Drawing.Point(639, 349);
             this.dtpHattyuDate.Margin = new System.Windows.Forms.Padding(2);
@@ -666,6 +646,19 @@
             this.lblEmployeeName.TabIndex = 129;
             this.lblEmployeeName.Text = "社員名";
             // 
+            // dgvStock
+            // 
+            this.dgvStock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStock.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.dgvStock.Location = new System.Drawing.Point(1193, 523);
+            this.dgvStock.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvStock.Name = "dgvStock";
+            this.dgvStock.RowHeadersWidth = 51;
+            this.dgvStock.RowTemplate.Height = 24;
+            this.dgvStock.Size = new System.Drawing.Size(700, 219);
+            this.dgvStock.TabIndex = 130;
+            this.dgvStock.TabStop = false;
+            //
             // pctHint
             // 
             this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
@@ -682,8 +675,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
-            this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.dgvStock);
             this.Controls.Add(this.txbEmployeeName);
             this.Controls.Add(this.lblEmployeeName);
             this.Controls.Add(this.dtpHattyuDate);
@@ -722,8 +716,6 @@
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.dgvHattyu);
             this.Controls.Add(this.lblHattyuDate);
-            this.Controls.Add(this.txbHattyuDetailID);
-            this.Controls.Add(this.lblHattyuDetailID);
             this.Controls.Add(this.lblEmployeeID);
             this.Controls.Add(this.lblMakerName);
             this.Controls.Add(this.txbHattyuID);
@@ -739,6 +731,7 @@
             this.pnlHonsha.ResumeLayout(false);
             this.pnlHonsha.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHattyu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -767,8 +760,6 @@
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.DataGridView dgvHattyu;
         private System.Windows.Forms.Label lblHattyuDate;
-        private System.Windows.Forms.TextBox txbHattyuDetailID;
-        private System.Windows.Forms.Label lblHattyuDetailID;
         private System.Windows.Forms.Label lblEmployeeID;
         private System.Windows.Forms.Label lblMakerName;
         private System.Windows.Forms.TextBox txbHattyuID;
@@ -796,5 +787,6 @@
         private System.Windows.Forms.TextBox txbEmployeeName;
         private System.Windows.Forms.Label lblEmployeeName;
         private System.Windows.Forms.PictureBox pctHint;
+        private System.Windows.Forms.DataGridView dgvStock;
     }
 }

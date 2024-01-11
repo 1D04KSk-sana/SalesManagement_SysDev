@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 namespace SalesManagement_SysDev
 {
     public partial class F_HonshaClient : Form
@@ -16,6 +17,18 @@ namespace SalesManagement_SysDev
         ClientDataAccess clientDataAccess = new ClientDataAccess();
         //データベース営業所テーブルアクセス用クラスのインスタンス化
         SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
+        //データベース受注テーブルアクセス用クラスのインスタンス化
+        OrderDataAccess orderDataAccess = new OrderDataAccess();
+        //データベース注文テーブルアクセス用クラスのインスタンス化
+        ChumonDataAccess chumonDataAccess = new ChumonDataAccess();
+        //データベース出庫テーブルアクセス用クラスのインスタンス化
+        SyukkoDataAccess syukkoDataAccess = new SyukkoDataAccess();
+        //データベース入荷テーブルアクセス用クラスのインスタンス化
+        ArrivalDataAccess arrivalDataAccess = new ArrivalDataAccess();
+        //データベース出荷テーブルアクセス用クラスのインスタンス化
+        ShipmentDataAccess shipmentDataAccess = new ShipmentDataAccess();
+        //データベース売上テーブルアクセス用クラスのインスタンス化
+        SaleDataAccess saleDataAccess = new SaleDataAccess();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
         //入力形式チェック用クラスのインスタンス化
@@ -28,6 +41,8 @@ namespace SalesManagement_SysDev
         private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
         //フォームを呼び出しする際のインスタンス化
         private F_SearchDialog f_SearchDialog = new F_SearchDialog();
+        //DataGridView用に使用す営業所のDictionary
+        private Dictionary<int, string> dictionarySalesOffice;
 
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
@@ -36,17 +51,26 @@ namespace SalesManagement_SysDev
             { 1, "非表示" },
         };
 
-        //DataGridView用に使用す営業所のDictionary
-        private Dictionary<int?, string> dictionarySalesOffice = new Dictionary<int?, string>
+        ///////////////////////////////
+        //メソッド名：DictionarySet()
+        //引　数   ：なし
+        //戻り値   ：なし
+        //機　能   ：Dictionaryのセット
+        ///////////////////////////////
+        private void DictionarySet()
         {
-            { 1, "北大阪営業所" },
-            { 2, "兵庫営業所" },
-            { 3, "鹿営業所"},
-            { 4, "京都営業所"},
-            { 5, "和歌山営業所"}
-        };
+            //営業所のデータを取得
+            listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
 
- 
+            dictionarySalesOffice = new Dictionary<int, string> { };
+
+            foreach (var item in listSalesOffice)
+            {
+                dictionarySalesOffice.Add(item.SoID, item.SoName);
+            }
+
+        }
+
         public F_HonshaClient()
         {
             InitializeComponent();
@@ -58,6 +82,7 @@ namespace SalesManagement_SysDev
             txbPageSize.Text = "3";
 
             SetFormDataGridView();
+            DictionarySet();
 
             //営業所のデータを取得
             listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
@@ -73,11 +98,6 @@ namespace SalesManagement_SysDev
 
             //cmbViewを表示に
             cmbView.SelectedIndex = 0;
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void rdoSElect_CheckedChanged(object sender, EventArgs e)
@@ -105,6 +125,8 @@ namespace SalesManagement_SysDev
 
             rdbRegister.Checked = true;
 
+            txbNumPage.Text = "1";
+
             GetDataGridView();
         }
 
@@ -131,6 +153,7 @@ namespace SalesManagement_SysDev
 
         private void btnPageSize_Click(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
             GetDataGridView();
         }
 
@@ -174,7 +197,7 @@ namespace SalesManagement_SysDev
             GetDataGridView();
         }
 
-        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
+        private void txbPageSizeID_KeyPress(object sender, KeyPressEventArgs e)
         {
             TextBox textBox = sender as TextBox;
 
@@ -198,6 +221,16 @@ namespace SalesManagement_SysDev
                     e.Handled = true;
                 }
             }
+        }
+
+        private void txbNumPage_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+            }
+
         }
 
         private void dgvRecordEditing_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -243,29 +276,42 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
-
-            }
-            else
-            {
-
+                txbClientID.Enabled = true;
+                txbClientPhone.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
+                txbClientName.Enabled = false;
+                txbClientAddress.Enabled=false;
+                txbClientFAX.Enabled = false;
+                txbClientPostal.Enabled = false;
             }
 
             if (rdbUpdate.Checked)
             {
-
-            }
-            else
-            {
-
+                txbClientID.Enabled = true;
+                txbClientPhone.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
+                txbClientName.Enabled = true;
+                txbClientAddress.Enabled = true;
+                txbClientFAX.Enabled = true;
+                txbClientPostal.Enabled = true;
             }
 
             if (rdbRegister.Checked)
             {
-
-            }
-            else
-            {
-
+                txbClientID.Enabled = true;
+                txbClientPhone.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
+                txbClientName.Enabled = true;
+                txbClientAddress.Enabled = true;
+                txbClientFAX.Enabled = true;
+                txbClientPostal.Enabled = true;
             }
         }
 
@@ -296,16 +342,16 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void ClientDataRegister()
         {
-            // 登録確認メッセージ
-            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
+            //テキストボックス等の入力チェック
+            if (!GetValidDataAtRegistration())
             {
                 return;
             }
 
-            //テキストボックス等の入力チェック
-            if (!GetValidDataAtRegistration())
+            // 登録確認メッセージ
+            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
             {
                 return;
             }
@@ -365,7 +411,6 @@ namespace SalesManagement_SysDev
         {
             return new M_Client
             {
-                ClID = int.Parse(txbClientID.Text.Trim()),
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 ClName = txbClientName.Text.Trim(),
                 ClAddress = txbClientAddress.Text.Trim(),
@@ -543,6 +588,23 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
             // 顧客情報作成
             var updClient = GenerateDataAtUpdate();
 
@@ -580,23 +642,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void UpdateClient(M_Client updClient)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
-            //操作ログデータ取得
-            var regOperationLog = GenerateLogAtRegistration(rdbUpdate.Text);
-
-            //操作ログデータの登録（成功 = true,失敗 = false）
-            if (!operationLogAccess.AddOperationLogData(regOperationLog))
-            {
-                return;
-            }
-
             // 顧客情報の更新
             bool flg = clientDataAccess.UpdateClientData(updClient);
             if (flg == true)
@@ -638,7 +683,7 @@ namespace SalesManagement_SysDev
                 //顧客IDの存在チェック
                 if (!clientDataAccess.CheckClientIDExistence(int.Parse(txbClientID.Text.Trim())))
                 {
-                    MessageBox.Show("顧客IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbClientID.Focus();
                     return false;
                 }
@@ -763,6 +808,51 @@ namespace SalesManagement_SysDev
                 cmbHidden.Focus();
                 return false;
             }
+            else if (cmbHidden.SelectedIndex == 1)
+            {
+                //受注テーブルにおける顧客IDの存在チェック
+                if (orderDataAccess.CheckOrderClientIDExistence(int.Parse(txbClientID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された顧客IDが受注テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+                //注文テーブルにおける顧客IDの存在チェック
+                if (chumonDataAccess.CheckChumonClientIDExistence(int.Parse(txbClientID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された顧客IDが注文テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+                //出庫テーブルにおける顧客IDの存在チェック
+                if (syukkoDataAccess.CheckSyukkoClientIDExistence(int.Parse(txbClientID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された顧客IDが出庫テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+                //入荷テーブルにおける顧客IDの存在チェック
+                if (arrivalDataAccess.CheckArrivalClientIDExistence(int.Parse(txbClientID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された顧客IDが入荷テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+                //出荷テーブルにおける顧客IDの存在チェック
+                if (shipmentDataAccess.CheckShipmentClientIDExistence(int.Parse(txbClientID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された顧客IDが出荷テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+                //売上テーブルにおける顧客IDの存在チェック
+                if (saleDataAccess.CheckSaleClientIDExistence(int.Parse(txbClientID.Text.Trim())))
+                {
+                    MessageBox.Show("指定された顧客IDが売上テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientID.Focus();
+                    return false;
+                }
+            }
 
             return true;
         }
@@ -820,13 +910,8 @@ namespace SalesManagement_SysDev
             M_Client selectCondition = new M_Client()
             {
                 ClID =intClientID,
-                //ClName = txbClientName.Text.Trim()
                 SoID= cmbSalesOfficeID.SelectedIndex + 1,
                 ClPhone = txbClientPhone.Text.Trim(),
-                //ClPostal= txbClientPostal.Text.Trim(),
-                //ClAddress= txbClientAddress.Text.Trim(),
-                //ClFAX=txbClientFax.Text.Trim(),
-                //ClHidden=txbHidden.Text.Trim()
             };
 
             if (searchFlg)
@@ -886,14 +971,14 @@ namespace SalesManagement_SysDev
                 // 顧客IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbClientID.Text.Trim()))
                 {
-                    MessageBox.Show("商品IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbClientID.Focus();
                     return false;
                 }
                 //顧客IDの重複チェック
                 if (!clientDataAccess.CheckClientIDExistence(int.Parse(txbClientID.Text.Trim())))
                 {
-                    MessageBox.Show("商品IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("顧客IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbClientID.Focus();
                     return false;
                 }
@@ -912,7 +997,7 @@ namespace SalesManagement_SysDev
         {
             //データグリッドビューに乗っている情報をGUIに反映
             txbClientID.Text = dgvClient[0, dgvClient.CurrentCellAddress.Y].Value.ToString();
-            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvClient[1, dgvClient.CurrentCellAddress.Y].Value.ToString()).Key.Value - 1;
+            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvClient[1, dgvClient.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbClientName.Text = dgvClient[2, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientAddress.Text = dgvClient[3, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientPhone.Text = dgvClient[4, dgvClient.CurrentCellAddress.Y].Value.ToString();
@@ -961,6 +1046,17 @@ namespace SalesManagement_SysDev
             dgvClient.Columns.Add("ClFAX", "FAX");
             dgvClient.Columns.Add("ClFlag", "顧客管理フラグ");
             dgvClient.Columns.Add("ClHidden", "非表示理由");
+
+            dgvClient.Columns["ClID"].Width = 120;
+            dgvClient.Columns["SoID"].Width = 200;
+            dgvClient.Columns["ClName"].Width = 160;
+            dgvClient.Columns["ClAddress"].Width = 400;
+            dgvClient.Columns["ClPhone"].Width = 180;
+            dgvClient.Columns["ClPostal"].Width = 150;
+            dgvClient.Columns["ClFAX"].Width = 180;
+            dgvClient.Columns["ClFlag"].Width = 170;
+            dgvClient.Columns["ClHidden"].Width = 337;
+
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvClient.Columns)
@@ -1105,8 +1201,15 @@ namespace SalesManagement_SysDev
             txbClientFAX.Text = string.Empty;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("本当に閉じますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
             Application.Exit();
         }
 
@@ -1114,9 +1217,10 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1tSBtymj0B82Q-tjiNp3mP2HDdMxDpypI/edit=true",
+                FileName = "https://docs.google.com/document/d/1tSBtymj0B82Q-tjiNp3mP2HDdMxDpypI",
                 UseShellExecute = true
             });
         }
+
     }
 }

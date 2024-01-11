@@ -33,6 +33,91 @@ namespace SalesManagement_SysDev
             }
             return flg;
         }
+
+        ///////////////////////////////
+        //メソッド名：CheckChumonSalesOfficeIDExistence()
+        //引　数   ：営業所ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する営業所IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckChumonSalesOfficeIDExistence(int SalesOfficeID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<T_Chumon> listChumon = context.T_Chumons.Where(x => x.ChFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listChumon.Any(x => x.SoID == SalesOfficeID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
+        //メソッド名：CheckChumonEmployeeIDExistence()
+        //引　数   ：社員ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する社員IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckChumonEmployeeIDExistence(int EmployeeID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<T_Chumon> listChumon = context.T_Chumons.Where(x => x.ChFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listChumon.Any(x => x.EmID == EmployeeID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
+        //メソッド名：CheckChumonClientIDExistence()
+        //引　数   ：顧客ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する顧客IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckChumonClientIDExistence(int ClientID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<T_Chumon> listChumon = context.T_Chumons.Where(x => x.ChFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listChumon.Any(x => x.ClID == ClientID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
         ///////////////////////////////
         //メソッド名：GetChumonData()
         //引　数：なし
@@ -114,24 +199,34 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.T_Chumons.AsQueryable();
 
-                if (selectChumon.OrID != null && selectChumon.OrID != 0)
+                if (selectChumon.OrID != 0)
                 {
                     query = query.Where(x => x.OrID == selectChumon.OrID);
                 }
 
-                if (selectChumon.SoID != null && selectChumon.SoID != 0)
+                if (selectChumon.SoID != 0)
                 {
                     query = query.Where(x => x.SoID == selectChumon.SoID);
                 }
 
-                if (selectChumon.ChID != null && selectChumon.ChID != 0)
+                if ( selectChumon.ChID != 0)
                 {
                     query = query.Where(x => x.ChID == selectChumon.ChID);
                 }
 
-                if (selectChumon.ClID != null && selectChumon.ClID != 0)
+                if ( selectChumon.ClID != 0)
                 {
                     query = query.Where(x => x.ClID == selectChumon.ClID);
+                }
+
+                if (selectChumon.ChDate != null)
+                {
+                    query = query.Where(x => x.ChDate.Value == selectChumon.ChDate.Value);
+                }
+
+                if (selectChumon.ChStateFlag != -1)
+                {
+                    query = query.Where(x => x.ChStateFlag == selectChumon.ChStateFlag);
                 }
 
                 listChumon = query.ToList();
@@ -183,7 +278,8 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var Chumon = context.T_Chumons.Single(x => x.OrID == cfmChumon.ChID);
 
-                Chumon.ChStateFlag = cfmChumon.ChStateFlag;
+                Chumon.ChStateFlag = 1;
+                Chumon.EmID = cfmChumon.EmID;
 
                 context.SaveChanges();
                 context.Dispose();
@@ -263,7 +359,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listChumon = context.T_Chumons.Where(x => x.OrID == selectChumon.OrID || x.SoID == selectChumon.SoID || x.ChID == selectChumon.ChID || x.ClID == selectChumon.ClID).ToList();
+                listChumon = context.T_Chumons.Where(x => x.OrID == selectChumon.OrID || x.SoID == selectChumon.SoID || x.ChID == selectChumon.ChID || x.ClID == selectChumon.ClID|| x.ChDate.Value == selectChumon.ChDate.Value || x.ChStateFlag == selectChumon.ChStateFlag).ToList();
 
                 context.Dispose();
             }

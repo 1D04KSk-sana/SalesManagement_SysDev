@@ -188,7 +188,6 @@ namespace SalesManagement_SysDev
                 Maker.MaFAX = updMaker.MaFAX;
                 Maker.MaPhone = updMaker.MaPhone;
                 Maker.MaAddress = updMaker.MaAddress;
-                Maker.MaID = updMaker.MaID;
                 Maker.MaPostal = updMaker.MaPostal;
 
                 context.SaveChanges();
@@ -216,11 +215,10 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.M_Makers.AsQueryable();
 
-                if (selectMaker.MaID != null && selectMaker.MaID != 0)
+                if (selectMaker.MaID != 0)
                 {
                     query = query.Where(x => x.MaID == selectMaker.MaID);
                 }
-
                 if (selectMaker.MaPhone != null && selectMaker.MaPhone != "")
                 {
                     query = query.Where(x => x.MaPhone == selectMaker.MaPhone);

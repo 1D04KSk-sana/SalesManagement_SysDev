@@ -86,13 +86,13 @@
             // 
             this.lblOperationLog.AutoSize = true;
             this.lblOperationLog.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblOperationLog.ForeColor = System.Drawing.Color.White;
-            this.lblOperationLog.Location = new System.Drawing.Point(739, 39);
+            this.lblOperationLog.ForeColor = System.Drawing.Color.Black;
+            this.lblOperationLog.Location = new System.Drawing.Point(810, 39);
             this.lblOperationLog.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOperationLog.Name = "lblOperationLog";
-            this.lblOperationLog.Size = new System.Drawing.Size(384, 64);
+            this.lblOperationLog.Size = new System.Drawing.Size(255, 64);
             this.lblOperationLog.TabIndex = 24;
-            this.lblOperationLog.Text = "ログ管理画面";
+            this.lblOperationLog.Text = "ログ管理";
             // 
             // btnReturn
             // 
@@ -122,7 +122,7 @@
             // 
             // btnClear
             // 
-            this.btnClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(172)))), ((int)(((byte)(242)))));
+            this.btnClear.BackColor = System.Drawing.Color.White;
             this.btnClear.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnClear.Location = new System.Drawing.Point(1492, 182);
             this.btnClear.Margin = new System.Windows.Forms.Padding(2);
@@ -136,7 +136,7 @@
             // 
             // btnDone
             // 
-            this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
+            this.btnDone.BackColor = System.Drawing.Color.White;
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnDone.Location = new System.Drawing.Point(1695, 182);
             this.btnDone.Margin = new System.Windows.Forms.Padding(2);
@@ -159,7 +159,6 @@
             this.rdbSearch.TabIndex = 6;
             this.rdbSearch.Text = "検索";
             this.rdbSearch.UseVisualStyleBackColor = true;
-            this.rdbSearch.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
             // txbEmployeeID
             // 
@@ -257,7 +256,7 @@
             // 
             // btnPageSize
             // 
-            this.btnPageSize.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
+            this.btnPageSize.BackColor = System.Drawing.Color.White;
             this.btnPageSize.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnPageSize.Location = new System.Drawing.Point(195, 1035);
             this.btnPageSize.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);

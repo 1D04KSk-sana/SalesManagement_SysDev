@@ -24,7 +24,7 @@ namespace SalesManagement_SysDev
         //コンボボックス用の営業所データリスト
         private static List<M_SalesOffice> listSalesOffice = new List<M_SalesOffice>();
         //データベース役職名テーブルアクセス用クラスのインスタンス化
-       PositionDataAccess PositionDataAccess = new PositionDataAccess();
+       PositionDataAccess positionDataAccess = new PositionDataAccess();
         //コンボボックス用の役職名データリスト
         private static List<M_Position> listPosition = new List<M_Position>();
 
@@ -37,6 +37,14 @@ namespace SalesManagement_SysDev
         {
             //テキストボックス等の入力チェック
             if (!GetValidDataAtRegistration())
+            {
+                return;
+            }
+
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
             {
                 return;
             }
@@ -154,27 +162,27 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-            // 顧客IDの適否
+            // 社員IDの適否
             if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
             {
-                // 顧客IDの数字チェック
+                // 社員IDの数字チェック
                 if (!dataInputCheck.CheckNumeric(txbEmployeeID.Text.Trim()))
                 {
-                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("社員IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbEmployeeID.Focus();
                     return false;
                 }
-                //顧客IDの重複チェック
+                //社員IDの重複チェック
                 if (EmployeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
                 {
-                    MessageBox.Show("顧客IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("社員IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbEmployeeID.Focus();
                     return false;
                 }
             }
             else
             {
-                MessageBox.Show("顧客IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("社員IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbEmployeeID.Focus();
                 return false;
             }
@@ -274,7 +282,7 @@ namespace SalesManagement_SysDev
             cmbSalesOfficeID.SelectedIndex = -1;
 
             //役職名のデータを取得
-            listPosition = PositionDataAccess.GetPositionDspData();
+            listPosition = positionDataAccess.GetPositionDspData();
             //取得したデータをコンボボックスに挿入
             cmbPositionID.DataSource = listPosition;
             //表示する名前をSoNameに指定
@@ -293,6 +301,13 @@ namespace SalesManagement_SysDev
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("本当に閉じますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
             Application.Exit();
         }
 

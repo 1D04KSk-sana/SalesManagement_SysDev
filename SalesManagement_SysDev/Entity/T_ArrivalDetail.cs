@@ -12,6 +12,8 @@ namespace SalesManagement_SysDev
     class T_ArrivalDetail
     {
         [Key]
+        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ArDetailID { get; set; }     //入荷詳細ID
         public int ArID { get; set; }           //入荷ID
         public int PrID { get; set; }           //商品ID

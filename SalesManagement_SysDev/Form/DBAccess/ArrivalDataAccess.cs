@@ -35,6 +35,90 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：CheckArrivalSalesOfficeIDExistence()
+        //引　数   ：営業所ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する営業所IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckArrivalSalesOfficeIDExistence(int SalesOfficeID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<T_Arrival> listArrival = context.T_Arrivals.Where(x => x.ArFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listArrival.Any(x => x.SoID == SalesOfficeID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
+        //メソッド名：CheckArrivalEmployeeIDExistence()
+        //引　数   ：社員ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する社員IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckArrivalEmployeeIDExistence(int EmployeeID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<T_Arrival> listArrival = context.T_Arrivals.Where(x => x.ArFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listArrival.Any(x => x.EmID == EmployeeID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
+        //メソッド名：CheckArrivalClientIDExistence()
+        //引　数   ：顧客ID
+        //戻り値   ：True or False
+        //機　能   ：表示flg=0の中で一致する顧客IDの有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckArrivalClientIDExistence(int ClientID)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+
+                List<T_Arrival> listArrival = context.T_Arrivals.Where(x => x.ArFlag == 0).ToList();
+
+                //部署CDで一致するデータが存在するか
+                flg = listArrival.Any(x => x.ClID == ClientID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
+
+        ///////////////////////////////
         //メソッド名：GetArrivalData()
         //引　数：なし
         //戻り値：入荷データ
@@ -253,6 +337,7 @@ namespace SalesManagement_SysDev
 
                 Arrival.ArStateFlag = cfmArrival.ArStateFlag;
                 Arrival.EmID = cfmArrival.EmID;
+                Arrival.ArDate = cfmArrival.ArDate;
                 context.SaveChanges();
                 context.Dispose();
 
@@ -265,5 +350,29 @@ namespace SalesManagement_SysDev
             }
         }
 
+        ///////////////////////////////
+        //メソッド名：AddArrivalData()
+        //引　数：regArrival = 入荷データ
+        //戻り値：True or False
+        //機　能：入荷データの登録
+        //      ：登録成功の場合True
+        //      ：登録失敗の場合False
+        ///////////////////////////////
+        public bool AddArrivalData(T_Arrival regArrival)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                context.T_Arrivals.Add(regArrival);
+                context.SaveChanges();
+                context.Dispose();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+        }
     }
 }

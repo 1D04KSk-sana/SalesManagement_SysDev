@@ -57,6 +57,8 @@ namespace SalesManagement_SysDev
 
             rdbSearch.Checked = false;
 
+            txbNumPage.Text = "1";
+
             GetDataGridView();
         }
         private void ChildForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -110,17 +112,6 @@ namespace SalesManagement_SysDev
             }
         }
 
-        private void RadioButton_Checked(object sender, EventArgs e)
-        {
-            if (rdbSearch.Checked)
-            {
-
-            }
-            else
-            {
-
-            }
-        }
         ///////////////////////////////
         //メソッド名：SetFormDataGridView()
         //引　数   ：なし
@@ -464,6 +455,7 @@ namespace SalesManagement_SysDev
 
         private void btnPageSize_Click(object sender, EventArgs e)
         {
+            txbNumPage.Text = "1";
             GetDataGridView();
         }
 
@@ -535,6 +527,13 @@ namespace SalesManagement_SysDev
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("本当に閉じますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
             Application.Exit();
         }
 
@@ -542,7 +541,7 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1EZOZ5lLJvSLiC0PDFAzTtEPuf1iQJLLU/edit=true",
+                FileName = "https://docs.google.com/document/d/1EZOZ5lLJvSLiC0PDFAzTtEPuf1iQJLLU",
                 UseShellExecute = true
             });
         }
