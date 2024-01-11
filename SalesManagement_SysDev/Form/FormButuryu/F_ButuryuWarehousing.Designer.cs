@@ -80,7 +80,7 @@
             this.lblWarehousing.Location = new System.Drawing.Point(811, 44);
             this.lblWarehousing.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblWarehousing.Name = "lblWarehousing";
-            this.lblWarehousing.Size = new System.Drawing.Size(288, 64);
+            this.lblWarehousing.Size = new System.Drawing.Size(287, 64);
             this.lblWarehousing.TabIndex = 24;
             this.lblWarehousing.Text = "入庫管理";
             // 
@@ -154,6 +154,7 @@
             this.txbHattyuID.Name = "txbHattyuID";
             this.txbHattyuID.Size = new System.Drawing.Size(220, 31);
             this.txbHattyuID.TabIndex = 3;
+            this.txbHattyuID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // txbWarehousingID
             // 
@@ -164,6 +165,7 @@
             this.txbWarehousingID.Name = "txbWarehousingID";
             this.txbWarehousingID.Size = new System.Drawing.Size(220, 31);
             this.txbWarehousingID.TabIndex = 1;
+            this.txbWarehousingID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // label2
             // 

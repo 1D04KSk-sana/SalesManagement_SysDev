@@ -581,6 +581,13 @@ namespace SalesManagement_SysDev
                     txbPositionName.Focus();
                     return false;
                 }
+                //役職名存在チェック
+                if (positionDataAccess.CheckPositionNameExistence(txbPositionName.Text.Trim()))
+                {
+                    MessageBox.Show("役職名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbPositionName.Focus();
+                    return false;
+                }
             }
             else
             {

@@ -107,7 +107,7 @@ namespace SalesManagement_SysDev
             this.lblClient.Location = new System.Drawing.Point(823, 37);
             this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(288, 64);
+            this.lblClient.Size = new System.Drawing.Size(287, 64);
             this.lblClient.TabIndex = 27;
             this.lblClient.Text = "注文管理";
             this.lblClient.Click += new System.EventHandler(this.lblClient_Click);
@@ -203,6 +203,7 @@ namespace SalesManagement_SysDev
             this.txbChumonID.Name = "txbChumonID";
             this.txbChumonID.Size = new System.Drawing.Size(220, 31);
             this.txbChumonID.TabIndex = 36;
+            this.txbChumonID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblChumonID
             // 
@@ -268,6 +269,7 @@ namespace SalesManagement_SysDev
             this.txbOrderID.Name = "txbOrderID";
             this.txbOrderID.Size = new System.Drawing.Size(220, 31);
             this.txbOrderID.TabIndex = 43;
+            this.txbOrderID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblOrderID
             // 

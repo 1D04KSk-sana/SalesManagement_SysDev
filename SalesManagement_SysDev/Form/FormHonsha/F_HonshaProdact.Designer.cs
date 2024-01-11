@@ -212,6 +212,7 @@
             this.txbProdactID.Name = "txbProdactID";
             this.txbProdactID.Size = new System.Drawing.Size(220, 31);
             this.txbProdactID.TabIndex = 6;
+            this.txbProdactID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // txbProdactName
             // 

@@ -36,10 +36,10 @@
             this.btnFormProdact = new System.Windows.Forms.Button();
             this.btnFormOperationLog = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnPsition = new System.Windows.Forms.Button();
-            this.btnFormSalesOffice = new System.Windows.Forms.Button();
-            this.btnFormMaker = new System.Windows.Forms.Button();
-            this.btnFormClassification = new System.Windows.Forms.Button();
+            this.lblHonsha = new System.Windows.Forms.Label();
+            this.btnFormMaster = new System.Windows.Forms.Button();
+            this.btnFormButuryu = new System.Windows.Forms.Button();
+            this.btnFormEigyo = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -132,61 +132,62 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(255)))), ((int)(((byte)(122)))));
+            this.panel1.Controls.Add(this.lblHonsha);
             this.panel1.Controls.Add(this.btnLogOut);
             this.panel1.Controls.Add(this.btnClose);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1920, 150);
             this.panel1.TabIndex = 8;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // btnFormSalesOffice
+            // lblHonsha
             // 
-            this.btnFormSalesOffice.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.btnFormSalesOffice.Location = new System.Drawing.Point(1288, 940);
-            this.btnFormSalesOffice.Name = "btnFormSalesOffice";
-            this.btnFormSalesOffice.Size = new System.Drawing.Size(510, 100);
-            this.btnFormSalesOffice.TabIndex = 9;
-            this.btnFormSalesOffice.TabStop = false;
-            this.btnFormSalesOffice.Text = "営業所管理画面";
-            this.btnFormSalesOffice.UseVisualStyleBackColor = true;
-            this.btnFormSalesOffice.Click += new System.EventHandler(this.btnFormSalesOffice_Click);
+            this.lblHonsha.AutoSize = true;
+            this.lblHonsha.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblHonsha.Location = new System.Drawing.Point(813, 41);
+            this.lblHonsha.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblHonsha.Name = "lblHonsha";
+            this.lblHonsha.Size = new System.Drawing.Size(287, 64);
+            this.lblHonsha.TabIndex = 3;
+            this.lblHonsha.Text = "本社管理";
             // 
-            // btnFormMaker
+            // btnFormMaster
             // 
-            this.btnFormMaker.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.btnFormMaker.Location = new System.Drawing.Point(1288, 788);
-            this.btnFormMaker.Name = "btnFormMaker";
-            this.btnFormMaker.Size = new System.Drawing.Size(510, 100);
-            this.btnFormMaker.TabIndex = 10;
-            this.btnFormMaker.TabStop = false;
-            this.btnFormMaker.Text = "メーカー管理画面";
-            this.btnFormMaker.UseVisualStyleBackColor = true;
-            this.btnFormMaker.Click += new System.EventHandler(this.btnFormMaker_Click);
+            this.btnFormMaster.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.btnFormMaster.Location = new System.Drawing.Point(1336, 917);
+            this.btnFormMaster.Name = "btnFormMaster";
+            this.btnFormMaster.Size = new System.Drawing.Size(510, 100);
+            this.btnFormMaster.TabIndex = 11;
+            this.btnFormMaster.TabStop = false;
+            this.btnFormMaster.Text = "マスター管理画面";
+            this.btnFormMaster.UseVisualStyleBackColor = true;
+            this.btnFormMaster.Click += new System.EventHandler(this.btnFormMaster_Click);
             // 
-            // btnPsition
+            // btnFormButuryu
             // 
-            this.btnPsition.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnPsition.Location = new System.Drawing.Point(1369, 647);
-            this.btnPsition.Name = "btnPsition";
-            this.btnPsition.Size = new System.Drawing.Size(510, 100);
-            this.btnPsition.TabIndex = 9;
-            this.btnPsition.TabStop = false;
-            this.btnPsition.Text = "役職管理画面";
-            this.btnPsition.UseVisualStyleBackColor = true;
-            this.btnPsition.Click += new System.EventHandler(this.btnPsition_Click);
-            //
-            // btnFormClassification
+            this.btnFormButuryu.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.btnFormButuryu.Location = new System.Drawing.Point(1336, 210);
+            this.btnFormButuryu.Margin = new System.Windows.Forms.Padding(2);
+            this.btnFormButuryu.Name = "btnFormButuryu";
+            this.btnFormButuryu.Size = new System.Drawing.Size(510, 100);
+            this.btnFormButuryu.TabIndex = 12;
+            this.btnFormButuryu.TabStop = false;
+            this.btnFormButuryu.Text = "物流管理画面";
+            this.btnFormButuryu.UseVisualStyleBackColor = true;
+            this.btnFormButuryu.Click += new System.EventHandler(this.btnButuryu_Click);
             // 
-            this.btnFormClassification.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFormClassification.Location = new System.Drawing.Point(1288, 646);
-            this.btnFormClassification.Name = "btnFormClassification";
-            this.btnFormClassification.Size = new System.Drawing.Size(510, 100);
-            this.btnFormClassification.TabIndex = 11;
-            this.btnFormClassification.TabStop = false;
-            this.btnFormClassification.Text = "分類管理画面";
-            this.btnFormClassification.UseVisualStyleBackColor = true;
-            this.btnFormClassification.Click += new System.EventHandler(this.btnFormClassification_Click);
+            // btnFormEigyo
+            // 
+            this.btnFormEigyo.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.btnFormEigyo.Location = new System.Drawing.Point(1336, 390);
+            this.btnFormEigyo.Margin = new System.Windows.Forms.Padding(2);
+            this.btnFormEigyo.Name = "btnFormEigyo";
+            this.btnFormEigyo.Size = new System.Drawing.Size(510, 100);
+            this.btnFormEigyo.TabIndex = 13;
+            this.btnFormEigyo.TabStop = false;
+            this.btnFormEigyo.Text = "営業管理画面";
+            this.btnFormEigyo.UseVisualStyleBackColor = true;
+            this.btnFormEigyo.Click += new System.EventHandler(this.btnFormEigyo_Click);
             // 
             // F_Honsha
             // 
@@ -194,10 +195,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
-            this.Controls.Add(this.btnPsition);
-            this.Controls.Add(this.btnFormClassification);
-            this.Controls.Add(this.btnFormMaker);
-            this.Controls.Add(this.btnFormSalesOffice);
+            this.Controls.Add(this.btnFormEigyo);
+            this.Controls.Add(this.btnFormButuryu);
+            this.Controls.Add(this.btnFormMaster);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnFormOperationLog);
             this.Controls.Add(this.btnFormProdact);
@@ -211,6 +211,7 @@
             this.Text = "本社画面";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -225,9 +226,9 @@
         private System.Windows.Forms.Button btnFormProdact;
         private System.Windows.Forms.Button btnFormOperationLog;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnPsition;
-        private System.Windows.Forms.Button btnFormSalesOffice;
-        private System.Windows.Forms.Button btnFormMaker;
-        private System.Windows.Forms.Button btnFormClassification;
+        private System.Windows.Forms.Label lblHonsha;
+        private System.Windows.Forms.Button btnFormMaster;
+        private System.Windows.Forms.Button btnFormButuryu;
+        private System.Windows.Forms.Button btnFormEigyo;
     }
 }

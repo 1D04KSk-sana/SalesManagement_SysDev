@@ -117,6 +117,7 @@
             this.txbPositionID.Name = "txbPositionID";
             this.txbPositionID.Size = new System.Drawing.Size(220, 31);
             this.txbPositionID.TabIndex = 26;
+            this.txbPositionID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblPositionID
             // 

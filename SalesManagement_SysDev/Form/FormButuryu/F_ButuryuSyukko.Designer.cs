@@ -121,7 +121,7 @@
             this.lblButuryuSyukko.ForeColor = System.Drawing.Color.Black;
             this.lblButuryuSyukko.Location = new System.Drawing.Point(818, 44);
             this.lblButuryuSyukko.Name = "lblButuryuSyukko";
-            this.lblButuryuSyukko.Size = new System.Drawing.Size(288, 64);
+            this.lblButuryuSyukko.Size = new System.Drawing.Size(287, 64);
             this.lblButuryuSyukko.TabIndex = 1;
             this.lblButuryuSyukko.Text = "出庫管理";
             // 
@@ -184,6 +184,7 @@
             this.txbSyukkoID.Name = "txbSyukkoID";
             this.txbSyukkoID.Size = new System.Drawing.Size(220, 31);
             this.txbSyukkoID.TabIndex = 4;
+            this.txbSyukkoID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblSyukkoID
             // 
@@ -272,6 +273,7 @@
             this.txbOrderID.Name = "txbOrderID";
             this.txbOrderID.Size = new System.Drawing.Size(220, 31);
             this.txbOrderID.TabIndex = 13;
+            this.txbOrderID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblSyukkoDate
             // 

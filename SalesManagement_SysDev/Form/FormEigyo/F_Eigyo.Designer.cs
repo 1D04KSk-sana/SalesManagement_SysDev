@@ -35,6 +35,7 @@
             this.btnFormSyukko = new System.Windows.Forms.Button();
             this.btnFormArrival = new System.Windows.Forms.Button();
             this.pnlEigyo = new System.Windows.Forms.Panel();
+            this.lblEigyo = new System.Windows.Forms.Label();
             this.pnlEigyo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -119,6 +120,7 @@
             // pnlEigyo
             // 
             this.pnlEigyo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(181)))), ((int)(((byte)(128)))));
+            this.pnlEigyo.Controls.Add(this.lblEigyo);
             this.pnlEigyo.Controls.Add(this.btnLogOut);
             this.pnlEigyo.Controls.Add(this.btnclose);
             this.pnlEigyo.Location = new System.Drawing.Point(0, 0);
@@ -126,6 +128,17 @@
             this.pnlEigyo.Name = "pnlEigyo";
             this.pnlEigyo.Size = new System.Drawing.Size(1920, 150);
             this.pnlEigyo.TabIndex = 6;
+            // 
+            // lblEigyo
+            // 
+            this.lblEigyo.AutoSize = true;
+            this.lblEigyo.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblEigyo.Location = new System.Drawing.Point(808, 42);
+            this.lblEigyo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblEigyo.Name = "lblEigyo";
+            this.lblEigyo.Size = new System.Drawing.Size(287, 64);
+            this.lblEigyo.TabIndex = 2;
+            this.lblEigyo.Text = "営業管理";
             // 
             // F_Eigyo
             // 
@@ -144,6 +157,7 @@
             this.Text = "営業画面";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.pnlEigyo.ResumeLayout(false);
+            this.pnlEigyo.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -157,5 +171,6 @@
         private System.Windows.Forms.Button btnFormSyukko;
         private System.Windows.Forms.Button btnFormArrival;
         private System.Windows.Forms.Panel pnlEigyo;
+        private System.Windows.Forms.Label lblEigyo;
     }
 }

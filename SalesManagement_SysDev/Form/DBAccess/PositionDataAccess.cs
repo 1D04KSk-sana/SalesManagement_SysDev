@@ -233,5 +233,29 @@ namespace SalesManagement_SysDev
 
             return listPosition;
         }
+        ///////////////////////////////
+        //メソッド名：CheckPositionNameExistence()
+        //引　数   ：役職コード
+        //戻り値   ：True or False
+        //機　能   ：一致する役職名の有無を確認
+        //          ：一致データありの場合True
+        //          ：一致データなしの場合False
+        ///////////////////////////////
+        public bool CheckPositionNameExistence(string PositionName)
+        {
+            bool flg = false;
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                //役職IDで一致するデータが存在するか
+                flg = context.M_Positions.Any(x => x.PoName == PositionName);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return flg;
+        }
     }
 }

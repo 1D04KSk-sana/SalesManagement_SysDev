@@ -36,6 +36,7 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblButuryu = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -119,12 +120,24 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(136)))), ((int)(((byte)(179)))));
+            this.panel1.Controls.Add(this.lblButuryu);
             this.panel1.Controls.Add(this.btnLogOut);
             this.panel1.Controls.Add(this.btnClose);
             this.panel1.Location = new System.Drawing.Point(0, 1);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1920, 150);
             this.panel1.TabIndex = 7;
+            // 
+            // lblButuryu
+            // 
+            this.lblButuryu.AutoSize = true;
+            this.lblButuryu.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblButuryu.Location = new System.Drawing.Point(797, 44);
+            this.lblButuryu.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblButuryu.Name = "lblButuryu";
+            this.lblButuryu.Size = new System.Drawing.Size(287, 64);
+            this.lblButuryu.TabIndex = 7;
+            this.lblButuryu.Text = "物流管理";
             // 
             // F_Buturyu
             // 
@@ -143,6 +156,7 @@
             this.Text = "F_Buturyu";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -157,5 +171,6 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnLogOut;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label lblButuryu;
     }
 }

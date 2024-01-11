@@ -254,8 +254,7 @@ namespace SalesManagement_SysDev
             //dgvWarehousingをリフレッシュ
             dgvWarehousing.Refresh();
 
-
-            if (pageNum == 0 && lastPage == pageNum)
+            if (lastPage == -1 || (lastPage == pageNum && pageNum == 0))
             {
                 btnPageMax.Visible = false;
                 btnNext.Visible = false;

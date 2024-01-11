@@ -375,6 +375,7 @@ namespace SalesManagement_SysDev
             this.txbMakerID.Size = new System.Drawing.Size(220, 31);
             this.txbMakerID.TabIndex = 57;
             this.txbMakerID.TabStop = false;
+            this.txbMakerID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblClientID
             // 
