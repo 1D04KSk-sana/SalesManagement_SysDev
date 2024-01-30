@@ -156,6 +156,7 @@
             this.Name = "F_Eigyo";
             this.Text = "営業画面";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.F_Eigyo_Load);
             this.pnlEigyo.ResumeLayout(false);
             this.pnlEigyo.PerformLayout();
             this.ResumeLayout(false);

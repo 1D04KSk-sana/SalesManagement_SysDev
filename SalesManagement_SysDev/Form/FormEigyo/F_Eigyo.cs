@@ -75,5 +75,17 @@ namespace SalesManagement_SysDev
         {
             Application.Exit();
         }
+
+        private void F_Eigyo_Load(object sender, EventArgs e)
+        {
+            if (F_Login.intPositionID == 1)
+            {
+                btnLogOut.Text = "閉じる";
+            }
+            else
+            {
+                btnLogOut.Text = "ログアウト";
+            }
+        }
     }
 }

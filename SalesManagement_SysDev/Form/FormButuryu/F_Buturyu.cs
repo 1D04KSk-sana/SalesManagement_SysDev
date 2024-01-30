@@ -95,5 +95,17 @@ namespace SalesManagement_SysDev
         {
             this.Close();
         }
+
+        private void F_Buturyu_Load(object sender, EventArgs e)
+        {
+            if (F_Login.intPositionID == 1)
+            {
+                btnLogOut.Text = "閉じる";
+            }
+            else
+            {
+                btnLogOut.Text = "ログアウト";
+            }
+        }
     }
 }

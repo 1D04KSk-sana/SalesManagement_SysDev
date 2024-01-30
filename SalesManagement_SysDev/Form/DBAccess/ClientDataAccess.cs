@@ -229,7 +229,7 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.M_Clients.AsQueryable();
 
-                if (selectClient.ClPhone != null && selectClient.ClID != 0)
+                if (selectClient.ClID != 0)
                 {
                     query = query.Where(x => x.ClID == selectClient.ClID);
                 }
@@ -239,7 +239,7 @@ namespace SalesManagement_SysDev
                     query = query.Where(x => x.SoID == selectClient.SoID);
                 }
 
-                if (selectClient.ClPhone != null && selectClient.ClPhone != "")
+                if (selectClient.ClPhone != null)
                 {
                     query = query.Where(x => x.ClPhone == selectClient.ClPhone);
                 }

@@ -110,19 +110,19 @@ namespace SalesManagement_SysDev
             }
             if (intPositionID == 2)
             {
-                //F_Eigyo f_Eigyo = new F_Eigyo();
+                F_Eigyo f_Eigyo = new F_Eigyo();
 
-                //f_Eigyo.Owner = this;
-                //f_Eigyo.FormClosed += ChildForm_FormClosed;
-                //f_Eigyo.Show();
+                f_Eigyo.Owner = this;
+                f_Eigyo.FormClosed += ChildForm_FormClosed;
+                f_Eigyo.Show();
             }
             if (intPositionID == 3)
             {
-                //F_Buturyu f_Buturyu = new F_Buturyu();
+                F_Buturyu f_Buturyu = new F_Buturyu();
 
-                //f_Buturyu.Owner = this;
-                //f_Buturyu.FormClosed += ChildForm_FormClosed;
-                //f_Buturyu.Show();
+                f_Buturyu.Owner = this;
+                f_Buturyu.FormClosed += ChildForm_FormClosed;
+                f_Buturyu.Show();
             }
 
             this.Opacity = 0;

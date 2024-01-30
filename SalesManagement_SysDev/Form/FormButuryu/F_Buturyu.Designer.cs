@@ -155,6 +155,7 @@
             this.Name = "F_Buturyu";
             this.Text = "F_Buturyu";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.F_Buturyu_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
