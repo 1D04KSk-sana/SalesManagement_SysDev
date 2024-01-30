@@ -958,8 +958,7 @@ namespace SalesManagement_SysDev
             {
                 sy.Add(new T_Syukko()
                 {
-                    //M_Employee = em[116],
-                    EmID = null,
+                    M_Employee = em[116],
                     M_Client = cl[1],
                     M_SalesOffice = so[0],
                     T_Order = or[0],
@@ -1097,6 +1096,7 @@ namespace SalesManagement_SysDev
             {
                 sh.Add(new T_Shipment()
                 {
+                    M_Employee = em[116],
                     M_SalesOffice = so[0],
                     M_Client = cl[1],
                     T_Order = or[0],

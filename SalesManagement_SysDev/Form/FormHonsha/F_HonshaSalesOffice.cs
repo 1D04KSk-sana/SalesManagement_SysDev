@@ -168,7 +168,7 @@ namespace SalesManagement_SysDev
             //選択された行に対してのコントロールの変更
             SelectRowControl();
         }
-            private void btnDone_Click(object sender, EventArgs e)
+        private void btnDone_Click(object sender, EventArgs e)
         {
             //登録ラヂオボタンがチェックされているとき
             if (rdbRegister.Checked)
