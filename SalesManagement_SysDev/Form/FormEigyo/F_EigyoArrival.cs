@@ -1179,7 +1179,7 @@ namespace SalesManagement_SysDev
 
                 txbHidden.Enabled = false;
                 cmbHidden.Enabled = false;
-                cmbConfirm.Enabled = false;
+                cmbConfirm.Enabled = true;
             }
             if (rdbUpdate.Checked)
             {
@@ -1198,7 +1198,7 @@ namespace SalesManagement_SysDev
             if (rdbConfirm.Checked)
             {
                 txbArrivalID.Enabled = true;
-                cmbConfirm.Enabled = true;
+                cmbConfirm.Enabled = false;
 
                 txbClientID.Enabled = false;
                 txbEmployeeID.Enabled = false;

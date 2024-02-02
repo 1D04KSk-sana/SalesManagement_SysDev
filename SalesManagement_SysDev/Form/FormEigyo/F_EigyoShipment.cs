@@ -1277,8 +1277,8 @@ namespace SalesManagement_SysDev
                 cmbSalesOfficeID.Enabled = true;
                 txbOrderID.Enabled = true;
                 dtpShipmentDate.Enabled = true;
+                cmbConfirm.Enabled = true;
 
-                cmbConfirm.Enabled = false;
                 txbShipmentHidden.Enabled = false;
                 cmbShipmentHidden.Enabled = false;
             }
@@ -1299,9 +1299,9 @@ namespace SalesManagement_SysDev
 
             if (rdbConfirm.Checked)
             {
-                txbOrderID.Enabled |= true;
-                cmbConfirm.Enabled |= true;
+                txbOrderID.Enabled = true;
 
+                cmbConfirm.Enabled = false;
                 txbClientID.Enabled = false;
                 txbEmployeeID.Enabled = false;
                 txbOrderID.Enabled = false;

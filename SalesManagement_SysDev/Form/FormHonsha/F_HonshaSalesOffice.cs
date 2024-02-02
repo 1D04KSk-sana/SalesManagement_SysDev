@@ -202,11 +202,21 @@ namespace SalesManagement_SysDev
             }
             if (rdbRegister.Checked)
             {
-                txbHidden.Enabled = false;
-                cmbHidden.Enabled = false;
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
+                txbSalesOfficeFAX.Enabled = true;
+                txbSalesOfficePostal.Enabled = true;
+                txbSalesOfficeAddress.Enabled = true;
+                txbSalesOfficeName.Enabled = true;
             }
             if (rdbUpdate.Checked)
             {
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
+                txbSalesOfficeFAX.Enabled = true;
+                txbSalesOfficePostal.Enabled = true;
+                txbSalesOfficeAddress.Enabled = true;
+                txbSalesOfficeName.Enabled = true;
             }
         }
         ///////////////////////////////

@@ -392,7 +392,7 @@ namespace SalesManagement_SysDev
                 dtpOrderDate.Enabled = true;
 
                 txbHidden.Enabled = false;
-                cmbConfirm.Enabled = false;
+                cmbConfirm.Enabled = true;
                 cmbHidden.Enabled = false;
                 txbProductID.Enabled = false;
                 txbOrderQuantity.Enabled = false;
@@ -417,7 +417,7 @@ namespace SalesManagement_SysDev
 
             if (rdbConfirm.Checked)
             {
-                cmbConfirm.Enabled = true;
+                cmbConfirm.Enabled = false;
                 txbOrderID.Enabled = true;
 
                 txbEmployeeID.Enabled = false;

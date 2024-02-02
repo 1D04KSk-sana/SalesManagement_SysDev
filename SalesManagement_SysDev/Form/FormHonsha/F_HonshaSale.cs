@@ -457,7 +457,7 @@ namespace SalesManagement_SysDev
             ClearImput();
             dtpSaleDate.Checked = false;
 
-            rdbHiddenUpdate.Checked = false;
+            rdbHiddenUpdate.Checked = true;
 
             txbNumPage.Text = "1";
 
@@ -483,8 +483,8 @@ namespace SalesManagement_SysDev
                 txbSaleID.Enabled = true;
                 cmbSalesOfficeID.Enabled = false;
                 dtpSaleDate.Enabled = false;
-                cmbHidden.Enabled = false;
-                txbHidden.Enabled = false;
+                cmbHidden.Enabled = true;
+                txbHidden.Enabled = true;
             }
         }
 

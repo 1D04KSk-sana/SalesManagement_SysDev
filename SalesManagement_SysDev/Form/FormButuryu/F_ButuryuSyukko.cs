@@ -1240,17 +1240,38 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
-
+                txbEmployeeID.Enabled = true;
+                txbClientID.Enabled = true;
+                txbOrderID.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                dtpSyukkoDate.Enabled = true;
+                cmbConfirm.Enabled = true;
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
             }
 
             if (rdbConfirm.Checked)
             {
-
+                txbEmployeeID.Enabled = false;
+                txbClientID.Enabled = false;
+                txbOrderID.Enabled = false;
+                cmbSalesOfficeID.Enabled = false;
+                dtpSyukkoDate.Enabled = false;
+                cmbConfirm.Enabled = false;
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
             }
 
             if (rdbHidden.Checked)
             {
-
+                txbEmployeeID.Enabled = false;
+                txbClientID.Enabled = false;
+                txbOrderID.Enabled = false;
+                cmbSalesOfficeID.Enabled = false;
+                dtpSyukkoDate.Enabled = false;
+                cmbConfirm.Enabled = false;
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
             }
         }
 

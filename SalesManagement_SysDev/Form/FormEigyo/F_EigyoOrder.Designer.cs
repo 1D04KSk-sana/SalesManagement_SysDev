@@ -305,6 +305,7 @@
             // 
             // txbClientName
             // 
+            this.txbClientName.Enabled = false;
             this.txbClientName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbClientName.ForeColor = System.Drawing.Color.Black;
             this.txbClientName.Location = new System.Drawing.Point(1134, 330);
@@ -526,6 +527,7 @@
             // 
             // txbEmployeeName
             // 
+            this.txbEmployeeName.Enabled = false;
             this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbEmployeeName.ForeColor = System.Drawing.Color.Black;
             this.txbEmployeeName.Location = new System.Drawing.Point(1134, 274);
@@ -639,6 +641,7 @@
             // txbProductName
             // 
             this.txbProductName.BackColor = System.Drawing.SystemColors.Control;
+            this.txbProductName.Enabled = false;
             this.txbProductName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbProductName.ForeColor = System.Drawing.Color.Black;
             this.txbProductName.Location = new System.Drawing.Point(1638, 327);
@@ -788,6 +791,7 @@
             this.Controls.Add(this.txbOrderID);
             this.Controls.Add(this.lblOrderID);
             this.Controls.Add(this.btnDone);
+            this.Enabled = false;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "F_EigyoOrder";
