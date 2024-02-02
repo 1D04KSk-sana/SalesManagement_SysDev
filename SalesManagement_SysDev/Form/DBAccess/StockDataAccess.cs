@@ -161,7 +161,7 @@ namespace SalesManagement_SysDev
 
                 if (selectStock.StQuantity != 0)
                 {
-                    query = query.Where(x => x.StQuantity == selectStock.StQuantity);
+                    query = query.Where(x => x.StQuantity <= selectStock.StQuantity);
                 }
 
                 listStock = query.ToList();
@@ -186,7 +186,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listStock = context.T_Stocks.Where(x => x.PrID == selectStock.PrID || x.StQuantity >= selectStock.StQuantity).ToList();
+                listStock = context.T_Stocks.Where(x => x.PrID == selectStock.PrID || x.StQuantity <= selectStock.StQuantity).ToList();
 
                 context.Dispose();
             }
