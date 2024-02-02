@@ -475,7 +475,6 @@
             this.lblOrder.Size = new System.Drawing.Size(287, 64);
             this.lblOrder.TabIndex = 23;
             this.lblOrder.Text = "受注管理";
-            this.lblOrder.Click += new System.EventHandler(this.lblOrder_Click);
             // 
             // btnReturn
             // 
@@ -625,7 +624,6 @@
             this.txbOrderQuantity.Name = "txbOrderQuantity";
             this.txbOrderQuantity.Size = new System.Drawing.Size(220, 31);
             this.txbOrderQuantity.TabIndex = 77;
-            this.txbOrderQuantity.TextChanged += new System.EventHandler(this.txbOrderQuantity_TextChanged);
             // 
             // lblProductName
             // 

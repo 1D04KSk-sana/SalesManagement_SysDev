@@ -938,11 +938,6 @@ namespace SalesManagement_SysDev
             }
         }
 
-        private void pnlSelect_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void btnSinghUp_Click(object sender, EventArgs e)
         {
             F_HonshaSinghUp F_HonshaSinghUp = new F_HonshaSinghUp();

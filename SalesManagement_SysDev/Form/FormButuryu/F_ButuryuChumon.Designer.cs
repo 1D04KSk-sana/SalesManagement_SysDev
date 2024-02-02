@@ -110,7 +110,6 @@ namespace SalesManagement_SysDev
             this.lblClient.Size = new System.Drawing.Size(287, 64);
             this.lblClient.TabIndex = 27;
             this.lblClient.Text = "注文管理";
-            this.lblClient.Click += new System.EventHandler(this.lblClient_Click);
             // 
             // btnClose
             // 

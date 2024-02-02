@@ -1685,20 +1685,5 @@ namespace SalesManagement_SysDev
                 UseShellExecute = true
             });
         }
-
-        private void pnlSelect_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void txbOrderQuantity_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblOrder_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

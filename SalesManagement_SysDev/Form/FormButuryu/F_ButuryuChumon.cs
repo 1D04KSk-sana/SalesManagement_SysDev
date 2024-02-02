@@ -1347,11 +1347,6 @@ namespace SalesManagement_SysDev
 
             txbEmployeeName.Text = Employee.EmName;
         }
-
-        private void lblClient_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
 
