@@ -791,7 +791,6 @@
             this.Controls.Add(this.txbOrderID);
             this.Controls.Add(this.lblOrderID);
             this.Controls.Add(this.btnDone);
-            this.Enabled = false;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "F_EigyoOrder";

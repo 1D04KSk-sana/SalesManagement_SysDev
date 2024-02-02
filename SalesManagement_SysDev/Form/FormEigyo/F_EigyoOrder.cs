@@ -1403,6 +1403,16 @@ namespace SalesManagement_SysDev
             dgvOrder.Columns.Add("OrStateFlag", "受注情報フラグ");
             dgvOrder.Columns.Add("OrHidden", "非表示理由");
 
+            dgvOrder.Columns["OrID"].Width = 100;
+            dgvOrder.Columns["SoID"].Width = 172;
+            dgvOrder.Columns["ClName"].Width = 152;
+            dgvOrder.Columns["ClCharge"].Width = 152;
+            dgvOrder.Columns["EmName"].Width = 140;
+            dgvOrder.Columns["OrDate"].Width = 160;
+            dgvOrder.Columns["OrStateFlag"].Width = 170;
+            dgvOrder.Columns["OrFlag"].Width = 171;
+            dgvOrder.Columns["OrHidden"].Width = 265;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvOrder.Columns)
             {
@@ -1436,6 +1446,12 @@ namespace SalesManagement_SysDev
             dgvOrderDetail.Columns.Add("PrID", "商品ID");
             dgvOrderDetail.Columns.Add("OrQuantity", "数量");
             dgvOrderDetail.Columns.Add("OrTotalPrice", "合計金額");
+
+            dgvOrderDetail.Columns["OrDetailID"].Width = 140;
+            dgvOrderDetail.Columns["OrID"].Width = 139;
+            dgvOrderDetail.Columns["PrID"].Width = 139;
+            dgvOrderDetail.Columns["OrQuantity"].Width = 139;
+            dgvOrderDetail.Columns["OrTotalPrice"].Width = 139;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvOrderDetail.Columns)
