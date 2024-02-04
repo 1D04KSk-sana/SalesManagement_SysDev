@@ -74,6 +74,8 @@ namespace SalesManagement_SysDev
 
         private void F_HonshaProdact_Load(object sender, EventArgs e)
         {
+            rdbRegister.Checked = true;
+            
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 

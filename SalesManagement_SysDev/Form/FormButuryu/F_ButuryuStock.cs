@@ -198,6 +198,8 @@ namespace SalesManagement_SysDev
 
         private void F_ButuryuStock_Load(object sender, EventArgs e)
         {
+            rdbUpdate.Checked = true;
+            
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 

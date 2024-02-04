@@ -131,6 +131,8 @@ namespace SalesManagement_SysDev
         }
         private void F_HonshaClassification_Load(object sender, EventArgs e)
         {
+            rdbMajorRegister.Checked = true;
+            
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 

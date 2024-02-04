@@ -345,6 +345,8 @@ namespace SalesManagement_SysDev
 
         private void F_HonshaPosition_Load(object sender, EventArgs e)
         {
+            rdbRegister.Checked = true;
+            
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 

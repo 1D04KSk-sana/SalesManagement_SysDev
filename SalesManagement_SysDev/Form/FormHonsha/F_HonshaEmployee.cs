@@ -101,6 +101,8 @@ namespace SalesManagement_SysDev
 
         private void F_HonshaEmployee_Load(object sender, EventArgs e)
         {
+            rdbUpdate.Checked = true;
+            
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 

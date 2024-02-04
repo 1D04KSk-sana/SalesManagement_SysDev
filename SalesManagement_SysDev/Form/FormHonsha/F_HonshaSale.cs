@@ -243,6 +243,8 @@ namespace SalesManagement_SysDev
 
         private void F_HonshaSale_Load(object sender, EventArgs e)
         {
+            rdbHiddenUpdate.Checked = true;
+            
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
             DictionarySet();

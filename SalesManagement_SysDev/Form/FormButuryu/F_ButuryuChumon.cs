@@ -1109,6 +1109,7 @@ namespace SalesManagement_SysDev
 
         private void F_ButuryuChumon_Load(object sender, EventArgs e)
         {
+            rdbHidden.Checked = true;
 
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";

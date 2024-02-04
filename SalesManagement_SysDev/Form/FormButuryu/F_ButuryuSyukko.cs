@@ -84,6 +84,8 @@ namespace SalesManagement_SysDev
 
         private void F_ButuryuSyukko_Load(object sender, EventArgs e)
         {
+            rdbHidden.Checked = true;
+            
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 

@@ -1269,7 +1269,9 @@ namespace SalesManagement_SysDev
         }
 
         private void F_ButuryuHattyu_Load(object sender, EventArgs e)
-             {
+        {
+            rdbRegister.Checked = true;
+
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 
@@ -1294,7 +1296,7 @@ namespace SalesManagement_SysDev
             foreach (var item in listStock)
             {
                 M_Product Prodact = prodactDataAccess.GetIDProdactData(item.PrID);
-                
+
                 if (item.StQuantity <= Prodact.PrSafetyStock)
                 {
                     listStockHattyuten.Add(item);

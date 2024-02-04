@@ -74,6 +74,8 @@ namespace SalesManagement_SysDev
 
         private void F_EigyoStockView_Load(object sender, EventArgs e)
         {
+            rdbHattyuten.Checked = true;
+
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
             DictionarySet();
