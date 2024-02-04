@@ -1102,7 +1102,7 @@ namespace SalesManagement_SysDev
 
             foreach (var item in listArrivalDetail)
             {
-                T_ShipmentDetail ShipmentDetail = GenerateShipmentDetailAtRegistration(item);
+                T_ShipmentDetail ShipmentDetail = GenerateShipmentDetailAtRegistration(item, Arrival);
 
                 flgArrivallist.Add(shipmentDetailDataAccess.AddShipmentDetailData(ShipmentDetail));
             }
@@ -1141,7 +1141,7 @@ namespace SalesManagement_SysDev
         {
             return new T_Shipment
             {
-                ShID = Arrival.ArID,
+                ShID = shipmentDataAccess.ShipmentNum() + 1,
                 ClID = Arrival.ClID,
                 SoID = Arrival.SoID,
                 OrID = Arrival.OrID,
@@ -1155,12 +1155,12 @@ namespace SalesManagement_SysDev
         //戻り値   ：入荷詳細登録情報
         //機　能   ：入荷詳細登録データのセット
         ///////////////////////////////
-        private T_ShipmentDetail GenerateShipmentDetailAtRegistration(T_ArrivalDetail ArrivalDetail)
+        private T_ShipmentDetail GenerateShipmentDetailAtRegistration(T_ArrivalDetail ArrivalDetail, T_Arrival Arrival)
         {
             return new T_ShipmentDetail
             {
                 ShDetailID = ArrivalDetail.ArDetailID,
-                ShID = ArrivalDetail.ArID,
+                ShID = shipmentDataAccess.GetIDOrderData(Arrival.OrID).ShID,
                 PrID = ArrivalDetail.PrID,
                 ShQuantity = ArrivalDetail.ArQuantity
             };

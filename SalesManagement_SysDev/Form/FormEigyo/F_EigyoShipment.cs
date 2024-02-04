@@ -19,6 +19,8 @@ namespace SalesManagement_SysDev
         SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
         //データベース受注テーブルアクセス用クラスのインスタンス化
         ShipmentDataAccess ShipmentDataAccess = new ShipmentDataAccess();
+        //データベース注文テーブルアクセス用クラスのインスタンス化
+        ChumonDataAccess chumonDataAccess = new ChumonDataAccess();
         //入力形式チェック用クラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
@@ -692,7 +694,7 @@ namespace SalesManagement_SysDev
                     return false;
                 }
 
-                T_Shipment shipment = ShipmentDataAccess.GetIDShipmentData(int.Parse(txbOrderID.Text.Trim()));
+                T_Shipment shipment = ShipmentDataAccess.GetIDShipmentData(int.Parse(txbShipmentID.Text.Trim()));
 
                 //受注IDの確定チェック
                 if (shipment.ShStateFlag == 1)
@@ -759,7 +761,9 @@ namespace SalesManagement_SysDev
             //注文登録
             T_Shipment Shipment = ShipmentDataAccess.GetIDShipmentData(cfmShipment.ShID);
 
-            T_Sale Sale = GenerateSaleAtRegistration(Shipment);
+            T_Chumon Chumon = chumonDataAccess.GetIDOrderData(Shipment.OrID);
+
+            T_Sale Sale = GenerateSaleAtRegistration(Shipment, Chumon);
 
             bool flgSale = saleDataAccess.AddSaleData(Sale);
 
@@ -780,7 +784,7 @@ namespace SalesManagement_SysDev
 
             foreach (var item in listShipmentDetail)
             {
-                T_SaleDetail SaleDetail = GenerateSaleDetailAtRegistration(item);
+                T_SaleDetail SaleDetail = GenerateSaleDetailAtRegistration(item, Chumon);
 
                 flgShipmentlist.Add(saleDetailDataAccess.AddSaleDetailData(SaleDetail));
             }
@@ -815,12 +819,12 @@ namespace SalesManagement_SysDev
         //戻り値   ：売上登録情報
         //機　能   ：売上登録データのセット
         ///////////////////////////////
-        private T_Sale GenerateSaleAtRegistration(T_Shipment Shipment)
+        private T_Sale GenerateSaleAtRegistration(T_Shipment Shipment, T_Chumon Chumon)
         {
             return new T_Sale
             {
-                SaID = Shipment.ShID,
-                ChID = Shipment.OrID,
+                SaID = saleDataAccess.SaleNum() + 1,
+                ChID = Chumon.ChID,
                 SoID = Shipment.SoID,
                 ClID = Shipment.ClID,
                 EmID = F_Login.intEmployeeID,
@@ -835,7 +839,7 @@ namespace SalesManagement_SysDev
         //戻り値   ：売上詳細登録情報
         //機　能   ：売上詳細登録データのセット
         ///////////////////////////////
-        private T_SaleDetail GenerateSaleDetailAtRegistration(T_ShipmentDetail ShipmentDetail)
+        private T_SaleDetail GenerateSaleDetailAtRegistration(T_ShipmentDetail ShipmentDetail, T_Chumon Chumon)
         {
             M_Product Prodact = prodactDataAccess.GetIDProdactData(ShipmentDetail.PrID);
 
@@ -843,8 +847,9 @@ namespace SalesManagement_SysDev
 
             return new T_SaleDetail
             {
+                Id = 1,
                 SaDetailID = ShipmentDetail.ShDetailID,
-                SaID = ShipmentDetail.ShID,
+                SaID = saleDataAccess.GetIDChumonData(Chumon.ChID).SaID,
                 PrID = ShipmentDetail.PrID,
                 SaQuantity = ShipmentDetail.ShQuantity,
                 SaTotalPrice = ShipmentDetail.ShQuantity * intProdactPrice

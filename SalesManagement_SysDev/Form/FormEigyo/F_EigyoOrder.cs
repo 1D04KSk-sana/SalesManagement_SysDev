@@ -354,7 +354,7 @@ namespace SalesManagement_SysDev
             if (rdbRegister.Checked)
             {
                 txbOrderID.Enabled = true;
-                txbEmployeeID.Enabled = true;
+                txbEmployeeID.Enabled = false;
                 txbClientID.Enabled = true;
                 txbOrderManager.Enabled = true;
                 cmbSalesOfficeID.Enabled = true;
@@ -592,6 +592,7 @@ namespace SalesManagement_SysDev
         {
             return new T_Order
             {
+                OrID = orderDataAccess.OrderNum() + 1,
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 EmID = F_Login.intEmployeeID,
                 ClID = clientDataAccess.GetClientID(txbClientName.Text.Trim()),
@@ -946,7 +947,7 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 更新確認メッセージ
+            // 確定確認メッセージ
             DialogResult result = MessageBox.Show("確定しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
             if (result == DialogResult.Cancel)
@@ -966,7 +967,7 @@ namespace SalesManagement_SysDev
             // 受注情報作成
             var cmfOrder = GenerateDataAtConfirm();
 
-            // 受注情報更新
+            // 受注情報確定
             ConfirmOrder(cmfOrder);
         }
 
@@ -1317,7 +1318,7 @@ namespace SalesManagement_SysDev
         {
             return new T_Chumon
             {
-                ChID = Order.OrID,
+                ChID = chumonDataAccess.ChumonNum() + 1,
                 SoID = Order.SoID,
                 ClID = Order.ClID,
                 OrID = Order.OrID,
@@ -1338,7 +1339,7 @@ namespace SalesManagement_SysDev
             return new T_ChumonDetail
             {
                 ChDetailID = OrderDetail.OrDetailID,
-                ChID = OrderDetail.OrID,
+                ChID = chumonDataAccess.GetIDOrderData(OrderDetail.OrID).ChID,
                 PrID = OrderDetail.PrID,
                 ChQuantity = OrderDetail.OrQuantity
             };

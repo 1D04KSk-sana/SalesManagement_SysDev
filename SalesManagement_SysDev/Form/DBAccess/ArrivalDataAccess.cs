@@ -320,6 +320,31 @@ namespace SalesManagement_SysDev
 
             return Arrival;
         }
+
+        ///////////////////////////////
+        //メソッド名：GetIDOrderData()
+        //引　数：受注ID
+        //戻り値：受注IDの一致する入荷データ
+        //機　能：受注IDの一致する入荷データの取得
+        ///////////////////////////////
+        public T_Arrival GetIDOrderData(int OrderID)
+        {
+            T_Arrival Arrival = new T_Arrival { };
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                Arrival = context.T_Arrivals.Single(x => x.OrID == OrderID);
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Arrival;
+        }
         ///////////////////////////////
         //メソッド名：ConfirmArrivalData()
         //引　数：cfmArrival = 入荷データ
@@ -373,6 +398,22 @@ namespace SalesManagement_SysDev
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
+        }
+
+        ///////////////////////////////
+        //メソッド名：ArrivalNum()
+        //引　数：なし
+        //戻り値：受注件数
+        //機　能：受注データの件数
+        ///////////////////////////////
+        public int ArrivalNum()
+        {
+            var context = new SalesManagement_DevContext();
+
+            //登録されている操作ログの件数取得
+            int ArrivalCount = context.T_Arrivals.Count();
+
+            return ArrivalCount;
         }
     }
 }

@@ -143,6 +143,31 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：GetIDOrderData()
+        //引　数：受注ID
+        //戻り値：受注IDの一致する注文データ
+        //機　能：受注IDの一致する注文データの取得
+        ///////////////////////////////
+        public T_Chumon GetIDOrderData(int OrderID)
+        {
+            T_Chumon Chumon = new T_Chumon { };
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                Chumon = context.T_Chumons.Single(x => x.OrID == OrderID);
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Chumon;
+        }
+
+        ///////////////////////////////
         //メソッド名：GetChumonDspData()
         //引　数：なし
         //戻り値：管理Flgが表示の受注データ
@@ -276,7 +301,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                var Chumon = context.T_Chumons.Single(x => x.OrID == cfmChumon.ChID);
+                var Chumon = context.T_Chumons.Single(x => x.ChID == cfmChumon.ChID);
 
                 Chumon.ChStateFlag = 1;
                 Chumon.EmID = cfmChumon.EmID;
@@ -370,6 +395,21 @@ namespace SalesManagement_SysDev
             return listChumon;
         }
 
+        ///////////////////////////////
+        //メソッド名：ChumonNum()
+        //引　数：なし
+        //戻り値：注文件数
+        //機　能：注文データの件数
+        ///////////////////////////////
+        public int ChumonNum()
+        {
+            var context = new SalesManagement_DevContext();
+
+            //登録されている操作ログの件数取得
+            int ChumonCount = context.T_Chumons.Count();
+
+            return ChumonCount;
+        }
     }
 }
 

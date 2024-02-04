@@ -254,7 +254,7 @@ namespace SalesManagement_SysDev
         {
             return new T_Chumon
             {
-                ChID = int.Parse(txbOrderID.Text.Trim()),
+                ChID = int.Parse(txbChumonID.Text.Trim()),
                 EmID = F_Login.intEmployeeID,
                 ChStateFlag = 1,
             };
@@ -474,7 +474,7 @@ namespace SalesManagement_SysDev
 
             foreach (var item in listChumonDetail)
             {
-                T_SyukkoDetail SyukkoDetail = GenerateSyukkoDetailAtRegistration(item);
+                T_SyukkoDetail SyukkoDetail = GenerateSyukkoDetailAtRegistration(item, Chumon);
 
                 flgChumonlist.Add(syukkoDetailDataAccess.AddSyukkoDetailData(SyukkoDetail));
             }
@@ -513,7 +513,7 @@ namespace SalesManagement_SysDev
         {
             return new T_Syukko
             {
-                SyID = Chumon.ChID,
+                SyID = syukkoDataAccess.SyukkoNum() + 1,
                 SoID = Chumon.SoID,
                 ClID = Chumon.ClID,
                 OrID = Chumon.OrID,
@@ -528,12 +528,12 @@ namespace SalesManagement_SysDev
         //戻り値   ：出庫詳細登録情報
         //機　能   ：出庫詳細登録データのセット
         ///////////////////////////////
-        private T_SyukkoDetail GenerateSyukkoDetailAtRegistration(T_ChumonDetail ChumonDetail)
+        private T_SyukkoDetail GenerateSyukkoDetailAtRegistration(T_ChumonDetail ChumonDetail, T_Chumon Chumon)
         {
             return new T_SyukkoDetail
             {
                 SyDetailID = ChumonDetail.ChDetailID,
-                SyID = ChumonDetail.ChID,
+                SyID = syukkoDataAccess.GetIDOrderData(Chumon.OrID).SyID,
                 PrID = ChumonDetail.PrID,
                 SyQuantity = ChumonDetail.ChQuantity
             };

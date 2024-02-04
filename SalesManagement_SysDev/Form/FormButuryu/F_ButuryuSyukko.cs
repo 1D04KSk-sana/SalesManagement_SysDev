@@ -410,7 +410,7 @@ namespace SalesManagement_SysDev
 
             foreach (var item in listSyukkoDetail)
             {
-                T_ArrivalDetail ArrivalDetail = GenerateArrivalDetailAtRegistration(item);
+                T_ArrivalDetail ArrivalDetail = GenerateArrivalDetailAtRegistration(item, Syukko);
 
                 flgSyukkolist.Add(arrivalDetailDataAccess.AddArrivalDetailData(ArrivalDetail));
             }
@@ -504,7 +504,7 @@ namespace SalesManagement_SysDev
         {
             return new T_Arrival
             {
-                ArID = Syukko.SyID,
+                ArID = arrivalDataAccess.ArrivalNum() + 1,
                 SoID = Syukko.SoID,
                 ClID = Syukko.ClID,
                 OrID = Syukko.OrID,
@@ -519,12 +519,12 @@ namespace SalesManagement_SysDev
         //戻り値   ：入荷詳細登録情報
         //機　能   ：入荷詳細登録データのセット
         ///////////////////////////////
-        private T_ArrivalDetail GenerateArrivalDetailAtRegistration(T_SyukkoDetail SyukkoDetail)
+        private T_ArrivalDetail GenerateArrivalDetailAtRegistration(T_SyukkoDetail SyukkoDetail, T_Syukko Syukko)
         {
             return new T_ArrivalDetail
             {
                 ArDetailID = SyukkoDetail.SyDetailID,
-                ArID = SyukkoDetail.SyID,
+                ArID = arrivalDataAccess.GetIDOrderData(Syukko.OrID).ArID,
                 PrID = SyukkoDetail.PrID,
                 ArQuantity = SyukkoDetail.SyQuantity
             };

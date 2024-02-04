@@ -204,19 +204,19 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
-        //メソッド名：GetIDOrderData()
+        //メソッド名：GetIDSyukkoData()
         //引　数：受注ID
         //戻り値：受注IDの一致する受注データ
         //機　能：受注IDの一致する受注データの取得
         ///////////////////////////////
         public T_Syukko GetIDSyukkoData(int SyukkoID)
         {
-            T_Syukko Order = new T_Syukko { };
+            T_Syukko Syukko = new T_Syukko { };
 
             try
             {
                 var context = new SalesManagement_DevContext();
-                Order = context.T_Syukkos.Single(x => x.OrID == SyukkoID);
+                Syukko = context.T_Syukkos.Single(x => x.SyID == SyukkoID);
 
                 context.Dispose();
             }
@@ -225,7 +225,32 @@ namespace SalesManagement_SysDev
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            return Order;
+            return Syukko;
+        }
+
+        ///////////////////////////////
+        //メソッド名：GetIDOrderData()
+        //引　数：受注ID
+        //戻り値：受注IDの一致する出庫データ
+        //機　能：受注IDの一致する出庫データの取得
+        ///////////////////////////////
+        public T_Syukko GetIDOrderData(int OrderID)
+        {
+            T_Syukko Syukko = new T_Syukko { };
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                Syukko = context.T_Syukkos.Single(x => x.OrID == OrderID);
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Syukko;
         }
 
         ///////////////////////////////
@@ -403,6 +428,22 @@ namespace SalesManagement_SysDev
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
+        }
+
+        ///////////////////////////////
+        //メソッド名：SyukkoNum()
+        //引　数：なし
+        //戻り値：受注件数
+        //機　能：受注データの件数
+        ///////////////////////////////
+        public int SyukkoNum()
+        {
+            var context = new SalesManagement_DevContext();
+
+            //登録されている操作ログの件数取得
+            int SyukkoCount = context.T_Syukkos.Count();
+
+            return SyukkoCount;
         }
     }
 }
