@@ -585,60 +585,70 @@ namespace SalesManagement_SysDev
             {
                 sc.Add(new M_SmallClassification()
                 {
+                    ScID = 1,
                     M_MajorClassification = mc[0],
                     ScName = "テレビ",
                     ScFlag = 0,
                 });
                 sc.Add(new M_SmallClassification()
                 {
+                    ScID = 2,
                     M_MajorClassification = mc[0],
                     ScName = "レコーダー",
                     ScFlag = 0,
                 });
                 sc.Add(new M_SmallClassification()
                 {
+                    ScID = 1,
                     M_MajorClassification = mc[1],
                     ScName = "エアコン",
                     ScFlag = 0,
                 });
                 sc.Add(new M_SmallClassification()
                 {
+                    ScID= 2,
                     M_MajorClassification = mc[1],
                     ScName = "冷蔵庫",
                     ScFlag = 0,
                 });
                 sc.Add(new M_SmallClassification()
                 {
+                    ScID = 3,
                     M_MajorClassification = mc[1],
                     ScName = "洗濯機",
                     ScFlag = 0,
                 });
                 sc.Add(new M_SmallClassification()
                 {
+                    ScID = 1,
                     M_MajorClassification = mc[2],
                     ScName = "オーディオ",
                     ScFlag = 0,
                 });
                 sc.Add(new M_SmallClassification()
                 {
+                    ScID = 2,
                     M_MajorClassification = mc[2],
                     ScName = "イヤホン",
                     ScFlag = 0,
                 });
                 sc.Add(new M_SmallClassification()
                 {
+                    ScID = 3,
                     M_MajorClassification = mc[2],
                     ScName = "ヘッドホン",
                     ScFlag = 0,
                 });
                 sc.Add(new M_SmallClassification()
                 {
+                    ScID = 1,
                     M_MajorClassification = mc[3],
                     ScName = "携帯電話",
                     ScFlag = 0,
                 });
                 sc.Add(new M_SmallClassification()
                 {
+                    ScID = 2,
                     M_MajorClassification = mc[3],
                     ScName = "スマートフォン",
                     ScFlag = 0,

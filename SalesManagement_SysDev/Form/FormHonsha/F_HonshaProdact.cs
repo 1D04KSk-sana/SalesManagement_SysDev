@@ -45,6 +45,8 @@ namespace SalesManagement_SysDev
         private static List<M_MajorClassification> listMajorID = new List<M_MajorClassification>();
         //データグリッドビュー用の小分類データ
         private static List<M_SmallClassification> listSmallID = new List<M_SmallClassification>();
+        //コンボボックス用の小分類データ
+        private static List<M_SmallClassification> listSmallMajorID = new List<M_SmallClassification>();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
         OperationLogDataAccess operationLogAccess = new OperationLogDataAccess();
         //データグリッドビュー用の商品データ
@@ -64,6 +66,8 @@ namespace SalesManagement_SysDev
         private Dictionary<int, string> dictionaryMakerName;
         //DataGridView用に使用する商品のDictionary
         private Dictionary<int, string> dictionaryProdact;
+        //CombBox用に使用する小分類のDictionary
+        private Dictionary<int, string> dicTionarySmallMajorID;
 
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
@@ -103,17 +107,6 @@ namespace SalesManagement_SysDev
             cmbMajorID.ValueMember = "McID";
             //cmbMakerNameを未選択に
             cmbMajorID.SelectedIndex = -1;
-
-            //小分類のデータを取得
-            listSmallID = SmallDataAccess.GetSmallClassificationDspData();
-            //取得したデータをコンボボックスに挿入
-            cmbSmallID.DataSource = listSmallID;
-            //表示する名前をScNameに指定
-            cmbSmallID.DisplayMember = "ScName";
-            //項目の順番をScIDに指定
-            cmbSmallID.ValueMember = "ScID";
-            //cmbMakerNameを未選択に
-            cmbSmallID.SelectedIndex = -1;
 
             //cmbViewを表示に
             cmbView.SelectedIndex = 0;
@@ -290,7 +283,7 @@ namespace SalesManagement_SysDev
 
             foreach (var item in listSmallID)
             {
-                dictionarySmallID.Add(item.ScID, item.ScName);
+                dictionarySmallID.Add(item.Id, item.ScName);
             }
 
             //メーカ名
@@ -1344,6 +1337,21 @@ namespace SalesManagement_SysDev
                 FileName = "https://docs.google.com/document/d/1ZgVVTTy5Qd2OHCWsk43F0fwvHmdQC4br",
                 UseShellExecute = true
             });
+        }
+
+        private void cmbMajorID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //小分類名のデータを取得
+            listSmallMajorID = SmallDataAccess.GetSmallIDData(cmbMajorID.SelectedIndex + 1);
+
+            //取得したデータをコンボボックスに挿入
+            cmbSmallID.DataSource = listSmallMajorID;
+            //表示する名前をScNameに指定
+            cmbSmallID.DisplayMember = "ScName";
+            //項目の順番をScIDに指定
+            cmbSmallID.ValueMember = "ScID";
+            //cmbMakerNameを未選択に
+            cmbSmallID.SelectedIndex = -1;
         }
     }
 }

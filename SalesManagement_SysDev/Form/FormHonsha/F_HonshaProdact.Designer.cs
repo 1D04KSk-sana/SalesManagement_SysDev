@@ -536,6 +536,7 @@
             this.cmbMajorID.Name = "cmbMajorID";
             this.cmbMajorID.Size = new System.Drawing.Size(220, 32);
             this.cmbMajorID.TabIndex = 46;
+            this.cmbMajorID.SelectedIndexChanged += new System.EventHandler(this.cmbMajorID_SelectedIndexChanged);
             // 
             // cmbSmallID
             // 

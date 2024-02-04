@@ -33,20 +33,13 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.lblClient = new System.Windows.Forms.Label();
             this.btnReturn = new System.Windows.Forms.Button();
-            this.rdbSmallRegister = new System.Windows.Forms.RadioButton();
-            this.rdbMajorUpdate = new System.Windows.Forms.RadioButton();
-            this.rdbMajorSearch = new System.Windows.Forms.RadioButton();
-            this.rdbSmallSearch = new System.Windows.Forms.RadioButton();
-            this.rdbMajorRegister = new System.Windows.Forms.RadioButton();
-            this.rdbSmallUpdate = new System.Windows.Forms.RadioButton();
-            this.txbSmallName = new System.Windows.Forms.TextBox();
-            this.lblSmallClassificationName = new System.Windows.Forms.Label();
+            this.rdbUpdate = new System.Windows.Forms.RadioButton();
+            this.rdbSearch = new System.Windows.Forms.RadioButton();
+            this.rdbRegister = new System.Windows.Forms.RadioButton();
             this.txbMajorName = new System.Windows.Forms.TextBox();
-            this.txbSmallID = new System.Windows.Forms.TextBox();
-            this.lblMajorClassificationName = new System.Windows.Forms.Label();
+            this.lblMajorName = new System.Windows.Forms.Label();
             this.txbMajorID = new System.Windows.Forms.TextBox();
-            this.lblSmallClassficationID = new System.Windows.Forms.Label();
-            this.lblMajorClassificationID = new System.Windows.Forms.Label();
+            this.lblMajorID = new System.Windows.Forms.Label();
             this.lblHidden = new System.Windows.Forms.Label();
             this.txbHidden = new System.Windows.Forms.TextBox();
             this.lblButuryuHidden = new System.Windows.Forms.Label();
@@ -65,6 +58,11 @@
             this.btnBack = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPageMax = new System.Windows.Forms.Button();
+            this.cmbClassfication = new System.Windows.Forms.ComboBox();
+            this.lblISmallD = new System.Windows.Forms.Label();
+            this.txbSmallName = new System.Windows.Forms.TextBox();
+            this.lblSmallName = new System.Windows.Forms.Label();
+            this.txbSmallID = new System.Windows.Forms.TextBox();
             this.pnlClassification.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMajor)).BeginInit();
@@ -130,167 +128,90 @@
             this.btnReturn.UseVisualStyleBackColor = true;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
-            // rdbSmallRegister
+            // rdbUpdate
             // 
-            this.rdbSmallRegister.AutoSize = true;
-            this.rdbSmallRegister.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSmallRegister.Location = new System.Drawing.Point(809, 196);
-            this.rdbSmallRegister.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.rdbSmallRegister.Name = "rdbSmallRegister";
-            this.rdbSmallRegister.Size = new System.Drawing.Size(208, 39);
-            this.rdbSmallRegister.TabIndex = 128;
-            this.rdbSmallRegister.Text = "小分類登録";
-            this.rdbSmallRegister.UseVisualStyleBackColor = true;
+            this.rdbUpdate.AutoSize = true;
+            this.rdbUpdate.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbUpdate.Location = new System.Drawing.Point(469, 193);
+            this.rdbUpdate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.rdbUpdate.Name = "rdbUpdate";
+            this.rdbUpdate.Size = new System.Drawing.Size(103, 39);
+            this.rdbUpdate.TabIndex = 127;
+            this.rdbUpdate.Text = "更新";
+            this.rdbUpdate.UseVisualStyleBackColor = true;
             // 
-            // rdbMajorUpdate
+            // rdbSearch
             // 
-            this.rdbMajorUpdate.AutoSize = true;
-            this.rdbMajorUpdate.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbMajorUpdate.Location = new System.Drawing.Point(246, 196);
-            this.rdbMajorUpdate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.rdbMajorUpdate.Name = "rdbMajorUpdate";
-            this.rdbMajorUpdate.Size = new System.Drawing.Size(208, 39);
-            this.rdbMajorUpdate.TabIndex = 127;
-            this.rdbMajorUpdate.Text = "大分類更新";
-            this.rdbMajorUpdate.UseVisualStyleBackColor = true;
+            this.rdbSearch.AutoSize = true;
+            this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbSearch.Location = new System.Drawing.Point(624, 193);
+            this.rdbSearch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.rdbSearch.Name = "rdbSearch";
+            this.rdbSearch.Size = new System.Drawing.Size(103, 39);
+            this.rdbSearch.TabIndex = 126;
+            this.rdbSearch.Text = "検索";
+            this.rdbSearch.UseVisualStyleBackColor = true;
             // 
-            // rdbMajorSearch
+            // rdbRegister
             // 
-            this.rdbMajorSearch.AutoSize = true;
-            this.rdbMajorSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbMajorSearch.Location = new System.Drawing.Point(458, 196);
-            this.rdbMajorSearch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.rdbMajorSearch.Name = "rdbMajorSearch";
-            this.rdbMajorSearch.Size = new System.Drawing.Size(208, 39);
-            this.rdbMajorSearch.TabIndex = 126;
-            this.rdbMajorSearch.Text = "大分類検索";
-            this.rdbMajorSearch.UseVisualStyleBackColor = true;
-            // 
-            // rdbSmallSearch
-            // 
-            this.rdbSmallSearch.AutoSize = true;
-            this.rdbSmallSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSmallSearch.Location = new System.Drawing.Point(1267, 196);
-            this.rdbSmallSearch.Margin = new System.Windows.Forms.Padding(2);
-            this.rdbSmallSearch.Name = "rdbSmallSearch";
-            this.rdbSmallSearch.Size = new System.Drawing.Size(208, 39);
-            this.rdbSmallSearch.TabIndex = 124;
-            this.rdbSmallSearch.Text = "小分類検索";
-            this.rdbSmallSearch.UseVisualStyleBackColor = true;
-            // 
-            // rdbMajorRegister
-            // 
-            this.rdbMajorRegister.AutoSize = true;
-            this.rdbMajorRegister.Checked = true;
-            this.rdbMajorRegister.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbMajorRegister.Location = new System.Drawing.Point(34, 196);
-            this.rdbMajorRegister.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.rdbMajorRegister.Name = "rdbMajorRegister";
-            this.rdbMajorRegister.Size = new System.Drawing.Size(208, 39);
-            this.rdbMajorRegister.TabIndex = 125;
-            this.rdbMajorRegister.TabStop = true;
-            this.rdbMajorRegister.Text = "大分類登録";
-            this.rdbMajorRegister.UseVisualStyleBackColor = true;
-            // 
-            // rdbSmallUpdate
-            // 
-            this.rdbSmallUpdate.AutoSize = true;
-            this.rdbSmallUpdate.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSmallUpdate.Location = new System.Drawing.Point(1036, 196);
-            this.rdbSmallUpdate.Margin = new System.Windows.Forms.Padding(2);
-            this.rdbSmallUpdate.Name = "rdbSmallUpdate";
-            this.rdbSmallUpdate.Size = new System.Drawing.Size(208, 39);
-            this.rdbSmallUpdate.TabIndex = 129;
-            this.rdbSmallUpdate.Text = "小分類更新";
-            this.rdbSmallUpdate.UseVisualStyleBackColor = true;
-            // 
-            // txbSmallName
-            // 
-            this.txbSmallName.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbSmallName.Location = new System.Drawing.Point(998, 353);
-            this.txbSmallName.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.txbSmallName.Name = "txbSmallName";
-            this.txbSmallName.Size = new System.Drawing.Size(220, 31);
-            this.txbSmallName.TabIndex = 135;
-            // 
-            // lblSmallClassificationName
-            // 
-            this.lblSmallClassificationName.AutoSize = true;
-            this.lblSmallClassificationName.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.lblSmallClassificationName.Location = new System.Drawing.Point(856, 356);
-            this.lblSmallClassificationName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblSmallClassificationName.Name = "lblSmallClassificationName";
-            this.lblSmallClassificationName.Size = new System.Drawing.Size(106, 24);
-            this.lblSmallClassificationName.TabIndex = 134;
-            this.lblSmallClassificationName.Text = "小分類名";
+            this.rdbRegister.AutoSize = true;
+            this.rdbRegister.Checked = true;
+            this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.rdbRegister.Location = new System.Drawing.Point(321, 193);
+            this.rdbRegister.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.rdbRegister.Name = "rdbRegister";
+            this.rdbRegister.Size = new System.Drawing.Size(103, 39);
+            this.rdbRegister.TabIndex = 125;
+            this.rdbRegister.TabStop = true;
+            this.rdbRegister.Text = "登録";
+            this.rdbRegister.UseVisualStyleBackColor = true;
             // 
             // txbMajorName
             // 
             this.txbMajorName.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbMajorName.Location = new System.Drawing.Point(194, 353);
+            this.txbMajorName.Location = new System.Drawing.Point(642, 304);
             this.txbMajorName.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txbMajorName.Name = "txbMajorName";
             this.txbMajorName.Size = new System.Drawing.Size(220, 31);
             this.txbMajorName.TabIndex = 133;
             // 
-            // txbSmallID
+            // lblMajorName
             // 
-            this.txbSmallID.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbSmallID.Location = new System.Drawing.Point(998, 290);
-            this.txbSmallID.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.txbSmallID.Name = "txbSmallID";
-            this.txbSmallID.Size = new System.Drawing.Size(220, 31);
-            this.txbSmallID.TabIndex = 132;
-            this.txbSmallID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
-            // 
-            // lblMajorClassificationName
-            // 
-            this.lblMajorClassificationName.AutoSize = true;
-            this.lblMajorClassificationName.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.lblMajorClassificationName.Location = new System.Drawing.Point(65, 360);
-            this.lblMajorClassificationName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblMajorClassificationName.Name = "lblMajorClassificationName";
-            this.lblMajorClassificationName.Size = new System.Drawing.Size(106, 24);
-            this.lblMajorClassificationName.TabIndex = 131;
-            this.lblMajorClassificationName.Text = "大分類名";
+            this.lblMajorName.AutoSize = true;
+            this.lblMajorName.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.lblMajorName.Location = new System.Drawing.Point(516, 307);
+            this.lblMajorName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMajorName.Name = "lblMajorName";
+            this.lblMajorName.Size = new System.Drawing.Size(106, 24);
+            this.lblMajorName.TabIndex = 131;
+            this.lblMajorName.Text = "大分類名";
             // 
             // txbMajorID
             // 
             this.txbMajorID.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbMajorID.Location = new System.Drawing.Point(194, 290);
+            this.txbMajorID.Location = new System.Drawing.Point(194, 304);
             this.txbMajorID.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txbMajorID.Name = "txbMajorID";
             this.txbMajorID.Size = new System.Drawing.Size(220, 31);
             this.txbMajorID.TabIndex = 130;
             this.txbMajorID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
-            // lblSmallClassficationID
+            // lblMajorID
             // 
-            this.lblSmallClassficationID.AutoSize = true;
-            this.lblSmallClassficationID.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.lblSmallClassficationID.Location = new System.Drawing.Point(856, 293);
-            this.lblSmallClassficationID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblSmallClassficationID.Name = "lblSmallClassficationID";
-            this.lblSmallClassficationID.Size = new System.Drawing.Size(104, 24);
-            this.lblSmallClassficationID.TabIndex = 137;
-            this.lblSmallClassficationID.Text = "小分類ID";
-            // 
-            // lblMajorClassificationID
-            // 
-            this.lblMajorClassificationID.AutoSize = true;
-            this.lblMajorClassificationID.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.lblMajorClassificationID.Location = new System.Drawing.Point(67, 293);
-            this.lblMajorClassificationID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblMajorClassificationID.Name = "lblMajorClassificationID";
-            this.lblMajorClassificationID.Size = new System.Drawing.Size(104, 24);
-            this.lblMajorClassificationID.TabIndex = 136;
-            this.lblMajorClassificationID.Text = "大分類ID";
+            this.lblMajorID.AutoSize = true;
+            this.lblMajorID.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.lblMajorID.Location = new System.Drawing.Point(68, 307);
+            this.lblMajorID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMajorID.Name = "lblMajorID";
+            this.lblMajorID.Size = new System.Drawing.Size(104, 24);
+            this.lblMajorID.TabIndex = 136;
+            this.lblMajorID.Text = "大分類ID";
             // 
             // lblHidden
             // 
             this.lblHidden.AutoSize = true;
             this.lblHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblHidden.Location = new System.Drawing.Point(138, 437);
+            this.lblHidden.Location = new System.Drawing.Point(30, 397);
             this.lblHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblHidden.Name = "lblHidden";
             this.lblHidden.Size = new System.Drawing.Size(142, 24);
@@ -300,17 +221,17 @@
             // txbHidden
             // 
             this.txbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.txbHidden.Location = new System.Drawing.Point(731, 434);
+            this.txbHidden.Location = new System.Drawing.Point(642, 394);
             this.txbHidden.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txbHidden.Name = "txbHidden";
-            this.txbHidden.Size = new System.Drawing.Size(662, 31);
+            this.txbHidden.Size = new System.Drawing.Size(1093, 31);
             this.txbHidden.TabIndex = 138;
             // 
             // lblButuryuHidden
             // 
             this.lblButuryuHidden.AutoSize = true;
             this.lblButuryuHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.lblButuryuHidden.Location = new System.Drawing.Point(581, 437);
+            this.lblButuryuHidden.Location = new System.Drawing.Point(492, 397);
             this.lblButuryuHidden.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblButuryuHidden.Name = "lblButuryuHidden";
             this.lblButuryuHidden.Size = new System.Drawing.Size(130, 24);
@@ -325,7 +246,7 @@
             this.cmbHidden.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbHidden.Location = new System.Drawing.Point(284, 434);
+            this.cmbHidden.Location = new System.Drawing.Point(195, 394);
             this.cmbHidden.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cmbHidden.Name = "cmbHidden";
             this.cmbHidden.Size = new System.Drawing.Size(220, 32);
@@ -366,7 +287,7 @@
             this.cmbView.Items.AddRange(new object[] {
             "表示",
             "非表示"});
-            this.cmbView.Location = new System.Drawing.Point(1525, 281);
+            this.cmbView.Location = new System.Drawing.Point(1144, 195);
             this.cmbView.Margin = new System.Windows.Forms.Padding(2);
             this.cmbView.Name = "cmbView";
             this.cmbView.Size = new System.Drawing.Size(360, 43);
@@ -512,12 +433,75 @@
             this.btnPageMax.UseVisualStyleBackColor = true;
             this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
+            // cmbClassfication
+            // 
+            this.cmbClassfication.AutoCompleteCustomSource.AddRange(new string[] {
+            "大分類",
+            "小分類"});
+            this.cmbClassfication.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbClassfication.Font = new System.Drawing.Font("MS UI Gothic", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.cmbClassfication.FormattingEnabled = true;
+            this.cmbClassfication.Items.AddRange(new object[] {
+            "大分類",
+            "小分類"});
+            this.cmbClassfication.Location = new System.Drawing.Point(25, 192);
+            this.cmbClassfication.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbClassfication.Name = "cmbClassfication";
+            this.cmbClassfication.Size = new System.Drawing.Size(259, 43);
+            this.cmbClassfication.TabIndex = 156;
+            this.cmbClassfication.TabStop = false;
+            // 
+            // lblISmallD
+            // 
+            this.lblISmallD.AutoSize = true;
+            this.lblISmallD.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.lblISmallD.Location = new System.Drawing.Point(949, 307);
+            this.lblISmallD.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblISmallD.Name = "lblISmallD";
+            this.lblISmallD.Size = new System.Drawing.Size(104, 24);
+            this.lblISmallD.TabIndex = 160;
+            this.lblISmallD.Text = "小分類ID";
+            // 
+            // txbSmallName
+            // 
+            this.txbSmallName.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.txbSmallName.Location = new System.Drawing.Point(1515, 304);
+            this.txbSmallName.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txbSmallName.Name = "txbSmallName";
+            this.txbSmallName.Size = new System.Drawing.Size(220, 31);
+            this.txbSmallName.TabIndex = 159;
+            // 
+            // lblSmallName
+            // 
+            this.lblSmallName.AutoSize = true;
+            this.lblSmallName.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.lblSmallName.Location = new System.Drawing.Point(1398, 307);
+            this.lblSmallName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSmallName.Name = "lblSmallName";
+            this.lblSmallName.Size = new System.Drawing.Size(106, 24);
+            this.lblSmallName.TabIndex = 158;
+            this.lblSmallName.Text = "小分類名";
+            // 
+            // txbSmallID
+            // 
+            this.txbSmallID.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.txbSmallID.Location = new System.Drawing.Point(1067, 304);
+            this.txbSmallID.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.txbSmallID.Name = "txbSmallID";
+            this.txbSmallID.Size = new System.Drawing.Size(220, 31);
+            this.txbSmallID.TabIndex = 157;
+            // 
             // F_HonshaClassification
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(1904, 1041);
+            this.Controls.Add(this.lblISmallD);
+            this.Controls.Add(this.txbSmallName);
+            this.Controls.Add(this.lblSmallName);
+            this.Controls.Add(this.txbSmallID);
+            this.Controls.Add(this.cmbClassfication);
             this.Controls.Add(this.lblNumPage);
             this.Controls.Add(this.txbNumPage);
             this.Controls.Add(this.btnPageMin);
@@ -536,20 +520,13 @@
             this.Controls.Add(this.txbHidden);
             this.Controls.Add(this.lblButuryuHidden);
             this.Controls.Add(this.cmbHidden);
-            this.Controls.Add(this.lblSmallClassficationID);
-            this.Controls.Add(this.lblMajorClassificationID);
-            this.Controls.Add(this.txbSmallName);
-            this.Controls.Add(this.lblSmallClassificationName);
+            this.Controls.Add(this.lblMajorID);
             this.Controls.Add(this.txbMajorName);
-            this.Controls.Add(this.txbSmallID);
-            this.Controls.Add(this.lblMajorClassificationName);
+            this.Controls.Add(this.lblMajorName);
             this.Controls.Add(this.txbMajorID);
-            this.Controls.Add(this.rdbSmallUpdate);
-            this.Controls.Add(this.rdbSmallRegister);
-            this.Controls.Add(this.rdbMajorUpdate);
-            this.Controls.Add(this.rdbMajorSearch);
-            this.Controls.Add(this.rdbSmallSearch);
-            this.Controls.Add(this.rdbMajorRegister);
+            this.Controls.Add(this.rdbUpdate);
+            this.Controls.Add(this.rdbSearch);
+            this.Controls.Add(this.rdbRegister);
             this.Controls.Add(this.pnlClassification);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "F_HonshaClassification";
@@ -573,20 +550,13 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lblClient;
         private System.Windows.Forms.Button btnReturn;
-        private System.Windows.Forms.RadioButton rdbSmallRegister;
-        private System.Windows.Forms.RadioButton rdbMajorUpdate;
-        private System.Windows.Forms.RadioButton rdbMajorSearch;
-        private System.Windows.Forms.RadioButton rdbSmallSearch;
-        private System.Windows.Forms.RadioButton rdbMajorRegister;
-        private System.Windows.Forms.RadioButton rdbSmallUpdate;
-        private System.Windows.Forms.TextBox txbSmallName;
-        private System.Windows.Forms.Label lblSmallClassificationName;
+        private System.Windows.Forms.RadioButton rdbUpdate;
+        private System.Windows.Forms.RadioButton rdbSearch;
+        private System.Windows.Forms.RadioButton rdbRegister;
         private System.Windows.Forms.TextBox txbMajorName;
-        private System.Windows.Forms.TextBox txbSmallID;
-        private System.Windows.Forms.Label lblMajorClassificationName;
+        private System.Windows.Forms.Label lblMajorName;
         private System.Windows.Forms.TextBox txbMajorID;
-        private System.Windows.Forms.Label lblSmallClassficationID;
-        private System.Windows.Forms.Label lblMajorClassificationID;
+        private System.Windows.Forms.Label lblMajorID;
         private System.Windows.Forms.Label lblHidden;
         private System.Windows.Forms.TextBox txbHidden;
         private System.Windows.Forms.Label lblButuryuHidden;
@@ -605,5 +575,10 @@
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPageMax;
+        private System.Windows.Forms.ComboBox cmbClassfication;
+        private System.Windows.Forms.Label lblISmallD;
+        private System.Windows.Forms.TextBox txbSmallName;
+        private System.Windows.Forms.Label lblSmallName;
+        private System.Windows.Forms.TextBox txbSmallID;
     }
 }

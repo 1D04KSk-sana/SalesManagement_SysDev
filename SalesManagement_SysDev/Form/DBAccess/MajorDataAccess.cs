@@ -212,9 +212,13 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.M_MajorClassifications.AsQueryable();
 
-                if (selectMajor.McID != null && selectMajor.McID != 0)
+                if ( selectMajor.McID != 0)
                 {
                     query = query.Where(x => x.McID == selectMajor.McID);
+                }
+                if (selectMajor.McName == null)
+                {
+                    query = query.Where(x => x.McName == selectMajor.McName);
                 }
 
                 listMajor = query.ToList();
@@ -239,7 +243,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listMajor = context.M_MajorClassifications.Where(x => x.McID == selectMajor.McID ).ToList();
+                listMajor = context.M_MajorClassifications.Where(x => x.McID == selectMajor.McID && x.McName == selectMajor.McName).ToList();
 
                 context.Dispose();
             }

@@ -276,7 +276,7 @@
             this.pnlHonsha.Location = new System.Drawing.Point(-8, -14);
             this.pnlHonsha.Margin = new System.Windows.Forms.Padding(2);
             this.pnlHonsha.Name = "pnlHonsha";
-            this.pnlHonsha.Size = new System.Drawing.Size(1920, 150);
+            this.pnlHonsha.Size = new System.Drawing.Size(1929, 150);
             this.pnlHonsha.TabIndex = 95;
             // 
             // pctHint

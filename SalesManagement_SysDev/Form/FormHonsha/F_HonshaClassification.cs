@@ -71,43 +71,49 @@ namespace SalesManagement_SysDev
             ClearImput();
 
 
-            rdbMajorRegister.Checked = true;
+            rdbRegister.Checked = true;
 
             GetDataGridView();
         }
 
         private void btnDone_Click(object sender, EventArgs e)
         {
-            //大分類登録ラヂオボタンがチェックされているとき
-            if (rdbMajorRegister.Checked)
+            if (cmbClassfication.SelectedIndex == 0)
             {
-                MajorDataRegister();
+                //大分類登録ラヂオボタンがチェックされているとき
+                if (rdbRegister.Checked)
+                {
+                    MajorDataRegister();
+                }
+                //大分類更新ラヂオボタンがチェックされているとき
+                if (rdbUpdate.Checked)
+                {
+                    MajorDataUpdate();
+                }
+                //大分類検索ラヂオボタンがチェックされているとき
+                if (rdbSearch.Checked)
+                {
+                    MajorDataSelect();
+                }
             }
-            //大分類更新ラヂオボタンがチェックされているとき
-            if (rdbMajorUpdate.Checked)
+            if (cmbClassfication.SelectedIndex == 1)
             {
-                MajorDataUpdate();
-            }
-            //大分類検索ラヂオボタンがチェックされているとき
-            if (rdbMajorSearch.Checked)
-            {
-                MajorDataSelect();
-            }
-            //小分類登録ラヂオボタンがチェックされているとき
-            if (rdbSmallRegister.Checked)
-            {
-                SmallDataRegister();
-            }
-            //小分類更新ラヂオボタンがチェックされているとき
-            if (rdbSmallUpdate.Checked)
-            {
-                SmallDataUpdate();
-            }
-            //小分類検索ラヂオボタンがチェックされているとき
-            if (rdbSmallSearch.Checked)
-            {
-                SmallDataSelect();
-            }
+                //小分類登録ラヂオボタンがチェックされているとき
+                if (rdbRegister.Checked)
+                {
+                    SmallDataRegister();
+                }
+                //小分類更新ラヂオボタンがチェックされているとき
+                if (rdbUpdate.Checked)
+                {
+                    SmallDataUpdate();
+                }
+                //小分類検索ラヂオボタンがチェックされているとき
+                if (rdbSearch.Checked)
+                {
+                    SmallDataSelect();
+                }
+            }            
         }
 
         private void btnReturn_Click(object sender, EventArgs e)
@@ -131,7 +137,7 @@ namespace SalesManagement_SysDev
         }
         private void F_HonshaClassification_Load(object sender, EventArgs e)
         {
-            rdbMajorRegister.Checked = true;
+            rdbRegister.Checked = true;
             
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
@@ -140,6 +146,8 @@ namespace SalesManagement_SysDev
 
             //cmbViewを表示に
             cmbView.SelectedIndex = 0;
+            //cmbClassficationViewを非表示に
+            cmbClassfication.SelectedIndex = 0;
         }
         private void btnPageMin_Click(object sender, EventArgs e)
         {
@@ -250,6 +258,12 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void MajorDataRegister()
         {
+            //テキストボックス等の入力チェック
+            if (!GetValidMDataAtRegistration())
+            {
+                return;
+            }
+
             // 登録確認メッセージ
             DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
@@ -258,14 +272,8 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            //テキストボックス等の入力チェック
-            if (!GetValidMDataAtRegistration())
-            {
-                return;
-            }
-
             //操作ログデータ取得
-            var regOperationLog = GenerateMLogAtRegistration(rdbMajorRegister.Text);
+            var regOperationLog = GenerateMLogAtRegistration(rdbRegister.Text);
 
             //操作ログデータの登録（成功 = true,失敗 = false）
             if (!operationLogAccess.AddOperationLogData(regOperationLog))
@@ -287,6 +295,12 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SmallDataRegister()
         {
+            //テキストボックス等の入力チェック
+            if (!GetValidSDataAtRegistration())
+            {
+                return;
+            }
+
             // 登録確認メッセージ
             DialogResult result = MessageBox.Show("登録しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
@@ -295,14 +309,8 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            //テキストボックス等の入力チェック
-            if (!GetValidSDataAtRegistration())
-            {
-                return;
-            }
-
             //操作ログデータ取得
-            var regOperationLog = GenerateSLogAtRegistration(rdbMajorRegister.Text);
+            var regOperationLog = GenerateSLogAtRegistration(rdbRegister.Text);
 
             //操作ログデータの登録（成功 = true,失敗 = false）
             if (!operationLogAccess.AddOperationLogData(regOperationLog))
@@ -377,12 +385,10 @@ namespace SalesManagement_SysDev
         //機　能   ：登録データのセット
         ///////////////////////////////
         private M_MajorClassification GenerateMDataAtRegistration()
-
         {
             return new M_MajorClassification
             {
-                McID = int.Parse(txbMajorID.Text.Trim()),
-                McName = string.Format(txbMajorName.Text.Trim()),
+                McName = txbMajorName.Text.Trim(),
                 McFlag = cmbHidden.SelectedIndex,
                 McHidden = txbHidden.Text.Trim(),
             };
@@ -394,12 +400,16 @@ namespace SalesManagement_SysDev
         //機　能   ：登録データのセット
         ///////////////////////////////
         private M_SmallClassification GenerateSDataAtRegistration()
-
         {
+            List<M_SmallClassification> listSmallClassfication = smallDataAccess.GetSmallIDData(int.Parse(txbMajorID.Text.Trim()));
+
+            int intSmallIDCount = listSmallClassfication.Count();
+
             return new M_SmallClassification
             {
-                ScID = int.Parse(txbSmallID.Text.Trim()),
-                ScName = string.Format(txbSmallName.Text.Trim()),
+                ScID = intSmallIDCount + 1,
+                McID = int.Parse(txbMajorID.Text.Trim()),
+                ScName = txbSmallName.Text.Trim(),
                 ScFlag = cmbHidden.SelectedIndex,
                 ScHidden = txbHidden.Text.Trim(),
             };
@@ -414,31 +424,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidMDataAtRegistration()
         {
-            // 大分類IDの適否
-            if (!String.IsNullOrEmpty(txbMajorID.Text.Trim()))
-            {
-                // 大分類IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbMajorID.Text.Trim()))
-                {
-                    MessageBox.Show("大分類IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMajorID.Focus();
-                    return false;
-                }
-                //大分類IDの重複チェック
-                if (majorDataAccess.CheckMajorIDExistence(int.Parse(txbMajorID.Text.Trim())))
-                {
-                    MessageBox.Show("大分類IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMajorID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("大分類IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbMajorID.Focus();
-                return false;
-            }
-
             // 大分類名の適否
             if (!String.IsNullOrEmpty(txbMajorName.Text.Trim()))
             {
@@ -484,31 +469,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidSDataAtRegistration()
         {
-            // 小分類IDの適否
-            if (!String.IsNullOrEmpty(txbSmallID.Text.Trim()))
-            {
-                // 小分類IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbSmallID.Text.Trim()))
-                {
-                    MessageBox.Show("小分類IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSmallID.Focus();
-                    return false;
-                }
-                //小分類IDの重複チェック
-                if (smallDataAccess.CheckSmallIDExistence(int.Parse(txbSmallID.Text.Trim())))
-                {
-                    MessageBox.Show("小分類IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSmallID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("小分類IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbSmallID.Focus();
-                return false;
-            }
-
             // 小分類名の適否
             if (!String.IsNullOrEmpty(txbSmallName.Text.Trim()))
             {
@@ -576,7 +536,7 @@ namespace SalesManagement_SysDev
                 EmID = F_Login.intEmployeeID,
                 FormName = "分類管理画面",
                 OpDone = OperationDone,
-                OpDBID = int.Parse(txbSmallID.Text.Trim()),
+                OpDBID = int.Parse(txbMajorID.Text.Trim()),
                 OpSetTime = DateTime.Now,
             };
         }
@@ -626,7 +586,7 @@ namespace SalesManagement_SysDev
             List<M_MajorClassification> listViewMajor = new List<M_MajorClassification>();
 
             //検索ラヂオボタンがチェックされているとき
-            if (rdbMajorSearch.Checked)
+            if (rdbSearch.Checked)
             {
                 //表示している（検索結果）のデータをとってくる
                 listViewMajor = listMajor;
@@ -666,7 +626,7 @@ namespace SalesManagement_SysDev
             List<M_SmallClassification> listViewSmall = new List<M_SmallClassification>();
 
             //検索ラヂオボタンがチェックされているとき
-            if (rdbMajorSearch.Checked)
+            if (rdbSearch.Checked)
             {
                 //表示している（検索結果）のデータをとってくる
                 listViewSmall = listSmall;
@@ -705,6 +665,23 @@ namespace SalesManagement_SysDev
                 return;
             }
 
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateSLogAtRegistration(rdbUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
+            {
+                return;
+            }
+
             // 大分類情報作成
             var updMajor = GenerateMDataAtUpdate();
 
@@ -721,6 +698,23 @@ namespace SalesManagement_SysDev
         {
             //テキストボックス等の入力チェック
             if (!GetValidSDataAtUpdate())
+            {
+                return;
+            }
+
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            //操作ログデータ取得
+            var regOperationLog = GenerateSLogAtRegistration(rdbUpdate.Text);
+
+            //操作ログデータの登録（成功 = true,失敗 = false）
+            if (!operationLogAccess.AddOperationLogData(regOperationLog))
             {
                 return;
             }
@@ -754,7 +748,7 @@ namespace SalesManagement_SysDev
                 //大分類IDの存在チェック
                 if (!majorDataAccess.CheckMajorIDExistence(int.Parse(txbMajorID.Text.Trim())))
                 {
-                    MessageBox.Show("大分類IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("大分類IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbMajorID.Focus();
                     return false;
                 }
@@ -882,7 +876,7 @@ namespace SalesManagement_SysDev
             return new M_MajorClassification
             {
                 McID = int.Parse(txbMajorID.Text.Trim()),
-                McName = string.Format(txbMajorName.Text.Trim()),
+                McName = txbMajorName.Text.Trim(),
                 McFlag = cmbHidden.SelectedIndex,
                 McHidden = txbHidden.Text.Trim(),
             };
@@ -911,23 +905,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void UpdateSmall(M_SmallClassification updSmall)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
-            //操作ログデータ取得
-            var regOperationLog = GenerateSLogAtRegistration(rdbSmallUpdate.Text);
-
-            //操作ログデータの登録（成功 = true,失敗 = false）
-            if (!operationLogAccess.AddOperationLogData(regOperationLog))
-            {
-                return;
-            }
-
             // 顧客情報の更新
             bool flg = smallDataAccess.UpdateSmallData(updSmall);
             if (flg == true)
@@ -953,23 +930,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void UpdateMajor(M_MajorClassification updMajor)
         {
-            // 更新確認メッセージ
-            DialogResult result = MessageBox.Show("更新しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Cancel)
-            {
-                return;
-            }
-
-            //操作ログデータ取得
-            var regOperationLog = GenerateMLogAtRegistration(rdbMajorUpdate.Text);
-
-            //操作ログデータの登録（成功 = true,失敗 = false）
-            if (!operationLogAccess.AddOperationLogData(regOperationLog))
-            {
-                return;
-            }
-
             // 大分類情報の更新
             bool flg = majorDataAccess.UpdateMajorData(updMajor);
             if (flg == true)
@@ -1187,6 +1147,7 @@ namespace SalesManagement_SysDev
             M_MajorClassification selectCondition = new M_MajorClassification()
             {
                 McID = intMajorID,
+                McName = txbMajorName.Text.Trim()
             };
 
             if (searchFlg)
@@ -1220,6 +1181,7 @@ namespace SalesManagement_SysDev
             M_SmallClassification selectCondition = new M_SmallClassification()
             {
                 ScID = intSmallID,
+                ScName = txbSmallName.Text.Trim()
             };
 
             if (searchFlg)
@@ -1317,8 +1279,8 @@ namespace SalesManagement_SysDev
         private void S_SelectRowControl()
         {
             //データグリッドビューに乗っている情報をGUIに反映
-            txbSmallID.Text = dgvSmall[0, dgvSmall.CurrentCellAddress.Y].Value.ToString();
-            txbSmallName.Text = dgvSmall[1, dgvSmall.CurrentCellAddress.Y].Value.ToString();
+            txbMajorID.Text = dgvSmall[0, dgvSmall.CurrentCellAddress.Y].Value.ToString();
+            txbMajorName.Text = dgvSmall[1, dgvSmall.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSmall[2, dgvSmall.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvSmall[3, dgvSmall.CurrentCellAddress.Y]?.Value?.ToString();
         }
