@@ -183,7 +183,7 @@ namespace SalesManagement_SysDev
         {
             return new T_Warehousing
             {
-                WaID = Hattyu.HaID,
+                WaID = warehousingDataAccess.WarehousingNum() + 1,
                 HaID = Hattyu.HaID,
                 EmID = F_Login.intEmployeeID,
                 WaShelfFlag = 0,
@@ -447,32 +447,6 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-
-            // 社員IDの適否
-            if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
-            {
-                //社員IDの存在チェック
-                if (!employeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
-                {
-                    MessageBox.Show("社員IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbEmployeeID.Focus();
-                    return false;
-                }
-                //社員IDが現在ログインしているIDと等しいかチェック
-                if (F_Login.intEmployeeID != int.Parse(txbEmployeeID.Text.Trim()))
-                {
-                    MessageBox.Show("自身の社員IDを入力してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbEmployeeID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("社員IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbEmployeeID.Focus();
-                return false;
-            }
-
             //表示選択の適否
             if (cmbHidden.SelectedIndex == -1)
             {
@@ -494,6 +468,7 @@ namespace SalesManagement_SysDev
         {
             return new T_Hattyu
             {
+                HaID = hattyuDataAccess.HattyuNum() + 1,
                 EmID = F_Login.intEmployeeID,
                 MaID = cmbMakerName.SelectedIndex + 1,
                 HaDate = dtpHattyuDate.Value,
@@ -1624,7 +1599,7 @@ namespace SalesManagement_SysDev
             {
                 cmbMakerName.Enabled = true;
                 cmbHidden.Enabled = true;
-                txbEmployeeID.Enabled = true;
+                txbEmployeeID.Enabled = false;
                 dtpHattyuDate.Enabled = true;
                 cmbConfirm.Enabled = true;
                 txbHidden.Enabled = false;

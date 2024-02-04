@@ -856,6 +856,7 @@ namespace SalesManagement_SysDev
             {
                 or.Add(new T_Order
                 {
+                    OrID = 1,
                     M_SalesOffice = so[0],
                     M_Employee = em[310],
                     M_Client = cl[1],
@@ -866,6 +867,7 @@ namespace SalesManagement_SysDev
                 });
                 or.Add(new T_Order
                 {
+                    OrID = 2,
                     M_SalesOffice = so[1],
                     M_Employee = em[116],
                     M_Client = cl[4],
@@ -925,6 +927,7 @@ namespace SalesManagement_SysDev
             {
                 ch.Add(new T_Chumon()
                 {
+                    ChID = 1,
                     M_SalesOffice = so[0],
                     M_Employee = em[1002],
                     M_Client = cl[1],
@@ -958,6 +961,7 @@ namespace SalesManagement_SysDev
             {
                 sy.Add(new T_Syukko()
                 {
+                    SyID = 1,
                     M_Employee = em[116],
                     M_Client = cl[1],
                     M_SalesOffice = so[0],
@@ -1017,6 +1021,7 @@ namespace SalesManagement_SysDev
             {
                 ha.Add(new T_Hattyu()
                 {
+                    HaID = 1,
                     M_Maker = ma[0],
                     M_Employee = em[310],
                     HaDate = new DateTime(2023, 11, 17),
@@ -1025,6 +1030,7 @@ namespace SalesManagement_SysDev
                 });
                 ha.Add(new T_Hattyu()
                 {
+                    HaID = 2,
                     M_Maker = ma[1],
                     M_Employee = em[116],
                     HaDate = new DateTime(2023, 11, 16),
@@ -1067,6 +1073,7 @@ namespace SalesManagement_SysDev
             {
                 wh.Add(new T_Warehousing()
                 {
+                    WaID = 1,
                     T_Hattyu = ha[0],
                     M_Employee = em[116],
                     WaDate = new DateTime(2023, 11, 16),
@@ -1096,6 +1103,7 @@ namespace SalesManagement_SysDev
             {
                 sh.Add(new T_Shipment()
                 {
+                    ShID = 1,
                     M_Employee = em[116],
                     M_SalesOffice = so[0],
                     M_Client = cl[1],
@@ -1110,6 +1118,7 @@ namespace SalesManagement_SysDev
             {
                 ar.Add(new T_Arrival()
                 {
+                    ArID = 1,
                     M_SalesOffice = so[0],
                     M_Employee = em[116],
                     M_Client = cl[1],
