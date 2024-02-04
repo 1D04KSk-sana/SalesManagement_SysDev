@@ -633,7 +633,7 @@ namespace SalesManagement_SysDev
         {
             M_Product Prodact = prodactDataAccess.GetIDProdactData(int.Parse(txbProductID.Text.Trim()));
 
-            List<T_HattyuDetail> listIDHattyuDetail = hattyuDetailDataAccess.GetHattyuDetailIDData(int.Parse(txbHattyuID.Text.Trim()));
+            List<T_HattyuDetail> listIDHattyuDetail = hattyuDetailDataAccess.GetIDHattyuDetailData(int.Parse(txbHattyuID.Text.Trim()));
 
             int intHattyuIDCount = listIDHattyuDetail.Count();
 
@@ -1062,6 +1062,16 @@ namespace SalesManagement_SysDev
                     txbHattyuID.Focus();
                     return false;
                 }
+
+                List<T_HattyuDetail> listHattyuDetail = hattyuDetailDataAccess.GetIDHattyuDetailData(int.Parse(txbHattyuID.Text.Trim()));
+
+                //発注IDの詳細登録チェック
+                if (listHattyuDetail.Count() == 0)
+                {
+                    MessageBox.Show("詳細が登録されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbHattyuID.Focus();
+                    return false;
+                }
             }
             else
             {
@@ -1070,13 +1080,7 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            //確定選択の適否
-            if (cmbConfirm.SelectedIndex == -1)
-            {
-                MessageBox.Show("未確定/確定が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                cmbConfirm.Focus();
-                return false;
-            }
+
 
             return true;
         }
@@ -1196,7 +1200,7 @@ namespace SalesManagement_SysDev
         {
             dgvHattyuDetail.Rows.Clear();
 
-            listHattyuDetail = hattyuDetailDataAccess.GetHattyuDetailIDData(intHattyuID);
+            listHattyuDetail = hattyuDetailDataAccess.GetIDHattyuDetailData(intHattyuID);
 
             //1行ずつdgvClientに挿入
             foreach (var item in listHattyuDetail)

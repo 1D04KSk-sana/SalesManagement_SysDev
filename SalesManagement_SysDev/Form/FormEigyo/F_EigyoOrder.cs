@@ -1017,6 +1017,16 @@ namespace SalesManagement_SysDev
                     txbOrderID.Focus();
                     return false;
                 }
+
+                List<T_OrderDetail> listOrderDetail = orderDetailDataAccess.GetOrderDetailIDData(int.Parse(txbOrderID.Text.Trim()));
+
+                //発注IDの詳細登録チェック
+                if (listOrderDetail.Count() == 0)
+                {
+                    MessageBox.Show("詳細が登録されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbOrderID.Focus();
+                    return false;
+                }
             }
             else
             {
