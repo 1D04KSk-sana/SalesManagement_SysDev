@@ -398,31 +398,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-            // 顧客IDの適否
-            if (!String.IsNullOrEmpty(txbClientID.Text.Trim()))
-            {
-                // 顧客IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbClientID.Text.Trim()))
-                {
-                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbClientID.Focus();
-                    return false;
-                }
-                //顧客IDの重複チェック
-                if (clientDataAccess.CheckClientIDExistence(int.Parse(txbClientID.Text.Trim())))
-                {
-                    MessageBox.Show("顧客IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbClientID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("顧客IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbClientID.Focus();
-                return false;
-            }
-
             // 顧客名の適否
             if (!String.IsNullOrEmpty(txbClientName.Text.Trim()))
             {
