@@ -185,7 +185,7 @@ namespace SalesManagement_SysDev
             {
                 WaID = warehousingDataAccess.WarehousingNum() + 1,
                 HaID = Hattyu.HaID,
-                EmID = F_Login.intEmployeeID,
+                EmID = null,
                 WaShelfFlag = 0,
                 WaFlag = 0,
             };

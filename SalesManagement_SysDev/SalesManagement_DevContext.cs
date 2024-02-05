@@ -363,7 +363,7 @@ namespace SalesManagement_SysDev
                     .HasForeignKey(x => x.HaID)
                     .WillCascadeOnDelete(false);
                 modelBuilder.Entity<T_Warehousing>()
-                    .HasRequired<M_Employee>(x => x.M_Employee)
+                    .HasOptional<M_Employee>(x => x.M_Employee)
                     .WithMany(x => x.T_Warehousing)
                     .HasForeignKey(x => x.EmID)
                     .WillCascadeOnDelete(false);

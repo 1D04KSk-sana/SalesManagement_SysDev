@@ -44,7 +44,7 @@ namespace SalesManagement_SysDev
         //データグリッドビュー用の大分類データ
         private static List<M_MajorClassification> listMajorID = new List<M_MajorClassification>();
         //データグリッドビュー用の小分類データ
-        private static List<M_SmallClassification> listSmallID = new List<M_SmallClassification>();
+        private static List<M_SmallClassification> listdgvSmallID = new List<M_SmallClassification>();
         //コンボボックス用の小分類データ
         private static List<M_SmallClassification> listSmallMajorID = new List<M_SmallClassification>();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
@@ -61,7 +61,7 @@ namespace SalesManagement_SysDev
         //DataGridView用に使用する大分類名のDictionary
         private Dictionary<int, string> dictionaryMajorID;
         //DataGridView用に使用する小分類名のDictionary
-        private Dictionary<int, string> dictionarySmallID;
+        private Dictionary<int, string> dictionarydgvSmallID;
         //DataGridView用に使用するメーカー名のDictionary
         private Dictionary<int, string> dictionaryMakerName;
         //DataGridView用に使用する商品のDictionary
@@ -274,16 +274,6 @@ namespace SalesManagement_SysDev
             foreach (var item in listMajorID)
             {
                 dictionaryMajorID.Add(item.McID, item.McName);
-            }
-
-            //小分類名のデータを取得
-            listSmallID = SmallDataAccess.GetSmallClassificationDspData();
-
-            dictionarySmallID = new Dictionary<int, string> { };
-
-            foreach (var item in listSmallID)
-            {
-                dictionarySmallID.Add(item.Id, item.ScName);
             }
 
             //メーカ名
@@ -1020,10 +1010,17 @@ namespace SalesManagement_SysDev
             //1行ずつdgvClientに挿入
             foreach (var item in depData)
             {
-                dgvProdact.Rows.Add(item.PrID, dictionaryMakerName[item.MaID],item.PrName, 
-                     item.Price,item.PrJCode, item.PrSafetyStock, dictionaryMajorID[item.McID], dictionarySmallID[item.ScID],
-                     item.PrModelNumber, item.PrColor, dictionaryHidden[item.PrFlag],
-                     item.PrReleaseDate, item.PrHidden);
+                //小分類名のデータを取得
+                listdgvSmallID = SmallDataAccess.GetSmallIDData(item.McID);
+
+                dictionarydgvSmallID = new Dictionary<int, string> { };
+
+                foreach (var items in listdgvSmallID)
+                {
+                    dictionarydgvSmallID.Add(items.ScID, items.ScName);
+                }
+
+                dgvProdact.Rows.Add(item.PrID, dictionaryMakerName[item.MaID],item.PrName, item.Price,item.PrJCode, item.PrSafetyStock, dictionaryMajorID[item.McID], dictionarydgvSmallID[item.ScID], item.PrModelNumber, item.PrColor, dictionaryHidden[item.PrFlag], item.PrReleaseDate, item.PrHidden);
             }
 
             //dgvClientをリフレッシュ
@@ -1175,6 +1172,16 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SelectRowControl()
         {
+            //小分類名のデータを取得
+            listdgvSmallID = SmallDataAccess.GetSmallIDData(int.Parse(dgvProdact[6, dgvProdact.CurrentCellAddress.Y].Value.ToString()));
+
+            dictionarydgvSmallID = new Dictionary<int, string> { };
+
+            foreach (var items in listdgvSmallID)
+            {
+                dictionarydgvSmallID.Add(items.ScID, items.ScName);
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbProdactID.Text = dgvProdact[0, dgvProdact.CurrentCellAddress.Y].Value.ToString();
             //cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvProdact[1, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key.Value - 1;
@@ -1183,7 +1190,7 @@ namespace SalesManagement_SysDev
             txbProdactPrice.Text = dgvProdact[3, dgvProdact.CurrentCellAddress.Y].Value.ToString();
             txbProdactSafetyStock.Text = dgvProdact[5, dgvProdact.CurrentCellAddress.Y].Value.ToString();
             cmbMajorID.SelectedIndex = dictionaryMajorID.FirstOrDefault(x => x.Value == dgvProdact[6, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key -1;
-            cmbSmallID.SelectedIndex = dictionarySmallID.FirstOrDefault(x => x.Value == dgvProdact[7, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key -1;
+            cmbSmallID.SelectedIndex = dictionarydgvSmallID.FirstOrDefault(x => x.Value == dgvProdact[7, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key -1;
             txbModelNumber.Text = dgvProdact[8, dgvProdact.CurrentCellAddress.Y].Value.ToString();
             txbProdactColor.Text = dgvProdact[9, dgvProdact.CurrentCellAddress.Y].Value.ToString();
             dtpProdactReleaseDate.Text = dgvProdact[11, dgvProdact.CurrentCellAddress.Y].Value.ToString();

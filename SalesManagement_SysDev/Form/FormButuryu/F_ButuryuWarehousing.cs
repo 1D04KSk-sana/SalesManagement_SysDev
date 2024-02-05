@@ -248,7 +248,14 @@ namespace SalesManagement_SysDev
             //1行ずつdgvWarehousingに挿入
             foreach (var item in depData)
             {
-                dgvWarehousing.Rows.Add(item.WaID, dictionaryEmployee[item.EmID], item.HaID, item.WaDate, dictionaryHidden[item.WaFlag], dictionaryConfirm[item.WaShelfFlag], item.WaHidden);
+                string strEmployeeName = "";
+
+                if (item.EmID != null)
+                {
+                    strEmployeeName = dictionaryEmployee[item.EmID.Value];
+                }
+
+                dgvWarehousing.Rows.Add(item.WaID, strEmployeeName, item.HaID, item.WaDate, dictionaryHidden[item.WaFlag], dictionaryConfirm[item.WaShelfFlag], item.WaHidden);
             }
 
             //dgvWarehousingをリフレッシュ

@@ -21,7 +21,7 @@ namespace SalesManagement_SysDev
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int WaID { get; set; }               //入庫ID	
         public int HaID { get; set; }               //発注ID	
-        public int EmID { get; set; }               //社員ID
+        public int? EmID { get; set; }               //社員ID
         [DataType(DataType.Date)]
         [Column(TypeName = "date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
