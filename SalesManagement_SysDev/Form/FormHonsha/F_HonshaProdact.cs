@@ -1173,7 +1173,7 @@ namespace SalesManagement_SysDev
         private void SelectRowControl()
         {
             //小分類名のデータを取得
-            listdgvSmallID = SmallDataAccess.GetSmallIDData(int.Parse(dgvProdact[6, dgvProdact.CurrentCellAddress.Y].Value.ToString()));
+            listdgvSmallID = SmallDataAccess.GetSmallIDData(dictionaryMajorID.FirstOrDefault(x => x.Value == dgvProdact[6, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key);
 
             dictionarydgvSmallID = new Dictionary<int, string> { };
 
