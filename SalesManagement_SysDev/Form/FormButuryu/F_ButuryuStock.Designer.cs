@@ -54,6 +54,7 @@
             this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.rdbUpdate = new System.Windows.Forms.RadioButton();
             this.rdbHattyuten = new System.Windows.Forms.RadioButton();
+            this.btnProdactView = new System.Windows.Forms.Button();
             this.pnlButuryu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStock)).BeginInit();
@@ -383,6 +384,19 @@
             this.rdbHattyuten.UseVisualStyleBackColor = true;
             this.rdbHattyuten.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
+            // btnProdactView
+            // 
+            this.btnProdactView.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.btnProdactView.Location = new System.Drawing.Point(1587, 319);
+            this.btnProdactView.Margin = new System.Windows.Forms.Padding(2);
+            this.btnProdactView.Name = "btnProdactView";
+            this.btnProdactView.Size = new System.Drawing.Size(204, 43);
+            this.btnProdactView.TabIndex = 132;
+            this.btnProdactView.TabStop = false;
+            this.btnProdactView.Text = "商品一覧";
+            this.btnProdactView.UseVisualStyleBackColor = true;
+            this.btnProdactView.Click += new System.EventHandler(this.btnProdactView_Click);
+            // 
             // F_ButuryuStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -390,6 +404,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.btnProdactView);
             this.Controls.Add(this.rdbHattyuten);
             this.Controls.Add(this.rdbUpdate);
             this.Controls.Add(this.rdbSearch);
@@ -455,5 +470,6 @@
         private System.Windows.Forms.PictureBox pctHint;
         private System.Windows.Forms.RadioButton rdbUpdate;
         private System.Windows.Forms.RadioButton rdbHattyuten;
+        private System.Windows.Forms.Button btnProdactView;
     }
 }

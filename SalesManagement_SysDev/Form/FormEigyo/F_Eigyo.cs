@@ -80,7 +80,7 @@ namespace SalesManagement_SysDev
         {
             if (F_Login.intPositionID == 1)
             {
-                btnLogOut.Text = "閉じる";
+                btnLogOut.Text = "戻る";
             }
             else
             {

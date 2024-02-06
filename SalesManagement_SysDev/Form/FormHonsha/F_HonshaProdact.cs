@@ -320,7 +320,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtSearch()
         {
             //検索条件の存在確認
-            if (String.IsNullOrEmpty(txbProdactID.Text.Trim()) && cmbMajorID.SelectedIndex == -1 && cmbMakerName.SelectedIndex == -1 && cmbSmallID.SelectedIndex == -1)
+            if (String.IsNullOrEmpty(txbProdactID.Text.Trim()) && cmbMajorID.SelectedIndex == -1 && cmbMakerName.SelectedIndex == -1 && cmbSmallID.SelectedIndex == -1 && dtpProdactReleaseDate.Checked == false)
             {
                 MessageBox.Show("検索条件が未入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbProdactID.Focus();
@@ -1284,6 +1284,13 @@ namespace SalesManagement_SysDev
                 intProdactID = int.Parse(strProdactID);
             }
 
+            DateTime? dateProdact = null;
+
+            if (dtpProdactReleaseDate.Checked)
+            {
+                dateProdact = dtpProdactReleaseDate.Value.Date;
+            }
+
             // 検索条件のセット
             M_Product selectCondition = new M_Product()
             {
@@ -1291,6 +1298,7 @@ namespace SalesManagement_SysDev
                 McID = cmbMajorID.SelectedIndex + 1,
                 ScID = cmbSmallID.SelectedIndex + 1,
                 MaID = cmbMakerName.SelectedIndex + 1,
+                PrReleaseDate = dateProdact.Value,
                 //テキストボックス = txbxxxxxx.Text.Trim()
             };
 

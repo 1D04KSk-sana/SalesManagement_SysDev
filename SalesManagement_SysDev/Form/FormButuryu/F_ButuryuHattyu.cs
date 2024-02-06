@@ -1661,5 +1661,16 @@ namespace SalesManagement_SysDev
                 UseShellExecute = true
             });
         }
+
+        private void btnProdactView_Click(object sender, EventArgs e)
+        {
+            ProdactView prodactView = new ProdactView();
+
+            prodactView.Owner = this;
+            prodactView.FormClosed += ChildForm_FormClosed;
+            prodactView.Show();
+
+            this.Opacity = 0;
+        }
     }
 }

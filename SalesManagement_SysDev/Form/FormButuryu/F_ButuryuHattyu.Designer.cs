@@ -76,6 +76,7 @@
             this.txbEmployeeName = new System.Windows.Forms.TextBox();
             this.lblEmployeeName = new System.Windows.Forms.Label();
             this.dgvStock = new System.Windows.Forms.DataGridView();
+            this.btnProdactView = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHattyuDetail)).BeginInit();
             this.pnlHonsha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
@@ -484,7 +485,7 @@
             // txbHattyuQuantity
             // 
             this.txbHattyuQuantity.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbHattyuQuantity.Location = new System.Drawing.Point(1587, 412);
+            this.txbHattyuQuantity.Location = new System.Drawing.Point(1592, 382);
             this.txbHattyuQuantity.Margin = new System.Windows.Forms.Padding(2);
             this.txbHattyuQuantity.Name = "txbHattyuQuantity";
             this.txbHattyuQuantity.ShortcutsEnabled = false;
@@ -495,7 +496,7 @@
             // 
             this.txbProductName.Enabled = false;
             this.txbProductName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProductName.Location = new System.Drawing.Point(1587, 359);
+            this.txbProductName.Location = new System.Drawing.Point(1592, 329);
             this.txbProductName.Margin = new System.Windows.Forms.Padding(2);
             this.txbProductName.Name = "txbProductName";
             this.txbProductName.ReadOnly = true;
@@ -506,7 +507,7 @@
             // txbProductID
             // 
             this.txbProductID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbProductID.Location = new System.Drawing.Point(1587, 305);
+            this.txbProductID.Location = new System.Drawing.Point(1592, 275);
             this.txbProductID.Margin = new System.Windows.Forms.Padding(2);
             this.txbProductID.Name = "txbProductID";
             this.txbProductID.ShortcutsEnabled = false;
@@ -519,7 +520,7 @@
             // 
             this.lbltxbHattyuQuentity.AutoSize = true;
             this.lbltxbHattyuQuentity.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lbltxbHattyuQuentity.Location = new System.Drawing.Point(1486, 415);
+            this.lbltxbHattyuQuentity.Location = new System.Drawing.Point(1491, 385);
             this.lbltxbHattyuQuentity.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbltxbHattyuQuentity.Name = "lbltxbHattyuQuentity";
             this.lbltxbHattyuQuentity.Size = new System.Drawing.Size(58, 24);
@@ -530,7 +531,7 @@
             // 
             this.lblProductName.AutoSize = true;
             this.lblProductName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProductName.Location = new System.Drawing.Point(1462, 362);
+            this.lblProductName.Location = new System.Drawing.Point(1467, 332);
             this.lblProductName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProductName.Name = "lblProductName";
             this.lblProductName.Size = new System.Drawing.Size(82, 24);
@@ -541,7 +542,7 @@
             // 
             this.lblProductID.AutoSize = true;
             this.lblProductID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProductID.Location = new System.Drawing.Point(1464, 305);
+            this.lblProductID.Location = new System.Drawing.Point(1469, 275);
             this.lblProductID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProductID.Name = "lblProductID";
             this.lblProductID.Size = new System.Drawing.Size(80, 24);
@@ -671,6 +672,19 @@
             this.dgvStock.TabIndex = 130;
             this.dgvStock.TabStop = false;
             // 
+            // btnProdactView
+            // 
+            this.btnProdactView.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.btnProdactView.Location = new System.Drawing.Point(1608, 446);
+            this.btnProdactView.Margin = new System.Windows.Forms.Padding(2);
+            this.btnProdactView.Name = "btnProdactView";
+            this.btnProdactView.Size = new System.Drawing.Size(204, 43);
+            this.btnProdactView.TabIndex = 131;
+            this.btnProdactView.TabStop = false;
+            this.btnProdactView.Text = "商品一覧";
+            this.btnProdactView.UseVisualStyleBackColor = true;
+            this.btnProdactView.Click += new System.EventHandler(this.btnProdactView_Click);
+            // 
             // F_ButuryuHattyu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -678,6 +692,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(214)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBox = false;
+            this.Controls.Add(this.btnProdactView);
             this.Controls.Add(this.dgvStock);
             this.Controls.Add(this.txbEmployeeName);
             this.Controls.Add(this.lblEmployeeName);
@@ -789,5 +804,6 @@
         private System.Windows.Forms.Label lblEmployeeName;
         private System.Windows.Forms.PictureBox pctHint;
         private System.Windows.Forms.DataGridView dgvStock;
+        private System.Windows.Forms.Button btnProdactView;
     }
 }

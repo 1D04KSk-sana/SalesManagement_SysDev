@@ -165,6 +165,10 @@ namespace SalesManagement_SysDev
                 {
                     query = query.Where(x => x.ScID == selectProdact.ScID);
                 }
+                if (selectProdact.PrReleaseDate != null)
+                {
+                    query = query.Where(x => x.PrReleaseDate == selectProdact.PrReleaseDate);
+                }
 
 
                 listProdact = query.ToList();
@@ -190,7 +194,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listProdact = context.M_Products.Where(x => x.PrID == selectProdact.PrID || x.McID == selectProdact.McID || x.ScID == selectProdact.ScID || x.MaID == selectProdact.MaID).ToList();
+                listProdact = context.M_Products.Where(x => x.PrID == selectProdact.PrID || x.McID == selectProdact.McID || x.ScID == selectProdact.ScID || x.MaID == selectProdact.MaID || x.PrReleaseDate == selectProdact.PrReleaseDate).ToList();
 
                 context.Dispose();
             }
