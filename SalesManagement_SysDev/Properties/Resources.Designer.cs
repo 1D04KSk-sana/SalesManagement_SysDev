@@ -63,6 +63,16 @@ namespace SalesManagement_SysDev.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
+        internal static System.Drawing.Bitmap Loading {
+            get {
+                object obj = ResourceManager.GetObject("Loading", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
         internal static System.Drawing.Bitmap PassEye {
             get {
                 object obj = ResourceManager.GetObject("PassEye", resourceCulture);

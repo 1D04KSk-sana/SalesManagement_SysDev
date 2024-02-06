@@ -17,11 +17,9 @@ namespace SalesManagement_SysDev
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            F_Login loginForm = new F_Login();
+            F_Load.ShowSplash();
 
-            F_Load.ShowSplash(loginForm);
-
-            Application.Run(loginForm);
+            Application.Run(new F_Login());
         }
     }
 }
