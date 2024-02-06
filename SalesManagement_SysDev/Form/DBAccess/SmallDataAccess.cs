@@ -199,6 +199,45 @@ namespace SalesManagement_SysDev
             }
         }
         ///////////////////////////////
+        //メソッド名：UpdateHiddenMakerData()
+        //引　数：大分類ID
+        //戻り値：True or False
+        //機　能：メーカーデータの非表示更新
+        //      ：更新成功の場合True
+        //      ：更新失敗の場合False
+        ///////////////////////////////
+        public bool UpdateHiddenMakerData(int MajorID)
+        {
+            List<M_SmallClassification> listSmall = new List<M_SmallClassification>();
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                
+                listSmall = context.M_SmallClassifications.Where(x => x.McID == MajorID).ToList();
+
+                int smallcount = listSmall.Count();
+
+                for (int i = 1; i <= smallcount; i++)
+                {
+                    var Small = context.M_SmallClassifications.Single(x => x.McID == MajorID && x.ScID == i);
+
+                    Small.ScFlag = 1;
+
+                    context.SaveChanges();
+                }
+
+                context.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+        ///////////////////////////////
         //メソッド名：GetAndMakerData()
         //引　数：検索条件
         //戻り値：条件完全一致メーカーデータ

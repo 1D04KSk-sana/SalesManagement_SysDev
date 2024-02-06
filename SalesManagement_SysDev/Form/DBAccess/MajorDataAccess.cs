@@ -254,5 +254,31 @@ namespace SalesManagement_SysDev
 
             return listMajor;
         }
+        ///////////////////////////////
+        //メソッド名：GetMajorNameData()
+        //引　数：大分類名
+        //戻り値：大分類ID
+        //機　能：大分類の取得
+        ///////////////////////////////
+        public int GetMajorNameData(string MajorName)
+        {
+            int intMajorID = 0;
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Major = context.M_MajorClassifications.Single(x => x.McName == MajorName);
+
+                intMajorID = Major.McID;
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return intMajorID;
+        }
     }
 }

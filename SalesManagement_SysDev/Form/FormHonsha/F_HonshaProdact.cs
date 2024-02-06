@@ -44,7 +44,7 @@ namespace SalesManagement_SysDev
         //データグリッドビュー用の大分類データ
         private static List<M_MajorClassification> listMajorID = new List<M_MajorClassification>();
         //データグリッドビュー用の小分類データ
-        private static List<M_SmallClassification> listdgvSmallID = new List<M_SmallClassification>();
+        private static List<M_SmallClassification> listDGVSmallID = new List<M_SmallClassification>();
         //コンボボックス用の小分類データ
         private static List<M_SmallClassification> listSmallMajorID = new List<M_SmallClassification>();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
@@ -58,6 +58,9 @@ namespace SalesManagement_SysDev
         //フォームを呼び出しする際のインスタンス化
         private F_SearchDialog f_SearchDialog = new F_SearchDialog();
 
+        //データグリッドビュー用の大分類データリスト
+        private static List<M_MajorClassification> listDGVMajorID = new List<M_MajorClassification>();
+
         //DataGridView用に使用する大分類名のDictionary
         private Dictionary<int, string> dictionaryMajorID;
         //DataGridView用に使用する小分類名のDictionary
@@ -66,8 +69,6 @@ namespace SalesManagement_SysDev
         private Dictionary<int, string> dictionaryMakerName;
         //DataGridView用に使用する商品のDictionary
         private Dictionary<int, string> dictionaryProdact;
-        //CombBox用に使用する小分類のDictionary
-        private Dictionary<int, string> dicTionarySmallMajorID;
 
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
@@ -99,12 +100,12 @@ namespace SalesManagement_SysDev
 
             //大分類のデータを取得
             listMajorID = MajorDataAccess.GetMajorClassificationDspData();
-            //取得したデータをコンボボックスに挿入
-            cmbMajorID.DataSource = listMajorID;
             //表示する名前をMaNameに指定
             cmbMajorID.DisplayMember = "McName";
             //項目の順番をMaIDに指定
             cmbMajorID.ValueMember = "McID";
+            //取得したデータをコンボボックスに挿入
+            cmbMajorID.DataSource = listMajorID;
             //cmbMakerNameを未選択に
             cmbMajorID.SelectedIndex = -1;
 
@@ -269,12 +270,18 @@ namespace SalesManagement_SysDev
             //大分類名のデータを取得
             listMajorID = MajorDataAccess.GetMajorClassificationDspData();
 
+            //データグリッドビュー用の大分類のデータを取得
+            listDGVMajorID = MajorDataAccess.GetMajorData();
+
             dictionaryMajorID = new Dictionary<int, string> { };
 
-            foreach (var item in listMajorID)
+            foreach (var item in listDGVMajorID)
             {
                 dictionaryMajorID.Add(item.McID, item.McName);
             }
+
+            //データグリッドビュー用の小分類のデータを取得
+            listDGVSmallID = SmallDataAccess.GetSmallData();
 
             //メーカ名
             listMaker = MakerDataAccess.GetMakerDspData();
@@ -1011,11 +1018,11 @@ namespace SalesManagement_SysDev
             foreach (var item in depData)
             {
                 //小分類名のデータを取得
-                listdgvSmallID = SmallDataAccess.GetSmallIDData(item.McID);
+                listSmallMajorID = SmallDataAccess.GetSmallIDData(item.McID);
 
                 dictionarydgvSmallID = new Dictionary<int, string> { };
 
-                foreach (var items in listdgvSmallID)
+                foreach (var items in listSmallMajorID)
                 {
                     dictionarydgvSmallID.Add(items.ScID, items.ScName);
                 }
@@ -1173,13 +1180,53 @@ namespace SalesManagement_SysDev
         private void SelectRowControl()
         {
             //小分類名のデータを取得
-            listdgvSmallID = SmallDataAccess.GetSmallIDData(dictionaryMajorID.FirstOrDefault(x => x.Value == dgvProdact[6, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key);
+            listSmallMajorID = SmallDataAccess.GetSmallIDData(dictionaryMajorID.FirstOrDefault(x => x.Value == dgvProdact[6, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key);
 
             dictionarydgvSmallID = new Dictionary<int, string> { };
 
-            foreach (var items in listdgvSmallID)
+            foreach (var items in listSmallMajorID)
             {
                 dictionarydgvSmallID.Add(items.ScID, items.ScName);
+            }
+
+            bool cmbMflg = false;
+            int intMajorID = dictionaryMajorID.FirstOrDefault(x => x.Value == dgvProdact[6, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key;
+
+            foreach (var item in listMajorID)
+            {
+                if (intMajorID == item.McID)
+                {
+                    cmbMflg = true;
+                }
+            }
+
+            if (cmbMflg)
+            {
+                cmbMajorID.SelectedValue = intMajorID;
+            }
+            else
+            {
+                cmbMajorID.SelectedIndex = -1;
+            }
+
+            bool cmbSflg = false;
+            int intSmallID = dictionarydgvSmallID.FirstOrDefault(x => x.Value == dgvProdact[7, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key;
+
+            foreach (var item in listSmallMajorID)
+            {
+                if (intSmallID == item.ScID)
+                {
+                    cmbSflg = true;
+                }
+            }
+
+            if (cmbSflg)
+            {
+                cmbSmallID.SelectedValue = intSmallID;
+            }
+            else
+            {
+                cmbSmallID.SelectedIndex = -1;
             }
 
             //データグリッドビューに乗っている情報をGUIに反映
@@ -1189,8 +1236,6 @@ namespace SalesManagement_SysDev
             txbProdactName.Text = dgvProdact[2, dgvProdact.CurrentCellAddress.Y].Value.ToString();
             txbProdactPrice.Text = dgvProdact[3, dgvProdact.CurrentCellAddress.Y].Value.ToString();
             txbProdactSafetyStock.Text = dgvProdact[5, dgvProdact.CurrentCellAddress.Y].Value.ToString();
-            cmbMajorID.SelectedIndex = dictionaryMajorID.FirstOrDefault(x => x.Value == dgvProdact[6, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key -1;
-            cmbSmallID.SelectedIndex = dictionarydgvSmallID.FirstOrDefault(x => x.Value == dgvProdact[7, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key -1;
             txbModelNumber.Text = dgvProdact[8, dgvProdact.CurrentCellAddress.Y].Value.ToString();
             txbProdactColor.Text = dgvProdact[9, dgvProdact.CurrentCellAddress.Y].Value.ToString();
             dtpProdactReleaseDate.Text = dgvProdact[11, dgvProdact.CurrentCellAddress.Y].Value.ToString();
@@ -1348,15 +1393,27 @@ namespace SalesManagement_SysDev
 
         private void cmbMajorID_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //小分類名のデータを取得
-            listSmallMajorID = SmallDataAccess.GetSmallIDData(cmbMajorID.SelectedIndex + 1);
+            if (cmbMajorID.SelectedIndex == -1)
+            {
+                if (cmbSmallID.Items.Count != 0)
+                {
+                    cmbSmallID.DataSource = null;
+                }
 
-            //取得したデータをコンボボックスに挿入
-            cmbSmallID.DataSource = listSmallMajorID;
+                return;
+            }
+
+            int intSmallID = MajorDataAccess.GetMajorNameData(cmbMajorID.Text);
+
+            //小分類名のデータを取得
+            listSmallMajorID = SmallDataAccess.GetSmallIDData(intSmallID);
+
             //表示する名前をScNameに指定
             cmbSmallID.DisplayMember = "ScName";
             //項目の順番をScIDに指定
             cmbSmallID.ValueMember = "ScID";
+            //取得したデータをコンボボックスに挿入
+            cmbSmallID.DataSource = listSmallMajorID;
             //cmbMakerNameを未選択に
             cmbSmallID.SelectedIndex = -1;
         }

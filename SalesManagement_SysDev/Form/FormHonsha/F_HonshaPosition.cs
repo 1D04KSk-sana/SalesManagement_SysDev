@@ -584,12 +584,12 @@ namespace SalesManagement_SysDev
                     return false;
                 }
                 //役職名存在チェック
-                if (positionDataAccess.CheckPositionNameExistence(txbPositionName.Text.Trim()))
-                {
-                    MessageBox.Show("役職名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbPositionName.Focus();
-                    return false;
-                }
+                //if (positionDataAccess.CheckPositionNameExistence(txbPositionName.Text.Trim()))
+                //{
+                //    MessageBox.Show("役職名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //    txbPositionName.Focus();
+                //    return false;
+                //}
             }
             else
             {
@@ -604,16 +604,6 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("表示選択が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbHidden.Focus();
                 return false;
-            }
-            else if (cmbHidden.SelectedIndex == 1)
-            {
-                //社員テーブルにおける役職IDの存在チェック
-                if (employeeDataAccess.CheckEmployeePositonIDExistence(int.Parse(txbPositionID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された役職IDが社員テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbPositionID.Focus();
-                    return false;
-                }
             }
 
             return true;
@@ -877,6 +867,18 @@ namespace SalesManagement_SysDev
                 txbHidden.Enabled = true;
                 cmbHidden.Enabled = true;
             }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("本当に閉じますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+            Application.Exit();
         }
     }
 }

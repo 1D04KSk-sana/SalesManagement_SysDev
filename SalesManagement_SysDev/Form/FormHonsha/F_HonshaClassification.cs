@@ -770,13 +770,13 @@ namespace SalesManagement_SysDev
                     txbMajorName.Focus();
                     return false;
                 }
-                //大分類名存在チェック
-                if (majorDataAccess.CheckMajorNameExistence(string.Format(txbMajorName.Text.Trim())))
-                {
-                    MessageBox.Show("大分類名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMajorName.Focus();
-                    return false;
-                }
+                ////大分類名存在チェック
+                //if (majorDataAccess.CheckMajorNameExistence(string.Format(txbMajorName.Text.Trim())))
+                //{
+                //    MessageBox.Show("大分類名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //    txbMajorName.Focus();
+                //    return false;
+                //}
             }
             else
             {
@@ -840,13 +840,13 @@ namespace SalesManagement_SysDev
                     txbSmallName.Focus();
                     return false;
                 }
-                //小分類名存在チェック
-                if (smallDataAccess.CheckSmallNameExistence(string.Format(txbSmallName.Text.Trim())))
-                {
-                    MessageBox.Show("小分類名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSmallName.Focus();
-                    return false;
-                }
+                ////小分類名存在チェック
+                //if (smallDataAccess.CheckSmallNameExistence(string.Format(txbSmallName.Text.Trim())))
+                //{
+                //    MessageBox.Show("小分類名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //    txbSmallName.Focus();
+                //    return false;
+                //}
             }
             else
             {
@@ -932,6 +932,27 @@ namespace SalesManagement_SysDev
         {
             // 大分類情報の更新
             bool flg = majorDataAccess.UpdateMajorData(updMajor);
+
+            List<bool> listflg = new List<bool>();
+
+            if (updMajor.McFlag == 1)
+            {
+                List<M_SmallClassification> listSmall = smallDataAccess.GetSmallIDData(updMajor.McID);
+
+                foreach (var item in  listSmall)
+                {
+                    listflg.Add(smallDataAccess.UpdateHiddenMakerData(item.ScID));
+                }
+
+                foreach (var item in listflg)
+                {
+                    if (!item)
+                    {
+                        flg = false;
+                    }
+                }
+            }
+
             if (flg == true)
             {
                 MessageBox.Show("更新しました。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information);
