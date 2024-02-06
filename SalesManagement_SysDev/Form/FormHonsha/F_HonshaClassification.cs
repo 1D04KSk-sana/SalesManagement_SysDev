@@ -1313,8 +1313,8 @@ namespace SalesManagement_SysDev
         private void S_SelectRowControl()
         {
             //データグリッドビューに乗っている情報をGUIに反映
-            txbMajorID.Text = dgvSmall[0, dgvSmall.CurrentCellAddress.Y].Value.ToString();
-            txbMajorName.Text = dgvSmall[1, dgvSmall.CurrentCellAddress.Y].Value.ToString();
+            txbSmallID.Text = dgvSmall[0, dgvSmall.CurrentCellAddress.Y].Value.ToString();
+            txbSmallName.Text = dgvSmall[1, dgvSmall.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSmall[2, dgvSmall.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvSmall[3, dgvSmall.CurrentCellAddress.Y]?.Value?.ToString();
         }
