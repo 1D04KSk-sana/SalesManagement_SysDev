@@ -137,5 +137,14 @@ namespace SalesManagement_SysDev
 
             this.Opacity = 0;
         }
+
+        private void btnPassChange_Click(object sender, EventArgs e)
+        {
+            F_PassChange f_PassChange = new F_PassChange();
+
+            f_PassChange.Owner = this;
+            f_PassChange.FormClosed += ChildForm_FormClosed;
+            f_PassChange.Show();
+        }
     }
 }

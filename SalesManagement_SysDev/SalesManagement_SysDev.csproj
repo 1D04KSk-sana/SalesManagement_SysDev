@@ -212,6 +212,12 @@
     <Compile Include="Form\FormHonsha\F_HonshaMaster.Designer.cs">
       <DependentUpon>F_HonshaMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\F_PassChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\F_PassChange.Designer.cs">
+      <DependentUpon>F_PassChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="MonthPicker.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -352,6 +358,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\FormHonsha\F_HonshaClient.resx">
       <DependentUpon>F_HonshaClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\F_PassChange.resx">
+      <DependentUpon>F_PassChange.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\F_SearchDialog.resx">
       <DependentUpon>F_SearchDialog.cs</DependentUpon>
