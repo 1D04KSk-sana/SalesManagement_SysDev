@@ -32,7 +32,7 @@ namespace SalesManagement_SysDev
             return listSmall;
         }
         ///////////////////////////////
-        //メソッド名：GetSmallData()
+        //メソッド名：GetSmallListData()
         //引　数：なし
         //戻り値：大分類データ
         //機　能：大分類データの全取得
@@ -53,6 +53,29 @@ namespace SalesManagement_SysDev
             }
 
             return listSmall;
+        }
+        ///////////////////////////////
+        //メソッド名：GetSmallIDData()
+        //引　数：小分類ID
+        //戻り値：小分類データ
+        //機　能：小分類データの全取得
+        ///////////////////////////////
+        public M_SmallClassification GetSmallIDData(int smallID)
+        {
+            M_SmallClassification Small = null;
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                Small = context.M_SmallClassifications.Single(x => x.ScID == smallID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Small;
         }
         ///////////////////////////////
         //メソッド名：GetSmallDspData()　　※オーバーロード
@@ -299,7 +322,7 @@ namespace SalesManagement_SysDev
         //戻り値：受注詳細データ
         //機　能：受注詳細データの全取得
         ///////////////////////////////
-        public List<M_SmallClassification> GetSmallIDData(int MajorID)
+        public List<M_SmallClassification> GetMajorIDData(int MajorID)
         {
             List<M_SmallClassification> listSmall = new List<M_SmallClassification>();
 

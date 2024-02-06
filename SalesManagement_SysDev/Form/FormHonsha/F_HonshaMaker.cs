@@ -719,13 +719,19 @@ namespace SalesManagement_SysDev
                     txbMakerName.Focus();
                     return false;
                 }
-                ////メーカー名存在チェック
-                //if (makerDataAccess.CheckMakerNameExistence(txbMakerName.Text.Trim()))
-                //{
-                //    MessageBox.Show("メーカー名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    txbMakerID.Focus();
-                //    return false;
-                //}
+
+                M_Maker Maker = makerDataAccess.GetMakerIDData(int.Parse(txbMakerID.Text.Trim()));
+
+                //メーカー名がDBとは異なる場合
+                if (Maker.MaName != txbMakerName.Text.Trim())
+                {
+                    if (makerDataAccess.CheckMakerNameExistence(txbMakerName.Text.Trim()))
+                    {
+                        MessageBox.Show("メーカー名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txbMakerName.Focus();
+                        return false;
+                    }
+                }
             }
             else
             {

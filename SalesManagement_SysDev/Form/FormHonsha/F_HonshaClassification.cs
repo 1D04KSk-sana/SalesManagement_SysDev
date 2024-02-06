@@ -55,7 +55,7 @@ namespace SalesManagement_SysDev
 
             dgvSmall.Rows.Clear();
 
-            listSmall = smallDataAccess.GetSmallIDData(int.Parse(dgvMajor[0, dgvMajor.CurrentCellAddress.Y].Value.ToString()));
+            listSmall = smallDataAccess.GetMajorIDData(int.Parse(dgvMajor[0, dgvMajor.CurrentCellAddress.Y].Value.ToString()));
 
             //1行ずつdgvSmallに挿入
             foreach (var item in listSmall)
@@ -402,7 +402,7 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private M_SmallClassification GenerateSDataAtRegistration()
         {
-            List<M_SmallClassification> listSmallClassfication = smallDataAccess.GetSmallIDData(int.Parse(txbMajorID.Text.Trim()));
+            List<M_SmallClassification> listSmallClassfication = smallDataAccess.GetMajorIDData(int.Parse(txbMajorID.Text.Trim()));
 
             int intSmallIDCount = listSmallClassfication.Count();
 
@@ -771,13 +771,19 @@ namespace SalesManagement_SysDev
                     txbMajorName.Focus();
                     return false;
                 }
-                ////大分類名存在チェック
-                //if (majorDataAccess.CheckMajorNameExistence(string.Format(txbMajorName.Text.Trim())))
-                //{
-                //    MessageBox.Show("大分類名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    txbMajorName.Focus();
-                //    return false;
-                //}
+
+                M_MajorClassification Major = majorDataAccess.GetMajorIDData(int.Parse(txbMajorID.Text.Trim()));
+
+                //大分類名がDBとは異なる場合
+                if (Major.McName != txbMajorName.Text.Trim())
+                {
+                    if (majorDataAccess.CheckMajorNameExistence(txbMajorName.Text.Trim()))
+                    {
+                        MessageBox.Show("大分類名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txbMajorID.Focus();
+                        return false;
+                    }
+                }
             }
             else
             {
@@ -841,13 +847,19 @@ namespace SalesManagement_SysDev
                     txbSmallName.Focus();
                     return false;
                 }
-                ////小分類名存在チェック
-                //if (smallDataAccess.CheckSmallNameExistence(string.Format(txbSmallName.Text.Trim())))
-                //{
-                //    MessageBox.Show("小分類名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    txbSmallName.Focus();
-                //    return false;
-                //}
+
+                M_SmallClassification Small = smallDataAccess.GetSmallIDData(int.Parse(txbSmallID.Text.Trim()));
+
+                //小分類名がDBとは異なる場合
+                if (Small.ScName != txbSmallName.Text.Trim())
+                {
+                    if (smallDataAccess.CheckSmallNameExistence(txbSmallName.Text.Trim()))
+                    {
+                        MessageBox.Show("小分類名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txbSmallName.Focus();
+                        return false;
+                    }
+                }
             }
             else
             {
@@ -938,7 +950,7 @@ namespace SalesManagement_SysDev
 
             if (updMajor.McFlag == 1)
             {
-                List<M_SmallClassification> listSmall = smallDataAccess.GetSmallIDData(updMajor.McID);
+                List<M_SmallClassification> listSmall = smallDataAccess.GetMajorIDData(updMajor.McID);
 
                 foreach (var item in  listSmall)
                 {

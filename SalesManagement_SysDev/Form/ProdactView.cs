@@ -225,7 +225,7 @@ namespace SalesManagement_SysDev
             int intSmallID = MajorDataAccess.GetMajorNameData(cmbMajorID.Text);
 
             //小分類名のデータを取得
-            listSmallMajorID = SmallDataAccess.GetSmallIDData(intSmallID);
+            listSmallMajorID = SmallDataAccess.GetMajorIDData(intSmallID);
 
             //表示する名前をScNameに指定
             cmbSmallID.DisplayMember = "ScName";
@@ -480,7 +480,7 @@ namespace SalesManagement_SysDev
             foreach (var item in depData)
             {
                 //小分類名のデータを取得
-                listSmallMajorID = SmallDataAccess.GetSmallIDData(item.McID);
+                listSmallMajorID = SmallDataAccess.GetMajorIDData(item.McID);
 
                 dictionarydgvSmallID = new Dictionary<int, string> { };
 
@@ -549,7 +549,7 @@ namespace SalesManagement_SysDev
         private void SelectRowControl()
         {
             //小分類名のデータを取得
-            listSmallMajorID = SmallDataAccess.GetSmallIDData(dictionaryMajorID.FirstOrDefault(x => x.Value == dgvProdact[6, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key);
+            listSmallMajorID = SmallDataAccess.GetMajorIDData(dictionaryMajorID.FirstOrDefault(x => x.Value == dgvProdact[6, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key);
 
             dictionarydgvSmallID = new Dictionary<int, string> { };
 

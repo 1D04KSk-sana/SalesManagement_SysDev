@@ -32,6 +32,29 @@ namespace SalesManagement_SysDev
             return listSalesOffice;
         }
         ///////////////////////////////
+        //メソッド名：GetSalesOfficeIDData()
+        //引　数：営業所ID
+        //戻り値：営業所データ
+        //機　能：営業所データの全取得
+        ///////////////////////////////
+        public M_SalesOffice GetSalesOfficeIDData(int salesOfficeID)
+        {
+            M_SalesOffice SalesOffice = null;
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                SalesOffice = context.M_SalesOffices.Single(x => x.SoID == salesOfficeID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return SalesOffice;
+        }
+        ///////////////////////////////
         //メソッド名：CheckClientIDExistence()
         //引　数   ：営業所コード
         //戻り値   ：True or False

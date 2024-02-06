@@ -97,6 +97,29 @@ namespace SalesManagement_SysDev
             return listMajor;
         }
         ///////////////////////////////
+        //メソッド名：GetMajorIDData()
+        //引　数：大分類ID
+        //戻り値：大分類データ
+        //機　能：大分類データの全取得
+        ///////////////////////////////
+        public M_MajorClassification GetMajorIDData(int majorID)
+        {
+            M_MajorClassification Major = null;
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                Major = context.M_MajorClassifications.Single(x => x.McID == majorID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Major;
+        }
+        ///////////////////////////////
         //メソッド名：CheckMakerIDExistence()
         //引　数   ：メーカーコード
         //戻り値   ：True or False

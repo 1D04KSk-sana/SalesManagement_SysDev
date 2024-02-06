@@ -789,13 +789,18 @@ namespace SalesManagement_SysDev
                     txbSalesOfficeName.Focus();
                     return false;
                 }
-                ////営業所名存在チェック
-                //if (salesOfficeDataAccess.CheckSalesOfficeNameExistence(txbSalesOfficeName.Text.Trim()))
-                //{
-                //    MessageBox.Show("営業所名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    txbSalesOfficeID.Focus();
-                //    return false;
-                //}
+
+                M_SalesOffice SalesOffice = salesOfficeDataAccess.GetSalesOfficeIDData(int.Parse(txbSalesOfficeID.Text.Trim()));
+
+                if (SalesOffice.SoName == txbSalesOfficeName.Text.Trim())
+                {
+                    if (salesOfficeDataAccess.CheckSalesOfficeNameExistence(txbSalesOfficeName.Text.Trim()))
+                    {
+                        MessageBox.Show("営業所名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txbSalesOfficeName.Focus();
+                        return false;
+                    }
+                }
             }
             else
             {
