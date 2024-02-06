@@ -58,15 +58,8 @@ namespace SalesManagement_SysDev
         //データベースメーカーテーブルアクセス用クラスのインスタンス化
         MakerDataAccess MakerDataAccess = new MakerDataAccess();
 
-
-
-
-
-
-
-
-
-
+        //データグリッドビュー用のメーカーデータリスト
+        private static List<M_Maker> listDGVMakerID = new List<M_Maker>();
 
         public F_ButuryuHattyu()
         {
@@ -145,9 +138,12 @@ namespace SalesManagement_SysDev
             //メーカー名のデータを取得
             listMaker = makerDataAccess.GetMakerDspData();
 
+            //データグリッドビュー用のメーカーのデータを取得
+            listDGVMakerID = MakerDataAccess.GetMakerData();
+
             dictionaryMaker = new Dictionary<int, string> { };
 
-            foreach (var item in listMaker)
+            foreach (var item in listDGVMakerID)
             {
                 dictionaryMaker.Add(item.MaID, item.MaName);
             }
@@ -1248,9 +1244,28 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SelectRowControl()
         {
+            bool cmbMakerflg = false;
+            int intMakerID = dictionaryMaker.FirstOrDefault(x => x.Value == dgvHattyu[1, dgvHattyu.CurrentCellAddress.Y].Value.ToString()).Key;
+
+            foreach (var item in listDGVMakerID)
+            {
+                if (intMakerID == item.MaID)
+                {
+                    cmbMakerflg = true;
+                }
+            }
+
+            if (cmbMakerflg)
+            {
+                cmbMakerName.SelectedValue = intMakerID;
+            }
+            else
+            {
+                cmbMakerName.SelectedIndex = -1;
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbHattyuID.Text = dgvHattyu[0, dgvHattyu.CurrentCellAddress.Y].Value.ToString();
-            cmbMakerName.SelectedIndex = dictionaryMaker.FirstOrDefault(x => x.Value == dgvHattyu[1, dgvHattyu.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvHattyu[2, dgvHattyu.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             dtpHattyuDate.Text = dgvHattyu[3, dgvHattyu.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvHattyu[4, dgvHattyu.CurrentCellAddress.Y].Value.ToString()).Key;

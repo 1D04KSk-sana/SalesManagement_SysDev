@@ -56,6 +56,8 @@ namespace SalesManagement_SysDev
 
         //データグリッドビュー用の役員データリスト
         private static List<M_Position> listDGVPosition = new List<M_Position>();
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_SalesOffice> listDGVSalesOfficeID = new List<M_SalesOffice>();
 
         //DataGridView用に使用する営業所のDictionary
         private Dictionary<int, string> dictionarySalesOffice;
@@ -272,9 +274,12 @@ namespace SalesManagement_SysDev
             //営業所のデータを取得
             listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
 
+            //データグリッドビュー用の営業所のデータを取得
+            listDGVSalesOfficeID = salesOfficeDataAccess.GetSalesOfficeData();
+
             dictionarySalesOffice = new Dictionary<int, string> { };
 
-            foreach (var item in listSalesOffice)
+            foreach (var item in listDGVSalesOfficeID)
             {
                 dictionarySalesOffice.Add(item.SoID, item.SoName);
             }
@@ -815,9 +820,28 @@ namespace SalesManagement_SysDev
                 cmbPositionName.SelectedIndex = -1;
             }
 
+            bool cmbEmployeeflg = false;
+            int intEmployeeID = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvEmployee[1, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key;
+
+            foreach (var item in listDGVSalesOfficeID)
+            {
+                if (intEmployeeID == item.SoID)
+                {
+                    cmbEmployeeflg = true;
+                }
+            }
+
+            if (cmbEmployeeflg)
+            {
+                cmbSalesOfficeID.SelectedValue = intEmployeeID;
+            }
+            else
+            {
+                cmbSalesOfficeID.SelectedIndex = -1;
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbEmployeeID.Text = dgvEmployee[0, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
-            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvEmployee[1, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbEmployeeName.Text = dgvEmployee[2, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
             txbEmployeePhone.Text = dgvEmployee[3, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvEmployee[4, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key;

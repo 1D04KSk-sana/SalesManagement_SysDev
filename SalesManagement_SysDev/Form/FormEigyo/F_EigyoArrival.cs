@@ -62,6 +62,8 @@ namespace SalesManagement_SysDev
         //DataGridView用に使用す商品のDictionary
         private Dictionary<int, string> dictionaryProdact;
 
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_SalesOffice> listDGVSalesOfficeID = new List<M_SalesOffice>();
 
         public F_EigyoArrival()
         {
@@ -138,9 +140,12 @@ namespace SalesManagement_SysDev
             //営業所のデータを取得
             listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
 
+            //データグリッドビュー用の営業所のデータを取得
+            listDGVSalesOfficeID = salesOfficeDataAccess.GetSalesOfficeData();
+
             dictionarySalesOffice = new Dictionary<int, string> { };
 
-            foreach (var item in listSalesOffice)
+            foreach (var item in listDGVSalesOfficeID)
             {
                 dictionarySalesOffice.Add(item.SoID, item.SoName);
             }
@@ -509,9 +514,28 @@ namespace SalesManagement_SysDev
                 dtpArrivalDate.Text = arrivalDate.ToString();
             }
 
+            bool cmbflg = false;
+            int intSalesOfficeID = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvArrival[1, dgvArrival.CurrentCellAddress.Y].Value.ToString()).Key;
+
+            foreach (var item in listDGVSalesOfficeID)
+            {
+                if (intSalesOfficeID == item.SoID)
+                {
+                    cmbflg = true;
+                }
+            }
+
+            if (cmbflg)
+            {
+                cmbSalesOfficeID.SelectedValue = intSalesOfficeID;
+            }
+            else
+            {
+                cmbSalesOfficeID.SelectedIndex = -1;
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbArrivalID.Text = dgvArrival[0, dgvArrival.CurrentCellAddress.Y].Value.ToString();
-            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvArrival[1, dgvArrival.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvArrival[2, dgvArrival.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvArrival[3, dgvArrival.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbOrderID.Text = dgvArrival[4, dgvArrival.CurrentCellAddress.Y].Value.ToString();

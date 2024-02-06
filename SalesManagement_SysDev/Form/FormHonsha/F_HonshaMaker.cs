@@ -718,13 +718,13 @@ namespace SalesManagement_SysDev
                     txbMakerName.Focus();
                     return false;
                 }
-                //メーカー名存在チェック
-                if (makerDataAccess.CheckMakerNameExistence(txbMakerName.Text.Trim()))
-                {
-                    MessageBox.Show("メーカー名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMakerID.Focus();
-                    return false;
-                }
+                ////メーカー名存在チェック
+                //if (makerDataAccess.CheckMakerNameExistence(txbMakerName.Text.Trim()))
+                //{
+                //    MessageBox.Show("メーカー名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //    txbMakerID.Focus();
+                //    return false;
+                //}
             }
             else
             {
@@ -819,23 +819,6 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("表示非表示が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbHidden.Focus();
                 return false;
-            }
-            else if (cmbHidden.SelectedIndex == 1)
-            {
-                //商品テーブルにおけるメーカーIDの存在チェック
-                if (prodactDataAccess.CheckProdactMakerIDExistence(int.Parse(txbMakerID.Text.Trim())))
-                {
-                    MessageBox.Show("指定されたメーカーIDが商品テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMakerID.Focus();
-                    return false;
-                }
-                //発注テーブルにおけるメーカーIDの存在チェック
-                if (hattyuDataAccess.CheckHattyuMakerIDExistence(int.Parse(txbMakerID.Text.Trim())))
-                {
-                    MessageBox.Show("指定されたメーカーIDが発注テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMakerID.Focus();
-                    return false;
-                }
             }
 
             return true;

@@ -789,13 +789,13 @@ namespace SalesManagement_SysDev
                     txbSalesOfficeName.Focus();
                     return false;
                 }
-                //営業所名存在チェック
-                if (salesOfficeDataAccess.CheckSalesOfficeNameExistence(txbSalesOfficeName.Text.Trim()))
-                {
-                    MessageBox.Show("営業所名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
+                ////営業所名存在チェック
+                //if (salesOfficeDataAccess.CheckSalesOfficeNameExistence(txbSalesOfficeName.Text.Trim()))
+                //{
+                //    MessageBox.Show("営業所名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //    txbSalesOfficeID.Focus();
+                //    return false;
+                //}
             }
             else
             {
@@ -890,65 +890,6 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("表示選択が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbHidden.Focus();
                 return false;
-            }
-            else if (cmbHidden.SelectedIndex == 1)
-            {
-                //顧客テーブルにおける営業所IDの存在チェック
-                if (clientDataAccess.CheckClientSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された営業所IDが顧客テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
-                //社員テーブルにおける営業所IDの存在チェック
-                if (employeeDataAccess.CheckEmployeeSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された営業所IDが社員テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
-                //受注テーブルにおける営業所IDの存在チェック
-                if (orderDataAccess.CheckOrderSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された営業所IDが受注テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
-                //注文テーブルにおける営業所IDの存在チェック
-                if (chumonDataAccess.CheckChumonSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された営業所IDが注文テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
-                //出庫テーブルにおける営業所IDの存在チェック
-                if (syukkoDataAccess.CheckSyukkoSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された営業所IDが出庫テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
-                //入荷テーブルにおける営業所IDの存在チェック
-                if (arrivalDataAccess.CheckArrivalSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された営業所IDが入荷テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
-                //出荷テーブルにおける営業所IDの存在チェック
-                if (shipmentDataAccess.CheckShipmenttSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された営業所IDが出荷テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
-                //売上テーブルにおける営業所IDの存在チェック
-                if (saleDataAccess.CheckSaleSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された営業所IDが売上テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
             }
 
             return true;

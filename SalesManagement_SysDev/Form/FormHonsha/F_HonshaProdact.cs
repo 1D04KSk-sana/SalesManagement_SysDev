@@ -60,6 +60,8 @@ namespace SalesManagement_SysDev
 
         //データグリッドビュー用の大分類データリスト
         private static List<M_MajorClassification> listDGVMajorID = new List<M_MajorClassification>();
+        //データグリッドビュー用のメーカーデータリスト
+        private static List<M_Maker> listDGVMakerID = new List<M_Maker>();
 
         //DataGridView用に使用する大分類名のDictionary
         private Dictionary<int, string> dictionaryMajorID;
@@ -286,9 +288,12 @@ namespace SalesManagement_SysDev
             //メーカ名
             listMaker = MakerDataAccess.GetMakerDspData();
 
+            //データグリッドビュー用のメーカーのデータを取得
+            listDGVMakerID = MakerDataAccess.GetMakerData();
+
             dictionaryMakerName = new Dictionary<int, string> { };
 
-            foreach (var item in listMaker)
+            foreach (var item in listDGVMakerID)
             {
                 dictionaryMakerName.Add(item.MaID, item.MaName);
             }
@@ -1229,10 +1234,29 @@ namespace SalesManagement_SysDev
                 cmbSmallID.SelectedIndex = -1;
             }
 
+            bool cmbMakerflg = false;
+            int intMakerID = dictionaryMakerName.FirstOrDefault(x => x.Value == dgvProdact[1, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key;
+
+            foreach(var item in listDGVMakerID)
+            {
+                if (intMakerID == item.MaID)
+                {
+                    cmbMakerflg = true;
+                }
+            }
+
+            if (cmbMakerflg)
+            {
+                cmbMakerName.SelectedValue = intMakerID;
+            }
+            else
+            {
+                cmbMakerName.SelectedIndex = -1;
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbProdactID.Text = dgvProdact[0, dgvProdact.CurrentCellAddress.Y].Value.ToString();
             //cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvProdact[1, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key.Value - 1;
-            cmbMakerName.SelectedIndex = dictionaryMakerName.FirstOrDefault(x => x.Value == dgvProdact[1, dgvProdact.CurrentCellAddress.Y].Value.ToString()).Key -1;
             txbProdactName.Text = dgvProdact[2, dgvProdact.CurrentCellAddress.Y].Value.ToString();
             txbProdactPrice.Text = dgvProdact[3, dgvProdact.CurrentCellAddress.Y].Value.ToString();
             txbProdactSafetyStock.Text = dgvProdact[5, dgvProdact.CurrentCellAddress.Y].Value.ToString();
