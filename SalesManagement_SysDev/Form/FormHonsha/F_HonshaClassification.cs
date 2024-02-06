@@ -60,7 +60,7 @@ namespace SalesManagement_SysDev
             //1行ずつdgvSmallに挿入
             foreach (var item in listSmall)
             {
-                dgvSmall.Rows.Add(item.ScID, item.ScName, item.ScFlag, item.ScHidden);
+                dgvSmall.Rows.Add(item.ScID, item.ScName, dictionaryHidden[item.ScFlag], item.ScHidden);
             }
 
             //dgvSmallをリフレッシュ

@@ -1004,6 +1004,7 @@ namespace SalesManagement_SysDev
             {
                 sa.Add(new T_Sale()
                 {
+                    SaID = 1,
                     M_Employee = em[116],
                     M_Client = cl[1],
                     T_Chumon = ch[0],
