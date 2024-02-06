@@ -91,6 +91,7 @@
             this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pctHint.TabIndex = 34;
             this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
             // 
             // btnClose
             // 

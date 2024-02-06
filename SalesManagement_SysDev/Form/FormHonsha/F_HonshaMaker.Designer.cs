@@ -66,14 +66,17 @@ namespace SalesManagement_SysDev
             this.btnBack = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPageMax = new System.Windows.Forms.Button();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.pnlSelect.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMaker)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(255)))), ((int)(((byte)(112)))));
+            this.panel1.Controls.Add(this.pctHint);
             this.panel1.Controls.Add(this.lblMaker);
             this.panel1.Controls.Add(this.btnClose);
             this.panel1.Controls.Add(this.btnReturn);
@@ -510,6 +513,17 @@ namespace SalesManagement_SysDev
             this.btnPageMax.UseVisualStyleBackColor = true;
             this.btnPageMax.Click += new System.EventHandler(this.btnPageMax_Click);
             // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1617, 37);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 35;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            // 
             // F_HonshaMaker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -557,6 +571,7 @@ namespace SalesManagement_SysDev
             this.pnlSelect.ResumeLayout(false);
             this.pnlSelect.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMaker)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -601,5 +616,6 @@ namespace SalesManagement_SysDev
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPageMax;
+        private System.Windows.Forms.PictureBox pctHint;
     }
 }

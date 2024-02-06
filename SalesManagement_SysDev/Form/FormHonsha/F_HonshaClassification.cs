@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -1389,6 +1390,15 @@ namespace SalesManagement_SysDev
             {
                 dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+        }
+
+        private void pctHint_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://docs.google.com/document/d/1Z3YrjQt_mtU7ZRFNzO-mtclnj1IlsH01",
+                UseShellExecute = true
+            });
         }
     }
 }
