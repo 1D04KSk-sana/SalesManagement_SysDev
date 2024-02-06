@@ -294,6 +294,8 @@ namespace SalesManagement_SysDev
             //データからページに必要な部分だけを取り出す
             var depData = viewArrival.Skip(pageSize * pageNum).Take(pageSize).ToList();
 
+            depData.Reverse();
+
             //1行ずつdgvArrivalに挿入
             foreach (var item in depData)
             {

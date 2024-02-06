@@ -183,6 +183,8 @@ namespace SalesManagement_SysDev
             //データからページに必要な部分だけを取り出す
             var depData = viewLog.Skip(pageSize * pageNum).Take(pageSize).ToList();
 
+            depData.Reverse();
+
             //1行ずつdgvOperationLogに挿入
             foreach (var item in depData)
             {

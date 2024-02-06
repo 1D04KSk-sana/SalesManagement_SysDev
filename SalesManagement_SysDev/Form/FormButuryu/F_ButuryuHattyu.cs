@@ -315,6 +315,8 @@ namespace SalesManagement_SysDev
             //データからページに必要な部分だけを取り出す
             var depData = viewHattyu.Skip(pageSize * pageNum).Take(pageSize).ToList();
 
+            depData.Reverse();
+
             //1行ずつdgvHattyuに挿入
             foreach (var item in depData)
             {
