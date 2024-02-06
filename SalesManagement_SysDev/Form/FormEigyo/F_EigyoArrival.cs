@@ -416,7 +416,8 @@ namespace SalesManagement_SysDev
             dgvArrival.Columns["ArStateFlag"].Width = 161;
             dgvArrival.Columns["ArHidden"].Width = 265;
 
-
+            dgvArrival.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(96)))), ((int)(((byte)(54)))));
+            dgvArrival.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvArrival.Columns)

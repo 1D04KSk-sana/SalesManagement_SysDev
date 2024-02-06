@@ -1023,6 +1023,8 @@ namespace SalesManagement_SysDev
             dgvClient.Columns["ClFlag"].Width = 170;
             dgvClient.Columns["ClHidden"].Width = 337;
 
+            dgvClient.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(131)))), ((int)(((byte)(69)))));
+            dgvClient.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvClient.Columns)

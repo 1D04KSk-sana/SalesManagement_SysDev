@@ -972,6 +972,9 @@ namespace SalesManagement_SysDev
             dgvEmployee.Columns["EmHiredate"].Width = 200;
             dgvEmployee.Columns["EmHidden"].Width = 500;
 
+            dgvEmployee.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(131)))), ((int)(((byte)(69)))));
+            dgvEmployee.DefaultCellStyle.SelectionForeColor = Color.White;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvEmployee.Columns)
             {

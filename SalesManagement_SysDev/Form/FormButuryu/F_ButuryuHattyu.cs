@@ -1385,6 +1385,9 @@ namespace SalesManagement_SysDev
             dgvHattyu.Columns["WaWarehouseFlag"].Width = 160;
             dgvHattyu.Columns["HaHidden"].Width = 267;
 
+            dgvHattyu.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            dgvHattyu.DefaultCellStyle.SelectionForeColor = Color.White;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvHattyu.Columns)
             {
@@ -1423,6 +1426,8 @@ namespace SalesManagement_SysDev
             dgvHattyuDetail.Columns["PrID"].Width = 174;
             dgvHattyuDetail.Columns["HaQuantity"].Width = 175;
 
+            dgvHattyuDetail.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            dgvHattyuDetail.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvHattyuDetail.Columns)
@@ -1461,6 +1466,9 @@ namespace SalesManagement_SysDev
             dgvStock.Columns["PrName"].Width = 174;
             dgvStock.Columns["StQuantity"].Width = 174;
             dgvStock.Columns["PrSafetyStock"].Width = 175;
+
+            dgvStock.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            dgvStock.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvStock.Columns)

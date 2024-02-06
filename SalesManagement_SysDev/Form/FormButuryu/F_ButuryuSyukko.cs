@@ -952,6 +952,9 @@ namespace SalesManagement_SysDev
             dgvSyukko.Columns["SyFlag"].Width = 100;
             dgvSyukko.Columns["SyHidden"].Width = 163;
 
+            dgvSyukko.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            dgvSyukko.DefaultCellStyle.SelectionForeColor = Color.White;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvSyukko.Columns)
             {
@@ -990,6 +993,9 @@ namespace SalesManagement_SysDev
             dgvSyukkoDetail.Columns["SyID"].Width = 192;
             dgvSyukkoDetail.Columns["PrID"].Width = 192;
             dgvSyukkoDetail.Columns["SyQuantity"].Width = 191;
+
+            dgvSyukkoDetail.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            dgvSyukkoDetail.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvSyukkoDetail.Columns)

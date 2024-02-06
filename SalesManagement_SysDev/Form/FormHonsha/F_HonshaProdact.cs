@@ -1126,6 +1126,9 @@ namespace SalesManagement_SysDev
             dgvProdact.Columns["PrReleaseDate"].Width = 210;
             dgvProdact.Columns["PrHidden"].Width = 298;
 
+            dgvProdact.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(131)))), ((int)(((byte)(69)))));
+            dgvProdact.DefaultCellStyle.SelectionForeColor = Color.White;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvProdact.Columns)
             {

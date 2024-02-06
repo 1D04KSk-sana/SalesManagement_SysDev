@@ -1432,6 +1432,9 @@ namespace SalesManagement_SysDev
             dgvOrder.Columns["OrFlag"].Width = 171;
             dgvOrder.Columns["OrHidden"].Width = 265;
 
+            dgvOrder.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(96)))), ((int)(((byte)(54)))));
+            dgvOrder.DefaultCellStyle.SelectionForeColor = Color.White;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvOrder.Columns)
             {
@@ -1471,6 +1474,9 @@ namespace SalesManagement_SysDev
             dgvOrderDetail.Columns["PrID"].Width = 139;
             dgvOrderDetail.Columns["OrQuantity"].Width = 139;
             dgvOrderDetail.Columns["OrTotalPrice"].Width = 139;
+
+            dgvOrderDetail.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(96)))), ((int)(((byte)(54)))));
+            dgvOrderDetail.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvOrderDetail.Columns)

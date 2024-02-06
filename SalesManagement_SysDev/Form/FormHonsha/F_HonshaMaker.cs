@@ -275,6 +275,9 @@ namespace SalesManagement_SysDev
             dgvMaker.Columns["MaFlag"].Width = 237;
             dgvMaker.Columns["MaHidden"].Width = 237;
 
+            dgvMaker.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(131)))), ((int)(((byte)(69)))));
+            dgvMaker.DefaultCellStyle.SelectionForeColor = Color.White;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvMaker.Columns)
             {

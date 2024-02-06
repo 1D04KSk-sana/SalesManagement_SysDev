@@ -336,6 +336,8 @@ namespace SalesManagement_SysDev
             dgvPosition.Columns["PoFlag"].Width = 500;
             dgvPosition.Columns["PoHidden"].Width = 900;
 
+            dgvPosition.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(131)))), ((int)(((byte)(69)))));
+            dgvPosition.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvPosition.Columns)

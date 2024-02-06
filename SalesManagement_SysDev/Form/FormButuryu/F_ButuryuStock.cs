@@ -711,6 +711,9 @@ namespace SalesManagement_SysDev
             dgvStock.Columns["StQuantity"].Width = 475;
             dgvStock.Columns["PrSafetyStock"].Width = 475;
 
+            dgvStock.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            dgvStock.DefaultCellStyle.SelectionForeColor = Color.White;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvStock.Columns)
             {

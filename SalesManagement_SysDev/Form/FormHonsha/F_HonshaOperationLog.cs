@@ -156,6 +156,9 @@ namespace SalesManagement_SysDev
             dgvOperationLog.Columns["OpDBID"].Width = 316;
             dgvOperationLog.Columns["OpSetTime"].Width = 320;
 
+            dgvOperationLog.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(131)))), ((int)(((byte)(69)))));
+            dgvOperationLog.DefaultCellStyle.SelectionForeColor = Color.White;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvOperationLog.Columns)
             {

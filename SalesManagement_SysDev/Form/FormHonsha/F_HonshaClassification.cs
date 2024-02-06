@@ -1358,6 +1358,8 @@ namespace SalesManagement_SysDev
             dgvMajor.Columns["McFlag"].Width = 225;
             dgvMajor.Columns["McHidden"].Width = 225;
 
+            dgvMajor.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(131)))), ((int)(((byte)(69)))));
+            dgvMajor.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvMajor.Columns)
@@ -1396,6 +1398,9 @@ namespace SalesManagement_SysDev
             dgvSmall.Columns["ScName"].Width = 225;
             dgvSmall.Columns["ScFlag"].Width = 225;
             dgvSmall.Columns["ScHidden"].Width = 225;
+
+            dgvSmall.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(131)))), ((int)(((byte)(69)))));
+            dgvSmall.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvSmall.Columns)

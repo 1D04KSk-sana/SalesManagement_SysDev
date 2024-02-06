@@ -320,6 +320,8 @@ namespace SalesManagement_SysDev
             dgvSale.Columns["SaFlag"].Width = 120;
             dgvSale.Columns["SaHidden"].Width = 280;
 
+            dgvSale.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(131)))), ((int)(((byte)(69)))));
+            dgvSale.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvSale.Columns)
@@ -360,7 +362,10 @@ namespace SalesManagement_SysDev
             dgvSaleDetail.Columns["PrID"].Width = 120;
             dgvSaleDetail.Columns["SaQuantity"].Width = 120;
             dgvSaleDetail.Columns["SaTotalPrice"].Width = 187;
-                        
+
+            dgvSaleDetail.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(131)))), ((int)(((byte)(69)))));
+            dgvSaleDetail.DefaultCellStyle.SelectionForeColor = Color.White;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvSaleDetail.Columns)
             {

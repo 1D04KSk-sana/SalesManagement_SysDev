@@ -747,6 +747,8 @@ namespace SalesManagement_SysDev
             dgvChumon.Columns["ChFlag"].Width = 200;
             dgvChumon.Columns["ChHidden"].Width = 200;
 
+            dgvChumon.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            dgvChumon.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvChumon.Columns)
@@ -784,7 +786,10 @@ namespace SalesManagement_SysDev
             dgvChumonDetail.Columns["ChID"].Width = 150;
             dgvChumonDetail.Columns["ChDetailID"].Width = 150;
             dgvChumonDetail.Columns["PrID"].Width = 150;
-            dgvChumonDetail.Columns["OrQuantity"].Width = 300;            
+            dgvChumonDetail.Columns["OrQuantity"].Width = 300;
+
+            dgvChumonDetail.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            dgvChumonDetail.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvChumonDetail.Columns)

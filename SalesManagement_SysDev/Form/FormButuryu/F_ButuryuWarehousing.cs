@@ -375,7 +375,8 @@ namespace SalesManagement_SysDev
             dgvWarehousing.Columns["WaShelfFlag"].Width = 160;
             dgvWarehousing.Columns["WaHidden"].Width = 265;
 
-
+            dgvWarehousing.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            dgvWarehousing.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvWarehousing.Columns)
@@ -415,6 +416,8 @@ namespace SalesManagement_SysDev
             dgvWarehousingDetail.Columns["PrID"].Width = 174;
             dgvWarehousingDetail.Columns["WaQuantity"].Width = 175;
 
+            dgvWarehousingDetail.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            dgvWarehousingDetail.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvWarehousingDetail.Columns)

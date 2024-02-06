@@ -992,6 +992,9 @@ namespace SalesManagement_SysDev
             dgvSalesOffice.Columns["SoFlag"].Width = 237;
             dgvSalesOffice.Columns["SoHidden"].Width = 237;
 
+            dgvSalesOffice.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(131)))), ((int)(((byte)(69)))));
+            dgvSalesOffice.DefaultCellStyle.SelectionForeColor = Color.White;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvSalesOffice.Columns)
             {

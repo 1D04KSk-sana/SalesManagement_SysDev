@@ -960,6 +960,9 @@ namespace SalesManagement_SysDev
             dgvShipment.Columns["ShFlag"].Width = 171;
             dgvShipment.Columns["ShHidden"].Width = 265;
 
+            dgvShipment.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(96)))), ((int)(((byte)(54)))));
+            dgvShipment.DefaultCellStyle.SelectionForeColor = Color.White;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvShipment.Columns)
             {
@@ -997,6 +1000,9 @@ namespace SalesManagement_SysDev
             dgvShipmentDetail.Columns["ShID"].Width = 174;
             dgvShipmentDetail.Columns["PrID"].Width = 174;
             dgvShipmentDetail.Columns["ShQuantity"].Width = 175;
+
+            dgvShipmentDetail.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(96)))), ((int)(((byte)(54)))));
+            dgvShipmentDetail.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvShipmentDetail.Columns)
