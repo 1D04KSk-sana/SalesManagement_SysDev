@@ -343,6 +343,7 @@
             // 
             this.cmbView.BackColor = System.Drawing.Color.White;
             this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbView.FormattingEnabled = true;
             this.cmbView.Items.AddRange(new object[] {
@@ -482,6 +483,7 @@
             // cmbConfirm
             // 
             this.cmbConfirm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbConfirm.FormattingEnabled = true;
             this.cmbConfirm.Items.AddRange(new object[] {
@@ -549,6 +551,7 @@
             // cmbSalesOfficeID
             // 
             this.cmbSalesOfficeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSalesOfficeID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSalesOfficeID.FormattingEnabled = true;
             this.cmbSalesOfficeID.Location = new System.Drawing.Point(856, 274);
@@ -607,6 +610,7 @@
             // cmbHidden
             // 
             this.cmbHidden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHidden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbHidden.ForeColor = System.Drawing.Color.Black;
             this.cmbHidden.FormattingEnabled = true;

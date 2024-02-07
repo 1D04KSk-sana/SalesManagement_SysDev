@@ -121,6 +121,7 @@
             // cmbView
             // 
             this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbView.FormattingEnabled = true;
             this.cmbView.Items.AddRange(new object[] {
@@ -246,6 +247,7 @@
             // cmbSalesOfficeID
             // 
             this.cmbSalesOfficeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSalesOfficeID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSalesOfficeID.FormattingEnabled = true;
             this.cmbSalesOfficeID.Location = new System.Drawing.Point(975, 290);
@@ -415,6 +417,7 @@
             // cmbHidden
             // 
             this.cmbHidden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHidden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbHidden.FormattingEnabled = true;
             this.cmbHidden.Items.AddRange(new object[] {

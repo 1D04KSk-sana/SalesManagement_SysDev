@@ -190,6 +190,7 @@ namespace SalesManagement_SysDev
             // cmbView
             // 
             this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 26F);
             this.cmbView.FormattingEnabled = true;
             this.cmbView.Items.AddRange(new object[] {
@@ -231,6 +232,7 @@ namespace SalesManagement_SysDev
             // cmbHidden
             // 
             this.cmbHidden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHidden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.cmbHidden.FormattingEnabled = true;
             this.cmbHidden.Items.AddRange(new object[] {

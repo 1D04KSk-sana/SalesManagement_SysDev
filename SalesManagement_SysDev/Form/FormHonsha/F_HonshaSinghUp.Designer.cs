@@ -127,6 +127,7 @@
             // cmbSalesOfficeID
             // 
             this.cmbSalesOfficeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSalesOfficeID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSalesOfficeID.FormattingEnabled = true;
             this.cmbSalesOfficeID.Items.AddRange(new object[] {
@@ -245,6 +246,7 @@
             // cmbPositionID
             // 
             this.cmbPositionID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPositionID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbPositionID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbPositionID.ForeColor = System.Drawing.Color.Black;
             this.cmbPositionID.FormattingEnabled = true;

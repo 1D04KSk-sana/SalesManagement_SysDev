@@ -128,6 +128,7 @@
             // cmbView
             // 
             this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 26F);
             this.cmbView.FormattingEnabled = true;
             this.cmbView.Items.AddRange(new object[] {
@@ -363,6 +364,7 @@
             // cmbHidden
             // 
             this.cmbHidden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHidden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbHidden.FormattingEnabled = true;
             this.cmbHidden.Items.AddRange(new object[] {
@@ -515,6 +517,7 @@
             // cmbMakerName
             // 
             this.cmbMakerName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMakerName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbMakerName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbMakerName.FormattingEnabled = true;
             this.cmbMakerName.Location = new System.Drawing.Point(146, 405);
@@ -526,6 +529,7 @@
             // cmbMajorID
             // 
             this.cmbMajorID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMajorID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbMajorID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbMajorID.FormattingEnabled = true;
             this.cmbMajorID.Items.AddRange(new object[] {
@@ -543,6 +547,7 @@
             // cmbSmallID
             // 
             this.cmbSmallID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSmallID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbSmallID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSmallID.FormattingEnabled = true;
             this.cmbSmallID.Location = new System.Drawing.Point(1643, 270);

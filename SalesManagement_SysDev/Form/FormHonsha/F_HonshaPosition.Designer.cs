@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.pnlHonsha = new System.Windows.Forms.Panel();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblPosition = new System.Windows.Forms.Label();
             this.btnReturn = new System.Windows.Forms.Button();
@@ -56,10 +57,9 @@
             this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.rdbUpdate = new System.Windows.Forms.RadioButton();
             this.rdbRegister = new System.Windows.Forms.RadioButton();
-            this.pctHint = new System.Windows.Forms.PictureBox();
             this.pnlHonsha.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPosition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPosition)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHonsha
@@ -74,6 +74,17 @@
             this.pnlHonsha.Name = "pnlHonsha";
             this.pnlHonsha.Size = new System.Drawing.Size(1927, 150);
             this.pnlHonsha.TabIndex = 23;
+            // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1610, 41);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 36;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
             // 
             // btnClose
             // 
@@ -327,6 +338,7 @@
             // 
             this.cmbView.BackColor = System.Drawing.Color.White;
             this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 26F);
             this.cmbView.FormattingEnabled = true;
             this.cmbView.Items.AddRange(new object[] {
@@ -343,6 +355,7 @@
             // 
             this.cmbHidden.BackColor = System.Drawing.Color.White;
             this.cmbHidden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHidden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F);
             this.cmbHidden.FormattingEnabled = true;
             this.cmbHidden.Items.AddRange(new object[] {
@@ -407,17 +420,6 @@
             this.rdbRegister.UseVisualStyleBackColor = true;
             this.rdbRegister.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
-            // pctHint
-            // 
-            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
-            this.pctHint.Location = new System.Drawing.Point(1610, 41);
-            this.pctHint.Name = "pctHint";
-            this.pctHint.Size = new System.Drawing.Size(60, 60);
-            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pctHint.TabIndex = 36;
-            this.pctHint.TabStop = false;
-            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
-            // 
             // F_HonshaPosition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -455,8 +457,8 @@
             this.Load += new System.EventHandler(this.F_HonshaPosition_Load);
             this.pnlHonsha.ResumeLayout(false);
             this.pnlHonsha.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPosition)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPosition)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
