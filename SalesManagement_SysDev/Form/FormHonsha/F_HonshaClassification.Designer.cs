@@ -300,7 +300,7 @@
             // 
             this.dgvMajor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMajor.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.dgvMajor.Location = new System.Drawing.Point(20, 491);
+            this.dgvMajor.Location = new System.Drawing.Point(47, 491);
             this.dgvMajor.Margin = new System.Windows.Forms.Padding(2);
             this.dgvMajor.Name = "dgvMajor";
             this.dgvMajor.RowHeadersWidth = 51;
@@ -315,7 +315,7 @@
             // 
             this.dgvSmall.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSmall.Font = new System.Drawing.Font("MS UI Gothic", 18F);
-            this.dgvSmall.Location = new System.Drawing.Point(985, 491);
+            this.dgvSmall.Location = new System.Drawing.Point(971, 491);
             this.dgvSmall.Margin = new System.Windows.Forms.Padding(2);
             this.dgvSmall.Name = "dgvSmall";
             this.dgvSmall.RowHeadersWidth = 51;
@@ -363,7 +363,7 @@
             // 
             this.lblNumPage.AutoSize = true;
             this.lblNumPage.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblNumPage.Location = new System.Drawing.Point(1586, 1000);
+            this.lblNumPage.Location = new System.Drawing.Point(621, 1000);
             this.lblNumPage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblNumPage.Name = "lblNumPage";
             this.lblNumPage.Size = new System.Drawing.Size(61, 21);
@@ -373,7 +373,7 @@
             // txbNumPage
             // 
             this.txbNumPage.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbNumPage.Location = new System.Drawing.Point(1518, 997);
+            this.txbNumPage.Location = new System.Drawing.Point(553, 997);
             this.txbNumPage.Margin = new System.Windows.Forms.Padding(2);
             this.txbNumPage.Name = "txbNumPage";
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
@@ -384,7 +384,7 @@
             // btnPageMin
             // 
             this.btnPageMin.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnPageMin.Location = new System.Drawing.Point(1673, 990);
+            this.btnPageMin.Location = new System.Drawing.Point(708, 990);
             this.btnPageMin.Margin = new System.Windows.Forms.Padding(2);
             this.btnPageMin.Name = "btnPageMin";
             this.btnPageMin.Size = new System.Drawing.Size(50, 40);
@@ -398,7 +398,7 @@
             // 
             this.btnBack.BackColor = System.Drawing.Color.White;
             this.btnBack.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnBack.Location = new System.Drawing.Point(1727, 990);
+            this.btnBack.Location = new System.Drawing.Point(762, 990);
             this.btnBack.Margin = new System.Windows.Forms.Padding(2);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(50, 40);
@@ -411,7 +411,7 @@
             // btnNext
             // 
             this.btnNext.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnNext.Location = new System.Drawing.Point(1781, 990);
+            this.btnNext.Location = new System.Drawing.Point(816, 990);
             this.btnNext.Margin = new System.Windows.Forms.Padding(2);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(50, 40);
@@ -424,7 +424,7 @@
             // btnPageMax
             // 
             this.btnPageMax.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnPageMax.Location = new System.Drawing.Point(1835, 990);
+            this.btnPageMax.Location = new System.Drawing.Point(870, 990);
             this.btnPageMax.Margin = new System.Windows.Forms.Padding(2);
             this.btnPageMax.Name = "btnPageMax";
             this.btnPageMax.Size = new System.Drawing.Size(50, 40);
