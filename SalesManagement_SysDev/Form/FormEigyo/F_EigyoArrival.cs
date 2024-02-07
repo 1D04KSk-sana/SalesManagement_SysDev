@@ -92,18 +92,15 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            if (e.KeyChar > '0' && '9' > e.KeyChar)
-            {
-                // テキストボックスに入力されている値を取得
-                string inputText = textBox.Text + e.KeyChar;
+            // テキストボックスに入力されている値を取得
+            string inputText = textBox.Text + e.KeyChar;
 
-                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
-                int parsedValue;
-                if (!int.TryParse(inputText, out parsedValue))
-                {
-                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    e.Handled = true;
-                }
+            // 8文字を超える場合は入力を許可しない
+            if (inputText.Length > 8 && e.KeyChar != '\b')
+            {
+                MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Handled = true;
+                return;
             }
         }
         private void btnReturn_Click(object sender, EventArgs e)
@@ -457,6 +454,8 @@ namespace SalesManagement_SysDev
             dgvArrivalDetail.Columns["PrID"].Width = 174;
             dgvArrivalDetail.Columns["ArQuantity"].Width = 175;
 
+            dgvArrivalDetail.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(96)))), ((int)(((byte)(54)))));
+            dgvArrivalDetail.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvArrivalDetail.Columns)

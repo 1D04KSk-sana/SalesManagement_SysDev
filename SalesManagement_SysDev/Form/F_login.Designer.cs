@@ -63,6 +63,7 @@
             this.txbEmployeeID.Name = "txbEmployeeID";
             this.txbEmployeeID.Size = new System.Drawing.Size(309, 42);
             this.txbEmployeeID.TabIndex = 6;
+            this.txbEmployeeID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // txbSinghUpPass
             // 

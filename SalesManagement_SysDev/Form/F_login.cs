@@ -51,6 +51,29 @@ namespace SalesManagement_SysDev
             FormLoadIvent();
         }
 
+        private void textBoxID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            //0～9と、バックスペース以外の時は、イベントをキャンセルする
+            if ((e.KeyChar < '0' || '9' < e.KeyChar) && e.KeyChar != '\b')
+            {
+                e.Handled = true;
+                return;
+            }
+
+            // テキストボックスに入力されている値を取得
+            string inputText = textBox.Text + e.KeyChar;
+
+            // 8文字を超える場合は入力を許可しない
+            if (inputText.Length > 8 && e.KeyChar != '\b')
+            {
+                MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Handled = true;
+                return;
+            }
+        }
+
         private void btnclose_Click(object sender, EventArgs e)
         {
             // 更新確認メッセージ
