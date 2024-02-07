@@ -346,6 +346,31 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：GetIDOrderData()
+        //引　数：受注ID
+        //戻り値：受注IDの一致する入荷データ
+        //機　能：受注IDの一致する入荷データの取得
+        ///////////////////////////////
+        public T_Shipment GetIDOrderData(int OrderID)
+        {
+            T_Shipment Shipment = new T_Shipment { };
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                Shipment = context.T_Shipments.Single(x => x.OrID == OrderID);
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Shipment;
+        }
+
+        ///////////////////////////////
         //メソッド名：ConfirmShipmentData()
         //引　数：出荷データ
         //戻り値：True or False
@@ -374,6 +399,22 @@ namespace SalesManagement_SysDev
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+        }
+
+        ///////////////////////////////
+        //メソッド名：ShipmentNum()
+        //引　数：なし
+        //戻り値：受注件数
+        //機　能：受注データの件数
+        ///////////////////////////////
+        public int ShipmentNum()
+        {
+            var context = new SalesManagement_DevContext();
+
+            //登録されている操作ログの件数取得
+            int ShipmentCount = context.T_Shipments.Count();
+
+            return ShipmentCount;
         }
     }
 }

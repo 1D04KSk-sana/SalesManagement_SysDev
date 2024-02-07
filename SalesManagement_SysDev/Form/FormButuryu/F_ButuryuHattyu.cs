@@ -58,15 +58,8 @@ namespace SalesManagement_SysDev
         //データベースメーカーテーブルアクセス用クラスのインスタンス化
         MakerDataAccess MakerDataAccess = new MakerDataAccess();
 
-
-
-
-
-
-
-
-
-
+        //データグリッドビュー用のメーカーデータリスト
+        private static List<M_Maker> listDGVMakerID = new List<M_Maker>();
 
         public F_ButuryuHattyu()
         {
@@ -145,9 +138,12 @@ namespace SalesManagement_SysDev
             //メーカー名のデータを取得
             listMaker = makerDataAccess.GetMakerDspData();
 
+            //データグリッドビュー用のメーカーのデータを取得
+            listDGVMakerID = MakerDataAccess.GetMakerData();
+
             dictionaryMaker = new Dictionary<int, string> { };
 
-            foreach (var item in listMaker)
+            foreach (var item in listDGVMakerID)
             {
                 dictionaryMaker.Add(item.MaID, item.MaName);
             }
@@ -162,13 +158,26 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private T_OperationLog GenerateLogAtRegistration(string OperationDone)
         {
+            int? intDBID = 0;
+
+            if (OperationDone == "登録")
+            {
+                var context = new SalesManagement_DevContext();
+
+                intDBID = context.T_Hattyus.Count() + 1;
+            }
+            else
+            {
+                intDBID = int.Parse(txbHattyuID.Text.Trim());
+            }
+
             return new T_OperationLog
             {
                 OpHistoryID = operationLogAccess.OperationLogNum() + 1,
                 EmID = F_Login.intEmployeeID,
                 FormName = "発注管理画面",
                 OpDone = OperationDone,
-                OpDBID = int.Parse(txbHattyuID.Text.Trim()),
+                OpDBID = intDBID,
                 OpSetTime = DateTime.Now,
             };
         }
@@ -183,9 +192,9 @@ namespace SalesManagement_SysDev
         {
             return new T_Warehousing
             {
-                WaID = Hattyu.HaID,
+                WaID = warehousingDataAccess.WarehousingNum() + 1,
                 HaID = Hattyu.HaID,
-                EmID = F_Login.intEmployeeID,
+                EmID = null,
                 WaShelfFlag = 0,
                 WaFlag = 0,
             };
@@ -319,6 +328,8 @@ namespace SalesManagement_SysDev
             //データからページに必要な部分だけを取り出す
             var depData = viewHattyu.Skip(pageSize * pageNum).Take(pageSize).ToList();
 
+            depData.Reverse();
+
             //1行ずつdgvHattyuに挿入
             foreach (var item in depData)
             {
@@ -447,32 +458,6 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-
-            // 社員IDの適否
-            if (!String.IsNullOrEmpty(txbEmployeeID.Text.Trim()))
-            {
-                //社員IDの存在チェック
-                if (!employeeDataAccess.CheckEmployeeIDExistence(int.Parse(txbEmployeeID.Text.Trim())))
-                {
-                    MessageBox.Show("社員IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbEmployeeID.Focus();
-                    return false;
-                }
-                //社員IDが現在ログインしているIDと等しいかチェック
-                if (F_Login.intEmployeeID != int.Parse(txbEmployeeID.Text.Trim()))
-                {
-                    MessageBox.Show("自身の社員IDを入力してください", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbEmployeeID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("社員IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbEmployeeID.Focus();
-                return false;
-            }
-
             //表示選択の適否
             if (cmbHidden.SelectedIndex == -1)
             {
@@ -494,6 +479,7 @@ namespace SalesManagement_SysDev
         {
             return new T_Hattyu
             {
+                HaID = hattyuDataAccess.HattyuNum() + 1,
                 EmID = F_Login.intEmployeeID,
                 MaID = cmbMakerName.SelectedIndex + 1,
                 HaDate = dtpHattyuDate.Value,
@@ -658,7 +644,7 @@ namespace SalesManagement_SysDev
         {
             M_Product Prodact = prodactDataAccess.GetIDProdactData(int.Parse(txbProductID.Text.Trim()));
 
-            List<T_HattyuDetail> listIDHattyuDetail = hattyuDetailDataAccess.GetHattyuDetailIDData(int.Parse(txbHattyuID.Text.Trim()));
+            List<T_HattyuDetail> listIDHattyuDetail = hattyuDetailDataAccess.GetIDHattyuDetailData(int.Parse(txbHattyuID.Text.Trim()));
 
             int intHattyuIDCount = listIDHattyuDetail.Count();
 
@@ -1087,6 +1073,16 @@ namespace SalesManagement_SysDev
                     txbHattyuID.Focus();
                     return false;
                 }
+
+                List<T_HattyuDetail> listHattyuDetail = hattyuDetailDataAccess.GetIDHattyuDetailData(int.Parse(txbHattyuID.Text.Trim()));
+
+                //発注IDの詳細登録チェック
+                if (listHattyuDetail.Count() == 0)
+                {
+                    MessageBox.Show("詳細が登録されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbHattyuID.Focus();
+                    return false;
+                }
             }
             else
             {
@@ -1095,13 +1091,7 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            //確定選択の適否
-            if (cmbConfirm.SelectedIndex == -1)
-            {
-                MessageBox.Show("未確定/確定が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                cmbConfirm.Focus();
-                return false;
-            }
+
 
             return true;
         }
@@ -1221,7 +1211,7 @@ namespace SalesManagement_SysDev
         {
             dgvHattyuDetail.Rows.Clear();
 
-            listHattyuDetail = hattyuDetailDataAccess.GetHattyuDetailIDData(intHattyuID);
+            listHattyuDetail = hattyuDetailDataAccess.GetIDHattyuDetailData(intHattyuID);
 
             //1行ずつdgvClientに挿入
             foreach (var item in listHattyuDetail)
@@ -1269,9 +1259,28 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SelectRowControl()
         {
+            bool cmbMakerflg = false;
+            int intMakerID = dictionaryMaker.FirstOrDefault(x => x.Value == dgvHattyu[1, dgvHattyu.CurrentCellAddress.Y].Value.ToString()).Key;
+
+            foreach (var item in listDGVMakerID)
+            {
+                if (intMakerID == item.MaID)
+                {
+                    cmbMakerflg = true;
+                }
+            }
+
+            if (cmbMakerflg)
+            {
+                cmbMakerName.SelectedValue = intMakerID;
+            }
+            else
+            {
+                cmbMakerName.SelectedIndex = -1;
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbHattyuID.Text = dgvHattyu[0, dgvHattyu.CurrentCellAddress.Y].Value.ToString();
-            cmbMakerName.SelectedIndex = dictionaryMaker.FirstOrDefault(x => x.Value == dgvHattyu[1, dgvHattyu.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvHattyu[2, dgvHattyu.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             dtpHattyuDate.Text = dgvHattyu[3, dgvHattyu.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvHattyu[4, dgvHattyu.CurrentCellAddress.Y].Value.ToString()).Key;
@@ -1294,7 +1303,9 @@ namespace SalesManagement_SysDev
         }
 
         private void F_ButuryuHattyu_Load(object sender, EventArgs e)
-             {
+        {
+            rdbRegister.Checked = true;
+
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 
@@ -1319,7 +1330,7 @@ namespace SalesManagement_SysDev
             foreach (var item in listStock)
             {
                 M_Product Prodact = prodactDataAccess.GetIDProdactData(item.PrID);
-                
+
                 if (item.StQuantity <= Prodact.PrSafetyStock)
                 {
                     listStockHattyuten.Add(item);
@@ -1387,6 +1398,9 @@ namespace SalesManagement_SysDev
             dgvHattyu.Columns["WaWarehouseFlag"].Width = 160;
             dgvHattyu.Columns["HaHidden"].Width = 267;
 
+            dgvHattyu.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            dgvHattyu.DefaultCellStyle.SelectionForeColor = Color.White;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvHattyu.Columns)
             {
@@ -1425,6 +1439,8 @@ namespace SalesManagement_SysDev
             dgvHattyuDetail.Columns["PrID"].Width = 174;
             dgvHattyuDetail.Columns["HaQuantity"].Width = 175;
 
+            dgvHattyuDetail.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            dgvHattyuDetail.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvHattyuDetail.Columns)
@@ -1463,6 +1479,9 @@ namespace SalesManagement_SysDev
             dgvStock.Columns["PrName"].Width = 174;
             dgvStock.Columns["StQuantity"].Width = 174;
             dgvStock.Columns["PrSafetyStock"].Width = 175;
+
+            dgvStock.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            dgvStock.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvStock.Columns)
@@ -1586,24 +1605,26 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
+                cmbMakerName.Enabled = true;
+                txbEmployeeID.Enabled = true;
+                dtpHattyuDate.Enabled = true;
+                txbHidden.Enabled = false;
+                cmbConfirm.Enabled = true;
+                cmbHidden.Enabled = false;
                 txbHattyuQuantity.Enabled = false;
                 txbProductID.Enabled = false;
-                txbProductName.Enabled = false;
-                txbHidden.Enabled = false;
-                cmbConfirm.Enabled = false;
-                cmbHidden.Enabled = false;
             }
 
             if (rdbConfirm.Checked)
             {
                 cmbMakerName.Enabled = false;
+                cmbHidden.Enabled = false;
                 txbEmployeeID.Enabled = false;
                 dtpHattyuDate.Enabled = false;
-                cmbHidden.Enabled = false;
+                cmbConfirm.Enabled = true;
                 txbHidden.Enabled = false;
                 txbHattyuQuantity.Enabled = false;
                 txbProductID.Enabled = false;
-                txbProductName.Enabled = false;
             }
 
             if (rdbDetailRegister.Checked)
@@ -1614,26 +1635,32 @@ namespace SalesManagement_SysDev
                 cmbHidden.Enabled = false;
                 cmbConfirm.Enabled = false;
                 txbHidden.Enabled = false;
+                txbProductID.Enabled = true;
+                txbHattyuQuantity.Enabled = true;
             }
 
             if (rdbRegister.Checked)
             {
+                cmbMakerName.Enabled = true;
+                cmbHidden.Enabled = true;
+                txbEmployeeID.Enabled = false;
+                dtpHattyuDate.Enabled = true;
+                cmbConfirm.Enabled = true;
+                txbHidden.Enabled = false;
                 txbHattyuQuantity.Enabled = false;
                 txbProductID.Enabled = false;
-                txbProductName.Enabled = false;
-                txbHidden.Enabled = false;
-                cmbConfirm.Enabled = false;
             }
 
             if (rdbUpdate.Checked)
             {
                 cmbMakerName.Enabled = false;
+                cmbHidden.Enabled = true;
                 txbEmployeeID.Enabled = false;
                 dtpHattyuDate.Enabled = false;
+                cmbConfirm.Enabled = false;
+                txbHidden.Enabled = true;
                 txbHattyuQuantity.Enabled = false;
                 txbProductID.Enabled = false;
-                txbProductName.Enabled = false;
-                cmbConfirm.Enabled = false;
             }
         }
 
@@ -1656,6 +1683,17 @@ namespace SalesManagement_SysDev
                 FileName = "https://docs.google.com/document/d/1ek0yP4S7QgqV0NlQk6M91KyCYdRDb5GE",
                 UseShellExecute = true
             });
+        }
+
+        private void btnProdactView_Click(object sender, EventArgs e)
+        {
+            ProdactView prodactView = new ProdactView();
+
+            prodactView.Owner = this;
+            prodactView.FormClosed += ChildForm_FormClosed;
+            prodactView.Show();
+
+            this.Opacity = 0;
         }
     }
 }

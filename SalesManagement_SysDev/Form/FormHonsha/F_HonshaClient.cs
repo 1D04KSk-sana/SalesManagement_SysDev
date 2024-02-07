@@ -44,6 +44,9 @@ namespace SalesManagement_SysDev
         //DataGridView用に使用す営業所のDictionary
         private Dictionary<int, string> dictionarySalesOffice;
 
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_SalesOffice> listDGVSalesOfficeID = new List<M_SalesOffice>();
+
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
         { 
@@ -62,9 +65,12 @@ namespace SalesManagement_SysDev
             //営業所のデータを取得
             listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
 
+            //データグリッドビュー用の営業所のデータを取得
+            listDGVSalesOfficeID = salesOfficeDataAccess.GetSalesOfficeData();
+
             dictionarySalesOffice = new Dictionary<int, string> { };
 
-            foreach (var item in listSalesOffice)
+            foreach (var item in listDGVSalesOfficeID)
             {
                 dictionarySalesOffice.Add(item.SoID, item.SoName);
             }
@@ -78,6 +84,8 @@ namespace SalesManagement_SysDev
 
         private void F_HonshaClient_Load(object sender, EventArgs e)
         {
+            rdbRegister.Checked = true;
+            
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 
@@ -287,13 +295,26 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private T_OperationLog GenerateLogAtRegistration(string OperationDone)
         {
+            int? intDBID = 0;
+
+            if (OperationDone == "登録")
+            {
+                var context = new SalesManagement_DevContext();
+
+                intDBID = context.M_Clients.Count() + 1;
+            }
+            else
+            {
+                intDBID = int.Parse(txbClientID.Text.Trim());
+            }
+
             return new T_OperationLog
             {
                 OpHistoryID = operationLogAccess.OperationLogNum() + 1,
                 EmID = F_Login.intEmployeeID,
                 FormName = "顧客管理画面",
                 OpDone = OperationDone,
-                OpDBID = int.Parse(txbClientID.Text.Trim()),
+                OpDBID = intDBID,
                 OpSetTime = DateTime.Now,
             };
         }
@@ -396,31 +417,6 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private bool GetValidDataAtRegistration()
         {
-            // 顧客IDの適否
-            if (!String.IsNullOrEmpty(txbClientID.Text.Trim()))
-            {
-                // 顧客IDの数字チェック
-                if (!dataInputCheck.CheckNumeric(txbClientID.Text.Trim()))
-                {
-                    MessageBox.Show("顧客IDは全て数字入力です", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbClientID.Focus();
-                    return false;
-                }
-                //顧客IDの重複チェック
-                if (clientDataAccess.CheckClientIDExistence(int.Parse(txbClientID.Text.Trim())))
-                {
-                    MessageBox.Show("顧客IDが既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbClientID.Focus();
-                    return false;
-                }
-            }
-            else
-            {
-                MessageBox.Show("顧客IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txbClientID.Focus();
-                return false;
-            }
-
             // 顧客名の適否
             if (!String.IsNullOrEmpty(txbClientName.Text.Trim()))
             {
@@ -959,9 +955,28 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SelectRowControl()
         {
+            bool cmbflg = false;
+            int intSalesOfficeID = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvClient[1, dgvClient.CurrentCellAddress.Y].Value.ToString()).Key;
+
+            foreach (var item in listDGVSalesOfficeID)
+            {
+                if (intSalesOfficeID == item.SoID)
+                {
+                    cmbflg = true;
+                }
+            }
+
+            if (cmbflg)
+            {
+                cmbSalesOfficeID.SelectedValue = intSalesOfficeID;
+            }
+            else
+            {
+                cmbSalesOfficeID.SelectedIndex = -1;
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbClientID.Text = dgvClient[0, dgvClient.CurrentCellAddress.Y].Value.ToString();
-            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvClient[1, dgvClient.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbClientName.Text = dgvClient[2, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientAddress.Text = dgvClient[3, dgvClient.CurrentCellAddress.Y].Value.ToString();
             txbClientPhone.Text = dgvClient[4, dgvClient.CurrentCellAddress.Y].Value.ToString();
@@ -1021,6 +1036,8 @@ namespace SalesManagement_SysDev
             dgvClient.Columns["ClFlag"].Width = 170;
             dgvClient.Columns["ClHidden"].Width = 337;
 
+            dgvClient.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(131)))), ((int)(((byte)(69)))));
+            dgvClient.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvClient.Columns)

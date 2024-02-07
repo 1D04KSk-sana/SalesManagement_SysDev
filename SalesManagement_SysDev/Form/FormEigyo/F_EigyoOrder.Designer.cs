@@ -81,6 +81,7 @@
             this.lblConfirm = new System.Windows.Forms.Label();
             this.cmbConfirm = new System.Windows.Forms.ComboBox();
             this.btnDetailClear = new System.Windows.Forms.Button();
+            this.btnProdactView = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).BeginInit();
             this.pnlHonsha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
@@ -267,7 +268,7 @@
             this.txbHidden.Location = new System.Drawing.Point(663, 449);
             this.txbHidden.Margin = new System.Windows.Forms.Padding(2);
             this.txbHidden.Name = "txbHidden";
-            this.txbHidden.Size = new System.Drawing.Size(1195, 31);
+            this.txbHidden.Size = new System.Drawing.Size(691, 31);
             this.txbHidden.TabIndex = 49;
             // 
             // lblClientHidden
@@ -305,6 +306,7 @@
             // 
             // txbClientName
             // 
+            this.txbClientName.Enabled = false;
             this.txbClientName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbClientName.ForeColor = System.Drawing.Color.Black;
             this.txbClientName.Location = new System.Drawing.Point(1134, 330);
@@ -474,7 +476,6 @@
             this.lblOrder.Size = new System.Drawing.Size(287, 64);
             this.lblOrder.TabIndex = 23;
             this.lblOrder.Text = "受注管理";
-            this.lblOrder.Click += new System.EventHandler(this.lblOrder_Click);
             // 
             // btnReturn
             // 
@@ -526,6 +527,7 @@
             // 
             // txbEmployeeName
             // 
+            this.txbEmployeeName.Enabled = false;
             this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbEmployeeName.ForeColor = System.Drawing.Color.Black;
             this.txbEmployeeName.Location = new System.Drawing.Point(1134, 274);
@@ -623,7 +625,6 @@
             this.txbOrderQuantity.Name = "txbOrderQuantity";
             this.txbOrderQuantity.Size = new System.Drawing.Size(220, 31);
             this.txbOrderQuantity.TabIndex = 77;
-            this.txbOrderQuantity.TextChanged += new System.EventHandler(this.txbOrderQuantity_TextChanged);
             // 
             // lblProductName
             // 
@@ -639,6 +640,7 @@
             // txbProductName
             // 
             this.txbProductName.BackColor = System.Drawing.SystemColors.Control;
+            this.txbProductName.Enabled = false;
             this.txbProductName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbProductName.ForeColor = System.Drawing.Color.Black;
             this.txbProductName.Location = new System.Drawing.Point(1638, 327);
@@ -733,12 +735,26 @@
             this.btnDetailClear.UseVisualStyleBackColor = true;
             this.btnDetailClear.Click += new System.EventHandler(this.btnDetailClear_Click);
             // 
+            // btnProdactView
+            // 
+            this.btnProdactView.Font = new System.Drawing.Font("MS UI Gothic", 18F);
+            this.btnProdactView.Location = new System.Drawing.Point(1654, 443);
+            this.btnProdactView.Margin = new System.Windows.Forms.Padding(2);
+            this.btnProdactView.Name = "btnProdactView";
+            this.btnProdactView.Size = new System.Drawing.Size(204, 43);
+            this.btnProdactView.TabIndex = 132;
+            this.btnProdactView.TabStop = false;
+            this.btnProdactView.Text = "商品一覧";
+            this.btnProdactView.UseVisualStyleBackColor = true;
+            this.btnProdactView.Click += new System.EventHandler(this.btnProdactView_Click);
+            // 
             // F_EigyoOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(219)))), ((int)(((byte)(193)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.btnProdactView);
             this.Controls.Add(this.rdbUpdate);
             this.Controls.Add(this.rdbConfirm);
             this.Controls.Add(this.btnDetailClear);
@@ -859,5 +875,6 @@
         private System.Windows.Forms.Button btnDetailClear;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pctHint;
+        private System.Windows.Forms.Button btnProdactView;
     }
 }

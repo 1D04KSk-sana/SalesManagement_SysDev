@@ -334,6 +334,7 @@
             // 
             // txbProductName
             // 
+            this.txbProductName.Enabled = false;
             this.txbProductName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbProductName.ForeColor = System.Drawing.Color.Black;
             this.txbProductName.Location = new System.Drawing.Point(650, 338);

@@ -127,7 +127,7 @@
             this.lblProdact.Location = new System.Drawing.Point(843, 45);
             this.lblProdact.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblProdact.Name = "lblProdact";
-            this.lblProdact.Size = new System.Drawing.Size(221, 64);
+            this.lblProdact.Size = new System.Drawing.Size(220, 64);
             this.lblProdact.TabIndex = 1;
             this.lblProdact.Text = "ログイン";
             // 

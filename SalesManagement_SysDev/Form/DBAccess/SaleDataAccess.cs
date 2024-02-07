@@ -143,6 +143,31 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：GetIDChumonData()
+        //引　数：注文ID
+        //戻り値：注文IDの一致する売上データ
+        //機　能：注文IDの一致する売上データの取得
+        ///////////////////////////////
+        public T_Sale GetIDChumonData(int ChumonID)
+        {
+            T_Sale Sale = new T_Sale { };
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                Sale = context.T_Sales.Single(x => x.ChID == ChumonID);
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Sale;
+        }
+
+        ///////////////////////////////
         //メソッド名：GetSaleDspData()
         //引　数：なし
         //戻り値：管理Flgが表示の売上データ
@@ -309,6 +334,22 @@ namespace SalesManagement_SysDev
                 MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
+        }
+
+        ///////////////////////////////
+        //メソッド名：SaleNum()
+        //引　数：なし
+        //戻り値：受注件数
+        //機　能：受注データの件数
+        ///////////////////////////////
+        public int SaleNum()
+        {
+            var context = new SalesManagement_DevContext();
+
+            //登録されている操作ログの件数取得
+            int SaleCount = context.T_Sales.Count();
+
+            return SaleCount;
         }
     }
 }

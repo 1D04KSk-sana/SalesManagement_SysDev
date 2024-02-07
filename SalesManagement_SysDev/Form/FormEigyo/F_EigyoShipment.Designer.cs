@@ -171,7 +171,7 @@
             // 
             // btnDone
             // 
-            this.btnDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(143)))), ((int)(((byte)(143)))));
+            this.btnDone.BackColor = System.Drawing.Color.White;
             this.btnDone.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btnDone.Location = new System.Drawing.Point(1661, 172);
             this.btnDone.Margin = new System.Windows.Forms.Padding(2);
@@ -257,6 +257,7 @@
             // 
             // txbClientName
             // 
+            this.txbClientName.Enabled = false;
             this.txbClientName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbClientName.ForeColor = System.Drawing.Color.Black;
             this.txbClientName.Location = new System.Drawing.Point(669, 359);
@@ -268,6 +269,7 @@
             // 
             // txbEmployeeName
             // 
+            this.txbEmployeeName.Enabled = false;
             this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbEmployeeName.ForeColor = System.Drawing.Color.Black;
             this.txbEmployeeName.Location = new System.Drawing.Point(1532, 277);

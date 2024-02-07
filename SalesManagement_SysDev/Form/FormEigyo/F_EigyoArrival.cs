@@ -62,6 +62,8 @@ namespace SalesManagement_SysDev
         //DataGridView用に使用す商品のDictionary
         private Dictionary<int, string> dictionaryProdact;
 
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_SalesOffice> listDGVSalesOfficeID = new List<M_SalesOffice>();
 
         public F_EigyoArrival()
         {
@@ -138,9 +140,12 @@ namespace SalesManagement_SysDev
             //営業所のデータを取得
             listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
 
+            //データグリッドビュー用の営業所のデータを取得
+            listDGVSalesOfficeID = salesOfficeDataAccess.GetSalesOfficeData();
+
             dictionarySalesOffice = new Dictionary<int, string> { };
 
-            foreach (var item in listSalesOffice)
+            foreach (var item in listDGVSalesOfficeID)
             {
                 dictionarySalesOffice.Add(item.SoID, item.SoName);
             }
@@ -289,6 +294,8 @@ namespace SalesManagement_SysDev
             //データからページに必要な部分だけを取り出す
             var depData = viewArrival.Skip(pageSize * pageNum).Take(pageSize).ToList();
 
+            depData.Reverse();
+
             //1行ずつdgvArrivalに挿入
             foreach (var item in depData)
             {
@@ -338,6 +345,8 @@ namespace SalesManagement_SysDev
 
         private void F_EigyoArrival_Load(object sender, EventArgs e)
         {
+            rdbUpdate.Checked = true;
+            
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 
@@ -407,7 +416,8 @@ namespace SalesManagement_SysDev
             dgvArrival.Columns["ArStateFlag"].Width = 161;
             dgvArrival.Columns["ArHidden"].Width = 265;
 
-
+            dgvArrival.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(96)))), ((int)(((byte)(54)))));
+            dgvArrival.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvArrival.Columns)
@@ -507,9 +517,28 @@ namespace SalesManagement_SysDev
                 dtpArrivalDate.Text = arrivalDate.ToString();
             }
 
+            bool cmbflg = false;
+            int intSalesOfficeID = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvArrival[1, dgvArrival.CurrentCellAddress.Y].Value.ToString()).Key;
+
+            foreach (var item in listDGVSalesOfficeID)
+            {
+                if (intSalesOfficeID == item.SoID)
+                {
+                    cmbflg = true;
+                }
+            }
+
+            if (cmbflg)
+            {
+                cmbSalesOfficeID.SelectedValue = intSalesOfficeID;
+            }
+            else
+            {
+                cmbSalesOfficeID.SelectedIndex = -1;
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbArrivalID.Text = dgvArrival[0, dgvArrival.CurrentCellAddress.Y].Value.ToString();
-            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvArrival[1, dgvArrival.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvArrival[2, dgvArrival.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvArrival[3, dgvArrival.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbOrderID.Text = dgvArrival[4, dgvArrival.CurrentCellAddress.Y].Value.ToString();
@@ -1102,7 +1131,7 @@ namespace SalesManagement_SysDev
 
             foreach (var item in listArrivalDetail)
             {
-                T_ShipmentDetail ShipmentDetail = GenerateShipmentDetailAtRegistration(item);
+                T_ShipmentDetail ShipmentDetail = GenerateShipmentDetailAtRegistration(item, Arrival);
 
                 flgArrivallist.Add(shipmentDetailDataAccess.AddShipmentDetailData(ShipmentDetail));
             }
@@ -1141,7 +1170,7 @@ namespace SalesManagement_SysDev
         {
             return new T_Shipment
             {
-                ShID = Arrival.ArID,
+                ShID = shipmentDataAccess.ShipmentNum() + 1,
                 ClID = Arrival.ClID,
                 SoID = Arrival.SoID,
                 OrID = Arrival.OrID,
@@ -1155,12 +1184,12 @@ namespace SalesManagement_SysDev
         //戻り値   ：入荷詳細登録情報
         //機　能   ：入荷詳細登録データのセット
         ///////////////////////////////
-        private T_ShipmentDetail GenerateShipmentDetailAtRegistration(T_ArrivalDetail ArrivalDetail)
+        private T_ShipmentDetail GenerateShipmentDetailAtRegistration(T_ArrivalDetail ArrivalDetail, T_Arrival Arrival)
         {
             return new T_ShipmentDetail
             {
                 ShDetailID = ArrivalDetail.ArDetailID,
-                ShID = ArrivalDetail.ArID,
+                ShID = shipmentDataAccess.GetIDOrderData(Arrival.OrID).ShID,
                 PrID = ArrivalDetail.PrID,
                 ShQuantity = ArrivalDetail.ArQuantity
             };
@@ -1179,7 +1208,7 @@ namespace SalesManagement_SysDev
 
                 txbHidden.Enabled = false;
                 cmbHidden.Enabled = false;
-                cmbConfirm.Enabled = false;
+                cmbConfirm.Enabled = true;
             }
             if (rdbUpdate.Checked)
             {
@@ -1198,7 +1227,7 @@ namespace SalesManagement_SysDev
             if (rdbConfirm.Checked)
             {
                 txbArrivalID.Enabled = true;
-                cmbConfirm.Enabled = true;
+                cmbConfirm.Enabled = false;
 
                 txbClientID.Enabled = false;
                 txbEmployeeID.Enabled = false;

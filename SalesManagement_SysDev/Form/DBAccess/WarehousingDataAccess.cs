@@ -313,5 +313,20 @@ namespace SalesManagement_SysDev
             }
         }
 
+        ///////////////////////////////
+        //メソッド名：WarehousingNum()
+        //引　数：なし
+        //戻り値：入庫件数
+        //機　能：入庫データの件数
+        ///////////////////////////////
+        public int WarehousingNum()
+        {
+            var context = new SalesManagement_DevContext();
+
+            //登録されている操作ログの件数取得
+            int WarehousingCount = context.T_Warehousings.Count();
+
+            return WarehousingCount;
+        }
     }
 }

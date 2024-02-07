@@ -136,6 +136,7 @@
             // 
             // txbEmployeeName
             // 
+            this.txbEmployeeName.Enabled = false;
             this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbEmployeeName.ForeColor = System.Drawing.Color.Black;
             this.txbEmployeeName.Location = new System.Drawing.Point(869, 325);

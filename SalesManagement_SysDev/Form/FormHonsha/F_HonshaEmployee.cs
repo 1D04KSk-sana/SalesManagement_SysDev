@@ -53,16 +53,11 @@ namespace SalesManagement_SysDev
         private static List<M_Position> listPosition = new List<M_Position>();
         //コンボボックス用の顧客データリスト
         private static List<M_Client> listClient = new List<M_Client>();
-        //コンボボックス用の社員データリスト
-        private static List<M_Product> listProdact = new List<M_Product>();
-        //コンボボックス用の社員データリスト
-        private static List<M_Employee> listHiredate = new List<M_Employee>();
-        //データグリッドビュー用の顧客データ
-        private static List<T_Order> listOrder = new List<T_Order>();
-        //データグリッドビュー用の顧客データ
-        private static List<T_OrderDetail> listOrderDetail = new List<T_OrderDetail>();
-        //データグリッドビュー用の全顧客データ
-        private static List<T_Order> listAllOrder = new List<T_Order>();
+
+        //データグリッドビュー用の役員データリスト
+        private static List<M_Position> listDGVPosition = new List<M_Position>();
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_SalesOffice> listDGVSalesOfficeID = new List<M_SalesOffice>();
 
         //DataGridView用に使用する営業所のDictionary
         private Dictionary<int, string> dictionarySalesOffice;
@@ -101,6 +96,8 @@ namespace SalesManagement_SysDev
 
         private void F_HonshaEmployee_Load(object sender, EventArgs e)
         {
+            rdbUpdate.Checked = true;
+            
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 
@@ -277,9 +274,12 @@ namespace SalesManagement_SysDev
             //営業所のデータを取得
             listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
 
+            //データグリッドビュー用の営業所のデータを取得
+            listDGVSalesOfficeID = salesOfficeDataAccess.GetSalesOfficeData();
+
             dictionarySalesOffice = new Dictionary<int, string> { };
 
-            foreach (var item in listSalesOffice)
+            foreach (var item in listDGVSalesOfficeID)
             {
                 dictionarySalesOffice.Add(item.SoID, item.SoName);
             }
@@ -302,12 +302,15 @@ namespace SalesManagement_SysDev
                 dictionaryEmployee.Add(item.EmID, item.EmName);
             }
 
-            //役職のデータを取得
+            //コンボボックス用の役職のデータを取得
             listPosition = positionDataAccess.GetPositionDspData();
+
+            //データグリッドビュー用の役職のデータを取得
+            listDGVPosition = positionDataAccess.GetPositionData();
 
             dictionaryPositionname = new Dictionary<int, string> { };
 
-            foreach (var item in listPosition)
+            foreach (var item in listDGVPosition)
             {
                 dictionaryPositionname.Add(item.PoID, item.PoName);
             }
@@ -797,10 +800,48 @@ namespace SalesManagement_SysDev
         //////////////////////////////
         private void SelectRowControl()
         {
+            bool cmbflg = false;
+            int intPositionID = dictionaryPositionname.FirstOrDefault(x => x.Value == dgvEmployee[5, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key;
+
+            foreach (var item in listPosition)
+            {
+                if (intPositionID == item.PoID)
+                {
+                    cmbflg = true;
+                }
+            }
+
+            if (cmbflg)
+            {
+                cmbPositionName.SelectedValue = intPositionID;
+            }
+            else
+            {
+                cmbPositionName.SelectedIndex = -1;
+            }
+
+            bool cmbEmployeeflg = false;
+            int intEmployeeID = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvEmployee[1, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key;
+
+            foreach (var item in listDGVSalesOfficeID)
+            {
+                if (intEmployeeID == item.SoID)
+                {
+                    cmbEmployeeflg = true;
+                }
+            }
+
+            if (cmbEmployeeflg)
+            {
+                cmbSalesOfficeID.SelectedValue = intEmployeeID;
+            }
+            else
+            {
+                cmbSalesOfficeID.SelectedIndex = -1;
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbEmployeeID.Text = dgvEmployee[0, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
-            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvEmployee[1, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key - 1;
-            cmbPositionName.SelectedIndex = dictionaryPositionname.FirstOrDefault(x => x.Value == dgvEmployee[5, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbEmployeeName.Text = dgvEmployee[2, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
             txbEmployeePhone.Text = dgvEmployee[3, dgvEmployee.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvEmployee[4, dgvEmployee.CurrentCellAddress.Y].Value.ToString()).Key;
@@ -931,16 +972,14 @@ namespace SalesManagement_SysDev
             dgvEmployee.Columns["EmHiredate"].Width = 200;
             dgvEmployee.Columns["EmHidden"].Width = 500;
 
+            dgvEmployee.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(131)))), ((int)(((byte)(69)))));
+            dgvEmployee.DefaultCellStyle.SelectionForeColor = Color.White;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvEmployee.Columns)
             {
                 dataColumn.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-        }
-
-        private void pnlSelect_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void btnSinghUp_Click(object sender, EventArgs e)

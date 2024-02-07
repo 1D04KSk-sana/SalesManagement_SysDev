@@ -268,6 +268,7 @@
             // 
             // txbClientName
             // 
+            this.txbClientName.Enabled = false;
             this.txbClientName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbClientName.Location = new System.Drawing.Point(975, 367);
             this.txbClientName.Margin = new System.Windows.Forms.Padding(2);

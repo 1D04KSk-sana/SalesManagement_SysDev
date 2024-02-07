@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -56,6 +57,8 @@ namespace SalesManagement_SysDev
         }
         private void F_HonshaMaker_Load(object sender, EventArgs e)
         {
+            rdbRegister.Checked = true;
+            
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 
@@ -271,6 +274,9 @@ namespace SalesManagement_SysDev
             dgvMaker.Columns["MaFAX"].Width = 237;
             dgvMaker.Columns["MaFlag"].Width = 237;
             dgvMaker.Columns["MaHidden"].Width = 237;
+
+            dgvMaker.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(131)))), ((int)(((byte)(69)))));
+            dgvMaker.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvMaker.Columns)
@@ -578,13 +584,26 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private T_OperationLog GenerateLogAtRegistration(string OperationDone)
         {
+            int? intDBID = 0;
+
+            if (OperationDone == "登録")
+            {
+                var context = new SalesManagement_DevContext();
+
+                intDBID = context.M_Makers.Count() + 1;
+            }
+            else
+            {
+                intDBID = int.Parse(txbMakerID.Text.Trim());
+            }
+
             return new T_OperationLog
             {
                 OpHistoryID = operationLogAccess.OperationLogNum() + 1,
                 EmID = F_Login.intEmployeeID,
                 FormName = "メーカー管理画面",
                 OpDone = OperationDone,
-                OpDBID = int.Parse(txbMakerID.Text.Trim()),
+                OpDBID = intDBID,
                 OpSetTime = DateTime.Now,
             };
         }
@@ -716,12 +735,18 @@ namespace SalesManagement_SysDev
                     txbMakerName.Focus();
                     return false;
                 }
-                //メーカー名存在チェック
-                if (makerDataAccess.CheckMakerNameExistence(txbMakerName.Text.Trim()))
+
+                M_Maker Maker = makerDataAccess.GetMakerIDData(int.Parse(txbMakerID.Text.Trim()));
+
+                //メーカー名がDBとは異なる場合
+                if (Maker.MaName != txbMakerName.Text.Trim())
                 {
-                    MessageBox.Show("メーカー名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMakerID.Focus();
-                    return false;
+                    if (makerDataAccess.CheckMakerNameExistence(txbMakerName.Text.Trim()))
+                    {
+                        MessageBox.Show("メーカー名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txbMakerName.Focus();
+                        return false;
+                    }
                 }
             }
             else
@@ -817,23 +842,6 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("表示非表示が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbHidden.Focus();
                 return false;
-            }
-            else if (cmbHidden.SelectedIndex == 1)
-            {
-                //商品テーブルにおけるメーカーIDの存在チェック
-                if (prodactDataAccess.CheckProdactMakerIDExistence(int.Parse(txbMakerID.Text.Trim())))
-                {
-                    MessageBox.Show("指定されたメーカーIDが商品テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMakerID.Focus();
-                    return false;
-                }
-                //発注テーブルにおけるメーカーIDの存在チェック
-                if (hattyuDataAccess.CheckHattyuMakerIDExistence(int.Parse(txbMakerID.Text.Trim())))
-                {
-                    MessageBox.Show("指定されたメーカーIDが発注テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbMakerID.Focus();
-                    return false;
-                }
             }
 
             return true;
@@ -1032,5 +1040,13 @@ namespace SalesManagement_SysDev
             GetDataGridView();
         }
 
+        private void pctHint_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://docs.google.com/document/d/1UeRjKYrl-vhHzw6KEuL9NTGTpe1O71yy1mZgfFEGJO0",
+                UseShellExecute = true
+            });
+        }
     }
 }

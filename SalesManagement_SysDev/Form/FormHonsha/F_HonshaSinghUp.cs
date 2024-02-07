@@ -119,16 +119,13 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private T_OperationLog GenerateLogAtRegistration(string OperationDone)
         {
-            //登録・更新使用としている顧客データの取得
-            var logOperatin = GenerateDataAtRegistration();
-
             return new T_OperationLog
             {
                 OpHistoryID = operationLogDataAccess.OperationLogNum() + 1,
                 EmID = F_Login.intEmployeeID,
                 FormName = "社員新規登録画面",
                 OpDone = OperationDone,
-                OpDBID = logOperatin.EmID,
+                OpDBID = int.Parse(txbEmployeeID.Text.Trim()),
                 OpSetTime = DateTime.Now
             };
         }

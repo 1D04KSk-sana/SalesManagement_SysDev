@@ -240,6 +240,35 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：UpdatePassData()
+        //引　数：updPass = パスワードデータ
+        //戻り値：True or False
+        //機　能：パスワードデータの更新
+        //      ：更新成功の場合True
+        //      ：更新失敗の場合False
+        ///////////////////////////////
+        public bool UpdatePassData(M_Employee updPass)
+        {
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Employee = context.M_Employees.Single(x => x.EmID == updPass.EmID);
+
+                Employee.EmPassword = updPass.EmPassword;
+
+                context.SaveChanges();
+                context.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        ///////////////////////////////
         //メソッド名：GetAndEmployeeData()
         //引　数：検索条件
         //戻り値：条件完全一致社員データ

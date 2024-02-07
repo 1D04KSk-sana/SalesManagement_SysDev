@@ -95,5 +95,26 @@ namespace SalesManagement_SysDev
         {
             this.Close();
         }
+
+        private void F_Buturyu_Load(object sender, EventArgs e)
+        {
+            if (F_Login.intPositionID == 1)
+            {
+                btnLogOut.Text = "戻る";
+            }
+            else
+            {
+                btnLogOut.Text = "ログアウト";
+            }
+        }
+
+        private void btnPassChange_Click(object sender, EventArgs e)
+        {
+            F_PassChange f_PassChange = new F_PassChange();
+
+            f_PassChange.Owner = this;
+            f_PassChange.FormClosed += ChildForm_FormClosed;
+            f_PassChange.Show();
+        }
     }
 }

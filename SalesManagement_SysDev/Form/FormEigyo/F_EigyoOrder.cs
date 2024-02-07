@@ -59,6 +59,9 @@ namespace SalesManagement_SysDev
         //DataGridView用に使用する商品のDictionary
         private Dictionary<int, string> dictionaryProdact;
 
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_SalesOffice> listDGVSalesOfficeID = new List<M_SalesOffice>();
+
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
         {
@@ -184,6 +187,8 @@ namespace SalesManagement_SysDev
 
         private void F_EigyoOrder_Load(object sender, EventArgs e)
         {
+            rdbRegister.Checked = true;
+            
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 
@@ -354,7 +359,7 @@ namespace SalesManagement_SysDev
             if (rdbRegister.Checked)
             {
                 txbOrderID.Enabled = true;
-                txbEmployeeID.Enabled = true;
+                txbEmployeeID.Enabled = false;
                 txbClientID.Enabled = true;
                 txbOrderManager.Enabled = true;
                 cmbSalesOfficeID.Enabled = true;
@@ -392,7 +397,7 @@ namespace SalesManagement_SysDev
                 dtpOrderDate.Enabled = true;
 
                 txbHidden.Enabled = false;
-                cmbConfirm.Enabled = false;
+                cmbConfirm.Enabled = true;
                 cmbHidden.Enabled = false;
                 txbProductID.Enabled = false;
                 txbOrderQuantity.Enabled = false;
@@ -417,7 +422,7 @@ namespace SalesManagement_SysDev
 
             if (rdbConfirm.Checked)
             {
-                cmbConfirm.Enabled = true;
+                cmbConfirm.Enabled = false;
                 txbOrderID.Enabled = true;
 
                 txbEmployeeID.Enabled = false;
@@ -443,9 +448,12 @@ namespace SalesManagement_SysDev
             //営業所のデータを取得
             listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
 
+            //データグリッドビュー用の営業所のデータを取得
+            listDGVSalesOfficeID = salesOfficeDataAccess.GetSalesOfficeData();
+
             dictionarySalesOffice = new Dictionary<int, string> { };
 
-            foreach (var item in listSalesOffice)
+            foreach (var item in listDGVSalesOfficeID)
             {
                 dictionarySalesOffice.Add(item.SoID, item.SoName);
             }
@@ -592,6 +600,7 @@ namespace SalesManagement_SysDev
         {
             return new T_Order
             {
+                OrID = orderDataAccess.OrderNum() + 1,
                 SoID = cmbSalesOfficeID.SelectedIndex + 1,
                 EmID = F_Login.intEmployeeID,
                 ClID = clientDataAccess.GetClientID(txbClientName.Text.Trim()),
@@ -946,7 +955,7 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            // 更新確認メッセージ
+            // 確定確認メッセージ
             DialogResult result = MessageBox.Show("確定しますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
             if (result == DialogResult.Cancel)
@@ -966,7 +975,7 @@ namespace SalesManagement_SysDev
             // 受注情報作成
             var cmfOrder = GenerateDataAtConfirm();
 
-            // 受注情報更新
+            // 受注情報確定
             ConfirmOrder(cmfOrder);
         }
 
@@ -1011,6 +1020,16 @@ namespace SalesManagement_SysDev
                 if (order.OrFlag == 1)
                 {
                     MessageBox.Show("受注IDは非表示にされています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbOrderID.Focus();
+                    return false;
+                }
+
+                List<T_OrderDetail> listOrderDetail = orderDetailDataAccess.GetOrderDetailIDData(int.Parse(txbOrderID.Text.Trim()));
+
+                //発注IDの詳細登録チェック
+                if (listOrderDetail.Count() == 0)
+                {
+                    MessageBox.Show("詳細が登録されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbOrderID.Focus();
                     return false;
                 }
@@ -1317,7 +1336,7 @@ namespace SalesManagement_SysDev
         {
             return new T_Chumon
             {
-                ChID = Order.OrID,
+                ChID = chumonDataAccess.ChumonNum() + 1,
                 SoID = Order.SoID,
                 ClID = Order.ClID,
                 OrID = Order.OrID,
@@ -1338,7 +1357,7 @@ namespace SalesManagement_SysDev
             return new T_ChumonDetail
             {
                 ChDetailID = OrderDetail.OrDetailID,
-                ChID = OrderDetail.OrID,
+                ChID = chumonDataAccess.GetIDOrderData(OrderDetail.OrID).ChID,
                 PrID = OrderDetail.PrID,
                 ChQuantity = OrderDetail.OrQuantity
             };
@@ -1352,6 +1371,19 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private T_OperationLog GenerateLogAtRegistration(string OperationDone)
         {
+            int? intDBID = 0;
+
+            if (OperationDone == "登録")
+            {
+                var context = new SalesManagement_DevContext();
+
+                intDBID = context.T_Orders.Count() + 1;
+            }
+            else
+            {
+                intDBID = int.Parse(txbOrderID.Text.Trim());
+            }
+
             return new T_OperationLog
             {
                 OpHistoryID = operationLogAccess.OperationLogNum() + 1,
@@ -1403,6 +1435,19 @@ namespace SalesManagement_SysDev
             dgvOrder.Columns.Add("OrStateFlag", "受注情報フラグ");
             dgvOrder.Columns.Add("OrHidden", "非表示理由");
 
+            dgvOrder.Columns["OrID"].Width = 100;
+            dgvOrder.Columns["SoID"].Width = 172;
+            dgvOrder.Columns["ClName"].Width = 152;
+            dgvOrder.Columns["ClCharge"].Width = 152;
+            dgvOrder.Columns["EmName"].Width = 140;
+            dgvOrder.Columns["OrDate"].Width = 160;
+            dgvOrder.Columns["OrStateFlag"].Width = 170;
+            dgvOrder.Columns["OrFlag"].Width = 171;
+            dgvOrder.Columns["OrHidden"].Width = 265;
+
+            dgvOrder.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(96)))), ((int)(((byte)(54)))));
+            dgvOrder.DefaultCellStyle.SelectionForeColor = Color.White;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvOrder.Columns)
             {
@@ -1436,6 +1481,15 @@ namespace SalesManagement_SysDev
             dgvOrderDetail.Columns.Add("PrID", "商品ID");
             dgvOrderDetail.Columns.Add("OrQuantity", "数量");
             dgvOrderDetail.Columns.Add("OrTotalPrice", "合計金額");
+
+            dgvOrderDetail.Columns["OrDetailID"].Width = 140;
+            dgvOrderDetail.Columns["OrID"].Width = 139;
+            dgvOrderDetail.Columns["PrID"].Width = 139;
+            dgvOrderDetail.Columns["OrQuantity"].Width = 139;
+            dgvOrderDetail.Columns["OrTotalPrice"].Width = 139;
+
+            dgvOrderDetail.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(96)))), ((int)(((byte)(54)))));
+            dgvOrderDetail.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvOrderDetail.Columns)
@@ -1520,6 +1574,8 @@ namespace SalesManagement_SysDev
 
             //データからページに必要な部分だけを取り出す
             var depData = viewOrder.Skip(pageSize * pageNum).Take(pageSize).ToList();
+
+            depData.Reverse();
 
             //1行ずつdgvClientに挿入
             foreach (var item in depData)
@@ -1624,9 +1680,28 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SelectRowControl()
         {
+            bool cmbflg = false;
+            int intSalesOfficeID = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvOrder[1, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key;
+
+            foreach (var item in listSalesOffice)
+            {
+                if (intSalesOfficeID == item.SoID)
+                {
+                    cmbflg = true;
+                }
+            }
+
+            if (cmbflg)
+            {
+                cmbSalesOfficeID.SelectedValue = intSalesOfficeID;
+            }
+            else
+            {
+                cmbSalesOfficeID.SelectedIndex = -1;
+            }
+            
             //データグリッドビューに乗っている情報をGUIに反映
             txbOrderID.Text = dgvOrder[0, dgvOrder.CurrentCellAddress.Y].Value.ToString();
-            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvOrder[1, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvOrder[2, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbOrderManager.Text = dgvOrder[3, dgvOrder.CurrentCellAddress.Y].Value.ToString();
             txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvOrder[4, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
@@ -1670,19 +1745,15 @@ namespace SalesManagement_SysDev
             });
         }
 
-        private void pnlSelect_Paint(object sender, PaintEventArgs e)
+        private void btnProdactView_Click(object sender, EventArgs e)
         {
+            ProdactView prodactView = new ProdactView();
 
-        }
+            prodactView.Owner = this;
+            prodactView.FormClosed += ChildForm_FormClosed;
+            prodactView.Show();
 
-        private void txbOrderQuantity_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblOrder_Click(object sender, EventArgs e)
-        {
-
+            this.Opacity = 0;
         }
     }
 }

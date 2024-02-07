@@ -203,7 +203,7 @@ namespace SalesManagement_SysDev
             this.BackColor = Color.Black;
 
             // フォームの不透明度を設定（半透明化）
-            //this.Opacity = 0.8;
+            this.Opacity = 0.8;
 
             // 丸み値
             System.Drawing.Drawing2D.GraphicsPath gp = new System.Drawing.Drawing2D.GraphicsPath();
@@ -222,6 +222,11 @@ namespace SalesManagement_SysDev
             gp.CloseFigure();
 
             this.Region = new Region(gp);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            this.Opacity = 0;
         }
     }
 }

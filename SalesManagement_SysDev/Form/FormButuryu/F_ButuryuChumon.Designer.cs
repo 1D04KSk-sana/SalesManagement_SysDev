@@ -110,7 +110,6 @@ namespace SalesManagement_SysDev
             this.lblClient.Size = new System.Drawing.Size(287, 64);
             this.lblClient.TabIndex = 27;
             this.lblClient.Text = "注文管理";
-            this.lblClient.Click += new System.EventHandler(this.lblClient_Click);
             // 
             // btnClose
             // 
@@ -218,6 +217,7 @@ namespace SalesManagement_SysDev
             // 
             // txbClientName
             // 
+            this.txbClientName.Enabled = false;
             this.txbClientName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbClientName.Location = new System.Drawing.Point(640, 347);
             this.txbClientName.Margin = new System.Windows.Forms.Padding(2);
@@ -546,6 +546,7 @@ namespace SalesManagement_SysDev
             // 
             // txbEmployeeName
             // 
+            this.txbEmployeeName.Enabled = false;
             this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbEmployeeName.Location = new System.Drawing.Point(1497, 344);
             this.txbEmployeeName.Margin = new System.Windows.Forms.Padding(2);

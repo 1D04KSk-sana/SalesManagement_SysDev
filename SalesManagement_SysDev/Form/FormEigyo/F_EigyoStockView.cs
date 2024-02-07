@@ -160,6 +160,9 @@ namespace SalesManagement_SysDev
             dgvStockView.Columns["StQuantity"].Width = 475;
             dgvStockView.Columns["PrSafetyStock"].Width = 475;
 
+            dgvStockView.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(96)))), ((int)(((byte)(54)))));
+            dgvStockView.DefaultCellStyle.SelectionForeColor = Color.White;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvStockView.Columns)
             {
@@ -302,6 +305,8 @@ namespace SalesManagement_SysDev
 
             //データからページに必要な部分だけを取り出す
             var depData = viewStock.Skip(pageSize * pageNum).Take(pageSize).ToList();
+
+            depData.Reverse();
 
             //1行ずつdgvStockに挿入
             foreach (var item in depData)

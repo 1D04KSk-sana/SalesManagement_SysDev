@@ -249,6 +249,7 @@
             // 
             // txbEmployeeName
             // 
+            this.txbEmployeeName.Enabled = false;
             this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbEmployeeName.Location = new System.Drawing.Point(514, 347);
             this.txbEmployeeName.Name = "txbEmployeeName";
@@ -537,6 +538,7 @@
             // 
             // txbClientName
             // 
+            this.txbClientName.Enabled = false;
             this.txbClientName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbClientName.Location = new System.Drawing.Point(514, 411);
             this.txbClientName.Name = "txbClientName";

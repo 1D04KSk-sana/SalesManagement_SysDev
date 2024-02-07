@@ -19,6 +19,8 @@ namespace SalesManagement_SysDev
         SalesOfficeDataAccess salesOfficeDataAccess = new SalesOfficeDataAccess();
         //データベース受注テーブルアクセス用クラスのインスタンス化
         ShipmentDataAccess ShipmentDataAccess = new ShipmentDataAccess();
+        //データベース注文テーブルアクセス用クラスのインスタンス化
+        ChumonDataAccess chumonDataAccess = new ChumonDataAccess();
         //入力形式チェック用クラスのインスタンス化
         DataInputCheck dataInputCheck = new DataInputCheck();
         //データベース操作ログテーブルアクセス用クラスのインスタンス化
@@ -58,6 +60,9 @@ namespace SalesManagement_SysDev
 
         //フォームを呼び出しする際のインスタンス化
         private F_SearchDialog f_SearchDialog = new F_SearchDialog();
+
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_SalesOffice> listDGVSalesOfficeID = new List<M_SalesOffice>();
 
         //DataGridView用に使用する営業所のDictionary
         private Dictionary<int, string> dictionarySalesOffice;
@@ -148,6 +153,8 @@ namespace SalesManagement_SysDev
            
         private void F_EigyoShipment_Load(object sender, EventArgs e)
         {
+            rdbUpdate.Checked = true;
+            
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 
@@ -692,7 +699,7 @@ namespace SalesManagement_SysDev
                     return false;
                 }
 
-                T_Shipment shipment = ShipmentDataAccess.GetIDShipmentData(int.Parse(txbOrderID.Text.Trim()));
+                T_Shipment shipment = ShipmentDataAccess.GetIDShipmentData(int.Parse(txbShipmentID.Text.Trim()));
 
                 //受注IDの確定チェック
                 if (shipment.ShStateFlag == 1)
@@ -759,7 +766,9 @@ namespace SalesManagement_SysDev
             //注文登録
             T_Shipment Shipment = ShipmentDataAccess.GetIDShipmentData(cfmShipment.ShID);
 
-            T_Sale Sale = GenerateSaleAtRegistration(Shipment);
+            T_Chumon Chumon = chumonDataAccess.GetIDOrderData(Shipment.OrID);
+
+            T_Sale Sale = GenerateSaleAtRegistration(Shipment, Chumon);
 
             bool flgSale = saleDataAccess.AddSaleData(Sale);
 
@@ -780,7 +789,7 @@ namespace SalesManagement_SysDev
 
             foreach (var item in listShipmentDetail)
             {
-                T_SaleDetail SaleDetail = GenerateSaleDetailAtRegistration(item);
+                T_SaleDetail SaleDetail = GenerateSaleDetailAtRegistration(item, Chumon);
 
                 flgShipmentlist.Add(saleDetailDataAccess.AddSaleDetailData(SaleDetail));
             }
@@ -815,12 +824,12 @@ namespace SalesManagement_SysDev
         //戻り値   ：売上登録情報
         //機　能   ：売上登録データのセット
         ///////////////////////////////
-        private T_Sale GenerateSaleAtRegistration(T_Shipment Shipment)
+        private T_Sale GenerateSaleAtRegistration(T_Shipment Shipment, T_Chumon Chumon)
         {
             return new T_Sale
             {
-                SaID = Shipment.ShID,
-                ChID = Shipment.OrID,
+                SaID = saleDataAccess.SaleNum() + 1,
+                ChID = Chumon.ChID,
                 SoID = Shipment.SoID,
                 ClID = Shipment.ClID,
                 EmID = F_Login.intEmployeeID,
@@ -835,7 +844,7 @@ namespace SalesManagement_SysDev
         //戻り値   ：売上詳細登録情報
         //機　能   ：売上詳細登録データのセット
         ///////////////////////////////
-        private T_SaleDetail GenerateSaleDetailAtRegistration(T_ShipmentDetail ShipmentDetail)
+        private T_SaleDetail GenerateSaleDetailAtRegistration(T_ShipmentDetail ShipmentDetail, T_Chumon Chumon)
         {
             M_Product Prodact = prodactDataAccess.GetIDProdactData(ShipmentDetail.PrID);
 
@@ -843,8 +852,9 @@ namespace SalesManagement_SysDev
 
             return new T_SaleDetail
             {
+                Id = 1,
                 SaDetailID = ShipmentDetail.ShDetailID,
-                SaID = ShipmentDetail.ShID,
+                SaID = saleDataAccess.GetIDChumonData(Chumon.ChID).SaID,
                 PrID = ShipmentDetail.PrID,
                 SaQuantity = ShipmentDetail.ShQuantity,
                 SaTotalPrice = ShipmentDetail.ShQuantity * intProdactPrice
@@ -862,9 +872,12 @@ namespace SalesManagement_SysDev
             //営業所のデータを取得
             listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
 
+            //データグリッドビュー用の営業所のデータを取得
+            listDGVSalesOfficeID = salesOfficeDataAccess.GetSalesOfficeData();
+
             dictionarySalesOffice = new Dictionary<int, string> { };
 
-            foreach (var item in listSalesOffice)
+            foreach (var item in listDGVSalesOfficeID)
             {
                 dictionarySalesOffice.Add(item.SoID, item.SoName);
             }
@@ -947,6 +960,9 @@ namespace SalesManagement_SysDev
             dgvShipment.Columns["ShFlag"].Width = 171;
             dgvShipment.Columns["ShHidden"].Width = 265;
 
+            dgvShipment.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(96)))), ((int)(((byte)(54)))));
+            dgvShipment.DefaultCellStyle.SelectionForeColor = Color.White;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvShipment.Columns)
             {
@@ -984,6 +1000,9 @@ namespace SalesManagement_SysDev
             dgvShipmentDetail.Columns["ShID"].Width = 174;
             dgvShipmentDetail.Columns["PrID"].Width = 174;
             dgvShipmentDetail.Columns["ShQuantity"].Width = 175;
+
+            dgvShipmentDetail.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(96)))), ((int)(((byte)(54)))));
+            dgvShipmentDetail.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvShipmentDetail.Columns)
@@ -1091,6 +1110,8 @@ namespace SalesManagement_SysDev
             //データからページに必要な部分だけを取り出す
             var depData = viewShipment.Skip(pageSize * pageNum).Take(pageSize).ToList();
 
+            depData.Reverse();
+
             //1行ずつdgvShipmentに挿入
             foreach (var item in depData)
             {
@@ -1174,11 +1195,30 @@ namespace SalesManagement_SysDev
                 dtpShipmentDate.Text = shipmentDate.ToString();
             }
 
+            bool cmbflg = false;
+            int intSalesOfficeID = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvShipment[1, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key;
+
+            foreach (var item in listDGVSalesOfficeID)
+            {
+                if (intSalesOfficeID == item.SoID)
+                {
+                    cmbflg = true;
+                }
+            }
+
+            if (cmbflg)
+            {
+                cmbSalesOfficeID.SelectedValue = intSalesOfficeID;
+            }
+            else
+            {
+                cmbSalesOfficeID.SelectedIndex = -1;
+            }
+
             //データグリッドビューに乗っている情報をguiに反映
             txbShipmentID.Text = dgvShipment[0, dgvShipment.CurrentCellAddress.Y].Value.ToString();
             txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvShipment[2, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvShipment[3, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
-            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvShipment[1, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbOrderID.Text = dgvShipment[4, dgvShipment.CurrentCellAddress.Y].Value.ToString();
             cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvShipment[7, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key;
             cmbShipmentHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvShipment[6, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key;
@@ -1277,8 +1317,8 @@ namespace SalesManagement_SysDev
                 cmbSalesOfficeID.Enabled = true;
                 txbOrderID.Enabled = true;
                 dtpShipmentDate.Enabled = true;
+                cmbConfirm.Enabled = true;
 
-                cmbConfirm.Enabled = false;
                 txbShipmentHidden.Enabled = false;
                 cmbShipmentHidden.Enabled = false;
             }
@@ -1299,9 +1339,9 @@ namespace SalesManagement_SysDev
 
             if (rdbConfirm.Checked)
             {
-                txbOrderID.Enabled |= true;
-                cmbConfirm.Enabled |= true;
+                txbOrderID.Enabled = true;
 
+                cmbConfirm.Enabled = false;
                 txbClientID.Enabled = false;
                 txbEmployeeID.Enabled = false;
                 txbOrderID.Enabled = false;

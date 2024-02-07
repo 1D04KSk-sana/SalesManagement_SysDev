@@ -198,6 +198,8 @@ namespace SalesManagement_SysDev
 
         private void F_ButuryuStock_Load(object sender, EventArgs e)
         {
+            rdbUpdate.Checked = true;
+            
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 
@@ -303,6 +305,8 @@ namespace SalesManagement_SysDev
 
             //データからページに必要な部分だけを取り出す
             var depData = viewStock.Skip(pageSize * pageNum).Take(pageSize).ToList();
+
+            depData.Reverse();
 
             //1行ずつdgvClientに挿入
             foreach (var item in depData)
@@ -707,6 +711,9 @@ namespace SalesManagement_SysDev
             dgvStock.Columns["StQuantity"].Width = 475;
             dgvStock.Columns["PrSafetyStock"].Width = 475;
 
+            dgvStock.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            dgvStock.DefaultCellStyle.SelectionForeColor = Color.White;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvStock.Columns)
             {
@@ -763,6 +770,17 @@ namespace SalesManagement_SysDev
         {
             txbNumPage.Text = "1";
             GetDataGridView();
+        }
+
+        private void btnProdactView_Click(object sender, EventArgs e)
+        {
+            ProdactView prodactView = new ProdactView();
+
+            prodactView.Owner = this;
+            prodactView.FormClosed += ChildForm_FormClosed;
+            prodactView.Show();
+
+            this.Opacity = 0;
         }
     }
 }

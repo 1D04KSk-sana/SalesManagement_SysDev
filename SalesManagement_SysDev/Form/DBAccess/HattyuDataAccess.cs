@@ -334,5 +334,20 @@ namespace SalesManagement_SysDev
             }
         }
 
+        ///////////////////////////////
+        //メソッド名：HattyuNum()
+        //引　数：なし
+        //戻り値：発注件数
+        //機　能：発注データの件数
+        ///////////////////////////////
+        public int HattyuNum()
+        {
+            var context = new SalesManagement_DevContext();
+
+            //登録されている発注件数取得
+            int HattyuCount = context.T_Hattyus.Count();
+
+            return HattyuCount;
+        }
     }
 }

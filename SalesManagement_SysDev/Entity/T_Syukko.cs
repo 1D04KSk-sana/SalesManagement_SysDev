@@ -17,6 +17,8 @@ namespace SalesManagement_SysDev
         }
 
         [Key]
+        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SyID { get; set; }               //出庫ID	
         public int? EmID { get; set; }              //社員ID	
         public int ClID { get; set; }               //顧客ID	

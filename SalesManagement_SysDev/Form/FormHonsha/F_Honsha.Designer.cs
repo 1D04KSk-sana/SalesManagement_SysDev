@@ -40,6 +40,7 @@
             this.btnFormMaster = new System.Windows.Forms.Button();
             this.btnFormButuryu = new System.Windows.Forms.Button();
             this.btnFormEigyo = new System.Windows.Forms.Button();
+            this.btnPassChange = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -189,12 +190,26 @@
             this.btnFormEigyo.UseVisualStyleBackColor = true;
             this.btnFormEigyo.Click += new System.EventHandler(this.btnFormEigyo_Click);
             // 
+            // btnPassChange
+            // 
+            this.btnPassChange.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnPassChange.Location = new System.Drawing.Point(25, 1004);
+            this.btnPassChange.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnPassChange.Name = "btnPassChange";
+            this.btnPassChange.Size = new System.Drawing.Size(227, 50);
+            this.btnPassChange.TabIndex = 47;
+            this.btnPassChange.TabStop = false;
+            this.btnPassChange.Text = "パスワード変更";
+            this.btnPassChange.UseVisualStyleBackColor = true;
+            this.btnPassChange.Click += new System.EventHandler(this.btnPassChange_Click);
+            // 
             // F_Honsha
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.btnPassChange);
             this.Controls.Add(this.btnFormEigyo);
             this.Controls.Add(this.btnFormButuryu);
             this.Controls.Add(this.btnFormMaster);
@@ -230,5 +245,6 @@
         private System.Windows.Forms.Button btnFormMaster;
         private System.Windows.Forms.Button btnFormButuryu;
         private System.Windows.Forms.Button btnFormEigyo;
+        private System.Windows.Forms.Button btnPassChange;
     }
 }

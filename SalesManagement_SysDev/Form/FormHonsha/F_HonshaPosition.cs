@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -335,6 +336,8 @@ namespace SalesManagement_SysDev
             dgvPosition.Columns["PoFlag"].Width = 500;
             dgvPosition.Columns["PoHidden"].Width = 900;
 
+            dgvPosition.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(131)))), ((int)(((byte)(69)))));
+            dgvPosition.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvPosition.Columns)
@@ -345,6 +348,8 @@ namespace SalesManagement_SysDev
 
         private void F_HonshaPosition_Load(object sender, EventArgs e)
         {
+            rdbRegister.Checked = true;
+            
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 
@@ -364,13 +369,26 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private T_OperationLog GenerateLogAtRegistration(string OperationDone)
         {
+            int? intDBID = 0;
+
+            if (OperationDone == "登録")
+            {
+                var context = new SalesManagement_DevContext();
+
+                intDBID = context.M_Positions.Count() + 1;
+            }
+            else
+            {
+                intDBID = int.Parse(txbPositionID.Text.Trim());
+            }
+
             return new T_OperationLog
             {
                 OpHistoryID = operationLogAccess.OperationLogNum() + 1,
                 EmID = F_Login.intEmployeeID,
                 FormName = "役職管理",
                 OpDone = OperationDone,
-                OpDBID = int.Parse(txbPositionID.Text.Trim()),
+                OpDBID = intDBID,
                 OpSetTime = DateTime.Now,
             };
         }
@@ -581,11 +599,13 @@ namespace SalesManagement_SysDev
                     txbPositionName.Focus();
                     return false;
                 }
-                //役職名存在チェック
-                if (positionDataAccess.CheckPositionNameExistence(txbPositionName.Text.Trim()))
+
+                M_Position Position = positionDataAccess.GetPositionIDData(int.Parse(txbPositionID.Text.Trim()));
+
+                if (Position.PoName != txbPositionName.Text.Trim())
                 {
                     MessageBox.Show("役職名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbPositionName.Focus();
+                    txbPositionID.Focus();
                     return false;
                 }
             }
@@ -602,16 +622,6 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("表示選択が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbHidden.Focus();
                 return false;
-            }
-            else if (cmbHidden.SelectedIndex == 1)
-            {
-                //社員テーブルにおける役職IDの存在チェック
-                if (employeeDataAccess.CheckEmployeePositonIDExistence(int.Parse(txbPositionID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された役職IDが社員テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbPositionID.Focus();
-                    return false;
-                }
             }
 
             return true;
@@ -875,6 +885,27 @@ namespace SalesManagement_SysDev
                 txbHidden.Enabled = true;
                 cmbHidden.Enabled = true;
             }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            // 更新確認メッセージ
+            DialogResult result = MessageBox.Show("本当に閉じますか？", "確認", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Cancel)
+            {
+                return;
+            }
+            Application.Exit();
+        }
+
+        private void pctHint_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://docs.google.com/document/d/1gg14VPnUVGjmiVEmFMjEHm2udjTegejpo6AO7PUOW0s",
+                UseShellExecute = true
+            });
         }
     }
 }

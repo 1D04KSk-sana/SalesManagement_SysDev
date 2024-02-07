@@ -16,6 +16,8 @@ namespace SalesManagement_SysDev
         }
 
         [Key]
+        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int SaID { get; set; }           //売上ID	
         public int ClID { get; set; }           //顧客ID	
         public int SoID { get; set; }           //営業所ID	
@@ -24,7 +26,7 @@ namespace SalesManagement_SysDev
         [DataType(DataType.Date)]
         [Column(TypeName = "date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
-        public DateTime? SaDate { get; set; }    //売上日時
+        public DateTime? SaDate { get; set; }   //売上日時
         public string SaHidden { get; set; }    //非表示理由	
         public int SaFlag { get; set; }	        //売上管理フラグ	
 

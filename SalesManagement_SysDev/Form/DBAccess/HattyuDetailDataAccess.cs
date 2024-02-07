@@ -59,29 +59,6 @@ namespace SalesManagement_SysDev
             }
         }
         ///////////////////////////////
-        //メソッド名：GetHattyuDetailData()
-        //引　数：なし
-        //戻り値：発注詳細データ
-        //機　能：発注詳細データの全取得
-        ///////////////////////////////
-        public List<T_HattyuDetail> GetHattyuDetailIDData(int hattyuID)
-        {
-            List<T_HattyuDetail> listHattyuDetail = new List<T_HattyuDetail>();
-
-            try
-            {
-                var context = new SalesManagement_DevContext();
-                listHattyuDetail = context.T_HattyuDetails.Where(x => x.HaID == hattyuID).ToList();
-                context.Dispose();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return listHattyuDetail;
-        }
-        ///////////////////////////////
         //メソッド名：CheckHattyuDetailIDExistence()
         //引　数   ：発注詳細コード
         //戻り値   ：True or False
@@ -129,6 +106,22 @@ namespace SalesManagement_SysDev
             }
 
             return listHattyuDetail;
+        }
+
+        ///////////////////////////////
+        //メソッド名：HattyuDetailNum()
+        //引　数：なし
+        //戻り値：発注詳細件数
+        //機　能：発注詳細データの件数
+        ///////////////////////////////
+        public int HattyuDetailNum()
+        {
+            var context = new SalesManagement_DevContext();
+
+            //登録されている発注件数取得
+            int HattyuDetailCount = context.T_Hattyus.Count();
+
+            return HattyuDetailCount;
         }
     }
 }

@@ -245,10 +245,19 @@ namespace SalesManagement_SysDev
             //データからページに必要な部分だけを取り出す
             var depData = viewWarehousing.Skip(pageSize * pageNum).Take(pageSize).ToList();
 
+            depData.Reverse();
+
             //1行ずつdgvWarehousingに挿入
             foreach (var item in depData)
             {
-                dgvWarehousing.Rows.Add(item.WaID, dictionaryEmployee[item.EmID], item.HaID, item.WaDate, dictionaryHidden[item.WaFlag], dictionaryConfirm[item.WaShelfFlag], item.WaHidden);
+                string strEmployeeName = "";
+
+                if (item.EmID != null)
+                {
+                    strEmployeeName = dictionaryEmployee[item.EmID.Value];
+                }
+
+                dgvWarehousing.Rows.Add(item.WaID, strEmployeeName, item.HaID, item.WaDate, dictionaryHidden[item.WaFlag], dictionaryConfirm[item.WaShelfFlag], item.WaHidden);
             }
 
             //dgvWarehousingをリフレッシュ
@@ -307,6 +316,8 @@ namespace SalesManagement_SysDev
 
         private void F_ButuryuWarehousing_Load(object sender, EventArgs e)
         {
+            rdbUpdate.Checked = true;
+            
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 
@@ -364,7 +375,8 @@ namespace SalesManagement_SysDev
             dgvWarehousing.Columns["WaShelfFlag"].Width = 160;
             dgvWarehousing.Columns["WaHidden"].Width = 265;
 
-
+            dgvWarehousing.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            dgvWarehousing.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvWarehousing.Columns)
@@ -404,6 +416,8 @@ namespace SalesManagement_SysDev
             dgvWarehousingDetail.Columns["PrID"].Width = 174;
             dgvWarehousingDetail.Columns["WaQuantity"].Width = 175;
 
+            dgvWarehousingDetail.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            dgvWarehousingDetail.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvWarehousingDetail.Columns)
@@ -1084,25 +1098,32 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
+                txbEmployeeID.Enabled = true;
+                txbHattyuID.Enabled = true;
+                cmbConfirm.Enabled = true;
+                dtpWarehousingDate.Enabled = true;
                 txbHidden.Enabled = false;
                 cmbHidden.Enabled = false;
             }
 
             if (rdbConfirm.Checked)
             {
-                txbEmployeeName.Enabled = false;
+                txbEmployeeID.Enabled = false;
                 txbHattyuID.Enabled = false;
                 dtpWarehousingDate.Enabled = false;
+                cmbConfirm.Enabled = false;
                 cmbHidden.Enabled = false;
                 txbHidden.Enabled = false;
             }
 
             if (rdbUpdate.Checked)
             {
-                txbEmployeeName.Enabled = false;
+                txbEmployeeID.Enabled = false;
                 txbHattyuID.Enabled = false;
                 cmbConfirm.Enabled = false;
                 dtpWarehousingDate.Enabled = false;
+                cmbHidden.Enabled = true;
+                txbHidden.Enabled = true;
             }
         }
     }

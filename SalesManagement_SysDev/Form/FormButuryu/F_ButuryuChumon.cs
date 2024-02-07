@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -70,7 +71,9 @@ namespace SalesManagement_SysDev
         private Dictionary<int, string> dictionaryEmployee;
         //DataGridView用に使用する商品のDictionary
         private Dictionary<int, string> dictionaryProdact;
-        
+
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_SalesOffice> listDGVSalesOfficeID = new List<M_SalesOffice>();
 
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
@@ -254,7 +257,7 @@ namespace SalesManagement_SysDev
         {
             return new T_Chumon
             {
-                ChID = int.Parse(txbOrderID.Text.Trim()),
+                ChID = int.Parse(txbChumonID.Text.Trim()),
                 EmID = F_Login.intEmployeeID,
                 ChStateFlag = 1,
             };
@@ -474,7 +477,7 @@ namespace SalesManagement_SysDev
 
             foreach (var item in listChumonDetail)
             {
-                T_SyukkoDetail SyukkoDetail = GenerateSyukkoDetailAtRegistration(item);
+                T_SyukkoDetail SyukkoDetail = GenerateSyukkoDetailAtRegistration(item, Chumon);
 
                 flgChumonlist.Add(syukkoDetailDataAccess.AddSyukkoDetailData(SyukkoDetail));
             }
@@ -513,7 +516,7 @@ namespace SalesManagement_SysDev
         {
             return new T_Syukko
             {
-                SyID = Chumon.ChID,
+                SyID = syukkoDataAccess.SyukkoNum() + 1,
                 SoID = Chumon.SoID,
                 ClID = Chumon.ClID,
                 OrID = Chumon.OrID,
@@ -528,12 +531,12 @@ namespace SalesManagement_SysDev
         //戻り値   ：出庫詳細登録情報
         //機　能   ：出庫詳細登録データのセット
         ///////////////////////////////
-        private T_SyukkoDetail GenerateSyukkoDetailAtRegistration(T_ChumonDetail ChumonDetail)
+        private T_SyukkoDetail GenerateSyukkoDetailAtRegistration(T_ChumonDetail ChumonDetail, T_Chumon Chumon)
         {
             return new T_SyukkoDetail
             {
                 SyDetailID = ChumonDetail.ChDetailID,
-                SyID = ChumonDetail.ChID,
+                SyID = syukkoDataAccess.GetIDOrderData(Chumon.OrID).SyID,
                 PrID = ChumonDetail.PrID,
                 SyQuantity = ChumonDetail.ChQuantity
             };
@@ -744,6 +747,8 @@ namespace SalesManagement_SysDev
             dgvChumon.Columns["ChFlag"].Width = 200;
             dgvChumon.Columns["ChHidden"].Width = 200;
 
+            dgvChumon.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            dgvChumon.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvChumon.Columns)
@@ -781,7 +786,10 @@ namespace SalesManagement_SysDev
             dgvChumonDetail.Columns["ChID"].Width = 150;
             dgvChumonDetail.Columns["ChDetailID"].Width = 150;
             dgvChumonDetail.Columns["PrID"].Width = 150;
-            dgvChumonDetail.Columns["OrQuantity"].Width = 300;            
+            dgvChumonDetail.Columns["OrQuantity"].Width = 300;
+
+            dgvChumonDetail.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            dgvChumonDetail.DefaultCellStyle.SelectionForeColor = Color.White;
 
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvChumonDetail.Columns)
@@ -811,6 +819,8 @@ namespace SalesManagement_SysDev
 
             //データからページに必要な部分だけを取り出す
             var depData = viewChumon.Skip(pageSize * pageNum).Take(pageSize).ToList();
+
+            depData.Reverse();
 
             //1行ずつdgvClientに挿入
             foreach (var item in depData)
@@ -909,9 +919,12 @@ namespace SalesManagement_SysDev
             //営業所のデータを取得
             listSalesOffice = salesOfficeDataAccess.GetSalesOfficeDspData();
 
+            //データグリッドビュー用の営業所のデータを取得
+            listDGVSalesOfficeID = salesOfficeDataAccess.GetSalesOfficeData();
+
             dictionarySalesOffice = new Dictionary<int, string> { };
 
-            foreach (var item in listSalesOffice)
+            foreach (var item in listDGVSalesOfficeID)
             {
                 dictionarySalesOffice.Add(item.SoID, item.SoName);
             }
@@ -954,9 +967,28 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SelectRowControl()
         {
+            bool cmbflg = false;
+            int intSalesOfficeID = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvChumon[1, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key;
+
+            foreach (var item in listSalesOffice)
+            {
+                if (intSalesOfficeID == item.SoID)
+                {
+                    cmbflg = true;
+                }
+            }
+
+            if (cmbflg)
+            {
+                cmbSalesOfficeID.SelectedValue = intSalesOfficeID;
+            }
+            else
+            {
+                cmbSalesOfficeID.SelectedIndex = -1;
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbChumonID.Text = dgvChumon[0, dgvChumon.CurrentCellAddress.Y].Value.ToString();
-            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvChumon[1, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbOrderID.Text = dgvChumon[2, dgvChumon.CurrentCellAddress.Y].Value.ToString();
             dtpChumonDate.Text = dgvChumon[3, dgvChumon.CurrentCellAddress.Y].Value.ToString();
             txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvChumon[4, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
@@ -1109,6 +1141,7 @@ namespace SalesManagement_SysDev
 
         private void F_ButuryuChumon_Load(object sender, EventArgs e)
         {
+            rdbHidden.Checked = true;
 
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
@@ -1289,17 +1322,38 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
-
+                txbClientID.Enabled = true;
+                cmbConfirm.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                cmbHidden.Enabled = false;
+                txbOrderID.Enabled = true;
+                txbEmployeeID.Enabled = true;
+                txbHidden.Enabled = false;
+                dtpChumonDate.Enabled = true;
             }
 
             if (rdbConfirm.Checked)
             {
-
+                txbClientID.Enabled = false;
+                cmbConfirm.Enabled = false;
+                cmbSalesOfficeID.Enabled = false;
+                cmbHidden.Enabled = false;
+                txbOrderID.Enabled = false;
+                txbEmployeeID.Enabled = false;
+                txbHidden.Enabled = false;
+                dtpChumonDate.Enabled = false;
             }
 
             if (rdbHidden.Checked)
             {
-                
+                txbClientID.Enabled = false;
+                cmbConfirm.Enabled = false;
+                cmbSalesOfficeID.Enabled = false;
+                cmbHidden.Enabled = true;
+                txbOrderID.Enabled = false;
+                txbEmployeeID.Enabled = false;
+                txbHidden.Enabled = true;
+                dtpChumonDate.Enabled = false;
             }
         }
 
@@ -1325,11 +1379,6 @@ namespace SalesManagement_SysDev
             var Employee = listEmployee.Single(x => x.EmID == intEmployeeID);
 
             txbEmployeeName.Text = Employee.EmName;
-        }
-
-        private void lblClient_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

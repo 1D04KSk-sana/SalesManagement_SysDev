@@ -157,7 +157,6 @@
             this.pnlSelect.Name = "pnlSelect";
             this.pnlSelect.Size = new System.Drawing.Size(264, 69);
             this.pnlSelect.TabIndex = 29;
-            this.pnlSelect.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlSelect_Paint);
             // 
             // rdbSearch
             // 

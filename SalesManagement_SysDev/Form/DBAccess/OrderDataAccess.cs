@@ -372,5 +372,21 @@ namespace SalesManagement_SysDev
 
             return listOrder;
         }
+
+        ///////////////////////////////
+        //メソッド名：OrderNum()
+        //引　数：なし
+        //戻り値：受注件数
+        //機　能：受注データの件数
+        ///////////////////////////////
+        public int OrderNum()
+        {
+            var context = new SalesManagement_DevContext();
+
+            //登録されている操作ログの件数取得
+            int OrderCount = context.T_Orders.Count();
+
+            return OrderCount;
+        }
     }
 }

@@ -97,6 +97,29 @@ namespace SalesManagement_SysDev
             return listMaker;
         }
         ///////////////////////////////
+        //メソッド名：GetMakerIDData()
+        //引　数：メーカーID
+        //戻り値：メーカーデータ
+        //機　能：メーカーデータの全取得
+        ///////////////////////////////
+        public M_Maker GetMakerIDData(int makerID)
+        {
+            M_Maker Maker = null;
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                Maker = context.M_Makers.Single(x => x.MaID == makerID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Maker;
+        }
+        ///////////////////////////////
         //メソッド名：CheckMakerIDExistence()
         //引　数   ：メーカーコード
         //戻り値   ：True or False

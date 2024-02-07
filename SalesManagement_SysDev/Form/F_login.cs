@@ -110,19 +110,19 @@ namespace SalesManagement_SysDev
             }
             if (intPositionID == 2)
             {
-                //F_Eigyo f_Eigyo = new F_Eigyo();
+                F_Eigyo f_Eigyo = new F_Eigyo();
 
-                //f_Eigyo.Owner = this;
-                //f_Eigyo.FormClosed += ChildForm_FormClosed;
-                //f_Eigyo.Show();
+                f_Eigyo.Owner = this;
+                f_Eigyo.FormClosed += ChildForm_FormClosed;
+                f_Eigyo.Show();
             }
             if (intPositionID == 3)
             {
-                //F_Buturyu f_Buturyu = new F_Buturyu();
+                F_Buturyu f_Buturyu = new F_Buturyu();
 
-                //f_Buturyu.Owner = this;
-                //f_Buturyu.FormClosed += ChildForm_FormClosed;
-                //f_Buturyu.Show();
+                f_Buturyu.Owner = this;
+                f_Buturyu.FormClosed += ChildForm_FormClosed;
+                f_Buturyu.Show();
             }
 
             this.Opacity = 0;
@@ -585,60 +585,70 @@ namespace SalesManagement_SysDev
             {
                 sc.Add(new M_SmallClassification()
                 {
+                    ScID = 1,
                     M_MajorClassification = mc[0],
                     ScName = "テレビ",
                     ScFlag = 0,
                 });
                 sc.Add(new M_SmallClassification()
                 {
+                    ScID = 2,
                     M_MajorClassification = mc[0],
                     ScName = "レコーダー",
                     ScFlag = 0,
                 });
                 sc.Add(new M_SmallClassification()
                 {
+                    ScID = 1,
                     M_MajorClassification = mc[1],
                     ScName = "エアコン",
                     ScFlag = 0,
                 });
                 sc.Add(new M_SmallClassification()
                 {
+                    ScID= 2,
                     M_MajorClassification = mc[1],
                     ScName = "冷蔵庫",
                     ScFlag = 0,
                 });
                 sc.Add(new M_SmallClassification()
                 {
+                    ScID = 3,
                     M_MajorClassification = mc[1],
                     ScName = "洗濯機",
                     ScFlag = 0,
                 });
                 sc.Add(new M_SmallClassification()
                 {
+                    ScID = 1,
                     M_MajorClassification = mc[2],
                     ScName = "オーディオ",
                     ScFlag = 0,
                 });
                 sc.Add(new M_SmallClassification()
                 {
+                    ScID = 2,
                     M_MajorClassification = mc[2],
                     ScName = "イヤホン",
                     ScFlag = 0,
                 });
                 sc.Add(new M_SmallClassification()
                 {
+                    ScID = 3,
                     M_MajorClassification = mc[2],
                     ScName = "ヘッドホン",
                     ScFlag = 0,
                 });
                 sc.Add(new M_SmallClassification()
                 {
+                    ScID = 1,
                     M_MajorClassification = mc[3],
                     ScName = "携帯電話",
                     ScFlag = 0,
                 });
                 sc.Add(new M_SmallClassification()
                 {
+                    ScID = 2,
                     M_MajorClassification = mc[3],
                     ScName = "スマートフォン",
                     ScFlag = 0,
@@ -692,7 +702,7 @@ namespace SalesManagement_SysDev
                     PrName = "エアコンA",
                     Price = 160000,
                     PrSafetyStock = 50,
-                    M_SmallClassification = sc[2],
+                    M_SmallClassification = sc[0],
                     M_MajorClassification = mc[1],
                     PrModelNumber = "1",
                     PrColor = "白",
@@ -705,7 +715,7 @@ namespace SalesManagement_SysDev
                     PrName = "冷蔵庫A",
                     Price = 200000,
                     PrSafetyStock = 50,
-                    M_SmallClassification = sc[3],
+                    M_SmallClassification = sc[1],
                     M_MajorClassification = mc[1],
                     PrModelNumber = "1",
                     PrColor = "白",
@@ -718,7 +728,7 @@ namespace SalesManagement_SysDev
                     PrName = "洗濯機A",
                     Price = 150000,
                     PrSafetyStock = 50,
-                    M_SmallClassification = sc[4],
+                    M_SmallClassification = sc[2],
                     M_MajorClassification = mc[1],
                     PrModelNumber = "1",
                     PrColor = "白",
@@ -731,7 +741,7 @@ namespace SalesManagement_SysDev
                     PrName = "オーディオA",
                     Price = 6000,
                     PrSafetyStock = 10,
-                    M_SmallClassification = sc[5],
+                    M_SmallClassification = sc[0],
                     M_MajorClassification = mc[2],
                     PrModelNumber = "1",
                     PrColor = "黒",
@@ -744,7 +754,7 @@ namespace SalesManagement_SysDev
                     PrName = "イヤホンA",
                     Price = 5000,
                     PrSafetyStock = 100,
-                    M_SmallClassification = sc[6],
+                    M_SmallClassification = sc[1],
                     M_MajorClassification = mc[2],
                     PrModelNumber = "1",
                     PrColor = "赤",
@@ -757,7 +767,7 @@ namespace SalesManagement_SysDev
                     PrName = "iphone8",
                     Price = 78800,
                     PrSafetyStock = 50,
-                    M_SmallClassification = sc[8],
+                    M_SmallClassification = sc[0],
                     M_MajorClassification = mc[3],
                     PrModelNumber = "1",
                     PrColor = "ゴールド",
@@ -770,7 +780,7 @@ namespace SalesManagement_SysDev
                     PrName = "スマートフォンA",
                     Price = 30000,
                     PrSafetyStock = 50,
-                    M_SmallClassification = sc[9],
+                    M_SmallClassification = sc[1],
                     M_MajorClassification = mc[3],
                     PrModelNumber = "1",
                     PrColor = "シルバー",
@@ -783,7 +793,7 @@ namespace SalesManagement_SysDev
                     PrName = "スマートフォンB",
                     Price = 40000,
                     PrSafetyStock = 50,
-                    M_SmallClassification = sc[9],
+                    M_SmallClassification = sc[1],
                     M_MajorClassification = mc[3],
                     PrModelNumber = "1",
                     PrColor = "黒",
@@ -856,6 +866,7 @@ namespace SalesManagement_SysDev
             {
                 or.Add(new T_Order
                 {
+                    OrID = 1,
                     M_SalesOffice = so[0],
                     M_Employee = em[310],
                     M_Client = cl[1],
@@ -866,6 +877,7 @@ namespace SalesManagement_SysDev
                 });
                 or.Add(new T_Order
                 {
+                    OrID = 2,
                     M_SalesOffice = so[1],
                     M_Employee = em[116],
                     M_Client = cl[4],
@@ -925,6 +937,7 @@ namespace SalesManagement_SysDev
             {
                 ch.Add(new T_Chumon()
                 {
+                    ChID = 1,
                     M_SalesOffice = so[0],
                     M_Employee = em[1002],
                     M_Client = cl[1],
@@ -958,8 +971,8 @@ namespace SalesManagement_SysDev
             {
                 sy.Add(new T_Syukko()
                 {
-                    //M_Employee = em[116],
-                    EmID = null,
+                    SyID = 1,
+                    M_Employee = em[116],
                     M_Client = cl[1],
                     M_SalesOffice = so[0],
                     T_Order = or[0],
@@ -991,6 +1004,7 @@ namespace SalesManagement_SysDev
             {
                 sa.Add(new T_Sale()
                 {
+                    SaID = 1,
                     M_Employee = em[116],
                     M_Client = cl[1],
                     T_Chumon = ch[0],
@@ -1018,6 +1032,7 @@ namespace SalesManagement_SysDev
             {
                 ha.Add(new T_Hattyu()
                 {
+                    HaID = 1,
                     M_Maker = ma[0],
                     M_Employee = em[310],
                     HaDate = new DateTime(2023, 11, 17),
@@ -1026,6 +1041,7 @@ namespace SalesManagement_SysDev
                 });
                 ha.Add(new T_Hattyu()
                 {
+                    HaID = 2,
                     M_Maker = ma[1],
                     M_Employee = em[116],
                     HaDate = new DateTime(2023, 11, 16),
@@ -1068,6 +1084,7 @@ namespace SalesManagement_SysDev
             {
                 wh.Add(new T_Warehousing()
                 {
+                    WaID = 1,
                     T_Hattyu = ha[0],
                     M_Employee = em[116],
                     WaDate = new DateTime(2023, 11, 16),
@@ -1097,6 +1114,8 @@ namespace SalesManagement_SysDev
             {
                 sh.Add(new T_Shipment()
                 {
+                    ShID = 1,
+                    M_Employee = em[116],
                     M_SalesOffice = so[0],
                     M_Client = cl[1],
                     T_Order = or[0],
@@ -1110,6 +1129,7 @@ namespace SalesManagement_SysDev
             {
                 ar.Add(new T_Arrival()
                 {
+                    ArID = 1,
                     M_SalesOffice = so[0],
                     M_Employee = em[116],
                     M_Client = cl[1],

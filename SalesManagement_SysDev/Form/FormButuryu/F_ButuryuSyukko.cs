@@ -64,6 +64,9 @@ namespace SalesManagement_SysDev
         //DataGridView用に使用する商品のDictionary
         private Dictionary<int, string> dictionaryProdact;
 
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_SalesOffice> listDGVSalesOfficeID = new List<M_SalesOffice>();
+
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
         {
@@ -84,6 +87,8 @@ namespace SalesManagement_SysDev
 
         private void F_ButuryuSyukko_Load(object sender, EventArgs e)
         {
+            rdbHidden.Checked = true;
+            
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 
@@ -410,7 +415,7 @@ namespace SalesManagement_SysDev
 
             foreach (var item in listSyukkoDetail)
             {
-                T_ArrivalDetail ArrivalDetail = GenerateArrivalDetailAtRegistration(item);
+                T_ArrivalDetail ArrivalDetail = GenerateArrivalDetailAtRegistration(item, Syukko);
 
                 flgSyukkolist.Add(arrivalDetailDataAccess.AddArrivalDetailData(ArrivalDetail));
             }
@@ -504,7 +509,7 @@ namespace SalesManagement_SysDev
         {
             return new T_Arrival
             {
-                ArID = Syukko.SyID,
+                ArID = arrivalDataAccess.ArrivalNum() + 1,
                 SoID = Syukko.SoID,
                 ClID = Syukko.ClID,
                 OrID = Syukko.OrID,
@@ -519,12 +524,12 @@ namespace SalesManagement_SysDev
         //戻り値   ：入荷詳細登録情報
         //機　能   ：入荷詳細登録データのセット
         ///////////////////////////////
-        private T_ArrivalDetail GenerateArrivalDetailAtRegistration(T_SyukkoDetail SyukkoDetail)
+        private T_ArrivalDetail GenerateArrivalDetailAtRegistration(T_SyukkoDetail SyukkoDetail, T_Syukko Syukko)
         {
             return new T_ArrivalDetail
             {
                 ArDetailID = SyukkoDetail.SyDetailID,
-                ArID = SyukkoDetail.SyID,
+                ArID = arrivalDataAccess.GetIDOrderData(Syukko.OrID).ArID,
                 PrID = SyukkoDetail.PrID,
                 ArQuantity = SyukkoDetail.SyQuantity
             };
@@ -857,9 +862,12 @@ namespace SalesManagement_SysDev
             //営業所名のデータを取得
             listSalesOfficeID = SalesOfficeDataAccess.GetSalesOfficeDspData();
 
+            //データグリッドビュー用の営業所のデータを取得
+            listDGVSalesOfficeID = SalesOfficeDataAccess.GetSalesOfficeData();
+
             dictionarySalesOffice = new Dictionary<int, string> { };
 
-            foreach (var item in listSalesOfficeID)
+            foreach (var item in listDGVSalesOfficeID)
             {
                 dictionarySalesOffice.Add(item.SoID, item.SoName);
             }
@@ -944,6 +952,9 @@ namespace SalesManagement_SysDev
             dgvSyukko.Columns["SyFlag"].Width = 100;
             dgvSyukko.Columns["SyHidden"].Width = 163;
 
+            dgvSyukko.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            dgvSyukko.DefaultCellStyle.SelectionForeColor = Color.White;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvSyukko.Columns)
             {
@@ -983,6 +994,9 @@ namespace SalesManagement_SysDev
             dgvSyukkoDetail.Columns["PrID"].Width = 192;
             dgvSyukkoDetail.Columns["SyQuantity"].Width = 191;
 
+            dgvSyukkoDetail.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+            dgvSyukkoDetail.DefaultCellStyle.SelectionForeColor = Color.White;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvSyukkoDetail.Columns)
             {
@@ -1010,6 +1024,8 @@ namespace SalesManagement_SysDev
 
             //データからページに必要な部分だけを取り出す
             var depData = viewSyukko.Skip(pageSize * pageNum).Take(pageSize).ToList();
+
+            depData.Reverse();
 
             //1行ずつdgvSyukkoに挿入
             foreach (var item in depData)
@@ -1130,10 +1146,29 @@ namespace SalesManagement_SysDev
                 dtpSyukkoDate.Text = syukkoDate.ToString();
             }
 
+            bool cmbflg = false;
+            int intSalesOfficeID = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvSyukko[3, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key;
+
+            foreach (var item in listSalesOfficeID)
+            {
+                if (intSalesOfficeID == item.SoID)
+                {
+                    cmbflg = true;
+                }
+            }
+
+            if (cmbflg)
+            {
+                cmbSalesOfficeID.SelectedValue = intSalesOfficeID;
+            }
+            else
+            {
+                cmbSalesOfficeID.SelectedIndex = -1;
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbSyukkoID.Text = dgvSyukko[0, dgvSyukko.CurrentCellAddress.Y].Value.ToString();
             txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvSyukko[1, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
-            cmbSalesOfficeID.SelectedIndex = dictionarySalesOffice.FirstOrDefault(x => x.Value == dgvSyukko[3, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key - 1;
             txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvSyukko[2, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbOrderID.Text = dgvSyukko[4, dgvSyukko.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSyukko[7, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key;
@@ -1240,17 +1275,38 @@ namespace SalesManagement_SysDev
         {
             if (rdbSearch.Checked)
             {
-
+                txbEmployeeID.Enabled = true;
+                txbClientID.Enabled = true;
+                txbOrderID.Enabled = true;
+                cmbSalesOfficeID.Enabled = true;
+                dtpSyukkoDate.Enabled = true;
+                cmbConfirm.Enabled = true;
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
             }
 
             if (rdbConfirm.Checked)
             {
-
+                txbEmployeeID.Enabled = false;
+                txbClientID.Enabled = false;
+                txbOrderID.Enabled = false;
+                cmbSalesOfficeID.Enabled = false;
+                dtpSyukkoDate.Enabled = false;
+                cmbConfirm.Enabled = false;
+                txbHidden.Enabled = false;
+                cmbHidden.Enabled = false;
             }
 
             if (rdbHidden.Checked)
             {
-
+                txbEmployeeID.Enabled = false;
+                txbClientID.Enabled = false;
+                txbOrderID.Enabled = false;
+                cmbSalesOfficeID.Enabled = false;
+                dtpSyukkoDate.Enabled = false;
+                cmbConfirm.Enabled = false;
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
             }
         }
 

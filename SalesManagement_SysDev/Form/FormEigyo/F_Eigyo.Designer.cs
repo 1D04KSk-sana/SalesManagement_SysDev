@@ -36,6 +36,7 @@
             this.btnFormArrival = new System.Windows.Forms.Button();
             this.pnlEigyo = new System.Windows.Forms.Panel();
             this.lblEigyo = new System.Windows.Forms.Label();
+            this.btnPassChange = new System.Windows.Forms.Button();
             this.pnlEigyo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -140,12 +141,26 @@
             this.lblEigyo.TabIndex = 2;
             this.lblEigyo.Text = "営業管理";
             // 
+            // btnPassChange
+            // 
+            this.btnPassChange.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btnPassChange.Location = new System.Drawing.Point(34, 999);
+            this.btnPassChange.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.btnPassChange.Name = "btnPassChange";
+            this.btnPassChange.Size = new System.Drawing.Size(227, 50);
+            this.btnPassChange.TabIndex = 48;
+            this.btnPassChange.TabStop = false;
+            this.btnPassChange.Text = "パスワード変更";
+            this.btnPassChange.UseVisualStyleBackColor = true;
+            this.btnPassChange.Click += new System.EventHandler(this.btnPassChange_Click);
+            // 
             // F_Eigyo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(219)))), ((int)(((byte)(193)))));
             this.ClientSize = new System.Drawing.Size(1920, 1080);
+            this.Controls.Add(this.btnPassChange);
             this.Controls.Add(this.pnlEigyo);
             this.Controls.Add(this.btnFormArrival);
             this.Controls.Add(this.btnFormSyukko);
@@ -156,6 +171,7 @@
             this.Name = "F_Eigyo";
             this.Text = "営業画面";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.F_Eigyo_Load);
             this.pnlEigyo.ResumeLayout(false);
             this.pnlEigyo.PerformLayout();
             this.ResumeLayout(false);
@@ -172,5 +188,6 @@
         private System.Windows.Forms.Button btnFormArrival;
         private System.Windows.Forms.Panel pnlEigyo;
         private System.Windows.Forms.Label lblEigyo;
+        private System.Windows.Forms.Button btnPassChange;
     }
 }

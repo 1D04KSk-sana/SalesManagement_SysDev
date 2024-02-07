@@ -32,7 +32,7 @@ namespace SalesManagement_SysDev
             return listSmall;
         }
         ///////////////////////////////
-        //メソッド名：GetSmallData()
+        //メソッド名：GetSmallListData()
         //引　数：なし
         //戻り値：大分類データ
         //機　能：大分類データの全取得
@@ -53,6 +53,29 @@ namespace SalesManagement_SysDev
             }
 
             return listSmall;
+        }
+        ///////////////////////////////
+        //メソッド名：GetSmallIDData()
+        //引　数：小分類ID
+        //戻り値：小分類データ
+        //機　能：小分類データの全取得
+        ///////////////////////////////
+        public M_SmallClassification GetSmallIDData(int smallID)
+        {
+            M_SmallClassification Small = null;
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                Small = context.M_SmallClassifications.Single(x => x.ScID == smallID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Small;
         }
         ///////////////////////////////
         //メソッド名：GetSmallDspData()　　※オーバーロード
@@ -199,6 +222,45 @@ namespace SalesManagement_SysDev
             }
         }
         ///////////////////////////////
+        //メソッド名：UpdateHiddenMakerData()
+        //引　数：大分類ID
+        //戻り値：True or False
+        //機　能：メーカーデータの非表示更新
+        //      ：更新成功の場合True
+        //      ：更新失敗の場合False
+        ///////////////////////////////
+        public bool UpdateHiddenMakerData(int MajorID)
+        {
+            List<M_SmallClassification> listSmall = new List<M_SmallClassification>();
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                
+                listSmall = context.M_SmallClassifications.Where(x => x.McID == MajorID).ToList();
+
+                int smallcount = listSmall.Count();
+
+                for (int i = 1; i <= smallcount; i++)
+                {
+                    var Small = context.M_SmallClassifications.Single(x => x.McID == MajorID && x.ScID == i);
+
+                    Small.ScFlag = 1;
+
+                    context.SaveChanges();
+                }
+
+                context.Dispose();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+        ///////////////////////////////
         //メソッド名：GetAndMakerData()
         //引　数：検索条件
         //戻り値：条件完全一致メーカーデータ
@@ -212,9 +274,13 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.M_SmallClassifications.AsQueryable();
 
-                if (selectSmall.ScID != null && selectSmall.ScID != 0)
+                if (selectSmall.ScID != 0)
                 {
                     query = query.Where(x => x.ScID == selectSmall.ScID);
+                }
+                if (selectSmall.ScName == null)
+                {
+                    query = query.Where(x => x.ScName == selectSmall.ScName);
                 }
 
                 listSmall = query.ToList();
@@ -239,7 +305,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listSmall = context.M_SmallClassifications.Where(x => x.ScID == selectSmall.ScID).ToList();
+                listSmall = context.M_SmallClassifications.Where(x => x.ScID == selectSmall.ScID && x.ScName == selectSmall.ScName).ToList();
 
                 context.Dispose();
             }
@@ -256,14 +322,14 @@ namespace SalesManagement_SysDev
         //戻り値：受注詳細データ
         //機　能：受注詳細データの全取得
         ///////////////////////////////
-        public List<M_SmallClassification> GetSmallIDData(int SmallID)
+        public List<M_SmallClassification> GetMajorIDData(int MajorID)
         {
             List<M_SmallClassification> listSmall = new List<M_SmallClassification>();
 
             try
             {
                 var context = new SalesManagement_DevContext();
-                listSmall = context.M_SmallClassifications.Where(x => x.ScID == SmallID).ToList();
+                listSmall = context.M_SmallClassifications.Where(x => x.McID == MajorID).ToList();
                 context.Dispose();
             }
             catch (Exception ex)

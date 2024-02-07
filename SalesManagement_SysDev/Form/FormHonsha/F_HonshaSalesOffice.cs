@@ -55,6 +55,8 @@ namespace SalesManagement_SysDev
 
         private void F_HonshaSalesOffice_Load(object sender, EventArgs e)
         {
+            rdbRegister.Checked = true;
+            
             txbNumPage.Text = "1";
             txbPageSize.Text = "3";
 
@@ -168,7 +170,7 @@ namespace SalesManagement_SysDev
             //選択された行に対してのコントロールの変更
             SelectRowControl();
         }
-            private void btnDone_Click(object sender, EventArgs e)
+        private void btnDone_Click(object sender, EventArgs e)
         {
             //登録ラヂオボタンがチェックされているとき
             if (rdbRegister.Checked)
@@ -202,11 +204,21 @@ namespace SalesManagement_SysDev
             }
             if (rdbRegister.Checked)
             {
-                txbHidden.Enabled = false;
-                cmbHidden.Enabled = false;
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
+                txbSalesOfficeFAX.Enabled = true;
+                txbSalesOfficePostal.Enabled = true;
+                txbSalesOfficeAddress.Enabled = true;
+                txbSalesOfficeName.Enabled = true;
             }
             if (rdbUpdate.Checked)
             {
+                txbHidden.Enabled = true;
+                cmbHidden.Enabled = true;
+                txbSalesOfficeFAX.Enabled = true;
+                txbSalesOfficePostal.Enabled = true;
+                txbSalesOfficeAddress.Enabled = true;
+                txbSalesOfficeName.Enabled = true;
             }
         }
         ///////////////////////////////
@@ -450,13 +462,26 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private T_OperationLog GenerateLogAtRegistration(string OperationDone)
         {
+            int? intDBID = 0;
+
+            if (OperationDone == "登録")
+            {
+                var context = new SalesManagement_DevContext();
+
+                intDBID = context.M_SalesOffices.Count() + 1;
+            }
+            else
+            {
+                intDBID = int.Parse(txbSalesOfficeID.Text.Trim());
+            }
+
             return new T_OperationLog
             {
                 OpHistoryID = operationLogAccess.OperationLogNum() + 1,
                 EmID = F_Login.intEmployeeID,
                 FormName = "営業所管理画面",
                 OpDone = OperationDone,
-                OpDBID = int.Parse(txbSalesOfficeID.Text.Trim()),
+                OpDBID = intDBID,
                 OpSetTime = DateTime.Now,
             };
         }
@@ -777,12 +802,17 @@ namespace SalesManagement_SysDev
                     txbSalesOfficeName.Focus();
                     return false;
                 }
-                //営業所名存在チェック
-                if (salesOfficeDataAccess.CheckSalesOfficeNameExistence(txbSalesOfficeName.Text.Trim()))
+
+                M_SalesOffice SalesOffice = salesOfficeDataAccess.GetSalesOfficeIDData(int.Parse(txbSalesOfficeID.Text.Trim()));
+
+                if (SalesOffice.SoName == txbSalesOfficeName.Text.Trim())
                 {
-                    MessageBox.Show("営業所名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
+                    if (salesOfficeDataAccess.CheckSalesOfficeNameExistence(txbSalesOfficeName.Text.Trim()))
+                    {
+                        MessageBox.Show("営業所名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txbSalesOfficeName.Focus();
+                        return false;
+                    }
                 }
             }
             else
@@ -878,65 +908,6 @@ namespace SalesManagement_SysDev
                 MessageBox.Show("表示選択が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbHidden.Focus();
                 return false;
-            }
-            else if (cmbHidden.SelectedIndex == 1)
-            {
-                //顧客テーブルにおける営業所IDの存在チェック
-                if (clientDataAccess.CheckClientSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された営業所IDが顧客テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
-                //社員テーブルにおける営業所IDの存在チェック
-                if (employeeDataAccess.CheckEmployeeSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された営業所IDが社員テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
-                //受注テーブルにおける営業所IDの存在チェック
-                if (orderDataAccess.CheckOrderSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された営業所IDが受注テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
-                //注文テーブルにおける営業所IDの存在チェック
-                if (chumonDataAccess.CheckChumonSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された営業所IDが注文テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
-                //出庫テーブルにおける営業所IDの存在チェック
-                if (syukkoDataAccess.CheckSyukkoSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された営業所IDが出庫テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
-                //入荷テーブルにおける営業所IDの存在チェック
-                if (arrivalDataAccess.CheckArrivalSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された営業所IDが入荷テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
-                //出荷テーブルにおける営業所IDの存在チェック
-                if (shipmentDataAccess.CheckShipmenttSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された営業所IDが出荷テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
-                //売上テーブルにおける営業所IDの存在チェック
-                if (saleDataAccess.CheckSaleSalesOfficeIDExistence(int.Parse(txbSalesOfficeID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された営業所IDが売上テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbSalesOfficeID.Focus();
-                    return false;
-                }
             }
 
             return true;
@@ -1034,6 +1005,9 @@ namespace SalesManagement_SysDev
             dgvSalesOffice.Columns["SoFlag"].Width = 237;
             dgvSalesOffice.Columns["SoHidden"].Width = 237;
 
+            dgvSalesOffice.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(131)))), ((int)(((byte)(69)))));
+            dgvSalesOffice.DefaultCellStyle.SelectionForeColor = Color.White;
+
             //並び替えができないようにする
             foreach (DataGridViewColumn dataColumn in dgvSalesOffice.Columns)
             {
@@ -1075,14 +1049,15 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1EwgtxiqAgD8eJP7D9e6v9xkQuUIdCJ1H",
+                FileName = "https://docs.google.com/document/d/1KXNrOqFjH81U178g2ciWFvq3VsRJHfi6H0kTSw_l1hk",
                 UseShellExecute = true
             });
         }
 
         private void btnPageSize_Click(object sender, EventArgs e)
         {
-
+            txbNumPage.Text = "1";
+            GetDataGridView();
         }
     }
 }

@@ -6,9 +6,31 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 namespace SalesManagement_SysDev
 {
-     class PositionDataAccess
+    class PositionDataAccess
     {
+        ///////////////////////////////
+        //メソッド名：GetPositionIDData()
+        //引　数：役職ID
+        //戻り値：役職データ
+        //機　能：役職データの全取得
+        ///////////////////////////////
+        public M_Position GetPositionIDData(int positionID)
+        {
+            M_Position Position = null;
 
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                Position = context.M_Positions.Single(x => x.PoID == positionID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Position;
+        }
         ///////////////////////////////
         //メソッド名：GetPositionDspData()
         //引　数：なし

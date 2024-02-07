@@ -97,6 +97,29 @@ namespace SalesManagement_SysDev
             return listMajor;
         }
         ///////////////////////////////
+        //メソッド名：GetMajorIDData()
+        //引　数：大分類ID
+        //戻り値：大分類データ
+        //機　能：大分類データの全取得
+        ///////////////////////////////
+        public M_MajorClassification GetMajorIDData(int majorID)
+        {
+            M_MajorClassification Major = null;
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                Major = context.M_MajorClassifications.Single(x => x.McID == majorID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Major;
+        }
+        ///////////////////////////////
         //メソッド名：CheckMakerIDExistence()
         //引　数   ：メーカーコード
         //戻り値   ：True or False
@@ -212,9 +235,13 @@ namespace SalesManagement_SysDev
                 var context = new SalesManagement_DevContext();
                 var query = context.M_MajorClassifications.AsQueryable();
 
-                if (selectMajor.McID != null && selectMajor.McID != 0)
+                if ( selectMajor.McID != 0)
                 {
                     query = query.Where(x => x.McID == selectMajor.McID);
+                }
+                if (selectMajor.McName == null)
+                {
+                    query = query.Where(x => x.McName == selectMajor.McName);
                 }
 
                 listMajor = query.ToList();
@@ -239,7 +266,7 @@ namespace SalesManagement_SysDev
             try
             {
                 var context = new SalesManagement_DevContext();
-                listMajor = context.M_MajorClassifications.Where(x => x.McID == selectMajor.McID ).ToList();
+                listMajor = context.M_MajorClassifications.Where(x => x.McID == selectMajor.McID && x.McName == selectMajor.McName).ToList();
 
                 context.Dispose();
             }
@@ -249,6 +276,32 @@ namespace SalesManagement_SysDev
             }
 
             return listMajor;
+        }
+        ///////////////////////////////
+        //メソッド名：GetMajorNameData()
+        //引　数：大分類名
+        //戻り値：大分類ID
+        //機　能：大分類の取得
+        ///////////////////////////////
+        public int GetMajorNameData(string MajorName)
+        {
+            int intMajorID = 0;
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                var Major = context.M_MajorClassifications.Single(x => x.McName == MajorName);
+
+                intMajorID = Major.McID;
+
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return intMajorID;
         }
     }
 }

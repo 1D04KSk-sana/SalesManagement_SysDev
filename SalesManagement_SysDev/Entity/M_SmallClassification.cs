@@ -17,6 +17,8 @@ namespace SalesManagement_SysDev
         }
 
         [Key]
+        public int Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ScID { get; set; }           //小分類ID		
         public int McID { get; set; }           //大分類ID
         [MaxLength(50)]

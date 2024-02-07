@@ -56,13 +56,16 @@
             this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.rdbUpdate = new System.Windows.Forms.RadioButton();
             this.rdbRegister = new System.Windows.Forms.RadioButton();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.pnlHonsha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPosition)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlHonsha
             // 
             this.pnlHonsha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(255)))), ((int)(((byte)(112)))));
+            this.pnlHonsha.Controls.Add(this.pctHint);
             this.pnlHonsha.Controls.Add(this.btnClose);
             this.pnlHonsha.Controls.Add(this.lblPosition);
             this.pnlHonsha.Controls.Add(this.btnReturn);
@@ -83,13 +86,14 @@
             this.btnClose.TabIndex = 24;
             this.btnClose.Text = "閉じる";
             this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // lblPosition
             // 
             this.lblPosition.AutoSize = true;
             this.lblPosition.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.lblPosition.ForeColor = System.Drawing.Color.Black;
-            this.lblPosition.Location = new System.Drawing.Point(815, 46);
+            this.lblPosition.Location = new System.Drawing.Point(815, 41);
             this.lblPosition.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPosition.Name = "lblPosition";
             this.lblPosition.Size = new System.Drawing.Size(287, 64);
@@ -403,6 +407,17 @@
             this.rdbRegister.UseVisualStyleBackColor = true;
             this.rdbRegister.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
+            // pctHint
+            // 
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1610, 41);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 36;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
+            // 
             // F_HonshaPosition
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -441,6 +456,7 @@
             this.pnlHonsha.ResumeLayout(false);
             this.pnlHonsha.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPosition)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -476,5 +492,6 @@
         private System.Windows.Forms.RadioButton rdbSearch;
         private System.Windows.Forms.RadioButton rdbUpdate;
         private System.Windows.Forms.RadioButton rdbRegister;
+        private System.Windows.Forms.PictureBox pctHint;
     }
 }
