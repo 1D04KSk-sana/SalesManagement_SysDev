@@ -583,6 +583,8 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SetDataGridView(List<T_Sale> viewSale,List<T_SaleDetail> viewSaleDetail)
         {
+            viewSale.Reverse();
+
             //中身を消去
             dgvSale.Rows.Clear();
             //中身を消去
