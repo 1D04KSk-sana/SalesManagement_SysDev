@@ -565,13 +565,11 @@
             // rdbHidden
             // 
             this.rdbHidden.AutoSize = true;
-            this.rdbHidden.Checked = true;
             this.rdbHidden.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbHidden.Location = new System.Drawing.Point(72, 195);
             this.rdbHidden.Name = "rdbHidden";
             this.rdbHidden.Size = new System.Drawing.Size(208, 39);
             this.rdbHidden.TabIndex = 2;
-            this.rdbHidden.TabStop = true;
             this.rdbHidden.Text = "非表示更新";
             this.rdbHidden.UseVisualStyleBackColor = true;
             this.rdbHidden.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);

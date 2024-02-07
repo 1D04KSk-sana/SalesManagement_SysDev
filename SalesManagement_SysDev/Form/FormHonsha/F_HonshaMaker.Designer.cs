@@ -217,14 +217,12 @@ namespace SalesManagement_SysDev
             // rdbRegister
             // 
             this.rdbRegister.AutoSize = true;
-            this.rdbRegister.Checked = true;
             this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 26F);
             this.rdbRegister.Location = new System.Drawing.Point(29, 16);
             this.rdbRegister.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbRegister.Name = "rdbRegister";
             this.rdbRegister.Size = new System.Drawing.Size(103, 39);
             this.rdbRegister.TabIndex = 0;
-            this.rdbRegister.TabStop = true;
             this.rdbRegister.Text = "登録";
             this.rdbRegister.UseVisualStyleBackColor = true;
             this.rdbRegister.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);

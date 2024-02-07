@@ -448,14 +448,12 @@
             // rdbHiddenUpdate
             // 
             this.rdbHiddenUpdate.AutoSize = true;
-            this.rdbHiddenUpdate.Checked = true;
             this.rdbHiddenUpdate.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbHiddenUpdate.Location = new System.Drawing.Point(46, 190);
             this.rdbHiddenUpdate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbHiddenUpdate.Name = "rdbHiddenUpdate";
             this.rdbHiddenUpdate.Size = new System.Drawing.Size(208, 39);
             this.rdbHiddenUpdate.TabIndex = 79;
-            this.rdbHiddenUpdate.TabStop = true;
             this.rdbHiddenUpdate.Text = "非表示更新";
             this.rdbHiddenUpdate.UseVisualStyleBackColor = true;
             this.rdbHiddenUpdate.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);

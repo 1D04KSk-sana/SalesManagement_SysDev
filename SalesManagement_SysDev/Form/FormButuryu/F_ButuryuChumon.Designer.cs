@@ -182,14 +182,12 @@ namespace SalesManagement_SysDev
             // rdbHidden
             // 
             this.rdbHidden.AutoSize = true;
-            this.rdbHidden.Checked = true;
             this.rdbHidden.Font = new System.Drawing.Font("MS UI Gothic", 26F);
             this.rdbHidden.Location = new System.Drawing.Point(55, 186);
             this.rdbHidden.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbHidden.Name = "rdbHidden";
             this.rdbHidden.Size = new System.Drawing.Size(208, 39);
             this.rdbHidden.TabIndex = 0;
-            this.rdbHidden.TabStop = true;
             this.rdbHidden.Text = "非表示更新";
             this.rdbHidden.UseVisualStyleBackColor = true;
             this.rdbHidden.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
