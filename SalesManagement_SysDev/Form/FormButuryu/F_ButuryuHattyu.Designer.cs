@@ -141,10 +141,12 @@
             // 
             // txbNumPage
             // 
+            this.txbNumPage.Enabled = false;
             this.txbNumPage.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbNumPage.Location = new System.Drawing.Point(812, 1036);
             this.txbNumPage.Margin = new System.Windows.Forms.Padding(2);
             this.txbNumPage.Name = "txbNumPage";
+            this.txbNumPage.ReadOnly = true;
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 105;
             this.txbNumPage.TabStop = false;

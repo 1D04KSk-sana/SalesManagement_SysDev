@@ -246,10 +246,12 @@
             // 
             // txbNumPage
             // 
+            this.txbNumPage.Enabled = false;
             this.txbNumPage.Font = new System.Drawing.Font("MS UI Gothic", 16F);
             this.txbNumPage.Location = new System.Drawing.Point(1487, 1025);
             this.txbNumPage.Margin = new System.Windows.Forms.Padding(1);
             this.txbNumPage.Name = "txbNumPage";
+            this.txbNumPage.ReadOnly = true;
             this.txbNumPage.Size = new System.Drawing.Size(50, 29);
             this.txbNumPage.TabIndex = 41;
             this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);

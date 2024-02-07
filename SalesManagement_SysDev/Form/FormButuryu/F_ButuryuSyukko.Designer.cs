@@ -377,7 +377,7 @@
             // btnPageMin
             // 
             this.btnPageMin.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnPageMin.Location = new System.Drawing.Point(796, 1011);
+            this.btnPageMin.Location = new System.Drawing.Point(849, 1012);
             this.btnPageMin.Name = "btnPageMin";
             this.btnPageMin.Size = new System.Drawing.Size(50, 40);
             this.btnPageMin.TabIndex = 26;
@@ -388,9 +388,11 @@
             // 
             // txbNumPage
             // 
+            this.txbNumPage.Enabled = false;
             this.txbNumPage.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbNumPage.Location = new System.Drawing.Point(659, 1018);
+            this.txbNumPage.Location = new System.Drawing.Point(723, 1016);
             this.txbNumPage.Name = "txbNumPage";
+            this.txbNumPage.ReadOnly = true;
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 27;
             this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
@@ -399,7 +401,7 @@
             // 
             this.lblNumPage.AutoSize = true;
             this.lblNumPage.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblNumPage.Location = new System.Drawing.Point(715, 1025);
+            this.lblNumPage.Location = new System.Drawing.Point(779, 1023);
             this.lblNumPage.Name = "lblNumPage";
             this.lblNumPage.Size = new System.Drawing.Size(64, 21);
             this.lblNumPage.TabIndex = 28;
@@ -408,7 +410,7 @@
             // btnBack
             // 
             this.btnBack.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnBack.Location = new System.Drawing.Point(865, 1011);
+            this.btnBack.Location = new System.Drawing.Point(905, 1011);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(50, 40);
             this.btnBack.TabIndex = 29;
@@ -420,7 +422,7 @@
             // btnNext
             // 
             this.btnNext.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnNext.Location = new System.Drawing.Point(971, 1011);
+            this.btnNext.Location = new System.Drawing.Point(982, 1012);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(50, 40);
             this.btnNext.TabIndex = 30;
