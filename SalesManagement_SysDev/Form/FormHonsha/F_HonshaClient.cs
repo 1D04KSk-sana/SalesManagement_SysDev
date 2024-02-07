@@ -523,14 +523,6 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            //表示非表示選択の適否
-            if (cmbHidden.SelectedIndex == -1)
-            {
-                MessageBox.Show("表示家選択が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                cmbHidden.Focus();
-                return false;
-            }
-
             return true;
         }
 
