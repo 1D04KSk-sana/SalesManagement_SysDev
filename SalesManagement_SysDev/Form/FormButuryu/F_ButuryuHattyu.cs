@@ -577,6 +577,15 @@ namespace SalesManagement_SysDev
                     txbHattyuID.Focus();
                     return false;
                 }
+
+                T_Hattyu Hattyu = hattyuDataAccess.GetIDHattyuData(int.Parse(txbHattyuID.Text.Trim()));
+
+                if (Hattyu.WaWarehouseFlag == 1)
+                {
+                    MessageBox.Show("発注IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbHattyuID.Focus();
+                    return false;
+                }
             }
             else
             {

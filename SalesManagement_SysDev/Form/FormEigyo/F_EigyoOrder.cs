@@ -703,6 +703,16 @@ namespace SalesManagement_SysDev
                     txbOrderID.Focus();
                     return false;
                 }
+
+                T_Order Order = orderDataAccess.GetIDOrderData(int.Parse(txbOrderID.Text.Trim()));
+
+                //受注IDの確定チェック
+                if (Order.OrStateFlag == 1)
+                {
+                    MessageBox.Show("受注IDがすでに確定されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbOrderID.Focus();
+                    return false;
+                }
             }
             else
             {
