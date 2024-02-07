@@ -312,7 +312,7 @@ namespace SalesManagement_SysDev
         {
             Process.Start(new ProcessStartInfo
             {
-                FileName = "https://docs.google.com/document/d/1HEdrDIx3vWK5Z-YM3f-fX5uqfVorDScC/edit=true",
+                FileName = "https://docs.google.com/document/d/1HEdrDIx3vWK5Z-YM3f-fX5uqfVorDScC",
                 UseShellExecute = true
             });
         }
