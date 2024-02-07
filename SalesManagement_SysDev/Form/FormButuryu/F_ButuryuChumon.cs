@@ -553,7 +553,10 @@ namespace SalesManagement_SysDev
             txbChumonID.Text = string.Empty;
             txbOrderID.Text = string.Empty;
             txbClientID.Text = string.Empty;
+            txbClientName.Text = string.Empty;
             txbEmployeeID.Text = string.Empty;
+            txbEmployeeName.Text = string.Empty;
+            cmbConfirm.SelectedIndex = -1;
             cmbSalesOfficeID.SelectedIndex = -1;
             cmbHidden.SelectedIndex = -1;
             txbHidden.Text = string.Empty;
