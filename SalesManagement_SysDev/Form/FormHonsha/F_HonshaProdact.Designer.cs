@@ -304,6 +304,7 @@
             this.txbProdactPrice.Name = "txbProdactPrice";
             this.txbProdactPrice.Size = new System.Drawing.Size(220, 31);
             this.txbProdactPrice.TabIndex = 24;
+            this.txbProdactPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblProdactPrice
             // 
@@ -335,6 +336,7 @@
             this.txbProdactSafetyStock.Name = "txbProdactSafetyStock";
             this.txbProdactSafetyStock.Size = new System.Drawing.Size(220, 31);
             this.txbProdactSafetyStock.TabIndex = 28;
+            this.txbProdactSafetyStock.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblProdactSafetyStock
             // 
