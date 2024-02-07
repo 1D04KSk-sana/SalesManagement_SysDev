@@ -237,23 +237,23 @@
             // 
             this.lblMajorID.AutoSize = true;
             this.lblMajorID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblMajorID.Location = new System.Drawing.Point(1183, 278);
+            this.lblMajorID.Location = new System.Drawing.Point(1197, 278);
             this.lblMajorID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMajorID.Name = "lblMajorID";
-            this.lblMajorID.Size = new System.Drawing.Size(104, 24);
+            this.lblMajorID.Size = new System.Drawing.Size(82, 24);
             this.lblMajorID.TabIndex = 9;
-            this.lblMajorID.Text = "大分類ID";
+            this.lblMajorID.Text = "大分類";
             // 
             // lblSmallID
             // 
             this.lblSmallID.AutoSize = true;
             this.lblSmallID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblSmallID.Location = new System.Drawing.Point(1535, 273);
+            this.lblSmallID.Location = new System.Drawing.Point(1547, 278);
             this.lblSmallID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSmallID.Name = "lblSmallID";
-            this.lblSmallID.Size = new System.Drawing.Size(104, 24);
+            this.lblSmallID.Size = new System.Drawing.Size(82, 24);
             this.lblSmallID.TabIndex = 17;
-            this.lblSmallID.Text = "小分類ID";
+            this.lblSmallID.Text = "小分類";
             // 
             // txbProdactColor
             // 
@@ -548,7 +548,7 @@
             this.cmbSmallID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbSmallID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSmallID.FormattingEnabled = true;
-            this.cmbSmallID.Location = new System.Drawing.Point(1643, 270);
+            this.cmbSmallID.Location = new System.Drawing.Point(1643, 275);
             this.cmbSmallID.Margin = new System.Windows.Forms.Padding(2);
             this.cmbSmallID.Name = "cmbSmallID";
             this.cmbSmallID.Size = new System.Drawing.Size(220, 32);
