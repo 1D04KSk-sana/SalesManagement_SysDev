@@ -1397,7 +1397,7 @@ namespace SalesManagement_SysDev
                 EmID = F_Login.intEmployeeID,
                 FormName = "受注管理画面",
                 OpDone = OperationDone,
-                OpDBID = int.Parse(txbOrderID.Text.Trim()),
+                OpDBID = intDBID,
                 OpSetTime = DateTime.Now,
             };
         }
