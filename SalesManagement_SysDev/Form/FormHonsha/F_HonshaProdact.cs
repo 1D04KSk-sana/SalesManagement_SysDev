@@ -753,8 +753,18 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private T_OperationLog GenerateLogAtRegistration(string OperationDone)
         {
-            //登録・更新使用としている商品データの取得
-            var logOperatin = GenerateDataAtRegistration();
+            int? intDBID = 0;
+
+            if (OperationDone == "登録")
+            {
+                var context = new SalesManagement_DevContext();
+
+                intDBID = context.M_Products.Count() + 1;
+            }
+            else
+            {
+                intDBID = int.Parse(txbProdactID.Text.Trim());
+            }
 
             return new T_OperationLog
             {
@@ -762,7 +772,7 @@ namespace SalesManagement_SysDev
                 EmID = F_Login.intEmployeeID,
                 FormName = "商品管理画面",
                 OpDone = OperationDone,
-                OpDBID = logOperatin.PrID,
+                OpDBID = intDBID,
                 OpSetTime = DateTime.Now,
             };
         }
@@ -818,7 +828,7 @@ namespace SalesManagement_SysDev
         private bool GetValidDataAtRegistration()
         {
             // メーカー名の適否
-            if (cmbHidden.SelectedIndex == -1)
+            if (cmbMakerName.SelectedIndex == -1)
             {
                 MessageBox.Show("メーカー名が入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cmbMakerName.Focus();
@@ -879,14 +889,6 @@ namespace SalesManagement_SysDev
                 return false;
             }
 
-            // 小分類IDの適否
-            if (cmbMajorID.SelectedIndex == -1)
-            {
-                MessageBox.Show("小分類IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                cmbMajorID.Focus();
-                return false;
-            }
-
             // 型番の適否
             if (!String.IsNullOrEmpty(txbModelNumber.Text.Trim()))
             {
@@ -936,6 +938,14 @@ namespace SalesManagement_SysDev
             {
                 MessageBox.Show("大分類IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txbProdactName.Focus();
+                return false;
+            }
+
+            // 小分類IDの適否
+            if (cmbMajorID.SelectedIndex == -1)
+            {
+                MessageBox.Show("小分類IDが入力されていません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbMajorID.Focus();
                 return false;
             }
 

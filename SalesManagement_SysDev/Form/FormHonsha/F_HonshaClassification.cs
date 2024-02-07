@@ -513,13 +513,40 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private T_OperationLog GenerateMLogAtRegistration(string OperationDone)
         {
+            int? intDBID = 0;
+
+            if (OperationDone == "登録")
+            {
+                var context = new SalesManagement_DevContext();
+
+                if (cmbClassfication.SelectedIndex == 0)
+                {
+                    intDBID = context.M_MajorClassifications.Count() + 1;
+                }
+                if (cmbClassfication.SelectedIndex == 1)
+                {
+                    intDBID = context.M_SmallClassifications.Count() + 1;
+                }
+            }
+            else
+            {
+                if (cmbClassfication.SelectedIndex == 0)
+                {
+                    intDBID = int.Parse(txbMajorID.Text.Trim());
+                }
+                if (cmbClassfication.SelectedIndex == 1)
+                {
+                    intDBID = int.Parse(txbSmallID.Text.Trim());
+                }
+            }
+
             return new T_OperationLog
             {
                 OpHistoryID = operationLogAccess.OperationLogNum() + 1,
                 EmID = F_Login.intEmployeeID,
                 FormName = "分類管理画面",
                 OpDone = OperationDone,
-                OpDBID = int.Parse(txbMajorID.Text.Trim()),
+                OpDBID = intDBID,
                 OpSetTime = DateTime.Now,
             };
         }

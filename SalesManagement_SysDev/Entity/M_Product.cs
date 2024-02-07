@@ -44,7 +44,7 @@ namespace SalesManagement_SysDev
         [DataType(DataType.Date)]
         [Column(TypeName = "date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
-        public DateTime PrReleaseDate { get; set; } //発売日		
+        public DateTime? PrReleaseDate { get; set; } //発売日		
         public int PrFlag { get; set; }             //商品管理フラグ
         public string PrHidden { get; set; }	    //非表示理由		
 
