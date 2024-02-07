@@ -90,7 +90,7 @@
             this.lblOperationLog.Location = new System.Drawing.Point(810, 39);
             this.lblOperationLog.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOperationLog.Name = "lblOperationLog";
-            this.lblOperationLog.Size = new System.Drawing.Size(255, 64);
+            this.lblOperationLog.Size = new System.Drawing.Size(254, 64);
             this.lblOperationLog.TabIndex = 24;
             this.lblOperationLog.Text = "ログ管理";
             // 
@@ -345,6 +345,7 @@
             // 
             // txbEmployeeName
             // 
+            this.txbEmployeeName.Enabled = false;
             this.txbEmployeeName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbEmployeeName.Location = new System.Drawing.Point(655, 311);
             this.txbEmployeeName.Margin = new System.Windows.Forms.Padding(2);
