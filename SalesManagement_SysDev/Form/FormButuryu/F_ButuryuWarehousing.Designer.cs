@@ -465,7 +465,7 @@
             // 
             this.rdbConfirm.AutoSize = true;
             this.rdbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbConfirm.Location = new System.Drawing.Point(257, 182);
+            this.rdbConfirm.Location = new System.Drawing.Point(282, 182);
             this.rdbConfirm.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbConfirm.Name = "rdbConfirm";
             this.rdbConfirm.Size = new System.Drawing.Size(103, 39);
@@ -482,10 +482,10 @@
             this.rdbUpdate.Location = new System.Drawing.Point(54, 182);
             this.rdbUpdate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbUpdate.Name = "rdbUpdate";
-            this.rdbUpdate.Size = new System.Drawing.Size(173, 39);
+            this.rdbUpdate.Size = new System.Drawing.Size(208, 39);
             this.rdbUpdate.TabIndex = 124;
             this.rdbUpdate.TabStop = true;
-            this.rdbUpdate.Text = "表示更新";
+            this.rdbUpdate.Text = "非表示更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
             this.rdbUpdate.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
@@ -520,7 +520,7 @@
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(388, 182);
+            this.rdbSearch.Location = new System.Drawing.Point(413, 182);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);

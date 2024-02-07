@@ -447,7 +447,7 @@
             // 
             this.rdbConfirm.AutoSize = true;
             this.rdbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbConfirm.Location = new System.Drawing.Point(241, 195);
+            this.rdbConfirm.Location = new System.Drawing.Point(306, 195);
             this.rdbConfirm.Name = "rdbConfirm";
             this.rdbConfirm.Size = new System.Drawing.Size(103, 39);
             this.rdbConfirm.TabIndex = 1;
@@ -459,7 +459,7 @@
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(380, 195);
+            this.rdbSearch.Location = new System.Drawing.Point(445, 195);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
             this.rdbSearch.TabIndex = 0;
@@ -569,10 +569,10 @@
             this.rdbHidden.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbHidden.Location = new System.Drawing.Point(72, 195);
             this.rdbHidden.Name = "rdbHidden";
-            this.rdbHidden.Size = new System.Drawing.Size(138, 39);
+            this.rdbHidden.Size = new System.Drawing.Size(208, 39);
             this.rdbHidden.TabIndex = 2;
             this.rdbHidden.TabStop = true;
-            this.rdbHidden.Text = "非表示";
+            this.rdbHidden.Text = "非表示更新";
             this.rdbHidden.UseVisualStyleBackColor = true;
             this.rdbHidden.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
