@@ -70,6 +70,9 @@ namespace SalesManagement_SysDev
         //データグリッドビュー用の営業所データリスト
         private static List<M_Client> listDGVClientID = new List<M_Client>();
 
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_Employee> listDGVEmployeeID = new List<M_Employee>();
+
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
         {
@@ -883,9 +886,11 @@ namespace SalesManagement_SysDev
             //社員名のデータを取得
             listEmployee = employeeDataAccess.GetEmployeeDspData();
 
+            listDGVEmployeeID = employeeDataAccess.GetEmployeeData();
+
             dictionaryEmployee = new Dictionary<int, string> { };
 
-            foreach (var item in listEmployee)
+            foreach (var item in listDGVEmployeeID)
             {
                 dictionaryEmployee.Add(item.EmID, item.EmName);
             }
@@ -1180,7 +1185,7 @@ namespace SalesManagement_SysDev
             string strClientID = dictionaryClient.FirstOrDefault(x => x.Value == dgvSyukko[2, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             foreach (var item in listDGVClientID)
             {
-                if (strClientID == item.SoID.ToString())
+                if (strClientID == item.ClID.ToString())
                 {
                     cmbClientflg = true;
                 }
@@ -1195,9 +1200,27 @@ namespace SalesManagement_SysDev
                 txbClientID.Text = string.Empty;
             }
 
+            bool cmbEmployeeflg = false;
+            string strEmployeeID = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvSyukko[1, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            foreach (var item in listDGVEmployeeID)
+            {
+                if (strEmployeeID == item.EmID.ToString())
+                {
+                    cmbEmployeeflg = true;
+                }
+            }
+
+            if (cmbEmployeeflg)
+            {
+                txbEmployeeID.Text = strEmployeeID;
+            }
+            else
+            {
+                txbEmployeeID.Text = string.Empty;
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbSyukkoID.Text = dgvSyukko[0, dgvSyukko.CurrentCellAddress.Y].Value.ToString();
-            txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvSyukko[1, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbOrderID.Text = dgvSyukko[4, dgvSyukko.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSyukko[7, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvSyukko[8, dgvSyukko.CurrentCellAddress.Y]?.Value?.ToString();

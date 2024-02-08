@@ -30,6 +30,9 @@ namespace SalesManagement_SysDev
         //データベース社員テーブルアクセス用クラスのインスタンス化
         EmployeeDataAccess employeeDataAccess = new EmployeeDataAccess();
 
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_Employee> listDGVEmployeeID = new List<M_Employee>();
+
 
         public F_HonshaOperationLog()
         {
@@ -500,9 +503,11 @@ namespace SalesManagement_SysDev
 
             listEmployee = employeeDataAccess.GetEmployeeDspData();
 
+            listDGVEmployeeID = employeeDataAccess.GetEmployeeData();
+
             dictionaryEmployee = new Dictionary<int, string> { };
 
-            foreach (var item in listEmployee)
+            foreach (var item in listDGVEmployeeID)
             {
                 dictionaryEmployee.Add(item.EmID, item.EmName);
             }

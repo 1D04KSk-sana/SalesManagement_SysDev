@@ -78,6 +78,9 @@ namespace SalesManagement_SysDev
         //データグリッドビュー用の営業所データリスト
         private static List<M_Client> listDGVClientID = new List<M_Client>();
 
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_Employee> listDGVEmployeeID = new List<M_Employee>();
+
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
         {
@@ -953,9 +956,11 @@ namespace SalesManagement_SysDev
 
             listEmployee = employeeDataAccess.GetEmployeeDspData();
 
+            listDGVEmployeeID = employeeDataAccess.GetEmployeeData();
+
             dictionaryEmployee = new Dictionary<int, string> { };
 
-            foreach (var item in listEmployee)
+            foreach (var item in listDGVEmployeeID)
             {
                 dictionaryEmployee.Add(item.EmID, item.EmName);
             }
@@ -1005,7 +1010,7 @@ namespace SalesManagement_SysDev
 
             foreach (var item in listDGVClientID)
             {
-                if (strClientID == item.SoID.ToString())
+                if (strClientID == item.ClID.ToString())
                 {
                     cmbClientflg = true;
                 }
@@ -1020,11 +1025,29 @@ namespace SalesManagement_SysDev
                 txbClientID.Text = string.Empty;
             }
 
+            bool cmbEmployeeflg = false;
+            string strEmployeeID = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvChumon[5, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            foreach (var item in listDGVEmployeeID)
+            {
+                if (strEmployeeID == item.EmID.ToString())
+                {
+                    cmbEmployeeflg = true;
+                }
+            }
+
+            if (cmbEmployeeflg)
+            {
+                txbEmployeeID.Text = strEmployeeID;
+            }
+            else
+            {
+                txbEmployeeID.Text = string.Empty;
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbChumonID.Text = dgvChumon[0, dgvChumon.CurrentCellAddress.Y].Value.ToString();
             txbOrderID.Text = dgvChumon[2, dgvChumon.CurrentCellAddress.Y].Value.ToString();
             dtpChumonDate.Text = dgvChumon[3, dgvChumon.CurrentCellAddress.Y].Value.ToString();
-            txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvChumon[5, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvChumon[6, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key;
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvChumon[7, dgvChumon.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvChumon[8, dgvChumon.CurrentCellAddress.Y]?.Value?.ToString();
