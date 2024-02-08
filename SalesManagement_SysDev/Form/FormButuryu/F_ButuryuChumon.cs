@@ -820,6 +820,8 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SetDataGridView(List<T_Chumon> viewChumon)
         {
+            viewChumon.Reverse();
+
             //中身を消去
             dgvChumon.Rows.Clear();
             dgvChumonDetail.Rows.Clear();
@@ -833,8 +835,6 @@ namespace SalesManagement_SysDev
 
             //データからページに必要な部分だけを取り出す
             var depData = viewChumon.Skip(pageSize * pageNum).Take(pageSize).ToList();
-
-            depData.Reverse();
 
             //1行ずつdgvClientに挿入
             foreach (var item in depData)

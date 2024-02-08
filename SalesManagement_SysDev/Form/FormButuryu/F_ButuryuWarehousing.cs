@@ -242,6 +242,8 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SetDataGridView(List<T_Warehousing> viewWarehousing)
         {
+            viewWarehousing.Reverse();
+
             //中身を消去
             dgvWarehousing.Rows.Clear();
 
@@ -254,8 +256,6 @@ namespace SalesManagement_SysDev
 
             //データからページに必要な部分だけを取り出す
             var depData = viewWarehousing.Skip(pageSize * pageNum).Take(pageSize).ToList();
-
-            depData.Reverse();
 
             //1行ずつdgvWarehousingに挿入
             foreach (var item in depData)

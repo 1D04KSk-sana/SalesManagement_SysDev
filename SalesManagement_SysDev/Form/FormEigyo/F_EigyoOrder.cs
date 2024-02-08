@@ -1589,6 +1589,8 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SetDataGridView(List<T_Order> viewOrder)
         {
+            viewOrder.Reverse();
+
             //中身を消去
             dgvOrder.Rows.Clear();
             dgvOrderDetail.Rows.Clear();
@@ -1601,8 +1603,6 @@ namespace SalesManagement_SysDev
 
             //データからページに必要な部分だけを取り出す
             var depData = viewOrder.Skip(pageSize * pageNum).Take(pageSize).ToList();
-
-            depData.Reverse();
 
             //1行ずつdgvClientに挿入
             foreach (var item in depData)

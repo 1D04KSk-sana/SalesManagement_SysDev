@@ -217,7 +217,7 @@ namespace SalesManagement_SysDev
         {
 
             //商品のデータを取得
-            listProdact = prodactDataAccess.GetProdactDspData();
+            listProduct = prodactDataAccess.GetProdactDspData();
 
             listDGVProdactID = prodactDataAccess.GetProdactData();
 
@@ -301,6 +301,8 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SetDataGridView(List<T_Stock> viewStock)
         {
+            viewStock.Reverse();
+
             //中身を消去
             dgvStock.Rows.Clear();
 
@@ -313,8 +315,6 @@ namespace SalesManagement_SysDev
 
             //データからページに必要な部分だけを取り出す
             var depData = viewStock.Skip(pageSize * pageNum).Take(pageSize).ToList();
-
-            depData.Reverse();
 
             //1行ずつdgvClientに挿入
             foreach (var item in depData)

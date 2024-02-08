@@ -1032,6 +1032,8 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SetDataGridView(List<T_Syukko> viewSyukko)
         {
+            viewSyukko.Reverse();
+
             //中身を消去
             dgvSyukko.Rows.Clear();
 
@@ -1044,8 +1046,6 @@ namespace SalesManagement_SysDev
 
             //データからページに必要な部分だけを取り出す
             var depData = viewSyukko.Skip(pageSize * pageNum).Take(pageSize).ToList();
-
-            depData.Reverse();
 
             //1行ずつdgvSyukkoに挿入
             foreach (var item in depData)

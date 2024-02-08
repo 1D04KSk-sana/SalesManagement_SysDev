@@ -1111,6 +1111,8 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SetDataGridView(List<T_Shipment> viewShipment)
         {
+            viewShipment.Reverse();
+
             //中身を消去
             dgvShipment.Rows.Clear();
             dgvShipmentDetail.Rows.Clear();
@@ -1124,8 +1126,6 @@ namespace SalesManagement_SysDev
 
             //データからページに必要な部分だけを取り出す
             var depData = viewShipment.Skip(pageSize * pageNum).Take(pageSize).ToList();
-
-            depData.Reverse();
 
             //1行ずつdgvShipmentに挿入
             foreach (var item in depData)
