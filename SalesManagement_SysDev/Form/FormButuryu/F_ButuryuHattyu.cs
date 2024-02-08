@@ -61,6 +61,12 @@ namespace SalesManagement_SysDev
         //データグリッドビュー用のメーカーデータリスト
         private static List<M_Maker> listDGVMakerID = new List<M_Maker>();
 
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_Employee> listDGVEmployeeID = new List<M_Employee>();
+
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_Product> listDGVProdactID = new List<M_Product>();
+
         public F_ButuryuHattyu()
         {
             InitializeComponent();
@@ -116,9 +122,11 @@ namespace SalesManagement_SysDev
             //社員のデータ取得
             listEmployee = employeeDataAccess.GetEmployeeDspData();
 
+            listDGVEmployeeID = employeeDataAccess.GetEmployeeData();
+
             dictionaryEmployee = new Dictionary<int, string> { };
 
-            foreach (var item in listEmployee)
+            foreach (var item in listDGVEmployeeID)
             {
                 dictionaryEmployee.Add(item.EmID, item.EmName);
             }
@@ -126,9 +134,11 @@ namespace SalesManagement_SysDev
             //商品のデータを取得
             listProdact = prodactDataAccess.GetProdactDspData();
 
+            listDGVProdactID = prodactDataAccess.GetProdactData();
+
             dictionaryProdact = new Dictionary<int, string> { };
 
-            foreach (var item in listProdact)
+            foreach (var item in listDGVProdactID)
             {
                 dictionaryProdact.Add(item.PrID, item.PrName);
             }
@@ -1290,9 +1300,27 @@ namespace SalesManagement_SysDev
                 cmbMakerName.SelectedIndex = -1;
             }
 
+            bool cmbEmployeeflg = false;
+            string strEmployeeID = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvHattyu[2, dgvHattyu.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            foreach (var item in listDGVEmployeeID)
+            {
+                if (strEmployeeID == item.EmID.ToString())
+                {
+                    cmbEmployeeflg = true;
+                }
+            }
+
+            if (cmbEmployeeflg)
+            {
+                txbEmployeeID.Text = strEmployeeID;
+            }
+            else
+            {
+                txbEmployeeID.Text = string.Empty;
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbHattyuID.Text = dgvHattyu[0, dgvHattyu.CurrentCellAddress.Y].Value.ToString();
-            txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvHattyu[2, dgvHattyu.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             dtpHattyuDate.Text = dgvHattyu[3, dgvHattyu.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvHattyu[4, dgvHattyu.CurrentCellAddress.Y].Value.ToString()).Key;
             cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvHattyu[5, dgvHattyu.CurrentCellAddress.Y].Value.ToString()).Key;
@@ -1307,9 +1335,27 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SelectRowDetailControl()
         {
+            bool cmbProdactflg = false;
+            string strProdactID = dictionaryProdact.FirstOrDefault(x => x.Value == dgvHattyuDetail[2, dgvHattyuDetail.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            foreach (var item in listDGVProdactID)
+            {
+                if (strProdactID == item.PrID.ToString())
+                {
+                    cmbProdactflg = true;
+                }
+            }
+
+            if (cmbProdactflg)
+            {
+                txbEmployeeID.Text = strProdactID;
+            }
+            else
+            {
+                txbEmployeeID.Text = string.Empty;
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbHattyuID.Text = dgvHattyuDetail[0, dgvHattyuDetail.CurrentCellAddress.Y].Value.ToString();
-            txbProductID.Text = dictionaryProdact.FirstOrDefault(x => x.Value == dgvHattyuDetail[2, dgvHattyuDetail.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbHattyuQuantity.Text = dgvHattyuDetail[3, dgvHattyuDetail.CurrentCellAddress.Y].Value.ToString();
         }
 
@@ -1705,6 +1751,18 @@ namespace SalesManagement_SysDev
             prodactView.Show();
 
             this.Opacity = 0;
+        }
+
+        private void dgvStock_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //クリックされたDataGridViewがヘッダーのとき⇒何もしない
+            if (dgvHattyuDetail.SelectedCells.Count == 0)
+            {
+                return;
+            }
+
+            //選択された行に対してのコントロールの変更
+            SelectRowDetailControl();
         }
     }
 }

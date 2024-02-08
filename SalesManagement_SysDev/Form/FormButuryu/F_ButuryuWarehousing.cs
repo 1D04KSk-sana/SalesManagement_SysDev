@@ -47,6 +47,12 @@ namespace SalesManagement_SysDev
         StockDataAccess stockDataAccess = new StockDataAccess();
 
 
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_Employee> listDGVEmployeeID = new List<M_Employee>();
+
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_Product> listDGVProdactID = new List<M_Product>();
+
 
         public F_ButuryuWarehousing()
         {
@@ -98,12 +104,13 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void DictionarySet()
         {
-            //社員のデータ取得
             listEmployee = employeeDataAccess.GetEmployeeDspData();
+
+            listDGVEmployeeID = employeeDataAccess.GetEmployeeData();
 
             dictionaryEmployee = new Dictionary<int, string> { };
 
-            foreach (var item in listEmployee)
+            foreach (var item in listDGVEmployeeID)
             {
                 dictionaryEmployee.Add(item.EmID, item.EmName);
             }
@@ -111,13 +118,14 @@ namespace SalesManagement_SysDev
             //商品のデータを取得
             listProdact = prodactDataAccess.GetProdactDspData();
 
+            listDGVProdactID = prodactDataAccess.GetProdactData();
+
             dictionaryProdact = new Dictionary<int, string> { };
 
-            foreach (var item in listProdact)
+            foreach (var item in listDGVProdactID)
             {
                 dictionaryProdact.Add(item.PrID, item.PrName);
             }
-
         }
 
         ///////////////////////////////
@@ -465,9 +473,28 @@ namespace SalesManagement_SysDev
                 dtpWarehousingDate.Text = warehousingDate.ToString();
             }
 
+
+            bool cmbEmployeeflg = false;
+            string strEmployeeID = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvWarehousing[1, dgvWarehousing.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            foreach (var item in listDGVEmployeeID)
+            {
+                if (strEmployeeID == item.EmID.ToString())
+                {
+                    cmbEmployeeflg = true;
+                }
+            }
+
+            if (cmbEmployeeflg)
+            {
+                txbEmployeeID.Text = strEmployeeID;
+            }
+            else
+            {
+                txbEmployeeID.Text = string.Empty;
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbWarehousingID.Text = dgvWarehousing[0, dgvWarehousing.CurrentCellAddress.Y].Value.ToString();
-            txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvWarehousing[1, dgvWarehousing.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbHattyuID.Text = dgvWarehousing[2, dgvWarehousing.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvWarehousing[4, dgvWarehousing.CurrentCellAddress.Y].Value.ToString()).Key;
             cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvWarehousing[5, dgvWarehousing.CurrentCellAddress.Y].Value.ToString()).Key;

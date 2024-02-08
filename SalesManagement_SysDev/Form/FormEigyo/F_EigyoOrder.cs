@@ -68,6 +68,9 @@ namespace SalesManagement_SysDev
         //データグリッドビュー用の営業所データリスト
         private static List<M_Employee> listDGVEmployeeID = new List<M_Employee>();
 
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_Product> listDGVProdactID = new List<M_Product>();
+
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
         {
@@ -486,9 +489,11 @@ namespace SalesManagement_SysDev
             //商品のデータを取得
             listProdact = prodactDataAccess.GetProdactDspData();
 
+            listDGVProdactID = prodactDataAccess.GetProdactData();
+
             dictionaryProdact = new Dictionary<int, string> { };
 
-            foreach (var item in listProdact)
+            foreach (var item in listDGVProdactID)
             {
                 dictionaryProdact.Add(item.PrID, item.PrName);
             }
@@ -1777,8 +1782,26 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SelectRowDetailControl()
         {
+            bool cmbProdactflg = false;
+            string strProdactID = dictionaryProdact.FirstOrDefault(x => x.Value == dgvOrderDetail[2, dgvOrderDetail.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            foreach (var item in listDGVProdactID)
+            {
+                if (strProdactID == item.PrID.ToString())
+                {
+                    cmbProdactflg = true;
+                }
+            }
+
+            if (cmbProdactflg)
+            {
+                txbEmployeeID.Text = strProdactID;
+            }
+            else
+            {
+                txbEmployeeID.Text = string.Empty;
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
-            txbProductID.Text = dictionaryProdact.FirstOrDefault(x => x.Value == dgvOrderDetail[2, dgvOrderDetail.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbOrderQuantity.Text = dgvOrderDetail[3, dgvOrderDetail.CurrentCellAddress.Y].Value.ToString();
         }
 

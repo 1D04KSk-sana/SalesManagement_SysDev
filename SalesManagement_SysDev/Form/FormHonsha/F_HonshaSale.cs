@@ -136,7 +136,7 @@ namespace SalesManagement_SysDev
                 dictionaryClient.Add(item.ClID.Value, item.ClName);
             }
 
-            listProdact = prodactDataAccess.GetProdactDspData();
+            listProdact = prodactDataAccess.GetProdactData();
 
             dictionaryProdact = new Dictionary<int, string> { };
 

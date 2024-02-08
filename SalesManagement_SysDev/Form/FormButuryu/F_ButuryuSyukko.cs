@@ -73,6 +73,9 @@ namespace SalesManagement_SysDev
         //データグリッドビュー用の営業所データリスト
         private static List<M_Employee> listDGVEmployeeID = new List<M_Employee>();
 
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_Product> listDGVProdactID = new List<M_Product>();
+
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
         {
@@ -909,9 +912,11 @@ namespace SalesManagement_SysDev
 
             listProdact = prodactDataAccess.GetProdactDspData();
 
+            listDGVProdactID = prodactDataAccess.GetProdactData();
+
             dictionaryProdact = new Dictionary<int, string> { };
 
-            foreach (var item in listProdact)
+            foreach (var item in listDGVProdactID)
             {
                 dictionaryProdact.Add(item.PrID, item.PrName);
             }

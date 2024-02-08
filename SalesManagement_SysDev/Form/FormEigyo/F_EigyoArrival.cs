@@ -134,7 +134,7 @@ namespace SalesManagement_SysDev
             }
 
             //商品のデータを取得
-            listProdact = prodactDataAccess.GetProdactDspData();
+            listProdact = prodactDataAccess.GetProdactData();
 
             dictionaryProdact = new Dictionary<int, string> { };
 

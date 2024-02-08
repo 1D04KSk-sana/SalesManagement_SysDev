@@ -965,7 +965,7 @@ namespace SalesManagement_SysDev
                 dictionaryEmployee.Add(item.EmID, item.EmName);
             }
 
-            listProdact = prodactDataAccess.GetProdactDspData();
+            listProdact = prodactDataAccess.GetProdactData();
 
             dictionaryProdact = new Dictionary<int, string> { };
 

@@ -675,6 +675,7 @@
             this.dgvStock.Size = new System.Drawing.Size(700, 219);
             this.dgvStock.TabIndex = 130;
             this.dgvStock.TabStop = false;
+            this.dgvStock.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStock_CellClick);
             // 
             // btnProdactView
             // 
