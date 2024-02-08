@@ -588,6 +588,11 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void GetDataGridView()
         {
+            if (txbPageSize.Text.Trim() == string.Empty)
+            {
+                txbPageSize.Text = "1";
+            }
+
             //表示用の大分類リスト作成
             List<M_MajorClassification> listViewMajor = SetListMajor();
 
@@ -1440,6 +1445,12 @@ namespace SalesManagement_SysDev
                 FileName = "https://docs.google.com/document/d/1Z3YrjQt_mtU7ZRFNzO-mtclnj1IlsH01",
                 UseShellExecute = true
             });
+        }
+
+        private void btnPageSize_Click(object sender, EventArgs e)
+        {
+            txbNumPage.Text = "1";
+            GetDataGridView();
         }
     }
 }

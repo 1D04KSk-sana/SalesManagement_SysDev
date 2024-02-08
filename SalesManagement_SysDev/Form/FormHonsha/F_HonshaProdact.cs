@@ -1350,6 +1350,11 @@ namespace SalesManagement_SysDev
 
         private void btnPagesize_Click(object sender, EventArgs e)
         {
+            if (txbPageSize.Text.Trim() == string.Empty)
+            {
+                txbPageSize.Text = "1";
+            }
+
             txbNumPage.Text = "1";
             GetDataGridView();
         }

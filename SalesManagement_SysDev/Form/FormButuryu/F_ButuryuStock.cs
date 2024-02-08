@@ -248,6 +248,11 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void GetDataGridView()
         {
+            if (txbPageSize.Text.Trim() == string.Empty)
+            {
+                txbPageSize.Text = "1";
+            }
+
             //表示用の商品リスト作成
             List<T_Stock> listViewStock = SetListStock();
 

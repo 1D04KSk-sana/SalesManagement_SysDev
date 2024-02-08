@@ -693,6 +693,11 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void GetDataGridView()
         {
+            if (txbPageSize.Text.Trim() == string.Empty)
+            {
+                txbPageSize.Text = "1";
+            }
+
             //表示用の受注リスト作成
             List<T_Chumon> listViewChumon = SetListChumon();
 

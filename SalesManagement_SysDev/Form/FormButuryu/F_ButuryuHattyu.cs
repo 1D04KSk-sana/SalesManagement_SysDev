@@ -255,6 +255,11 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void GetDataGridView()
         {
+            if (txbPageSize.Text.Trim() == string.Empty)
+            {
+                txbPageSize.Text = "1";
+            }
+
             //表示用の発注リスト作成
             List<T_Hattyu> listViewHattyu = SetListHattyu();
 

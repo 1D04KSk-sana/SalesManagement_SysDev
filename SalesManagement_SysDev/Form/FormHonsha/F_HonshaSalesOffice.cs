@@ -243,6 +243,11 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void GetDataGridView()
         {
+            if (txbPageSize.Text.Trim() == string.Empty)
+            {
+                txbPageSize.Text = "1";
+            }
+
             //表示用の顧客リスト作成
             List<M_SalesOffice> listViewSalesOffice = SetListSalesOffice();
 
