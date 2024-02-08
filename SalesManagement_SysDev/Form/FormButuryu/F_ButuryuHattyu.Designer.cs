@@ -88,7 +88,7 @@
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbSearch.Location = new System.Drawing.Point(695, 179);
+            this.rdbSearch.Location = new System.Drawing.Point(718, 179);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
@@ -100,14 +100,12 @@
             // rdbRegister
             // 
             this.rdbRegister.AutoSize = true;
-            this.rdbRegister.Checked = true;
             this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbRegister.Location = new System.Drawing.Point(28, 179);
             this.rdbRegister.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbRegister.Name = "rdbRegister";
             this.rdbRegister.Size = new System.Drawing.Size(103, 39);
             this.rdbRegister.TabIndex = 107;
-            this.rdbRegister.TabStop = true;
             this.rdbRegister.Text = "登録";
             this.rdbRegister.UseVisualStyleBackColor = true;
             this.rdbRegister.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
@@ -115,6 +113,7 @@
             // cmbHidden
             // 
             this.cmbHidden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHidden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbHidden.FormattingEnabled = true;
             this.cmbHidden.Items.AddRange(new object[] {
@@ -140,10 +139,12 @@
             // 
             // txbNumPage
             // 
+            this.txbNumPage.Enabled = false;
             this.txbNumPage.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbNumPage.Location = new System.Drawing.Point(812, 1036);
             this.txbNumPage.Margin = new System.Windows.Forms.Padding(2);
             this.txbNumPage.Name = "txbNumPage";
+            this.txbNumPage.ReadOnly = true;
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 105;
             this.txbNumPage.TabStop = false;
@@ -254,6 +255,7 @@
             // cmbView
             // 
             this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbView.FormattingEnabled = true;
             this.cmbView.Items.AddRange(new object[] {
@@ -431,9 +433,9 @@
             this.rdbUpdate.Location = new System.Drawing.Point(352, 179);
             this.rdbUpdate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbUpdate.Name = "rdbUpdate";
-            this.rdbUpdate.Size = new System.Drawing.Size(173, 39);
+            this.rdbUpdate.Size = new System.Drawing.Size(208, 39);
             this.rdbUpdate.TabIndex = 110;
-            this.rdbUpdate.Text = "表示更新";
+            this.rdbUpdate.Text = "非表示更新";
             this.rdbUpdate.UseVisualStyleBackColor = true;
             this.rdbUpdate.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
@@ -552,6 +554,7 @@
             // cmbMakerName
             // 
             this.cmbMakerName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMakerName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbMakerName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbMakerName.FormattingEnabled = true;
             this.cmbMakerName.Location = new System.Drawing.Point(186, 349);
@@ -578,7 +581,7 @@
             // 
             this.rdbConfirm.AutoSize = true;
             this.rdbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.rdbConfirm.Location = new System.Drawing.Point(563, 179);
+            this.rdbConfirm.Location = new System.Drawing.Point(586, 179);
             this.rdbConfirm.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbConfirm.Name = "rdbConfirm";
             this.rdbConfirm.Size = new System.Drawing.Size(103, 39);
@@ -612,6 +615,7 @@
             // cmbConfirm
             // 
             this.cmbConfirm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbConfirm.FormattingEnabled = true;
             this.cmbConfirm.Items.AddRange(new object[] {
@@ -671,6 +675,7 @@
             this.dgvStock.Size = new System.Drawing.Size(700, 219);
             this.dgvStock.TabIndex = 130;
             this.dgvStock.TabStop = false;
+            this.dgvStock.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStock_CellClick);
             // 
             // btnProdactView
             // 

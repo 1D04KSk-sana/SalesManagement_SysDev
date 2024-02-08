@@ -62,6 +62,15 @@ namespace SalesManagement_SysDev
         //データグリッドビュー用の営業所データリスト
         private static List<M_SalesOffice> listDGVSalesOfficeID = new List<M_SalesOffice>();
 
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_Client> listDGVClientID = new List<M_Client>();
+
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_Employee> listDGVEmployeeID = new List<M_Employee>();
+
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_Product> listDGVProdactID = new List<M_Product>();
+
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
         {
@@ -253,18 +262,15 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            if (e.KeyChar > '0' && '9' > e.KeyChar)
-            {
-                // テキストボックスに入力されている値を取得
-                string inputText = textBox.Text + e.KeyChar;
+            // テキストボックスに入力されている値を取得
+            string inputText = textBox.Text + e.KeyChar;
 
-                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
-                int parsedValue;
-                if (!int.TryParse(inputText, out parsedValue))
-                {
-                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    e.Handled = true;
-                }
+            // 8文字を超える場合は入力を許可しない
+            if (inputText.Length > 8 && e.KeyChar != '\b')
+            {
+                MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Handled = true;
+                return;
             }
         }
 
@@ -460,18 +466,22 @@ namespace SalesManagement_SysDev
 
             listClient = clientDataAccess.GetClientDspData();
 
+            listDGVClientID = clientDataAccess.GetClientData();
+
             dictionaryClient = new Dictionary<int, string> { };
 
-            foreach (var item in listClient)
+            foreach (var item in listDGVClientID)
             {
                 dictionaryClient.Add(item.ClID.Value, item.ClName);
             }
 
             listEmployee = employeeDataAccess.GetEmployeeDspData();
 
+            listDGVEmployeeID = employeeDataAccess.GetEmployeeData();
+
             dictionaryEmployee = new Dictionary<int, string> { };
 
-            foreach (var item in listEmployee)
+            foreach (var item in listDGVEmployeeID)
             {
                 dictionaryEmployee.Add(item.EmID, item.EmName);
             }
@@ -479,9 +489,11 @@ namespace SalesManagement_SysDev
             //商品のデータを取得
             listProdact = prodactDataAccess.GetProdactDspData();
 
+            listDGVProdactID = prodactDataAccess.GetProdactData();
+
             dictionaryProdact = new Dictionary<int, string> { };
 
-            foreach (var item in listProdact)
+            foreach (var item in listDGVProdactID)
             {
                 dictionaryProdact.Add(item.PrID, item.PrName);
             }
@@ -703,6 +715,16 @@ namespace SalesManagement_SysDev
                 if (!orderDataAccess.CheckOrderIDExistence(int.Parse(txbOrderID.Text.Trim())))
                 {
                     MessageBox.Show("受注IDが存在しません", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbOrderID.Focus();
+                    return false;
+                }
+
+                T_Order Order = orderDataAccess.GetIDOrderData(int.Parse(txbOrderID.Text.Trim()));
+
+                //受注IDの確定チェック
+                if (Order.OrStateFlag == 1)
+                {
+                    MessageBox.Show("受注IDがすでに確定されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txbOrderID.Focus();
                     return false;
                 }
@@ -1390,7 +1412,7 @@ namespace SalesManagement_SysDev
                 EmID = F_Login.intEmployeeID,
                 FormName = "受注管理画面",
                 OpDone = OperationDone,
-                OpDBID = int.Parse(txbOrderID.Text.Trim()),
+                OpDBID = intDBID,
                 OpSetTime = DateTime.Now,
             };
         }
@@ -1506,6 +1528,11 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void GetDataGridView()
         {
+            if (txbPageSize.Text.Trim() == string.Empty)
+            {
+                txbPageSize.Text = "1";
+            }
+
             //表示用の受注リスト作成
             List<T_Order> listViewOrder = SetListOrder();
 
@@ -1562,6 +1589,8 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SetDataGridView(List<T_Order> viewOrder)
         {
+            viewOrder.Reverse();
+
             //中身を消去
             dgvOrder.Rows.Clear();
             dgvOrderDetail.Rows.Clear();
@@ -1574,8 +1603,6 @@ namespace SalesManagement_SysDev
 
             //データからページに必要な部分だけを取り出す
             var depData = viewOrder.Skip(pageSize * pageNum).Take(pageSize).ToList();
-
-            depData.Reverse();
 
             //1行ずつdgvClientに挿入
             foreach (var item in depData)
@@ -1699,12 +1726,48 @@ namespace SalesManagement_SysDev
             {
                 cmbSalesOfficeID.SelectedIndex = -1;
             }
-            
+
+            bool cmbClientflg = false;
+            string strClientID = dictionaryClient.FirstOrDefault(x => x.Value == dgvOrder[2, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            foreach (var item in listDGVClientID)
+            {
+                if (strClientID == item.ClID.ToString())
+                {
+                    cmbClientflg = true;
+                }
+            }
+
+            if (cmbClientflg)
+            {
+                txbClientID.Text = strClientID;
+            }
+            else
+            {
+                txbClientID.Text = string.Empty;
+            }
+
+            bool cmbEmployeeflg = false;
+            string strEmployeeID = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvOrder[4, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            foreach (var item in listDGVEmployeeID)
+            {
+                if (strEmployeeID == item.EmID.ToString())
+                {
+                    cmbEmployeeflg = true;
+                }
+            }
+
+            if (cmbEmployeeflg)
+            {
+                txbEmployeeID.Text = strEmployeeID;
+            }
+            else
+            {
+                txbEmployeeID.Text = string.Empty;
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbOrderID.Text = dgvOrder[0, dgvOrder.CurrentCellAddress.Y].Value.ToString();
-            txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvOrder[2, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbOrderManager.Text = dgvOrder[3, dgvOrder.CurrentCellAddress.Y].Value.ToString();
-            txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvOrder[4, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             dtpOrderDate.Text = dgvOrder[5, dgvOrder.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvOrder[6, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key;
             cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvOrder[7, dgvOrder.CurrentCellAddress.Y].Value.ToString()).Key;
@@ -1719,8 +1782,26 @@ namespace SalesManagement_SysDev
         ///////////////////////////////
         private void SelectRowDetailControl()
         {
+            bool cmbProdactflg = false;
+            string strProdactID = dictionaryProdact.FirstOrDefault(x => x.Value == dgvOrderDetail[2, dgvOrderDetail.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            foreach (var item in listDGVProdactID)
+            {
+                if (strProdactID == item.PrID.ToString())
+                {
+                    cmbProdactflg = true;
+                }
+            }
+
+            if (cmbProdactflg)
+            {
+                txbProductID.Text = strProdactID;
+            }
+            else
+            {
+                txbProductID.Text = string.Empty;
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
-            txbProductID.Text = dictionaryProdact.FirstOrDefault(x => x.Value == dgvOrderDetail[2, dgvOrderDetail.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbOrderQuantity.Text = dgvOrderDetail[3, dgvOrderDetail.CurrentCellAddress.Y].Value.ToString();
         }
 

@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             this.pnlProdactView = new System.Windows.Forms.Panel();
-            this.lblProdact = new System.Windows.Forms.Label();
+            this.pctHint = new System.Windows.Forms.PictureBox();
             this.btnReturn = new System.Windows.Forms.Button();
+            this.lblProdact = new System.Windows.Forms.Label();
             this.rdbSearch = new System.Windows.Forms.RadioButton();
             this.btnDone = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
@@ -55,10 +56,9 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPageMax = new System.Windows.Forms.Button();
             this.dgvProdact = new System.Windows.Forms.DataGridView();
-            this.pctHint = new System.Windows.Forms.PictureBox();
             this.pnlProdactView.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProdact)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProdact)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlProdactView
@@ -73,16 +73,16 @@
             this.pnlProdactView.Size = new System.Drawing.Size(1920, 150);
             this.pnlProdactView.TabIndex = 44;
             // 
-            // lblProdact
+            // pctHint
             // 
-            this.lblProdact.AutoSize = true;
-            this.lblProdact.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblProdact.Location = new System.Drawing.Point(843, 45);
-            this.lblProdact.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblProdact.Name = "lblProdact";
-            this.lblProdact.Size = new System.Drawing.Size(287, 64);
-            this.lblProdact.TabIndex = 1;
-            this.lblProdact.Text = "商品一覧";
+            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
+            this.pctHint.Location = new System.Drawing.Point(1817, 39);
+            this.pctHint.Name = "pctHint";
+            this.pctHint.Size = new System.Drawing.Size(60, 60);
+            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pctHint.TabIndex = 74;
+            this.pctHint.TabStop = false;
+            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
             // 
             // btnReturn
             // 
@@ -97,6 +97,17 @@
             this.btnReturn.Text = "戻る";
             this.btnReturn.UseVisualStyleBackColor = false;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
+            // 
+            // lblProdact
+            // 
+            this.lblProdact.AutoSize = true;
+            this.lblProdact.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lblProdact.Location = new System.Drawing.Point(843, 45);
+            this.lblProdact.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblProdact.Name = "lblProdact";
+            this.lblProdact.Size = new System.Drawing.Size(287, 64);
+            this.lblProdact.TabIndex = 1;
+            this.lblProdact.Text = "商品一覧";
             // 
             // rdbSearch
             // 
@@ -142,6 +153,7 @@
             // cmbView
             // 
             this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 26F);
             this.cmbView.FormattingEnabled = true;
             this.cmbView.Items.AddRange(new object[] {
@@ -179,6 +191,7 @@
             // cmbSmallID
             // 
             this.cmbSmallID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSmallID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbSmallID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSmallID.FormattingEnabled = true;
             this.cmbSmallID.Location = new System.Drawing.Point(1120, 274);
@@ -190,6 +203,7 @@
             // cmbMajorID
             // 
             this.cmbMajorID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMajorID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbMajorID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbMajorID.FormattingEnabled = true;
             this.cmbMajorID.Items.AddRange(new object[] {
@@ -229,6 +243,7 @@
             // cmbMakerName
             // 
             this.cmbMakerName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMakerName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbMakerName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbMakerName.FormattingEnabled = true;
             this.cmbMakerName.Location = new System.Drawing.Point(145, 376);
@@ -321,10 +336,12 @@
             // 
             // txbNumPage
             // 
+            this.txbNumPage.Enabled = false;
             this.txbNumPage.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbNumPage.Location = new System.Drawing.Point(1542, 1036);
             this.txbNumPage.Margin = new System.Windows.Forms.Padding(2);
             this.txbNumPage.Name = "txbNumPage";
+            this.txbNumPage.ReadOnly = true;
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 117;
             this.txbNumPage.TabStop = false;
@@ -396,17 +413,6 @@
             this.dgvProdact.TabStop = false;
             this.dgvProdact.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProdact_CellClick);
             // 
-            // pctHint
-            // 
-            this.pctHint.Image = global::SalesManagement_SysDev.Properties.Resources.Question;
-            this.pctHint.Location = new System.Drawing.Point(1817, 39);
-            this.pctHint.Name = "pctHint";
-            this.pctHint.Size = new System.Drawing.Size(60, 60);
-            this.pctHint.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pctHint.TabIndex = 74;
-            this.pctHint.TabStop = false;
-            this.pctHint.Click += new System.EventHandler(this.pctHint_Click);
-            // 
             // ProdactView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -445,8 +451,8 @@
             this.Load += new System.EventHandler(this.ProdactView_Load);
             this.pnlProdactView.ResumeLayout(false);
             this.pnlProdactView.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvProdact)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProdact)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

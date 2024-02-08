@@ -157,7 +157,7 @@ namespace SalesManagement_SysDev
             // 
             this.rdbSearch.AutoSize = true;
             this.rdbSearch.Font = new System.Drawing.Font("MS UI Gothic", 26F);
-            this.rdbSearch.Location = new System.Drawing.Point(419, 186);
+            this.rdbSearch.Location = new System.Drawing.Point(500, 186);
             this.rdbSearch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbSearch.Name = "rdbSearch";
             this.rdbSearch.Size = new System.Drawing.Size(103, 39);
@@ -170,7 +170,7 @@ namespace SalesManagement_SysDev
             // 
             this.rdbConfirm.AutoSize = true;
             this.rdbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 26F);
-            this.rdbConfirm.Location = new System.Drawing.Point(241, 186);
+            this.rdbConfirm.Location = new System.Drawing.Point(322, 186);
             this.rdbConfirm.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbConfirm.Name = "rdbConfirm";
             this.rdbConfirm.Size = new System.Drawing.Size(103, 39);
@@ -182,15 +182,13 @@ namespace SalesManagement_SysDev
             // rdbHidden
             // 
             this.rdbHidden.AutoSize = true;
-            this.rdbHidden.Checked = true;
             this.rdbHidden.Font = new System.Drawing.Font("MS UI Gothic", 26F);
             this.rdbHidden.Location = new System.Drawing.Point(55, 186);
             this.rdbHidden.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.rdbHidden.Name = "rdbHidden";
-            this.rdbHidden.Size = new System.Drawing.Size(138, 39);
+            this.rdbHidden.Size = new System.Drawing.Size(208, 39);
             this.rdbHidden.TabIndex = 0;
-            this.rdbHidden.TabStop = true;
-            this.rdbHidden.Text = "非表示";
+            this.rdbHidden.Text = "非表示更新";
             this.rdbHidden.UseVisualStyleBackColor = true;
             this.rdbHidden.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
             // 
@@ -252,6 +250,7 @@ namespace SalesManagement_SysDev
             // 
             this.cmbSalesOfficeID.BackColor = System.Drawing.Color.White;
             this.cmbSalesOfficeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSalesOfficeID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSalesOfficeID.FormattingEnabled = true;
             this.cmbSalesOfficeID.Location = new System.Drawing.Point(640, 274);
@@ -300,6 +299,7 @@ namespace SalesManagement_SysDev
             // 
             this.cmbView.BackColor = System.Drawing.Color.White;
             this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbView.FormattingEnabled = true;
             this.cmbView.Items.AddRange(new object[] {
@@ -361,10 +361,12 @@ namespace SalesManagement_SysDev
             // 
             // txbNumPage
             // 
+            this.txbNumPage.Enabled = false;
             this.txbNumPage.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbNumPage.Location = new System.Drawing.Point(1356, 1041);
             this.txbNumPage.Margin = new System.Windows.Forms.Padding(2);
             this.txbNumPage.Name = "txbNumPage";
+            this.txbNumPage.ReadOnly = true;
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 74;
             this.txbNumPage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
@@ -468,6 +470,7 @@ namespace SalesManagement_SysDev
             // 
             this.cmbHidden.BackColor = System.Drawing.Color.White;
             this.cmbHidden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHidden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbHidden.FormattingEnabled = true;
             this.cmbHidden.Items.AddRange(new object[] {
@@ -593,6 +596,7 @@ namespace SalesManagement_SysDev
             // 
             this.cmbConfirm.BackColor = System.Drawing.Color.White;
             this.cmbConfirm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbConfirm.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbConfirm.FormattingEnabled = true;
             this.cmbConfirm.Items.AddRange(new object[] {

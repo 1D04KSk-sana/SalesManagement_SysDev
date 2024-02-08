@@ -47,8 +47,8 @@
             this.btnDone = new System.Windows.Forms.Button();
             this.cmbPositionID = new System.Windows.Forms.ComboBox();
             this.dtpHireDate = new System.Windows.Forms.DateTimePicker();
-            this.txbEmployeeID = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.txbEmployeeID = new System.Windows.Forms.TextBox();
             this.pnlHonsha.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pctHint)).BeginInit();
             this.SuspendLayout();
@@ -127,6 +127,7 @@
             // cmbSalesOfficeID
             // 
             this.cmbSalesOfficeID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSalesOfficeID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbSalesOfficeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSalesOfficeID.FormattingEnabled = true;
             this.cmbSalesOfficeID.Items.AddRange(new object[] {
@@ -245,6 +246,7 @@
             // cmbPositionID
             // 
             this.cmbPositionID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPositionID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbPositionID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbPositionID.ForeColor = System.Drawing.Color.Black;
             this.cmbPositionID.FormattingEnabled = true;
@@ -263,15 +265,6 @@
             this.dtpHireDate.Size = new System.Drawing.Size(220, 29);
             this.dtpHireDate.TabIndex = 56;
             // 
-            // txbEmployeeID
-            // 
-            this.txbEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txbEmployeeID.Location = new System.Drawing.Point(570, 237);
-            this.txbEmployeeID.Name = "txbEmployeeID";
-            this.txbEmployeeID.Size = new System.Drawing.Size(220, 31);
-            this.txbEmployeeID.TabIndex = 58;
-            this.txbEmployeeID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -283,6 +276,16 @@
             this.label1.TabIndex = 59;
             this.label1.Text = "社員ID";
             // 
+            // txbEmployeeID
+            // 
+            this.txbEmployeeID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txbEmployeeID.Location = new System.Drawing.Point(570, 237);
+            this.txbEmployeeID.Margin = new System.Windows.Forms.Padding(2);
+            this.txbEmployeeID.Name = "txbEmployeeID";
+            this.txbEmployeeID.Size = new System.Drawing.Size(220, 31);
+            this.txbEmployeeID.TabIndex = 60;
+            this.txbEmployeeID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
+            // 
             // F_HonshaSinghUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 16F);
@@ -290,8 +293,8 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(213)))), ((int)(((byte)(255)))), ((int)(((byte)(218)))));
             this.ClientSize = new System.Drawing.Size(1902, 1033);
             this.ControlBox = false;
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.txbEmployeeID);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.dtpHireDate);
             this.Controls.Add(this.cmbPositionID);
             this.Controls.Add(this.pnlHonsha);
@@ -342,9 +345,9 @@
         private System.Windows.Forms.Button btnDone;
         private System.Windows.Forms.ComboBox cmbPositionID;
         private System.Windows.Forms.DateTimePicker dtpHireDate;
-        private System.Windows.Forms.MaskedTextBox txbEmployeeID;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.PictureBox pctHint;
+        private System.Windows.Forms.TextBox txbEmployeeID;
     }
 }

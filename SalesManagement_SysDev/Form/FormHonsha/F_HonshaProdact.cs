@@ -543,72 +543,6 @@ namespace SalesManagement_SysDev
                 cmbHidden.Focus();
                 return false;
             }
-            else if (cmbHidden.SelectedIndex == 1)
-            {
-                //在庫テーブルにおける商品IDの存在チェック
-                if (stockDataAccess.CheckStockProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された商品IDが在庫テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactID.Focus();
-                    return false;
-                }
-                //受注詳細テーブルにおける商品IDの存在チェック
-                if (orderDetailDataAccess.CheckOrderDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された商品IDが受注詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactID.Focus();
-                    return false;
-                }
-                //注文詳細テーブルにおける商品IDの存在チェック
-                if (chumonDetailDataAccess.CheckChumonDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された商品IDが注文詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactID.Focus();
-                    return false;
-                }
-                //出庫詳細テーブルにおける商品IDの存在チェック
-                if (syukkoDetailDataAccess.CheckSyukkoDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された商品IDが出庫詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactID.Focus();
-                    return false;
-                }
-                //入荷詳細テーブルにおける商品IDの存在チェック
-                if (arrivalDetailDataAccess.CheckArrivalDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された商品IDが入荷詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactID.Focus();
-                    return false;
-                }
-                //出荷詳細テーブルにおける商品IDの存在チェック
-                if (shipmentDetailDataAccess.CheckShipmentDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された商品IDが出荷詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactID.Focus();
-                    return false;
-                }
-                //発注詳細テーブルにおける商品IDの存在チェック
-                if (hattyuDetailDataAccess.CheckHattyuDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された商品IDが発注詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactID.Focus();
-                    return false;
-                }
-                //入庫詳細テーブルにおける商品IDの存在チェック
-                if (warehousingDetailDataAccess.CheckWarehousingDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された商品IDが入庫詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactID.Focus();
-                    return false;
-                }
-                //売上詳細テーブルにおける商品IDの存在チェック
-                if (saleDetailDataAccess.CheckSaleDetailProdactIDExistence(int.Parse(txbProdactID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された商品IDが売上詳細テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbProdactID.Focus();
-                    return false;
-                }
-            }
 
             return true;
         }
@@ -1350,6 +1284,11 @@ namespace SalesManagement_SysDev
 
         private void btnPagesize_Click(object sender, EventArgs e)
         {
+            if (txbPageSize.Text.Trim() == string.Empty)
+            {
+                txbPageSize.Text = "1";
+            }
+
             txbNumPage.Text = "1";
             GetDataGridView();
         }
@@ -1400,18 +1339,15 @@ namespace SalesManagement_SysDev
                 return;
             }
 
-            if (e.KeyChar > '0' && '9' > e.KeyChar)
-            {
-                // テキストボックスに入力されている値を取得
-                string inputText = textBox.Text + e.KeyChar;
+            // テキストボックスに入力されている値を取得
+            string inputText = textBox.Text + e.KeyChar;
 
-                // 入力されている値をTryParseして、結果がTrueの場合のみ処理を行う
-                int parsedValue;
-                if (!int.TryParse(inputText, out parsedValue))
-                {
-                    MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    e.Handled = true;
-                }
+            // 8文字を超える場合は入力を許可しない
+            if (inputText.Length > 8 && e.KeyChar != '\b')
+            {
+                MessageBox.Show("入力された数字が大きすぎます", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Handled = true;
+                return;
             }
         }
 

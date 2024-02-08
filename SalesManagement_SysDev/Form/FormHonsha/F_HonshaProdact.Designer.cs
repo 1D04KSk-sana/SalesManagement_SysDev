@@ -128,6 +128,7 @@
             // cmbView
             // 
             this.cmbView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbView.Font = new System.Drawing.Font("MS UI Gothic", 26F);
             this.cmbView.FormattingEnabled = true;
             this.cmbView.Items.AddRange(new object[] {
@@ -181,14 +182,12 @@
             // rdbRegister
             // 
             this.rdbRegister.AutoSize = true;
-            this.rdbRegister.Checked = true;
             this.rdbRegister.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.rdbRegister.Location = new System.Drawing.Point(9, 17);
             this.rdbRegister.Margin = new System.Windows.Forms.Padding(2);
             this.rdbRegister.Name = "rdbRegister";
             this.rdbRegister.Size = new System.Drawing.Size(103, 39);
             this.rdbRegister.TabIndex = 0;
-            this.rdbRegister.TabStop = true;
             this.rdbRegister.Text = "登録";
             this.rdbRegister.UseVisualStyleBackColor = true;
             this.rdbRegister.CheckedChanged += new System.EventHandler(this.RadioButton_Checked);
@@ -238,23 +237,23 @@
             // 
             this.lblMajorID.AutoSize = true;
             this.lblMajorID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblMajorID.Location = new System.Drawing.Point(1183, 278);
+            this.lblMajorID.Location = new System.Drawing.Point(1197, 278);
             this.lblMajorID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMajorID.Name = "lblMajorID";
-            this.lblMajorID.Size = new System.Drawing.Size(104, 24);
+            this.lblMajorID.Size = new System.Drawing.Size(82, 24);
             this.lblMajorID.TabIndex = 9;
-            this.lblMajorID.Text = "大分類ID";
+            this.lblMajorID.Text = "大分類";
             // 
             // lblSmallID
             // 
             this.lblSmallID.AutoSize = true;
             this.lblSmallID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lblSmallID.Location = new System.Drawing.Point(1535, 273);
+            this.lblSmallID.Location = new System.Drawing.Point(1547, 278);
             this.lblSmallID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSmallID.Name = "lblSmallID";
-            this.lblSmallID.Size = new System.Drawing.Size(104, 24);
+            this.lblSmallID.Size = new System.Drawing.Size(82, 24);
             this.lblSmallID.TabIndex = 17;
-            this.lblSmallID.Text = "小分類ID";
+            this.lblSmallID.Text = "小分類";
             // 
             // txbProdactColor
             // 
@@ -304,6 +303,7 @@
             this.txbProdactPrice.Name = "txbProdactPrice";
             this.txbProdactPrice.Size = new System.Drawing.Size(220, 31);
             this.txbProdactPrice.TabIndex = 24;
+            this.txbProdactPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblProdactPrice
             // 
@@ -335,6 +335,7 @@
             this.txbProdactSafetyStock.Name = "txbProdactSafetyStock";
             this.txbProdactSafetyStock.Size = new System.Drawing.Size(220, 31);
             this.txbProdactSafetyStock.TabIndex = 28;
+            this.txbProdactSafetyStock.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxID_KeyPress);
             // 
             // lblProdactSafetyStock
             // 
@@ -361,6 +362,7 @@
             // cmbHidden
             // 
             this.cmbHidden.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbHidden.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbHidden.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbHidden.FormattingEnabled = true;
             this.cmbHidden.Items.AddRange(new object[] {
@@ -513,6 +515,7 @@
             // cmbMakerName
             // 
             this.cmbMakerName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMakerName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbMakerName.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbMakerName.FormattingEnabled = true;
             this.cmbMakerName.Location = new System.Drawing.Point(146, 405);
@@ -524,6 +527,7 @@
             // cmbMajorID
             // 
             this.cmbMajorID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbMajorID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbMajorID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbMajorID.FormattingEnabled = true;
             this.cmbMajorID.Items.AddRange(new object[] {
@@ -541,9 +545,10 @@
             // cmbSmallID
             // 
             this.cmbSmallID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSmallID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cmbSmallID.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.cmbSmallID.FormattingEnabled = true;
-            this.cmbSmallID.Location = new System.Drawing.Point(1643, 270);
+            this.cmbSmallID.Location = new System.Drawing.Point(1643, 275);
             this.cmbSmallID.Margin = new System.Windows.Forms.Padding(2);
             this.cmbSmallID.Name = "cmbSmallID";
             this.cmbSmallID.Size = new System.Drawing.Size(220, 32);
@@ -586,10 +591,12 @@
             // 
             // txbNumPage
             // 
+            this.txbNumPage.Enabled = false;
             this.txbNumPage.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.txbNumPage.Location = new System.Drawing.Point(1537, 1028);
             this.txbNumPage.Margin = new System.Windows.Forms.Padding(2);
             this.txbNumPage.Name = "txbNumPage";
+            this.txbNumPage.ReadOnly = true;
             this.txbNumPage.Size = new System.Drawing.Size(50, 28);
             this.txbNumPage.TabIndex = 111;
             this.txbNumPage.TabStop = false;
