@@ -1794,11 +1794,11 @@ namespace SalesManagement_SysDev
 
             if (cmbProdactflg)
             {
-                txbEmployeeID.Text = strProdactID;
+                txbProductID.Text = strProdactID;
             }
             else
             {
-                txbEmployeeID.Text = string.Empty;
+                txbProductID.Text = string.Empty;
             }
 
             //データグリッドビューに乗っている情報をGUIに反映
