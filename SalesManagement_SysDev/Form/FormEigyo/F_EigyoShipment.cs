@@ -64,6 +64,9 @@ namespace SalesManagement_SysDev
         //データグリッドビュー用の営業所データリスト
         private static List<M_SalesOffice> listDGVSalesOfficeID = new List<M_SalesOffice>();
 
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_Client> listDGVClientID = new List<M_Client>();
+
         //DataGridView用に使用する営業所のDictionary
         private Dictionary<int, string> dictionarySalesOffice;
         //DataGridView用に使用する顧客のDictionary
@@ -884,9 +887,11 @@ namespace SalesManagement_SysDev
             //顧客のデータを取得
             listClient = clientDataAccess.GetClientDspData();
 
+            listDGVClientID = clientDataAccess.GetClientData();
+
             dictionaryClient = new Dictionary<int, string> { };
 
-            foreach (var item in listClient)
+            foreach (var item in listDGVClientID)
             {
                 dictionaryClient.Add(item.ClID.Value, item.ClName);
             }
@@ -1220,9 +1225,27 @@ namespace SalesManagement_SysDev
                 cmbSalesOfficeID.SelectedIndex = -1;
             }
 
+            bool cmbClientflg = false;
+            string strClientID = dictionaryClient.FirstOrDefault(x => x.Value == dgvShipment[2, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            foreach (var item in listDGVClientID)
+            {
+                if (strClientID == item.SoID.ToString())
+                {
+                    cmbClientflg = true;
+                }
+            }
+
+            if (cmbClientflg)
+            {
+                txbClientID.Text = strClientID;
+            }
+            else
+            {
+                txbClientID.Text = string.Empty;
+            }
+
             //データグリッドビューに乗っている情報をguiに反映
             txbShipmentID.Text = dgvShipment[0, dgvShipment.CurrentCellAddress.Y].Value.ToString();
-            txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvShipment[2, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvShipment[3, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbOrderID.Text = dgvShipment[4, dgvShipment.CurrentCellAddress.Y].Value.ToString();
             cmbConfirm.SelectedIndex = dictionaryConfirm.FirstOrDefault(x => x.Value == dgvShipment[7, dgvShipment.CurrentCellAddress.Y].Value.ToString()).Key;

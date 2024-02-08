@@ -311,6 +311,7 @@
             this.dgvClient.TabIndex = 18;
             this.dgvClient.TabStop = false;
             this.dgvClient.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRecordEditing_CellClick);
+            this.dgvClient.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClient_CellContentClick);
             // 
             // btnDone
             // 

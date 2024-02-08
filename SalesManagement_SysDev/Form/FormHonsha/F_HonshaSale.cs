@@ -51,6 +51,9 @@ namespace SalesManagement_SysDev
         //データグリッドビュー用の営業所データリスト
         private static List<M_SalesOffice> listDGVSalesOfficeID = new List<M_SalesOffice>();
 
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_Client> listDGVClientID = new List<M_Client>();
+
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
         {
@@ -121,9 +124,11 @@ namespace SalesManagement_SysDev
 
             listClient = clientDataAccess.GetClientDspData();
 
+            listDGVClientID = clientDataAccess.GetClientData();
+
             dictionaryClient = new Dictionary<int, string> { };
 
-            foreach (var item in listClient)
+            foreach (var item in listDGVClientID)
             {
                 dictionaryClient.Add(item.ClID.Value, item.ClName);
             }
@@ -673,9 +678,27 @@ namespace SalesManagement_SysDev
                 cmbSalesOfficeID.SelectedIndex = -1;
             }
 
+            bool cmbClientflg = false;
+            string strClientID = (dictionaryClient.FirstOrDefault(x => x.Value == dgvSale[1, dgvSale.CurrentCellAddress.Y].Value.ToString()).Key).ToString(); ;
+            foreach (var item in listDGVClientID)
+            {
+                if (strClientID == item.SoID.ToString())
+                {
+                    cmbClientflg = true;
+                }
+            }
+
+            if (cmbClientflg)
+            {
+                txbClientID.Text = strClientID;
+            }
+            else
+            {
+                txbClientID.Text = string.Empty;
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbSaleID.Text = dgvSale[0, dgvSale.CurrentCellAddress.Y].Value.ToString();
-            txbClientID.Text = (dictionaryClient.FirstOrDefault(x => x.Value == dgvSale[1, dgvSale.CurrentCellAddress.Y].Value.ToString()).Key - 1).ToString();
             txbChumonID.Text = dgvSale[4, dgvSale.CurrentCellAddress.Y].Value.ToString();
             dtpSaleDate.Text = dgvSale[5, dgvSale.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSale[6, dgvSale.CurrentCellAddress.Y].Value.ToString()).Key;

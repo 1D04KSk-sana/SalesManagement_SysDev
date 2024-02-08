@@ -760,51 +760,6 @@ namespace SalesManagement_SysDev
                 cmbHidden.Focus();
                 return false;
             }
-            else if (cmbHidden.SelectedIndex == 1)
-            {
-                //受注テーブルにおける顧客IDの存在チェック
-                if (orderDataAccess.CheckOrderClientIDExistence(int.Parse(txbClientID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された顧客IDが受注テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbClientID.Focus();
-                    return false;
-                }
-                //注文テーブルにおける顧客IDの存在チェック
-                if (chumonDataAccess.CheckChumonClientIDExistence(int.Parse(txbClientID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された顧客IDが注文テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbClientID.Focus();
-                    return false;
-                }
-                //出庫テーブルにおける顧客IDの存在チェック
-                if (syukkoDataAccess.CheckSyukkoClientIDExistence(int.Parse(txbClientID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された顧客IDが出庫テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbClientID.Focus();
-                    return false;
-                }
-                //入荷テーブルにおける顧客IDの存在チェック
-                if (arrivalDataAccess.CheckArrivalClientIDExistence(int.Parse(txbClientID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された顧客IDが入荷テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbClientID.Focus();
-                    return false;
-                }
-                //出荷テーブルにおける顧客IDの存在チェック
-                if (shipmentDataAccess.CheckShipmentClientIDExistence(int.Parse(txbClientID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された顧客IDが出荷テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbClientID.Focus();
-                    return false;
-                }
-                //売上テーブルにおける顧客IDの存在チェック
-                if (saleDataAccess.CheckSaleClientIDExistence(int.Parse(txbClientID.Text.Trim())))
-                {
-                    MessageBox.Show("指定された顧客IDが売上テーブルで使用されています", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbClientID.Focus();
-                    return false;
-                }
-            }
 
             return true;
         }
@@ -1221,6 +1176,11 @@ namespace SalesManagement_SysDev
                 e.Handled = true;
                 return;
             }
+        }
+
+        private void dgvClient_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

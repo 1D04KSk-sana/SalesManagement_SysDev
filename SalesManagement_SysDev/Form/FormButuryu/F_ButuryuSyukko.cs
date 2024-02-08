@@ -67,6 +67,9 @@ namespace SalesManagement_SysDev
         //データグリッドビュー用の営業所データリスト
         private static List<M_SalesOffice> listDGVSalesOfficeID = new List<M_SalesOffice>();
 
+        //データグリッドビュー用の営業所データリスト
+        private static List<M_Client> listDGVClientID = new List<M_Client>();
+
         //DataGridView用に使用する表示形式のDictionary
         private Dictionary<int, string> dictionaryHidden = new Dictionary<int, string>
         {
@@ -890,9 +893,11 @@ namespace SalesManagement_SysDev
             //顧客名のデータを取得
             listClient = clientDataAccess.GetClientDspData();
 
+            listDGVClientID = clientDataAccess.GetClientData();
+
             dictionaryClient = new Dictionary<int, string> { };
 
-            foreach (var item in listClient)
+            foreach (var item in listDGVClientID)
             {
                 dictionaryClient.Add(item.ClID.Value, item.ClName);
             }
@@ -1171,10 +1176,28 @@ namespace SalesManagement_SysDev
                 cmbSalesOfficeID.SelectedIndex = -1;
             }
 
+            bool cmbClientflg = false;
+            string strClientID = dictionaryClient.FirstOrDefault(x => x.Value == dgvSyukko[2, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
+            foreach (var item in listDGVClientID)
+            {
+                if (strClientID == item.SoID.ToString())
+                {
+                    cmbClientflg = true;
+                }
+            }
+
+            if (cmbClientflg)
+            {
+                txbClientID.Text = strClientID;
+            }
+            else
+            {
+                txbClientID.Text = string.Empty;
+            }
+
             //データグリッドビューに乗っている情報をGUIに反映
             txbSyukkoID.Text = dgvSyukko[0, dgvSyukko.CurrentCellAddress.Y].Value.ToString();
             txbEmployeeID.Text = dictionaryEmployee.FirstOrDefault(x => x.Value == dgvSyukko[1, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
-            txbClientID.Text = dictionaryClient.FirstOrDefault(x => x.Value == dgvSyukko[2, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key.ToString();
             txbOrderID.Text = dgvSyukko[4, dgvSyukko.CurrentCellAddress.Y].Value.ToString();
             cmbHidden.SelectedIndex = dictionaryHidden.FirstOrDefault(x => x.Value == dgvSyukko[7, dgvSyukko.CurrentCellAddress.Y].Value.ToString()).Key;
             txbHidden.Text = dgvSyukko[8, dgvSyukko.CurrentCellAddress.Y]?.Value?.ToString();
