@@ -807,7 +807,7 @@ namespace SalesManagement_SysDev
 
                 M_SalesOffice SalesOffice = salesOfficeDataAccess.GetSalesOfficeIDData(int.Parse(txbSalesOfficeID.Text.Trim()));
 
-                if (SalesOffice.SoName == txbSalesOfficeName.Text.Trim())
+                if (SalesOffice.SoName != txbSalesOfficeName.Text.Trim())
                 {
                     if (salesOfficeDataAccess.CheckSalesOfficeNameExistence(txbSalesOfficeName.Text.Trim()))
                     {

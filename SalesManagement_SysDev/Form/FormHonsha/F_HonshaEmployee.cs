@@ -550,6 +550,15 @@ namespace SalesManagement_SysDev
                     txbEmployeeName.Focus();
                     return false;
                 }
+
+                M_Employee employee = employeeDataAccess.GetEmployeeIDData(int.Parse(txbEmployeeID.Text.Trim()));
+
+                if (employee.EmName != txbEmployeeName.Text.Trim())
+                {
+                    MessageBox.Show("社員名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbEmployeeName.Focus();
+                    return false;
+                }
             }
             else
             {

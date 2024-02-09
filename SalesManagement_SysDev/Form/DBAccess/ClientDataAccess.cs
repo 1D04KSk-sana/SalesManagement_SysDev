@@ -148,6 +148,30 @@ namespace SalesManagement_SysDev
         }
 
         ///////////////////////////////
+        //メソッド名：GetClientIDData()
+        //引　数：顧客ID
+        //戻り値：顧客データ
+        //機　能：顧客データの全取得
+        ///////////////////////////////
+        public M_Client GetClientIDData(int ClientID)
+        {
+            M_Client Client = new M_Client();
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                Client = context.M_Clients.Single(x => x.ClID == ClientID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Client;
+        }
+
+        ///////////////////////////////
         //メソッド名：GetClientDspData()
         //引　数：なし
         //戻り値：管理Flgが表示の顧客データ

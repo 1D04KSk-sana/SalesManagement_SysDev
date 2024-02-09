@@ -610,7 +610,7 @@ namespace SalesManagement_SysDev
                 if (Position.PoName != txbPositionName.Text.Trim())
                 {
                     MessageBox.Show("役職名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    txbPositionID.Focus();
+                    txbPositionName.Focus();
                     return false;
                 }
             }
