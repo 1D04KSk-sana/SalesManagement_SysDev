@@ -114,6 +114,31 @@ namespace SalesManagement_SysDev
 
             return listEmployee;
         }
+
+        ///////////////////////////////
+        //メソッド名：GetEmployeeIDData()
+        //引　数：社員ID
+        //戻り値：顧客データ
+        //機　能：顧客データの全取得
+        ///////////////////////////////
+        public M_Employee GetEmployeeIDData(int EmployeeID)
+        {
+            M_Employee Employee = new M_Employee();
+
+            try
+            {
+                var context = new SalesManagement_DevContext();
+                Employee = context.M_Employees.Single(x => x.EmID == EmployeeID);
+                context.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "例外エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return Employee;
+        }
+
         ///////////////////////////////
         //メソッド名：GetEmployeeDspData()
         //引　数：なし

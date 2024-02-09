@@ -657,6 +657,15 @@ namespace SalesManagement_SysDev
                     txbClientName.Focus();
                     return false;
                 }
+
+                M_Client Client = clientDataAccess.GetClientIDData(int.Parse(txbClientID.Text.Trim()));
+
+                if (Client.ClName != txbClientName.Text.Trim())
+                {
+                    MessageBox.Show("顧客名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbClientName.Focus();
+                    return false;
+                }
             }
             else
             {

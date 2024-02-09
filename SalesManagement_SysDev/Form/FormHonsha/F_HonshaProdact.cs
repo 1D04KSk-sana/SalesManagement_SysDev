@@ -440,6 +440,15 @@ namespace SalesManagement_SysDev
                     txbProdactName.Focus();
                     return false;
                 }
+
+                M_Product Prodact = ProdactDataAccess.GetIDProdactData(int.Parse(txbProdactID.Text.Trim()));
+
+                if (Prodact.PrName != txbProdactName.Text.Trim())
+                {
+                    MessageBox.Show("商品名が既に存在します", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbProdactName.Focus();
+                    return false;
+                }
             }
             else
             {
